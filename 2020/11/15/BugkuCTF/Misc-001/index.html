@@ -6,24 +6,46 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Misc_006 | Hexo</title>
+  <title>Misc_001 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="听首音乐（1）下载附件，是一个音频文件，用audacity工具打开（2）波形图上有些东西，Ctrl+鼠标滚轮，放大，是莫尔斯电码（3）得到….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.用在线工具解码，">
+  <meta name="description" content="隐写（1）解压附件，发现有一张图片，并没有有用的信息（2）根据题意，flag被隐藏起来了，用notepad++打开（3）红色方框部分代表的是图片的像素，也可以理解为长和高，发现图片的高度比长度小了不少，将高度修改为长度的值。（4）保存后重新打开图片，发现flag 眼见非实(ISCCCTF)（1）下载附件，得到一个名为zip没有后缀名的文件（2）用notepad++打开，发现文件头是50 4B 03">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Misc_006">
-<meta property="og:url" content="http://example.com/2020/11/15/Misc-006/index.html">
+<meta property="og:title" content="Misc_001">
+<meta property="og:url" content="http://example.com/2020/11/15/BugkuCTF/Misc-001/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="听首音乐（1）下载附件，是一个音频文件，用audacity工具打开（2）波形图上有些东西，Ctrl+鼠标滚轮，放大，是莫尔斯电码（3）得到….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.用在线工具解码，">
+<meta property="og:description" content="隐写（1）解压附件，发现有一张图片，并没有有用的信息（2）根据题意，flag被隐藏起来了，用notepad++打开（3）红色方框部分代表的是图片的像素，也可以理解为长和高，发现图片的高度比长度小了不少，将高度修改为长度的值。（4）保存后重新打开图片，发现flag 眼见非实(ISCCCTF)（1）下载附件，得到一个名为zip没有后缀名的文件（2）用notepad++打开，发现文件头是50 4B 03">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201114181337328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201114181702980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201114181823245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="article:published_time" content="2020-11-15T09:10:49.000Z">
-<meta property="article:modified_time" content="2020-11-15T09:11:43.943Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222021275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222050891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222126820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222143936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222246657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222313691.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222346825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222418463.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222429644.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222459970.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222507509.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222548608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222607981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222638392.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222716140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222737816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222759359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222809753.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222856237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222917608.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030222940899.png#">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202010302230013.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030223007998.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030223039681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201030223048756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2020-11-15T08:54:28.000Z">
+<meta property="article:modified_time" content="2020-11-15T08:56:45.334Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="CTF靶场">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201114181337328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201030222021275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -52,7 +74,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/d/图片/我的图片/3.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/"></a></h1>
@@ -110,7 +132,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/d/图片/我的图片/3.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author"></h1>
@@ -159,27 +181,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Misc-006" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-BugkuCTF/Misc-001" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Misc_006
+      Misc_001
     </h1>
   
 
         
-        <a href="/2020/11/15/Misc-006/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:10:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+        <a href="/2020/11/15/BugkuCTF/Misc-001/" class="archive-article-date">
+  	<time datetime="2020-11-15T08:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="听首音乐"><a href="#听首音乐" class="headerlink" title="听首音乐"></a>听首音乐</h2><p>（1）下载附件，是一个音频文件，用audacity工具打开<br><img src="https://img-blog.csdnimg.cn/20201114181337328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）波形图上有些东西，Ctrl+鼠标滚轮，放大，是莫尔斯电码<br><img src="https://img-blog.csdnimg.cn/20201114181702980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）得到….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.用在线工具解码，得到flag为5BC925649CB0188F52E617D70929191C，这里注意字母为大写，直接提交就可以。<br><img src="https://img-blog.csdnimg.cn/20201114181823245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+        <h2 id="隐写"><a href="#隐写" class="headerlink" title="隐写"></a>隐写</h2><p>（1）解压附件，发现有一张图片，并没有有用的信息<br><img src="https://img-blog.csdnimg.cn/20201030222021275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题意，flag被隐藏起来了，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222050891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）红色方框部分代表的是图片的像素，也可以理解为长和高，发现图片的高度比长度小了不少，将高度修改为长度的值。<br><img src="https://img-blog.csdnimg.cn/20201030222126820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）保存后重新打开图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222143936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="眼见非实-ISCCCTF"><a href="#眼见非实-ISCCCTF" class="headerlink" title="眼见非实(ISCCCTF)"></a>眼见非实(ISCCCTF)</h2><p>（1）下载附件，得到一个名为zip没有后缀名的文件<br>（2）用notepad++打开，发现文件头是50 4B 03 04，说明是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222246657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）修改文件后缀名为.zip，解压后得到一个文档<br><img src="https://img-blog.csdnimg.cn/20201030222313691.png#pic_center" alt="在这里插入图片描述"><br>（4）双击打开后并没有发现有用信息，再用notepad++打开，发现又是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222346825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）修改后缀名为.zip，解压后得到一个文件夹<br><img src="https://img-blog.csdnimg.cn/20201030222418463.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222429644.png#pic_center" alt="在这里插入图片描述"><br>（6）最终在word文件夹里找到flag，可用记事本或notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222459970.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222507509.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="啊哒"><a href="#啊哒" class="headerlink" title="啊哒"></a>啊哒</h2><p>（1）打开附件，解压后得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222548608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）文件头确实是以FF D8 开头，寻找结尾FF D9<br><img src="https://img-blog.csdnimg.cn/20201030222607981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）发现FF D9后面还有一个压缩文件，50 4B 03 04，将原来的图片改后缀名为.zip，也可以在kali下用命令foremost -t all ada.jap 分离文件。<br><img src="https://img-blog.csdnimg.cn/20201030222638392.png#pic_center" alt="在这里插入图片描述"><br>（4）解压，但发现需要密码<br><img src="https://img-blog.csdnimg.cn/20201030222716140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）查看图片属性，发现一串字符，作为密码输入，但显示密码错误<br><img src="https://img-blog.csdnimg.cn/20201030222737816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）将这串十六进制字符转为ASCII码字符，得到sdnisc_2018，将其作为解压密码，得到flag<br><img src="https://img-blog.csdnimg.cn/20201030222759359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222809753.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="又一张图片，还单纯吗"><a href="#又一张图片，还单纯吗" class="headerlink" title="又一张图片，还单纯吗"></a>又一张图片，还单纯吗</h2><p>（1）附件是一张.jpg的图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222856237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）确实以FF D8开头，寻找图片结尾FF D9，接连找到几个FF D9后，又发现了一张以FF D8开头的.jpg图片<br><img src="https://img-blog.csdnimg.cn/20201030222917608.png#pic_center" alt="在这里插入图片描述"><br>（3）用kali输入命令foremost -t -all 2.jpg分离文件，则又得到了一张图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222940899.png#" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202010302230013.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223007998.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="猜"><a href="#猜" class="headerlink" title="猜"></a>猜</h2><p>（1）附件是一张图片，根据提示是某人的名字，直接百度搜索图片，是刘亦菲，名字拼音即flag<br><img src="https://img-blog.csdnimg.cn/20201030223039681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223048756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 
       
 
@@ -281,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/11/15/Misc-006/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/11/15/BugkuCTF/Misc-001/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -295,9 +321,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/11/15/BugkuCTF/Misc-002/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Misc_002
+        
+      </div>
+    </a>
   
-    <a href="/2020/11/15/Misc-005/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Misc_005</div>
+  
+    <a href="/2020/11/15/XCTF/Misc-004/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Misc_004</div>
       <i class="icon-circle-right"></i>
     </a>
   
