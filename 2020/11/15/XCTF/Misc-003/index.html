@@ -6,38 +6,45 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Misc_002 | Hexo</title>
+  <title>Misc_003 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="János-the-Ripper（1）附件是一个压缩包，解压后得到一个没有后缀名的文件，用notepad++打开（2）是一个压缩包，改后缀名为zip，解压，但需要密码（3）直接暴力破解，得到密码fish（4）得到flag Test-flag-please-ignore（1）下载附件，是一个压缩包，解压后用notepad++打开（2）一串十六进制数，转为字符串 hit-the-core（1）下载附件">
+  <meta name="description" content="simple_transfer（1）下载附件，得到一个流量包，用wireshark打开，在搜索框输入tcp contains flag查找flag，并没有发现有用信息。（2）放到kali下，用foremost分解，得到一个pdf文件，打开看到flag。 Hear-with-your-Eyes（1）下载附件，一个.gz文件，解压后是一个没有后缀名的文件，用notepad++打开，没有flag信息。直">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Misc_002">
-<meta property="og:url" content="http://example.com/2020/11/15/Misc-002/index.html">
+<meta property="og:title" content="Misc_003">
+<meta property="og:url" content="http://example.com/2020/11/15/XCTF/Misc-003/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="János-the-Ripper（1）附件是一个压缩包，解压后得到一个没有后缀名的文件，用notepad++打开（2）是一个压缩包，改后缀名为zip，解压，但需要密码（3）直接暴力破解，得到密码fish（4）得到flag Test-flag-please-ignore（1）下载附件，是一个压缩包，解压后用notepad++打开（2）一串十六进制数，转为字符串 hit-the-core（1）下载附件">
+<meta property="og:description" content="simple_transfer（1）下载附件，得到一个流量包，用wireshark打开，在搜索框输入tcp contains flag查找flag，并没有发现有用信息。（2）放到kali下，用foremost分解，得到一个pdf文件，打开看到flag。 Hear-with-your-Eyes（1）下载附件，一个.gz文件，解压后是一个没有后缀名的文件，用notepad++打开，没有flag信息。直">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201031111055252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201031113641184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201031113742969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201031113816887.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101110811501.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101110859979.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201102174632149.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201102175004523.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103203219434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110320424561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103204313481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103205333423.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103220936994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103221021711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103221315213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110322144843.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103222149719.png#pic_center">
-<meta property="article:published_time" content="2020-11-15T07:59:58.000Z">
-<meta property="article:modified_time" content="2020-11-15T08:07:37.199Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104185840360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104185953178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104193005337.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104194048622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105114640452.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105120341660.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105120813523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105123523762.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202011051236377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105123710874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201107144903770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110714492428.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201108120310683.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201108121130666.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201108120605449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201108121230526.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201108121308124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201112194655132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201112194718517.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201112194751259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201114112042304.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201114112209518.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201114112817329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201114112938259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2020-11-15T08:46:23.000Z">
+<meta property="article:modified_time" content="2020-11-15T08:48:05.251Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="CTF靶场">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201031111055252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201104185840360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -173,35 +180,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Misc-002" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-XCTF/Misc-003" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Misc_002
+      Misc_003
     </h1>
   
 
         
-        <a href="/2020/11/15/Misc-002/" class="archive-article-date">
-  	<time datetime="2020-11-15T07:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+        <a href="/2020/11/15/XCTF/Misc-003/" class="archive-article-date">
+  	<time datetime="2020-11-15T08:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Janos-the-Ripper"><a href="#Janos-the-Ripper" class="headerlink" title="János-the-Ripper"></a>János-the-Ripper</h2><p>（1）附件是一个压缩包，解压后得到一个没有后缀名的文件，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201031111055252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）是一个压缩包，改后缀名为zip，解压，但需要密码<br><img src="https://img-blog.csdnimg.cn/20201031113641184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）直接暴力破解，得到密码fish<br><img src="https://img-blog.csdnimg.cn/20201031113742969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）得到flag<br><img src="https://img-blog.csdnimg.cn/20201031113816887.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Test-flag-please-ignore"><a href="#Test-flag-please-ignore" class="headerlink" title="Test-flag-please-ignore"></a>Test-flag-please-ignore</h2><p>（1）下载附件，是一个压缩包，解压后用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201101110811501.png#pic_center" alt="在这里插入图片描述">（2）一串十六进制数，转为字符串<br><img src="https://img-blog.csdnimg.cn/20201101110859979.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="hit-the-core"><a href="#hit-the-core" class="headerlink" title="hit-the-core"></a>hit-the-core</h2><p>（1）下载附件，得到一个core文件，放到kali下，使用命令strings查看字符串。<br><img src="https://img-blog.csdnimg.cn/20201102174632149.png#pic_center" alt="在这里插入图片描述">（2）发现一串特殊的字符，格式像flag，看到前面的大写字母为ALXCTF，相邻的字母之间都隔了4个字符，按照这个规律，写个简单的程序（C语言），提取出flag。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;strings.h&gt;</span><br><span class="line">int main()&#123;</span><br><span class="line">	char a[200];</span><br><span class="line">	gets(a);</span><br><span class="line"></span><br><span class="line">	int i&#x3D;3;</span><br><span class="line">	</span><br><span class="line">	while(a[i] !&#x3D; 0)&#123;</span><br><span class="line">		printf(&quot;%c&quot;,a[i]);</span><br><span class="line">		i+&#x3D;5;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>（3）<img src="https://img-blog.csdnimg.cn/20201102175004523.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="快乐游戏题"><a href="#快乐游戏题" class="headerlink" title="快乐游戏题"></a>快乐游戏题</h2><p>（1）得到一个附件，是一个捉猫猫游戏。鼓捣了好久，没有发现任何flag信息，最后看了大家的writeup，都是玩通关得出来的。没法，玩呗，玩了好久，终于困住猫了，拿到了flag。<br><img src="https://img-blog.csdnimg.cn/20201103203219434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Banmabanma"><a href="#Banmabanma" class="headerlink" title="Banmabanma"></a>Banmabanma</h2><p>（1）下载附件，一张斑马的图片，看了看，典型的条形码，直接在线扫码<a target="_blank" rel="noopener" href="https://online-barcode-reader.inliteresearch.com/">https://online-barcode-reader.inliteresearch.com/</a><br><img src="https://img-blog.csdnimg.cn/2020110320424561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）得到flag。<br><img src="https://img-blog.csdnimg.cn/20201103204313481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="easycap"><a href="#easycap" class="headerlink" title="easycap"></a>easycap</h2><p>（1）下载附件，用wireshark打开，选择一个包，追踪tcp流，发现flag。注意格式，直接提交 FLAG:385b87afc8671dee07550290d16a8071 即可。<br><img src="https://img-blog.csdnimg.cn/20201103205333423.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="stage1"><a href="#stage1" class="headerlink" title="stage1"></a>stage1</h2><p>（1）下载附件，得到一张图片，用stegsolve工具打开，图片太大直接用键盘上的左右键切换视图，在左一视图发现一个二维码。<br><img src="https://img-blog.csdnimg.cn/20201103220936994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）用二维码扫描器扫描，得到一串十六进制数。<br><img src="https://img-blog.csdnimg.cn/20201103221021711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）保存到一个文本文档，命名为1.txt，用010 editor导入十六进制，数字的开头为03 F3 ,可知是pyc文件，保存为1.pyc<br><img src="https://img-blog.csdnimg.cn/20201103221315213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）用在线工具反编译，<a target="_blank" rel="noopener" href="https://tool.lu/pyc/">https://tool.lu/pyc/</a><br><img src="https://img-blog.csdnimg.cn/2020110322144843.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（5）复制后再Python.exe下执行，由于反编译后得到的是Python2的代码，这里我用的是Python3，要做点修改，最后一行改为print (flag)<br><img src="https://img-blog.csdnimg.cn/20201103222149719.png#pic_center" alt="在这里插入图片描述"><br>（6）前面的“…”是在循环中，按两下回车退出循环，然后再加一个flag(),调用函数，得到flag。</p>
+        <h2 id="simple-transfer"><a href="#simple-transfer" class="headerlink" title="simple_transfer"></a>simple_transfer</h2><p>（1）下载附件，得到一个流量包，用wireshark打开，在搜索框输入tcp contains flag查找flag，并没有发现有用信息。<br><img src="https://img-blog.csdnimg.cn/20201104185840360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）放到kali下，用foremost分解，得到一个pdf文件，打开看到flag。<br><img src="https://img-blog.csdnimg.cn/20201104185953178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Hear-with-your-Eyes"><a href="#Hear-with-your-Eyes" class="headerlink" title="Hear-with-your-Eyes"></a>Hear-with-your-Eyes</h2><p>（1）下载附件，一个.gz文件，解压后是一个没有后缀名的文件，用notepad++打开，没有flag信息。直接用7-zip工具打开，发现了一个sound.wav音频文件。<br><img src="https://img-blog.csdnimg.cn/20201104193005337.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据提示“用眼睛看这段音频”，使用audacity工具打开这个wav文件，点击“sound”切换到频谱图，就能看到flag。<br>audacity官网下载地址：<a target="_blank" rel="noopener" href="https://www.audacityteam.org/">https://www.audacityteam.org/</a><br><img src="https://img-blog.csdnimg.cn/20201104194048622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Ditf"><a href="#Ditf" class="headerlink" title="Ditf"></a>Ditf</h2><p>（1）下载得到一张png图片，notepad++打开，没发现啥信息，修改下图片高度看看。<br><img src="https://img-blog.csdnimg.cn/20201105114640452.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201105120341660.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）发现一串字符StRe1izia，应该是一个密码，将图片放到kali下用foremost分解，得到一个压缩包，解压需要密码，输入该串字符，成功解压。<img src="https://img-blog.csdnimg.cn/20201105120813523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>。<br>（3）解压后得到一个Ditf.pcapng文件，用wireshark打开。Ctrl+F，选择字符串，搜索flag，无果。再搜索png，发现一个kiss.png。<br><img src="https://img-blog.csdnimg.cn/20201105123523762.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）追踪http流，发现一串特征明显的代码<br><img src="https://img-blog.csdnimg.cn/202011051236377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（5）用base64解码，得到flag。<br><img src="https://img-blog.csdnimg.cn/20201105123710874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="神奇的Modbus"><a href="#神奇的Modbus" class="headerlink" title="神奇的Modbus"></a>神奇的Modbus</h2><p>（1）用wireshark打开附件，根据题意，输入modbus过滤，并追踪tcp流，可发现flag。<br><img src="https://img-blog.csdnimg.cn/20201107144903770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/2020110714492428.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）提交flag时注意题目格式为sctf{xxx}，但提交sctf{Easy_Mdbus}错误，仔细观察，根据题目，应提交sctf{Easy_Modbus}，多加一个o</p>
+<h2 id="glance-50"><a href="#glance-50" class="headerlink" title="glance-50"></a>glance-50</h2><p>（1）附件是一张长条状的gif动图，很有可能就是分离gif的每一帧然后拼接形成图片得到flag。<br><img src="https://img-blog.csdnimg.cn/20201108120310683.png#pic_center" alt="在这里插入图片描述">（2）将该图片放到kali里，用convert命令可以分解GIF图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert 9266eadf353d4ada94ededaeb96d0c50.gif flag.png</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20201108121130666.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201108120605449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）用convert分解出了200张图片，接下来就是图片的拼接。依旧使用kali下的工具montage。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">montage flag*.png -tile x1 -geometry +0+0 flag.png</span><br><span class="line">&#x2F;&#x2F;-tile是拼接时每行和每列的图片数，这里用x1，就是只一行</span><br><span class="line">&#x2F;&#x2F;-geometry是首选每个图和边框尺寸，边框为0，图照原始尺寸即可</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20201108121230526.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201108121308124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）flag为TWCTF{Bliss by Charles O’Rear}</p>
+<h2 id="What-is-this"><a href="#What-is-this" class="headerlink" title="What-is-this"></a>What-is-this</h2><p>（1）得到一个.gz的压缩包，直接用7-zip工具打开，附件进行了两次压缩，最后得到两张类似的图片<br><img src="https://img-blog.csdnimg.cn/20201112194655132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201112194718517.png#pic_center" alt="在这里插入图片描述">（2）用stegsolve工具将两张图片合成一下，得到flag<br><img src="https://img-blog.csdnimg.cn/20201112194751259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="再见李华"><a href="#再见李华" class="headerlink" title="再见李华"></a>再见李华</h2><p>（1）下载附件得到一张图片，图上是md5的信息，但解密不出来。放到kali中binwalk一下，发现还有一个压缩包。用foremost分离文件，得到压缩包，但解压需要密码。<br><img src="https://img-blog.csdnimg.cn/20201114112042304.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题目提示，1000个字，署名，LiHua<br>猜测1000个字是4位，LiHua是密码的一部分，将这两个部分组合起来，用ARCHPR进行爆破<br><img src="https://img-blog.csdnimg.cn/20201114112209518.png#pic_center" alt="在这里插入图片描述"><br>（3）爆破时攻击类型选择“掩码”，并设置掩码“????LiHua”<br><img src="https://img-blog.csdnimg.cn/20201114112817329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）成功破解，得到密码15CCLiHua，解压后得到flag<br><img src="https://img-blog.csdnimg.cn/20201114112938259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 
       
 
@@ -303,7 +312,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/11/15/Misc-002/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/11/15/XCTF/Misc-003/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -317,18 +326,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/11/15/Web/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/11/15/XCTF/Misc-004/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Web
+          Misc_004
         
       </div>
     </a>
   
   
-    <a href="/2020/11/15/Misc-001/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Misc_001</div>
+    <a href="/2020/11/15/XCTF/Web-005/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Web_005</div>
       <i class="icon-circle-right"></i>
     </a>
   

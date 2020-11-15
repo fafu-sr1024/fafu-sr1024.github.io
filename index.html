@@ -152,19 +152,108 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Misc-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Misc-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Misc-004/">Misc_004</a>
+      <a class="article-title" href="/2020/11/15/Misc-001/">Misc_001</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Misc-004/" class="archive-article-date">
+        <a href="/2020/11/15/Misc-001/" class="archive-article-date">
+  	<time datetime="2020-11-15T08:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="隐写"><a href="#隐写" class="headerlink" title="隐写"></a>隐写</h2><p>（1）解压附件，发现有一张图片，并没有有用的信息<br><img src="https://img-blog.csdnimg.cn/20201030222021275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题意，flag被隐藏起来了，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222050891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）红色方框部分代表的是图片的像素，也可以理解为长和高，发现图片的高度比长度小了不少，将高度修改为长度的值。<br><img src="https://img-blog.csdnimg.cn/20201030222126820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）保存后重新打开图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222143936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="眼见非实-ISCCCTF"><a href="#眼见非实-ISCCCTF" class="headerlink" title="眼见非实(ISCCCTF)"></a>眼见非实(ISCCCTF)</h2><p>（1）下载附件，得到一个名为zip没有后缀名的文件<br>（2）用notepad++打开，发现文件头是50 4B 03 04，说明是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222246657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）修改文件后缀名为.zip，解压后得到一个文档<br><img src="https://img-blog.csdnimg.cn/20201030222313691.png#pic_center" alt="在这里插入图片描述"><br>（4）双击打开后并没有发现有用信息，再用notepad++打开，发现又是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222346825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）修改后缀名为.zip，解压后得到一个文件夹<br><img src="https://img-blog.csdnimg.cn/20201030222418463.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222429644.png#pic_center" alt="在这里插入图片描述"><br>（6）最终在word文件夹里找到flag，可用记事本或notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222459970.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222507509.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="啊哒"><a href="#啊哒" class="headerlink" title="啊哒"></a>啊哒</h2><p>（1）打开附件，解压后得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222548608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）文件头确实是以FF D8 开头，寻找结尾FF D9<br><img src="https://img-blog.csdnimg.cn/20201030222607981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）发现FF D9后面还有一个压缩文件，50 4B 03 04，将原来的图片改后缀名为.zip，也可以在kali下用命令foremost -t all ada.jap 分离文件。<br><img src="https://img-blog.csdnimg.cn/20201030222638392.png#pic_center" alt="在这里插入图片描述"><br>（4）解压，但发现需要密码<br><img src="https://img-blog.csdnimg.cn/20201030222716140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）查看图片属性，发现一串字符，作为密码输入，但显示密码错误<br><img src="https://img-blog.csdnimg.cn/20201030222737816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）将这串十六进制字符转为ASCII码字符，得到sdnisc_2018，将其作为解压密码，得到flag<br><img src="https://img-blog.csdnimg.cn/20201030222759359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222809753.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="又一张图片，还单纯吗"><a href="#又一张图片，还单纯吗" class="headerlink" title="又一张图片，还单纯吗"></a>又一张图片，还单纯吗</h2><p>（1）附件是一张.jpg的图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222856237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）确实以FF D8开头，寻找图片结尾FF D9，接连找到几个FF D9后，又发现了一张以FF D8开头的.jpg图片<br><img src="https://img-blog.csdnimg.cn/20201030222917608.png#pic_center" alt="在这里插入图片描述"><br>（3）用kali输入命令foremost -t -all 2.jpg分离文件，则又得到了一张图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222940899.png#" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202010302230013.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223007998.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="猜"><a href="#猜" class="headerlink" title="猜"></a>猜</h2><p>（1）附件是一张图片，根据提示是某人的名字，直接百度搜索图片，是刘亦菲，名字拼音即flag<br><img src="https://img-blog.csdnimg.cn/20201030223039681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223048756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/Misc-001/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-XCTF/Misc-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/XCTF/Misc-004/">Misc_004</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/XCTF/Misc-004/" class="archive-article-date">
   	<time datetime="2020-11-15T08:48:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -209,7 +298,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Misc-004/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Misc-004/">展开全文 >></a>
         </p>
       
 
@@ -239,19 +328,19 @@
 
 
   
-    <article id="post-Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Misc-003/">Misc_003</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Misc-003/">Misc_003</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Misc-003/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Misc-003/" class="archive-article-date">
   	<time datetime="2020-11-15T08:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -304,7 +393,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Misc-003/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Misc-003/">展开全文 >></a>
         </p>
       
 
@@ -334,19 +423,19 @@
 
 
   
-    <article id="post-Web-005" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Web-005" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Web-005/">Web_005</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Web-005/">Web_005</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Web-005/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Web-005/" class="archive-article-date">
   	<time datetime="2020-11-15T08:40:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -394,7 +483,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Web-005/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Web-005/">展开全文 >></a>
         </p>
       
 
@@ -424,19 +513,19 @@
 
 
   
-    <article id="post-Web-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Web-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Web-004/">Web_004</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Web-004/">Web_004</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Web-004/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Web-004/" class="archive-article-date">
   	<time datetime="2020-11-15T08:37:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -500,7 +589,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Web-004/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Web-004/">展开全文 >></a>
         </p>
       
 
@@ -530,19 +619,19 @@
 
 
   
-    <article id="post-Web-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Web-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Web-003/">Web_003</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Web-003/">Web_003</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Web-003/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Web-003/" class="archive-article-date">
   	<time datetime="2020-11-15T08:33:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -597,7 +686,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Web-003/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Web-003/">展开全文 >></a>
         </p>
       
 
@@ -627,19 +716,19 @@
 
 
   
-    <article id="post-Web-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Web-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Web-002/">Web_002</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Web-002/">Web_002</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Web-002/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Web-002/" class="archive-article-date">
   	<time datetime="2020-11-15T08:27:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -689,7 +778,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Web-002/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Web-002/">展开全文 >></a>
         </p>
       
 
@@ -719,19 +808,19 @@
 
 
   
-    <article id="post-Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Web-001/">Web_001</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Web-001/">Web_001</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Web-001/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Web-001/" class="archive-article-date">
   	<time datetime="2020-11-15T08:19:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -783,7 +872,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Web-001/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Web-001/">展开全文 >></a>
         </p>
       
 
@@ -813,19 +902,19 @@
 
 
   
-    <article id="post-Web" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Web" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Web/">Web</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Web/">Web</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Web/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Web/" class="archive-article-date">
   	<time datetime="2020-11-15T08:04:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -890,7 +979,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Web/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Web/">展开全文 >></a>
         </p>
       
 
@@ -920,19 +1009,19 @@
 
 
   
-    <article id="post-Misc-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-XCTF/Misc-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Misc-002/">Misc_002</a>
+      <a class="article-title" href="/2020/11/15/XCTF/Misc-002/">Misc_002</a>
     </h1>
   
 
         
-        <a href="/2020/11/15/Misc-002/" class="archive-article-date">
+        <a href="/2020/11/15/XCTF/Misc-002/" class="archive-article-date">
   	<time datetime="2020-11-15T07:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
 </a>
         
@@ -983,101 +1072,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Misc-002/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Misc-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/Misc-001/">Misc_001</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/Misc-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T07:47:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="base64÷4"><a href="#base64÷4" class="headerlink" title="base64÷4"></a>base64÷4</h2><p><img src="https://img-blog.csdnimg.cn/20201029233527346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029233823554.png#pic_center" alt="在这里插入图片描述"><br>（1）根据题目提示，直接用base16解密得到flag</p>
-<p><img src="https://img-blog.csdnimg.cn/20201029233921359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="reverseMe"><a href="#reverseMe" class="headerlink" title="reverseMe"></a>reverseMe</h2><p>（1）打开附件，发现是一张图片<br><img src="https://img-blog.csdnimg.cn/20201029234035117.png#pic_center" alt="在这里插入图片描述"><br>（2）用画图工具打开该图片，使用水平翻转，即可查看到flag<br><img src="https://img-blog.csdnimg.cn/20201029234114796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029234125317.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="something-in-image"><a href="#something-in-image" class="headerlink" title="something_in_image"></a>something_in_image</h2><p>解法一：<br>（1）使用记事本或010 editor工具打开附件，Ctrl+F搜索flag<br><img src="https://img-blog.csdnimg.cn/20201029234240873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029234254152.png#pic_center" alt="在这里插入图片描述"><br>解法二：<br>根据题目包含image，使用kali，命令：strings badimages | grep Flag    （注，根据记事本中常出现的“Flag”，而不是“flag”进行搜索）<br><img src="https://img-blog.csdnimg.cn/2020102923435872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="wireshark-1"><a href="#wireshark-1" class="headerlink" title="wireshark-1"></a>wireshark-1</h2><p>（1）用wireshark打开附件，输入表达式http contains flag查找flag信息，根据题目，看到登录应该查找HTTP post请求，追踪筛选出的报文追踪tcp流，即可看到flag<br><img src="https://img-blog.csdnimg.cn/2020102923460010.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029234609210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="pure-color"><a href="#pure-color" class="headerlink" title="pure_color"></a>pure_color</h2><p>（1）附件是一张全白的png图片<br><img src="https://img-blog.csdnimg.cn/20201029234704614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）用notepad++打开没有发现flag信息<br>（3）用stegsolve打开，打开 File Format Analysis 没有flag的线索<br><img src="https://img-blog.csdnimg.cn/2020102923475148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4)最后在最底下的’&lt;’按钮发现了flag<br><img src="https://img-blog.csdnimg.cn/202010292348317.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Aesop-secret"><a href="#Aesop-secret" class="headerlink" title="Aesop_secret"></a>Aesop_secret</h2><p>（1）下载附件得到一张gif的动图，通过stegsolve工具分解得到9张图片<br><img src="https://img-blog.csdnimg.cn/20201029235041213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）用画图工具分别将这九张图通过旋转、裁剪一系列操作，得到9张裁剪过的图，再将这9张裁剪过的图片拼在一起（这里耗费了较多时间），得到如下图<br><img src="https://img-blog.csdnimg.cn/20201029235123359.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029235133815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）图片显示为ISCC，显然不是flag，再用notepad++打开原来的gif动图，发现一串密文<br><img src="https://img-blog.csdnimg.cn/20201029235235364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）用base64解码，无果，根据题目和上面图片的ISCC，联想到AES加密，ISCC则为密钥<br><img src="https://img-blog.csdnimg.cn/202010292352570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）解码后仍然是一串密文，再次解密，得到flag<br><img src="https://img-blog.csdnimg.cn/20201029235319285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="a-good-idea"><a href="#a-good-idea" class="headerlink" title="a_good_idea"></a>a_good_idea</h2><p>（1）打开附件，是一张.jpg格式的图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201029235355127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020102923541217.png#pic_center" alt="在这里插入图片描述"><br>（2）确实以FF D8开头，寻找图片结尾FF D9，发现后面还有一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201029235436753.png#pic_center" alt="在这里插入图片描述"><br>（3）将原图片后缀名改为.zip，解压后得到一个文件夹，里面是两张相同的图片和一个hint提示文本<br><img src="https://img-blog.csdnimg.cn/20201029235502674.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029235519348.png#pic_center" alt="在这里插入图片描述"><br>（4）hint为“试着找出像素的秘密”，用stegsolve工具合成这两张图片，发现一些红点，貌似是二维码<br><img src="https://img-blog.csdnimg.cn/20201029235544453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）用wps图片编辑，在“工具”中选择“色彩”，将亮度和饱和度调到最高<br><img src="https://img-blog.csdnimg.cn/2020102923562537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）发现还是不太明显，先保存这张图片，再用wps图片工具打开，再调一遍亮度和饱和度<br><img src="https://img-blog.csdnimg.cn/20201029235702553.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（7）可以看到清晰的二维码图片，用二维码扫描工具扫描图片，发现flag<br><img src="https://img-blog.csdnimg.cn/2020102923573284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Training-Stegano-1"><a href="#Training-Stegano-1" class="headerlink" title="Training-Stegano-1"></a>Training-Stegano-1</h2><p>一张bmp格式的图片，直接用notepad++打开，即可看flag，注意提交时不用加flag{}<br><img src="https://img-blog.csdnimg.cn/20201029235912499.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="can-has-stdio"><a href="#can-has-stdio" class="headerlink" title="can_has_stdio?"></a>can_has_stdio?</h2><p>（1）用notepad++打开附件<br><img src="https://img-blog.csdnimg.cn/20201029235946797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现是Brainfuck文件，用在线解析工具得到flag<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/brain.html">http://ctf.ssleye.com/brain.html</a><br><img src="https://img-blog.csdnimg.cn/20201030000056979.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>#Brainfuck解析规则：<br>     “&gt;”: 指针位置右移一位<br>    “&lt;”: 指针位置左移一位<br>     +: 指针所指向的位置里面的值加1<br>     -: 指针所指向的位置里面的值减1<br>     . :输出指针当前位置指向单元格中的内容<br>     [: 如果指针指向的单元值为零，向后跳转到对应的]指令的次一指令处<br>     ]:如果指针指向的单元值不为零，向前跳转到对应的[指令的次一指令处(额…好像比较难理解,只是用于循环某一段代码而已,两个一般联合使用)</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/Misc-001/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/15/XCTF/Misc-002/">展开全文 >></a>
         </p>
       
 
