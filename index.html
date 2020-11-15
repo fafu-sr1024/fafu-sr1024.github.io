@@ -152,6 +152,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kali/kali修改时间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/">kali修改时间</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/" class="archive-article-date">
+  	<time datetime="2020-11-15T15:25:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（1）tzselect命令执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tzselect</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p>
+<p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p>
+<p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
+<p>（3）修改配置文件，修改时区，输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfig</span><br><span class="line">rm -f &#x2F;etc&#x2F;localtime        &#x2F;&#x2F;链接到上海时区文件       </span><br><span class="line">ln -sf &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime</span><br></pre></td></tr></table></figure>
+
+<p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-BugkuCTF/Misc-006" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1012,96 +1095,6 @@
 
 
   
-    <article id="post-XCTF/Web-005" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/Web-005/">Web_005</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/Web-005/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:40:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="NaNNaNNaNNaN-Batman"><a href="#NaNNaNNaNNaN-Batman" class="headerlink" title="NaNNaNNaNNaN-Batman"></a>NaNNaNNaNNaN-Batman</h2><p>（1）下载附件，是一个没有后缀名的文件，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201104203101152.png#pic_center" alt="在这里插入图片描述">（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。<br><img src="https://img-blog.csdnimg.cn/20201104203445934.png#pic_center" alt="在这里插入图片描述">（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。<br><img src="https://img-blog.csdnimg.cn/20201104203642634.png#pic_center" alt="在这里插入图片描述">（4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“alert(_);”。重新用浏览器打开，即显示出正常代码。<br><img src="https://img-blog.csdnimg.cn/20201104210527470.png#pic_center" alt="在这里插入图片描述">（5）使用在线网站将这段js代码对齐 <a target="_blank" rel="noopener" href="https://beautifier.io/">https://beautifier.io/</a><br><img src="https://img-blog.csdnimg.cn/20201104211100387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（6）可以看到需要满足几个 if 中的正则表达式条件，^表示开始，$表示结尾，同时还要满足长度为16位。<br>把匹配出来的值be0f233ac7be98aa，输入到网页中的输入框就得到了flag。<br><img src="https://img-blog.csdnimg.cn/20201104212001550.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201104212019299.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>（1）打开网址，根据注释中的提示，逆向加密算法，解密$miwen就能得到flag<br><img src="https://img-blog.csdnimg.cn/20201114164452564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）分析其中的PHP内置函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">strrev(string): 反转字符串</span><br><span class="line">strlen(string): 返回字符串的长度</span><br><span class="line">substr(string, start, length): 返回字符串的一部分   </span><br><span class="line">&#x2F;&#x2F;string: 所需要的字符串</span><br><span class="line">&#x2F;&#x2F;start: 在字符串何处开始</span><br><span class="line">&#x2F;&#x2F;length: 可选。规定被返回字符串的长度。默认是直到字符串的结尾</span><br><span class="line"></span><br><span class="line">ord(string): 返回字符串首个字符的 ASCII 值</span><br><span class="line">chr(): 从指定的 ASCII 值返回对应的字符</span><br><span class="line">str_rot13(string): 对字符串执行 ROT13 编码。</span><br><span class="line">&#x2F;&#x2F;ROT13 编码把每一个字母在字母表中向前移动 13 个字母。数字和非字母字符保持不变</span><br><span class="line"></span><br><span class="line">base64_encode(string): 使用 MIME base64 对数据进行编码</span><br></pre></td></tr></table></figure>
-<p>(3)分析网址中的函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$miwen&#x3D;&quot;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&quot;;</span><br><span class="line"></span><br><span class="line">function encode($str)&#123;                &#x2F;&#x2F;给encode一个参数 $str</span><br><span class="line">    $_o&#x3D;strrev($str);                 &#x2F;&#x2F;将所传参数 $str 通过 strrev() 函数反转字符串操作并赋值给 $_o</span><br><span class="line">    &#x2F;&#x2F; echo $_o;</span><br><span class="line">        </span><br><span class="line">    for($_0&#x3D;0;$_0&lt;strlen($_o);$_0++)&#123;          &#x2F;&#x2F;循环遍历 变量 $_o</span><br><span class="line">       </span><br><span class="line">        $_c&#x3D;substr($_o,$_0,1);    &#x2F;&#x2F;在for循环中首先依次取字符串 $_o 的第 $_0 个值，赋值给 $_c</span><br><span class="line">        $__&#x3D;ord($_c)+1;  &#x2F;&#x2F;将变量 $c 转化为 ASCII码 并 +1，赋值给 $_</span><br><span class="line">        $_c&#x3D;chr($__);   &#x2F;&#x2F;将 $__ 转化为该ASCII码所对应的字符，赋值给 $_c</span><br><span class="line">        $_&#x3D;$_.$_c;     &#x2F;&#x2F;拼接字符串，赋值给$_</span><br><span class="line">    &#125; </span><br><span class="line">    return str_rot13(strrev(base64_encode($_)));  </span><br><span class="line">    &#x2F;&#x2F;将拼接好后的字符串 $_ 先进行 base64编码，再将编码后的值进行反转字符串操作，</span><br><span class="line">    &#x2F;&#x2F;最后对反转后的字符串进行 rot13 加密，得出结果为$miwen</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">&#x2F;*</span><br><span class="line">   逆向加密算法，解密$miwen就是flag</span><br><span class="line">*&#x2F;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>（4）用在线工具写出逆向代码 <a target="_blank" rel="noopener" href="https://tool.lu/coderunner/">https://tool.lu/coderunner/</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$str&#x3D;&#39;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&#39;;</span><br><span class="line">$_ &#x3D; base64_decode(strrev(str_rot13($str)));</span><br><span class="line"></span><br><span class="line">$_o&#x3D;NULL;</span><br><span class="line">for($_0&#x3D;0;$_0&lt;strlen($_);$_0++)&#123;  </span><br><span class="line">       </span><br><span class="line">        $_c&#x3D;substr($_,$_0,1);  </span><br><span class="line"></span><br><span class="line">        $__&#x3D;ord($_c)-1;  </span><br><span class="line"></span><br><span class="line">        $_c&#x3D;chr($__);  </span><br><span class="line"></span><br><span class="line">        $_o&#x3D;$_o.$_c;   </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo strrev($_o);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Web进阶区//" class="article-tag-list-link color2">XCTF_Web进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/Web-005/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1200,6 +1193,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kali</a>
               </li>
             
             <div class="clearfix"></div>
