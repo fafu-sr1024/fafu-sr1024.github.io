@@ -11,10 +11,9 @@
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
     <meta name="description" content="（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc
-1vim /root/.bashrc
-
+vim /root/.bashrc
 （2）粘贴内容如下：
-1234567891011121314151617181920212,"> 
+# set variable identifying the chroo,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -102,13 +101,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    10k
+                    3.2k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    9 mins.
+                    3 mins.
                 </span>
                 
                 
@@ -143,14 +142,88 @@
     <div class='main'>
         <div class="content markdown animated fadeIn">
             <p>（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /root/.bashrc</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">vim /root/.bashrc</code></pre>
 <p>（2）粘贴内容如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"># set variable identifying the chroot you work in (used in the prompt below)</span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">&quot;$&#123;debian_chroot:-&#125;&quot;</span> ] &amp;&amp; [ -r /etc/debian_chroot ]; then</span><br><span class="line">    debian_chroot=$(cat /etc/debian_chroot)</span><br><span class="line">fi</span><br><span class="line"> </span><br><span class="line"># set a fancy prompt (non-color, unless we know we &quot;want&quot; color)</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;$TERM&quot;</span> <span class="keyword">in</span></span><br><span class="line">    xterm-color) color_prompt=yes;;</span><br><span class="line">esac</span><br><span class="line"> </span><br><span class="line"># uncomment for a colored prompt, if the terminal has the capability; turned</span><br><span class="line"># off by default to not distract the user: the focus in a terminal window</span><br><span class="line"># should be on the output of commands, not on the prompt</span><br><span class="line">force_color_prompt=yes</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">&quot;$force_color_prompt&quot;</span> ]; then</span><br><span class="line">    <span class="keyword">if</span> [ -x /usr/bin/tput ] &amp;&amp; tput setaf <span class="number">1</span> &gt;&amp;<span class="regexp">/dev/</span><span class="literal">null</span>; then</span><br><span class="line">    # We have color support; assume it&#x27;s compliant with Ecma-48</span><br><span class="line">    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such</span><br><span class="line">    # a case would tend to support setf rather than setaf.)</span><br><span class="line">    color_prompt=yes</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    color_prompt=</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;$color_prompt&quot;</span> = yes ]; then</span><br><span class="line">    PS1=<span class="string">&#x27;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    PS1=<span class="string">&#x27;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#x27;</span></span><br><span class="line">fi</span><br><span class="line">unset color_prompt force_color_prompt</span><br><span class="line"> </span><br><span class="line"># If this is an xterm set the title to user@host:dir</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;$TERM&quot;</span> <span class="keyword">in</span></span><br><span class="line">xterm*|rxvt*)</span><br><span class="line">    PS1=<span class="string">&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br><span class="line"> </span><br><span class="line"># enable color support of ls and also add handy aliases</span><br><span class="line"><span class="keyword">if</span> [ -x /usr/bin/dircolors ]; then</span><br><span class="line">    test -r ~<span class="regexp">/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/</span>.dircolors)<span class="string">&quot; || eval &quot;</span>$(dircolors -b)<span class="string">&quot;</span></span><br><span class="line"><span class="string">    alias ls=&#x27;ls --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias dir=&#x27;dir --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias vdir=&#x27;vdir --color=auto&#x27;</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">    #alias grep=&#x27;grep --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias fgrep=&#x27;fgrep --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias egrep=&#x27;egrep --color=auto&#x27;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"># some more ls aliases</span></span><br><span class="line"><span class="string">#alias ll=&#x27;ls -l&#x27;</span></span><br><span class="line"><span class="string">#alias la=&#x27;ls -A&#x27;</span></span><br><span class="line"><span class="string">#alias l=&#x27;ls -CF&#x27;</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"># Alias definitions.</span></span><br><span class="line"><span class="string"># You may want to put all your additions into a separate file like</span></span><br><span class="line"><span class="string"># ~/.bash_aliases, instead of adding them here directly.</span></span><br><span class="line"><span class="string"># See /usr/share/doc/bash-doc/examples in the bash-doc package.</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">if [ -f ~/.bash_aliases ]; then</span></span><br><span class="line"><span class="string">    . ~/.bash_aliases</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"># enable programmable completion features (you don&#x27;t need to enable</span></span><br><span class="line"><span class="string"># this, if it&#x27;s already enabled in /etc/bash.bashrc and /etc/profile</span></span><br><span class="line"><span class="string"># sources /etc/bash.bashrc).</span></span><br><span class="line"><span class="string">if ! shopt -oq posix; then</span></span><br><span class="line"><span class="string">  if [ -f /usr/share/bash-completion/bash_completion ]; then</span></span><br><span class="line"><span class="string">    . /usr/share/bash-completion/bash_completion</span></span><br><span class="line"><span class="string">  elif [ -f /etc/bash_completion ]; then</span></span><br><span class="line"><span class="string">    . /etc/bash_completion</span></span><br><span class="line"><span class="string">  fi</span></span><br><span class="line"><span class="string">fi</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript"># set variable identifying the chroot you work in (used in the prompt below)
+if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&amp; [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
 
+# set a fancy prompt (non-color, unless we know we &quot;want&quot; color)
+case &quot;$TERM&quot; in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n &quot;$force_color_prompt&quot; ]; then
+    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
+    # We have color support; assume it&#39;s compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;
+else
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#39;
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case &quot;$TERM&quot; in
+xterm*|rxvt*)
+    PS1=&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/.dircolors)&quot; || eval &quot;$(dircolors -b)&quot;
+    alias ls=&#39;ls --color=auto&#39;
+    #alias dir=&#39;dir --color=auto&#39;
+    #alias vdir=&#39;vdir --color=auto&#39;
+
+    #alias grep=&#39;grep --color=auto&#39;
+    #alias fgrep=&#39;fgrep --color=auto&#39;
+    #alias egrep=&#39;egrep --color=auto&#39;
+fi
+
+# some more ls aliases
+#alias ll=&#39;ls -l&#39;
+#alias la=&#39;ls -A&#39;
+#alias l=&#39;ls -CF&#39;
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don&#39;t need to enable
+# this, if it&#39;s already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi</code></pre>
 <p>（3）执行命令source /root/.bashrc即可</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /root/.bashrc</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">source /root/.bashrc</code></pre>
 <p>（4）配置前：</p>
 <p><img src="https://i.loli.net/2020/11/15/kmhGaFQ2cq5uB7O.png" alt="image-20201115235207538"></p>
 <p>（5）配置后：</p>

@@ -11,12 +11,11 @@
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
     <meta name="description" content="（1）tzselect命令执行
-1tzselect
-
+tzselect
 
 （2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。
 
-（3）修改配置文件，修改时区,"> 
+（3）修改配置文件，修改时区，输,"> 
     <meta name="author" content="John Doe"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -104,7 +103,7 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    1.1k
+                    565
                 </span>
                 
                 
@@ -145,14 +144,14 @@
     <div class='main'>
         <div class="content markdown animated fadeIn">
             <p>（1）tzselect命令执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tzselect</span><br></pre></td></tr></table></figure>
-
+<pre><code>tzselect</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p>
 <p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p>
 <p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
 <p>（3）修改配置文件，修改时区，输入以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfig</span><br><span class="line">rm -f &#x2F;etc&#x2F;localtime        &#x2F;&#x2F;链接到上海时区文件       </span><br><span class="line">ln -sf &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime</span><br></pre></td></tr></table></figure>
-
+<pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
+rm -f /etc/localtime        //链接到上海时区文件       
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre>
 <p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->

@@ -81,13 +81,13 @@
                                     <div class="timeline-content">
                                         <a class="timeline-title" target="_self" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">kali中的文件/目录操作</a>
                                         <p>
-                                            文件操作常见命令1file fileName        &#x2F;&#x2F;查看文件类型等基本信息
-
-
-
-压缩，解压缩命令tar123tar cvf file.tar dir    &#x2F;&#x2F;打包目录中的文件，后面也可跟多个文件tar xvf file.tar        &#x2F;&#x2F;解包#tar是打包，不是压缩
-
-.gz123gzip file     ...
+                                            文件操作常见命令file fileName        //查看文件类型等基本信息
+压缩，解压缩命令tartar cvf file.tar dir    //打包目录中的文件，后面也可跟多个文件
+tar xvf file.tar        //解包
+#tar是打包，不是压缩
+.gzgzip file           //压缩
+gunzip file.gz      //解压
+gzi...
                                         </p>
                                     </div>
                                 </li>
@@ -102,10 +102,10 @@
                                         <a class="timeline-title" target="_self" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">kali下root用户的配色问题</a>
                                         <p>
                                             （1）在该文件夹中粘贴颜色配置：vim /root/.bashrc
-1vim /root/.bashrc
-
+vim /root/.bashrc
 （2）粘贴内容如下：
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707...
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&...
                                         </p>
                                     </div>
                                 </li>
@@ -120,13 +120,13 @@
                                         <a class="timeline-title" target="_self" href="/2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/">kali修改时间</a>
                                         <p>
                                             （1）tzselect命令执行
-1tzselect
-
+tzselect
 
 （2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。
 
 （3）修改配置文件，修改时区，输入以下命令
-123echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfigrm -f &#...
+echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
+rm -f /etc/localtime        //链接...
                                         </p>
                                     </div>
                                 </li>
@@ -244,9 +244,9 @@ web基础$_GET用get方法输入一个参数，参数名为“what”，值为�
                                         <a class="timeline-title" target="_self" href="/2020/11/15/XCTF/Misc-004/">Misc_004</a>
                                         <p>
                                             embarrass（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag（3）在kaili中用strings命令找到flag
-1strings misc_02.pcapng | grep flag
+strings misc_02.pcapng | grep flag
 
-MISCa...
+MISCal...
                                         </p>
                                     </div>
                                 </li>
@@ -350,7 +350,8 @@ Training-WWW-Robots（1）根据...
                                         <p>
                                             view_source这里右键无法查看网页源代码，可通过f12键或者在url地址前加上”view-source:”查看网页源代码找到flag。
 get_postHTTP常用的请求方法：get，post。（1）直接把请求参数拼接在URL后面，以？间隔URL和参数，若有多个参数，则以&amp;间隔参数
-1http:&#x2F;&#x2F;220.249.52.133:55274&#x2F;？a&...
+http://220.249.52.133:55274/？a=1
+（2）post：提交post...
                                         </p>
                                     </div>
                                 </li>
