@@ -196,7 +196,23 @@
         <h2 id="Janos-the-Ripper"><a href="#Janos-the-Ripper" class="headerlink" title="János-the-Ripper"></a>János-the-Ripper</h2><p>（1）附件是一个压缩包，解压后得到一个没有后缀名的文件，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201031111055252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）是一个压缩包，改后缀名为zip，解压，但需要密码<br><img src="https://img-blog.csdnimg.cn/20201031113641184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）直接暴力破解，得到密码fish<br><img src="https://img-blog.csdnimg.cn/20201031113742969.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）得到flag<br><img src="https://img-blog.csdnimg.cn/20201031113816887.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="Test-flag-please-ignore"><a href="#Test-flag-please-ignore" class="headerlink" title="Test-flag-please-ignore"></a>Test-flag-please-ignore</h2><p>（1）下载附件，是一个压缩包，解压后用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201101110811501.png#pic_center" alt="在这里插入图片描述">（2）一串十六进制数，转为字符串<br><img src="https://img-blog.csdnimg.cn/20201101110859979.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="hit-the-core"><a href="#hit-the-core" class="headerlink" title="hit-the-core"></a>hit-the-core</h2><p>（1）下载附件，得到一个core文件，放到kali下，使用命令strings查看字符串。<br><img src="https://img-blog.csdnimg.cn/20201102174632149.png#pic_center" alt="在这里插入图片描述">（2）发现一串特殊的字符，格式像flag，看到前面的大写字母为ALXCTF，相邻的字母之间都隔了4个字符，按照这个规律，写个简单的程序（C语言），提取出flag。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;strings.h&gt;</span><br><span class="line">int main()&#123;</span><br><span class="line">	char a[200];</span><br><span class="line">	gets(a);</span><br><span class="line"></span><br><span class="line">	int i&#x3D;3;</span><br><span class="line">	</span><br><span class="line">	while(a[i] !&#x3D; 0)&#123;</span><br><span class="line">		printf(&quot;%c&quot;,a[i]);</span><br><span class="line">		i+&#x3D;5;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;strings.h&gt;
+int main()&#123;
+    char a[200];
+    gets(a);
+
+    int i=3;
+
+    while(a[i] != 0)&#123;
+        printf(&quot;%c&quot;,a[i]);
+        i+=5;
+    &#125;
+
+    system(&quot;pause&quot;);
+    return 0;
+&#125;</code></pre>
 <p>（3）<img src="https://img-blog.csdnimg.cn/20201102175004523.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="快乐游戏题"><a href="#快乐游戏题" class="headerlink" title="快乐游戏题"></a>快乐游戏题</h2><p>（1）得到一个附件，是一个捉猫猫游戏。鼓捣了好久，没有发现任何flag信息，最后看了大家的writeup，都是玩通关得出来的。没法，玩呗，玩了好久，终于困住猫了，拿到了flag。<br><img src="https://img-blog.csdnimg.cn/20201103203219434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="Banmabanma"><a href="#Banmabanma" class="headerlink" title="Banmabanma"></a>Banmabanma</h2><p>（1）下载附件，一张斑马的图片，看了看，典型的条形码，直接在线扫码<a target="_blank" rel="noopener" href="https://online-barcode-reader.inliteresearch.com/">https://online-barcode-reader.inliteresearch.com/</a><br><img src="https://img-blog.csdnimg.cn/2020110320424561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）得到flag。<br><img src="https://img-blog.csdnimg.cn/20201103204313481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>

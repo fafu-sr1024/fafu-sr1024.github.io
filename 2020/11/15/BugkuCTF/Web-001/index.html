@@ -207,19 +207,47 @@
 <h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p><img src="https://img-blog.csdnimg.cn/20201031191427635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（1）根据题目的意思，将域名flag.baidu.com指向到IP地址123.206.87.240<br>windows平台在C:\Windows\System32\drivers\etc\host中最后一行加入120.24.86.145 flag.bugku.com  （这里用notepad++打开host文件，修改后保存）<br><img src="https://img-blog.csdnimg.cn/20201031192314845.png#pic_center" alt="在这里插入图片描述">（2）修改完后，打开浏览器访问flag.baidu.com，得到flag<br><img src="https://img-blog.csdnimg.cn/20201031192355246.png#pic_center" alt="在这里插入图片描述">#如果是linux平台，则在/etc/host中加入123.206.87.240   flag.baidu.com </p>
 <h2 id="你必须让他停下"><a href="#你必须让他停下" class="headerlink" title="你必须让他停下"></a>你必须让他停下</h2><p>（1）打开网址，页面一直刷新，用burp抓包<br><img src="https://img-blog.csdnimg.cn/20201031194439430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）发送到Repeater，点击发送，每发送一次，图片都会来一次变化，这是随机的，不断地发送，在出现10.jpg的时候发现了flag<br><img src="https://img-blog.csdnimg.cn/20201031194748327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h2><p>（1）打开网址，发现一段php代码<br><img src="https://img-blog.csdnimg.cn/20201101173036596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）对代码的解释：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line"></span><br><span class="line">error_reporting(0);                            &#x2F;&#x2F;关闭php错误显示</span><br><span class="line">include &quot;flag1.php&quot;;                           &#x2F;&#x2F;引入flag1.php文件代码</span><br><span class="line">highlight_file(__file__);</span><br><span class="line">if(isset($_GET[&#39;args&#39;]))&#123;                     &#x2F;&#x2F;通过get方式传递 args变量才能执行if里面的代码</span><br><span class="line">    $args &#x3D; $_GET[&#39;args&#39;];</span><br><span class="line">    if(!preg_match(&quot;&#x2F;^\w+$&#x2F;&quot;,$args))&#123;    &#x2F;&#x2F;正则表达式的意思是匹配任意[A-Z,a-z，0-9,_]的字符，就是任意大小写字母和0-9以及下划线组成</span><br><span class="line">        die(&quot;args error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    eval(&quot;var_dump($$args);&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php  
+
+error_reporting(0);                            //关闭php错误显示
+include &quot;flag1.php&quot;;                           //引入flag1.php文件代码
+highlight_file(__file__);
+if(isset($_GET[&#39;args&#39;]))&#123;                     //通过get方式传递 args变量才能执行if里面的代码
+    $args = $_GET[&#39;args&#39;];
+    if(!preg_match(&quot;/^\w+$/&quot;,$args))&#123;    //正则表达式的意思是匹配任意[A-Z,a-z，0-9,_]的字符，就是任意大小写字母和0-9以及下划线组成
+        die(&quot;args error!&quot;);
+    &#125;
+    eval(&quot;var_dump($$args);&quot;);
+&#125;
+?&gt;</code></pre>
 <p>（3）可变变量(<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.variable.php">https://www.php.net/manual/zh/language.variables.variable.php</a>)<br>#一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a &#x3D; &#39;hello&#39;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+$a = &#39;hello&#39;;
+?&gt;</code></pre>
 <p>#一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$$a &#x3D; &#39;world&#39;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+$$a = &#39;world&#39;;
+?&gt;</code></pre>
 <p>#这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo &quot;$a $&#123;$a&#125;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+echo &quot;$a $&#123;$a&#125;&quot;;
+?&gt;</code></pre>
 <p>与以下语句输出完全相同的结果,都会输出hello world： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo &quot;$a $hello&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+echo &quot;$a $hello&quot;;
+?&gt;</code></pre>
 <p>#要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下$$a[1] 时，解析器需要知道是想要 $a[1] 作为一个变量呢，还是想要 $$a 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 ${$a[1]}，对第二种情况用 ${$a}[1]。 </p>
 <p>#在 PHP 的函数和类的方法中，超全局变量不能用作可变变量。$this 变量也是一个特殊变量，不能被动态引用。 </p>
 <p>（4）超全局变量是在全部作用域中始终可用的内置变量<br>这些超全局变量是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$GLOBALS</span><br><span class="line">$_SERVER</span><br><span class="line">$_GET</span><br><span class="line">$_POST</span><br><span class="line">$_FILES</span><br><span class="line">$_COOKIE</span><br><span class="line">$_SESSION</span><br><span class="line">$_REQUEST</span><br><span class="line">$_ENV</span><br></pre></td></tr></table></figure>
+<pre><code>    $GLOBALS
+    $_SERVER
+    $_GET
+    $_POST
+    $_FILES
+    $_COOKIE
+    $_SESSION
+    $_REQUEST
+    $_ENV</code></pre>
 <p>（5）所以只需给变量传入一个全局变量就可以了，将其变量名传入。构造参数：?args=GLOBALS，就能得到flag。<br><img src="https://img-blog.csdnimg.cn/20201101175938899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h2><p><img src="https://img-blog.csdnimg.cn/20201101184046587.png#pic_center" alt="在这里插入图片描述">（1）查看网页源代码，发现一串特殊的字符<br><img src="https://img-blog.csdnimg.cn/20201101184313987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据题目的提示，JSFuck是用6个字符 [ ] ( ) ! +来编写JavaScript程序。将源代码中的特殊字符放到浏览器的console控制台上进行解密。粘贴到控制台后按回车即可。<br><img src="https://img-blog.csdnimg.cn/20201101184717920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）注意提交格式，要求大写。CTF{WHATFK}</p>
 <p>#Jother是一种运用于javascript语言中利用少量字符构造精简的匿名函数方法对于字符串进行的编码方式。其中8个少量字符包括：[ ] ( ) ! + { }  只用这些字符就能完成对任意字符串的编码。（可以在浏览器的console控制台上直接解密）</p>

@@ -172,24 +172,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="文件操作常见命令"><a href="#文件操作常见命令" class="headerlink" title="文件操作常见命令"></a>文件操作常见命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file fileName        &#x2F;&#x2F;查看文件类型等基本信息</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="压缩，解压缩命令"><a href="#压缩，解压缩命令" class="headerlink" title="压缩，解压缩命令"></a>压缩，解压缩命令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar cvf file.tar dir    &#x2F;&#x2F;打包目录中的文件，后面也可跟多个文件</span><br><span class="line">tar xvf file.tar        &#x2F;&#x2F;解包</span><br><span class="line">#tar是打包，不是压缩</span><br></pre></td></tr></table></figure>
-
-<h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gzip file           &#x2F;&#x2F;压缩</span><br><span class="line">gunzip file.gz      &#x2F;&#x2F;解压</span><br><span class="line">gzip -d file.gz     &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
-
-<h3 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf file.tar.gz dir &#x2F;&#x2F;压缩</span><br><span class="line">tar zxvf file.tar.gz     &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
-
-<h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bzip2 (-z) file      &#x2F;&#x2F;压缩，有无参数z都可</span><br><span class="line">bunzip2 file.bz2     &#x2F;&#x2F;解压</span><br><span class="line">bzip2 -d file.bz2    &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
-
-<h3 id="tar-bz2"><a href="#tar-bz2" class="headerlink" title=".tar.bz2"></a>.tar.bz2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar jcvf file.tar.bz2 dir   &#x2F;&#x2F;压缩</span><br><span class="line">tar jxvf file.tar.bz2       &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
-
-<h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zip file.zip file&#x2F;dir     &#x2F;&#x2F;压缩文件或目录</span><br><span class="line">unzip file.zip            &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
-
-<h3 id="tgz"><a href="#tgz" class="headerlink" title=".tgz"></a>.tgz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf file.tar.tgz file1 file2   &#x2F;&#x2F;压缩</span><br><span class="line">tar zxvf file.tar.tgz      &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
-
+        <h2 id="文件操作常见命令"><a href="#文件操作常见命令" class="headerlink" title="文件操作常见命令"></a>文件操作常见命令</h2><pre><code>file fileName        //查看文件类型等基本信息</code></pre>
+<h2 id="压缩，解压缩命令"><a href="#压缩，解压缩命令" class="headerlink" title="压缩，解压缩命令"></a>压缩，解压缩命令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><pre><code>tar cvf file.tar dir    //打包目录中的文件，后面也可跟多个文件
+tar xvf file.tar        //解包
+#tar是打包，不是压缩</code></pre>
+<h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><pre><code>gzip file           //压缩
+gunzip file.gz      //解压
+gzip -d file.gz     //解压</code></pre>
+<h3 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h3><pre><code>tar zcvf file.tar.gz dir //压缩
+tar zxvf file.tar.gz     //解压</code></pre>
+<h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><pre><code>bzip2 (-z) file      //压缩，有无参数z都可
+bunzip2 file.bz2     //解压
+bzip2 -d file.bz2    //解压</code></pre>
+<h3 id="tar-bz2"><a href="#tar-bz2" class="headerlink" title=".tar.bz2"></a>.tar.bz2</h3><pre><code>tar jcvf file.tar.bz2 dir   //压缩
+tar jxvf file.tar.bz2       //解压</code></pre>
+<h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><pre><code>zip file.zip file/dir     //压缩文件或目录
+unzip file.zip            //解压</code></pre>
+<h3 id="tgz"><a href="#tgz" class="headerlink" title=".tgz"></a>.tgz</h3><pre><code>tar zcvf file.tar.tgz file1 file2   //压缩
+tar zxvf file.tar.tgz      //解压</code></pre>
 
       
 
@@ -264,14 +264,88 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /root/.bashrc</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">vim /root/.bashrc</code></pre>
 <p>（2）粘贴内容如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"># set variable identifying the chroot you work in (used in the prompt below)</span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">&quot;$&#123;debian_chroot:-&#125;&quot;</span> ] &amp;&amp; [ -r /etc/debian_chroot ]; then</span><br><span class="line">    debian_chroot=$(cat /etc/debian_chroot)</span><br><span class="line">fi</span><br><span class="line"> </span><br><span class="line"># set a fancy prompt (non-color, unless we know we &quot;want&quot; color)</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;$TERM&quot;</span> <span class="keyword">in</span></span><br><span class="line">    xterm-color) color_prompt=yes;;</span><br><span class="line">esac</span><br><span class="line"> </span><br><span class="line"># uncomment for a colored prompt, if the terminal has the capability; turned</span><br><span class="line"># off by default to not distract the user: the focus in a terminal window</span><br><span class="line"># should be on the output of commands, not on the prompt</span><br><span class="line">force_color_prompt=yes</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">&quot;$force_color_prompt&quot;</span> ]; then</span><br><span class="line">    <span class="keyword">if</span> [ -x /usr/bin/tput ] &amp;&amp; tput setaf <span class="number">1</span> &gt;&amp;<span class="regexp">/dev/</span><span class="literal">null</span>; then</span><br><span class="line">    # We have color support; assume it&#x27;s compliant with Ecma-48</span><br><span class="line">    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such</span><br><span class="line">    # a case would tend to support setf rather than setaf.)</span><br><span class="line">    color_prompt=yes</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    color_prompt=</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;$color_prompt&quot;</span> = yes ]; then</span><br><span class="line">    PS1=<span class="string">&#x27;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    PS1=<span class="string">&#x27;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#x27;</span></span><br><span class="line">fi</span><br><span class="line">unset color_prompt force_color_prompt</span><br><span class="line"> </span><br><span class="line"># If this is an xterm set the title to user@host:dir</span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;$TERM&quot;</span> <span class="keyword">in</span></span><br><span class="line">xterm*|rxvt*)</span><br><span class="line">    PS1=<span class="string">&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br><span class="line"> </span><br><span class="line"># enable color support of ls and also add handy aliases</span><br><span class="line"><span class="keyword">if</span> [ -x /usr/bin/dircolors ]; then</span><br><span class="line">    test -r ~<span class="regexp">/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/</span>.dircolors)<span class="string">&quot; || eval &quot;</span>$(dircolors -b)<span class="string">&quot;</span></span><br><span class="line"><span class="string">    alias ls=&#x27;ls --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias dir=&#x27;dir --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias vdir=&#x27;vdir --color=auto&#x27;</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">    #alias grep=&#x27;grep --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias fgrep=&#x27;fgrep --color=auto&#x27;</span></span><br><span class="line"><span class="string">    #alias egrep=&#x27;egrep --color=auto&#x27;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"># some more ls aliases</span></span><br><span class="line"><span class="string">#alias ll=&#x27;ls -l&#x27;</span></span><br><span class="line"><span class="string">#alias la=&#x27;ls -A&#x27;</span></span><br><span class="line"><span class="string">#alias l=&#x27;ls -CF&#x27;</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"># Alias definitions.</span></span><br><span class="line"><span class="string"># You may want to put all your additions into a separate file like</span></span><br><span class="line"><span class="string"># ~/.bash_aliases, instead of adding them here directly.</span></span><br><span class="line"><span class="string"># See /usr/share/doc/bash-doc/examples in the bash-doc package.</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">if [ -f ~/.bash_aliases ]; then</span></span><br><span class="line"><span class="string">    . ~/.bash_aliases</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"># enable programmable completion features (you don&#x27;t need to enable</span></span><br><span class="line"><span class="string"># this, if it&#x27;s already enabled in /etc/bash.bashrc and /etc/profile</span></span><br><span class="line"><span class="string"># sources /etc/bash.bashrc).</span></span><br><span class="line"><span class="string">if ! shopt -oq posix; then</span></span><br><span class="line"><span class="string">  if [ -f /usr/share/bash-completion/bash_completion ]; then</span></span><br><span class="line"><span class="string">    . /usr/share/bash-completion/bash_completion</span></span><br><span class="line"><span class="string">  elif [ -f /etc/bash_completion ]; then</span></span><br><span class="line"><span class="string">    . /etc/bash_completion</span></span><br><span class="line"><span class="string">  fi</span></span><br><span class="line"><span class="string">fi</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript"># set variable identifying the chroot you work in (used in the prompt below)
+if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&amp; [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
 
+# set a fancy prompt (non-color, unless we know we &quot;want&quot; color)
+case &quot;$TERM&quot; in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n &quot;$force_color_prompt&quot; ]; then
+    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
+    # We have color support; assume it&#39;s compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;
+else
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#39;
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case &quot;$TERM&quot; in
+xterm*|rxvt*)
+    PS1=&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/.dircolors)&quot; || eval &quot;$(dircolors -b)&quot;
+    alias ls=&#39;ls --color=auto&#39;
+    #alias dir=&#39;dir --color=auto&#39;
+    #alias vdir=&#39;vdir --color=auto&#39;
+
+    #alias grep=&#39;grep --color=auto&#39;
+    #alias fgrep=&#39;fgrep --color=auto&#39;
+    #alias egrep=&#39;egrep --color=auto&#39;
+fi
+
+# some more ls aliases
+#alias ll=&#39;ls -l&#39;
+#alias la=&#39;ls -A&#39;
+#alias l=&#39;ls -CF&#39;
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don&#39;t need to enable
+# this, if it&#39;s already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi</code></pre>
 <p>（3）执行命令source /root/.bashrc即可</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /root/.bashrc</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">source /root/.bashrc</code></pre>
 <p>（4）配置前：</p>
 <p><img src="https://i.loli.net/2020/11/15/kmhGaFQ2cq5uB7O.png" alt="image-20201115235207538"></p>
 <p>（5）配置后：</p>
@@ -350,14 +424,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>（1）tzselect命令执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tzselect</span><br></pre></td></tr></table></figure>
-
+<pre><code>tzselect</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p>
 <p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p>
 <p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
 <p>（3）修改配置文件，修改时区，输入以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfig</span><br><span class="line">rm -f &#x2F;etc&#x2F;localtime        &#x2F;&#x2F;链接到上海时区文件       </span><br><span class="line">ln -sf &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime</span><br></pre></td></tr></table></figure>
-
+<pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
+rm -f /etc/localtime        //链接到上海时区文件       
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre>
 <p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
 
       
@@ -519,11 +593,14 @@
       
         <h2 id="乌云邀请码"><a href="#乌云邀请码" class="headerlink" title="乌云邀请码"></a>乌云邀请码</h2><p>（1）下载附件，得到一张图片，notepad++打开，没有flag信息。再用stegsolve工具打开，发现plane0上面都有一串小黑点，选择Analyse 的Data Extract进行分析。<br><img src="https://img-blog.csdnimg.cn/20201104232409664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）勾选红绿蓝的0层，选择BGR模式，然后点击Preview，滚动条滑到最上，看到了flag。保存命名为1.txt，打开就是flag。<br><img src="https://img-blog.csdnimg.cn/20201104232714398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201104232725994.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="神秘的文件"><a href="#神秘的文件" class="headerlink" title="神秘的文件"></a>神秘的文件</h2><p>（1）下载附件，解压后还有一个压缩包。继续解压，但需要密码，直接暴力破解，破解不出来。换一个攻击类型，改为字典攻击，导入常用密码.txt，开始攻击。<br><img src="https://img-blog.csdnimg.cn/20201107181454181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201107181523294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）成功破解，密码为q1w2e3r4<br><img src="https://img-blog.csdnimg.cn/20201107181621538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）解压成功后，得到一个docx文档，打开没有发现flag。<br><img src="https://img-blog.csdnimg.cn/20201107181812554.png#pic_center" alt="在这里插入图片描述">（4）不过下面那行的红色下划线有点奇怪，应该还有字，只是字体颜色为白色，改为黑色看看。<br><img src="https://img-blog.csdnimg.cn/20201107181953703.png#pic_center" alt="在这里插入图片描述">（5）提交错误，再把该docx文档放到kali下binwalk一下，发现还有其他文件，用foremost进行分离文件。（也可以使用binwalk分离文件）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#apt-get install binwalk        &#x2F;&#x2F;安装binwalk</span><br><span class="line">#binwalk 文件名                  &#x2F;&#x2F;查看是否存在隐藏文件</span><br><span class="line">#foremost -t all 文件名       &#x2F;&#x2F;分离文件</span><br><span class="line">#binwalk -e 文件名             &#x2F;&#x2F;分离文件</span><br></pre></td></tr></table></figure>
+<pre><code>#apt-get install binwalk        //安装binwalk
+#binwalk 文件名                  //查看是否存在隐藏文件
+#foremost -t all 文件名       //分离文件
+#binwalk -e 文件名             //分离文件</code></pre>
 <p><img src="https://img-blog.csdnimg.cn/20201107182721882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）分解后，又是一个压缩包，解压后在docProps里发现falg.txt，里面是base64，解码后得到flag。<br><img src="https://img-blog.csdnimg.cn/20201107182828889.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201107182856236.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="论剑"><a href="#论剑" class="headerlink" title="论剑"></a>论剑</h2><p>（1）下载附件，得到一张图片<br><img src="https://img-blog.csdnimg.cn/20201109190942602.png#pic_center" alt="在这里插入图片描述">（2）放到kali下binwalk一下，发现有两张图片，用foremost分解，又是两张一样的图片。<br><img src="https://img-blog.csdnimg.cn/20201109191156780.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）将得到的两张图片用stegsolve合成一下，没有发现信息。<br>（4）再用notepad++打开三张图片，查看图片尺寸是否一样<br>（4）发现新得到的两张图片尺寸不一样，将其修改为一样<br><img src="https://img-blog.csdnimg.cn/2020110919192734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）查看图片，发现有两张图片携带了flag信息，但同样的部分却被遮挡住了<br><img src="https://img-blog.csdnimg.cn/20201109192108944.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（5）原图片中一定还有隐藏的信息，继续在notepad++中查看，发现了一串特殊的二进制字符。<br><img src="https://img-blog.csdnimg.cn/20201109192727587.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（5）将这串二进制字符转换成字符串<br><img src="https://img-blog.csdnimg.cn/20201109192823812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（6）得到mynameiskey!!!hhh，意思是“我的名字是密码”，应该还存在加密文件<br><img src="https://img-blog.csdnimg.cn/2020110919341721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（7）7z压缩包的文件头是37 7A BC AF 27 1C，与这串二进制后面的数字很像，将其改为7z压缩包的文件头，放到kali下binwalk一下<br><img src="https://img-blog.csdnimg.cn/20201109193651596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（8）确实存在一个7z的压缩包，用foremost分离文件，但奇怪的是这里我分离不出来。可以直接把原图片的后缀名改为.7z，解压<br><img src="https://img-blog.csdnimg.cn/20201109200530480.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（9）依旧是一张图片，依旧修改图片尺寸<br><img src="https://img-blog.csdnimg.cn/20201109200600834.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201109201400718.png#pic_center" alt="在这里插入图片描述">（10）结合之前获得的flag信息，用base16解码，得到flag<br><img src="https://img-blog.csdnimg.cn/20201109201554314.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/2020110920162984.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="图穷匕见"><a href="#图穷匕见" class="headerlink" title="图穷匕见"></a>图穷匕见</h2><p>（1）下载附件，是一张.jpg图片，binwalk一下，没发现flag信息。放到notepad++下，搜索图片结尾ff d9，在图片后面发现了一大串的特殊的数字。<br><img src="https://img-blog.csdnimg.cn/2020110923262426.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）该串数字为16进制，将其转换为ASCII码，内容为一串坐标<br><img src="https://img-blog.csdnimg.cn/20201109232859612.png#pic_center" alt="在这里插入图片描述">（3）放到记事本里，在“编辑”里选择“替换”，将(,)全部替换为空<br><img src="https://img-blog.csdnimg.cn/20201109233050561.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201109233124704.png#pic_center" alt="在这里插入图片描述">（4）保存后放到kali下，这里需要使用gnuplot工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">atp-get install gnuplot            &#x2F;&#x2F;安装gnuplot工具</span><br></pre></td></tr></table></figure>
+<pre><code>atp-get install gnuplot            //安装gnuplot工具</code></pre>
 <p><img src="https://img-blog.csdnimg.cn/20201109233437618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（5）得到一张二维码图片，扫描后得到flag<br><img src="https://img-blog.csdnimg.cn/20201109233517131.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201109233642751.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="convert"><a href="#convert" class="headerlink" title="convert"></a>convert</h2><p>（1）打开链接，是一大串二进制数字，编写代码，将其转换为八位一组。使用在线工具将其转换为十六进制。<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/jinzhi.html">http://ctf.ssleye.com/jinzhi.html</a><br><img src="https://img-blog.csdnimg.cn/20201114141308684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020111414134873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现十六进制的开头为52 61 72 21，显然是一个rar的压缩包。将这串十六进制数保存在一个文本文档里，用010 editor导入十六进制，另存为3.rar<br><img src="https://img-blog.csdnimg.cn/20201114141622184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）解压后得到一张图片，查看其属性，在详细信息中发现一串base64加密的字符，解密后得到flag。<br><img src="https://img-blog.csdnimg.cn/20201114141742641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201114141801436.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 
@@ -611,12 +688,54 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="猫片-安恒"><a href="#猫片-安恒" class="headerlink" title="猫片(安恒)"></a>猫片(安恒)</h2><p>（1）将下载的文件后缀名改为png（注：png正常文件头：89 50 4E 47）<br><img src="https://img-blog.csdnimg.cn/20201031123855768.png#pic_center" alt="在这里插入图片描述"><br>（2）根据提示LSB和BGR，用stegsolve工具打开，发现一张png图片<br><img src="https://img-blog.csdnimg.cn/20201031124027360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）将其保存下来，并修改后缀名为.png，但无法打开。用notepad++打开，发现文件头错误<br><img src="https://img-blog.csdnimg.cn/20201031124313322.png#pic_center" alt="在这里插入图片描述"><br>（3）将前面的ff fe删掉并保存，打开图片，是半张二维码<br><img src="https://img-blog.csdnimg.cn/2020103112441746.png#pic_center" alt="在这里插入图片描述"><br>（4）修改图片高度试试，改为和长度一样。<br><img src="https://img-blog.csdnimg.cn/2020103112542257.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201031125455519.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201031125506356.png#pic_center" alt="在这里插入图片描述"><br>（5）看到了完整的二维码，但和正常的有些不一样，中间的正方形应为黑色。用画图工具反色一下（新建–&gt;粘贴来源–&gt;右键–反色–&gt;裁剪）<br><img src="https://img-blog.csdnimg.cn/20201031130018412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201031130038164.png#pic_center" alt="在这里插入图片描述"><br>（6）扫描器扫描，得到一个网址，是一个百度云链接<br><img src="https://img-blog.csdnimg.cn/20201031130224341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020103113034095.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（7）下载下来后，是一个rar压缩包，但解压时出现了问题，可以用WinRAR打开<br><img src="https://img-blog.csdnimg.cn/20201031130626811.png#pic_center" alt="在这里插入图片描述"><br>（8）不过依然得到一个flag.txt文件<br><img src="https://img-blog.csdnimg.cn/20201031130758999.png#pic_center" alt="在这里插入图片描述"><br>（9）根据hint里的提示“NTFS”,用NtfsStreamsEditor查看数据流，然后导出。<br>#flag.rar这个压缩文件一定要用winrar来解压才能找得到数据流。<br><img src="https://img-blog.csdnimg.cn/2020103122191832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（10）一个.pyc文件，放到在线工具<a target="_blank" rel="noopener" href="https://tool.lu/pyc/">https://tool.lu/pyc/</a><br><img src="https://img-blog.csdnimg.cn/20201031133154759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（11）根据这个加密脚本，再写一个解密脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">def decode():</span><br><span class="line">    ciphertext &#x3D; [</span><br><span class="line">    &#39;96&#39;,</span><br><span class="line">    &#39;65&#39;,</span><br><span class="line">    &#39;93&#39;,</span><br><span class="line">    &#39;123&#39;,</span><br><span class="line">    &#39;91&#39;,</span><br><span class="line">    &#39;97&#39;,</span><br><span class="line">    &#39;22&#39;,</span><br><span class="line">    &#39;93&#39;,</span><br><span class="line">    &#39;70&#39;,</span><br><span class="line">    &#39;102&#39;,</span><br><span class="line">    &#39;94&#39;,</span><br><span class="line">    &#39;132&#39;,</span><br><span class="line">    &#39;46&#39;,</span><br><span class="line">    &#39;112&#39;,</span><br><span class="line">    &#39;64&#39;,</span><br><span class="line">    &#39;97&#39;,</span><br><span class="line">    &#39;88&#39;,</span><br><span class="line">    &#39;80&#39;,</span><br><span class="line">    &#39;82&#39;,</span><br><span class="line">    &#39;137&#39;,</span><br><span class="line">    &#39;90&#39;,</span><br><span class="line">    &#39;109&#39;,</span><br><span class="line">    &#39;99&#39;,</span><br><span class="line">    &#39;112&#39;]</span><br><span class="line">    ciphertext.reverse()</span><br><span class="line">    flag &#x3D; &#39;&#39;</span><br><span class="line">    for i in range(len(ciphertext)):</span><br><span class="line">        if i % 2 &#x3D;&#x3D; 0:</span><br><span class="line">            s &#x3D; int(ciphertext[i]) - 10</span><br><span class="line">        else:</span><br><span class="line">            s &#x3D; int(ciphertext[i]) + 10</span><br><span class="line">        s&#x3D;chr(i^s)</span><br><span class="line">        flag +&#x3D; s</span><br><span class="line">    return flag</span><br><span class="line"> </span><br><span class="line">def main():</span><br><span class="line">    flag &#x3D; decode()</span><br><span class="line">    print(flag)</span><br><span class="line"> </span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<pre><code>def decode():
+    ciphertext = [
+    &#39;96&#39;,
+    &#39;65&#39;,
+    &#39;93&#39;,
+    &#39;123&#39;,
+    &#39;91&#39;,
+    &#39;97&#39;,
+    &#39;22&#39;,
+    &#39;93&#39;,
+    &#39;70&#39;,
+    &#39;102&#39;,
+    &#39;94&#39;,
+    &#39;132&#39;,
+    &#39;46&#39;,
+    &#39;112&#39;,
+    &#39;64&#39;,
+    &#39;97&#39;,
+    &#39;88&#39;,
+    &#39;80&#39;,
+    &#39;82&#39;,
+    &#39;137&#39;,
+    &#39;90&#39;,
+    &#39;109&#39;,
+    &#39;99&#39;,
+    &#39;112&#39;]
+    ciphertext.reverse()
+    flag = &#39;&#39;
+    for i in range(len(ciphertext)):
+        if i % 2 == 0:
+            s = int(ciphertext[i]) - 10
+        else:
+            s = int(ciphertext[i]) + 10
+        s=chr(i^s)
+        flag += s
+    return flag
+
+def main():
+    flag = decode()
+    print(flag)
+
+if __name__ == &#39;__main__&#39;:
+    main()</code></pre>
 <p>（12）用代码在线工具执行一下<a target="_blank" rel="noopener" href="https://tool.lu/coderunner/">https://tool.lu/coderunner/</a><br><img src="https://img-blog.csdnimg.cn/20201031133531810.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="多彩"><a href="#多彩" class="headerlink" title="多彩"></a>多彩</h2><p>（1）得到一张.png的图片,在notepad++里没有发现有用信息<br><img src="https://img-blog.csdnimg.cn/20201031162838777.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）放到stegsolve里分析，发现了图片中隐藏的数据，是一个压缩包，将其抽取出来<br><img src="https://img-blog.csdnimg.cn/20201031163106844.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）先用notepad++打开这个压缩包，删掉文件头前面的东西，然后保存<br><img src="https://img-blog.csdnimg.cn/20201031163401174.png#pic_center" alt="在这里插入图片描述"><br>（4）把后缀名改为zip，解压，但出错了，后缀名改为.rar也是这样（不执行第3步也会出错）<br><img src="https://img-blog.csdnimg.cn/20201101120011595.png#pic_center" alt="在这里插入图片描述">（5）看了一些大佬的writeup，压缩文件是加密的，需要用到图片中的色号。但我这里直接显示出错，没让我输入密码。后面就不会做了。（嘤嘤嘤）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1,27,59,11,23,7,57,1,1,76,222,1,1,50,214,6,77,50,53,214,6</span><br></pre></td></tr></table></figure>
+<pre><code>1,27,59,11,23,7,57,1,1,76,222,1,1,50,214,6,77,50,53,214,6</code></pre>
 <h2 id="旋转跳跃"><a href="#旋转跳跃" class="headerlink" title="旋转跳跃"></a>旋转跳跃</h2><p><img src="https://img-blog.csdnimg.cn/20201101114352899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（1）附件是一个音频文件，使用工具MP3Stego来对音频进行解码。将该音频文件拷贝到MP3Stego目录下，在目录栏里输入cmd打开运行窗口。输入如下命令解码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Decode.exe -X -P syclovergeek sycgeek-mp3.mp3          &#x2F;&#x2F;-P后面即为题目提示的密码</span><br></pre></td></tr></table></figure>
+<pre><code>Decode.exe -X -P syclovergeek sycgeek-mp3.mp3          //-P后面即为题目提示的密码</code></pre>
 <p><img src="https://img-blog.csdnimg.cn/20201101114808149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）解码完后，在MP3Stego目录下多了一个sycgeek-mp3.mp3.txt文件，打开即可看到flag。<br><img src="https://img-blog.csdnimg.cn/20201101114920512.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="普通的二维码"><a href="#普通的二维码" class="headerlink" title="普通的二维码"></a>普通的二维码</h2><p>（1）下载附件，得到一张二维码，扫描后没有flag。用notepad++打开看看<br><img src="https://img-blog.csdnimg.cn/20201104224511217.png#pic_center" alt="在这里插入图片描述">（2）在最后发现一串数字，想到ASCII码，146作为八进制时对应的是f。然后把这串数字转换成对应的字符，得到flag。<br><img src="https://img-blog.csdnimg.cn/20201104224835832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 
@@ -712,19 +831,47 @@
 <h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p><img src="https://img-blog.csdnimg.cn/20201031191427635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（1）根据题目的意思，将域名flag.baidu.com指向到IP地址123.206.87.240<br>windows平台在C:\Windows\System32\drivers\etc\host中最后一行加入120.24.86.145 flag.bugku.com  （这里用notepad++打开host文件，修改后保存）<br><img src="https://img-blog.csdnimg.cn/20201031192314845.png#pic_center" alt="在这里插入图片描述">（2）修改完后，打开浏览器访问flag.baidu.com，得到flag<br><img src="https://img-blog.csdnimg.cn/20201031192355246.png#pic_center" alt="在这里插入图片描述">#如果是linux平台，则在/etc/host中加入123.206.87.240   flag.baidu.com </p>
 <h2 id="你必须让他停下"><a href="#你必须让他停下" class="headerlink" title="你必须让他停下"></a>你必须让他停下</h2><p>（1）打开网址，页面一直刷新，用burp抓包<br><img src="https://img-blog.csdnimg.cn/20201031194439430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）发送到Repeater，点击发送，每发送一次，图片都会来一次变化，这是随机的，不断地发送，在出现10.jpg的时候发现了flag<br><img src="https://img-blog.csdnimg.cn/20201031194748327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h2><p>（1）打开网址，发现一段php代码<br><img src="https://img-blog.csdnimg.cn/20201101173036596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）对代码的解释：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line"></span><br><span class="line">error_reporting(0);                            &#x2F;&#x2F;关闭php错误显示</span><br><span class="line">include &quot;flag1.php&quot;;                           &#x2F;&#x2F;引入flag1.php文件代码</span><br><span class="line">highlight_file(__file__);</span><br><span class="line">if(isset($_GET[&#39;args&#39;]))&#123;                     &#x2F;&#x2F;通过get方式传递 args变量才能执行if里面的代码</span><br><span class="line">    $args &#x3D; $_GET[&#39;args&#39;];</span><br><span class="line">    if(!preg_match(&quot;&#x2F;^\w+$&#x2F;&quot;,$args))&#123;    &#x2F;&#x2F;正则表达式的意思是匹配任意[A-Z,a-z，0-9,_]的字符，就是任意大小写字母和0-9以及下划线组成</span><br><span class="line">        die(&quot;args error!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    eval(&quot;var_dump($$args);&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php  
+
+error_reporting(0);                            //关闭php错误显示
+include &quot;flag1.php&quot;;                           //引入flag1.php文件代码
+highlight_file(__file__);
+if(isset($_GET[&#39;args&#39;]))&#123;                     //通过get方式传递 args变量才能执行if里面的代码
+    $args = $_GET[&#39;args&#39;];
+    if(!preg_match(&quot;/^\w+$/&quot;,$args))&#123;    //正则表达式的意思是匹配任意[A-Z,a-z，0-9,_]的字符，就是任意大小写字母和0-9以及下划线组成
+        die(&quot;args error!&quot;);
+    &#125;
+    eval(&quot;var_dump($$args);&quot;);
+&#125;
+?&gt;</code></pre>
 <p>（3）可变变量(<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.variable.php">https://www.php.net/manual/zh/language.variables.variable.php</a>)<br>#一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a &#x3D; &#39;hello&#39;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+$a = &#39;hello&#39;;
+?&gt;</code></pre>
 <p>#一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$$a &#x3D; &#39;world&#39;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+$$a = &#39;world&#39;;
+?&gt;</code></pre>
 <p>#这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo &quot;$a $&#123;$a&#125;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+echo &quot;$a $&#123;$a&#125;&quot;;
+?&gt;</code></pre>
 <p>与以下语句输出完全相同的结果,都会输出hello world： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo &quot;$a $hello&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+echo &quot;$a $hello&quot;;
+?&gt;</code></pre>
 <p>#要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下$$a[1] 时，解析器需要知道是想要 $a[1] 作为一个变量呢，还是想要 $$a 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 ${$a[1]}，对第二种情况用 ${$a}[1]。 </p>
 <p>#在 PHP 的函数和类的方法中，超全局变量不能用作可变变量。$this 变量也是一个特殊变量，不能被动态引用。 </p>
 <p>（4）超全局变量是在全部作用域中始终可用的内置变量<br>这些超全局变量是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$GLOBALS</span><br><span class="line">$_SERVER</span><br><span class="line">$_GET</span><br><span class="line">$_POST</span><br><span class="line">$_FILES</span><br><span class="line">$_COOKIE</span><br><span class="line">$_SESSION</span><br><span class="line">$_REQUEST</span><br><span class="line">$_ENV</span><br></pre></td></tr></table></figure>
+<pre><code>    $GLOBALS
+    $_SERVER
+    $_GET
+    $_POST
+    $_FILES
+    $_COOKIE
+    $_SESSION
+    $_REQUEST
+    $_ENV</code></pre>
 <p>（5）所以只需给变量传入一个全局变量就可以了，将其变量名传入。构造参数：?args=GLOBALS，就能得到flag。<br><img src="https://img-blog.csdnimg.cn/20201101175938899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h2><p><img src="https://img-blog.csdnimg.cn/20201101184046587.png#pic_center" alt="在这里插入图片描述">（1）查看网页源代码，发现一串特殊的字符<br><img src="https://img-blog.csdnimg.cn/20201101184313987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据题目的提示，JSFuck是用6个字符 [ ] ( ) ! +来编写JavaScript程序。将源代码中的特殊字符放到浏览器的console控制台上进行解密。粘贴到控制台后按回车即可。<br><img src="https://img-blog.csdnimg.cn/20201101184717920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）注意提交格式，要求大写。CTF{WHATFK}</p>
 <p>#Jother是一种运用于javascript语言中利用少量字符构造精简的匿名函数方法对于字符串进行的编码方式。其中8个少量字符包括：[ ] ( ) ! + { }  只用这些字符就能完成对任意字符串的编码。（可以在浏览器的console控制台上直接解密）</p>
@@ -813,14 +960,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="想蹭网先解开密码"><a href="#想蹭网先解开密码" class="headerlink" title="想蹭网先解开密码"></a>想蹭网先解开密码</h2><p><img src="https://img-blog.csdnimg.cn/20201030224918563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（1）用wireshark打开附件<br><img src="https://img-blog.csdnimg.cn/20201030224945875.png#pic_center" alt="在这里插入图片描述"><br>（2）WiFi连接认证的重点在WPA的四次握手包，即eapol协议的包，过滤一下：<br><img src="https://img-blog.csdnimg.cn/20201030225003978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）根据题目，需要爆破WiFi密码，使用密码生成工具crunch生成密码字典（kali自带，无需安装）这里题目提示密码为手机号，所以设置生成11位的字符，并且给出了前7位，则只剩下4位需要破解。<br><img src="https://img-blog.csdnimg.cn/20201030225045290.png#pic_center" alt="在这里插入图片描述"><br>（4）再使用软件aircrack破解WiFi密码（kali自带，无需安装），这里选择第三3个，然后开始破解，即可看到flag。<br><img src="https://img-blog.csdnimg.cn/20201030225105113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225113875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>#字典生成工具crunch：<br>参数:  crunch<br>-t   @/,/%/^<br><br>     @插入小写字母<br>    ，插入大写字母<br>    %插入数字<br>^插入特殊符号<br>例子：<br>（1）生成11个数字组合的密码字典：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 11 11 0123456789 -o mypwd.txt     &#x2F;&#x2F;第一个11代表生成的字符串最短几个字符，第二个11代表生成的字符串最长几个字符</span><br></pre></td></tr></table></figure>
+<pre><code>crunch 11 11 0123456789 -o mypwd.txt     //第一个11代表生成的字符串最短几个字符，第二个11代表生成的字符串最长几个字符</code></pre>
 <p>（2）生成4个数字和1391040组合的密码字典：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 11 11 0123456789 -t 1391040%%%% -o mypwd.txt</span><br></pre></td></tr></table></figure>
+<pre><code>crunch 11 11 0123456789 -t 1391040%%%% -o mypwd.txt</code></pre>
 <p>（3）生成4个小写字母和4个数字组合的密码字典：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 8 8 -t @@@@%%%%  -o mypwd.txt</span><br></pre></td></tr></table></figure>
-
+<pre><code>crunch 8 8 -t @@@@%%%%  -o mypwd.txt</code></pre>
 <p>#工具aircrack破解WiFi密码：破解WEP/WPA/WPA2加密的主流工具之一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -w mypwd.txt wifi.cap       &#x2F;&#x2F;前面是密码字典的位置，后面是需要破解的握手包即.cap文件的位置，看到KEY FOUND即为找到密码</span><br></pre></td></tr></table></figure>
+<pre><code>aircrack-ng -w mypwd.txt wifi.cap       //前面是密码字典的位置，后面是需要破解的握手包即.cap文件的位置，看到KEY FOUND即为找到密码</code></pre>
 <h2 id="Linux2"><a href="#Linux2" class="headerlink" title="Linux2"></a>Linux2</h2><p>（1）用notepad++打开附件，搜索flag，无果。再试试搜key，发现flag。<br><img src="https://img-blog.csdnimg.cn/20201030225632898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225640161.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="细心的大象"><a href="#细心的大象" class="headerlink" title="细心的大象"></a>细心的大象</h2><p>（1）得到一张.jpg的图片，用notepad++打开，发现有两张.jpg的图片，还有一些其他的文件。放到kali中用foremost分解，foremost -t all 1.jpg<br><img src="https://img-blog.csdnimg.cn/20201030225710475.png#pic_center" alt="在这里插入图片描述"><br>（2）分解完后，在output目录下发现有一个压缩包，压缩包里面还有一张2.png图片，但解压需要密码<br><img src="https://img-blog.csdnimg.cn/20201030225727162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）查看原有图片的属性，在“详细信息”里看到备注中的一串字符<br><img src="https://img-blog.csdnimg.cn/2020103022574693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）应该被加密了，用base64解码后得到MSDS456ASD123zz<br><img src="https://img-blog.csdnimg.cn/20201030225802968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）以解码后的字符作为密码，解压压缩包，得到2.png（可将压缩包放到Windows下解压）<br><img src="https://img-blog.csdnimg.cn/2020103022581822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）用notepad++打开2.png，搜索flag或key，无果。修改图片的高度，使其和长度一样<br><img src="https://img-blog.csdnimg.cn/20201030225835951.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225842650.png#pic_center" alt="在这里插入图片描述"><br>（7）看到了flag<br><img src="https://img-blog.csdnimg.cn/20201030225856761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="爆照-08067CTF"><a href="#爆照-08067CTF" class="headerlink" title="爆照(08067CTF)"></a>爆照(08067CTF)</h2><p>（1）得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030225938915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现其中还包含其他文件，放到kali中用foremost分解。得到一个zip文件夹，里面有多个文件<br><img src="https://img-blog.csdnimg.cn/20201030225959464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）用notepad++依次打开8，88，888，8888，88888，888888，8888888，88888888<br>发现88，888，8888都是jpg文件，其他的则是bmp文件（文件头42 4D 76）。修改各个文件的后缀名<br><img src="https://img-blog.csdnimg.cn/20201030230022380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）发现88.jpg有一个二维码，用扫描器得到bilibili<br><img src="https://img-blog.csdnimg.cn/20201030230047182.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）依次查看各图片的属性，在888.jpg中发现base64密文，解密后得到silisili<br><img src="https://img-blog.csdnimg.cn/20201030230105655.png#pic_center" alt="在这里插入图片描述"><br>（6）根据提示，按顺序分析8888.jpg，在notepad++里发现还有一个压缩包<br><img src="https://img-blog.csdnimg.cn/20201030230123626.png#pic_center" alt="在这里插入图片描述"><br>（7）将8888.jpg放到kali中用foremost分解，得到一张二维码图片，扫描后的到panama<br><img src="https://img-blog.csdnimg.cn/20201030230146958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>8）按顺序排列，flag为flag{bilibili_silisili_panama}，注意格式，中间记得要有下划线</p>

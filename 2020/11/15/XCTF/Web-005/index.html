@@ -186,11 +186,66 @@
       
         <h2 id="NaNNaNNaNNaN-Batman"><a href="#NaNNaNNaNNaN-Batman" class="headerlink" title="NaNNaNNaNNaN-Batman"></a>NaNNaNNaNNaN-Batman</h2><p>（1）下载附件，是一个没有后缀名的文件，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201104203101152.png#pic_center" alt="在这里插入图片描述">（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。<br><img src="https://img-blog.csdnimg.cn/20201104203445934.png#pic_center" alt="在这里插入图片描述">（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。<br><img src="https://img-blog.csdnimg.cn/20201104203642634.png#pic_center" alt="在这里插入图片描述">（4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“alert(_);”。重新用浏览器打开，即显示出正常代码。<br><img src="https://img-blog.csdnimg.cn/20201104210527470.png#pic_center" alt="在这里插入图片描述">（5）使用在线网站将这段js代码对齐 <a target="_blank" rel="noopener" href="https://beautifier.io/">https://beautifier.io/</a><br><img src="https://img-blog.csdnimg.cn/20201104211100387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（6）可以看到需要满足几个 if 中的正则表达式条件，^表示开始，$表示结尾，同时还要满足长度为16位。<br>把匹配出来的值be0f233ac7be98aa，输入到网页中的输入框就得到了flag。<br><img src="https://img-blog.csdnimg.cn/20201104212001550.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201104212019299.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>（1）打开网址，根据注释中的提示，逆向加密算法，解密$miwen就能得到flag<br><img src="https://img-blog.csdnimg.cn/20201114164452564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）分析其中的PHP内置函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">strrev(string): 反转字符串</span><br><span class="line">strlen(string): 返回字符串的长度</span><br><span class="line">substr(string, start, length): 返回字符串的一部分   </span><br><span class="line">&#x2F;&#x2F;string: 所需要的字符串</span><br><span class="line">&#x2F;&#x2F;start: 在字符串何处开始</span><br><span class="line">&#x2F;&#x2F;length: 可选。规定被返回字符串的长度。默认是直到字符串的结尾</span><br><span class="line"></span><br><span class="line">ord(string): 返回字符串首个字符的 ASCII 值</span><br><span class="line">chr(): 从指定的 ASCII 值返回对应的字符</span><br><span class="line">str_rot13(string): 对字符串执行 ROT13 编码。</span><br><span class="line">&#x2F;&#x2F;ROT13 编码把每一个字母在字母表中向前移动 13 个字母。数字和非字母字符保持不变</span><br><span class="line"></span><br><span class="line">base64_encode(string): 使用 MIME base64 对数据进行编码</span><br></pre></td></tr></table></figure>
+<pre><code>strrev(string): 反转字符串
+strlen(string): 返回字符串的长度
+substr(string, start, length): 返回字符串的一部分   
+//string: 所需要的字符串
+//start: 在字符串何处开始
+//length: 可选。规定被返回字符串的长度。默认是直到字符串的结尾
+
+ord(string): 返回字符串首个字符的 ASCII 值
+chr(): 从指定的 ASCII 值返回对应的字符
+str_rot13(string): 对字符串执行 ROT13 编码。
+//ROT13 编码把每一个字母在字母表中向前移动 13 个字母。数字和非字母字符保持不变
+
+base64_encode(string): 使用 MIME base64 对数据进行编码</code></pre>
 <p>(3)分析网址中的函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$miwen&#x3D;&quot;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&quot;;</span><br><span class="line"></span><br><span class="line">function encode($str)&#123;                &#x2F;&#x2F;给encode一个参数 $str</span><br><span class="line">    $_o&#x3D;strrev($str);                 &#x2F;&#x2F;将所传参数 $str 通过 strrev() 函数反转字符串操作并赋值给 $_o</span><br><span class="line">    &#x2F;&#x2F; echo $_o;</span><br><span class="line">        </span><br><span class="line">    for($_0&#x3D;0;$_0&lt;strlen($_o);$_0++)&#123;          &#x2F;&#x2F;循环遍历 变量 $_o</span><br><span class="line">       </span><br><span class="line">        $_c&#x3D;substr($_o,$_0,1);    &#x2F;&#x2F;在for循环中首先依次取字符串 $_o 的第 $_0 个值，赋值给 $_c</span><br><span class="line">        $__&#x3D;ord($_c)+1;  &#x2F;&#x2F;将变量 $c 转化为 ASCII码 并 +1，赋值给 $_</span><br><span class="line">        $_c&#x3D;chr($__);   &#x2F;&#x2F;将 $__ 转化为该ASCII码所对应的字符，赋值给 $_c</span><br><span class="line">        $_&#x3D;$_.$_c;     &#x2F;&#x2F;拼接字符串，赋值给$_</span><br><span class="line">    &#125; </span><br><span class="line">    return str_rot13(strrev(base64_encode($_)));  </span><br><span class="line">    &#x2F;&#x2F;将拼接好后的字符串 $_ 先进行 base64编码，再将编码后的值进行反转字符串操作，</span><br><span class="line">    &#x2F;&#x2F;最后对反转后的字符串进行 rot13 加密，得出结果为$miwen</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">&#x2F;*</span><br><span class="line">   逆向加密算法，解密$miwen就是flag</span><br><span class="line">*&#x2F;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+$miwen=&quot;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&quot;;
+
+function encode($str)&#123;                //给encode一个参数 $str
+    $_o=strrev($str);                 //将所传参数 $str 通过 strrev() 函数反转字符串操作并赋值给 $_o
+    // echo $_o;
+
+    for($_0=0;$_0&lt;strlen($_o);$_0++)&#123;          //循环遍历 变量 $_o
+
+        $_c=substr($_o,$_0,1);    //在for循环中首先依次取字符串 $_o 的第 $_0 个值，赋值给 $_c
+        $__=ord($_c)+1;  //将变量 $c 转化为 ASCII码 并 +1，赋值给 $_
+        $_c=chr($__);   //将 $__ 转化为该ASCII码所对应的字符，赋值给 $_c
+        $_=$_.$_c;     //拼接字符串，赋值给$_
+    &#125; 
+    return str_rot13(strrev(base64_encode($_)));  
+    //将拼接好后的字符串 $_ 先进行 base64编码，再将编码后的值进行反转字符串操作，
+    //最后对反转后的字符串进行 rot13 加密，得出结果为$miwen
+&#125;
+
+highlight_file(__FILE__);
+/*
+   逆向加密算法，解密$miwen就是flag
+*/
+?&gt;</code></pre>
 <p>（4）用在线工具写出逆向代码 <a target="_blank" rel="noopener" href="https://tool.lu/coderunner/">https://tool.lu/coderunner/</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$str&#x3D;&#39;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&#39;;</span><br><span class="line">$_ &#x3D; base64_decode(strrev(str_rot13($str)));</span><br><span class="line"></span><br><span class="line">$_o&#x3D;NULL;</span><br><span class="line">for($_0&#x3D;0;$_0&lt;strlen($_);$_0++)&#123;  </span><br><span class="line">       </span><br><span class="line">        $_c&#x3D;substr($_,$_0,1);  </span><br><span class="line"></span><br><span class="line">        $__&#x3D;ord($_c)-1;  </span><br><span class="line"></span><br><span class="line">        $_c&#x3D;chr($__);  </span><br><span class="line"></span><br><span class="line">        $_o&#x3D;$_o.$_c;   </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo strrev($_o);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;?php
+$str=&#39;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&#39;;
+$_ = base64_decode(strrev(str_rot13($str)));
+
+$_o=NULL;
+for($_0=0;$_0&lt;strlen($_);$_0++)&#123;  
+
+        $_c=substr($_,$_0,1);  
+
+        $__=ord($_c)-1;  
+
+        $_c=chr($__);  
+
+        $_o=$_o.$_c;   
+    &#125; 
+
+
+echo strrev($_o);
+
+?&gt;</code></pre>
+
       
 
       

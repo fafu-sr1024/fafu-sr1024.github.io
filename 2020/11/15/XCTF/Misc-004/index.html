@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Misc_004 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="embarrass（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag（3）在kaili中用strings命令找到flag 1strings misc_02.pcapng | grep flag  MISCall（">
+  <meta name="description" content="embarrass（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag（3）在kaili中用strings命令找到flag strings misc_02.pcapng | grep flag  MISCall（1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Misc_004">
 <meta property="og:url" content="http://example.com/2020/11/15/XCTF/Misc-004/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="embarrass（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag（3）在kaili中用strings命令找到flag 1strings misc_02.pcapng | grep flag  MISCall（">
+<meta property="og:description" content="embarrass（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag（3）在kaili中用strings命令找到flag strings misc_02.pcapng | grep flag  MISCall（1">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.loli.net/2020/11/15/l9KHhroMWP7OiYN.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/15/KQ4ziVuqCkgvbwj.png">
@@ -193,53 +193,44 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h2><p>（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。<br><img src="https://i.loli.net/2020/11/15/l9KHhroMWP7OiYN.png" alt="在这里插入图片描述"><br>（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag<br><img src="https://i.loli.net/2020/11/15/KQ4ziVuqCkgvbwj.png" alt="在这里插入图片描述"><br><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"><br>（3）在kaili中用strings命令找到flag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings misc_02.pcapng | grep flag</span><br></pre></td></tr></table></figure>
+<pre><code>strings misc_02.pcapng | grep flag</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"></p>
 <h2 id="MISCall"><a href="#MISCall" class="headerlink" title="MISCall"></a>MISCall</h2><p>（1）下载附件，得到一个没有后缀名的文件，放到kali中binwalk一下，发现是一个bzip2类型的压缩包，为了方便，重命名一下，改为1.bzip2</p>
 <p><img src="https://i.loli.net/2020/11/15/pMuYPblFTah97om.png" alt="image-20201115185454990"></p>
 <p>（2）解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf 1.bzip2</span><br></pre></td></tr></table></figure>
-
+<pre><code>tar xvf 1.bzip2</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/S3n7zFvPRj6dhit.png" alt="image-20201115190744053"></p>
 <p>（3）发现了一个flag.txt和.git文件夹，但flag.txt中没有flag。利用.git目录，git stash进行恢复以前修改/删除的文件。查看git 记录，给出了一个最近上传的文件，但这个文件并不存在</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log  &#x2F;&#x2F;查看git记录</span><br></pre></td></tr></table></figure>
-
+<pre><code>git log  //查看git记录</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/5IsbF7Vqx1W8aQy.png" alt="image-20201115220941620"></p>
 <p>（4）查看修改列表，存储列表中有一条记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list   &#x2F;&#x2F;查看修改列表</span><br></pre></td></tr></table></figure>
-
+<pre><code>git stash list   //查看修改列表</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/Zj3pUFvGExP9o6R.png" alt="image-20201115221415569"></p>
 <p>（5）校验列表中的存储文件</p>
 <p><img src="https://i.loli.net/2020/11/15/GE9BMlFo1pnQqv2.png" alt="image-20201115221608681"></p>
 <p>（6）恢复上面的文件，直接执行 git stash apply 时，会提示文件覆盖自动终止，可以先把原来的flag.txt删除再执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply   &#x2F;&#x2F;恢复文件</span><br></pre></td></tr></table></figure>
-
+<pre><code>git stash apply   //恢复文件</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/QDfqhwAg72E1UIM.png" alt="image-20201115222553488"></p>
 <p>（7）运行s.py得到flag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python s.py</span><br></pre></td></tr></table></figure>
-
+<pre><code>python s.py</code></pre>
 <h2 id="Get-the-key-txt"><a href="#Get-the-key-txt" class="headerlink" title="Get-the-key.txt"></a>Get-the-key.txt</h2><p>（1）下载附件，得到一个压缩包，解压后是一个没有后缀名的文件，放到kali中binwalk一下查看文件类型，也可使用file命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file fileName</span><br></pre></td></tr></table></figure>
-
+<pre><code>file fileName</code></pre>
 <p><img src="https://i.loli.net/2020/11/16/zsJpYd4Vtui18rM.png" alt="image-20201116162315709"></p>
 <p>（2）发现是Linux的文件系统数据，在/tmp下创建forensic文件夹，并将文件挂载到该目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;tmp&#x2F;forensic</span><br><span class="line">mount -o loop forensic100 &#x2F;tmp&#x2F;forensic    &#x2F;&#x2F;挂载</span><br></pre></td></tr></table></figure>
-
+<pre><code>mkdir /tmp/forensic
+mount -o loop forensic100 /tmp/forensic    //挂载</code></pre>
 <p>（3）进入新创建的目录下，发现大量文件</p>
 <p><img src="https://i.loli.net/2020/11/16/7S92HjkdNI3FWyJ.png" alt="image-20201116162837956"></p>
 <p>（4）根据题目提示 get-the-key.txt，使用如下命令进行文件匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -r key.txt</span><br></pre></td></tr></table></figure>
-
+<pre><code>grep -r key.txt</code></pre>
 <p><img src="https://i.loli.net/2020/11/16/Y54CSjGl1qNLPFz.png" alt="image-20201116163043401"></p>
 <p>（5)得到一个二进制的名为1的文件，查看其类型</p>
 <p><img src="https://i.loli.net/2020/11/16/FAKorPwyYfG5xWs.png" alt="image-20201116163215732"></p>
 <p>（6）是gzip压缩包，但用gunzip 1解压会出错，tar xvf 1也不行，最后使用gunzip &lt; 1得到flag：SECCON{@]NL7n+-s75FrET]vU=7Z}</p>
 <p>（7）还有一种方法，在得知1的类型为gzip压缩文件后，修改后缀，文件名改为1.gz，然后解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip 1.gz</span><br></pre></td></tr></table></figure>
-
+<pre><code>gunzip 1.gz</code></pre>
 <p>（8）解压成功，依然得到一个名为1的文件，再次查看该文件类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file 1</span><br></pre></td></tr></table></figure>
-
+<pre><code>file 1</code></pre>
 <p><img src="https://i.loli.net/2020/11/16/HrIy7Ua2vbnmzD5.png" alt="image-20201116165042375"></p>
 <p>（9）是一个ASCII码的文件，用cat查看内容，得到flag</p>
 <p><img src="https://i.loli.net/2020/11/16/JVIY64MigQ9Hdsz.png" alt="image-20201116165159099"></p>

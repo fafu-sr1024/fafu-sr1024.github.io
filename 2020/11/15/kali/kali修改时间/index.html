@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>kali修改时间 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="（1）tzselect命令执行 1tzselect   （2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。  （3）修改配置文件，修改时区，输入以下命令 123echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfigrm -f &amp;#x2F">
+  <meta name="description" content="（1）tzselect命令执行 tzselect  （2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。  （3）修改配置文件，修改时区，输入以下命令 echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfig rm -f &#x2F;etc&#x2F;localtime        &#x2F;&#x2F;链接到上海">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kali修改时间">
 <meta property="og:url" content="http://example.com/2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="（1）tzselect命令执行 1tzselect   （2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。  （3）修改配置文件，修改时区，输入以下命令 123echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfigrm -f &amp;#x2F">
+<meta property="og:description" content="（1）tzselect命令执行 tzselect  （2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。  （3）修改配置文件，修改时区，输入以下命令 echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfig rm -f &#x2F;etc&#x2F;localtime        &#x2F;&#x2F;链接到上海">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png">
@@ -179,14 +179,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>（1）tzselect命令执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tzselect</span><br></pre></td></tr></table></figure>
-
+<pre><code>tzselect</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p>
 <p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p>
 <p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
 <p>（3）修改配置文件，修改时区，输入以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;ZONE&#x3D;Asia&#x2F;Shanghai&quot; &gt;&gt; &#x2F;etc&#x2F;sysconfig</span><br><span class="line">rm -f &#x2F;etc&#x2F;localtime        &#x2F;&#x2F;链接到上海时区文件       </span><br><span class="line">ln -sf &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia&#x2F;Shanghai &#x2F;etc&#x2F;localtime</span><br></pre></td></tr></table></figure>
-
+<pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
+rm -f /etc/localtime        //链接到上海时区文件       
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre>
 <p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
 
       
