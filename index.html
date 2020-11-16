@@ -152,6 +152,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kali/kali中的文件-目录操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">kali中的文件/目录操作</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  	<time datetime="2020-11-16T07:04:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="压缩，解压缩命令"><a href="#压缩，解压缩命令" class="headerlink" title="压缩，解压缩命令"></a>压缩，解压缩命令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar cvf file.tar dir    &#x2F;&#x2F;打包目录中的文件，后面也可跟多个文件</span><br><span class="line">tar xvf file.tar        &#x2F;&#x2F;解包</span><br><span class="line">#tar是打包，不是压缩</span><br></pre></td></tr></table></figure>
+
+<h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gzip file           &#x2F;&#x2F;压缩</span><br><span class="line">gunzip file.gz      &#x2F;&#x2F;解压</span><br><span class="line">gzip -d file.gz     &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
+
+<h3 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf file.tar.gz dir &#x2F;&#x2F;压缩</span><br><span class="line">tar zxvf file.tar.gz     &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
+
+<h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bzip2 (-z) file      &#x2F;&#x2F;压缩，有无参数z都可</span><br><span class="line">bunzip2 file.bz2     &#x2F;&#x2F;解压</span><br><span class="line">bzip2 -d file.bz2    &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
+
+<h3 id="tar-bz2"><a href="#tar-bz2" class="headerlink" title=".tar.bz2"></a>.tar.bz2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar jcvf file.tar.bz2 dir   &#x2F;&#x2F;压缩</span><br><span class="line">tar jxvf file.tar.bz2       &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
+
+<h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zip file.zip file&#x2F;dir     &#x2F;&#x2F;压缩文件或目录</span><br><span class="line">unzip file.zip            &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
+
+<h3 id="tgz"><a href="#tgz" class="headerlink" title=".tgz"></a>.tgz</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf file.tar.tgz file1 file2   &#x2F;&#x2F;压缩</span><br><span class="line">tar zxvf file.tar.tgz      &#x2F;&#x2F;解压</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kali/kali下root用户的配色问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -978,117 +1065,9 @@
 
 
   
-    <article id="post-XCTF/Misc-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/Misc-004/">Misc_004</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/Misc-004/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:48:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h2><p>（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。<br><img src="https://i.loli.net/2020/11/15/l9KHhroMWP7OiYN.png" alt="在这里插入图片描述"><br>（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag<br><img src="https://i.loli.net/2020/11/15/KQ4ziVuqCkgvbwj.png" alt="在这里插入图片描述"><br><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"><br>（3）在kaili中用strings命令找到flag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings misc_02.pcapng | grep flag</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"></p>
-<h2 id="MISCall"><a href="#MISCall" class="headerlink" title="MISCall"></a>MISCall</h2><p>（1）下载附件，得到一个没有后缀名的文件，放到kali中binwalk一下，发现是一个bzip2类型的压缩包，为了方便，重命名一下，改为1.bzip2</p>
-<p><img src="https://i.loli.net/2020/11/15/pMuYPblFTah97om.png" alt="image-20201115185454990"></p>
-<p>（2）解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf 1.bzip2</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/11/15/S3n7zFvPRj6dhit.png" alt="image-20201115190744053"></p>
-<p>（3）发现了一个flag.txt和.git文件夹，但flag.txt中没有flag。利用.git目录，git stash进行恢复以前修改/删除的文件。查看git 记录，给出了一个最近上传的文件，但这个文件并不存在</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log  &#x2F;&#x2F;查看git记录</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/11/15/5IsbF7Vqx1W8aQy.png" alt="image-20201115220941620"></p>
-<p>（4）查看修改列表，存储列表中有一条记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list   &#x2F;&#x2F;查看修改列表</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/11/15/Zj3pUFvGExP9o6R.png" alt="image-20201115221415569"></p>
-<p>（5）校验列表中的存储文件</p>
-<p><img src="https://i.loli.net/2020/11/15/GE9BMlFo1pnQqv2.png" alt="image-20201115221608681"></p>
-<p>（6）恢复上面的文件，直接执行 git stash apply 时，会提示文件覆盖自动终止，可以先把原来的flag.txt删除再执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply   &#x2F;&#x2F;恢复文件</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2020/11/15/QDfqhwAg72E1UIM.png" alt="image-20201115222553488"></p>
-<p>（7）运行s.py得到flag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python s.py</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/Misc-004/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
