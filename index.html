@@ -410,7 +410,7 @@ fi</code></pre>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/">kali修改时间</a>
+      <a class="article-title" href="/2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/">安装kali后修改系统时间</a>
     </h1>
   
 
@@ -430,8 +430,8 @@ fi</code></pre>
 <p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
 <p>（3）修改配置文件，修改时区，输入以下命令</p>
 <pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
-rm -f /etc/localtime        //链接到上海时区文件       
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre>
+rm -f /etc/localtime             
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime    //链接到上海时区文件  </code></pre>
 <p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
 
       

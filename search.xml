@@ -42,11 +42,11 @@
     
     
     <entry>
-      <title>kali修改时间</title>
+      <title>安装kali后修改系统时间</title>
       <link href="2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/"/>
       <url>2020/11/15/kali/kali%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4/</url>
       
-        <content type="html"><![CDATA[<p>（1）tzselect命令执行</p><pre><code>tzselect</code></pre><p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p><p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p><p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p><p>（3）修改配置文件，修改时区，输入以下命令</p><pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfigrm -f /etc/localtime        //链接到上海时区文件       ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre><p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>]]></content>
+        <content type="html"><![CDATA[<p>（1）tzselect命令执行</p><pre><code>tzselect</code></pre><p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p><p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p><p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p><p>（3）修改配置文件，修改时区，输入以下命令</p><pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfigrm -f /etc/localtime             ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime    //链接到上海时区文件  </code></pre><p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>]]></content>
       
       
       
