@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>XCTF_Web_005 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NaNNaNNaNNaN-Batman（1）下载附件，是一个没有后缀名的文件，用notepad++打开（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。（4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“alert">
+  <meta name="description" content="NaNNaNNaNNaN-Batman（1）下载附件，是一个没有后缀名的文件，用notepad++打开（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。 (4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“aler">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XCTF_Web_005">
 <meta property="og:url" content="http://example.com/2020/11/15/XCTF/XCTF_Web-005/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="NaNNaNNaNNaN-Batman（1）下载附件，是一个没有后缀名的文件，用notepad++打开（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。（4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“alert">
+<meta property="og:description" content="NaNNaNNaNNaN-Batman（1）下载附件，是一个没有后缀名的文件，用notepad++打开（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。 (4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“aler">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201104203101152.png#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201104203445934.png#pic_center">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201104212019299.png#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201114164452564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="article:published_time" content="2020-11-15T08:40:29.000Z">
-<meta property="article:modified_time" content="2020-11-17T08:51:46.564Z">
+<meta property="article:modified_time" content="2020-11-17T10:26:53.179Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="CTF靶场">
 <meta name="twitter:card" content="summary">
@@ -184,7 +184,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="NaNNaNNaNNaN-Batman"><a href="#NaNNaNNaNNaN-Batman" class="headerlink" title="NaNNaNNaNNaN-Batman"></a>NaNNaNNaNNaN-Batman</h2><p>（1）下载附件，是一个没有后缀名的文件，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201104203101152.png#pic_center" alt="在这里插入图片描述">（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。<br><img src="https://img-blog.csdnimg.cn/20201104203445934.png#pic_center" alt="在这里插入图片描述">（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。<br><img src="https://img-blog.csdnimg.cn/20201104203642634.png#pic_center" alt="在这里插入图片描述">（4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“alert(_);”。重新用浏览器打开，即显示出正常代码。<br><img src="https://img-blog.csdnimg.cn/20201104210527470.png#pic_center" alt="在这里插入图片描述">（5）使用在线网站将这段js代码对齐 <a target="_blank" rel="noopener" href="https://beautifier.io/">https://beautifier.io/</a><br><img src="https://img-blog.csdnimg.cn/20201104211100387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（6）可以看到需要满足几个 if 中的正则表达式条件，^表示开始，$表示结尾，同时还要满足长度为16位。<br>把匹配出来的值be0f233ac7be98aa，输入到网页中的输入框就得到了flag。<br><img src="https://img-blog.csdnimg.cn/20201104212001550.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201104212019299.png#pic_center" alt="在这里插入图片描述"></p>
+        <h2 id="NaNNaNNaNNaN-Batman"><a href="#NaNNaNNaNNaN-Batman" class="headerlink" title="NaNNaNNaNNaN-Batman"></a>NaNNaNNaNNaN-Batman</h2><p>（1）下载附件，是一个没有后缀名的文件，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201104203101152.png#pic_center" alt="在这里插入图片描述">（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。<br><img src="https://img-blog.csdnimg.cn/20201104203445934.png#pic_center" alt="在这里插入图片描述">（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。<br><img src="https://img-blog.csdnimg.cn/20201104203642634.png#pic_center" alt="在这里插入图片描述"></p>
+<p>(4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“alert(_);”。重新用浏览器打开，即显示出正常代码。<br><img src="https://img-blog.csdnimg.cn/20201104210527470.png#pic_center" alt="在这里插入图片描述">（5）使用在线网站将这段js代码对齐 <a target="_blank" rel="noopener" href="https://beautifier.io/">https://beautifier.io/</a><br><img src="https://img-blog.csdnimg.cn/20201104211100387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（6）可以看到需要满足几个 if 中的正则表达式条件，^表示开始，$表示结尾，同时还要满足长度为16位。<br>把匹配出来的值be0f233ac7be98aa，输入到网页中的输入框就得到了flag。<br><img src="https://img-blog.csdnimg.cn/20201104212001550.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201104212019299.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>（1）打开网址，根据注释中的提示，逆向加密算法，解密$miwen就能得到flag<br><img src="https://img-blog.csdnimg.cn/20201114164452564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）分析其中的PHP内置函数</p>
 <pre><code>strrev(string): 反转字符串
 strlen(string): 返回字符串的长度
