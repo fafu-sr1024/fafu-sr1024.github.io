@@ -15,17 +15,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="文件操作常见命令以下内容都是基于kali2020.1版本的，在此列出命令的一些常见使用参数及用法，若要获取详细的使用方法，在命令后面加上 –help即可查看，或者使用man也可查看命令的帮助文档 命令 --help man 命令 cdcd dir             &#x2F;&#x2F;进入一个目录dir cd .               &#x2F;&#x2F;验证&quot;.&quot;代表当前目录 cd ..">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117193550828.png">
-<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117193616793.png">
-<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117200316254.png">
-<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117210654615.png">
-<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117210722443.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/17/QOJ7eMRVEADYHPC.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/17/ASpWwGgIdYsPHbq.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/17/ewixY9GIWPm8qLX.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/17/eIcms43GCbuO9YZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/17/L7PSbIX1kYcOMEH.png">
 <meta property="article:published_time" content="2020-11-16T07:04:35.000Z">
-<meta property="article:modified_time" content="2020-11-17T13:59:02.506Z">
+<meta property="article:modified_time" content="2020-11-17T14:13:14.482Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="kali">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117193550828.png">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/17/QOJ7eMRVEADYHPC.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -188,9 +188,9 @@ man 命令</code></pre>
 cd .               //验证&quot;.&quot;代表当前目录
 cd ..              //进入当前目录的上一级（cd ../.. 进入当前目录的上两级目录）
 cd -               //返回进入此目录之前所在的目录</code></pre>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117193550828.png" alt="image-20201117193550828"></p>
+<p><img src="https://i.loli.net/2020/11/17/QOJ7eMRVEADYHPC.png" alt="image-20201117193550828"></p>
 <h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>显示当前所在的工作目录</p>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117193616793.png" alt="image-20201117193616793"></p>
+<p><img src="https://i.loli.net/2020/11/17/ASpWwGgIdYsPHbq.png" alt="image-20201117193616793"></p>
 <h3 id="ls-参数-对象-显示目录中的文件"><a href="#ls-参数-对象-显示目录中的文件" class="headerlink" title="ls [参数] [对象]       显示目录中的文件"></a>ls [参数] [对象]       显示目录中的文件</h3><pre><code>-a               //显示所有文件（包含隐藏文件）
 -l               //显示文件或目录的详细信息
 -lh              //将文件大小以K为单位显示
@@ -201,7 +201,7 @@ cd -               //返回进入此目录之前所在的目录</code></pre>
 <pre><code>vim ~/.bashrc     //进入编辑模式</code></pre>
 <p>（2）将alias ll=’ls -l‘前面的注释符号#删掉，保存并退出编辑</p>
 <p>（3）重启即可</p>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117200316254.png" alt="image-20201117200316254"></p>
+<p><img src="https://i.loli.net/2020/11/17/ewixY9GIWPm8qLX.png" alt="image-20201117200316254"></p>
 <h3 id="touch，vi-创建文件"><a href="#touch，vi-创建文件" class="headerlink" title="touch，vi     创建文件"></a>touch，vi     创建文件</h3><pre><code>touch file            //立即生成文件，若文件存在，则更新文件的时间戳
 vi file               //必须要保存才能生成相应的文件</code></pre>
 <h3 id="mkdir-dir-创建目录"><a href="#mkdir-dir-创建目录" class="headerlink" title="mkdir  dir    创建目录"></a>mkdir  dir    创建目录</h3><h3 id="rmdir-删除空目录"><a href="#rmdir-删除空目录" class="headerlink" title="rmdir            删除空目录"></a>rmdir            删除空目录</h3><pre><code>rmdir dir           //只能删除空目录</code></pre>
@@ -218,8 +218,8 @@ mv file dir                //若sou为文件，dst为目录，则将file移动�
 <h3 id="file"><a href="#file" class="headerlink" title="file"></a>file</h3><pre><code>file file_name     //显示文件类型等基本信息</code></pre>
 <h3 id="ln-s-target-link-name-建立文件或目录链接"><a href="#ln-s-target-link-name-建立文件或目录链接" class="headerlink" title="ln [-s] target link_name         建立文件或目录链接"></a>ln [-s] target link_name         建立文件或目录链接</h3><p>（1）target最好指定为绝对路径，可使用pwd命令快速地获取路径，在后面加上需要链接的文件或目录即可</p>
 <p>（2）建立的链接相当于windows中的快捷方式，但和target文件有不同的inodes。</p>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117210654615.png" alt="image-20201117210654615"></p>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117210722443.png" alt="image-20201117210722443"></p>
+<p><img src="https://i.loli.net/2020/11/17/eIcms43GCbuO9YZ.png" alt="image-20201117210654615"></p>
+<p><img src="https://i.loli.net/2020/11/17/L7PSbIX1kYcOMEH.png" alt="image-20201117210722443"></p>
 <h3 id="find-path-expr-在路径path中查找符合表达式expr的文件"><a href="#find-path-expr-在路径path中查找符合表达式expr的文件" class="headerlink" title="find [path] [expr]              在路径path中查找符合表达式expr的文件"></a>find [path] [expr]              在路径path中查找符合表达式expr的文件</h3><p>（1）以下为表达式内容</p>
 <pre><code>-name flag         //查找文件名符合flag的文件，-iname忽略大小写
 -empty             //查找空文件
