@@ -8,18 +8,24 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>kali中的文件/目录操作 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="文件操作常见命令file fileName        &#x2F;&#x2F;查看文件类型等基本信息 压缩，解压缩命令tartar cvf file.tar dir    &#x2F;&#x2F;打包目录中的文件，后面也可跟多个文件 tar xvf file.tar        &#x2F;&#x2F;解包 #tar是打包，不是压缩 .gzgzip file           &#x2F;&#x2F;压缩 gunzip file.gz      &#x2F;&#x2F;解压 gzip -">
+  <meta name="description" content="文件操作常见命令以下内容都是基于kali2020.1版本的，在此列出命令的一些常见使用参数及用法，若要获取详细的使用方法，在命令后面加上 –help即可查看，或者使用man也可查看命令的帮助文档 命令 --help man 命令 cdcd dir             &#x2F;&#x2F;进入一个目录dir cd .               &#x2F;&#x2F;验证&quot;.&quot;代表当前目录 cd ..">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kali中的文件&#x2F;目录操作">
 <meta property="og:url" content="http://example.com/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="文件操作常见命令file fileName        &#x2F;&#x2F;查看文件类型等基本信息 压缩，解压缩命令tartar cvf file.tar dir    &#x2F;&#x2F;打包目录中的文件，后面也可跟多个文件 tar xvf file.tar        &#x2F;&#x2F;解包 #tar是打包，不是压缩 .gzgzip file           &#x2F;&#x2F;压缩 gunzip file.gz      &#x2F;&#x2F;解压 gzip -">
+<meta property="og:description" content="文件操作常见命令以下内容都是基于kali2020.1版本的，在此列出命令的一些常见使用参数及用法，若要获取详细的使用方法，在命令后面加上 –help即可查看，或者使用man也可查看命令的帮助文档 命令 --help man 命令 cdcd dir             &#x2F;&#x2F;进入一个目录dir cd .               &#x2F;&#x2F;验证&quot;.&quot;代表当前目录 cd ..">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117193550828.png">
+<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117193616793.png">
+<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117200316254.png">
+<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117210654615.png">
+<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117210722443.png">
 <meta property="article:published_time" content="2020-11-16T07:04:35.000Z">
-<meta property="article:modified_time" content="2020-11-16T09:00:36.831Z">
+<meta property="article:modified_time" content="2020-11-17T13:59:02.506Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="kali">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201117193550828.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,7 +181,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="文件操作常见命令"><a href="#文件操作常见命令" class="headerlink" title="文件操作常见命令"></a>文件操作常见命令</h2><pre><code>file fileName        //查看文件类型等基本信息</code></pre>
+        <h2 id="文件操作常见命令"><a href="#文件操作常见命令" class="headerlink" title="文件操作常见命令"></a>文件操作常见命令</h2><p>以下内容都是基于kali2020.1版本的，在此列出命令的一些常见使用参数及用法，若要获取详细的使用方法，在命令后面加上 –help即可查看，或者使用man也可查看命令的帮助文档</p>
+<pre><code>命令 --help
+man 命令</code></pre>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><pre><code>cd dir             //进入一个目录dir
+cd .               //验证&quot;.&quot;代表当前目录
+cd ..              //进入当前目录的上一级（cd ../.. 进入当前目录的上两级目录）
+cd -               //返回进入此目录之前所在的目录</code></pre>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117193550828.png" alt="image-20201117193550828"></p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>显示当前所在的工作目录</p>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117193616793.png" alt="image-20201117193616793"></p>
+<h3 id="ls-参数-对象-显示目录中的文件"><a href="#ls-参数-对象-显示目录中的文件" class="headerlink" title="ls [参数] [对象]       显示目录中的文件"></a>ls [参数] [对象]       显示目录中的文件</h3><pre><code>-a               //显示所有文件（包含隐藏文件）
+-l               //显示文件或目录的详细信息
+-lh              //将文件大小以K为单位显示
+-i               //显示文件或目录的indoes</code></pre>
+<p>这里直接使用’ll’命令，其效果和’ls -l’一样，但初次使用’ll’会报错，系统会提示未找到该命令。</p>
+<p>解决方法：</p>
+<p>（1）编辑以下文档</p>
+<pre><code>vim ~/.bashrc     //进入编辑模式</code></pre>
+<p>（2）将alias ll=’ls -l‘前面的注释符号#删掉，保存并退出编辑</p>
+<p>（3）重启即可</p>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117200316254.png" alt="image-20201117200316254"></p>
+<h3 id="touch，vi-创建文件"><a href="#touch，vi-创建文件" class="headerlink" title="touch，vi     创建文件"></a>touch，vi     创建文件</h3><pre><code>touch file            //立即生成文件，若文件存在，则更新文件的时间戳
+vi file               //必须要保存才能生成相应的文件</code></pre>
+<h3 id="mkdir-dir-创建目录"><a href="#mkdir-dir-创建目录" class="headerlink" title="mkdir  dir    创建目录"></a>mkdir  dir    创建目录</h3><h3 id="rmdir-删除空目录"><a href="#rmdir-删除空目录" class="headerlink" title="rmdir            删除空目录"></a>rmdir            删除空目录</h3><pre><code>rmdir dir           //只能删除空目录</code></pre>
+<p>若要删除非空目录：</p>
+<pre><code>rm -rf dir</code></pre>
+<h3 id="cp-参数-sou-dst-复制文件或目录"><a href="#cp-参数-sou-dst-复制文件或目录" class="headerlink" title="cp [参数] sou dst     复制文件或目录"></a>cp [参数] sou dst     复制文件或目录</h3><pre><code>cp file1 file2 /dir          //若sou为文件，dst为目录，则可复制多个文件到该目录，但要加上目录所在路径
+cp file1 file2               //若sou和dst均为文件，则将file1的内容复制到file2中
+cp -r dir1 dir2              //若sou和dst均为目录，则将dir2复制到dir1中，需要加上参数-r  </code></pre>
+<h3 id="mv-sou-dst-重命名、移动文件"><a href="#mv-sou-dst-重命名、移动文件" class="headerlink" title="mv sou dst      重命名、移动文件"></a>mv sou dst      重命名、移动文件</h3><pre><code>mv file1 file2             //若sou和dst均为文件，则将file1重命名为file2
+mv file dir                //若sou为文件，dst为目录，则将file移动到目录dir中，且可以移动多个文件</code></pre>
+<h3 id="rm-参数-删除文件或目录"><a href="#rm-参数-删除文件或目录" class="headerlink" title="rm [参数]         删除文件或目录"></a>rm [参数]         删除文件或目录</h3><pre><code>-i                 //删除之前系统会进行一次确认
+-r                 //递归删除，用于删除目录
+-f                 //强制删除，没有提示和确认</code></pre>
+<h3 id="file"><a href="#file" class="headerlink" title="file"></a>file</h3><pre><code>file file_name     //显示文件类型等基本信息</code></pre>
+<h3 id="ln-s-target-link-name-建立文件或目录链接"><a href="#ln-s-target-link-name-建立文件或目录链接" class="headerlink" title="ln [-s] target link_name         建立文件或目录链接"></a>ln [-s] target link_name         建立文件或目录链接</h3><p>（1）target最好指定为绝对路径，可使用pwd命令快速地获取路径，在后面加上需要链接的文件或目录即可</p>
+<p>（2）建立的链接相当于windows中的快捷方式，但和target文件有不同的inodes。</p>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117210654615.png" alt="image-20201117210654615"></p>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201117210722443.png" alt="image-20201117210722443"></p>
+<h3 id="find-path-expr-在路径path中查找符合表达式expr的文件"><a href="#find-path-expr-在路径path中查找符合表达式expr的文件" class="headerlink" title="find [path] [expr]              在路径path中查找符合表达式expr的文件"></a>find [path] [expr]              在路径path中查找符合表达式expr的文件</h3><p>（1）以下为表达式内容</p>
+<pre><code>-name flag         //查找文件名符合flag的文件，-iname忽略大小写
+-empty             //查找空文件
+-user root         //查找在系统中属于root这个用户的文件
+-group root        //查找在系统中属于root这个组的文件
+-amin -n           //查找系统中最后n分钟被访问的文件
+-atime -n          //查找系统中最后n天被访问的文件</code></pre>
+<p>（2）查找相关文件，并执行相关命令</p>
+<pre><code>//将查找到的文件执行command操作
+-exc command &#123;&#125; \;          
+| xargs command
+
+eg:
+//删除查找到的文件名符合flag的文件
+find / -name flag -exec rm -rf &#123;&#125; \;         
+find / -name flag | xargs rm -rf</code></pre>
+<p>{}表示find搜索出来的每个文件</p>
+<p>{}和\之间有空格，命令的结尾必须是”;“不要忘记最后的分号</p>
+<p>“|”为管道符，即把前一个命令的输出作为后一个命令的输入</p>
 <h2 id="压缩，解压缩命令"><a href="#压缩，解压缩命令" class="headerlink" title="压缩，解压缩命令"></a>压缩，解压缩命令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><pre><code>tar cvf file.tar dir    //打包目录中的文件，后面也可跟多个文件
 tar xvf file.tar        //解包
 #tar是打包，不是压缩</code></pre>
