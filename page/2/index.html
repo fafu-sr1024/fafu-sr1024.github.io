@@ -395,6 +395,23 @@ mount -o loop forensic100 /tmp/forensic    //挂载</code></pre>
 <p><img src="https://i.loli.net/2020/11/16/HrIy7Ua2vbnmzD5.png" alt="image-20201116165042375"></p>
 <p>（9）是一个ASCII码的文件，用cat查看内容，得到flag</p>
 <p><img src="https://i.loli.net/2020/11/16/JVIY64MigQ9Hdsz.png" alt="image-20201116165159099"></p>
+<h2 id="就在其中"><a href="#就在其中" class="headerlink" title="就在其中"></a>就在其中</h2><p>（1）下载附件，得到一个流量包，用wireshark打开，搜索字符flag，但并没有任何信息</p>
+<p>（2）将该流量包放到kali中binwalk一下，查看是否存在隐藏文件</p>
+<p><img src="https://i.loli.net/2020/11/20/BHCYuVwWea1DPhn.png" alt="image-20201120202514449"></p>
+<p>（3）确实存在隐藏文件，用foremost工具分离文件，得到jpg、pdf、zip三个文件夹</p>
+<p><img src="https://i.loli.net/2020/11/20/Up1ZiB2VeNnJzuL.png" alt="image-20201120202620317"></p>
+<p>（4）其中jpg和pdf文件夹下并没有明显的flag信息，zip下有一个压缩包，加压后得到一个文档key.txt，但却是一串奇怪的字符</p>
+<p><img src="https://i.loli.net/2020/11/20/IjmJZKQ9RCN54ak.png" alt="image-20201120203033157"></p>
+<p>（5）再次打开流量包，搜索key字符</p>
+<p><img src="https://i.loli.net/2020/11/20/3EqQp7hHclIzkw5.png" alt="image-20201120204201790"></p>
+<p>（6）可以看到先进行tcp连接，再进行ftp传输，应该是一个在传输某些文档的流量包，flag信息应该和传输的文档有关，追踪tcp流，发现了RSA私钥</p>
+<p><img src="https://i.loli.net/2020/11/20/TYaGp3WhDRorI1M.png" alt="image-20201120205800250"></p>
+<p>（7）将这串字符全部复制到一个文本中，命名为rsa.key，放到kali中的openssl进行解密</p>
+<pre><code>openssl rsautl -decrypt -in key.txt -inkey rsa.key -out flag.txt
+// -in 为要解密的加密文档   -inkey  为密钥      -out  为输出文档</code></pre>
+<p><img src="https://i.loli.net/2020/11/20/wdJftIDXWbpjoxV.png" alt="image-20201120210306217"></p>
+<p>（8）查看flag.txt</p>
+<p><img src="https://i.loli.net/2020/11/20/k21zZ48GylfohpR.png" alt="image-20201120210509016"></p>
 
       
 
