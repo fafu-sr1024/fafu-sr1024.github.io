@@ -152,6 +152,142 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kali/kali2020.1安装过程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">kali2020.1安装过程</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2020-11-18T11:39:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="准备资源"><a href="#准备资源" class="headerlink" title="准备资源"></a>准备资源</h2><p>（1）kali2020.1镜像，下载链接:<a target="_blank" rel="noopener" href="https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso">https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso</a></p>
+<p>（2）VMware</p>
+<p>（3）良好的网络环境</p>
+<p>（4）物理计算机至少有8G的内存，以保证在后续使用虚拟机时的流畅</p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="新建一个虚拟机"><a href="#新建一个虚拟机" class="headerlink" title="新建一个虚拟机"></a>新建一个虚拟机</h3><p>（1）打开VMware，新建一个虚拟机</p>
+<p><img src="https://i.loli.net/2020/11/18/5XWaNzcn7CAwHh9.png" alt="image-20201118194822750"></p>
+<p>（2）会弹出两种安装方式，这里我选择自定义安装</p>
+<p><img src="https://i.loli.net/2020/11/18/TSrnQKmefyx51MA.png" alt="image-20201118194943515"></p>
+<p>（3）默认选择下一步，直到“安装客户机操作系统”，这里选择“稍后安装操作系统”</p>
+<p><img src="https://i.loli.net/2020/11/18/4ipg25EmeGxB3wO.png" alt="image-20201118195206604"></p>
+<p>（4）选择操作系统及其版本</p>
+<p><img src="https://i.loli.net/2020/11/18/ShvCRwpOme84uQA.png" alt="image-20201118195449341"></p>
+<p>（5）给虚拟机命名，并给其选择存放位置，这里建议在VMware目录下新建一个与虚拟机名称一样的文件夹，将虚拟机存在这个文件夹里。</p>
+<p><img src="https://i.loli.net/2020/11/18/sFnwLfxpku4M2zt.png" alt="image-20201118195753952"></p>
+<p>（6）配置处理器数量</p>
+<p><img src="https://i.loli.net/2020/11/20/3sUfFGozpgAjuZC.png" alt="image-20201119125125453"></p>
+<p>（7）为虚拟机分配内存，这里可以分配多一点，以便在后续的安装中更快</p>
+<p><img src="https://i.loli.net/2020/11/18/Q8PkLYq3iTphnxO.png" alt="image-20201118200631782"></p>
+<p>（8）网络类型选择NAT模式，桥接模式需要一个真实的IP，在校园里一般都是NAT模式。</p>
+<p>（9）之后便一直默认下一步，直到为虚拟机分配磁盘容量，这里可自行定义</p>
+<p><img src="https://i.loli.net/2020/11/18/XsACzh1xDS8IPla.png" alt="image-20201118200852936"></p>
+<p>（10）默认下一步，直到“自定义硬件”，这里可以移除一些平时不用的硬件配置，比如USB控制器、声卡、打印机。点击“自定义硬件”即可在里面移除不用的硬件，然后点击完成。</p>
+<p><img src="https://i.loli.net/2020/11/18/moWHl74GbhLCOsP.png" alt="image-20201118221327164"></p>
+<p>（11）可看到已经创建好了一个虚拟机，此时便要用到下载好的镜像了。点击“CD/DVD(IDE)”,选择“使用ISO映像文件”，添加下载好的镜像，点击确定。</p>
+<p><img src="https://i.loli.net/2020/11/18/LC2yNAH1boZ47pU.png" alt="image-20201118202005823"></p>
+<p><img src="https://i.loli.net/2020/11/18/IDyEQuATq85SnWj.png" alt="image-20201118202118646"></p>
+<h3 id="安装Kali"><a href="#安装Kali" class="headerlink" title="安装Kali"></a>安装Kali</h3><p>（1）点击开启虚拟机</p>
+<p><img src="https://i.loli.net/2020/11/18/ASMQzZ1RUPepvkX.png" alt="image-20201118202451736"></p>
+<p>（2）再出现的页面里选择Graphical install，回车，进行GUI界面安装</p>
+<p><img src="https://i.loli.net/2020/11/18/NZmAzXrL3S2HdBe.png" alt="image-20201118202651265"></p>
+<p>（3）选择一种语言，这里我选择English，选好后点击continue</p>
+<p><img src="https://i.loli.net/2020/11/18/QpMaZgdkzuIHoXS.png" alt="image-20201118202755157"></p>
+<p>（4）选择国家、领地或地区</p>
+<p><img src="https://i.loli.net/2020/11/20/lbFrZzvmwgCDYnW.png" alt="image-20201120124026274"></p>
+<p>（5）选择键盘映射</p>
+<p><img src="https://i.loli.net/2020/11/20/2avsNCjpUz4xcBV.png" alt="image-20201120124328490"></p>
+<p>（6）稍等1分钟。填写主机名</p>
+<p><img src="https://i.loli.net/2020/11/18/S8ypjUHImC7Lgds.png" alt="image-20201118203301686"></p>
+<p>（7）填写域名，这里可不填</p>
+<p><img src="https://i.loli.net/2020/11/18/fTXeW3Q9rFk8UaR.png" alt="image-20201118203351174"></p>
+<p>（8）设置一个用户名来取代root执行非管理任务的普通用户账号，因为2020版本的kali系统打破了传统默认是root的默认账号。</p>
+<p><img src="https://i.loli.net/2020/11/18/wX2eKgRrWLMvyup.png" alt="image-20201118203930694"></p>
+<p>（9）这里会填入上一步的用户名，可改可不改，这里是在登录界面用的用户名。</p>
+<p><img src="https://i.loli.net/2020/11/18/G4vhds7uL6WtT2F.png" alt="image-20201118204113340"></p>
+<p>（10）输入密码，二次输入确认密码</p>
+<p><img src="https://i.loli.net/2020/11/18/sXLcI6UMtRElZAr.png" alt="image-20201118204212719"></p>
+<p>（11）稍等1到两分钟，选择时区</p>
+<p><img src="https://i.loli.net/2020/11/18/B8RTg3AunV29rSw.png" alt="image-20201118204421448"></p>
+<p>（12）进入磁盘分区选项，点击continue</p>
+<p><img src="https://i.loli.net/2020/11/18/x9GhY3UWQiA5kjH.png" alt="image-20201118204704353"></p>
+<p>（13）默认并一直点击continue，直到最后一项，选择“yes”，将改动写入磁盘</p>
+<p><img src="https://i.loli.net/2020/11/20/BLOSzmAFR7cdjpn.png" alt="image-20201120124504208"></p>
+<p>（14）稍等1分钟，进入配置软件包管理器。这里若没有http代理信息，可忽略，点击continue</p>
+<p><img src="https://i.loli.net/2020/11/20/Feq3szcvNxDMw2E.png" alt="image-20201120124628480"></p>
+<p><img src="https://i.loli.net/2020/11/18/yO9kegB2uZ6CYtX.png" alt="image-20201118205218688"></p>
+<p>（15）默认即可，continue</p>
+<p><img src="https://i.loli.net/2020/11/18/DhuOtkTaMrH27Sy.png" alt="image-20201118215722620"></p>
+<p>（16）之后便是“选择并安装软件”，这里需要一点时间，安装完成后，便是将GRUB安装至硬盘，选择“yes”</p>
+<p><img src="https://i.loli.net/2020/11/20/BgtskKXzbRdjPa2.png" alt="image-20201120122137530"></p>
+<p>（17）选择/dev/sda</p>
+<p><img src="https://i.loli.net/2020/11/20/rXnxbWyJYhfejLq.png" alt="image-20201120122345533"></p>
+<p>（18）安装完成</p>
+<p><img src="https://i.loli.net/2020/11/20/wj8yP64sCcK9ndh.png" alt="image-20201120122609322"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kali/kali中的文件-目录操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1234,95 +1370,6 @@ echo &quot;$a $hello&quot;;
 
 
   
-    <article id="post-BugkuCTF/BugkuCTF_Misc-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/">BugkuCTF_Misc_001</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="隐写"><a href="#隐写" class="headerlink" title="隐写"></a>隐写</h2><p>（1）解压附件，发现有一张图片，并没有有用的信息<br><img src="https://img-blog.csdnimg.cn/20201030222021275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题意，flag被隐藏起来了，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222050891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）红色方框部分代表的是图片的像素，也可以理解为长和高，发现图片的高度比长度小了不少，将高度修改为长度的值。<br><img src="https://img-blog.csdnimg.cn/20201030222126820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）保存后重新打开图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222143936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="眼见非实-ISCCCTF"><a href="#眼见非实-ISCCCTF" class="headerlink" title="眼见非实(ISCCCTF)"></a>眼见非实(ISCCCTF)</h2><p>（1）下载附件，得到一个名为zip没有后缀名的文件<br>（2）用notepad++打开，发现文件头是50 4B 03 04，说明是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222246657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）修改文件后缀名为.zip，解压后得到一个文档<br><img src="https://img-blog.csdnimg.cn/20201030222313691.png#pic_center" alt="在这里插入图片描述"><br>（4）双击打开后并没有发现有用信息，再用notepad++打开，发现又是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222346825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）修改后缀名为.zip，解压后得到一个文件夹<br><img src="https://img-blog.csdnimg.cn/20201030222418463.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222429644.png#pic_center" alt="在这里插入图片描述"><br>（6）最终在word文件夹里找到flag，可用记事本或notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222459970.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222507509.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="啊哒"><a href="#啊哒" class="headerlink" title="啊哒"></a>啊哒</h2><p>（1）打开附件，解压后得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222548608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）文件头确实是以FF D8 开头，寻找结尾FF D9<br><img src="https://img-blog.csdnimg.cn/20201030222607981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）发现FF D9后面还有一个压缩文件，50 4B 03 04，将原来的图片改后缀名为.zip，也可以在kali下用命令foremost -t all ada.jap 分离文件。<br><img src="https://img-blog.csdnimg.cn/20201030222638392.png#pic_center" alt="在这里插入图片描述"><br>（4）解压，但发现需要密码<br><img src="https://img-blog.csdnimg.cn/20201030222716140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）查看图片属性，发现一串字符，作为密码输入，但显示密码错误<br><img src="https://img-blog.csdnimg.cn/20201030222737816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）将这串十六进制字符转为ASCII码字符，得到sdnisc_2018，将其作为解压密码，得到flag<br><img src="https://img-blog.csdnimg.cn/20201030222759359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222809753.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="又一张图片，还单纯吗"><a href="#又一张图片，还单纯吗" class="headerlink" title="又一张图片，还单纯吗"></a>又一张图片，还单纯吗</h2><p>（1）附件是一张.jpg的图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222856237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）确实以FF D8开头，寻找图片结尾FF D9，接连找到几个FF D9后，又发现了一张以FF D8开头的.jpg图片<br><img src="https://img-blog.csdnimg.cn/20201030222917608.png#pic_center" alt="在这里插入图片描述"><br>（3）用kali输入命令foremost -t -all 2.jpg分离文件，则又得到了一张图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222940899.png#" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202010302230013.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223007998.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="猜"><a href="#猜" class="headerlink" title="猜"></a>猜</h2><p>（1）附件是一张图片，根据提示是某人的名字，直接百度搜索图片，是刘亦菲，名字拼音即flag<br><img src="https://img-blog.csdnimg.cn/20201030223039681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223048756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1420,11 +1467,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
+                <a href="javascript:void(0)" class="js-tag color5">kali</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">kali</a>
+                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
               </li>
             
             <div class="clearfix"></div>
