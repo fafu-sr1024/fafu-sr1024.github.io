@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>kali的基本使用</title>
+      <link href="2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+      <url>2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基本守则"><a href="#基本守则" class="headerlink" title="基本守则"></a>基本守则</h2><p>（1）Linux系统大小写敏感</p><p>（2）文件名前带“.”是隐藏文件</p><p>（3）配置文件#开头代表是注释行，程序不执行改行</p><p>（4）Linux系统下的“/”相当于DOS下的“\”</p><p>（5）超级用户“#”，普通用户“$”</p><h2 id="转义符"><a href="#转义符" class="headerlink" title="转义符"></a>转义符</h2><p>将特殊字符转换成普通字符</p><p>（1）\        反斜杠，对单个字符进行转义</p><p>（2）’’        单引号，对一串字符进行转义</p><p>（3）``     反引号，可将命令二次处理</p><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="X-windows（图形化）与控制台（shell）间的切换"><a href="#X-windows（图形化）与控制台（shell）间的切换" class="headerlink" title="X-windows（图形化）与控制台（shell）间的切换"></a>X-windows（图形化）与控制台（shell）间的切换</h3><p>（1）X-windows切换到控制台：</p><pre><code>init 3</code></pre><p>或使用快捷键：Ctrl+alt+F3</p><p>（2）控制台切换到X-windows：</p><pre><code>startx或init 5</code></pre><h3 id="设置默认开机界面"><a href="#设置默认开机界面" class="headerlink" title="设置默认开机界面"></a>设置默认开机界面</h3><p>（1）查看当前系统默认开机界面</p><pre><code>systemctl get-default</code></pre><p>（2）设置开机默认为X-windows</p><pre><code>systemctl set-default graphical.target</code></pre><p>（3）设置开机默认为控制台</p><pre><code>systemclt set-default multi-user.target</code></pre><p>（4）命令可用tab键补全</p><h3 id="关机，重启，注销用户，锁屏，解锁"><a href="#关机，重启，注销用户，锁屏，解锁" class="headerlink" title="关机，重启，注销用户，锁屏，解锁"></a>关机，重启，注销用户，锁屏，解锁</h3><p>（1）关机，三种方式：</p><pre><code>shutdown -h nowhaltinit0</code></pre><p>（2）重启，三种方式：</p><pre><code>shutdown -r nowrebootinit 6</code></pre><p>（3）注销用户，退出登录</p><p>控制台界面下：</p><pre><code>exit    或快捷键Ctrl+D</code></pre><p>X-windows界面或shell下：</p><pre><code>pkill -kill -t tty7</code></pre><p>（4）锁屏，快捷键：Ctrl+s</p><p>（5）解锁，快捷键：Ctrl+q</p><h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><table><thead><tr><th align="center">命令</th><th align="center">解释</th><th align="center">示例</th></tr></thead><tbody><tr><td align="center">history</td><td align="center">显示历史命令</td><td align="center">!5      //执行第5行的命令</td></tr><tr><td align="center">echo</td><td align="center">回显命令</td><td align="center"></td></tr><tr><td align="center">uname</td><td align="center">显示系统信息</td><td align="center">-a参数     //显示全部信息</td></tr><tr><td align="center">hostname</td><td align="center">显示主机名</td><td align="center"></td></tr><tr><td align="center">date</td><td align="center">显示或修改系统时间</td><td align="center">-s “20201120 12:12:00”</td></tr><tr><td align="center">cal</td><td align="center">显示日历</td><td align="center">cal 01 2020 //显示2020年1月的日历</td></tr><tr><td align="center">who、w</td><td align="center">查看登录用户信息</td><td align="center"></td></tr><tr><td align="center">whoami</td><td align="center">显示用户名</td><td align="center"></td></tr><tr><td align="center">which</td><td align="center">显示命令所在位置</td><td align="center"></td></tr><tr><td align="center">whereis</td><td align="center">显示文件位于系统中的什么位置</td><td align="center"></td></tr><tr><td align="center">whatis</td><td align="center">显示命令的简短描述</td><td align="center"></td></tr><tr><td align="center">命令 –help</td><td align="center">显示命令的使用摘要和参数列表</td><td align="center"></td></tr><tr><td align="center">man</td><td align="center">显示命令的说明文档</td><td align="center"></td></tr></tbody></table><p>ps：man命令：查看文档时，直接输入/keyword  即可在文档中搜索keyword这个关键字，n跳到下一个关键字，N跳到上一个关键字，键q离开说明文档</p><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table><thead><tr><th align="center">tab</th><th align="center">自动补全命令</th></tr></thead><tbody><tr><td align="center">Ctrl+a</td><td align="center">把光标移动到命令行最开始的地方</td></tr><tr><td align="center">Ctrl+e</td><td align="center">把光标移动到命令行末尾</td></tr><tr><td align="center">Ctrl+u</td><td align="center">删除当前光标前的所有内容</td></tr></tbody></table>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> kali </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>kali2020.1安装过程</title>
       <link href="2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/"/>
       <url>2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</url>
