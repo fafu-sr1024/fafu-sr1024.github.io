@@ -412,6 +412,32 @@ mount -o loop forensic100 /tmp/forensic    //挂载</code></pre>
 <p><img src="https://i.loli.net/2020/11/20/wdJftIDXWbpjoxV.png" alt="image-20201120210306217"></p>
 <p>（8）查看flag.txt</p>
 <p><img src="https://i.loli.net/2020/11/20/k21zZ48GylfohpR.png" alt="image-20201120210509016"></p>
+<h2 id="Reverse-it"><a href="#Reverse-it" class="headerlink" title="Reverse-it"></a>Reverse-it</h2><p>（1）下载得到一个附件，用010 editor打开，但无法明显看出是什么类型的文件，再放到kali中binwalk一下，依然没有发现。</p>
+<p>（2）根据题目Reverse-it，逆向它，再仔细观察010 editor里的十六进制编码</p>
+<p><img src="https://i.loli.net/2020/11/22/MEG51FuCgRwp83r.png" alt="image-20201122164943736"></p>
+<p><img src="https://i.loli.net/2020/11/22/5jTNkhSzX46lYGr.png" alt="image-20201122165014259"></p>
+<p>（3）在文件头和文件尾发现了特殊的编码，联想jpg的图片格式，以FF D8开头，FF D9结尾。所以整个文件被倒过来了，需要再将其逆转回去。这里借助Python脚本。</p>
+<pre><code class="python">import os
+f = open(&#39;1&#39;,&quot;rb&quot;)#二进制形式打开
+f = f.read()[::-1]
+for i in f:
+    ans = str(hex(i))[2:][::-1]
+    if len(ans) == 1:
+        ans = ans + &#39;0&#39;
+    print(ans,end=&#39;&#39;)</code></pre>
+<p>（4）将得到的新文件保存并名为jpg格式，得到一张图片</p>
+<p><img src="https://i.loli.net/2020/11/22/mzhyvHuLsipbgt8.png" alt="image-20201122165457966"></p>
+<p>（5）可以看到是张翻转过的图片，这里可以使用windows下的画图工具将其水平翻转过来，也可以利用Python脚本。</p>
+<pre><code class="python">from PIL import Image
+im = Image.open(&quot;t.jpg&quot;)
+pim = im.load()
+an = Image.open(&quot;t.jpg&quot;)
+ans = an.load()
+for i in range(im.size[0]):
+    for j in range(im.size[1]):
+        ans[i, j] = pim[im.size[0]-i-1, j]
+an.show()</code></pre>
+<p><img src="https://i.loli.net/2020/11/22/fvH2PcDKqViZsFA.png" alt="image-20201122165652047"></p>
 
       
 
@@ -1382,11 +1408,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">kali</a>
+                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
+                <a href="javascript:void(0)" class="js-tag color5">kali</a>
               </li>
             
             <div class="clearfix"></div>
