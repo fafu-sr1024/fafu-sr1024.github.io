@@ -42,8 +42,9 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/22/5jTNkhSzX46lYGr.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/22/mzhyvHuLsipbgt8.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/22/fvH2PcDKqViZsFA.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/23/K3pOT2NVXjUgEtd.png">
 <meta property="article:published_time" content="2020-11-15T08:48:52.000Z">
-<meta property="article:modified_time" content="2020-11-22T08:58:54.350Z">
+<meta property="article:modified_time" content="2020-11-23T13:00:46.667Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="CTF靶场">
 <meta name="twitter:card" content="summary">
@@ -288,6 +289,11 @@ for i in range(im.size[0]):
         ans[i, j] = pim[im.size[0]-i-1, j]
 an.show()</code></pre>
 <p><img src="https://i.loli.net/2020/11/22/fvH2PcDKqViZsFA.png" alt="image-20201122165652047"></p>
+<h2 id="打野"><a href="#打野" class="headerlink" title="打野"></a>打野</h2><p>（1）得到一张坤坤的bmp格式图片，放到kali中binwalk一下，并没有发现隐藏的文件。再用strings查看，同样没有得到flag的信息。最后使用kali中的zsteg工具，该工具可以检测png和bmp图片里的隐写数据。</p>
+<pre><code>zsteg &#39;文件路径&#39;
+zsteg /root/Desktop/CTF/XCTF/Misc/005/瞅啥.bmp</code></pre>
+<p><img src="https://i.loli.net/2020/11/23/K3pOT2NVXjUgEtd.png" alt="image-20201123204350799"></p>
+<p>（2）得到flag</p>
 
       
 
@@ -441,7 +447,7 @@ an.show()</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#embarrass"><span class="toc-number">1.</span> <span class="toc-text">embarrass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISCall"><span class="toc-number">2.</span> <span class="toc-text">MISCall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-the-key-txt"><span class="toc-number">3.</span> <span class="toc-text">Get-the-key.txt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%B1%E5%9C%A8%E5%85%B6%E4%B8%AD"><span class="toc-number">4.</span> <span class="toc-text">就在其中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-it"><span class="toc-number">5.</span> <span class="toc-text">Reverse-it</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#embarrass"><span class="toc-number">1.</span> <span class="toc-text">embarrass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISCall"><span class="toc-number">2.</span> <span class="toc-text">MISCall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-the-key-txt"><span class="toc-number">3.</span> <span class="toc-text">Get-the-key.txt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%B1%E5%9C%A8%E5%85%B6%E4%B8%AD"><span class="toc-number">4.</span> <span class="toc-text">就在其中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-it"><span class="toc-number">5.</span> <span class="toc-text">Reverse-it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E9%87%8E"><span class="toc-number">6.</span> <span class="toc-text">打野</span></a></li></ol>
                     </div>
                 </span>
             </div>

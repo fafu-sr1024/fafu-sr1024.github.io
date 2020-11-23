@@ -438,6 +438,11 @@ for i in range(im.size[0]):
         ans[i, j] = pim[im.size[0]-i-1, j]
 an.show()</code></pre>
 <p><img src="https://i.loli.net/2020/11/22/fvH2PcDKqViZsFA.png" alt="image-20201122165652047"></p>
+<h2 id="打野"><a href="#打野" class="headerlink" title="打野"></a>打野</h2><p>（1）得到一张坤坤的bmp格式图片，放到kali中binwalk一下，并没有发现隐藏的文件。再用strings查看，同样没有得到flag的信息。最后使用kali中的zsteg工具，该工具可以检测png和bmp图片里的隐写数据。</p>
+<pre><code>zsteg &#39;文件路径&#39;
+zsteg /root/Desktop/CTF/XCTF/Misc/005/瞅啥.bmp</code></pre>
+<p><img src="https://i.loli.net/2020/11/23/K3pOT2NVXjUgEtd.png" alt="image-20201123204350799"></p>
+<p>（2）得到flag</p>
 
       
 
