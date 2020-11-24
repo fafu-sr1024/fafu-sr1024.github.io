@@ -152,6 +152,152 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-BugkuCTF/BugkuCTF_Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/">BugkuCTF_Web_001</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/" class="archive-article-date">
+  	<time datetime="2020-11-15T09:04:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>直接在URL前加“view-source:”，查看源代码，发现flag</p>
+<h2 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h2><p>（1）打开网址，是计算两个数的和，但结果只能输入一位数字。<br><img src="https://img-blog.csdnimg.cn/20201031181135297.png#pic_center" alt="在这里插入图片描述">（2）查看源代码<br><img src="https://img-blog.csdnimg.cn/20201031181300527.png#pic_center" alt="在这里插入图片描述">（3）指出了字符串的最大长度为1，直接修改这个最大长度，只要改为比结果的位数大就行<br><img src="https://img-blog.csdnimg.cn/20201031181506727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>（4）然后计算出正确的结果就能得到flag<br><img src="https://img-blog.csdnimg.cn/20201031181616802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="web基础-GET"><a href="#web基础-GET" class="headerlink" title="web基础$_GET"></a>web基础$_GET</h2><p>用get方法输入一个参数，参数名为“what”，值为“flag”<br>?用来间隔URL和请求参数，若要输入多个参数，用&amp;间隔。<br><img src="https://img-blog.csdnimg.cn/20201031182115891.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="web基础-POST"><a href="#web基础-POST" class="headerlink" title="web基础$_POST"></a>web基础$_POST</h2><p>用post方法输入一个参数，借助hackbar工具，传一个what参数，值为flag<br><img src="https://img-blog.csdnimg.cn/20201031182732284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"> </p>
+<h2 id="矛盾"><a href="#矛盾" class="headerlink" title="矛盾"></a>矛盾</h2><p>（1）一串php代码<br><img src="https://img-blog.csdnimg.cn/20201031184550585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>（2）用get方法传入一个num参数，其不能为数字，但又要等于1。这里涉及php代码弱类型比较，数字和字符混合的字符串转换为整数后只保留数字部分。所以num可以构造为1xiaosong，字符部分随便。<br><img src="https://img-blog.csdnimg.cn/20201031185112888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>#<img src="https://img-blog.csdnimg.cn/20201031185229655.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h2><p>（1）打开网址，一直是重复的页面<br><img src="https://img-blog.csdnimg.cn/20201031185735566.png#pic_center" alt="在这里插入图片描述">（2）用view-source:查看源代码，在最下面发现一串unicode编码<br><img src="https://img-blog.csdnimg.cn/20201031185849413.png#pic_center" alt="在这里插入图片描述">（3）用在线工具转为ASCII码得到flag ( <a target="_blank" rel="noopener" href="http://tool.chinaz.com/tools/unicode.aspx">http://tool.chinaz.com/tools/unicode.aspx</a>)<br><img src="https://img-blog.csdnimg.cn/2020103118594657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p><img src="https://img-blog.csdnimg.cn/20201031191427635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>（1）根据题目的意思，将域名flag.baidu.com指向到IP地址123.206.87.240<br>windows平台在C:\Windows\System32\drivers\etc\host中最后一行加入120.24.86.145 flag.bugku.com  （这里用notepad++打开host文件，修改后保存）<br><img src="https://img-blog.csdnimg.cn/20201031192314845.png#pic_center" alt="在这里插入图片描述"></p>
+<p>（2）修改完后，打开浏览器访问flag.baidu.com，得到flag<br><img src="https://img-blog.csdnimg.cn/20201031192355246.png#pic_center" alt="在这里插入图片描述"></p>
+<p>#如果是linux平台，则在/etc/host中加入123.206.87.240   flag.baidu.com </p>
+<h2 id="你必须让他停下"><a href="#你必须让他停下" class="headerlink" title="你必须让他停下"></a>你必须让他停下</h2><p>（1）打开网址，页面一直刷新，用burp抓包<br><img src="https://img-blog.csdnimg.cn/20201031194439430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>（2）发送到Repeater，点击发送，每发送一次，图片都会来一次变化，这是随机的，不断地发送，在出现10.jpg的时候发现了flag<br><img src="https://img-blog.csdnimg.cn/20201031194748327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h2><p>（1）打开网址，发现一段php代码<br><img src="https://img-blog.csdnimg.cn/20201101173036596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>（2）对代码的解释：</p>
+<pre><code>&lt;?php  
+
+error_reporting(0);                            //关闭php错误显示
+include &quot;flag1.php&quot;;                           //引入flag1.php文件代码
+highlight_file(__file__);
+if(isset($_GET[&#39;args&#39;]))&#123;                     //通过get方式传递 args变量才能执行if里面的代码
+    $args = $_GET[&#39;args&#39;];
+    if(!preg_match(&quot;/^\w+$/&quot;,$args))&#123;    //正则表达式的意思是匹配任意[A-Z,a-z，0-9,_]的字符，就是任意大小写字母和0-9以及下划线组成
+        die(&quot;args error!&quot;);
+    &#125;
+    eval(&quot;var_dump($$args);&quot;);
+&#125;
+?&gt;</code></pre>
+<p>（3）可变变量(<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.variable.php">https://www.php.net/manual/zh/language.variables.variable.php</a>)<br>#一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如： </p>
+<pre><code>&lt;?php
+$a = &#39;hello&#39;;
+?&gt;</code></pre>
+<p>#一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。例如：</p>
+<pre><code>&lt;?php
+$$a = &#39;world&#39;;
+?&gt;</code></pre>
+<p>#这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句： </p>
+<pre><code>&lt;?php
+echo &quot;$a $&#123;$a&#125;&quot;;
+?&gt;</code></pre>
+<p>与以下语句输出完全相同的结果,都会输出hello world： </p>
+<pre><code>&lt;?php
+echo &quot;$a $hello&quot;;
+?&gt;</code></pre>
+<p>#要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下$$a[1] 时，解析器需要知道是想要 $a[1] 作为一个变量呢，还是想要 $$a 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 ${$a[1]}，对第二种情况用 ${$a}[1]。 </p>
+<p>#在 PHP 的函数和类的方法中，超全局变量不能用作可变变量。$this 变量也是一个特殊变量，不能被动态引用。 </p>
+<p>（4）超全局变量是在全部作用域中始终可用的内置变量<br>这些超全局变量是：</p>
+<pre><code>    $GLOBALS
+    $_SERVER
+    $_GET
+    $_POST
+    $_FILES
+    $_COOKIE
+    $_SESSION
+    $_REQUEST
+    $_ENV</code></pre>
+<p>（5）所以只需给变量传入一个全局变量就可以了，将其变量名传入。构造参数：?args=GLOBALS，就能得到flag。<br><img src="https://img-blog.csdnimg.cn/20201101175938899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h2><p><img src="https://img-blog.csdnimg.cn/20201101184046587.png#pic_center" alt="在这里插入图片描述"></p>
+<p>（1）查看网页源代码，发现一串特殊的字符<br><img src="https://img-blog.csdnimg.cn/20201101184313987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据题目的提示，JSFuck是用6个字符 [ ] ( ) ! +来编写JavaScript程序。将源代码中的特殊字符放到浏览器的console控制台上进行解密。粘贴到控制台后按回车即可。<br><img src="https://img-blog.csdnimg.cn/20201101184717920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）注意提交格式，要求大写。CTF{WHATFK}</p>
+<p>#Jother是一种运用于javascript语言中利用少量字符构造精简的匿名函数方法对于字符串进行的编码方式。其中8个少量字符包括：[ ] ( ) ! + { }  只用这些字符就能完成对任意字符串的编码。（可以在浏览器的console控制台上直接解密）</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/BugkuCTF-Web//" class="article-tag-list-link color3">BugkuCTF_Web</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-BugkuCTF/BugkuCTF_Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1156,149 +1302,6 @@ echo strrev($_o);
 
 
   
-    <article id="post-XCTF/XCTF_Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Web-001/">XCTF_Web_001</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/XCTF_Web-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:19:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="baby-web"><a href="#baby-web" class="headerlink" title="baby_web"></a>baby_web</h2><p><img src="https://img-blog.csdnimg.cn/20201030180847595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030180905654.png#pic_center" alt="在这里插入图片描述"><br>（1）按照提示，初始界面想到index.php，再次请求index.php后仍是1.php(被重定向了)。F12打开开发者模式查看“网络”模块，查看返回包发现确实有index.php，并且其中的location参数被设置为了1.php，同时发现flag<br><img src="https://img-blog.csdnimg.cn/20201030181023278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>(2)也可以访问index.php，用Burp抓包，在响应包中发现flag<br><img src="https://img-blog.csdnimg.cn/20201030181133758.png#pic_center" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20201030181059758.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Training-WWW-Robots"><a href="#Training-WWW-Robots" class="headerlink" title="Training-WWW-Robots"></a>Training-WWW-Robots</h2><p><img src="https://img-blog.csdnimg.cn/20201030181220449.png#pic_center" alt="在这里插入图片描述"><br>（1）根据题目，熟悉robots.txt，在URL后加上/robots.txt<br><img src="https://img-blog.csdnimg.cn/20201030181244238.png#pic_center" alt="在这里插入图片描述"><br>（2）发现一个fl0g.php文件，在URL后加上fl0g.php访问，得到flag<br><img src="https://img-blog.csdnimg.cn/20201030181314103.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Web-php-unserialize"><a href="#Web-php-unserialize" class="headerlink" title="Web_php_unserialize"></a>Web_php_unserialize</h2><p>（1）先是一段代码审计</p>
-<pre><code>&lt;?php 
-class Demo &#123; 
-    private $file = &#39;index.php&#39;;
-    public function __construct($file) &#123; 
-        $this-&gt;file = $file;  //构造函数，对类的变量进行初始化
-    &#125;
-    function __destruct() &#123; 
-        echo @highlight_file($this-&gt;file, true); 
-    &#125;
-//魔术方法，如果有反序列化的使用，在反序列化之前会先调用这个方法
-    function __wakeup() &#123; 
-        if ($this-&gt;file != &#39;index.php&#39;) &#123; 
-            //the secret is in the fl4g.php
-            $this-&gt;file = &#39;index.php&#39;; 
-        &#125; 
-    &#125; 
-&#125;
-if (isset($_GET[&#39;var&#39;])) &#123; 
-    $var = base64_decode($_GET[&#39;var&#39;]); 
-//正则匹配，如果在var变量中存在O/C:数字(O:数字或者C:数字这样的形式&#125;)，不区分大小写，就输出stop hacking!否则的话就进行发序列化
-    if (preg_match(&#39;/[oc]:\d+:/i&#39;, $var)) &#123; 
-        die(&#39;stop hacking!&#39;); 
-    &#125; else &#123;
-        @unserialize($var); 
-    &#125; 
-&#125; else &#123; 
-    highlight_file(&quot;index.php&quot;); 
-&#125; 
-?&gt;</code></pre>
-<p>（2）审计完成之后，思路就很清晰了，对Demo这个类进行序列化，base64加密之后，赋值给var变量进行get传参就行了<br>在类Demo中有三个方法，一个构造，一个析构，还有就是一个魔术方法，构造函数__construct()在程序执行开始的时候对变量进行赋初值。析构函数__destruct()，在对象所在函数执行完成之后，会自动调用，这里就会高亮显示出文件。<br>在反序列化执行之前，会先执行__wakeup这个魔术方法，所以需要绕过，当成员属性数目大于实际数目时可绕过wakeup方法，正则匹配可以用+号来进行绕过。</p>
-<pre><code>&lt;?php
-class Demo &#123;
-private $file = &#39;index.php&#39;;
-//protected $file1 = &#39;index.php&#39;;
-public function __construct($file) &#123;
-    $this-&gt;file = $file;
-    //$this-&gt;file1 = $file1;
-&#125;
-function __destruct() &#123;
-    echo @highlight_file($this-&gt;file, true);
-&#125;
-function __wakeup() &#123;
-    if ($this-&gt;file != &#39;index.php&#39;) &#123;
-        //the secret is in the fl4g.php
-        $this-&gt;file = &#39;index.php&#39;;
-    &#125;
-&#125;
-&#125;
-$a = new Demo(&quot;fl4g.php&quot;);
-echo serialize($a).&quot;\n&quot;;
-//O:4:&quot;Demo&quot;:1:&#123;s:10:&quot; Demo file&quot;;s:8:&quot;fl4g.php&quot;;&#125;
-echo base64_encode(&#39;O:+4:&quot;Demo&quot;:2:&#123;s:10:&quot; Demo file&quot;;s:8:&quot;fl4g.php&quot;;&#125;&#39;);</code></pre>
-<p>使用代码在线工具执行,<a target="_blank" rel="noopener" href="https://tool.lu/coderunner/">https://tool.lu/coderunner/</a><br><img src="https://img-blog.csdnimg.cn/20201030182243753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>修改之后，再进行base64加密，传参就可以了<br>index.php?var=TzorNDoiRGVtbyI6Mjp7czoxMDoiAERlbW8AZmlsZSI7czo4OiJmbDRnLnBocCI7fQ==<br><img src="https://img-blog.csdnimg.cn/20201030182357578.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="php-rce"><a href="#php-rce" class="headerlink" title="php_rce"></a>php_rce</h2><p><img src="https://img-blog.csdnimg.cn/20201030182600616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（1）进入后发现是一个php框架，根据题目php-rce远程命令执行，在github上查一下这个版本有什么漏洞<br><img src="https://img-blog.csdnimg.cn/20201030182613799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030182621814.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030182634128.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现有好几个版本，由于只知道是5.0，则随便输入一个试试，这里注意只从”?s”开始复制，”?s”之前的是靶场。<br><img src="https://img-blog.csdnimg.cn/20201030182714277.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）得到进一步提示，为5.0.2版本，回到github找到5.0.2版本的再次复制，然后访问。发现可以进行远程命令执行。<br><img src="https://img-blog.csdnimg.cn/20201030182750642.png#pic_center" alt="在这里插入图片描述"><br>（4）ls查看有没有什么提示信息，可用hackbar执行，或者直接在地址栏输入命令也可。这里注意要把原来最后一个”=”后面的东西删掉再输入命令。<br><img src="https://img-blog.csdnimg.cn/20201030182851546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）ls后没有发现有用信息，接着查找上一级目录，直到发现flag<br><img src="https://img-blog.csdnimg.cn/20201030182918127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）然后输入查看命令 cat /flag即可看到flag<br><img src="https://img-blog.csdnimg.cn/20201030182941486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（7）也可以无需一级一级目录的找，使用命令find / -name flag,也可找到flag，然后cat /flag 就可以看到flag了。<br><img src="https://img-blog.csdnimg.cn/2020103018301474.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Web进阶区//" class="article-tag-list-link color2">XCTF_Web进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Web-001/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1396,11 +1399,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">kali</a>
+                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kali</a>
               </li>
             
             <div class="clearfix"></div>

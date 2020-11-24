@@ -152,6 +152,147 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/Python语言概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/24/Python/Python%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/">Python语言概述</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/24/Python/Python%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2020-11-24T10:35:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="编译和解释"><a href="#编译和解释" class="headerlink" title="编译和解释"></a>编译和解释</h2><p>（1)高级语言按照计算机执行方式的不同可分成两类：静态语言和脚本语言。这里的执行方式是指计算机执行一个程序的过程，静态语言采用编译执行，脚本语言采用解释执行。</p>
+<p>（2）编译：将源代码(高级语言代码)转换为目标代码(机器语言代码)的过程，执行编译的计算机程序称为编译器。编译是一次性的翻译，一旦程序被编译，则目标代码不再需要编译器就可以运行。</p>
+<p>（3）解释：将源代码逐条转换成目标代码的同时逐条运行目标代码的过程，执行解释的计算机程序称为解释器。</p>
+<p>解释在每次程序运行时都需要解释器和源代码。</p>
+<table>
+<thead>
+<tr>
+<th align="center">语言类型</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">静态语言(编译执行)</td>
+<td align="center">C语言、Java语言</td>
+</tr>
+<tr>
+<td align="center">脚本语言(解释执行)</td>
+<td align="center">JavaScript语言、PHP语言、Python语言</td>
+</tr>
+</tbody></table>
+<p>（4）Python语言虽然采用解释执行方式，但它的解释器也保留了编译器的部分功能，随着程序运行，解释器也会产生一个完整的目标代码。这种将解释器和编译器结合的新解释器是现代脚本语言为了提升计算机性能的一种有益演进。</p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>可在Python解释器自带的idle下编写Python语句，路径：D:\Python\Lib\idlelib，在该目录下双击idle.bat即可开始编写，也可直接在Windows下的“开始”菜单中搜索关键字”idle”找到快捷方式打开。</p>
+<pre><code class="python">&gt;&gt;&gt;print(&quot;Hello World&quot;)
+Hello World</code></pre>
+<p>其中，第一行的”&gt;&gt;&gt;”是Python语言运行环境的提示符，表示可以在这后面输入Python语句。第二行则是Python语句的执行结果。</p>
+<h2 id="Python语言的特点"><a href="#Python语言的特点" class="headerlink" title="Python语言的特点"></a>Python语言的特点</h2><p>语法简洁、跨平台、可扩展、开源通用、支持中文、模式多样(支持面向过程和面向对象两种编程方式)、类库丰富的脚本语言。</p>
+<h2 id="运行方式"><a href="#运行方式" class="headerlink" title="运行方式"></a>运行方式</h2><p>运行Python程序有两种方式：交互式和文件式。</p>
+<p>交互式指Python解释器即时响应用户输入的每条代码，给出输出结果，一般用于调试少量代码。</p>
+<p>文件式，也称为批量式，指用户将Python程序写在一个或多个文件中，然后启动Python解释器批量执行文件中的代码，是最常用的编程方式。</p>
+<h3 id="交互式启动和运行方法"><a href="#交互式启动和运行方法" class="headerlink" title="交互式启动和运行方法"></a>交互式启动和运行方法</h3><p>交互式有两种启动和运行方法。</p>
+<p>第一种方法，启动Windows命令行工具，Windows键+R快速打开运行窗口，输入”cmd”，在控制台输入”Python”，在命令提示符”&gt;&gt;&gt;”后输入程序代码，回车后显示输出结果。在”&gt;&gt;&gt;”提示符后输入exit()或quit()可以退出Python运行环境。</p>
+<p><img src="https://i.loli.net/2020/11/24/4jOUhvayTeZof5m.png" alt="image-20201124195448770"></p>
+<p>第二种方法，通过调用IDLE来启动Python运行环境。</p>
+<p><img src="https://i.loli.net/2020/11/24/4iaNIMPFjfoO5ry.png" alt="image-20201124195840923"></p>
+<h3 id="文件式启动和运行方法"><a href="#文件式启动和运行方法" class="headerlink" title="文件式启动和运行方法"></a>文件式启动和运行方法</h3><p>文件式也有两种运行方式。</p>
+<p>第一种方法，按照Python的语法格式在任意的编辑器中编写代码，可以使用Python安装包中的IDLE编辑器或者notepad++，然后保存为xx.py形式的文件。之后，进入xx.py文件所在目录，打开Windows的命令行窗口，输入</p>
+<pre><code>python xxx.py</code></pre>
+<p>即可运行Python程序文件获得输出。</p>
+<p><img src="https://i.loli.net/2020/11/24/sXkwqECbHKyfrZW.png" alt="image-20201124201902643"></p>
+<p>第二种方法，打开IDLE，按快捷键Ctrl+N打开一个新窗口，或者在菜单中选择File–&gt;New File选项。这个新窗口不再是交互模式，而是一个具备Python语法高亮辅助的编辑器，可进行代码编辑。编写完代码并保存为xx.py文件后，按快捷键F5，或者在菜单中选择Run–&gt;Run Module选项运行该文件。</p>
+<p><img src="https://i.loli.net/2020/11/24/1O45caGsVpeJyhH.png" alt="image-20201124202318979"></p>
+<h3 id="启动和运行方法推荐"><a href="#启动和运行方法推荐" class="headerlink" title="启动和运行方法推荐"></a>启动和运行方法推荐</h3><p>IDLE是一个简单有效的集成开发环境，支持交互式和文件式。其中，最常用且最重要的是采用IDLE的文件式方法。IDLE是小规模Python软件项目的主要编写工具，比IDLE更强大的Python语言集成开发环境是PyCharm，它主要用于中规模及以上的软件开发项目。</p>
+<h2 id="运行Python小程序"><a href="#运行Python小程序" class="headerlink" title="运行Python小程序"></a>运行Python小程序</h2><p>（1）同切圆的绘制</p>
+<p>文件式：</p>
+<pre><code>import turtle            #引入turtleku
+turtle.pensize (2)       #设置画笔宽度为2像素
+turtle.circle (10)       #绘制半径为10像素的圆
+turtle.circle (40)       #绘制半径为40像素的圆
+turtle.circle (80)       #绘制半径为80像素的圆
+turtle.circle (160)      #绘制半径为160像素的圆</code></pre>
+<p>运行结果：</p>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201124232954651.png" alt="image-20201124232954651"></p>
+<p>（2）日期和时间的输出</p>
+<p>交互式：</p>
+<pre><code>&gt;&gt;&gt;from datetime import datetime   #引用datetimeku
+&gt;&gt;&gt;now = datetime.now()            #获取当前日期和时间信息
+&gt;&gt;&gt;print(now)
+&gt;&gt;&gt;now.strftime(&quot;%x&quot;)              #输出其中的日期部分
+&gt;&gt;&gt;now.strftime(&quot;%X&quot;)              #输出其中的时间部分</code></pre>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201124233650419.png" alt="image-20201124233650419"></p>
+<p>文件式：</p>
+<pre><code>from datetime import datetime   #引用datetimeku
+now = datetime.now()            #获取当前日期和时间信息
+print(now)
+print(now.strftime(&quot;%x&quot;))       #输出其中的日期部分
+print(now.strftime(&quot;%X&quot;))       #输出其中的时间部分</code></pre>
+<p><img src="https://i.loli.net/2020/11/24/vhlAxUZELmpGYR6.png" alt="image-20201124233441815"></p>
+<p>（3）import保留字用来引入函数库，绘制图形可以使用turtle库，获得系统的日期和时间使用datetime库</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/24/Python/Python%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kali/解Misc题常用的kali工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1356,152 +1497,6 @@ if __name__ == &#39;__main__&#39;:
 
 
   
-    <article id="post-BugkuCTF/BugkuCTF_Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/">BugkuCTF_Web_001</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:04:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>直接在URL前加“view-source:”，查看源代码，发现flag</p>
-<h2 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h2><p>（1）打开网址，是计算两个数的和，但结果只能输入一位数字。<br><img src="https://img-blog.csdnimg.cn/20201031181135297.png#pic_center" alt="在这里插入图片描述">（2）查看源代码<br><img src="https://img-blog.csdnimg.cn/20201031181300527.png#pic_center" alt="在这里插入图片描述">（3）指出了字符串的最大长度为1，直接修改这个最大长度，只要改为比结果的位数大就行<br><img src="https://img-blog.csdnimg.cn/20201031181506727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（4）然后计算出正确的结果就能得到flag<br><img src="https://img-blog.csdnimg.cn/20201031181616802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web基础-GET"><a href="#web基础-GET" class="headerlink" title="web基础$_GET"></a>web基础$_GET</h2><p>用get方法输入一个参数，参数名为“what”，值为“flag”<br>?用来间隔URL和请求参数，若要输入多个参数，用&amp;间隔。<br><img src="https://img-blog.csdnimg.cn/20201031182115891.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web基础-POST"><a href="#web基础-POST" class="headerlink" title="web基础$_POST"></a>web基础$_POST</h2><p>用post方法输入一个参数，借助hackbar工具，传一个what参数，值为flag<br><img src="https://img-blog.csdnimg.cn/20201031182732284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"> </p>
-<h2 id="矛盾"><a href="#矛盾" class="headerlink" title="矛盾"></a>矛盾</h2><p>（1）一串php代码<br><img src="https://img-blog.csdnimg.cn/20201031184550585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）用get方法传入一个num参数，其不能为数字，但又要等于1。这里涉及php代码弱类型比较，数字和字符混合的字符串转换为整数后只保留数字部分。所以num可以构造为1xiaosong，字符部分随便。<br><img src="https://img-blog.csdnimg.cn/20201031185112888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>#<img src="https://img-blog.csdnimg.cn/20201031185229655.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h2><p>（1）打开网址，一直是重复的页面<br><img src="https://img-blog.csdnimg.cn/20201031185735566.png#pic_center" alt="在这里插入图片描述">（2）用view-source:查看源代码，在最下面发现一串unicode编码<br><img src="https://img-blog.csdnimg.cn/20201031185849413.png#pic_center" alt="在这里插入图片描述">（3）用在线工具转为ASCII码得到flag ( <a target="_blank" rel="noopener" href="http://tool.chinaz.com/tools/unicode.aspx">http://tool.chinaz.com/tools/unicode.aspx</a>)<br><img src="https://img-blog.csdnimg.cn/2020103118594657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p><img src="https://img-blog.csdnimg.cn/20201031191427635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（1）根据题目的意思，将域名flag.baidu.com指向到IP地址123.206.87.240<br>windows平台在C:\Windows\System32\drivers\etc\host中最后一行加入120.24.86.145 flag.bugku.com  （这里用notepad++打开host文件，修改后保存）<br><img src="https://img-blog.csdnimg.cn/20201031192314845.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）修改完后，打开浏览器访问flag.baidu.com，得到flag<br><img src="https://img-blog.csdnimg.cn/20201031192355246.png#pic_center" alt="在这里插入图片描述"></p>
-<p>#如果是linux平台，则在/etc/host中加入123.206.87.240   flag.baidu.com </p>
-<h2 id="你必须让他停下"><a href="#你必须让他停下" class="headerlink" title="你必须让他停下"></a>你必须让他停下</h2><p>（1）打开网址，页面一直刷新，用burp抓包<br><img src="https://img-blog.csdnimg.cn/20201031194439430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）发送到Repeater，点击发送，每发送一次，图片都会来一次变化，这是随机的，不断地发送，在出现10.jpg的时候发现了flag<br><img src="https://img-blog.csdnimg.cn/20201031194748327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h2><p>（1）打开网址，发现一段php代码<br><img src="https://img-blog.csdnimg.cn/20201101173036596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）对代码的解释：</p>
-<pre><code>&lt;?php  
-
-error_reporting(0);                            //关闭php错误显示
-include &quot;flag1.php&quot;;                           //引入flag1.php文件代码
-highlight_file(__file__);
-if(isset($_GET[&#39;args&#39;]))&#123;                     //通过get方式传递 args变量才能执行if里面的代码
-    $args = $_GET[&#39;args&#39;];
-    if(!preg_match(&quot;/^\w+$/&quot;,$args))&#123;    //正则表达式的意思是匹配任意[A-Z,a-z，0-9,_]的字符，就是任意大小写字母和0-9以及下划线组成
-        die(&quot;args error!&quot;);
-    &#125;
-    eval(&quot;var_dump($$args);&quot;);
-&#125;
-?&gt;</code></pre>
-<p>（3）可变变量(<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.variable.php">https://www.php.net/manual/zh/language.variables.variable.php</a>)<br>#一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如： </p>
-<pre><code>&lt;?php
-$a = &#39;hello&#39;;
-?&gt;</code></pre>
-<p>#一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。例如：</p>
-<pre><code>&lt;?php
-$$a = &#39;world&#39;;
-?&gt;</code></pre>
-<p>#这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句： </p>
-<pre><code>&lt;?php
-echo &quot;$a $&#123;$a&#125;&quot;;
-?&gt;</code></pre>
-<p>与以下语句输出完全相同的结果,都会输出hello world： </p>
-<pre><code>&lt;?php
-echo &quot;$a $hello&quot;;
-?&gt;</code></pre>
-<p>#要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下$$a[1] 时，解析器需要知道是想要 $a[1] 作为一个变量呢，还是想要 $$a 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 ${$a[1]}，对第二种情况用 ${$a}[1]。 </p>
-<p>#在 PHP 的函数和类的方法中，超全局变量不能用作可变变量。$this 变量也是一个特殊变量，不能被动态引用。 </p>
-<p>（4）超全局变量是在全部作用域中始终可用的内置变量<br>这些超全局变量是：</p>
-<pre><code>    $GLOBALS
-    $_SERVER
-    $_GET
-    $_POST
-    $_FILES
-    $_COOKIE
-    $_SESSION
-    $_REQUEST
-    $_ENV</code></pre>
-<p>（5）所以只需给变量传入一个全局变量就可以了，将其变量名传入。构造参数：?args=GLOBALS，就能得到flag。<br><img src="https://img-blog.csdnimg.cn/20201101175938899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h2><p><img src="https://img-blog.csdnimg.cn/20201101184046587.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（1）查看网页源代码，发现一串特殊的字符<br><img src="https://img-blog.csdnimg.cn/20201101184313987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据题目的提示，JSFuck是用6个字符 [ ] ( ) ! +来编写JavaScript程序。将源代码中的特殊字符放到浏览器的console控制台上进行解密。粘贴到控制台后按回车即可。<br><img src="https://img-blog.csdnimg.cn/20201101184717920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）注意提交格式，要求大写。CTF{WHATFK}</p>
-<p>#Jother是一种运用于javascript语言中利用少量字符构造精简的匿名函数方法对于字符串进行的编码方式。其中8个少量字符包括：[ ] ( ) ! + { }  只用这些字符就能完成对任意字符串的编码。（可以在浏览器的console控制台上直接解密）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-Web//" class="article-tag-list-link color3">BugkuCTF_Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1599,11 +1594,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">kali</a>
+                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">kali</a>
               </li>
             
             <div class="clearfix"></div>
