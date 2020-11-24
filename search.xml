@@ -11,16 +11,10 @@
         <content type="html"><![CDATA[<h2 id="binwalk"><a href="#binwalk" class="headerlink" title="binwalk"></a>binwalk</h2><p>binwalk是一款Python编写的工具，在kali中已经预安装了，可以在Python2和Python3的环境下运行，在Python3中运行速度更快。</p><pre><code>apt-get install binwalk         //安装binwalkbinwalk file                 //查看是否存在隐藏文件binwalk -e file              //文件提取</code></pre><h2 id="foremost"><a href="#foremost" class="headerlink" title="foremost"></a>foremost</h2><p>foremost在kali中已经预安装，可用于文件的分离</p><pre><code>apt-get install foremost     //安装foremostforemost -t all file         //分离文件，-t 指定文件类型，all则表示全部，后跟要分离的文件</code></pre><h2 id="zsteg"><a href="#zsteg" class="headerlink" title="zsteg"></a>zsteg</h2><p>zsteg可用于检测png和bmp图片里的隐写数据，为了使安装更快，要换为国内源</p><pre><code>gem sources -l             //查看现有源gem sources --remove https://rubygems.org/    //删除现有源gem sources -a http://gems.ruby-china.com/    //添加新源apt-get install gem        //安装gem，若不换源则需要等待许多时间gem install zsteg          //安装zsteg#使用方法，查看lsb数据zsteg xxx.bmpzsteg xxx.pngzsteg -a file             //查看各个通道的lsb</code></pre><h2 id="convert"><a href="#convert" class="headerlink" title="convert"></a>convert</h2><p>convert可以分解gif动图，kali自带的工具，无需安装</p><pre><code>convert xxx.gif flag.png       //分解gif动图，得到每一帧的图片按顺序以flag-x.png命名，-x为序号</code></pre><h2 id="montage"><a href="#montage" class="headerlink" title="montage"></a>montage</h2><p>montage用于图片的拼接，kali自带，无需安装，通常结合convert使用</p><pre><code>montage flag*.png -tile x1 -geometry +0+0 flag.png//-tile是拼接时每行和每列的图片数，这里用x1，就是只一行//-geometry是首选每个图和边框尺寸，边框为0，图照为原始尺寸//拼接好的图片命名为flag.png</code></pre><h2 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h2><p>查看可以打印的字符，通常可以借助管道符+grep匹配flag信息</p><pre><code>strings filestrings file | grep flag</code></pre><h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><p>保存当前的工作区与暂存区的状态，把当前的工作隐藏起来，等需要的时候再恢复</p><pre><code>git log           //查看git记录git stash list    //查看修改列表git stash show    //校验列表中的存储文件git stash apply   //恢复被隐藏的文件</code></pre><h2 id="gnuplot"><a href="#gnuplot" class="headerlink" title="gnuplot"></a>gnuplot</h2><p>gnuplot是一个命令行的交互式绘图工具。</p><pre><code>apt-get install gnuplot       //安装gnuplot工具</code></pre><p>使用：</p><p>在终端输入gnuplot，之后输入plot，后跟坐标文件，回车后即可看到绘制的图片。</p><p>例如BugkuCTF中的图穷匕见：</p><p><img src="https://i.loli.net/2020/11/24/LqcMiNKyJ5enmAl.png" alt="image-20201124170748506"></p><p><img src="https://i.loli.net/2020/11/24/5ySqZlarOGKsB1g.png" alt="image-20201124170808090"></p>]]></content>
       
       
-      <categories>
-          
-          <category> kali </category>
-          
-      </categories>
-      
       
         <tags>
             
-            <tag> CTF工具 </tag>
+            <tag> kali </tag>
             
         </tags>
       
