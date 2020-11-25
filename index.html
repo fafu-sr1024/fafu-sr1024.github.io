@@ -152,19 +152,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Python/Python语言概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Python/初识Python语言(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/24/Python/Python%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/">Python语言概述</a>
+      <a class="article-title" href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">初识Python语言(一)</a>
     </h1>
   
 
         
-        <a href="/2020/11/24/Python/Python%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/" class="archive-article-date">
+        <a href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/" class="archive-article-date">
   	<time datetime="2020-11-24T10:35:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
 </a>
         
@@ -240,6 +240,124 @@ print(now.strftime(&quot;%x&quot;))       #输出其中的日期部分
 print(now.strftime(&quot;%X&quot;))       #输出其中的时间部分</code></pre>
 <p><img src="https://i.loli.net/2020/11/24/vhlAxUZELmpGYR6.png" alt="image-20201124233441815"></p>
 <p>（3）import保留字用来引入函数库，绘制图形可以使用turtle库，获得系统的日期和时间使用datetime库</p>
+<h2 id="程序的基本编写方法"><a href="#程序的基本编写方法" class="headerlink" title="程序的基本编写方法"></a>程序的基本编写方法</h2><h3 id="IPO程序编写方法"><a href="#IPO程序编写方法" class="headerlink" title="IPO程序编写方法"></a>IPO程序编写方法</h3><p>无论程序规模如何，每个程序都有统一的运算模式：输入数据、处理数据和输出数据。这种运算模式形成了基本的程序编写方法：IPO(Input，Process，Output)方法。</p>
+<h3 id="输入-Input"><a href="#输入-Input" class="headerlink" title="输入(Input)"></a>输入(Input)</h3><p>输入是一个程序的开始。程序要处理的数据有多种来源，因此形成了多种输入方式。</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入方式</th>
+<th align="left">输入来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">文件输入</td>
+<td align="left">文件</td>
+</tr>
+<tr>
+<td align="left">网络输入</td>
+<td align="left">互联网上的数据</td>
+</tr>
+<tr>
+<td align="left">控制台输入</td>
+<td align="left">程序使用者输入的信息</td>
+</tr>
+<tr>
+<td align="left">交互界面输入</td>
+<td align="left">通过提供一个图形交互界面从用户处获取</td>
+</tr>
+<tr>
+<td align="left">随机数据输入</td>
+<td align="left">将随机数作为程序输入，需要使用特定的随机数生成器程序或调用相关函数</td>
+</tr>
+<tr>
+<td align="left">内部参数输入</td>
+<td align="left">以程序内部定义的初始化变量作为输入</td>
+</tr>
+</tbody></table>
+<h3 id="输出-Output"><a href="#输出-Output" class="headerlink" title="输出(Output)"></a>输出(Output)</h3><p>输出是程序展示运算成果的方式。</p>
+<table>
+<thead>
+<tr>
+<th>输出方式</th>
+<th>具体实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>控制台输出</td>
+<td>通过程序运行环境中的命令打印输出结果，例如Windows中的命令行工具、IDLE工具</td>
+</tr>
+<tr>
+<td>图形输出</td>
+<td>在计算机中启动独立的图形输出窗口，根据指令绘制运算结果</td>
+</tr>
+<tr>
+<td>文件输出</td>
+<td>以生成新的文件或修改已有文件方式输出运行结果，是程序常用的输出方式</td>
+</tr>
+<tr>
+<td>网络输出</td>
+<td>以访问网络接口方式输出数据</td>
+</tr>
+<tr>
+<td>操作系统内部变量输出</td>
+<td>程序将运行结果输出到系统内部变量中，这类变量包括管道、线程、信号量等</td>
+</tr>
+</tbody></table>
+<h3 id="处理-Process"><a href="#处理-Process" class="headerlink" title="处理(Process)"></a>处理(Process)</h3><p>处理是程序对输入数据进行计算产生输出结果的过程，计算问题的处理方法统称为“算法”。</p>
+<h3 id="无限循环程序"><a href="#无限循环程序" class="headerlink" title="无限循环程序"></a>无限循环程序</h3><p>无限循环程序没有输入输出，例如：</p>
+<pre><code class="python">while(True)
+   a = 1</code></pre>
+<p>由于没有输入输出，代码会一直执行下去。该程序快速消耗CPU的计算资源，可以用来辅助测试CPU或系统性能。不过，没有输入输出的程序功能十分有限，仅在特殊情况下使用。</p>
+<h2 id="Python语言的版本更迭"><a href="#Python语言的版本更迭" class="headerlink" title="Python语言的版本更迭"></a>Python语言的版本更迭</h2><p>Python2.x已是遗产，Python3.x是这个语言的现在和未来。Python2.x系列的最后一个版本，其主版本号为2.7。</p>
+<p>版本之间的区别：更多区别可以查看Guido的文章：<a target="_blank" rel="noopener" href="https://docs.python.org/3/whatsnew/3.0.html">https://docs.python.org/3/whatsnew/3.0.html</a></p>
+<p>（1）修改编码：3.x系列默认采用UTF-8编码，表达UTF-8编码字符串时，无需在前面加上u或者U</p>
+<p>（2）修改print语句：用print()函数替换了print语句，功能一样，格式不同</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;print &quot;The answer is&quot;, 2*2
+3.x:&gt;&gt;&gt;print(&quot;The answer is&quot;, 2*2)
+2.x:&gt;&gt;&gt;print x
+3.x:&gt;&gt;&gt;print(x,end=&quot;,&quot;)</code></pre>
+<p>（3）修改exec语句：用exec()函数替换了exec语句，功能一样，格式不同</p>
+<p>（4）去掉&lt;&gt;符号，用!=表示“不等于”</p>
+<p>（5）修改比较行为：用&lt;、&lt;=、&gt;=、&gt;符号比较两个元素时，若元素之间不存在有意义的顺序关系，将抛出TypeError错误，不再返回False，例如：</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;1 &lt; &quot;1&quot;
+False
+3.x:&gt;&gt;&gt;1 &lt; &quot;1&quot;
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
+    1 &lt; &quot;1&quot;
+TypeError: &#39;&lt;&#39; not supported between instances of &#39;int&#39; and &#39;str&#39;</code></pre>
+<p>（6）Python3.x系列不再区分整数和长整数类型，只有一个int类型，且无取值范围限制。因此，sys.maxint常量被去掉</p>
+<p>（7）修改整数除法：两个整数的一般除法(/)返回一个浮点数，不再返回一个整数，若想返回整数，则用整数除法(//)</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;3/2
+1
+3.x:&gt;&gt;&gt;3/2
+1.5
+3.x:&gt;&gt;&gt;3//2
+1</code></pre>
+<p>（8）3.x系列八进制整数格式使用0o开头，而不再使用0开头</p>
+<p>（9）增加as、with、True、False、None作为关键字</p>
+<p>（10）去掉raw_input()函数，用input()函数代替，input()返回一个字符串</p>
+<p>（11）修改range()函数，与Python2.x系列中的xrange()类似，不再显示返回一个列表。若要返回列表，则需要通过list()函数转换</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+3.x:&gt;&gt;&gt;range(10)
+range(0,10)
+3.x:&gt;&gt;&gt;list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<p>（12）修改返回类型：除range()外，zip()、map()、filter()、字典类型的key()方法、value()方法、item()方法不再返回列表类型</p>
+<p>（13）修改异常处理表达：使用as关键字标识异常信息，例如：</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;try:
+       ...   wrong_name
+       ...except NameError, err:
+       ...   print err
+       ...
+       name &#39;wrong_name&#39; is not defined
+3.x:&gt;&gt;&gt;try:
+       ...   wrong_name
+       ...except NameError as err:
+       ...   print(err)
+       ...
+name &#39;wrong_name&#39; is not defined</code></pre>
 
       
 
@@ -263,7 +381,7 @@ print(now.strftime(&quot;%X&quot;))       #输出其中的时间部分</code></p
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/24/Python/Python%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">展开全文 >></a>
         </p>
       
 
@@ -1594,15 +1712,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">kali</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
               </li>
             
             <div class="clearfix"></div>
