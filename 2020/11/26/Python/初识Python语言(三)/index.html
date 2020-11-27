@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Category: XCTF_Misc进阶区 | Hexo</title>
+  <title>初识Python语言(三) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/categories/XCTF-Misc%E8%BF%9B%E9%98%B6%E5%8C%BA/index.html">
+  <meta name="description" content="实例2：Python蟒蛇绘制import turtle turtle.setup(650, 350, 200, 200) turtle.penup() turtle.fd(-250) turtle.pendown() turtle.pensize(25) turtle.pencolor(&quot;purple&quot;) turtle.seth(-40) for i in range(4):">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识Python语言(三)">
+<meta property="og:url" content="http://example.com/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="实例2：Python蟒蛇绘制import turtle turtle.setup(650, 350, 200, 200) turtle.penup() turtle.fd(-250) turtle.pendown() turtle.pensize(25) turtle.pencolor(&quot;purple&quot;) turtle.seth(-40) for i in range(4):">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2020/11/26/jpJvVGNhOBQ2nFc.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/27/ulH8p5UXdWftGKx.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/27/VduCgIDaJ9A81ly.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/27/uprBWaQxZbXdn8i.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/27/InHJazGQuSZW1Ms.png">
+<meta property="article:published_time" content="2020-11-26T14:07:00.000Z">
+<meta property="article:modified_time" content="2020-11-27T05:44:06.826Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/26/jpJvVGNhOBQ2nFc.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,218 +161,404 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Python/初识Python语言(三)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      初识Python语言(三)
+    </h1>
+  
+
+        
+        <a href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/" class="archive-article-date">
+  	<time datetime="2020-11-26T14:07:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="实例2：Python蟒蛇绘制"><a href="#实例2：Python蟒蛇绘制" class="headerlink" title="实例2：Python蟒蛇绘制"></a>实例2：Python蟒蛇绘制</h2><pre><code class="python">import turtle
+turtle.setup(650, 350, 200, 200)
+turtle.penup()
+turtle.fd(-250)
+turtle.pendown()
+turtle.pensize(25)
+turtle.pencolor(&quot;purple&quot;)
+turtle.seth(-40)
+for i in range(4):
+    turtle.circle(40, 80)
+    turtle.circle(-40, 80)
+turtle.circle(40, 80/2)
+turtle.fd(40)
+turtle.circle(16, 180)
+turtle.fd(40 * 2/3)</code></pre>
+<p>输出效果：</p>
+<p><img src="https://i.loli.net/2020/11/26/jpJvVGNhOBQ2nFc.png" alt="image-20201126222735656"></p>
+<p>（1）实例2中绝大多数的代码都是&lt;a&gt;.&lt;b&gt;()的形式，这是Python的一种典型表达式。它可以表示调用一个对象&lt;a&gt;的方法&lt;b&gt;，也可以表示调用一个函数库&lt;a&gt;中的函数&lt;b&gt;()。实例2中使用了用于绘制图形的turtle库，并通过保留字import引用这个函数库。</p>
+<p>（2）实例2中通过使用函数库并利用库中函数进行编程的方法，称为“模块编程”。</p>
+<h3 id="import对库的引用"><a href="#import对库的引用" class="headerlink" title="import对库的引用"></a>import对库的引用</h3><p>使用import引用函数库有两种方式。</p>
+<p>（1）第一种：</p>
+<pre><code class="python">import &lt;库名&gt;</code></pre>
+<p>此时，可以调用库名中的所有函数，使用库中函数格式如下：</p>
+<pre><code>&lt;库名&gt;.&lt;函数名&gt;(&lt;函数参数&gt;)</code></pre>
+<p>（2）第二种：</p>
+<pre><code class="python">from &lt;库名&gt; import &lt;函数名,函数名,...,函数名&gt;
+from &lt;库名&gt; import *          #其中，*是通配符，表示所有函数</code></pre>
+<p>此时，调用该库的函数时不再需要使用库名，直接使用如下格式：</p>
+<pre><code>&lt;函数名&gt;(&lt;函数参数&gt;)</code></pre>
+<p>使用第二种库引用方式修改实例2代码，如下：</p>
+<pre><code class="python">from turtle import *       
+&#39;&#39;&#39;
+第一条语句也可用如下两条语句代替:
+from turtle setup, penup, fd, pendow
+from turtle pensize, pencolor, seth, circle
+&#39;&#39;&#39;
+setup(650, 350, 200, 200)
+penup()
+fd(-250)
+pendown()
+pensize(25)
+pencolor(&quot;purple&quot;)
+seth(-40)
+for i in range(4):
+    circle(40, 80)
+    circle(-40, 80)
+circle(40, 80/2)
+fd(40)
+circle(16, 180)
+fd(40 * 2/3)</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">import引用库方法</th>
+<th align="left">优点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">第一种</td>
+<td align="left">能够显示标明函数来源，在引用较多库时代码的可读性更好</td>
+</tr>
+<tr>
+<td align="left">第二种</td>
+<td align="left">利用保留字直接引用库中函数，使代码更简洁，在引用较少库的情况下效果更佳</td>
+</tr>
+</tbody></table>
+<p>（3）注意事项：第一种引用方式，Python解释器将&lt;a&gt;.&lt;b&gt;整体作为函数名。第二种引用方式，解释器将&lt;b&gt;作为函数名，因此第二种引用方式可能会出现：用户自定义的函数名&lt;b&gt;与库中的函数名&lt;b&gt;冲突的情况。</p>
+<h2 id="turtle库语法元素分析"><a href="#turtle库语法元素分析" class="headerlink" title="turtle库语法元素分析"></a>turtle库语法元素分析</h2><p>Python的turtle库是一个直观有趣的图形绘制函数库</p>
+<h3 id="绘图坐标体系"><a href="#绘图坐标体系" class="headerlink" title="绘图坐标体系"></a>绘图坐标体系</h3><p>（1）turtle库绘制图形有一个基本框架：一个小海龟在坐标系中爬行，其爬行轨迹形成了绘制图形。</p>
+<p>（2）刚开始绘制时，小海龟位于画布正中央，坐标为(0,0)，行进方向为水平右方。</p>
+<p><img src="https://i.loli.net/2020/11/27/ulH8p5UXdWftGKx.png" alt="image-20201127105742159"></p>
+<p>（3）实例2中使用了turtle.setup()函数，其作用是设置主窗体的大小和位置，具体定义如下：</p>
+<pre><code>turtle.setup(width, height, startx, starty)</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>width</td>
+<td>窗口宽度。若是整数，表示像素值；若是小数，表示窗口宽度与屏幕的比例</td>
+</tr>
+<tr>
+<td>height</td>
+<td>窗口高度。若是整数，表示像素值；若是小数，表示窗口高度与屏幕的比例</td>
+</tr>
+<tr>
+<td>startx</td>
+<td>窗口左侧与屏幕左侧的像素距离。如果值是None，窗口位于屏幕水平中央</td>
+</tr>
+<tr>
+<td>starty</td>
+<td>窗口顶部与屏幕顶部的像素距离。如果值是None，窗口位于屏幕垂直中央</td>
+</tr>
+</tbody></table>
+<h3 id="画笔控制函数"><a href="#画笔控制函数" class="headerlink" title="画笔控制函数"></a>画笔控制函数</h3><h4 id="turtle-penup-和turtle-pendown-函数"><a href="#turtle-penup-和turtle-pendown-函数" class="headerlink" title="turtle.penup()和turtle.pendown()函数"></a>turtle.penup()和turtle.pendown()函数</h4><p>turtle中的画笔(即小海龟)可以通过一组函数来控制，实例2中的penup()和pendown()函数是一组，它们分别表示抬起画笔和落下画笔。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>别名</th>
+<th>作用</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>turtle.penup()</td>
+<td>turtle.pu()，turtle.up()</td>
+<td>抬起画笔，之后移动画笔不绘制形状</td>
+<td>无</td>
+</tr>
+<tr>
+<td>turtle.pendown()</td>
+<td>turtle.pd()，turtle.down()</td>
+<td>落下画笔，之后移动画笔将绘制形状</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h4 id="turtle-pensize-函数"><a href="#turtle-pensize-函数" class="headerlink" title="turtle.pensize()函数"></a>turtle.pensize()函数</h4><p>用来设置画笔尺寸。</p>
+<pre><code>定义：turtle.pensize(width)
+别名：turtle.width()
+作用：设置画笔宽度，当无参数输入时返回当前画笔宽度
+参数如下
+#width。设置的画笔线条宽度，如果为None或者为空，则函数返回当前画笔宽度</code></pre>
+<h4 id="turtle-pencolor-函数"><a href="#turtle-pencolor-函数" class="headerlink" title="turtle.pencolor()函数"></a>turtle.pencolor()函数</h4><p>用来给画笔设置颜色。</p>
+<pre><code>定义：turtle.pencolor(colorstring)或turtle.pencolor((r,g,b))
+作用：设置画笔颜色，当无参数输入时返回当前画笔颜色
+参数如下：
+#colorstring：表示颜色的字符串，例如：“purple”、”red“、”blue“等
+#(r,g,b)：颜色对应的RGB数值，例如：(51,204,140)</code></pre>
+<p>很多RGB颜色都有固定的英文名字，这些英文名字可以作为colorstring输入，也可采用(r,g,b)形式直接输入。</p>
+<table>
+<thead>
+<tr>
+<th align="center">英文名称</th>
+<th align="center">RGB</th>
+<th align="center">中文名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">white</td>
+<td align="center">255 255 255</td>
+<td align="center">白色</td>
+</tr>
+<tr>
+<td align="center">black</td>
+<td align="center">0 0 0</td>
+<td align="center">黑色</td>
+</tr>
+<tr>
+<td align="center">grey</td>
+<td align="center">190 190 190</td>
+<td align="center">灰色</td>
+</tr>
+<tr>
+<td align="center">darkgreen</td>
+<td align="center">0 100 0</td>
+<td align="center">深绿色</td>
+</tr>
+<tr>
+<td align="center">gold</td>
+<td align="center">255 215 0</td>
+<td align="center">金色</td>
+</tr>
+<tr>
+<td align="center">violet</td>
+<td align="center">238 130 238</td>
+<td align="center">紫罗兰</td>
+</tr>
+<tr>
+<td align="center">purple</td>
+<td align="center">160 32 240</td>
+<td align="center">紫色</td>
+</tr>
+</tbody></table>
+<h3 id="形状绘制函数"><a href="#形状绘制函数" class="headerlink" title="形状绘制函数"></a>形状绘制函数</h3><h4 id="turtle-fd-函数"><a href="#turtle-fd-函数" class="headerlink" title="turtle.fd()函数"></a>turtle.fd()函数</h4><p>用来控制画笔向当前行进方向前进一个距离。</p>
+<pre><code>定义：turtle.fd(distance)
+别名：turtle.forward(distance)
+作用：向小海龟当前行进方向前进distance距离
+参数如下：
+#distance：行进距离的像素值，当值为负数时，表示向相反方向前进</code></pre>
+<h4 id="turtle-seth-函数"><a href="#turtle-seth-函数" class="headerlink" title="turtle.seth()函数"></a>turtle.seth()函数</h4><p>用来改变画笔绘制方向。</p>
+<pre><code>定义：turtle.set(to_angle)
+别名：turtle.setheading(to_angle)
+作用：设置小海龟当前行进方向为to_angle,该角度是绝对方向角度值
+参数如下：
+#to_angle：角度的整数值</code></pre>
+<p><img src="https://i.loli.net/2020/11/27/VduCgIDaJ9A81ly.png" alt="image-20201127124608385"></p>
+<p>注意：turtle库的角度坐标体系以正东向为绝对0度，这也是小海龟初始爬行方向。正西向为绝对180度。上图的方向坐标体系是方向的绝对方向体系，与小海龟爬向当前方向无关。</p>
+<h4 id="for循环语句"><a href="#for循环语句" class="headerlink" title="for循环语句"></a>for循环语句</h4><p>由保留字for引导的循环称为”遍历循环“，for语句的循环格式如下：</p>
+<pre><code class="python">for i in range(&lt;循环次数&gt;)
+    &lt;语句块1&gt;</code></pre>
+<p>例如实例2中的for循环表示循环内部的两个语句块连续执行4次：</p>
+<pre><code class="python">for i in range(4):
+    turtle.circle(40, 80)
+    turtle.circle(-40, 80)</code></pre>
+<h4 id="turtle-circle-函数"><a href="#turtle-circle-函数" class="headerlink" title="turtle.circle()函数"></a>turtle.circle()函数</h4><p>用来绘制一个弧形。</p>
+<pre><code>定义：turtle.circle(radius, extent=None)
+作用：根据半径radius绘制extent角度的弧形
+参数如下：
+#radius：弧形半径，当值为正数时，半径在小海龟左侧(逆时针)；当值为负数时，半径在小海龟右侧(顺时针)
+#extent：绘制弧形的角度，当不设置参数或参数设置为None时，绘制整个圆形</code></pre>
+<p><img src="https://i.loli.net/2020/11/27/uprBWaQxZbXdn8i.png" alt="image-20201127132201550"></p>
+<p><img src="https://i.loli.net/2020/11/27/InHJazGQuSZW1Ms.png" alt="image-20201127133023244"></p>
+<h3 id="函数的封装"><a href="#函数的封装" class="headerlink" title="函数的封装"></a>函数的封装</h3><p>实例2中的程序代码功能可以分为两类。一类是绘制图形前对画笔的设置，包括颜色、尺寸、初始位置等；另一类则是绘制Python蟒蛇的功能。因此，可以通过保留字def定义一个drawSnake()函数，将蟒蛇的绘制这个独立功能封装起来。代码如下：</p>
+<pre><code class="python">import turtle
+def drawSnake(radius, angle, length):
+    turtle.seth(-40)
+    for i in range(length):
+        turtle.circle(radius, angle)
+        turtle.circle(-radius, angle)
+    turtle.circle(radius, angle/2)
+    turtle.fd(40)
+    turtle.circle(16, 180)
+    turtle.fd(40 * 2/3)
+turtle.setup(650, 350, 200, 200)
+turtle.penup()
+turtle.fd(-250)
+turtle.pendown()
+turtle.pensize(25)
+turtle.pencolor(&quot;purple&quot;)
+drawSnake(40, 80, 4)
+turtle.done()</code></pre>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/11/15/XCTF/XCTF_Misc-004/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:48:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/11/15/XCTF/XCTF_Misc-004/">XCTF_Misc_004</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/11/15/XCTF/XCTF_Misc-003/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初识Python语言(二)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/11/15/XCTF/XCTF_Misc-003/">XCTF_Misc_003</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B2%EF%BC%9APython%E8%9F%92%E8%9B%87%E7%BB%98%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">实例2：Python蟒蛇绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#import%E5%AF%B9%E5%BA%93%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">import对库的引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#turtle%E5%BA%93%E8%AF%AD%E6%B3%95%E5%85%83%E7%B4%A0%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">turtle库语法元素分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%98%E5%9B%BE%E5%9D%90%E6%A0%87%E4%BD%93%E7%B3%BB"><span class="toc-number">2.1.</span> <span class="toc-text">绘图坐标体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%BB%E7%AC%94%E6%8E%A7%E5%88%B6%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">画笔控制函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#turtle-penup-%E5%92%8Cturtle-pendown-%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.1.</span> <span class="toc-text">turtle.penup()和turtle.pendown()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#turtle-pensize-%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.2.</span> <span class="toc-text">turtle.pensize()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#turtle-pencolor-%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.3.</span> <span class="toc-text">turtle.pencolor()函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E7%8A%B6%E7%BB%98%E5%88%B6%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.</span> <span class="toc-text">形状绘制函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#turtle-fd-%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.1.</span> <span class="toc-text">turtle.fd()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#turtle-seth-%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.2.</span> <span class="toc-text">turtle.seth()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.3.3.</span> <span class="toc-text">for循环语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#turtle-circle-%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.4.</span> <span class="toc-text">turtle.circle()函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%B0%81%E8%A3%85"><span class="toc-number">2.4.</span> <span class="toc-text">函数的封装</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/11/15/XCTF/XCTF_Misc-002/" class="archive-article-date">
-  	<time datetime="2020-11-15T07:59:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/11/15/XCTF/XCTF_Misc-002/">XCTF_Misc_002</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/11/15/XCTF/XCTF_Misc-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T07:47:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/11/15/XCTF/XCTF_Misc-001/">XCTF_Misc_001</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -384,10 +581,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
