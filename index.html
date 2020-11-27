@@ -363,6 +363,11 @@ fd(40 * 2/3)</code></pre>
 #to_angle：角度的整数值</code></pre>
 <p><img src="https://i.loli.net/2020/11/27/VduCgIDaJ9A81ly.png" alt="image-20201127124608385"></p>
 <p>注意：turtle库的角度坐标体系以正东向为绝对0度，这也是小海龟初始爬行方向。正西向为绝对180度。上图的方向坐标体系是方向的绝对方向体系，与小海龟爬向当前方向无关。</p>
+<h4 id="turtle-goto-函数"><a href="#turtle-goto-函数" class="headerlink" title="turtle.goto()函数"></a>turtle.goto()函数</h4><p>可以使用turtle.goto(x,y)方法来让小海龟沿着绝对坐标进行运动，且不打印其爬行轨迹。</p>
+<p>以屏幕中间为原点(0,0)，形成四象限的坐标体系。</p>
+<p><img src="https://i.loli.net/2020/11/27/NdikQ41ZT9EzMFc.png" alt="image-20201127164623691"></p>
+<pre><code class="Python">turtle.goto(0,300)  #x为0,y为300,代表中心向上移动300
+turtle.goto(-100,-100)  #x为-100，代表向左移动100；y为-100，代表向下移动100</code></pre>
 <h4 id="for循环语句"><a href="#for循环语句" class="headerlink" title="for循环语句"></a>for循环语句</h4><p>由保留字for引导的循环称为”遍历循环“，for语句的循环格式如下：</p>
 <pre><code class="python">for i in range(&lt;循环次数&gt;)
     &lt;语句块1&gt;</code></pre>
@@ -1941,11 +1946,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">CTF靶场</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
