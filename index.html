@@ -152,6 +152,552 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/深入Python语言(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">深入Python语言(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/" class="archive-article-date">
+  	<time datetime="2020-11-27T16:03:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h2><p>表示数字或数值的数据类型称为数字类型，Python语言提供3种数字类型：整数、浮点数和复数，分别对应数学中的整数、实数和复数。</p>
+<h3 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h3><p>（1）整数类型与数学中的整数概念一致，整数类型共有4种进制表示：十进制、二进制、八进制和十六进制。默认情况，整数采用十进制，其他进制需要增加引导符号。</p>
+<table>
+<thead>
+<tr>
+<th align="center">进制种类</th>
+<th align="center">引导符号</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">十进制</td>
+<td align="center">无</td>
+<td align="center">默认情况下使用</td>
+</tr>
+<tr>
+<td align="center">二进制</td>
+<td align="center">0b 或 0B</td>
+<td align="center">由0和1组成，例如：0b101,0B101</td>
+</tr>
+<tr>
+<td align="center">八进制</td>
+<td align="center">0o 或 0O</td>
+<td align="center">由字符0到7组成，例如：0o711,0O711</td>
+</tr>
+<tr>
+<td align="center">十六进制</td>
+<td align="center">0x 或 0X</td>
+<td align="center">由字符0到9、a到f、A到F组成，例如0xABC</td>
+</tr>
+</tbody></table>
+<p>（2）整数类型理论上的取值范围是负无穷到正无穷，实际上的取值范围受限于运行Python程序的计算机内存大小。除极大数的运算外，一般认为整数类型没有取值范围限制。</p>
+<p>（3）pow(x,y)函数是Python语言的一个内置函数，用来计算x的y次方。可以使用该函数来测试整数类型的取值范围。例如：</p>
+<pre><code class="python">&gt;&gt;&gt;pow(2,100)
+1267650600228229401496703205376
+&gt;&gt;&gt;pow(2,500)
+3273390607896141870013189696827599152216642046043064789483291368096133796404674554883270092325904157150886684127560071009217256545885393053328527589376</code></pre>
+<p>（4）pow()函数还可以嵌套使用</p>
+<pre><code class="python">&gt;&gt;&gt;pow(2,pow(2,15))</code></pre>
+<h3 id="浮点数类型"><a href="#浮点数类型" class="headerlink" title="浮点数类型"></a>浮点数类型</h3><p>（1）浮点数类型与数学中实数的概念一致，表示带有小数的数值。Python语言要求所有浮点数必须带有小数部分，小数部分可以是0，这样可以区分浮点数和整数类型。</p>
+<p>（2）浮点数有两种表示方法：十进制表示和科学计数法表示。</p>
+<p>科学计数法使用字母e或E作为幂的符号，以10位基数，含义如下：</p>
+<pre><code>&lt;a&gt;e&lt;b&gt; = a * pow(10,b)
+例如：
+4.3e-3 =4 .3*pow(10,-3)
+9.6E5 = 9.6*pow(10,5)     #9.6E5也可表示为9.6E+5</code></pre>
+<p>浮点数类型和整数类型由计算机的不同硬件单元执行，处理方法不同。尽管浮点数0.0与整数0值相同，但在计算机内部的表示不同。</p>
+<p>（3）Python浮点数的数值范围和小数精度受不同计算机系统的限制，sys.float_info详细列出了Python解释器所运行系统的浮点数各项参数。</p>
+<pre><code class="python">&gt;&gt;&gt;import sys    #引入sys函数库
+&gt;&gt;&gt;sys.float_info
+sys.float_info(max=1.7976931348623157e+308, max_exp=1024, max_10_exp=308, min=2.2250738585072014e-308, min_exp=-1021, min_10_exp=-307, dig=15, mant_dig=53, epsilon=2.220446049250313e-16, radix=2, rounds=1)
+&#39;&#39;&#39;
+上述输出给出了浮点数类型所能表示的最大值(max)、最小值(min)。
+科学计数法表示下：
+基数(radix)为2时最大值的幂(max_exp)
+最大值的幂(max_10_exp)
+最小值的幂(min_10_exp)
+能准确计算的浮点数最大个数(dig)
+系数(&lt;a&gt;)的最大精度(mant_dig)
+计算机所能分辨的两个相邻浮点数的最小差值(epsilon)
+&#39;&#39;&#39;
+&gt;&gt;&gt;sys.float_info.max
+1.7976931348623157e+308</code></pre>
+<p>（4）浮点数类型直接表示或科学计数法表示中的系数(&lt;a&gt;)最长可输出16个数字，浮点数运算结果中最长可输出17个数字。然而，根据sys.float_info结果，计算机只能提供15个数字(dig)的准确性，例如：</p>
+<pre><code class="python">&gt;&gt;&gt;3.1415926535897924     #17个数字
+3.1415926535897922        #17个数字，最后一位由计算机根据二进制计算结果确定
+&gt;&gt;&gt; 987654321123456.789
+987654321123456.8</code></pre>
+<p>（5）浮点数运算输出17个数字长度的结果，但是只有前15个数字是确定正确的，存在误差。因此浮点数无法进行高精度的数学运算，要获得高精度的运算结果，往往采用整数。使用整数表达浮点数的方法是高精度运算的基本方式之一。</p>
+<pre><code class="python">&gt;&gt;&gt; 3.141592653*1.234567898
+3.8785094379864535
+&gt;&gt;&gt; 3141592653*1234567898
+3878509437986453394</code></pre>
+<p>（6）扩展：Python通过标准库decimal提供了一个更精确的数字类型Decimal，并可以使用getcontext().prec参数自定义浮点数精度的位数，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; import decimal
+&gt;&gt;&gt; a = decimal.Decimal(&#39;3.141592653&#39;)
+&gt;&gt;&gt; b = decimal.Decimal(&#39;1.234567898&#39;)
+&gt;&gt;&gt; decimal.getcontext().prec = 19     #自定义精度超过19位数，仍以19位数精度输出
+&gt;&gt;&gt; a * b
+Decimal(&#39;3.878509437986453394&#39;)</code></pre>
+<h3 id="复数类型"><a href="#复数类型" class="headerlink" title="复数类型"></a>复数类型</h3><p>（1）复数可以看做是二元有序实数对(a,b)，表示为a+bj。其中，a是实数部分，简称实部；b是虚数部分，简称虚部；j表示”逆时针旋转90度”。复数是实数在二维平面空间旋转的一种表示。</p>
+<p>（2）Python语言中，复数的虚数部分通过后缀”J”或”j”来表示，例如:</p>
+<pre><code>12.3+4j    -5.6+7j     1.23e-4+5.67e+89j</code></pre>
+<p>（3）复数类型中实数部分和虚数部分的数值都是浮点类型。对于复数z，可以用z.real和z.imag分别获得它的实数部分和虚数部分，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; (1.23e-4+5.67e+89j).real
+0.000123
+&gt;&gt;&gt; (1.23e-4+5.67e+89j).imag
+5.67e+89</code></pre>
+<h2 id="数字类型的操作"><a href="#数字类型的操作" class="headerlink" title="数字类型的操作"></a>数字类型的操作</h2><p>Python解释器为数字类型提供数值运算操作符、数值运算函数、类型转换函数等操作方法</p>
+<h3 id="内置的数值运算操作符"><a href="#内置的数值运算操作符" class="headerlink" title="内置的数值运算操作符"></a>内置的数值运算操作符</h3><p>(1)内置操作符(共有9个)有Python解释器直接提供，不需要引用标准或第三方函数库。</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x + y</td>
+<td align="center">x与y之和</td>
+</tr>
+<tr>
+<td align="center">x - y</td>
+<td align="center">x与y之差</td>
+</tr>
+<tr>
+<td align="center">x * y</td>
+<td align="center">x与y之积</td>
+</tr>
+<tr>
+<td align="center">x / y</td>
+<td align="center">x与y之商</td>
+</tr>
+<tr>
+<td align="center">x // y</td>
+<td align="center">x与y之整数商，即不大于x与y之商的最大整数</td>
+</tr>
+<tr>
+<td align="center">x % y</td>
+<td align="center">x与y之商的余数，也称为模运算</td>
+</tr>
+<tr>
+<td align="center">-x</td>
+<td align="center">x的负值，即x*(-1)</td>
+</tr>
+<tr>
+<td align="center">+x</td>
+<td align="center">x本身</td>
+</tr>
+<tr>
+<td align="center">x ** y</td>
+<td align="center">x的y次幂</td>
+</tr>
+</tbody></table>
+<p>(2)操作符的运算结果可能改变数字类型，所产生的的结果是”更宽”的类型，基本规则如下：</p>
+<pre><code class="python">#整数之间运算，若数学意义上的结果是小数，结果是浮点数
+#整数之间运算，若数学意义上的结果是整数，结果是整数
+#整数和浮点数混合运算，输出结果是浮点数
+#整数或浮点数与复数运算，输出结果是复数
+&gt;&gt;&gt;100 / 3
+33.333333333333336
+&gt;&gt;&gt; 100 // 3
+33
+&gt;&gt;&gt; 123 + 4.0
+127.0
+&gt;&gt;&gt; 10.0 - 1 + 2j   #等价于(10.0 - 1) + 2j
+(9+2j)</code></pre>
+<p>（3）增强赋值操作符(+=、-=、*=、/=、%=、**=)。若用op表示这些二元数学操作符，则下面的赋值操作等价。注意，二元操作符之间没有空格：</p>
+<pre><code>x op= y
+等价于
+x = x op y</code></pre>
+<h3 id="内置的数值运算函数"><a href="#内置的数值运算函数" class="headerlink" title="内置的数值运算函数"></a>内置的数值运算函数</h3><table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">abs(x)</td>
+<td align="center">x的绝对值</td>
+</tr>
+<tr>
+<td align="center">divmod(x,y)</td>
+<td align="center">(x//y,x%y)，输出为二元组形式(也称元组类型)</td>
+</tr>
+<tr>
+<td align="center">pow(x,y[,z])</td>
+<td align="center">(x**y)%z,其中参数z是可选的。使用z时，模运算与幂运算同时进行，速度很快</td>
+</tr>
+<tr>
+<td align="center">round(x,[,ndigits])</td>
+<td align="center">对x四舍五入，保留ndigits为小数。round()返回四舍五入的整数值</td>
+</tr>
+<tr>
+<td align="center">max(x1,x2,…,xn)</td>
+<td align="center">x1,x2,…,xn的最大值，n没有限定</td>
+</tr>
+<tr>
+<td align="center">min(x1,x2,…,xn)</td>
+<td align="center">x1,x2,…,xn的最小值，n没有限定</td>
+</tr>
+</tbody></table>
+<p>注：abs()可以计算复数的绝对值。因此，复数的绝对值是二维坐标系中复数位置到坐标原点的长度，例如：</p>
+<pre><code class="python">&gt;&gt;&gt;abs(-3+4j)
+5.0</code></pre>
+<h3 id="内置的数字类型转换函数"><a href="#内置的数字类型转换函数" class="headerlink" title="内置的数字类型转换函数"></a>内置的数字类型转换函数</h3><p>浮点数类型转换为整数类型时，小数部分会被舍弃。复数不能直接转换为其他数字类型，可以用过.real和.imag将复数的实部或虚部分别转换。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int(x)</td>
+<td align="center">将x转换为整数，x可以是浮点数或字符串</td>
+</tr>
+<tr>
+<td align="center">float(x)</td>
+<td align="center">将x转换为浮点数，x可以是整数或字符串</td>
+</tr>
+<tr>
+<td align="center">complex(re[,im])</td>
+<td align="center">生成一个复数，实部为re，虚部为im。re可以是整数、浮点数或字符串，im可以是整数或浮点数，但不能为字符串</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; int(10.99)
+10
+&gt;&gt;&gt; complex(10.99)
+(10.99+0j)
+&gt;&gt;&gt; float(10 + 99j)          #复数不能直接转换，解释器会报错
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
+    float(10 + 99j)
+TypeError: can&#39;t convert complex to float
+&gt;&gt;&gt; float((10 + 99j).imag)     #转换后的虚数部分为99
+99.0</code></pre>
+<h2 id="math库的使用"><a href="#math库的使用" class="headerlink" title="math库的使用"></a>math库的使用</h2><h3 id="math库概述"><a href="#math库概述" class="headerlink" title="math库概述"></a>math库概述</h3><p>（1）利用函数库编程是Python语言的重要特点，这些库分为Python环境中默认支持的函数库，以及第三方提供需要进行安装的函数库。其中，默认支持的函数库也叫标准函数库或内置函数库。</p>
+<p>（2）math库是内置函数库，仅支持整数和浮点数运算，不支持复数类型。</p>
+<p>（3）引入形式：</p>
+<pre><code class="Python">import math                #对math库中函数采用math.&lt;b&gt;()形式使用
+from math import &lt;函数名&gt;   #采用&lt;函数名&gt;()形式使用
+from math import *         #math库中所有函数都可以采用&lt;函数名&gt;()形式使用</code></pre>
+<h3 id="math库解析"><a href="#math库解析" class="headerlink" title="math库解析"></a>math库解析</h3><p>（1）4个数学常数</p>
+<table>
+<thead>
+<tr>
+<th align="center">常数</th>
+<th align="center">数学表示</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.pi</td>
+<td align="center">π</td>
+<td align="center">圆周率，值为3.141 592 653 589 793</td>
+</tr>
+<tr>
+<td align="center">math.e</td>
+<td align="center">e</td>
+<td align="center">自然对数，值为2.718 281 828 459 045</td>
+</tr>
+<tr>
+<td align="center">math.inf</td>
+<td align="center">∞</td>
+<td align="center">正无穷大，负无穷大为-math.inf</td>
+</tr>
+<tr>
+<td align="center">math.nan</td>
+<td align="center"></td>
+<td align="center">非浮点数标记，NaN(not a number)</td>
+</tr>
+</tbody></table>
+<p>（2）16个数值表示函数，这里只列出比较常用的</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">数学表示</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.fabs(x)</td>
+<td align="center">|x|</td>
+<td align="center">返回x的绝对值</td>
+</tr>
+<tr>
+<td align="center">math.fmod(x)</td>
+<td align="center">x%y</td>
+<td align="center">返回x与y的模</td>
+</tr>
+<tr>
+<td align="center">math.fsum([x,y,…])</td>
+<td align="center">x+y+…</td>
+<td align="center">浮点数精确求和</td>
+</tr>
+<tr>
+<td align="center">math.ceil(x)</td>
+<td align="center"></td>
+<td align="center">向上取整，返回不小于x的最小整数</td>
+</tr>
+<tr>
+<td align="center">math.floor(x)</td>
+<td align="center"></td>
+<td align="center">向下取整，返回不大于x的最大整数</td>
+</tr>
+<tr>
+<td align="center">math.factorial(x)</td>
+<td align="center">x!</td>
+<td align="center">返回x的阶乘，若x为小数或负数，返回ValueError</td>
+</tr>
+<tr>
+<td align="center">math.gcd(a,b)</td>
+<td align="center"></td>
+<td align="center">返回a与b的最大公约数</td>
+</tr>
+<tr>
+<td align="center">math.modf(x)</td>
+<td align="center"></td>
+<td align="center">返回x的小数和整数部分</td>
+</tr>
+<tr>
+<td align="center">math.trunc(x)</td>
+<td align="center"></td>
+<td align="center">返回x的整数部分</td>
+</tr>
+<tr>
+<td align="center">math.isclose(a,b)</td>
+<td align="center"></td>
+<td align="center">比较a和b的相似性，返回True或False</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; 0.1 + 0.2 + 0.3
+0.6000000000000001
+&gt;&gt;&gt; import math
+&gt;&gt;&gt; math.fsum([0.1, 0.2, 0.3])
+0.6</code></pre>
+<p>在涉及浮点数运算及结果比较时，建议采用math库提供的函数，而不直接使用Python提供的运算符，以避免精度尾数带来的影响</p>
+<p>（3）8个幂对函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.pow(x,y)</td>
+<td align="center">返回x的y次幂</td>
+</tr>
+<tr>
+<td align="center">math.exp(x)</td>
+<td align="center">返回e的x次幂，e是自然对数</td>
+</tr>
+<tr>
+<td align="center">math.sqrt(x)</td>
+<td align="center">返回x的平方根</td>
+</tr>
+<tr>
+<td align="center">math.log(x[,base])</td>
+<td align="center">返回x的对数值，只输入x时，底数为e，即lnx</td>
+</tr>
+<tr>
+<td align="center">math.log2(x)</td>
+<td align="center">返回x的2对数值</td>
+</tr>
+<tr>
+<td align="center">math.log10(x)</td>
+<td align="center">返回x的10对数值</td>
+</tr>
+<tr>
+<td align="center">math.log1p(x)</td>
+<td align="center">返回1+x的自然对数值，ln(1+x)</td>
+</tr>
+<tr>
+<td align="center">math.expml(x)</td>
+<td align="center">返回e的x次幂减1</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt;math.pow(10, 1/3)
+2.154434690031884</code></pre>
+<p>（4）16个三角运算函数，这里只列出部分函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">数学表示</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.degrees(x)</td>
+<td align="center"></td>
+<td align="center">角度x的弧度值转角度值</td>
+</tr>
+<tr>
+<td align="center">math.radians(x)</td>
+<td align="center"></td>
+<td align="center">角度x的角度值转弧度值</td>
+</tr>
+<tr>
+<td align="center">math.hypot(x,y)</td>
+<td align="center"></td>
+<td align="center">返回(x,y)坐标到原点(0,0)的距离，联想勾股定理</td>
+</tr>
+<tr>
+<td align="center">math.sin(x)</td>
+<td align="center">sinx</td>
+<td align="center">返回x的正弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.cos(x)</td>
+<td align="center">cosx</td>
+<td align="center">返回x的余弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.tan(x)</td>
+<td align="center">tanx</td>
+<td align="center">返回x的正切函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.asin(x)</td>
+<td align="center">arcsinx</td>
+<td align="center">返回x的反正弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.acos(x)</td>
+<td align="center">arccosx</td>
+<td align="center">返回x的反余弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.atan(x)</td>
+<td align="center">arctanx</td>
+<td align="center">返回x的反正切函数值，x是弧度值</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; math.atan(1)*4      #arctan1的值是π/4
+3.141592653589793</code></pre>
+<h2 id="天天向上的力量"><a href="#天天向上的力量" class="headerlink" title="天天向上的力量"></a>天天向上的力量</h2><p>（1）一年365天，初始能力值为1.0，好好学习相比前一天提高0.1%，没有学习则相比前一天下降0.1%。分别计算一年下来，每天努力和每天放任的能力值。天天向上的力量是(1+0.001)的365次方，放任的力量是(1-0.001)的365次方。</p>
+<pre><code class="Python">import math
+dayup = math.pow((1.0 + 0.001), 365)   #提高0.1%
+daydown = math.pow((1.0-0.001), 365)   #放任0.1%
+print(&quot;向上：&#123;:.2f&#125;，向下：&#123;:.2f&#125;。&quot;.format(dayup, daydown))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上：1.44，向下：0.69。</code></pre>
+<p>可见，每天提高0.1%，一年将提高44%。</p>
+<p>（2）若学习时每天提高0.5%，放任时下降0.5%。</p>
+<pre><code class="python">import math
+dayup = math.pow((1.0 + 0.005), 365)   #提高0.5%
+daydown = math.pow((1.0-0.005), 365)   #放任0.5%
+print(&quot;向上：&#123;:.2f&#125;，向下：&#123;:.2f&#125;。&quot;.format(dayup, daydown))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上：6.17，向下：0.16。</code></pre>
+<p>每天努力0.5%，一年将提高6倍。</p>
+<p>（3）上面的两个代码中，0.1%、0.5%，这个每天努力的因素根据需求的不同而不断变化。因此，可以用一个变量dayfactor来表示，这样每次只需要修改这个变量值即可。新代码如下：</p>
+<pre><code class="python">import math
+dayfactor = 0.01
+dayup = math.pow((1.0 + dayfactor), 365)     #提高1%
+daydown = math.pow((1.0-dayfactor), 365)     #放任1%
+print(&quot;向上：&#123;:.2f&#125;，向下：&#123;:.2f&#125;。&quot;.format(dayup, daydown))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上：37.78，向下：0.03。</code></pre>
+<p>每天努力1%，一年将提高37倍。</p>
+<p>（4）每天努力提高1%，放任下降1%。一周努力5天，放任2天。</p>
+<pre><code class="python">dayup, dayfactor = 1.0, 0.01
+for i in range(365):
+    if (i % 7) in [6, 0]:
+        dayup = dayup * (1 - dayfactor)
+    else:
+        dayup = dayup * (1 + dayfactor)
+print(&quot;向上5天向下2天的力量：&#123;:.2f&#125;。&quot;.format(dayup))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上5天向下2天的力量：4.63。</code></pre>
+<p>可得，每周努力5天，休息2天，一年仅提高4倍，比起每天坚持所提高的37倍相去甚远。</p>
+<p>（5）同样每周努力5天，休息2天，那么每天需要努力多少才能与天天学习的效果一样。</p>
+<pre><code class="python">def dayUP(df):
+    dayup = 1.0
+    for i in range(365):
+        if (i % 7) in [6, 0]:
+            dayup = dayup * (1-0.01)
+        else:
+            dayup = dayup * (1+df)
+    return dayup                   #保留字return返回dayUP()的运行结果
+dayfactor = 0.01
+while (dayUP(dayfactor) &lt; 37.78):
+    dayfactor += 0.001
+print(&quot;每天的努力参数是：&#123;:.3f&#125;。&quot;.format(dayfactor))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+每天的努力参数是：0.019。</code></pre>
+<p>所以每天要努力1.9%才能达到和天天坚持一样的效果。这就是天天向上的力量！</p>
+<p><strong>学习如逆水行舟，不进则退。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/初识Python语言(三)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1735,91 +2281,6 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime    //链接到上海时�
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BugkuCTF/BugkuCTF_Misc-006" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/">BugkuCTF_Misc_006</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:10:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="听首音乐"><a href="#听首音乐" class="headerlink" title="听首音乐"></a>听首音乐</h2><p>（1）下载附件，是一个音频文件，用audacity工具打开<br><img src="https://img-blog.csdnimg.cn/20201114181337328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）波形图上有些东西，Ctrl+鼠标滚轮，放大，是莫尔斯电码<br><img src="https://img-blog.csdnimg.cn/20201114181702980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）得到….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.用在线工具解码，得到flag为5BC925649CB0188F52E617D70929191C，这里注意字母为大写，直接提交就可以。<br><img src="https://img-blog.csdnimg.cn/20201114181823245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/">展开全文 >></a>
         </p>
       
 
