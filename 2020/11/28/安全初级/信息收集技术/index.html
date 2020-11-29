@@ -8,13 +8,14 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>信息收集技术 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="信息收集（1）黑客攻击模型：    操作 目的    踩点 信息收集   定位 分析目标   入侵 实施攻击   留后门 方便再次进入   抹去痕迹 清理入侵记录   （2）信息收集，俗称踩点，渗透测试最重要的阶段之一。为了启动渗透测试，用户需要收集关于目标网络资产等信息。用户得到的信息越多，渗透测试成功的概率也就越高。 域名信息收集（1）whois协议，用来查询域名是否已经被注册，以及注册域名的">
+  <meta name="description" content="渗透测试（1）渗透测试，是通过模拟恶意黑客的攻击方法，来评估计算机网络系统安全的一种评估方法。 （2）黑客攻击模型(渗透测试思路）：    操作 目的    踩点 信息收集(前提)   定位 分析目标，寻找漏洞:系统漏洞(ms17-010)、web漏洞(sql、xss)   入侵 利用漏洞，实施攻击，获取权限(shell界面)   上传木马文件(留后门)或病毒 方便再次进入或实施破坏   抹去痕迹">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息收集技术">
 <meta property="og:url" content="http://example.com/2020/11/28/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%8A%80%E6%9C%AF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="信息收集（1）黑客攻击模型：    操作 目的    踩点 信息收集   定位 分析目标   入侵 实施攻击   留后门 方便再次进入   抹去痕迹 清理入侵记录   （2）信息收集，俗称踩点，渗透测试最重要的阶段之一。为了启动渗透测试，用户需要收集关于目标网络资产等信息。用户得到的信息越多，渗透测试成功的概率也就越高。 域名信息收集（1）whois协议，用来查询域名是否已经被注册，以及注册域名的">
+<meta property="og:description" content="渗透测试（1）渗透测试，是通过模拟恶意黑客的攻击方法，来评估计算机网络系统安全的一种评估方法。 （2）黑客攻击模型(渗透测试思路）：    操作 目的    踩点 信息收集(前提)   定位 分析目标，寻找漏洞:系统漏洞(ms17-010)、web漏洞(sql、xss)   入侵 利用漏洞，实施攻击，获取权限(shell界面)   上传木马文件(留后门)或病毒 方便再次进入或实施破坏   抹去痕迹">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2020/11/29/xUcBnq5HYrawLOJ.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/nUJAZcvkyDB7d24.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/dLP9H6cIqkbnjN7.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/DIPsx5gLSfU2ETn.png">
@@ -24,11 +25,11 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/28/KrloWijMNvsghxn.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/Z7a9l8cUomfEbCr.png">
 <meta property="article:published_time" content="2020-11-28T12:23:16.000Z">
-<meta property="article:modified_time" content="2020-11-28T15:40:50.692Z">
+<meta property="article:modified_time" content="2020-11-29T04:24:25.691Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全初级">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/11/28/nUJAZcvkyDB7d24.png">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/29/xUcBnq5HYrawLOJ.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -184,7 +185,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>（1）黑客攻击模型：</p>
+        <h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><p>（1）渗透测试，是通过模拟恶意黑客的攻击方法，来评估计算机网络系统安全的一种评估方法。</p>
+<p>（2）黑客攻击模型(渗透测试思路）：</p>
 <table>
 <thead>
 <tr>
@@ -194,42 +196,43 @@
 </thead>
 <tbody><tr>
 <td align="center">踩点</td>
-<td align="center">信息收集</td>
+<td align="center">信息收集(前提)</td>
 </tr>
 <tr>
 <td align="center">定位</td>
-<td align="center">分析目标</td>
+<td align="center">分析目标，寻找漏洞:系统漏洞(ms17-010)、web漏洞(sql、xss)</td>
 </tr>
 <tr>
 <td align="center">入侵</td>
-<td align="center">实施攻击</td>
+<td align="center">利用漏洞，实施攻击，获取权限(shell界面)</td>
 </tr>
 <tr>
-<td align="center">留后门</td>
-<td align="center">方便再次进入</td>
+<td align="center">上传木马文件(留后门)或病毒</td>
+<td align="center">方便再次进入或实施破坏</td>
 </tr>
 <tr>
 <td align="center">抹去痕迹</td>
 <td align="center">清理入侵记录</td>
 </tr>
 </tbody></table>
-<p>（2）信息收集，俗称踩点，渗透测试最重要的阶段之一。为了启动渗透测试，用户需要收集关于目标网络资产等信息。用户得到的信息越多，渗透测试成功的概率也就越高。</p>
-<h3 id="域名信息收集"><a href="#域名信息收集" class="headerlink" title="域名信息收集"></a>域名信息收集</h3><p>（1）whois协议，用来查询域名是否已经被注册，以及注册域名的详细信息的数据库(如域名所有人、域名注册商)。在线查询工具：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>信息收集，俗称踩点，是渗透测试的前提，也是最重要的阶段之一。为了启动渗透测试，用户需要收集关于目标网络资产等信息。用户得到的信息越多，渗透测试成功的概率也就越高。</p>
+<h3 id="域名信息收集"><a href="#域名信息收集" class="headerlink" title="域名信息收集"></a>域名信息收集</h3><p>（1）whois协议，用来查询域名是否已经被注册，以及注册域名的详细信息的数据库(如域名所有人、域名注册商)。在线查询工具：站长之家<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></p>
 <p>（2）子域名，是顶级域名(.com、.cn、.top)的下一级，域名整体包括两个”.”或包括一个”/“。例如：百度的顶级域名为baidu.com。其下的子域名有：news.baidu.com、tieba.baidu.com、zhidao.baidu.com……收集子域名可以很大程度知道目标所拥有的网站等资产信息。</p>
 <p>（3）子域名查询在线工具：<a target="_blank" rel="noopener" href="https://phpinfo.me/domain/">https://phpinfo.me/domain/</a>。其他工具：FuzzDomain、子域名挖掘机</p>
 <h3 id="旁站C段"><a href="#旁站C段" class="headerlink" title="旁站C段"></a>旁站C段</h3><p>（1）查询旁站指某个服务器同一个IP地址的所有域名</p>
 <p>（2）查询C段指某个服务器IP地址所在C段IP地址的所有域名</p>
-<p>（3）在线查询工具：<a href="www.webscan.cc">www.webscan.cc</a></p>
+<p>（3）在线查询工具：<a target="_blank" rel="noopener" href="https://chapangzhan.com/">https://chapangzhan.com</a>、<a href="s.tool.chinaz.com/same">s.tool.chinaz.com/same</a></p>
 <h3 id="征信查询"><a href="#征信查询" class="headerlink" title="征信查询"></a>征信查询</h3><p>（1）企业征信机构记录了一家企业的基本信息，历史沿革，股东及出资等信息的平台。</p>
 <p>（2）查询：<a target="_blank" rel="noopener" href="https://icredit.jd.com/">https://icredit.jd.com</a>、天眼查：<a target="_blank" rel="noopener" href="https://www.tianyancha.com/">https://www.tianyancha.com</a></p>
 <h3 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h3><p>（1）获取域名或者IP地址，并进行反向查找以快速显示同一服务器承载的所有其他域。</p>
-<p>（2）查询：Viewdns：<a target="_blank" rel="noopener" href="http://viewdns.info/">http://viewdns.info</a>、DNSdb：<a target="_blank" rel="noopener" href="https://www.dnsdb.io/">https://www.dnsdb.io</a></p>
+<p>（2）查询：Viewdns：<a target="_blank" rel="noopener" href="http://viewdns.info/">http://viewdns.info</a>、DNSdb：<a target="_blank" rel="noopener" href="https://www.dnsdb.io/">https://www.dnsdb.io</a> 也可用命令nslookup [域名]</p>
 <h3 id="IP查询"><a href="#IP查询" class="headerlink" title="IP查询"></a>IP查询</h3><p>（1）根据IP地址查询同一IP地址的其他信息</p>
 <p>（2）在线查询：114best：<a target="_blank" rel="noopener" href="http://www.114best.com/">http://www.114best.com</a></p>
 <h3 id="备案号查询"><a href="#备案号查询" class="headerlink" title="备案号查询"></a>备案号查询</h3><p>（1）备案号是网站是否合法注册经营的标志，一个网站域名要上线必然要经过备案程序，通过备案号反查可查询目标的所有合法网站。</p>
 <p>（2）在线查询：<a target="_blank" rel="noopener" href="http://icp.chinaz.com/">http://icp.chinaz.com</a></p>
 <h3 id="密码收集"><a href="#密码收集" class="headerlink" title="密码收集"></a>密码收集</h3><p>（1）gitHub是全球最大的面向开源及私有软件项目的托管平台。许多企业的开发人员在上传开源代码到github往往忽略了将密码等敏感信息删除导致信息泄露。</p>
-<p>（2）<a target="_blank" rel="noopener" href="https://github.com/">github.com</a></p>
+<p>（2）在github上搜索网站及关键字，在Code中查看。通常查看到的密码都使用了MD5加密，可用在线工具进行破解。 <a target="_blank" rel="noopener" href="https://github.com/">github.com</a></p>
+<p><img src="https://i.loli.net/2020/11/29/xUcBnq5HYrawLOJ.png" alt="image-20201129121609316"></p>
 <h3 id="Google-hacking"><a href="#Google-hacking" class="headerlink" title="Google hacking"></a>Google hacking</h3><p>（1）搜索引擎都会提供相应搜索语法，通过搜索语法可以快速得到想要的信息。</p>
 <p>（2）推荐搜索引擎：必应：bing.com、百度：baidu.com、谷歌：google.com</p>
 <p>（3）推荐语法：</p>
@@ -483,6 +486,15 @@ nmap -sT -p 80 192.168.100.* --open -oG result.txt</code></pre>
   
 <nav id="article-nav">
   
+    <a href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          深入Python语言(二)
+        
+      </div>
+    </a>
+  
   
     <a href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">深入Python语言(一)</div>
@@ -512,7 +524,7 @@ nmap -sT -p 80 192.168.100.* --open -oG result.txt</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">域名信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%81%E7%AB%99C%E6%AE%B5"><span class="toc-number">1.2.</span> <span class="toc-text">旁站C段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%81%E4%BF%A1%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.3.</span> <span class="toc-text">征信查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.</span> <span class="toc-text">DNS查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.5.</span> <span class="toc-text">IP查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E6%A1%88%E5%8F%B7%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.6.</span> <span class="toc-text">备案号查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E6%94%B6%E9%9B%86"><span class="toc-number">1.7.</span> <span class="toc-text">密码收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-hacking"><span class="toc-number">1.8.</span> <span class="toc-text">Google hacking</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="toc-number">2.</span> <span class="toc-text">端口扫描技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">Nmap端口扫描器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E9%A1%B9"><span class="toc-number">3.1.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">3.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nmap%E5%9B%BE%E5%BD%A2%E5%8C%96%E2%80%93Zenmap"><span class="toc-number">3.3.</span> <span class="toc-text">Nmap图形化–Zenmap</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">渗透测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.1.</span> <span class="toc-text">域名信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%81%E7%AB%99C%E6%AE%B5"><span class="toc-number">2.2.</span> <span class="toc-text">旁站C段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%81%E4%BF%A1%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.3.</span> <span class="toc-text">征信查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.4.</span> <span class="toc-text">DNS查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.5.</span> <span class="toc-text">IP查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E6%A1%88%E5%8F%B7%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.6.</span> <span class="toc-text">备案号查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E6%94%B6%E9%9B%86"><span class="toc-number">2.7.</span> <span class="toc-text">密码收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-hacking"><span class="toc-number">2.8.</span> <span class="toc-text">Google hacking</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text">端口扫描技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">Nmap端口扫描器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E9%A1%B9"><span class="toc-number">4.1.</span> <span class="toc-text">选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">4.2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nmap%E5%9B%BE%E5%BD%A2%E5%8C%96%E2%80%93Zenmap"><span class="toc-number">4.3.</span> <span class="toc-text">Nmap图形化–Zenmap</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

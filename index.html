@@ -152,6 +152,68 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/深入Python语言(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">深入Python语言(二)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/" class="archive-article-date">
+  	<time datetime="2020-11-29T01:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全初级/信息收集技术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,7 +234,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>（1）黑客攻击模型：</p>
+        <h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><p>（1）渗透测试，是通过模拟恶意黑客的攻击方法，来评估计算机网络系统安全的一种评估方法。</p>
+<p>（2）黑客攻击模型(渗透测试思路）：</p>
 <table>
 <thead>
 <tr>
@@ -182,42 +245,43 @@
 </thead>
 <tbody><tr>
 <td align="center">踩点</td>
-<td align="center">信息收集</td>
+<td align="center">信息收集(前提)</td>
 </tr>
 <tr>
 <td align="center">定位</td>
-<td align="center">分析目标</td>
+<td align="center">分析目标，寻找漏洞:系统漏洞(ms17-010)、web漏洞(sql、xss)</td>
 </tr>
 <tr>
 <td align="center">入侵</td>
-<td align="center">实施攻击</td>
+<td align="center">利用漏洞，实施攻击，获取权限(shell界面)</td>
 </tr>
 <tr>
-<td align="center">留后门</td>
-<td align="center">方便再次进入</td>
+<td align="center">上传木马文件(留后门)或病毒</td>
+<td align="center">方便再次进入或实施破坏</td>
 </tr>
 <tr>
 <td align="center">抹去痕迹</td>
 <td align="center">清理入侵记录</td>
 </tr>
 </tbody></table>
-<p>（2）信息收集，俗称踩点，渗透测试最重要的阶段之一。为了启动渗透测试，用户需要收集关于目标网络资产等信息。用户得到的信息越多，渗透测试成功的概率也就越高。</p>
-<h3 id="域名信息收集"><a href="#域名信息收集" class="headerlink" title="域名信息收集"></a>域名信息收集</h3><p>（1）whois协议，用来查询域名是否已经被注册，以及注册域名的详细信息的数据库(如域名所有人、域名注册商)。在线查询工具：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>信息收集，俗称踩点，是渗透测试的前提，也是最重要的阶段之一。为了启动渗透测试，用户需要收集关于目标网络资产等信息。用户得到的信息越多，渗透测试成功的概率也就越高。</p>
+<h3 id="域名信息收集"><a href="#域名信息收集" class="headerlink" title="域名信息收集"></a>域名信息收集</h3><p>（1）whois协议，用来查询域名是否已经被注册，以及注册域名的详细信息的数据库(如域名所有人、域名注册商)。在线查询工具：站长之家<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></p>
 <p>（2）子域名，是顶级域名(.com、.cn、.top)的下一级，域名整体包括两个”.”或包括一个”/“。例如：百度的顶级域名为baidu.com。其下的子域名有：news.baidu.com、tieba.baidu.com、zhidao.baidu.com……收集子域名可以很大程度知道目标所拥有的网站等资产信息。</p>
 <p>（3）子域名查询在线工具：<a target="_blank" rel="noopener" href="https://phpinfo.me/domain/">https://phpinfo.me/domain/</a>。其他工具：FuzzDomain、子域名挖掘机</p>
 <h3 id="旁站C段"><a href="#旁站C段" class="headerlink" title="旁站C段"></a>旁站C段</h3><p>（1）查询旁站指某个服务器同一个IP地址的所有域名</p>
 <p>（2）查询C段指某个服务器IP地址所在C段IP地址的所有域名</p>
-<p>（3）在线查询工具：<a href="www.webscan.cc">www.webscan.cc</a></p>
+<p>（3）在线查询工具：<a target="_blank" rel="noopener" href="https://chapangzhan.com/">https://chapangzhan.com</a>、<a href="s.tool.chinaz.com/same">s.tool.chinaz.com/same</a></p>
 <h3 id="征信查询"><a href="#征信查询" class="headerlink" title="征信查询"></a>征信查询</h3><p>（1）企业征信机构记录了一家企业的基本信息，历史沿革，股东及出资等信息的平台。</p>
 <p>（2）查询：<a target="_blank" rel="noopener" href="https://icredit.jd.com/">https://icredit.jd.com</a>、天眼查：<a target="_blank" rel="noopener" href="https://www.tianyancha.com/">https://www.tianyancha.com</a></p>
 <h3 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h3><p>（1）获取域名或者IP地址，并进行反向查找以快速显示同一服务器承载的所有其他域。</p>
-<p>（2）查询：Viewdns：<a target="_blank" rel="noopener" href="http://viewdns.info/">http://viewdns.info</a>、DNSdb：<a target="_blank" rel="noopener" href="https://www.dnsdb.io/">https://www.dnsdb.io</a></p>
+<p>（2）查询：Viewdns：<a target="_blank" rel="noopener" href="http://viewdns.info/">http://viewdns.info</a>、DNSdb：<a target="_blank" rel="noopener" href="https://www.dnsdb.io/">https://www.dnsdb.io</a> 也可用命令nslookup [域名]</p>
 <h3 id="IP查询"><a href="#IP查询" class="headerlink" title="IP查询"></a>IP查询</h3><p>（1）根据IP地址查询同一IP地址的其他信息</p>
 <p>（2）在线查询：114best：<a target="_blank" rel="noopener" href="http://www.114best.com/">http://www.114best.com</a></p>
 <h3 id="备案号查询"><a href="#备案号查询" class="headerlink" title="备案号查询"></a>备案号查询</h3><p>（1）备案号是网站是否合法注册经营的标志，一个网站域名要上线必然要经过备案程序，通过备案号反查可查询目标的所有合法网站。</p>
 <p>（2）在线查询：<a target="_blank" rel="noopener" href="http://icp.chinaz.com/">http://icp.chinaz.com</a></p>
 <h3 id="密码收集"><a href="#密码收集" class="headerlink" title="密码收集"></a>密码收集</h3><p>（1）gitHub是全球最大的面向开源及私有软件项目的托管平台。许多企业的开发人员在上传开源代码到github往往忽略了将密码等敏感信息删除导致信息泄露。</p>
-<p>（2）<a target="_blank" rel="noopener" href="https://github.com/">github.com</a></p>
+<p>（2）在github上搜索网站及关键字，在Code中查看。通常查看到的密码都使用了MD5加密，可用在线工具进行破解。 <a target="_blank" rel="noopener" href="https://github.com/">github.com</a></p>
+<p><img src="https://i.loli.net/2020/11/29/xUcBnq5HYrawLOJ.png" alt="image-20201129121609316"></p>
 <h3 id="Google-hacking"><a href="#Google-hacking" class="headerlink" title="Google hacking"></a>Google hacking</h3><p>（1）搜索引擎都会提供相应搜索语法，通过搜索语法可以快速得到想要的信息。</p>
 <p>（2）推荐搜索引擎：必应：bing.com、百度：baidu.com、谷歌：google.com</p>
 <p>（3）推荐语法：</p>
@@ -2306,166 +2370,6 @@ tar zxvf file.tar.tgz      //解压</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali下root用户的配色问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">kali下root用户的配色问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-11-15T15:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc</p>
-<pre><code class="javascript">vim /root/.bashrc</code></pre>
-<p>（2）粘贴内容如下：</p>
-<pre><code class="javascript"># set variable identifying the chroot you work in (used in the prompt below)
-if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&amp; [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we &quot;want&quot; color)
-case &quot;$TERM&quot; in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n &quot;$force_color_prompt&quot; ]; then
-    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
-    # We have color support; assume it&#39;s compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-    else
-    color_prompt=
-    fi
-fi
-
-if [ &quot;$color_prompt&quot; = yes ]; then
-    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;
-else
-    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#39;
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case &quot;$TERM&quot; in
-xterm*|rxvt*)
-    PS1=&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/.dircolors)&quot; || eval &quot;$(dircolors -b)&quot;
-    alias ls=&#39;ls --color=auto&#39;
-    #alias dir=&#39;dir --color=auto&#39;
-    #alias vdir=&#39;vdir --color=auto&#39;
-
-    #alias grep=&#39;grep --color=auto&#39;
-    #alias fgrep=&#39;fgrep --color=auto&#39;
-    #alias egrep=&#39;egrep --color=auto&#39;
-fi
-
-# some more ls aliases
-#alias ll=&#39;ls -l&#39;
-#alias la=&#39;ls -A&#39;
-#alias l=&#39;ls -CF&#39;
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don&#39;t need to enable
-# this, if it&#39;s already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi</code></pre>
-<p>（3）执行命令source /root/.bashrc即可</p>
-<pre><code class="javascript">source /root/.bashrc</code></pre>
-<p>（4）配置前：</p>
-<p><img src="https://i.loli.net/2020/11/15/kmhGaFQ2cq5uB7O.png" alt="image-20201115235207538"></p>
-<p>（5）配置后：</p>
-<p><img src="https://i.loli.net/2020/11/15/QBd9eWJRlyckqts.png" alt="image-20201115235233882"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">展开全文 >></a>
         </p>
       
 
