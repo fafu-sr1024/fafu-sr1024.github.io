@@ -172,7 +172,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="字符串类型及其操作"><a href="#字符串类型及其操作" class="headerlink" title="字符串类型及其操作"></a>字符串类型及其操作</h2><p>字符串是字符的序列表示，可以通过基本的字符串操作符、内置字符串处理函数和字符串处理方法等对字符串进行操作。</p>
+        <h2 id="字符串类型及其操作"><a href="#字符串类型及其操作" class="headerlink" title="字符串类型及其操作"></a>字符串类型及其操作</h2><p>要点：字符串是字符的序列表示，可以通过基本的字符串操作符、内置字符串处理函数和字符串处理方法等对字符串进行操作。</p>
 <h3 id="字符串类型的表示"><a href="#字符串类型的表示" class="headerlink" title="字符串类型的表示"></a>字符串类型的表示</h3><p>（1）字符串可以由一对单引号(‘)、双引号(“)或三引号(“‘)构成。其中，单引号和双引号都可以表示单行字符串，两者作用相同。三引号可以表示单行或者多行字符串。</p>
 <table>
 <thead>
@@ -401,7 +401,198 @@ python  is  an  excellent  language.</code></pre>
 &#39;0000000000000000000000000000000000000123&#39;
 &gt;&gt;&gt; &quot;-123&quot;.zfill(40)
 &#39;-000000000000000000000000000000000000123&#39;</code></pre>
-<h2 id="字符串类型的格式化"><a href="#字符串类型的格式化" class="headerlink" title="字符串类型的格式化"></a>字符串类型的格式化</h2>
+<h2 id="字符串类型的格式化"><a href="#字符串类型的格式化" class="headerlink" title="字符串类型的格式化"></a>字符串类型的格式化</h2><p>（1）要点：字符串通过format()方法进行格式化处理。</p>
+<p>（2）字符串是程序向控制台、网络、文件等介质输出运算结果的主要形式之一，字符串类型的格式化有助于提供更好的可读性和灵活性。</p>
+<h3 id="format-方法的基本使用"><a href="#format-方法的基本使用" class="headerlink" title="format()方法的基本使用"></a>format()方法的基本使用</h3><p>（1）基本使用格式：&lt;模板字符串&gt;.format(&lt;逗号分隔的参数&gt;)</p>
+<p>（2）模板字符串由一系列槽组成，用来将format()方法中逗号分隔的参数按照序号关系替换到模板字符串的槽中。</p>
+<p>（3）槽用大括号{}表示。若大括号中没有序号，则按照出现顺序替换；若大括号中指定了使用参数的序号，则按照序号对应的参数替换。序号从0开始编号。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;&#125;：计算机&#123;&#125;的CPU占用率为&#123;&#125;%。&quot;.format(&quot;2020-11-30&quot;,&quot;python&quot;,&quot;10&quot;) #按出现顺序0,1，2替换
+&#39;2020-11-30：计算机python的CPU占用率为10%。&#39;</code></pre>
+<p>（4）format()方法可以连接不同类型的变量或内容。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;&#125;&#123;&#125;&#123;&#125;&quot;.format(&quot;圆周率是&quot;,3.1415926,&quot;...&quot;)
+&#39;圆周率是3.1415926...&#39;
+&gt;&gt;&gt; &quot;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&quot;.format(&quot;无理数&quot;,3.1415926,&quot;...&quot;)
+&#39;圆周率&#123;3.1415926...&#125;是无理数&#39;
+
+&gt;&gt;&gt; s=&quot;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&quot;           #大括号本身是字符串的一部分
+&gt;&gt;&gt; s
+&#39;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&#39;
+&gt;&gt;&gt; s.format(&quot;无理数&quot;,3.1415926,&quot;...&quot;)  #当调用format()时解析大括号
+&#39;圆周率&#123;3.1415926...&#125;是无理数&#39;</code></pre>
+<h3 id="format-方法的格式控制"><a href="#format-方法的格式控制" class="headerlink" title="format()方法的格式控制"></a>format()方法的格式控制</h3><p>（1）format()方法中模本字符串的槽除了包括参数序号，还可以包括格式控制信息。其中，格式控制标记可以用来控制参数显示时的格式。槽内部信息如下：</p>
+<pre><code>&#123;&lt;参数信号&gt;: &lt;格式控制标记&gt;&#125;</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">格式控制标记</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">:</td>
+<td align="center">引导符号</td>
+</tr>
+<tr>
+<td align="center">&lt;填充&gt;</td>
+<td align="center">用于填充单个字符</td>
+</tr>
+<tr>
+<td align="center">&lt;对齐&gt;</td>
+<td align="center">&lt; 左对齐、&gt;右对齐、^居中对齐</td>
+</tr>
+<tr>
+<td align="center">&lt;宽度&gt;</td>
+<td align="center">槽的设定输出宽度</td>
+</tr>
+<tr>
+<td align="center">&lt;,&gt;</td>
+<td align="center">数字的千分分隔符，适用于整数和浮点数</td>
+</tr>
+<tr>
+<td align="center">&lt;.精度&gt;</td>
+<td align="center">浮点数小数部分的精度或字符串的最大输出长度</td>
+</tr>
+<tr>
+<td align="center">&lt;类型&gt;</td>
+<td align="center">整数类型b，c，d，o，x，X；浮点数类型e，E，f，%</td>
+</tr>
+</tbody></table>
+<p>（2）&lt;宽度&gt;指当前槽的设定输出字符宽度，如果该槽对应的format()参数长度比&lt;宽度&gt;大，则使用参数实际长度；若该值的实际位数小于指定宽度，则位数将被默认以空格字符补充。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:30&#125;&quot;.format(s)           #默认左对齐
+&#39;python                        &#39;
+&gt;&gt;&gt; &quot;&#123;0:3&#125;&quot;.format(s)            #参数比宽度大，直接输出字符实际长度 
+&#39;python&#39;</code></pre>
+<p>（3）&lt;对齐&gt;指参数在宽度内输出时的对齐方式。&lt;填充&gt;指宽度内除了参数外的字符采用什么方式表示，默认采用空格，可以通过填充更换。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:&gt;30&#125;&quot;.format(s)             #右对齐
+&#39;                        python&#39;
+&gt;&gt;&gt; &quot;&#123;0:*^30&#125;&quot;.format(s)            #居中对齐且使用*填充
+&#39;************python************&#39;</code></pre>
+<p>（4）格式控制标记中的逗号(,)用于显示数字类型的千位分隔符。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:-^20,&#125;&quot;.format(1234567890)
+&#39;---1,234,567,890----&#39;
+&gt;&gt;&gt; &quot;&#123;0:-^20,&#125;&quot;.format(12345.67890)
+&#39;----12,345.6789-----&#39;</code></pre>
+<p>（5）&lt;.精度&gt;表示两个含义，由小数点(.)开头。对于浮点数，精度表示小数部分输出的有效位。对于字符串，精度表示最大输出长度。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:.2f&#125;&quot;.format(12345.67890)
+&#39;12345.68&#39;
+&gt;&gt;&gt; &quot;&#123;0:.4&#125;&quot;.format(&quot;python&quot;)
+&#39;pyth&#39;</code></pre>
+<p>（6）&lt;类型&gt;表示输出整数和浮点数类型的格式规则。</p>
+<table>
+<thead>
+<tr>
+<th align="center">整数类型输出格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">b</td>
+<td align="center">输出整数的二进制方式</td>
+</tr>
+<tr>
+<td align="center">c</td>
+<td align="center">输出整数对应的Unicode字符</td>
+</tr>
+<tr>
+<td align="center">d</td>
+<td align="center">输出整数的十进制方式</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">输出整数的八进制方式</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">输出整数的小写十六进制方式</td>
+</tr>
+<tr>
+<td align="center">X</td>
+<td align="center">输出整数的大写十六进制方式</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:b&#125;,&#123;0:c&#125;,&#123;0:d&#125;,&#123;0:o&#125;,&#123;0:x&#125;,&#123;0:X&#125;&quot;.format(425)
+&#39;110101001,Ʃ,425,651,1a9,1A9&#39;</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">浮点数类型输出格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">e</td>
+<td align="center">输出浮点数对应的小写字母e的指数形式</td>
+</tr>
+<tr>
+<td align="center">E</td>
+<td align="center">输出浮点数对应的大写字母e的指数形式</td>
+</tr>
+<tr>
+<td align="center">f</td>
+<td align="center">输出浮点数的标准浮点形式</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">输出浮点数的百分形式</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:.2e&#125;,&#123;0:.2E&#125;,&#123;0:.2f&#125;,&#123;0:.2%&#125;&quot;.format(3.14)
+&#39;3.14e+00,3.14E+00,3.14,314.00%&#39;</code></pre>
+<h2 id="实例：文本进度条"><a href="#实例：文本进度条" class="headerlink" title="实例：文本进度条"></a>实例：文本进度条</h2><h3 id="非刷新文本进度条"><a href="#非刷新文本进度条" class="headerlink" title="非刷新文本进度条"></a>非刷新文本进度条</h3><p>（1）按照任务执行百分比将整个任务划分为100个单位，每执行N%输出一次进度条。每一行输出包含进度百分比，代表已完成的部分(**)和未完成的部分(..)的两种字符，以及一个跟随完成度前进的小箭头。</p>
+<p>（2）由于直接进行字符输出几乎是瞬间完成，为了便于观察，调用Python标准时间库time，使用time.sleep()函数将当前程序暂时挂起为t秒，t可以是小数。以此模拟进度条效果输出。</p>
+<pre><code class="python">import time
+scale = 10                              #scale表示输出进度条的精度，修改后会有不同的效果
+print(&quot;------执行开始------&quot;)             #print()函数在输出结尾处会自动产生一个&#39;\n&#39;，即换行符
+for i in range(scale+1):
+    a, b = &#39;**&#39; * i, &#39;..&#39; * (scale - i)
+    c = (i/scale)*100
+    print(&quot;%&#123;:^3.0f&#125;[&#123;&#125;-&gt;&#123;&#125;]&quot;.format(c, a, b))
+    time.sleep(0.1)
+print(&quot;------执行结束------&quot;)</code></pre>
+<p>（3）运行结果：</p>
+<pre><code class="python">&gt;&gt;&gt;
+------执行开始------
+% 0 [-&gt;....................]
+%10 [**-&gt;..................]
+%20 [****-&gt;................]
+%30 [******-&gt;..............]
+%40 [********-&gt;............]
+%50 [**********-&gt;..........]
+%60 [************-&gt;........]
+%70 [**************-&gt;......]
+%80 [****************-&gt;....]
+%90 [******************-&gt;..]
+%100[********************-&gt;]
+------执行结束------</code></pre>
+<h3 id="单行动态刷新"><a href="#单行动态刷新" class="headerlink" title="单行动态刷新"></a>单行动态刷新</h3><p>（1）将每一次精度输出都固定在同一行，不断用新生成的字符串覆盖之前的输出，形成单行动态刷新的效果。</p>
+<p>（2）采用print()函数，在该函数中更换参数end的默认值为’’，即每次使用print()函数输出时不换行。此时，系统输出指针还停留在上一次输出的行尾，下一次输出在字符串前部增加转义符’\r’,该转义符把输出指针移动到行首而不换行。</p>
+<pre><code class="python">import time
+for i in range(101):
+    print(&quot;\r&#123;:3&#125;%&quot;.format(i),end=&#39;&#39;)
+    time.sleep(0.05)</code></pre>
+<p>（3）运行结果：</p>
+<p><img src="https://i.loli.net/2020/11/30/YB5wiGKdHyn2LWz.png" alt="image-20201130190704002"></p>
+<p>（4）由于IDLE本身屏蔽了单行刷新功能，所以运行结果并没有出现单行刷新。若要获得刷新效果，选择到e4.2TextProgressBar.py文件所在目录，使用命令行工具cmd执行如下命令:</p>
+<pre><code>python e4.2TextProgressBar.py</code></pre>
+<p>也可使用PyCharm运行这个单行动态刷新程序，可直接看到单行刷新效果。</p>
+<p><img src="https://i.loli.net/2020/11/30/Y2vryMeVR9ZwTtF.png" alt="image-20201130192609421"></p>
+<h3 id="带刷新的文本进度条"><a href="#带刷新的文本进度条" class="headerlink" title="带刷新的文本进度条"></a>带刷新的文本进度条</h3><p>（1）在文本进度条中增加运行时间的监控。</p>
+<p>（2）这里采用time库中的time.clock()函数。time.clock()函数一般多次出现，第一次调用时计时开始，同一程序中第二次及后续调用时返回与第一次计时之间的时间差，单位为秒。该函数主要用来统计程序运行时间，增加用户体验。</p>
+<pre><code class="python">import time
+scale = 50
+print(&quot;执行开始&quot;.center(scale // 2,&#39;-&#39;))
+t = time.clock()
+for i in range(scale+1):
+    a = &#39;*&#39; * i
+    b = &#39;.&#39; * (scale-i)
+    c = (i/scale)*100
+    t = time.clock() - t
+    print(&quot;\r&#123;:^3.0f&#125;%[&#123;&#125;-&gt;&#123;&#125;]&#123;:.2f&#125;s&quot;.format(c, a, b, t), end=&#39;&#39;)
+    time.sleep(0.05)
+print(&quot;\n&quot;+&quot;执行结束&quot;.center(scale // 2,&#39;-&#39;))</code></pre>
+<p>（3）在PyCharm中运行结果：</p>
+<p><img src="https://i.loli.net/2020/11/30/nTDRXCghKbp6xHf.png" alt="image-20201130195623749"></p>
+
       
 
       
@@ -2673,7 +2864,7 @@ tar zxvf file.tar.tgz      //解压</code></pre>
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
-		toc_hide_index: true,
+		toc_hide_index: false,
 		root: "/",
 		innerArchive: true,
 		showTags: true
