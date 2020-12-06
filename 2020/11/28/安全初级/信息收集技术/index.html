@@ -18,6 +18,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/29/xUcBnq5HYrawLOJ.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/nUJAZcvkyDB7d24.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/dLP9H6cIqkbnjN7.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/01/tH5kBC9zT7DQueR.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/DIPsx5gLSfU2ETn.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/mVWkoXBKMt9vAY8.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/OKws1gfZmyP6elx.png">
@@ -25,7 +26,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/28/KrloWijMNvsghxn.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/28/Z7a9l8cUomfEbCr.png">
 <meta property="article:published_time" content="2020-11-28T12:23:16.000Z">
-<meta property="article:modified_time" content="2020-11-29T06:12:41.054Z">
+<meta property="article:modified_time" content="2020-12-01T16:05:44.783Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全初级">
 <meta name="twitter:card" content="summary">
@@ -245,23 +246,23 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">Intitle</td>
+<td align="center">Intitle:</td>
 <td align="center">搜索网站标题含有的关键字</td>
 </tr>
 <tr>
-<td align="center">Inurl</td>
+<td align="center">Inurl:</td>
 <td align="center">搜索url含有的关键字</td>
 </tr>
 <tr>
-<td align="center">Intext</td>
+<td align="center">Intext:</td>
 <td align="center">搜索网页正文含有的关键字</td>
 </tr>
 <tr>
-<td align="center">Site</td>
+<td align="center">Site:</td>
 <td align="center">搜索特定网站和网站域名</td>
 </tr>
 <tr>
-<td align="center">Filetype</td>
+<td align="center">Filetype:</td>
 <td align="center">搜索特定文档格式</td>
 </tr>
 </tbody></table>
@@ -271,6 +272,7 @@ intext:&quot;@163.com&quot;         //邮箱搜集</code></pre>
 <p><img src="https://i.loli.net/2020/11/28/nUJAZcvkyDB7d24.png" alt="image-20201128215731922"></p>
 <p><img src="https://i.loli.net/2020/11/28/dLP9H6cIqkbnjN7.png" alt="image-20201128214905209"></p>
 <p>（4）URL采集器：快速切换搜索引擎，快速获得搜索结果</p>
+<p><img src="https://i.loli.net/2020/12/01/tH5kBC9zT7DQueR.png" alt="image-20201201223132842"></p>
 <h2 id="端口扫描技术"><a href="#端口扫描技术" class="headerlink" title="端口扫描技术"></a>端口扫描技术</h2><p>（1）端口扫描通常使用专门的端口扫描工具来进行。可以详细收集目标开放的端口、服务、应用版本、操作系统、活跃主机等多种信息。</p>
 <p>（2）端口扫描流程：</p>
 <table>
@@ -338,12 +340,16 @@ intext:&quot;@163.com&quot;         //邮箱搜集</code></pre>
 </tr>
 </thead>
 <tbody><tr>
+<td align="center">-sP或-sn</td>
+<td align="center">用ping的方式判断是否有存活主机，不扫描端口(要加上掩码，例:10.10.10.0/24)</td>
+</tr>
+<tr>
 <td align="center">-sT</td>
-<td align="center">使用TCP连接扫描，对目标主机所有端口进行完整的三次握手，如果成功建立连接，则端口是开放的</td>
+<td align="center">使用TCP全连接扫描，对目标主机所有端口进行完整的三次握手，如果成功建立连接，则端口是开放的。速度慢，</td>
 </tr>
 <tr>
 <td align="center">-sS</td>
-<td align="center">使用半开连接(SYN stealth)扫描，使用SYN标记位的数据包进行端口探测，收到SYN/ACK包，则端口是开放的，收到RST/ACK包，则端口是关闭的</td>
+<td align="center">使用半开连接(SYN stealth)扫描，使用SYN标记位的数据包进行端口探测，收到SYN/ACK包,不再回复ACK包，则端口是开放的，收到RST/ACK包，则端口是关闭的。速度快</td>
 </tr>
 <tr>
 <td align="center">-sA</td>
@@ -355,9 +361,10 @@ intext:&quot;@163.com&quot;         //邮箱搜集</code></pre>
 <p>（3）Nmap 目标端口选项：</p>
 <pre><code>-p          //扫描指定端口(常用)
 -F          //快速扫描100个常用的端口(常用)
+-Pn         //开放的端口服务
 -r          //顺序扫描，按从小到大的顺序进行端口扫描</code></pre>
 <p>（4）Nmap 输出选项：</p>
-<pre><code>-oN       //标准输出为指定的文件
+<pre><code>-oN       //标准输出为指定的文件,也可用导出符&#39;&gt;&#39;,例&gt; 1.txt
 -oX       //生成XML格式文件可以转换成HTML文件</code></pre>
 <p>（5）其他常用选项:</p>
 <pre><code>-sV      //检测服务端软件版本信息(常用)
@@ -368,13 +375,17 @@ intext:&quot;@163.com&quot;         //邮箱搜集</code></pre>
 nmap -sS -sV -O -F www.baidu.com</code></pre>
 <p><img src="https://i.loli.net/2020/11/28/mVWkoXBKMt9vAY8.png" alt="image-20201128225426693"></p>
 <pre><code>#使用UDP探测scanme.nmap.org的DNS(53),SNMP(161),NTP(123)服务
-nmap -sU -P 53 161 123 scanme.nmap.org</code></pre>
+nmap -sU -P 53 161 123 scanme.nmap.org
+
+#open   开放
+#close  关闭
+#filtered 被过滤</code></pre>
 <p><img src="https://i.loli.net/2020/11/28/OKws1gfZmyP6elx.png" alt="image-20201128230000223"></p>
 <pre><code>#获取IP地址段10.10.10.0/24所有在线主机
 nmap -sP 10.10.10.0/24</code></pre>
 <p><img src="https://i.loli.net/2020/11/28/euU1NCdqnDxoZ4b.png" alt="image-20201128230406623"></p>
 <pre><code>#找出192.168.100.0/24网段所有开放80端口的IP，并把结果保存到result.txt
-nmap -sT -p 80 192.168.100.* --open -oG result.txt</code></pre>
+nmap -sT -p 80 --open 192.168.100.0/24  -oN result.txt</code></pre>
 <p><img src="https://i.loli.net/2020/11/28/KrloWijMNvsghxn.png" alt="image-20201128231811428"></p>
 <h3 id="Nmap图形化–Zenmap"><a href="#Nmap图形化–Zenmap" class="headerlink" title="Nmap图形化–Zenmap"></a>Nmap图形化–Zenmap</h3><p>Zenmap是用Python开发的nmap图形化界面，直接在kali终端中输入zenmap即可打开。使用方法：</p>
 <p>（1）输入目标主机的IP地址或域名</p>

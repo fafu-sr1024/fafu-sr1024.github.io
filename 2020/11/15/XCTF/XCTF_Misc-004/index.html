@@ -45,8 +45,12 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/23/K3pOT2NVXjUgEtd.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/27/fWNTdMEnOlRx2cB.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/27/bxRwAtQX8spzrKc.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/02/tF7KdViY8BfLwhj.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/02/DraloOHzsf5xWbG.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/02/4UzN7R6TObxAGec.png">
+<meta property="og:image" content="https://i.loli.net/2020/12/02/AfM5WVNdiwLzKt9.png">
 <meta property="article:published_time" content="2020-11-15T08:48:52.000Z">
-<meta property="article:modified_time" content="2020-11-27T12:55:05.575Z">
+<meta property="article:modified_time" content="2020-12-03T15:42:36.086Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="CTF靶场">
 <meta name="twitter:card" content="summary">
@@ -301,6 +305,14 @@ zsteg /root/Desktop/CTF/XCTF/Misc/005/瞅啥.bmp</code></pre>
 <p>（2）用kali中的工具zsteg看看图片中的隐藏数据</p>
 <p><img src="https://i.loli.net/2020/11/27/bxRwAtQX8spzrKc.png" alt="image-20201127205231331"></p>
 <p>（3）得到字符IsCc_2019,但直接提交是错误的，根据题意，需要倒过来，所以就是flag{9102_cCsI}</p>
+<h2 id="2017-Dating-in-Singapore"><a href="#2017-Dating-in-Singapore" class="headerlink" title="2017_Dating_in_Singapore"></a>2017_Dating_in_Singapore</h2><p>（1）下载附件，得到一份PDF文件，是2017年新加坡的日历。再看看提示，由’-‘分隔了12串数字，联想到对应的12个月。</p>
+<p><img src="https://i.loli.net/2020/12/02/tF7KdViY8BfLwhj.png" alt="image-20201202180623816"></p>
+<p>（2）将上述12串字符放到一个文本文档中，并分类为12行。</p>
+<p><img src="https://i.loli.net/2020/12/02/DraloOHzsf5xWbG.png" alt="image-20201202180924011"></p>
+<p>（3）每串数字对应一个月的日期，将其分为两两一组。</p>
+<p><img src="https://i.loli.net/2020/12/02/4UzN7R6TObxAGec.png" alt="image-20201202181311182"></p>
+<p>（5）对比一开始得到的PDF文件，得到HITB{CTFFUN}</p>
+<p><img src="https://i.loli.net/2020/12/02/AfM5WVNdiwLzKt9.png" alt="image-20201202181507644"></p>
 
       
 
@@ -454,7 +466,7 @@ zsteg /root/Desktop/CTF/XCTF/Misc/005/瞅啥.bmp</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#embarrass"><span class="toc-number">1.</span> <span class="toc-text">embarrass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISCall"><span class="toc-number">2.</span> <span class="toc-text">MISCall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-the-key-txt"><span class="toc-number">3.</span> <span class="toc-text">Get-the-key.txt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%B1%E5%9C%A8%E5%85%B6%E4%B8%AD"><span class="toc-number">4.</span> <span class="toc-text">就在其中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-it"><span class="toc-number">5.</span> <span class="toc-text">Reverse-it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E9%87%8E"><span class="toc-number">6.</span> <span class="toc-text">打野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%92%E7%AB%8B%E5%B1%8B"><span class="toc-number">7.</span> <span class="toc-text">倒立屋</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#embarrass"><span class="toc-number">1.</span> <span class="toc-text">embarrass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISCall"><span class="toc-number">2.</span> <span class="toc-text">MISCall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-the-key-txt"><span class="toc-number">3.</span> <span class="toc-text">Get-the-key.txt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%B1%E5%9C%A8%E5%85%B6%E4%B8%AD"><span class="toc-number">4.</span> <span class="toc-text">就在其中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse-it"><span class="toc-number">5.</span> <span class="toc-text">Reverse-it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E9%87%8E"><span class="toc-number">6.</span> <span class="toc-text">打野</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%92%E7%AB%8B%E5%B1%8B"><span class="toc-number">7.</span> <span class="toc-text">倒立屋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2017-Dating-in-Singapore"><span class="toc-number">8.</span> <span class="toc-text">2017_Dating_in_Singapore</span></a></li></ol>
                     </div>
                 </span>
             </div>
