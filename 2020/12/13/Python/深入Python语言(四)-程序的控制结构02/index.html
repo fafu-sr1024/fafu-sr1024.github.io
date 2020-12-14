@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>深入Python语言(三) | Hexo</title>
+  <title>深入Python语言(四) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="程序的基本结构要点：程序由3种基本结构组成：顺序结构、分支结构和循环结构 含义（1）顺序结构：程序按照线性顺序依次执行的一种运行方式 （2）分支结构：程序根据条件判断结果而选择不同向前执行路径的一种运行方式。包括单分支结构和二分支结构，二分支结构组合形成多分支结构。 （3）循环结构：程序根据条件判断结果向后反复执行的一种运行方式。根据循环体触发条件不同，循环结构包括条件循环和遍历循环。 实例（1）">
+  <meta name="description" content="random库的使用要点：随机运算的标准函数库random共提供9个常用函数 random库描述Python内置的random库主要用于产生各种分布的伪随机数序列。random采用梅森旋转算法生成伪随机数序列。主要目的是生成随机数，所有函数都是基于最基本的random.random()函数扩展实现。 random库解析   函数 描述    seed(a&#x3D;None) 初始化随机数种子，默认值为当前">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入Python语言(三)">
-<meta property="og:url" content="http://example.com/2020/12/02/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/index.html">
+<meta property="og:title" content="深入Python语言(四)">
+<meta property="og:url" content="http://example.com/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="程序的基本结构要点：程序由3种基本结构组成：顺序结构、分支结构和循环结构 含义（1）顺序结构：程序按照线性顺序依次执行的一种运行方式 （2）分支结构：程序根据条件判断结果而选择不同向前执行路径的一种运行方式。包括单分支结构和二分支结构，二分支结构组合形成多分支结构。 （3）循环结构：程序根据条件判断结果向后反复执行的一种运行方式。根据循环体触发条件不同，循环结构包括条件循环和遍历循环。 实例（1）">
+<meta property="og:description" content="random库的使用要点：随机运算的标准函数库random共提供9个常用函数 random库描述Python内置的random库主要用于产生各种分布的伪随机数序列。random采用梅森旋转算法生成伪随机数序列。主要目的是生成随机数，所有函数都是基于最基本的random.random()函数扩展实现。 random库解析   函数 描述    seed(a&#x3D;None) 初始化随机数种子，默认值为当前">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-12-02T03:50:56.000Z">
-<meta property="article:modified_time" content="2020-12-13T07:57:48.737Z">
+<meta property="article:published_time" content="2020-12-13T07:59:12.000Z">
+<meta property="article:modified_time" content="2020-12-13T10:13:48.153Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -155,286 +155,185 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Python/深入Python语言(三)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Python/深入Python语言(四)-程序的控制结构02" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      深入Python语言(三)
+      深入Python语言(四)
     </h1>
   
 
         
-        <a href="/2020/12/02/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/" class="archive-article-date">
-  	<time datetime="2020-12-02T03:50:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
+        <a href="/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/" class="archive-article-date">
+  	<time datetime="2020-12-13T07:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="程序的基本结构"><a href="#程序的基本结构" class="headerlink" title="程序的基本结构"></a>程序的基本结构</h2><p>要点：程序由3种基本结构组成：顺序结构、分支结构和循环结构</p>
-<h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>（1）顺序结构：程序按照线性顺序依次执行的一种运行方式</p>
-<p>（2）分支结构：程序根据条件判断结果而选择不同向前执行路径的一种运行方式。包括单分支结构和二分支结构，二分支结构组合形成多分支结构。</p>
-<p>（3）循环结构：程序根据条件判断结果向后反复执行的一种运行方式。根据循环体触发条件不同，循环结构包括条件循环和遍历循环。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>（1）圆面积和周长的计算</p>
-<pre><code class="python">R = eval(input(&quot;请输入圆半径：&quot;))
-S = 3.1415*R*R
-L = 2*3.1415*R
-print(&quot;面积和周长&quot;,S,L)</code></pre>
-<p>（2）实数绝对值的计算</p>
-<pre><code class="python">R = eval(input(&quot;输入实数：&quot;))
-if (R &lt; 0):
-    R = -R
-print(&quot;绝对值为&quot;,R)</code></pre>
-<p>（3）正整数累加</p>
-<pre><code class="python">R = eval(input(&quot;请输入整数：&quot;))
-i,sum = 0, 0
-while(i&lt;=R):
-    sum += i
-    i +=1
-print(&quot;累加求和&quot;,sum)</code></pre>
-<h2 id="程序的分支结构"><a href="#程序的分支结构" class="headerlink" title="程序的分支结构"></a>程序的分支结构</h2><h3 id="单分支结构-if语句"><a href="#单分支结构-if语句" class="headerlink" title="单分支结构:if语句"></a>单分支结构:if语句</h3><p>（1）Python中if语句的语法格式如下：</p>
-<pre><code class="python">if &lt;条件&gt;:
-    &lt;语句块&gt;</code></pre>
-<p>（2）形成条件判断最常见的方式是采用关系操作符。Python共有6个关系操作符。</p>
-<table>
+        <h2 id="random库的使用"><a href="#random库的使用" class="headerlink" title="random库的使用"></a>random库的使用</h2><p><strong>要点：随机运算的标准函数库random共提供9个常用函数</strong></p>
+<h3 id="random库描述"><a href="#random库描述" class="headerlink" title="random库描述"></a>random库描述</h3><p>Python内置的random库主要用于产生各种分布的伪随机数序列。random采用梅森旋转算法生成伪随机数序列。主要目的是生成随机数，所有函数都是基于最基本的random.random()函数扩展实现。</p>
+<h3 id="random库解析"><a href="#random库解析" class="headerlink" title="random库解析"></a>random库解析</h3><table>
 <thead>
 <tr>
-<th align="center">操作符</th>
-<th align="center">含义</th>
+<th align="center">函数</th>
+<th align="center">描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">&lt;</td>
-<td align="center">小于</td>
+<td align="center">seed(a=None)</td>
+<td align="center">初始化随机数种子，默认值为当前系统时间</td>
 </tr>
 <tr>
-<td align="center">&lt;=</td>
-<td align="center">小于或等于</td>
+<td align="center">random()</td>
+<td align="center">生成一个[0.0, 1.0]之间的随机小数</td>
 </tr>
 <tr>
-<td align="center">&gt;=</td>
-<td align="center">大于或等于</td>
+<td align="center">randint(a, b)</td>
+<td align="center">生成一个[a,  b]之间的整数</td>
 </tr>
 <tr>
-<td align="center">&gt;</td>
-<td align="center">大于</td>
+<td align="center">getrandbits(k)</td>
+<td align="center">生成一个k比特长度的随机整数</td>
 </tr>
 <tr>
-<td align="center">==</td>
-<td align="center">等于</td>
+<td align="center">randrange(start, stop[, step])</td>
+<td align="center">生成一个[start, stop]之间以step为步数的随机整数</td>
 </tr>
 <tr>
-<td align="center">!=</td>
-<td align="center">不等于</td>
+<td align="center">uniform(a, b)</td>
+<td align="center">生成一个[a, b]之间的随机小数</td>
+</tr>
+<tr>
+<td align="center">choice(seq)</td>
+<td align="center">从序列类型，例如列表中随机返回一个元素</td>
+</tr>
+<tr>
+<td align="center">shuffle(seq)</td>
+<td align="center">将序列类型中的元素随机排列，返回打乱后的序列</td>
+</tr>
+<tr>
+<td align="center">sample(pop, k)</td>
+<td align="center">从pop类型中随机选取k个元素，以列表类型返回</td>
 </tr>
 </tbody></table>
-<p><strong>Python使用”=”表示赋值语句，使用”==”表示等于</strong></p>
-<p>（3）实例：PM2.5空气质量提醒(1)</p>
-<pre><code class="python">PM = eval(input(&quot;请输入PM2.5值：&quot;))
-if 0 &lt;= PM &lt; 35:
-    print(&quot;空气质量优，快去户外活动!&quot;)
-if 35 &lt;= PM &lt;75:
-    print(&quot;空气质量良好，适度户外活动!&quot;)
-if 75 &lt;= PM:
-    print(&quot;空气污染，请小心!&quot;)</code></pre>
-<p>（4）上述代码使用数字进行比较，而字符或字符串也可以用于条件比较。字符串比较本质上是字符串对应Unicode编码的比较。因此，字符串的比较按照字典顺序进行。例如英文大写字符对应的Unicode编码比小写字符小。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;Python&quot; &gt; &quot;python&quot;
-False</code></pre>
-<h3 id="二分支结构-if-else语句"><a href="#二分支结构-if-else语句" class="headerlink" title="二分支结构:if-else语句"></a>二分支结构:if-else语句</h3><p>（1）Python语句中if-else语句用来形成二分支结构，语法格式如下：</p>
-<pre><code class="python">if &lt;条件&gt;:
+<p>（1）random库的引用方法与math库一样，可以采用下面两种方式实现：</p>
+<p>import random 或 from random import *</p>
+<pre><code class="python">&gt;&gt;&gt; from random import *
+&gt;&gt;&gt; randrange(0, 100, 4)  #从0开始到100以4递增的元素中随机返回
+20
+&gt;&gt;&gt; choice(range(100))
+82
+&gt;&gt;&gt; list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; ls = list(range(10))
+&gt;&gt;&gt; shuffle(ls)
+&gt;&gt;&gt; print(ls)
+[3, 5, 8, 7, 9, 0, 1, 2, 6, 4]</code></pre>
+<p>（2）生成随机数之前可以通过seed()函数指定随机数种子，随机数种子一般是一个整数，只要种子相同，每次生成的随机数序列也相同。</p>
+<pre><code class="Python">seed(125)  #随机数种子赋值为125
+&gt;&gt;&gt; &quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10))
+&#39;4.4.10&#39;
+&gt;&gt;&gt; &quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10))
+&#39;5.10.3&#39;
+&gt;&gt;&gt; seed(125)   #再次给随机数种子赋值125
+&gt;&gt;&gt; &quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10))
+&#39;4.4.10&#39;</code></pre>
+<p>（3）从上述语句可发现，在设定相同种子后，每次调用随机函数生成的随机数是相同的。这是随机数种子的作用。</p>
+<h2 id="程序的异常处理"><a href="#程序的异常处理" class="headerlink" title="程序的异常处理"></a>程序的异常处理</h2><p><strong>要点：Python通过try、except等保留字提供异常处理功能</strong></p>
+<pre><code class="python">num = eval(input(&quot;请输入一个数字：&quot;))
+print(num**2)</code></pre>
+<p>（1）输入数字时，程序正常执行，若输入数字则会报错。</p>
+<pre><code class="python">请输入一个数字：100
+10000
+&gt;&gt;&gt; 
+
+请输入一个数字：abc
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#2&gt;&quot;, line 1, in &lt;module&gt;      #line1为异常发生的代码行数
+    num = eval(input(&quot;请输入一个数字：&quot;))
+  File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
+NameError: name &#39;abc&#39; is not defined           #NameError为异常类型，后面跟异常内容提示
+&gt;&gt;&gt; </code></pre>
+<h3 id="异常处理：try-except语句"><a href="#异常处理：try-except语句" class="headerlink" title="异常处理：try-except语句"></a>异常处理：try-except语句</h3><p>（1）Python使用try-except语句实现异常处理，其基本语法格式如下：</p>
+<pre><code class="python">try:
     &lt;语句块1&gt;
-else:
+except &lt;异常类型&gt;:
     &lt;语句块2&gt;</code></pre>
-<p>（2）语句块1是在if条件满足后执行的一个或多个语句序列，语句块2是if条件不满足后执行的语句序列。</p>
-<p>（3）实例：PM2.5空气质量提醒(2)</p>
-<pre><code class="python">PM = eval(input(&quot;请输入PM2.5数值：&quot;))
-if PM &gt;=75:
-    print(&quot;空气存在污染，请小心!&quot;)
-else:
-    print(&quot;空气没有污染，可以开展户外活动!&quot;)</code></pre>
-<p>（4）二分支结构还有一种更为简洁的表达方式，适合通过判断返回特定值，语法格式如下：</p>
-<pre><code class="python">&lt;表达式1&gt; if &lt;条件&gt; else &lt;表达式2&gt;</code></pre>
-<p>上述实例可改造为：</p>
-<pre><code class="Python">PM = eval(input(&quot;请输入PM2.5数值：&quot;))
-print(&quot;空气&#123;&#125;污染!&quot;.format(&quot;存在&quot; if PM &gt;= 75 else &quot;没有&quot;))</code></pre>
-<p>（5）其他适合对特殊值处理的情况：</p>
-<pre><code class="python">&gt;&gt;&gt; count = 2
-&gt;&gt;&gt; count if count!=0 else &quot;不存在&quot;
-2
-&gt;&gt;&gt; count = 0
-&gt;&gt;&gt; count if count!=0 else &quot;不存在&quot;
-&#39;不存在&#39;</code></pre>
-<h3 id="多分支结构：if-elif-else语句"><a href="#多分支结构：if-elif-else语句" class="headerlink" title="多分支结构：if-elif-else语句"></a>多分支结构：if-elif-else语句</h3><p>（1）Python的if-elif-else描述多分支结构，语句格式如下：</p>
-<pre><code class="python">if &lt;条件1&gt;:
+<p>语句块1是正常执行的内容，当发生异常时执行except保留字后面的语句块。例如：</p>
+<pre><code class="python">try:
+    num = eval(input(&quot;请输入一个数字：&quot;))
+    print(num**2)
+except NameError:
+    print(&quot;输入错误，请输入一个整数。&quot;)</code></pre>
+<p>执行结果：</p>
+<pre><code class="python">请输入一个数字：abc
+输入错误，请输入一个整数。
+&gt;&gt;&gt; </code></pre>
+<h3 id="异常的高级用法"><a href="#异常的高级用法" class="headerlink" title="异常的高级用法"></a>异常的高级用法</h3><p>（1)try-except语句可以支持多个except语句，语法格式如下：</p>
+<pre><code class="python">try:
     &lt;语句块1&gt;
-elif &lt;条件2&gt;:
+except &lt;异常类型1&gt;:
     &lt;语句块2&gt;
 ...
-else:
-    &lt;语句块N&gt;</code></pre>
-<p>（2）多分支结构是二分支结构的扩展，通常用于设置同一个条件的多条执行路径。Python依次评估寻找第一个结果为True的条件，执行该条件下的语句块，然后跳过整个if-elif-else结构，执行后面的语句。</p>
-<p>（3）实例：</p>
-<pre><code class="python">PM = eval(input(&quot;请输入PM2.5值：&quot;))
-if 0 &lt;= PM &lt; 35:
-    print(&quot;空气质量优，快去户外活动!&quot;)
-elif 35 &lt;= PM &lt;75:
-    print(&quot;空气质量良好，适度户外活动!&quot;)
-else:
-    print(&quot;空气污染，请小心!&quot;)</code></pre>
-<h2 id="实例5-身体质量指数BMI"><a href="#实例5-身体质量指数BMI" class="headerlink" title="实例5:身体质量指数BMI"></a>实例5:身体质量指数BMI</h2><p>（1）BMI定义:BMI值等于体重(kg)除以身高(m)的平方。</p>
-<p>（2）指标分类：</p>
-<table>
-<thead>
-<tr>
-<th align="center">分类</th>
-<th align="center">国际BMI值</th>
-<th align="center">国内BMI值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">偏瘦</td>
-<td align="center">&lt;18.5</td>
-<td align="center">&lt;18.5</td>
-</tr>
-<tr>
-<td align="center">正常</td>
-<td align="center">18.5~25</td>
-<td align="center">18.5~24</td>
-</tr>
-<tr>
-<td align="center">偏胖</td>
-<td align="center">25~30</td>
-<td align="center">24~28</td>
-</tr>
-<tr>
-<td align="center">肥胖</td>
-<td align="center">&gt;=30</td>
-<td align="center">&gt;=28</td>
-</tr>
-</tbody></table>
-<p>（3）</p>
-<pre><code class="python">height, weight = eval(input(&quot;请输入身高(米)和体重\      #采用反斜杠(\)将很长的一行分解两行书写
-(公斤)[逗号隔开]:&quot;))
-bmi = weight / pow(height,2)
-print(&quot;BMI数值为：&#123;:.2f&#125;&quot;.format(bmi))
-who, dom = &quot;&quot;,&quot;&quot;
-if bmi &lt; 18.5:      #WHO标准
-    who = &quot;偏瘦&quot;
-elif bmi &lt; 25:
-    who = &quot;正常&quot;
-elif bmi &lt;30:
-    who = &quot;偏胖&quot;
-else:
-    who = &quot;肥胖&quot;
-
-if bmi &lt; 18.5:      #我国卫生部标准
-    dom = &quot;偏瘦&quot;
-elif bmi &lt; 24:
-    dom = &quot;正常&quot;
-elif bmi &lt; 28:
-    dom = &quot;偏胖&quot;
-else:
-    dom = &quot;肥胖&quot;
-
-print(&quot;BMI指标为：国际&#39;&#123;0&#125;&#39;,国内&#39;&#123;1&#125;&#39;&quot;.format(who, dom))</code></pre>
-<h2 id="程序的循环结构"><a href="#程序的循环结构" class="headerlink" title="程序的循环结构"></a>程序的循环结构</h2><p><strong>要点：Python通过for、while等保留字提供遍历循环和无限循环的结构</strong></p>
-<p>（1）根据循环的确定次数，可分为确定次数循环和非确定次数循环。</p>
-<p>（2）确定次数循环在Python中被称为“遍历循环”，具体采用for语句实现。</p>
-<p>（3）非确定次数循环程序不确定循环体可能的执行次数，而通过条件判断是否继续执行循环体，称为无限循环，又叫条件循环，采用while语句实现。</p>
-<h3 id="遍历循环：for语句"><a href="#遍历循环：for语句" class="headerlink" title="遍历循环：for语句"></a>遍历循环：for语句</h3><p>（1）Python通过保留字for实现“遍历循环”，基本使用方法如下：</p>
-<pre><code>for &lt;循环变量&gt; in &lt;遍历结构&gt;:
-    &lt;语句块&gt;</code></pre>
-<p>（2）遍历结构可以是字符串、文件、组合数据类型或range()函数等，常用的使用方法如下：</p>
-<pre><code class="Python">#循环n次
-for i in range(n):
-    &lt;语句块&gt;
-
-#遍历文件file的每一行
-for line in file:
-    &lt;语句块&gt;
-
-#遍历字符串s
-for c in s:
-    &lt;语句块&gt;
-
-#遍历列表ls
-for item in ls:
-    &lt;语句块&gt;</code></pre>
-<p>（3）遍历循环的一种扩展模式，使用方法如下：</p>
-<pre><code class="python">for &lt;循环结构&gt; in &lt;遍历结构&gt;:
+except &lt;异常类型N&gt;:
+    &lt;语句块N+1&gt;
+except:
+    &lt;语句块N+2&gt;</code></pre>
+<p>（2）其中，第1到第N个except语句后面都指定了异常类型，说明这些except所包含的语句块只处理这些类型的异常。最后一个except语句没有指定任何类型，表示它对应的语句块可以处理所有其他异常。这个过程与if-elif-else语句类似，是分支结构的一种表达方式。例如：</p>
+<pre><code class="python">try:
+    alp = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+    idx = eval(input(&quot;请输入一个整数：&quot;))
+    print(alp[idx])
+except NameError:
+    print(&quot;输入错误，请输入一个整数!&quot;)
+except:
+    print(&quot;其他错误&quot;)</code></pre>
+<p>（3）上面的程序中，当用户输入非整数字符时，except NameError 异常被捕获到，提示用户输入类型错误，当用户输入数字不再0到25之间时，异常被except捕获，程序打印其错误。执行结果如下：</p>
+<pre><code class="python">&gt;&gt;&gt;
+请输入一个整数：abc
+输入错误，请输入一个整数!
+&gt;&gt;&gt;
+请输入一个整数：100
+其他错误</code></pre>
+<p>（4）除了try和except保留字外，异常语句还可以else和finally保留字配合使用，语法格式如下：</p>
+<pre><code class="python">try:
     &lt;语句块1&gt;
+except &lt;异常类型1&gt;:
+    &lt;语句块2&gt;
 else:
-    &lt;语句块2&gt;</code></pre>
-<p>在扩展模式中，else语句只在循环正常执行并结束后才执行。因此，可以在&lt;语句块2&gt;中放置判断循环执行情况的语句。</p>
-<pre><code class="python">for s in &quot;BIT&quot;:
-    print(&quot;循环进行中：&quot;+s)
+    &lt;语句块3&gt;
+finally:
+    &lt;语句块4&gt;</code></pre>
+<p>（5）else语句与循环中的else一样，当try中的语句块1正常执行结束且没有发生异常时，else中的语句块3执行，可以看作是对try语句块正常执行后的一种追加处理。若except捕获到异常，则不会执行else中的语句块3。</p>
+<p>finally语句块则不同，无论try中的语句块1是否发生异常，语句块4都会执行。因此，可以将程序执行语句块1的一些收尾工作放在这里，例如：关闭、打开文件等。</p>
+<pre><code class="python">try:
+    alp = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+    idx = eval(input(&quot;请输入一个整数：&quot;))
+    print(alp[idx])
+except NameError:
+    print(&quot;输入错误，请输入一个整数!&quot;)
+except:
+    print(&quot;其他错误&quot;)
 else:
-    s = &quot;循环正常结束&quot;
-print(s)</code></pre>
+    print(&quot;没有发生异常&quot;)
+finally:
+    print(&quot;程序执行完毕，不知道是否发生了异常&quot;)</code></pre>
 <p>执行结果：</p>
-<pre><code class="python">循环进行中：B
-循环进行中：I
-循环进行中：T
-循环正常结束
-&gt;&gt;&gt; </code></pre>
-<h3 id="无限循环：while语句"><a href="#无限循环：while语句" class="headerlink" title="无限循环：while语句"></a>无限循环：while语句</h3><p>（1）Python通过保留字while实现无限循环，基本使用方法如下：</p>
-<pre><code class="Python">while &lt;条件&gt;：
-    &lt;语句块&gt;</code></pre>
-<p>其中条件与if语句中的判断条件一样，结果为True和False。</p>
-<p>（2）无限循环：使用保留字else的扩展模式，使用方法如下：</p>
-<pre><code class="python">while &lt;条件&gt;:
-    &lt;语句块1&gt;
-else：
-    &lt;语句块2&gt;</code></pre>
-<p>在这种扩展模式中，else语句只在循环正常执行后才执行。</p>
-<pre><code class="python">s, idx = &quot;BIT&quot;, 0
-while idx &lt; len(s):
-    print(&quot;循环进行中：&quot; + s[idx])
-    idx += 1
-else:
-    s = &quot;循环正常结束&quot;
-print(s)</code></pre>
-<p>执行结果：</p>
-<pre><code class="python">循环进行中：B
-循环进行中：I
-循环进行中：T
-循环正常结束
-&gt;&gt;&gt; </code></pre>
-<p>（3）若要通过while实现一个计数循环，则需在循环之前对计数器idx进行初始化，并在每次循环中对计数器idx进行累加。而for循环中循环变量逐一取自遍历结构，不需要程序维护计数器。</p>
-<h3 id="循环保留字：break和continue"><a href="#循环保留字：break和continue" class="headerlink" title="循环保留字：break和continue"></a>循环保留字：break和continue</h3><p>（1）这两个保留字用来辅助控制循环执行。</p>
-<p>（2）break用来跳出最内层for或while循环，脱离该循环后程序从循环代码后继续执行，例如：</p>
-<pre><code class="python">for s in &quot;BIT&quot;:
-    for i in range(10):
-        print(s, end=&quot;&quot;)
-        if s==&quot;I&quot;:
-            break</code></pre>
-<p>执行结果：</p>
-<pre><code class="python">BBBBBBBBBBITTTTTTTTTT
-&gt;&gt;&gt;</code></pre>
-<p>其中，break语句跳出了最内层for循环，单仍然继续执行外层循环，每个break语句只能跳出当前层次循环。</p>
-<p>（3）continue用来结束当前当次循环，即跳过循环体中下面还没执行的语句，但不跳出循环。</p>
-<pre><code class="python">for s in &quot;Python&quot;:
-    if s == &quot;t&quot;:
-        continue
-    print(s, end=&quot;&quot;)</code></pre>
-<p>执行结果：</p>
-<pre><code class="python">Pyhon
-&gt;&gt;&gt; </code></pre>
-<p>（4）for循环和while循环中都存在else扩展用法，else语句只在一种情况下执行，即循环正常遍历了所有内容或由于条件不成立而结束循环，没有因为break或return而退出循环。若有break或return则不执行else，continue保留字对else没有影响。</p>
-<pre><code class="python">#continue
-for s in &quot;Python&quot;:
-    if s == &quot;t&quot;:
-        continue
-    print(s, end=&quot;&quot;)
-else:
-    print(&quot;正常退出&quot;)</code></pre>
-<p>执行结果：</p>
-<pre><code>Pyhon 正常退出
-&gt;&gt;&gt; </code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+请输入一个整数：6
+G
+没有发生异常
+程序执行完毕，不知道是否发生了异常
+&gt;&gt;&gt; 
+请输入一个整数：abc
+输入错误，请输入一个整数!
+程序执行完毕，不知道是否发生了异常</code></pre>
+<p>（6）try-except异常一般只用来检测极少发生的情况，编写程序时不应过度依赖try-except这种异常处理机制，应该尽量在程序中采用if语句直接判断，避免通过异常处理来应对可能发生的情况。因为采用try-except语句会影响代码的可读性，增加代码维护难度。</p>
 
       
 
@@ -525,7 +424,7 @@ else:
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/02/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -539,18 +438,18 @@ else:
   
 <nav id="article-nav">
   
-    <a href="/2020/12/06/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%AA%8C%E8%AF%81/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/12/14/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A801/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          系统漏洞分析与验证
+          深入Python语言(五)
         
       </div>
     </a>
   
   
-    <a href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">深入Python语言(二)</div>
+    <a href="/2020/12/10/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Windows系统安全加固</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -577,7 +476,7 @@ else:
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">程序的基本结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AB%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text">实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">程序的分支结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84-if%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.1.</span> <span class="toc-text">单分支结构:if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84-if-else%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.2.</span> <span class="toc-text">二分支结构:if-else语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84%EF%BC%9Aif-elif-else%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.3.</span> <span class="toc-text">多分支结构：if-elif-else语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B5-%E8%BA%AB%E4%BD%93%E8%B4%A8%E9%87%8F%E6%8C%87%E6%95%B0BMI"><span class="toc-number">3.</span> <span class="toc-text">实例5:身体质量指数BMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">程序的循环结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%BE%AA%E7%8E%AF%EF%BC%9Afor%E8%AF%AD%E5%8F%A5"><span class="toc-number">4.1.</span> <span class="toc-text">遍历循环：for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E9%99%90%E5%BE%AA%E7%8E%AF%EF%BC%9Awhile%E8%AF%AD%E5%8F%A5"><span class="toc-number">4.2.</span> <span class="toc-text">无限循环：while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E4%BF%9D%E7%95%99%E5%AD%97%EF%BC%9Abreak%E5%92%8Ccontinue"><span class="toc-number">4.3.</span> <span class="toc-text">循环保留字：break和continue</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#random%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">random库的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#random%E5%BA%93%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">random库描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#random%E5%BA%93%E8%A7%A3%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">random库解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">程序的异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9Atry-except%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.1.</span> <span class="toc-text">异常处理：try-except语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E7%9A%84%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">异常的高级用法</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
