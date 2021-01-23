@@ -238,7 +238,7 @@
 <p>（3）利用hackbar工具手动构造命令并执行(注意：system()函数中命令包含多个单词，有空格则需要加双引号或单引号。)</p>
 <p>如：<strong>v=system(ipconfig);</strong></p>
 <p><strong>v=system(‘netstat -ano’);</strong></p>
-<p>**v=system(‘ping <a target="_blank" rel="noopener" href="http://www.baidu.com&/#39;">www.baidu.com&#39;</a>);</p>
+<p><strong>v=system(‘ping <a target="_blank" rel="noopener" href="http://www.baidu.com&/#39;">www.baidu.com&#39;</a>);</strong></p>
 <p>（4）获取权限，命令执行结果可通过查看网页源代码更清晰直观显示。</p>
 <p><img src="https://i.loli.net/2021/01/23/1pEeuUDczmYFvkj.png" alt="image-20210123173345789"></p>
 <p><img src="https://i.loli.net/2021/01/23/m7g1hu5V6LGSkTz.png" alt="image-20210123173359330"></p>
@@ -283,7 +283,7 @@
 <td>xx.asp：application/x-asap</td>
 </tr>
 </tbody></table>
-<h3 id="文件上传漏洞利用"><a href="#文件上传漏洞利用" class="headerlink" title="文件上传漏洞利用"></a>文件上传漏洞利用</h3><h4 id="无限制"><a href="#无限制" class="headerlink" title="无限制"></a>无限制</h4><p>直接上传木马文件test.php，随后构造木马连接，访问木马并利用</p>
+<h3 id="文件上传漏洞利用"><a href="#文件上传漏洞利用" class="headerlink" title="文件上传漏洞利用"></a>文件上传漏洞利用</h3><h4 id="无限制"><a href="#无限制" class="headerlink" title="无限制"></a>无限制</h4><p>直接上传木马文件test.php，随后构造木马链接，访问木马并利用</p>
 <p><img src="https://i.loli.net/2021/01/23/mGnxNlBq4pwo7aZ.png" alt="image-20210123183801625"></p>
 <p><img src="https://i.loli.net/2021/01/23/ohA8xvTWGu9ecjV.png" alt="image-20210123183810063"></p>
 <h4 id="JS校验-前端校验"><a href="#JS校验-前端校验" class="headerlink" title="JS校验(前端校验)"></a>JS校验(前端校验)</h4><p>（1）上传test1.php木马文件。无法成功上传，弹框要求以jpg、jpeg、JPG、JPEG这几种格式文件类型上传。</p>
