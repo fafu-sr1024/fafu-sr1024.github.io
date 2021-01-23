@@ -152,6 +152,207 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全初级/WEBshell与文件上传漏洞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/19/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEBshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">WEBshell与文件上传漏洞</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/19/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEBshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="archive-article-date">
+  	<time datetime="2021-01-19T13:36:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Webshell：以网页形式存在的一种命令执行环境(是一种网页后门)</strong></p>
+<h2 id="文件上传功能"><a href="#文件上传功能" class="headerlink" title="文件上传功能"></a>文件上传功能</h2><p>文件上传功能是大部分WEB应用的必备功能，网站允许用户自行上传头像、一些社交类网站允许用户上传照片、一些服务类网站需要用户上传证明材料的电子档、电商类网站允许用户上传图片展示商品情况等。然而，<strong>看似不起眼的文件上传功能如果没有做好安全防护措施，就存在巨大的安全风险。</strong> </p>
+<h3 id="文件上传流程和上传攻击"><a href="#文件上传流程和上传攻击" class="headerlink" title="文件上传流程和上传攻击"></a>文件上传流程和上传攻击</h3><p>（1）如果WEB应用在<strong>文件上传过程</strong>中没有对文件的安全性进行有效的校验，攻击者可以通过<strong>上传WEBshell等恶意文件对服务器进行攻击</strong>，这种情况下认为系统存在文件上传漏洞。</p>
+<p>（2）一个文件上传的一般流程：</p>
+<p><img src="https://i.loli.net/2021/01/23/Ud94mZEj8iaf6vg.png" alt="image-20210123155132231"></p>
+<h3 id="前端校验"><a href="#前端校验" class="headerlink" title="前端校验"></a>前端校验</h3><p><img src="https://i.loli.net/2021/01/23/bjMHPvfaRYDGpyE.png" alt="image-20210123163059178"></p>
+<h3 id="后端校验"><a href="#后端校验" class="headerlink" title="后端校验"></a>后端校验</h3><p><img src="https://i.loli.net/2021/01/23/ZwovTqJ8hWBIfyH.png" alt="image-20210123163718803"></p>
+<h2 id="命令执行函数"><a href="#命令执行函数" class="headerlink" title="命令执行函数"></a>命令执行函数</h2><h3 id="PHP执行命令函数"><a href="#PHP执行命令函数" class="headerlink" title="PHP执行命令函数"></a>PHP执行命令函数</h3><p>（1）**system()**：执行shell语句，输出并返回shell结果</p>
+<pre><code class="php">&lt;?php
+    echo system(&#39;ipconfig&#39;);
+?&gt;</code></pre>
+<p>（2）**passthru()**：调用命令，输出并返回执行结果</p>
+<pre><code class="php">&lt;?php
+    echo passthru(&#39;whoami&#39;);
+?&gt;</code></pre>
+<p>（3）**其他的命令执行函数：Exec()、Shell_exec()**：只执行命令(返回最后一行结果)</p>
+<h3 id="eval-函数"><a href="#eval-函数" class="headerlink" title="eval()函数"></a>eval()函数</h3><p>（1）语法：<strong>eval(phpcode)</strong></p>
+<p>（2）概念：把字符串按照PHP代码来计算</p>
+<pre><code class="php">&lt;?php
+    $str=&quot;echo &#39;goktech&#39;;echo 333+333;&quot;;
+    echo $str;
+    echo &quot;&lt;br/&gt;&quot;;
+    eval(&quot;$str&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/01/23/yhIZj4lpfLukV3z.png" alt="image-20210123164741040"></p>
+<p><strong>PS:该字符串必须是合法的PHP代码，且必须以分号结尾。</strong></p>
+<h2 id="一句话木马原理及利用"><a href="#一句话木马原理及利用" class="headerlink" title="一句话木马原理及利用"></a>一句话木马原理及利用</h2><h3 id="WEBshell——网页木马文件"><a href="#WEBshell——网页木马文件" class="headerlink" title="WEBshell——网页木马文件"></a>WEBshell——网页木马文件</h3><p>最常见的利用文件上传漏洞的方法就是<strong>上传网站木马(webshell)文件</strong>。webshell根据开发语言的不同又分为ASP木马、PHP木马、JSP木马等，该类木马利用了脚本语言中的系统命令执行、文件读写等函数的功能，一旦上传到服务器被脚本引擎解析，攻击者就可以实现对服务器的控制。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">一句话木马(小马)</th>
+<th align="center">大马</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">功能</td>
+<td align="center">功能简单，需要配合客户端使用</td>
+<td align="center">功能完善，直接使用浏览器即可利用</td>
+</tr>
+<tr>
+<td align="center">大小</td>
+<td align="center">代码量通常在一行左右，不超过10行</td>
+<td align="center">代码量通常较大</td>
+</tr>
+<tr>
+<td align="center">隐蔽性</td>
+<td align="center">强，容易通过变形隐藏特征，绕过过滤</td>
+<td align="center">相对较弱，代码量大，容易被检测出来，通常需要通过加密等方式来隐藏特征。</td>
+</tr>
+</tbody></table>
+<h3 id="一句话木马介绍"><a href="#一句话木马介绍" class="headerlink" title="一句话木马介绍"></a>一句话木马介绍</h3><p>（1）eval()函数将传入的内容作为php脚本执行；</p>
+<p>（2）$_POST[‘v’]传入想要执行的代码(v为参数名，可任意更改)；</p>
+<p>（3）v为传递数据的参数，只有使用正确的参数名提交代码才能够被执行，因此v也称为一句话木马的<strong>密码</strong></p>
+<p><img src="https://i.loli.net/2021/01/23/k6UP4gvN18MjwzF.png" alt="image-20210123170942615"></p>
+<h3 id="一句话木马利用思路"><a href="#一句话木马利用思路" class="headerlink" title="一句话木马利用思路"></a>一句话木马利用思路</h3><p>（1）手动构造数据包利用的思路是<strong>提交命令行、文件处理等函数代码实现控制服务器；</strong></p>
+<p>（2）自动化工具利用的思路是<strong>使用中国菜刀或Cknife等工具实现对服务器的控制；</strong></p>
+<p>（3）中国菜刀是一款专业的网站管理软件，用途广泛，使用方便，小巧实用。只要支持动态脚本的网站，都可以用中国菜刀来进行管理。利用上传到服务器的一句话脚本，再通过一些添加配置就可以工作了。</p>
+<p>（4）Cknife的功能与中国菜刀类似，不同的是<strong>Cknife是一开源产品。</strong></p>
+<p><img src="https://i.loli.net/2021/01/23/EzlmfTJqHe6bnax.png" alt="image-20210123171654387"></p>
+<h3 id="一句话木马利用方式"><a href="#一句话木马利用方式" class="headerlink" title="一句话木马利用方式"></a>一句话木马利用方式</h3><h4 id="手动"><a href="#手动" class="headerlink" title="手动"></a>手动</h4><p>（1）上传木马文件test.php</p>
+<p><img src="https://i.loli.net/2021/01/23/lzqEdWa7Vp618Hu.png" alt="image-20210123172646352"></p>
+<p>（2）浏览器连接，填写木马存放地址并访问：<a target="_blank" rel="noopener" href="http://127.0.0.1/test.php">http://127.0.0.1/test.php</a></p>
+<p>（3）利用hackbar工具手动构造命令并执行(注意：system()函数中命令包含多个单词，有空格则需要加双引号或单引号。)</p>
+<p>如：<strong>v=system(ipconfig);</strong></p>
+<p><strong>v=system(‘netstat -ano’);</strong></p>
+<p>**v=system(‘ping <a target="_blank" rel="noopener" href="http://www.baidu.com&/#39;">www.baidu.com&#39;</a>);</p>
+<p>（4）获取权限，命令执行结果可通过查看网页源代码更清晰直观显示。</p>
+<p><img src="https://i.loli.net/2021/01/23/1pEeuUDczmYFvkj.png" alt="image-20210123173345789"></p>
+<p><img src="https://i.loli.net/2021/01/23/m7g1hu5V6LGSkTz.png" alt="image-20210123173359330"></p>
+<h4 id="自动"><a href="#自动" class="headerlink" title="自动"></a>自动</h4><p>（1）专用工具连接——Cknife</p>
+<p><img src="https://i.loli.net/2021/01/23/kmF2NMnBcIorGWz.png" alt="image-20210123173602299"></p>
+<p>（2）获取权限：右键URL可进行文件管理等操作，也可右键选择“模拟终端”，通过输入命令的方式控制服务器。</p>
+<p><img src="https://i.loli.net/2021/01/23/7GwPkxsbnqVgZ6m.png" alt="image-20210123173824378"></p>
+<p><img src="https://i.loli.net/2021/01/23/HRUzArytfD6WSXF.png" alt="image-20210123173853021"></p>
+<h2 id="文件上传攻击"><a href="#文件上传攻击" class="headerlink" title="文件上传攻击"></a>文件上传攻击</h2><h3 id="文件上传漏洞测试思路"><a href="#文件上传漏洞测试思路" class="headerlink" title="文件上传漏洞测试思路"></a>文件上传漏洞测试思路</h3><p><img src="https://i.loli.net/2021/01/23/nNmCrzq1i9F5BKJ.png" alt="image-20210123182244608"></p>
+<h3 id="MIME类型检测"><a href="#MIME类型检测" class="headerlink" title="MIME类型检测"></a>MIME类型检测</h3><p>（1）MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。</p>
+<p>（2）是设定某种扩展名的文件<strong>用一种应用程序来打开的方式类型</strong>,当该扩展名文件被访问时，浏览器会自动使用指定应用程序来打开。</p>
+<p>（3）多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。</p>
+<p>（4）标准的文件上传组件中会自动上传文件的MIME类型，但是由于MIME类型是从客户端传递的，修改也不影响文件正常运行，因此通过burp工具拦截和修改MIME类型可以轻易绕过此类检测。</p>
+<table>
+<thead>
+<tr>
+<th>常见的MIME类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>xx.html超文本标记语言文本：text/html</td>
+</tr>
+<tr>
+<td>xx.txt普通文本：text/plain</td>
+</tr>
+<tr>
+<td>xx.pdf文档：application/pdf</td>
+</tr>
+<tr>
+<td>xx.png图片：image/png</td>
+</tr>
+<tr>
+<td>xx.jpg或xx.jpeg图片：image/jpeg</td>
+</tr>
+<tr>
+<td>xx.gif图片：image/gif</td>
+</tr>
+<tr>
+<td>xx.rtf文本：application/rtf</td>
+</tr>
+<tr>
+<td>xx.asp：application/x-asap</td>
+</tr>
+</tbody></table>
+<h3 id="文件上传漏洞利用"><a href="#文件上传漏洞利用" class="headerlink" title="文件上传漏洞利用"></a>文件上传漏洞利用</h3><h4 id="无限制"><a href="#无限制" class="headerlink" title="无限制"></a>无限制</h4><p>直接上传木马文件test.php，随后构造木马连接，访问木马并利用</p>
+<p><img src="https://i.loli.net/2021/01/23/mGnxNlBq4pwo7aZ.png" alt="image-20210123183801625"></p>
+<p><img src="https://i.loli.net/2021/01/23/ohA8xvTWGu9ecjV.png" alt="image-20210123183810063"></p>
+<h4 id="JS校验-前端校验"><a href="#JS校验-前端校验" class="headerlink" title="JS校验(前端校验)"></a>JS校验(前端校验)</h4><p>（1）上传test1.php木马文件。无法成功上传，弹框要求以jpg、jpeg、JPG、JPEG这几种格式文件类型上传。</p>
+<p><img src="https://i.loli.net/2021/01/23/xZFVUTIQf5ML91D.png" alt="image-20210123184202498"></p>
+<p>（2）将木马文件test1.php后缀改为.jpg，再次上传文件，用burp抓包。在burp中修改文件后缀名为.php，点击Forward。</p>
+<p><img src="https://i.loli.net/2021/01/23/7CABNjYmcWReHpa.png" alt="image-20210123184322559"></p>
+<p>（3）上传成功后即可访问木马并利用</p>
+<h4 id="MIME校验-后端校验"><a href="#MIME校验-后端校验" class="headerlink" title="MIME校验(后端校验)"></a>MIME校验(后端校验)</h4><p>（1）上传test2.php木马文件。无法成功上传，根据提示只能上传文件类型为JPEG或PNG的文件。</p>
+<p><img src="https://i.loli.net/2021/01/23/gdKJ1EFzSulNMhy.png" alt="image-20210123184457521"></p>
+<p>（2）将test2.php文件后缀名改为.jpeg,再次上传,用burp抓包。在burp中将木马文件的后缀名改为.php，点击Forward。或者不修改木马文件后缀名，而是将Content-Type的值改为image/jpeg也可成功上传木马文件。</p>
+<p> <img src="https://i.loli.net/2021/01/23/LvBnV9khC5yuSX2.png" alt="image-20210123184614061"></p>
+<p>（3）上传成功后即可访问木马并利用</p>
+<h4 id="黑名单校验-后端校验"><a href="#黑名单校验-后端校验" class="headerlink" title="黑名单校验(后端校验)"></a>黑名单校验(后端校验)</h4><p>（1）上传test3.php木马文件。无法成功上传。</p>
+<p><img src="https://i.loli.net/2021/01/23/7crZF8eUHpyOSxa.png" alt="image-20210123184828102"></p>
+<p>（2）将test3.php后缀名大写PHP，再次上传。上传成功</p>
+<p>（3）上传成功后即可访问木马并利用</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/19/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEBshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全初级/XSS注入的原理与利用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,7 +373,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前段代码介绍"><a href="#前段代码介绍" class="headerlink" title="前段代码介绍"></a>前段代码介绍</h2><h3 id="前段开发三剑客-三种语言"><a href="#前段开发三剑客-三种语言" class="headerlink" title="前段开发三剑客(三种语言)"></a>前段开发三剑客(三种语言)</h3><p>（1）HTML：相当于一个文档，里面是要给用户的信息。使用他提供的一些标签，来把你想传递给用户的信息进行合理编排，使信息更好地传递给用户。(可以看成是一个人)</p>
+        <h2 id="前端代码介绍"><a href="#前端代码介绍" class="headerlink" title="前端代码介绍"></a>前端代码介绍</h2><h3 id="前端开发三剑客-三种语言"><a href="#前端开发三剑客-三种语言" class="headerlink" title="前端开发三剑客(三种语言)"></a>前端开发三剑客(三种语言)</h3><p>（1）HTML：相当于一个文档，里面是要给用户的信息。使用他提供的一些标签，来把你想传递给用户的信息进行合理编排，使信息更好地传递给用户。(可以看成是一个人)</p>
 <p>（2）CSS：相当于把这个文档进行修饰，美化实现更好的交互性，使用户接受信息更加舒服，自然。最好的修饰就是接近简洁，自然。(看成是一个人的外观)</p>
 <p>（3）JavaScript：相当于更好地实现和用户的交互，使信息传递实现双向化。(看成是一个人的灵魂)</p>
 <p><img src="https://i.loli.net/2021/01/18/Yv6WwENH8LikbGx.png" alt="image-20210118201537947"></p>
@@ -2402,499 +2603,6 @@ else:
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/02/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8401/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(二)-基本数据类型02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">深入Python语言(二)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/" class="archive-article-date">
-  	<time datetime="2020-11-29T01:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="字符串类型及其操作"><a href="#字符串类型及其操作" class="headerlink" title="字符串类型及其操作"></a>字符串类型及其操作</h2><p>要点：字符串是字符的序列表示，可以通过基本的字符串操作符、内置字符串处理函数和字符串处理方法等对字符串进行操作。</p>
-<h3 id="字符串类型的表示"><a href="#字符串类型的表示" class="headerlink" title="字符串类型的表示"></a>字符串类型的表示</h3><p>（1）字符串可以由一对单引号(‘)、双引号(“)或三引号(“‘)构成。其中，单引号和双引号都可以表示单行字符串，两者作用相同。三引号可以表示单行或者多行字符串。</p>
-<table>
-<thead>
-<tr>
-<th>表示方法</th>
-<th>可行操作</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>单引号字符串</td>
-<td>可以使用双引号作为字符串的一部分</td>
-</tr>
-<tr>
-<td>双引号字符串</td>
-<td>可以使用单引号作为字符串的一部分</td>
-</tr>
-<tr>
-<td>三引号字符串</td>
-<td>可以使用双引号、单引号，也可以换行</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; print(&#39;我爱&quot;中国&quot;这个伟大的国家&#39;)
-我爱&quot;中国&quot;这个伟大的国家
-&gt;&gt;&gt; print(&quot;她有着&#39;960万平方公里&#39;的土地&quot;)
-她有着&#39;960万平方公里&#39;的土地
-&gt;&gt;&gt; print(&#39;&#39;&#39;她还有&quot;14亿&quot;的人口
-是&#39;世界第二大经济体&#39;
-&#39;&#39;&#39;)
-她还有&quot;14亿&quot;的人口
-是&#39;世界第二大经济体&#39;
-
-&gt;&gt;&gt; </code></pre>
-<p>（2）input()函数将用户的输入内容当做一个字符串类型，print()函数可以直接打印字符串。</p>
-<pre><code class="Python">&gt;&gt;&gt;name = input(&quot;请输入名字：&quot;)
-请输入名字：Python
-&gt;&gt;&gt;print(name)
-Python</code></pre>
-<p>（3）字符串以Unicode编码存储，因此，字符串的英文字符和中文字符都算作1个字符。</p>
-<pre><code class="python">&gt;&gt;&gt; name = &quot;Python语言程序设计&quot;
-&gt;&gt;&gt; print(name[0], name[7], name[-1])
-P 言 计
-&gt;&gt;&gt; print(name[2:-4])
-thon语言
-&gt;&gt;&gt; print(name[:6])
-Python
-&gt;&gt;&gt; print(name[6:])
-语言程序设计
-&gt;&gt;&gt; print(name[:])
-Python语言程序设计</code></pre>
-<p>（4）反斜杠字符\是一个特殊字符，在字符串中表示转义，即该字符与后面相邻的一个字符共同组成了新的含义。例如，\n表示换行、\\表示反斜杠、\‘表示单引号、\“表示双引号、\t表示制表符(Tab)等。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; print(&quot;Python\n语言\t程序\t设计&quot;)
-Python
-语言    程序    设计</code></pre>
-<h3 id="基本的字符串操作符"><a href="#基本的字符串操作符" class="headerlink" title="基本的字符串操作符"></a>基本的字符串操作符</h3><p>（1）5个基本的字符串操作符</p>
-<table>
-<thead>
-<tr>
-<th align="center">操作符</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">x + y</td>
-<td align="center">连接两个字符串x与y</td>
-</tr>
-<tr>
-<td align="center">x * n 或 n * x</td>
-<td align="center">复制n次字符串x</td>
-</tr>
-<tr>
-<td align="center">x in s</td>
-<td align="center">如果x是s的子串，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">str[i]</td>
-<td align="center">索引，返回第i个字符</td>
-</tr>
-<tr>
-<td align="center">str[N:M]</td>
-<td align="center">切片，返回索引第N到第M的子串，其中不包含M</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; &quot;Python语言&quot; + &quot;程序设计&quot;
-&#39;Python语言程序设计&#39;
-&gt;&gt;&gt; name = &quot;Python语言&quot; + &quot;程序设计&quot; + &quot;基础&quot;
-&gt;&gt;&gt; name
-&#39;Python语言程序设计基础&#39;
-&gt;&gt;&gt; &quot;Python语言&quot; in name
-True
-&gt;&gt;&gt; &quot;good&quot; in name
-False
-&gt;&gt;&gt; &quot;good!&quot; * 3
-&#39;good!good!good!&#39;</code></pre>
-<p>（2）获取星期字符串，例如：输入3，返回“星期三”。</p>
-<pre><code class="python">weekstr = &quot;星期一星期二星期三星期四星期五星期六星期日&quot;
-weekid = eval(input(&quot;请输入星期数字(1-7)：&quot;))
-pos = (weekid - 1)*3
-print(weekstr[pos:pos+3])</code></pre>
-<p>运行结果：</p>
-<pre><code class="python">&gt;&gt;&gt;
-请输入星期数字(1-7)：3
-星期三</code></pre>
-<h3 id="内置的字符串处理函数"><a href="#内置的字符串处理函数" class="headerlink" title="内置的字符串处理函数"></a>内置的字符串处理函数</h3><p>（1）共6个</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">len(x)</td>
-<td align="center">返回字符串x的长度，也可返回其他组合数据类型元素个数</td>
-</tr>
-<tr>
-<td align="center">str(x)</td>
-<td align="center">返回任意类型x所对应的字符串形式</td>
-</tr>
-<tr>
-<td align="center">chr(x)</td>
-<td align="center">返回Unicode编码x对应的单字符</td>
-</tr>
-<tr>
-<td align="center">ord(x)</td>
-<td align="center">返回单字符表示的Unicode编码</td>
-</tr>
-<tr>
-<td align="center">hex(x)</td>
-<td align="center">返回整数x对应十六进制数的小写形式字符串</td>
-</tr>
-<tr>
-<td align="center">oct(x)</td>
-<td align="center">返回整数x对应八进制数的小写形式字符串</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; len(&quot;Python语言程序设计&quot;)
-12
-&gt;&gt;&gt; str(3.1415926)
-&#39;3.1415926&#39;</code></pre>
-<p>（2）Python字符串中每个字符都是用Unicode编码表示，因为相比ASCII编码，Unicode编码能支持几乎所有书写语言的字符。chr()和ord()函数用于在单字符和Unicode编码值之间进行转换。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;1 + 1 = 2 &quot; + chr(10004)
-&#39;1 + 1 = 2 ✔&#39;
-&gt;&gt;&gt; &quot;金牛座字符♉对应的Unicode值：&quot; + str(ord(&quot;♉&quot;))
-&#39;金牛座字符♉对应的Unicode值：9801&#39;</code></pre>
-<p>（3）凯撒密码，采用了替换方法，对信息中的每一个英文字符循环替换为字母表序列中该字符后面第三个字符。</p>
-<p>设明文为P,密文为C，则满足：</p>
-<pre><code class="python">加密:C = (P+3) mod 26
-解密:P = (C-3) mod 26</code></pre>
-<pre><code class="Python">#加密，使用的信息仅包含小写字母
-plaincode = input(&quot;请输入明文：&quot;)
-for p in plaincode:
-    if ord(&quot;a&quot;) &lt;= ord(p) &lt;= ord(&quot;z&quot;):
-        print(chr(ord(&quot;a&quot;) + (ord(p) - ord(&quot;a&quot;) + 3)%26), end=&#39;&#39;)
-    else:
-        print(p, end=&#39; &#39;)
-
-#解密
-plaincode = input(&quot;请输入密文：&quot;)
-for c in plaincode:
-    if ord(&quot;a&quot;) &lt;= ord(c) &lt;= ord(&quot;z&quot;):
-        print(chr(ord(&quot;a&quot;) + (ord(c) - ord(&quot;a&quot;) - 3)%26), end=&#39;&#39;)
-    else:
-        print(c, end=&#39;&#39;)</code></pre>
-<pre><code class="python">#加密结果
-&gt;&gt;&gt;
-请输入明文：python is an excellent language.
-sbwkrq  lv  dq  hafhoohqw  odqjxdjh. 
-
-#解密结果
-&gt;&gt;&gt;
-请输入密文：sbwkrq  lv  dq  hafhoohqw  odqjxdjh.
-python  is  an  excellent  language.</code></pre>
-<h3 id="内置的字符串处理方法"><a href="#内置的字符串处理方法" class="headerlink" title="内置的字符串处理方法"></a>内置的字符串处理方法</h3><p>（1）在Python解释器内部，所有数据类型都采用面向对象方式实现，封装为一个类。字符串也是一个类，具有类似&lt;a&gt;.&lt;b&gt;()形式的字符串处理函数。在面向对象中，这类函数也被称为“方法”。str为字符串</p>
-<table>
-<thead>
-<tr>
-<th align="center">方法</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">str.lower()</td>
-<td align="center">返回字符串str的副本，全部字符小写</td>
-</tr>
-<tr>
-<td align="center">str.upper()</td>
-<td align="center">返回字符串str的副本，全部字符大写</td>
-</tr>
-<tr>
-<td align="center">str.islower()</td>
-<td align="center">当str所有字符都是小写时，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">str.isprintable()</td>
-<td align="center">当str所有字符都是可打印的，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">str.isnumeric()</td>
-<td align="center">当str所有字符都是数字时，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">str.isspace()</td>
-<td align="center">当str所有字符都是空格时，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">str.split(sep=None,maxsplit=-1)</td>
-<td align="center">返回一个列表，由str根据sep被分隔的部分构成</td>
-</tr>
-<tr>
-<td align="center">str.center(width[,fillchar])</td>
-<td align="center">字符串居中函数</td>
-</tr>
-<tr>
-<td align="center">str.zfill(width)</td>
-<td align="center">返回字符串str的副本，长度为width，不足部分在左侧添0</td>
-</tr>
-</tbody></table>
-<p>（2）str.split(sep=None,maxsplit=-1)方法返回一个列表，列表是一种存储多个数据的数据类型。其中，分隔str的标识符是sep，默认分隔符为空格。若给出参数maxsplit，则只分隔前maxsplit个字符，该参数默认可不给出。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;Python is an excellent language.&quot;.split()
-[&#39;Python&#39;, &#39;is&#39;, &#39;an&#39;, &#39;excellent&#39;, &#39;language.&#39;]</code></pre>
-<p>（3）str.center(width[,fillchar])方法返回长度为width的字符串。其中，str处于新字符串中心位置，两侧用新增字符fillchar填充。当width小于字符串长度时，返回str。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;python&quot;.center(40,&#39;=&#39;)
-&#39;=================python=================&#39;</code></pre>
-<p>（4）str.zfill(width)方法返回长度为width的字符串，若字符串长度不足width，在左侧添加字符”0”。但如果str最左侧是字符”+”或者”-“，则从第二个字符左侧添加”0”。同样，若width小于字符串长度，则返回str。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;123&quot;.zfill(40)
-&#39;0000000000000000000000000000000000000123&#39;
-&gt;&gt;&gt; &quot;-123&quot;.zfill(40)
-&#39;-000000000000000000000000000000000000123&#39;</code></pre>
-<h2 id="字符串类型的格式化"><a href="#字符串类型的格式化" class="headerlink" title="字符串类型的格式化"></a>字符串类型的格式化</h2><p>（1）要点：字符串通过format()方法进行格式化处理。</p>
-<p>（2）字符串是程序向控制台、网络、文件等介质输出运算结果的主要形式之一，字符串类型的格式化有助于提供更好的可读性和灵活性。</p>
-<h3 id="format-方法的基本使用"><a href="#format-方法的基本使用" class="headerlink" title="format()方法的基本使用"></a>format()方法的基本使用</h3><p>（1）基本使用格式：&lt;模板字符串&gt;.format(&lt;逗号分隔的参数&gt;)</p>
-<p>（2）模板字符串由一系列槽组成，用来将format()方法中逗号分隔的参数按照序号关系替换到模板字符串的槽中。</p>
-<p>（3）槽用大括号{}表示。若大括号中没有序号，则按照出现顺序替换；若大括号中指定了使用参数的序号，则按照序号对应的参数替换。序号从0开始编号。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;&#125;：计算机&#123;&#125;的CPU占用率为&#123;&#125;%。&quot;.format(&quot;2020-11-30&quot;,&quot;python&quot;,&quot;10&quot;) #按出现顺序0,1，2替换
-&#39;2020-11-30：计算机python的CPU占用率为10%。&#39;</code></pre>
-<p>（4）format()方法可以连接不同类型的变量或内容。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;&#125;&#123;&#125;&#123;&#125;&quot;.format(&quot;圆周率是&quot;,3.1415926,&quot;...&quot;)
-&#39;圆周率是3.1415926...&#39;
-&gt;&gt;&gt; &quot;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&quot;.format(&quot;无理数&quot;,3.1415926,&quot;...&quot;)
-&#39;圆周率&#123;3.1415926...&#125;是无理数&#39;
-
-&gt;&gt;&gt; s=&quot;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&quot;           #大括号本身是字符串的一部分
-&gt;&gt;&gt; s
-&#39;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&#39;
-&gt;&gt;&gt; s.format(&quot;无理数&quot;,3.1415926,&quot;...&quot;)  #当调用format()时解析大括号
-&#39;圆周率&#123;3.1415926...&#125;是无理数&#39;</code></pre>
-<h3 id="format-方法的格式控制"><a href="#format-方法的格式控制" class="headerlink" title="format()方法的格式控制"></a>format()方法的格式控制</h3><p>（1）format()方法中模本字符串的槽除了包括参数序号，还可以包括格式控制信息。其中，格式控制标记可以用来控制参数显示时的格式。槽内部信息如下：</p>
-<pre><code>&#123;&lt;参数信号&gt;: &lt;格式控制标记&gt;&#125;</code></pre>
-<table>
-<thead>
-<tr>
-<th align="center">格式控制标记</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">:</td>
-<td align="center">引导符号</td>
-</tr>
-<tr>
-<td align="center">&lt;填充&gt;</td>
-<td align="center">用于填充单个字符</td>
-</tr>
-<tr>
-<td align="center">&lt;对齐&gt;</td>
-<td align="center">&lt; 左对齐、&gt;右对齐、^居中对齐</td>
-</tr>
-<tr>
-<td align="center">&lt;宽度&gt;</td>
-<td align="center">槽的设定输出宽度</td>
-</tr>
-<tr>
-<td align="center">&lt;,&gt;</td>
-<td align="center">数字的千分分隔符，适用于整数和浮点数</td>
-</tr>
-<tr>
-<td align="center">&lt;.精度&gt;</td>
-<td align="center">浮点数小数部分的精度或字符串的最大输出长度</td>
-</tr>
-<tr>
-<td align="center">&lt;类型&gt;</td>
-<td align="center">整数类型b，c，d，o，x，X；浮点数类型e，E，f，%</td>
-</tr>
-</tbody></table>
-<p>（2）&lt;宽度&gt;指当前槽的设定输出字符宽度，如果该槽对应的format()参数长度比&lt;宽度&gt;大，则使用参数实际长度；若该值的实际位数小于指定宽度，则位数将被默认以空格字符补充。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:30&#125;&quot;.format(s)           #默认左对齐
-&#39;python                        &#39;
-&gt;&gt;&gt; &quot;&#123;0:3&#125;&quot;.format(s)            #参数比宽度大，直接输出字符实际长度 
-&#39;python&#39;</code></pre>
-<p>（3）&lt;对齐&gt;指参数在宽度内输出时的对齐方式。&lt;填充&gt;指宽度内除了参数外的字符采用什么方式表示，默认采用空格，可以通过填充更换。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:&gt;30&#125;&quot;.format(s)             #右对齐
-&#39;                        python&#39;
-&gt;&gt;&gt; &quot;&#123;0:*^30&#125;&quot;.format(s)            #居中对齐且使用*填充
-&#39;************python************&#39;</code></pre>
-<p>（4）格式控制标记中的逗号(,)用于显示数字类型的千位分隔符。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:-^20,&#125;&quot;.format(1234567890)
-&#39;---1,234,567,890----&#39;
-&gt;&gt;&gt; &quot;&#123;0:-^20,&#125;&quot;.format(12345.67890)
-&#39;----12,345.6789-----&#39;</code></pre>
-<p>（5）&lt;.精度&gt;表示两个含义，由小数点(.)开头。对于浮点数，精度表示小数部分输出的有效位。对于字符串，精度表示最大输出长度。</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:.2f&#125;&quot;.format(12345.67890)
-&#39;12345.68&#39;
-&gt;&gt;&gt; &quot;&#123;0:.4&#125;&quot;.format(&quot;python&quot;)
-&#39;pyth&#39;</code></pre>
-<p>（6）&lt;类型&gt;表示输出整数和浮点数类型的格式规则。</p>
-<table>
-<thead>
-<tr>
-<th align="center">整数类型输出格式</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">b</td>
-<td align="center">输出整数的二进制方式</td>
-</tr>
-<tr>
-<td align="center">c</td>
-<td align="center">输出整数对应的Unicode字符</td>
-</tr>
-<tr>
-<td align="center">d</td>
-<td align="center">输出整数的十进制方式</td>
-</tr>
-<tr>
-<td align="center">o</td>
-<td align="center">输出整数的八进制方式</td>
-</tr>
-<tr>
-<td align="center">x</td>
-<td align="center">输出整数的小写十六进制方式</td>
-</tr>
-<tr>
-<td align="center">X</td>
-<td align="center">输出整数的大写十六进制方式</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:b&#125;,&#123;0:c&#125;,&#123;0:d&#125;,&#123;0:o&#125;,&#123;0:x&#125;,&#123;0:X&#125;&quot;.format(425)
-&#39;110101001,Ʃ,425,651,1a9,1A9&#39;</code></pre>
-<table>
-<thead>
-<tr>
-<th align="center">浮点数类型输出格式</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">e</td>
-<td align="center">输出浮点数对应的小写字母e的指数形式</td>
-</tr>
-<tr>
-<td align="center">E</td>
-<td align="center">输出浮点数对应的大写字母e的指数形式</td>
-</tr>
-<tr>
-<td align="center">f</td>
-<td align="center">输出浮点数的标准浮点形式</td>
-</tr>
-<tr>
-<td align="center">%</td>
-<td align="center">输出浮点数的百分形式</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:.2e&#125;,&#123;0:.2E&#125;,&#123;0:.2f&#125;,&#123;0:.2%&#125;&quot;.format(3.14)
-&#39;3.14e+00,3.14E+00,3.14,314.00%&#39;</code></pre>
-<h2 id="实例：文本进度条"><a href="#实例：文本进度条" class="headerlink" title="实例：文本进度条"></a>实例：文本进度条</h2><h3 id="非刷新文本进度条"><a href="#非刷新文本进度条" class="headerlink" title="非刷新文本进度条"></a>非刷新文本进度条</h3><p>（1）按照任务执行百分比将整个任务划分为100个单位，每执行N%输出一次进度条。每一行输出包含进度百分比，代表已完成的部分(**)和未完成的部分(..)的两种字符，以及一个跟随完成度前进的小箭头。</p>
-<p>（2）由于直接进行字符输出几乎是瞬间完成，为了便于观察，调用Python标准时间库time，使用time.sleep()函数将当前程序暂时挂起为t秒，t可以是小数。以此模拟进度条效果输出。</p>
-<pre><code class="python">import time
-scale = 10                              #scale表示输出进度条的精度，修改后会有不同的效果
-print(&quot;------执行开始------&quot;)             #print()函数在输出结尾处会自动产生一个&#39;\n&#39;，即换行符
-for i in range(scale+1):
-    a, b = &#39;**&#39; * i, &#39;..&#39; * (scale - i)
-    c = (i/scale)*100
-    print(&quot;%&#123;:^3.0f&#125;[&#123;&#125;-&gt;&#123;&#125;]&quot;.format(c, a, b))
-    time.sleep(0.1)
-print(&quot;------执行结束------&quot;)</code></pre>
-<p>（3）运行结果：</p>
-<pre><code class="python">&gt;&gt;&gt;
-------执行开始------
-% 0 [-&gt;....................]
-%10 [**-&gt;..................]
-%20 [****-&gt;................]
-%30 [******-&gt;..............]
-%40 [********-&gt;............]
-%50 [**********-&gt;..........]
-%60 [************-&gt;........]
-%70 [**************-&gt;......]
-%80 [****************-&gt;....]
-%90 [******************-&gt;..]
-%100[********************-&gt;]
-------执行结束------</code></pre>
-<h3 id="单行动态刷新"><a href="#单行动态刷新" class="headerlink" title="单行动态刷新"></a>单行动态刷新</h3><p>（1）将每一次精度输出都固定在同一行，不断用新生成的字符串覆盖之前的输出，形成单行动态刷新的效果。</p>
-<p>（2）采用print()函数，在该函数中更换参数end的默认值为’’，即每次使用print()函数输出时不换行。此时，系统输出指针还停留在上一次输出的行尾，下一次输出在字符串前部增加转义符’\r’,该转义符把输出指针移动到行首而不换行。</p>
-<pre><code class="python">import time
-for i in range(101):
-    print(&quot;\r&#123;:3&#125;%&quot;.format(i),end=&#39;&#39;)
-    time.sleep(0.05)</code></pre>
-<p>（3）运行结果：</p>
-<p><img src="https://i.loli.net/2020/11/30/YB5wiGKdHyn2LWz.png" alt="image-20201130190704002"></p>
-<p>（4）由于IDLE本身屏蔽了单行刷新功能，所以运行结果并没有出现单行刷新。若要获得刷新效果，选择到e4.2TextProgressBar.py文件所在目录，使用命令行工具cmd执行如下命令:</p>
-<pre><code>python e4.2TextProgressBar.py</code></pre>
-<p>也可使用PyCharm运行这个单行动态刷新程序，可直接看到单行刷新效果。</p>
-<p><img src="https://i.loli.net/2020/11/30/Y2vryMeVR9ZwTtF.png" alt="image-20201130192609421"></p>
-<h3 id="带刷新的文本进度条"><a href="#带刷新的文本进度条" class="headerlink" title="带刷新的文本进度条"></a>带刷新的文本进度条</h3><p>（1）在文本进度条中增加运行时间的监控。</p>
-<p>（2）这里采用time库中的time.clock()函数。time.clock()函数一般多次出现，第一次调用时计时开始，同一程序中第二次及后续调用时返回与第一次计时之间的时间差，单位为秒。该函数主要用来统计程序运行时间，增加用户体验。</p>
-<pre><code class="python">import time
-scale = 50
-print(&quot;执行开始&quot;.center(scale // 2,&#39;-&#39;))
-t = time.clock()
-for i in range(scale+1):
-    a = &#39;*&#39; * i
-    b = &#39;.&#39; * (scale-i)
-    c = (i/scale)*100
-    t = time.clock() - t
-    print(&quot;\r&#123;:^3.0f&#125;%[&#123;&#125;-&gt;&#123;&#125;]&#123;:.2f&#125;s&quot;.format(c, a, b, t), end=&#39;&#39;)
-    time.sleep(0.05)
-print(&quot;\n&quot;+&quot;执行结束&quot;.center(scale // 2,&#39;-&#39;))</code></pre>
-<p>（3）在PyCharm中运行结果：</p>
-<p><img src="https://i.loli.net/2020/11/30/nTDRXCghKbp6xHf.png" alt="image-20201130195623749"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">展开全文 >></a>
         </p>
       
 

@@ -152,6 +152,166 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kali/kali下root用户的配色问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">kali下root用户的配色问题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-11-15T15:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc</p>
+<pre><code class="javascript">vim /root/.bashrc</code></pre>
+<p>（2）粘贴内容如下：</p>
+<pre><code class="javascript"># set variable identifying the chroot you work in (used in the prompt below)
+if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&amp; [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we &quot;want&quot; color)
+case &quot;$TERM&quot; in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n &quot;$force_color_prompt&quot; ]; then
+    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
+    # We have color support; assume it&#39;s compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;
+else
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#39;
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case &quot;$TERM&quot; in
+xterm*|rxvt*)
+    PS1=&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/.dircolors)&quot; || eval &quot;$(dircolors -b)&quot;
+    alias ls=&#39;ls --color=auto&#39;
+    #alias dir=&#39;dir --color=auto&#39;
+    #alias vdir=&#39;vdir --color=auto&#39;
+
+    #alias grep=&#39;grep --color=auto&#39;
+    #alias fgrep=&#39;fgrep --color=auto&#39;
+    #alias egrep=&#39;egrep --color=auto&#39;
+fi
+
+# some more ls aliases
+#alias ll=&#39;ls -l&#39;
+#alias la=&#39;ls -A&#39;
+#alias l=&#39;ls -CF&#39;
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don&#39;t need to enable
+# this, if it&#39;s already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi</code></pre>
+<p>（3）执行命令source /root/.bashrc即可</p>
+<pre><code class="javascript">source /root/.bashrc</code></pre>
+<p>（4）配置前：</p>
+<p><img src="https://i.loli.net/2020/11/15/kmhGaFQ2cq5uB7O.png" alt="image-20201115235207538"></p>
+<p>（5）配置后：</p>
+<p><img src="https://i.loli.net/2020/11/15/QBd9eWJRlyckqts.png" alt="image-20201115235233882"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kali/安装kali后修改系统时间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1173,107 +1333,6 @@ zsteg /root/Desktop/CTF/XCTF/Misc/005/瞅啥.bmp</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Misc-004/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-XCTF/XCTF_Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Misc-003/">XCTF_Misc_003</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/XCTF_Misc-003/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="simple-transfer"><a href="#simple-transfer" class="headerlink" title="simple_transfer"></a>simple_transfer</h2><p>（1）下载附件，得到一个流量包，用wireshark打开，在搜索框输入tcp contains flag查找flag，并没有发现有用信息。<br><img src="https://img-blog.csdnimg.cn/20201104185840360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）放到kali下，用foremost分解，得到一个pdf文件，打开看到flag。<br><img src="https://img-blog.csdnimg.cn/20201104185953178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Hear-with-your-Eyes"><a href="#Hear-with-your-Eyes" class="headerlink" title="Hear-with-your-Eyes"></a>Hear-with-your-Eyes</h2><p>（1）下载附件，一个.gz文件，解压后是一个没有后缀名的文件，用notepad++打开，没有flag信息。直接用7-zip工具打开，发现了一个sound.wav音频文件。<br><img src="https://img-blog.csdnimg.cn/20201104193005337.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据提示“用眼睛看这段音频”，使用audacity工具打开这个wav文件，点击“sound”切换到频谱图，就能看到flag。<br>audacity官网下载地址：<a target="_blank" rel="noopener" href="https://www.audacityteam.org/">https://www.audacityteam.org/</a><br><img src="https://img-blog.csdnimg.cn/20201104194048622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Ditf"><a href="#Ditf" class="headerlink" title="Ditf"></a>Ditf</h2><p>（1）下载得到一张png图片，notepad++打开，没发现啥信息，修改下图片高度看看。<br><img src="https://img-blog.csdnimg.cn/20201105114640452.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201105120341660.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）发现一串字符StRe1izia，应该是一个密码，将图片放到kali下用foremost分解，得到一个压缩包，解压需要密码，输入该串字符，成功解压。</p>
-<p><img src="https://img-blog.csdnimg.cn/20201105120813523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>。<br>（3）解压后得到一个Ditf.pcapng文件，用wireshark打开。Ctrl+F，选择字符串，搜索flag，无果。再搜索png，发现一个kiss.png。<br><img src="https://img-blog.csdnimg.cn/20201105123523762.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）追踪http流，发现一串特征明显的代码<br><img src="https://img-blog.csdnimg.cn/202011051236377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（5）用base64解码，得到flag。<br><img src="https://img-blog.csdnimg.cn/20201105123710874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="神奇的Modbus"><a href="#神奇的Modbus" class="headerlink" title="神奇的Modbus"></a>神奇的Modbus</h2><p>（1）用wireshark打开附件，根据题意，输入modbus过滤，并追踪tcp流，可发现flag。<br><img src="https://img-blog.csdnimg.cn/20201107144903770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/2020110714492428.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）提交flag时注意题目格式为sctf{xxx}，但提交sctf{Easy_Mdbus}错误，仔细观察，根据题目，应提交sctf{Easy_Modbus}，多加一个o</p>
-<h2 id="glance-50"><a href="#glance-50" class="headerlink" title="glance-50"></a>glance-50</h2><p>（1）附件是一张长条状的gif动图，很有可能就是分离gif的每一帧然后拼接形成图片得到flag。<br><img src="https://img-blog.csdnimg.cn/20201108120310683.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）将该图片放到kali里，用convert命令可以分解GIF图片</p>
-<pre><code>convert 9266eadf353d4ada94ededaeb96d0c50.gif flag.png</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20201108121130666.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201108120605449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）用convert分解出了200张图片，接下来就是图片的拼接。依旧使用kali下的工具montage。</p>
-<pre><code>montage flag*.png -tile x1 -geometry +0+0 flag.png
-//-tile是拼接时每行和每列的图片数，这里用x1，就是只一行
-//-geometry是首选每个图和边框尺寸，边框为0，图照原始尺寸即可</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20201108121230526.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201108121308124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）flag为TWCTF{Bliss by Charles O’Rear}</p>
-<h2 id="What-is-this"><a href="#What-is-this" class="headerlink" title="What-is-this"></a>What-is-this</h2><p>（1）得到一个.gz的压缩包，直接用7-zip工具打开，附件进行了两次压缩，最后得到两张类似的图片<br><img src="https://img-blog.csdnimg.cn/20201112194655132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201112194718517.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）用stegsolve工具将两张图片合成一下，得到flag<br><img src="https://img-blog.csdnimg.cn/20201112194751259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="再见李华"><a href="#再见李华" class="headerlink" title="再见李华"></a>再见李华</h2><p>（1）下载附件得到一张图片，图上是md5的信息，但解密不出来。放到kali中binwalk一下，发现还有一个压缩包。用foremost分离文件，得到压缩包，但解压需要密码。<br><img src="https://img-blog.csdnimg.cn/20201114112042304.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题目提示，1000个字，署名，LiHua<br>猜测1000个字是4位，LiHua是密码的一部分，将这两个部分组合起来，用ARCHPR进行爆破<br><img src="https://img-blog.csdnimg.cn/20201114112209518.png#pic_center" alt="在这里插入图片描述"><br>（3）爆破时攻击类型选择“掩码”，并设置掩码“????LiHua”<br><img src="https://img-blog.csdnimg.cn/20201114112817329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）成功破解，得到密码15CCLiHua，解压后得到flag<br><img src="https://img-blog.csdnimg.cn/20201114112938259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Misc-003/">展开全文 >></a>
         </p>
       
 
