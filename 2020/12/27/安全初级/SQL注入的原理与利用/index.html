@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/12/28/j1z5JDoWKX8QIYh.png">
 <meta property="og:image" content="https://i.loli.net/2020/12/28/QDLTgZqOvowe1A8.png">
 <meta property="article:published_time" content="2020-12-27T10:54:24.000Z">
-<meta property="article:modified_time" content="2021-01-18T09:24:06.871Z">
+<meta property="article:modified_time" content="2021-01-30T15:37:30.641Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全初级">
 <meta name="twitter:card" content="summary">
@@ -296,7 +296,7 @@ select user_id,user from users where last_name=&#39;admin&#39;and sleep(3)--&#39
 <pre><code class="sql">select aid,title from article union select bid,title from blog</code></pre>
 <p><img src="https://i.loli.net/2020/12/28/oKbsvpuWBnHRUyQ.png" alt="image-20201228183520085"></p>
 <p>（2）union查询结果说明：</p>
-<p>重复记录是指查询个中各个字段完全重复的记录，如上例，若title一样，但id号不一样则算作不同记录</p>
+<p>重复记录是指查询中各个字段完全重复的记录，如上例，若title一样，但id号不一样则算作不同记录</p>
 <p>在<strong>第一个</strong>select语句中被使用的字段名称也被用于结果的字段名称，如上例的aid</p>
 <p>各select语句字段名称可以不同，但<strong>字段属性必须一致，且数目相同</strong></p>
 <p>（3）union select语法用于合并两个或多个select语句的结果集。union内部的select语句必须拥有<strong>相同数量的列，因此判断原有查询语句的列数是构造SQL注入的第一步</strong></p>
@@ -316,7 +316,7 @@ select user_id,user from users where last_name=&#39;admin&#39;and sleep(3)--&#39
 <h4 id="构造数据提取语句"><a href="#构造数据提取语句" class="headerlink" title="构造数据提取语句"></a>构造数据提取语句</h4><p>在判断出输出位置后，将数据的输出位置替换为要查询的内容，即可通过联合查询的方式提取目标数据，被替换的位置可以是函数、字段名或另一个查询语句。</p>
 <p><img src="https://i.loli.net/2020/12/28/GDgI2QenLcJzxmE.png" alt="image-20201228190845417"></p>
 <p><img src="https://i.loli.net/2020/12/28/UKfi4sC7QVxWuad.png" alt="image-20201228192051553"></p>
-<h4 id="构造显示的数据条目"><a href="#构造显示的数据条目" class="headerlink" title="构造显示的数据条目"></a>构造显示的数据条目</h4><p>（1）有时web应用并不会将SQL查询的所有结果集显示出来，如只显示结果集的第一条记录，这时就需要调整输出结果。在mysql中，可以使用imit语句实现。</p>
+<h4 id="构造显示的数据条目"><a href="#构造显示的数据条目" class="headerlink" title="构造显示的数据条目"></a>构造显示的数据条目</h4><p>（1）有时web应用并不会将SQL查询的所有结果集显示出来，如只显示结果集的第一条记录，这时就需要调整输出结果。在mysql中，可以使用limit语句实现。</p>
 <p><strong>LIMIT子句可以被用于强制SELECT语句返回指定的记录数</strong></p>
 <p>（2）LIMIT接收一个或两个数字参数。参数必须是一个整数常量。如果给定两个参数，第一个参数指定第一个返回记录行的偏移量，第二个参数指定返回记录行的最大数目。</p>
 <p><strong>注意：初始记录行的偏移量是0而不是1</strong></p>

