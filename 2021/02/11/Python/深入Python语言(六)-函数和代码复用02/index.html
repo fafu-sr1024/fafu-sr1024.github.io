@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | Hexo</title>
+  <title>深入Python语言(六)-函数和代码复用02 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/index.html">
+  <meta name="description" content="代码复用和模块化设计要点：函数是程序的一种抽象，它通过封装实现代码复用，可以利用函数对程序进行模块化设计 （1）程序代码若是顺序但无组织的，不仅不利于阅读和理解，也很难进行升级和维护。因此，需要对代码进行抽象，形成易于理解的结构。当代编程语言从代码层面采用函数和对象两种抽象方式，分别对应面向过程和面向对象编程思想。 （2）函数封装的直接好处是代码复用，从而避免相同功能代码在调用出重复编写。代码复用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入Python语言(六)-函数和代码复用02">
+<meta property="og:url" content="http://example.com/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="代码复用和模块化设计要点：函数是程序的一种抽象，它通过封装实现代码复用，可以利用函数对程序进行模块化设计 （1）程序代码若是顺序但无组织的，不仅不利于阅读和理解，也很难进行升级和维护。因此，需要对代码进行抽象，形成易于理解的结构。当代编程语言从代码层面采用函数和对象两种抽象方式，分别对应面向过程和面向对象编程思想。 （2）函数封装的直接好处是代码复用，从而避免相同功能代码在调用出重复编写。代码复用">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/11/AmfsY7pe3naKUHS.png">
+<meta property="og:image" content="https://i.loli.net/2021/02/11/2GwhWLdFHp6fSTv.png">
+<meta property="article:published_time" content="2021-02-11T03:21:56.000Z">
+<meta property="article:modified_time" content="2021-02-11T14:16:53.573Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/11/AmfsY7pe3naKUHS.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,36 +158,183 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Python/深入Python语言(六)-函数和代码复用02" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/" class="archive-article-date">
-  	<time datetime="2021-02-11T03:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/">深入Python语言(六)-函数和代码复用02</a>
+    <h1 class="article-title" itemprop="name">
+      深入Python语言(六)-函数和代码复用02
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/" class="archive-article-date">
+  	<time datetime="2021-02-11T03:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码复用和模块化设计"><a href="#代码复用和模块化设计" class="headerlink" title="代码复用和模块化设计"></a>代码复用和模块化设计</h2><p><strong>要点：函数是程序的一种抽象，它通过封装实现代码复用，可以利用函数对程序进行模块化设计</strong></p>
+<p>（1）程序代码若是顺序但无组织的，不仅不利于阅读和理解，也很难进行升级和维护。因此，需要对代码进行抽象，形成易于理解的结构。当代编程语言从代码层面采用函数和对象两种抽象方式，分别对应<strong>面向过程和面向对象编程思想。</strong></p>
+<p>（2）函数封装的直接好处是代码复用，从而避免相同功能代码在调用出重复编写。代码复用产生了另一个好处，当更新函数功能时，所有被调用处的功能都被更新。</p>
+<p>（3）面向过程是一种以过程描述为主要方法的编程方式，该方法要求列出解决问题所需要的步骤，再用函数将这些步骤逐一实现，使用时依次建立并调用函数或编写语句即可。这是一种基本且自然的程序设计方法，函数通过将步骤或子功能封装实现代码复用并简化程序设计难度。</p>
+<p>（4）面向对象编程：对象是程序的一种高级抽象方式，它将程序代码组织为更高级的类。对象包括表征对象特征的属性和代表对象操作的方法。在程序设计中，若&lt;a&gt;代表对象，获取其属性&lt;b&gt;采用&lt;a&gt;.&lt;b&gt;，调用其方法&lt;c&gt;采用&lt;a&gt;.&lt;c&gt;()。对象的方法具有程序功能性，因此采用函数形式封装。对象可以凝聚更多代码，所以面向对象编程更适合代码规模较大，交互逻辑复杂的程序。</p>
+<p>（5）Python语言同时支持面向过程和面向对象两种编程方式。无论是面向过程还是面向对象编程，对程序合理划分功能模块并基于模块设计程序是一种常用方法，被称为“模块化设计”，即将一个程序分隔成短小的程序段，每一段程序完成一个小的功能。</p>
+<h2 id="函数的递归"><a href="#函数的递归" class="headerlink" title="函数的递归"></a>函数的递归</h2><h3 id="递归的定义"><a href="#递归的定义" class="headerlink" title="递归的定义"></a>递归的定义</h3><p>（1）函数定义中调用函数自身的方式称为递归。例如数学中的阶乘</p>
+<p><img src="https://i.loli.net/2021/02/11/AmfsY7pe3naKUHS.png" alt="image-20210211152129282"></p>
+<p>（2）递归的两个关键特征：</p>
+<ul>
+<li>存在一个或多个基例(例如0!)，基例不需要再次递归，它是确定的表达示或已知的值。</li>
+<li>所有递归链要以一个或多个基例结尾</li>
+</ul>
+<h3 id="递归的使用方法"><a href="#递归的使用方法" class="headerlink" title="递归的使用方法"></a>递归的使用方法</h3><p>（1）实例：阶乘的计算：根据用户输入的整数n，计算并输出n的阶乘值。</p>
+<pre><code class="python">def fact(n):
+    if n == 0:
+        return 1
+    else:
+        return n*fact(n-1)
+num = eval(input(&quot;请输入一个整数：&quot;))
+print(fact(abs(int(num))))</code></pre>
+<p>（2）fact()函数在其定义内部引用了自身，形成了递归过程(第5行)。无限制的递归将耗尽计算资源，因此需要设计基例使得递归逐层返回。fact()函数通过if语句给出了n为0时的基例，当n==0，fact()函数不再递归，返回数值1，若n!=0,则通过递归返回n与n-1阶乘的乘积。</p>
+<p>（3）由于负数和小数通过减一无法达到递归的基例(n==0)，代码第7行通过abs()和int()函数将用户输入转变成非负整数。</p>
+<p>（4）递归遵循函数第语义，每次调用都会引起新函数的开始，表示它有本地变量值的副本，包括函数的参数。每次调用时，函数参数的副本会临时存储，递归中各函数在运算自己的参数，互不影响。当基例结束运算并返回值时，各函数逐层结束运算，向调用者返回计算结果。</p>
+<p><strong>注意：使用递归一定要注意基例的构建，否则递归无法返回将会报错。</strong></p>
+<p>（5）实例：字符串反转：对于用户输入的字符串s，输出反转后的字符串。</p>
+<p>解决问题的基本思想：把一个字符串看成仅由首字符和剩余字符串两部分组成，若将剩余字符串和首字符交换，就完成了反转整个字符串。代码如下：</p>
+<pre><code class="python">&gt;&gt;&gt; def reverse(s):
+    return reverse(s[1:]) + s[0]    #s[0]是首字符，s[1:]是剩余字符串
+
+&gt;&gt;&gt; reverse(&quot;abc&quot;)
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
+    reverse(&quot;abc&quot;)
+  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
+    return reverse(s[1:]) + s[0]
+  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
+    return reverse(s[1:]) + s[0]
+  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
+    return reverse(s[1:]) + s[0]
+  [Previous line repeated 991 more times]
+RecursionError: maximum recursion depth exceeded</code></pre>
+<p>（6）上述代码出错，该错误表明系统无法执行reverse()函数创建的递归，这是因为reverse()函数没有基例，递归层数超过了系统允许的最大递归深度。默认情况下，当递归调用到1000层，Python解释器将终止程序。递归深度是为了防止无限递归错误而设计的，当用户编写的正确递归程序需要超过1000层时，可以通过如下代码设定。</p>
+<pre><code class="python">&gt;&gt;&gt;import sys
+&gt;&gt;&gt;sys.setrecursionlimit(2000)    #2000是新的递归层数</code></pre>
+<p>（7）reverse()函数超过递归深度是因为没有设计基例。可以把基例设计为字符串的最短形式，即空字符串。代码如下：</p>
+<pre><code class="python">def reverse(s):
+    if s == &quot;&quot;:
+        return s
+    else:
+        return reverse(s[1:]) + s[0]
+str = input(&quot;请输入一个字符串：&quot;)
+print(reverse(str))</code></pre>
+<h2 id="实例：科赫曲线绘制"><a href="#实例：科赫曲线绘制" class="headerlink" title="实例：科赫曲线绘制"></a>实例：科赫曲线绘制</h2><p>（1）科赫曲线在众多经典数学曲线中非常著名，由于其形状类似雪花，也被称为雪花曲线。</p>
+<p>（2）正整数n代表科赫曲线的阶数，表示生成科赫曲线过程的操作次数。科赫曲线初始化阶数为0，表示一个长度为L的直线。对于直线L，将其等分为3段，中间一段用边长为L/3的等边三角形的两个边代替，得到1阶科赫曲线，它包含4条线段。进一步对每条线段重复同样的操作后得到2阶科赫曲线。继续重复同样的操作n次可以得到n阶科赫曲线。</p>
+<p><img src="https://i.loli.net/2021/02/11/2GwhWLdFHp6fSTv.png" alt="image-20210211210938960"></p>
+<p>（3）科赫曲线属于分形几何分支，其绘制过程体现了递归思想，绘制过程代码如下：</p>
+<pre><code class="python">import turtle
+def koch(size, n):
+    if n==0:
+        turtle.fd(size)
+    else:
+        for angle in [0, 60, -120, 60]:
+            turtle.left(angle)
+            koch(size/3, n-1)
+def main():
+    turtle.setup(800,400)
+    turtle.speed(0)          #控制绘制速度
+    turtle.penup()
+    turtle.goto(-300,-50)
+    turtle.pendown()
+    turtle.pensize(2)
+    koch(600,3)              #0阶科赫曲线长度，阶数
+    turtle.hideturtle()
+main()</code></pre>
+<p>（4）n阶科赫曲线的绘制相当于在画笔前进方向的0°、60°、-120°和60°分别绘制n-1阶曲线。在给定初始图形后，通过科赫曲线可以生成很多漂亮的图形。代码如下。</p>
+<pre><code class="python">import turtle
+def koch(size, n):
+    if n == 0:
+        turtle.fd(size)
+    else:
+        for angle in [0, 60, -120, 60]:
+            turtle.left(angle)
+            koch(size/3, n-1)
+def main():
+    turtle.setup(600,600)
+    turtle.speed(0)
+    turtle.penup()
+    turtle.goto(-200,100)
+    turtle.pendown()
+    turtle.pensize(2)
+    level=5
+    koch(400,level)
+    turtle.right(120)
+    koch(400,level)
+    turtle.hideturtle()
+main()</code></pre>
+<h2 id="Python内置函数"><a href="#Python内置函数" class="headerlink" title="Python内置函数"></a>Python内置函数</h2><p>（1）Python解释器提供了68个内置函数，这些函数不需要引用库直接使用。以下对部分函数进行说明</p>
+<p>（2）all()函数一般针对组合数据类型，如果其中每个元素都是True，则返回True，否则返回False。注意：整数0、空字符串””、空列表[]等都被当做False。</p>
+<p>（3）any()函数与all()函数相反，只要组合数据中任何一个是True，则返回True，全部元素都是False才返回False。</p>
+<p>（4）hash()函数对于能够计算哈希的类型返回哈希值。</p>
+<p>（5）id()函数对每一个数据返回唯一编号，数据不同编号不同，可以通过比较两个变量编号是否相同判断数据是否一致。Python将数据存储在内存中的地址作为其唯一编号。</p>
+<p>（6）reversed()函数返回输入组合数据类型的逆序形式。</p>
+<p>（7）sorted()函数对一个序列进行排序，默认从小到大排序。</p>
+<p>（8）type()函数返回每个数据对应的类型。</p>
+<p>实例如下：</p>
+<pre><code class="python">&gt;&gt;&gt; ls = [1,2,5,0]
+&gt;&gt;&gt; all(ls)
+False
+&gt;&gt;&gt; any(ls)
+True
+&gt;&gt;&gt; hash(&quot;中国，你好&quot;)
+8827663102129553702
+&gt;&gt;&gt; id(ls)
+2463935192072
+&gt;&gt;&gt; list(reversed(ls))
+[0, 5, 2, 1]
+&gt;&gt;&gt; sorted(ls)       #不改变ls的值
+[0, 1, 2, 5]
+&gt;&gt;&gt; ls
+[1, 2, 5, 0]
+&gt;&gt;&gt; sorted(ls, reverse=True)
+[5, 2, 1, 0]
+&gt;&gt;&gt; type(ls)
+&lt;class &#39;list&#39;&gt;
+&gt;&gt;&gt; type(reversed(ls))
+&lt;class &#39;list_reverseiterator&#39;&gt;</code></pre>
+<p>（9）Python使用手册<a target="_blank" rel="noopener" href="https://docs.python.org/3">https://docs.python.org/3</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,171 +346,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2021-02-01T03:36:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WEB漏洞扫描与渗透测试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">WEB漏洞扫描与渗透测试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A8%E5%92%8C%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">代码复用和模块化设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%92%E5%BD%92"><span class="toc-number">2.</span> <span class="toc-text">函数的递归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">递归的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">递归的使用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E7%A7%91%E8%B5%AB%E6%9B%B2%E7%BA%BF%E7%BB%98%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">实例：科赫曲线绘制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">Python内置函数</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/23/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/OWASP%E4%B8%8E%E5%B8%B8%E8%A7%81WEB%E6%BC%8F%E6%B4%9E/" class="archive-article-date">
-  	<time datetime="2021-01-23T11:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/23/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/OWASP%E4%B8%8E%E5%B8%B8%E8%A7%81WEB%E6%BC%8F%E6%B4%9E/">OWASP与常见WEB漏洞</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/19/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEBshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="archive-article-date">
-  	<time datetime="2021-01-19T13:36:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/19/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEBshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">WEBshell与文件上传漏洞</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/18/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/XSS%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%A9%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2021-01-18T09:27:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/18/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/XSS%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%A9%E7%94%A8/">XSS注入的原理与利用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -378,8 +481,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

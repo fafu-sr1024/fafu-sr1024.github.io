@@ -152,6 +152,173 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全初级/Windows系统安全加固" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/10/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/">Windows系统安全加固</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/10/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/" class="archive-article-date">
+  	<time datetime="2020-12-10T08:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安全加固基本思路"><a href="#安全加固基本思路" class="headerlink" title="安全加固基本思路"></a>安全加固基本思路</h2><h3 id="安全基线"><a href="#安全基线" class="headerlink" title="安全基线"></a>安全基线</h3><p>（1）安全基线，即系统必须达到的最低的安全标准</p>
+<p>（2）一般通过检查各安全配置参数是否符合标准来度量</p>
+<h3 id="系统信息审查"><a href="#系统信息审查" class="headerlink" title="系统信息审查"></a>系统信息审查</h3><p>（1）查看系统的详细版本号，使用命令：</p>
+<pre><code>ver 或者 winver</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/FMeLBRwpbI5d6WK.png" alt="image-20201210163842045"></p>
+<p><img src="https://i.loli.net/2020/12/10/dnkx2zrlBDy5Obp.png" alt="image-20201210164309222"></p>
+<p>（2）查看系统的服务补丁包(Service Pack)，1个SP版本包含了该系统一段时间系统补丁和服务更新的集合。</p>
+<pre><code>wmic os get ServicePackMajorVersion</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/RMjFdkwe2aWpHsL.png" alt="image-20201210164333299"></p>
+<p>（3）查看系统的补丁安装情况</p>
+<pre><code>wmic qfe get hotfixid,InstalledOn</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/uaWThg9wYXoiRlc.png" alt="image-20201210164603798"></p>
+<p>（4）查看主机名</p>
+<pre><code>hostname</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/XAxzg9RNInQ86pi.png" alt="image-20201210164905930"></p>
+<p>（5）查看系统信息，包括主机信息，注册ID，处理器，内存，BIOS，域，补丁，网卡等信息。</p>
+<pre><code>systeminfo</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/5gmDzh12qQBv8tI.png" alt="image-20201210165140544"></p>
+<p>（6）查看开放端口</p>
+<pre><code>netstat -ano
+netstat -ano | find &quot;445&quot;     //端口筛选</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/ocea9lZtJTN5hIE.png" alt="image-20201210165941323"></p>
+<p><img src="https://i.loli.net/2020/12/10/F4EUNLO9hQyi7fj.png" alt="image-20201210170028656"></p>
+<p>（7）查看路由表，查看网络配置</p>
+<pre><code>route print
+ipconfig/all</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/HKiMeIPbUjcOXA2.png" alt="image-20201210170259177"></p>
+<p><img src="https://i.loli.net/2020/12/10/ix2Xm8wFtZouLjv.png" alt="image-20201210170356121"></p>
+<h2 id="Windows系统安全漏洞的修复"><a href="#Windows系统安全漏洞的修复" class="headerlink" title="Windows系统安全漏洞的修复"></a>Windows系统安全漏洞的修复</h2><h3 id="漏洞修复——方法1-补丁安装"><a href="#漏洞修复——方法1-补丁安装" class="headerlink" title="漏洞修复——方法1.补丁安装"></a>漏洞修复——方法1.补丁安装</h3><p>（1)补丁安装属于永久解决方案</p>
+<p>（2）微软官方补丁管理，官网补丁下载地址:<a target="_blank" rel="noopener" href="http://www.catalog.update.microsoft.com/home.aspx">http://www.catalog.update.microsoft.com/home.aspx</a></p>
+<p><img src="https://i.loli.net/2020/12/10/Wd5ceJPw6niLkza.png" alt="image-20201210171059715"></p>
+<p><img src="https://i.loli.net/2020/12/10/IoaNf5WcJEZ4Gyd.png" alt="image-20201210171120240"></p>
+<h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><p><strong>以Windows7 SP1安装ms12-020漏洞补丁KB2621440为例</strong></p>
+<p>（1）微软安全公告</p>
+<p>（2）下载并安装补丁</p>
+<p>（3）查看补丁安装情况</p>
+<pre><code>wmic qfe get hotfixid,InstalledOn | find /i &quot;KB2621440&quot;</code></pre>
+<p>（4）Metasploit验证无漏洞</p>
+<h3 id="漏洞修复——方法2-端口封禁"><a href="#漏洞修复——方法2-端口封禁" class="headerlink" title="漏洞修复——方法2.端口封禁"></a>漏洞修复——方法2.端口封禁</h3><p>（1）端口封禁是漏洞修复的临时解决方法</p>
+<p>（2）端口能被利用，是因为漏洞所在服务依赖端口开放访问，如果将端口封禁，那么漏洞便无法成功利用。封禁并不是把端口关掉，而是把访问该端口的流量过滤。例：</p>
+<p>ms17-010漏洞所在服务是文件共享服务smb，依赖端口为135,139,445</p>
+<p>ms12-020漏洞所在服务是远程桌面服务RDP，依赖端口为3389</p>
+<p>ms15-034漏洞所在服务是超文本传输协议http，依赖端口为80</p>
+<p>（3）端口封禁的方法：在组策略中创建IP安全策略。</p>
+<h4 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h4><p><strong>封禁135端口对外开放</strong></p>
+<p>（1）运行gpedit.msc进入组策略配置(组策略:是针对用户upn或计算机上强制使用的配置方法，不是权限)</p>
+<pre><code>PS:家庭版的Windows没有组策略，以管理员身份运行下载的脚本后，再用运行窗口即可打开gpedit.msc</code></pre>
+<p>（2）依次点击进入计算机配置–&gt;Windows设置–&gt;安全设置–&gt;IP安全策略</p>
+<p>（3）在空白处右键，创建IP安全策略</p>
+<p>（4）进入IP安全策略设置向导</p>
+<p>（5）设置IP安全策略名称</p>
+<p>（6）去除”激活默认响应规则”</p>
+<p>（7）点击完成， 并进入编辑属性</p>
+<p>（8）去除”使用添加向导”复选框，点击”添加”进入IP筛选列表配置</p>
+<p>（9）去除”使用添加向导”复选框，点击”添加”进入IP筛选器配置</p>
+<p>（10）地址选项卡，源地址选择”任何地址”，目标地址选择”我的IP地址”，去掉”镜像”</p>
+<p>（11）协议选项卡，协议类型选择”TCP”,设置从任意端口，到此端口填写135，点击”确定”，若需要添加屏蔽端口，可再次点击添加，无需添加则点击”确定”</p>
+<p>（12）在筛选器操作选项卡，点击”添加”，添加一个新筛选器操作”阻止”</p>
+<p>（13）选中新建的IP筛选列表和筛选器操作，点击”应用”</p>
+<p>（14）右键新IP安全策略，点击”分配”，指派新建的IP安全策略</p>
+<pre><code>运行--&gt;gpupdate /force    ##强制更新</code></pre>
+<p>（15）在kali中使用nmap工具验证端口已被阻塞</p>
+<pre><code>nmap -sS -p 135,139,445,3389 192.168.14.131</code></pre>
+<h2 id="Windows系统配置加固"><a href="#Windows系统配置加固" class="headerlink" title="Windows系统配置加固"></a>Windows系统配置加固</h2><h4 id="账号口令"><a href="#账号口令" class="headerlink" title="账号口令"></a>账号口令</h4><p><strong>账号优化:目的是为了梳理系统中的账号以及口令，避免默认账号及弱口令的存在</strong></p>
+<p>（1）查看账号方式：</p>
+<pre><code>开始--&gt;运行--&gt;compmgmt.msc(进入计算机管理)/lusrmgr.msc--&gt;本地用户和组
+或者
+开始--&gt;运行--&gt;cmd--&gt;net user</code></pre>
+<p><img src="https://i.loli.net/2020/12/10/KSJmdz6aosPxeNM.png" alt="image-20201210185315326"></p>
+<p>（2）删除无用账号</p>
+<pre><code>net user user_name /del
+PS:net user user_name$ passwd /add  增加一个账号，其中的添加美元符号即可在命令行中隐藏
+net user /?  获取提示</code></pre>
+<p>（3）锁定无用账号，如锁定”Guest”账号</p>
+<pre><code>net user Guest /active:no</code></pre>
+<p>（4）禁用Guest账号：运行–&gt;lusrmgr.msc–&gt;用户–&gt;Guest–&gt;禁用</p>
+<p><strong>口令策略：增强密码复杂度，防止用户长期使用同一个账号，以及账号锁定策略等，降低系统账号被暴力破解的可能性</strong></p>
+<p>（1）配置方式：开始–&gt;运行–&gt;secpol.msc(本地安全策略)–&gt;安全设置</p>
+<p>（2）账户策略–&gt;密码策略(建议加固值)</p>
+<p>（3）账户策略–&gt;账户锁定策略(建议加固值)</p>
+<p>（4）本地策略–&gt;安全选项：配置用户退出后再次登录不会显示上次退出的用户名</p>
+<h4 id="授权管理"><a href="#授权管理" class="headerlink" title="授权管理"></a>授权管理</h4><p>（1）授权账号登录：目的是设置允许从本地或者远程登录的账号。</p>
+<p>（2）配置操作：开始–&gt;运行–&gt;secpol.msc–&gt;安全设置–&gt;本地策略–&gt;用户权限分配</p>
+<p>（3）要求系统账号无法远程登录：用户权限分配–&gt;拒绝通过远程桌面服务登录–&gt;添加用户和组，添加system和administrator。</p>
+<p><img src="https://i.loli.net/2020/12/13/ipIALnbZvF1JOxB.png" alt="image-20201213111329893"></p>
+<p><img src="https://i.loli.net/2020/12/13/SekzPwMoQpaC9AF.png" alt="image-20201213111112396"></p>
+<p><img src="https://i.loli.net/2020/12/13/P459tnRrvLBY1FV.png" alt="image-20201213110908484"></p>
+<p>拒绝从网络访问这台计算机–&gt;添加用户和组，添加system和administrator</p>
+<p><img src="https://i.loli.net/2020/12/13/TEGv8lBVZSO1aoI.png" alt="image-20201213110947814"></p>
+<p>（4）最后要强制生效组策略，运行窗口下执行</p>
+<pre><code>gpupdate /force</code></pre>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>利用cmd将Windows物理机的文件传输到Windows虚拟机。</p>
+<pre><code>net use \\192.168.14.131\ipc$ &quot;ndsec&quot; user:ndsec       
+##其中ndsec为虚拟机的账户密码，192.168.14.131为虚拟机的IP地址</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/10/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全初级/系统漏洞分析与验证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2900,212 +3067,6 @@ git stash apply   //恢复被隐藏的文件</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali的基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">kali的基本使用</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-11-20T09:13:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基本守则"><a href="#基本守则" class="headerlink" title="基本守则"></a>基本守则</h2><p>（1）Linux系统大小写敏感</p>
-<p>（2）文件名前带“.”是隐藏文件</p>
-<p>（3）配置文件#开头代表是注释行，程序不执行改行</p>
-<p>（4）Linux系统下的“/”相当于DOS下的“\”</p>
-<p>（5）超级用户“#”，普通用户“$”</p>
-<h2 id="转义符"><a href="#转义符" class="headerlink" title="转义符"></a>转义符</h2><p>将特殊字符转换成普通字符</p>
-<p>（1）\        反斜杠，对单个字符进行转义</p>
-<p>（2）’’        单引号，对一串字符进行转义</p>
-<p>（3）``     反引号，可将命令二次处理</p>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="X-windows（图形化）与控制台（shell）间的切换"><a href="#X-windows（图形化）与控制台（shell）间的切换" class="headerlink" title="X-windows（图形化）与控制台（shell）间的切换"></a>X-windows（图形化）与控制台（shell）间的切换</h3><p>（1）X-windows切换到控制台：</p>
-<pre><code>init 3</code></pre>
-<p>或使用快捷键：Ctrl+alt+F3</p>
-<p>（2）控制台切换到X-windows：</p>
-<pre><code>startx
-或
-init 5</code></pre>
-<h3 id="设置默认开机界面"><a href="#设置默认开机界面" class="headerlink" title="设置默认开机界面"></a>设置默认开机界面</h3><p>（1）查看当前系统默认开机界面</p>
-<pre><code>systemctl get-default</code></pre>
-<p>（2）设置开机默认为X-windows</p>
-<pre><code>systemctl set-default graphical.target</code></pre>
-<p>（3）设置开机默认为控制台</p>
-<pre><code>systemclt set-default multi-user.target</code></pre>
-<p>（4）命令可用tab键补全</p>
-<h3 id="关机，重启，注销用户，锁屏，解锁"><a href="#关机，重启，注销用户，锁屏，解锁" class="headerlink" title="关机，重启，注销用户，锁屏，解锁"></a>关机，重启，注销用户，锁屏，解锁</h3><p>（1）关机，三种方式：</p>
-<pre><code>shutdown -h now
-halt
-init0</code></pre>
-<p>（2）重启，三种方式：</p>
-<pre><code>shutdown -r now
-reboot
-init 6</code></pre>
-<p>（3）注销用户，退出登录</p>
-<p>控制台界面下：</p>
-<pre><code>exit    或快捷键Ctrl+D</code></pre>
-<p>X-windows界面或shell下：</p>
-<pre><code>pkill -kill -t tty7</code></pre>
-<p>（4）锁屏，快捷键：Ctrl+s</p>
-<p>（5）解锁，快捷键：Ctrl+q</p>
-<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><table>
-<thead>
-<tr>
-<th align="center">命令</th>
-<th align="center">解释</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">history</td>
-<td align="center">显示历史命令</td>
-<td align="center">!5      //执行第5行的命令</td>
-</tr>
-<tr>
-<td align="center">echo</td>
-<td align="center">回显命令</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">uname</td>
-<td align="center">显示系统信息</td>
-<td align="center">-a参数     //显示全部信息</td>
-</tr>
-<tr>
-<td align="center">hostname</td>
-<td align="center">显示主机名</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">date</td>
-<td align="center">显示或修改系统时间</td>
-<td align="center">-s “20201120 12:12:00”</td>
-</tr>
-<tr>
-<td align="center">cal</td>
-<td align="center">显示日历</td>
-<td align="center">cal 01 2020 //显示2020年1月的日历</td>
-</tr>
-<tr>
-<td align="center">who、w</td>
-<td align="center">查看登录用户信息</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">whoami</td>
-<td align="center">显示用户名</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">which</td>
-<td align="center">显示命令所在位置</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">whereis</td>
-<td align="center">显示文件位于系统中的什么位置</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">whatis</td>
-<td align="center">显示命令的简短描述</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">命令 –help</td>
-<td align="center">显示命令的使用摘要和参数列表</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">man</td>
-<td align="center">显示命令的说明文档</td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<p>ps：man命令：查看文档时，直接输入/keyword  即可在文档中搜索keyword这个关键字，n跳到下一个关键字，N跳到上一个关键字，键q离开说明文档</p>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
-<thead>
-<tr>
-<th align="center">tab</th>
-<th align="center">自动补全命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Ctrl+a</td>
-<td align="center">把光标移动到命令行最开始的地方</td>
-</tr>
-<tr>
-<td align="center">Ctrl+e</td>
-<td align="center">把光标移动到命令行末尾</td>
-</tr>
-<tr>
-<td align="center">Ctrl+u</td>
-<td align="center">删除当前光标前的所有内容</td>
-</tr>
-</tbody></table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
         </p>
       
 
