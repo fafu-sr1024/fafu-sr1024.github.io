@@ -16,7 +16,7 @@
 <meta property="og:description" content="数字类型表示数字或数值的数据类型称为数字类型，Python语言提供3种数字类型：整数、浮点数和复数，分别对应数学中的整数、实数和复数。 整数类型（1）整数类型与数学中的整数概念一致，整数类型共有4种进制表示：十进制、二进制、八进制和十六进制。默认情况，整数采用十进制，其他进制需要增加引导符号。    进制种类 引导符号 描述    十进制 无 默认情况下使用   二进制 0b 或 0B 由0和1组">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-27T16:03:15.000Z">
-<meta property="article:modified_time" content="2020-12-14T12:16:19.338Z">
+<meta property="article:modified_time" content="2021-02-06T13:17:04.269Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -216,7 +216,7 @@
 <pre><code class="python">&gt;&gt;&gt;pow(2,pow(2,15))</code></pre>
 <h3 id="浮点数类型"><a href="#浮点数类型" class="headerlink" title="浮点数类型"></a>浮点数类型</h3><p>（1）浮点数类型与数学中实数的概念一致，表示带有小数的数值。Python语言要求所有浮点数必须带有小数部分，小数部分可以是0，这样可以区分浮点数和整数类型。</p>
 <p>（2）浮点数有两种表示方法：十进制表示和科学计数法表示。</p>
-<p>科学计数法使用字母e或E作为幂的符号，以10位基数，含义如下：</p>
+<p>科学计数法使用字母e或E作为幂的符号，以10为基数，含义如下：</p>
 <pre><code>&lt;a&gt;e&lt;b&gt; = a * pow(10,b)
 例如：
 4.3e-3 =4 .3*pow(10,-3)
@@ -361,7 +361,7 @@ x = x op y</code></pre>
 <p>注：abs()可以计算复数的绝对值。因此，复数的绝对值是二维坐标系中复数位置到坐标原点的长度，例如：</p>
 <pre><code class="python">&gt;&gt;&gt;abs(-3+4j)
 5.0</code></pre>
-<h3 id="内置的数字类型转换函数"><a href="#内置的数字类型转换函数" class="headerlink" title="内置的数字类型转换函数"></a>内置的数字类型转换函数</h3><p>浮点数类型转换为整数类型时，小数部分会被舍弃。复数不能直接转换为其他数字类型，可以用过.real和.imag将复数的实部或虚部分别转换。</p>
+<h3 id="内置的数字类型转换函数"><a href="#内置的数字类型转换函数" class="headerlink" title="内置的数字类型转换函数"></a>内置的数字类型转换函数</h3><p>浮点数类型转换为整数类型时，小数部分会被舍弃。复数不能直接转换为其他数字类型，可以通过.real和.imag将复数的实部或虚部分别转换。</p>
 <table>
 <thead>
 <tr>
