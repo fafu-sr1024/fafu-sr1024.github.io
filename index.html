@@ -152,6 +152,813 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全进阶/HTML代码进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">HTML代码进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-03-15T06:47:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="网站前端架构介绍"><a href="#网站前端架构介绍" class="headerlink" title="网站前端架构介绍"></a>网站前端架构介绍</h2><h3 id="WEB应用的基本架构"><a href="#WEB应用的基本架构" class="headerlink" title="WEB应用的基本架构"></a>WEB应用的基本架构</h3><p><img src="https://i.loli.net/2021/03/15/52cAsmaUxB4gwnF.png" alt="image-20210315145057858"></p>
+<h3 id="从网页制作到前端开发"><a href="#从网页制作到前端开发" class="headerlink" title="从网页制作到前端开发"></a>从网页制作到前端开发</h3><p>（1）WEB1.0时代的产物是“网页制作”，这时候的网页主要是静态网页，即没有与用户进行交互，而仅仅供读者浏览的网页，例如一篇日志、博文等展示性文章。（缺乏交互性）</p>
+<p>（2）WEB2.0时代，网页有静态网页和动态网页。</p>
+<ul>
+<li>所谓动态网页，就是用户不仅可以浏览网页，还可以与服务器进行交互。例如用户登录某个网站，输入账号密码，由服务器对该用户的账号进行验证，通过验证即可成功登录。</li>
+<li>WEB2.0时代的网页不仅包含绚丽的动画、音频和视频，还可以让用户在网页中进行评论交流、上传和下载文件等。具有良好的交互性。因而不再叫做“网页制作”，而是叫“WEB前端开发”。</li>
+</ul>
+<h3 id="前端架构核心技术"><a href="#前端架构核心技术" class="headerlink" title="前端架构核心技术"></a>前端架构核心技术</h3><p>（1）网页最主要由3部分组成：结构、表现和行为，目前模式是HTML、CSS和JavaScript。</p>
+<p>（2）HTML是网页的结构，CSS是网页的外观，而JavaScript是页面的行为。</p>
+<p>（3）CSS（Cascading Style Sheets）,用来表现HTML文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+<h2 id="HTML基本语法"><a href="#HTML基本语法" class="headerlink" title="HTML基本语法"></a>HTML基本语法</h2><h3 id="代码编写编辑器"><a href="#代码编写编辑器" class="headerlink" title="代码编写编辑器"></a>代码编写编辑器</h3><p>（1）离线编辑器：pycharm、Sublime Text3、Notepad++</p>
+<p>（2）在线编辑器：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jq22.com/webide/">https://www.jq22.com/webide/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp">https://www.w3school.com.cn/tiy/t.asp</a></li>
+<li><a target="_blank" rel="noopener" href="https://c.runoob.com/front-end/61">https://c.runoob.com/front-end/61</a></li>
+</ul>
+<h3 id="HTML基本概念"><a href="#HTML基本概念" class="headerlink" title="HTML基本概念"></a>HTML基本概念</h3><p>（1）HTML指的是超文本标记语言(Hyper Text Markup Language)</p>
+<p>（2）HTML不是一种编程语言，而是一种标记语言(Markup Language)，标记语言是一套标记标签(Markup Tag)</p>
+<p>（3）HTML使用标记标签来描述网页</p>
+<p>（4）HTML标签是由尖括号包围的关键词，比如&lt;html&gt;</p>
+<p>（5）HTML标签通常是成对出现的，比如&lt;b&gt;和&lt;/b&gt;</p>
+<p>（6）标签对中第一个标签是开始标签，第二个标签是结束标签</p>
+<p>（7）开始标签和结束标签也被称为开放标签和闭合标签</p>
+<p>PS:<strong>HTML文档通常用htm和html作为后缀名。Web浏览器的作用是读取HTML文档，并以网页的形式显示出他们。浏览器不会显示HTML标签，而是使用标签来解释页面的内容。</strong></p>
+<h3 id="HTML元素"><a href="#HTML元素" class="headerlink" title="HTML元素"></a>HTML元素</h3><p>（1）HTML元素指的是从开始标签(start tag)，到结束标签(end tag)的所有代码。</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;a href=&quot;index.html&quot;&gt;首页&lt;/a&gt;
+        &lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+&lt;!-- 上述HTML代码中，html元素中嵌套了body元素，body元素中又嵌套了a元素和br元素 --&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/ahLjpODg9TUnw6I.png" alt="image-20201216201051807"></p>
+<p>（2）HTML元素语法</p>
+<ul>
+<li><p>HTML元素以开始标签(start tag)起始，以结束标签(end tag)终止</p>
+</li>
+<li><p>元素的内容是开始标签与结束标签之间的内容</p>
+</li>
+<li><p>某些HTML元素内容为空，空元素在开始标签中闭合，无结束标签</p>
+</li>
+<li><p>大多数HTML元素可拥有属性，属性总是以名称/值对的形式出现，提供了有关HTML元素的更多信息。</p>
+<p>属性总是在HTML元素的开始标签中规定；属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没问题。</p>
+</li>
+</ul>
+<p>（3）嵌套的HTML元素</p>
+<ul>
+<li>大多数HTML元素可以嵌套(可以包含其他HTML元素)</li>
+<li>HTML文档由嵌套的HTML元素构成</li>
+</ul>
+<p>（4）空的HTML元素</p>
+<ul>
+<li>没有内容的HTML元素被称为空元素。空元素是在开始标签中关闭的。</li>
+<li>&lt;br&gt;就是没有关闭标签的空元素(&lt;br&gt;标签定义换行)</li>
+</ul>
+<h3 id="常见的HTML标签"><a href="#常见的HTML标签" class="headerlink" title="常见的HTML标签"></a>常见的HTML标签</h3><p>（1）基础标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;!DOCTYPE&gt;</td>
+<td align="center">定义文档类型</td>
+</tr>
+<tr>
+<td align="center">&lt;html&gt;</td>
+<td align="center">定义HTML文档</td>
+</tr>
+<tr>
+<td align="center">&lt;body&gt;</td>
+<td align="center">定义文档的主体</td>
+</tr>
+<tr>
+<td align="center">&lt;head&gt;</td>
+<td align="center">定义关于文档的信息</td>
+</tr>
+<tr>
+<td align="center">&lt;meta&gt;</td>
+<td align="center">定义关于HTML文档的元信息</td>
+</tr>
+<tr>
+<td align="center">&lt;title&gt;</td>
+<td align="center">定义文档的标题</td>
+</tr>
+<tr>
+<td align="center">&lt;script&gt;</td>
+<td align="center">定义客户端脚本</td>
+</tr>
+</tbody></table>
+<p>（2）多媒体标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;img&gt;</strong></td>
+<td align="center"><strong>定义图像</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;audio&gt;</td>
+<td align="center">定义声音内容</td>
+</tr>
+<tr>
+<td align="center">&lt;video&gt;</td>
+<td align="center">定义视频</td>
+</tr>
+</tbody></table>
+<p>（3）表单标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;form&gt;</strong></td>
+<td align="center"><strong>定义供用户输入的HTML表单</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;input&gt;</strong></td>
+<td align="center"><strong>定义输入控件</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;textarea&gt;</td>
+<td align="center">定义多行的文本输入控件</td>
+</tr>
+<tr>
+<td align="center">&lt;button&gt;</td>
+<td align="center">定义按钮</td>
+</tr>
+<tr>
+<td align="center">&lt;select&gt;</td>
+<td align="center">定义选择列表(下拉列表)</td>
+</tr>
+<tr>
+<td align="center">&lt;optgroup&gt;</td>
+<td align="center">定义选择列表中的相关选项的组合</td>
+</tr>
+<tr>
+<td align="center">&lt;option&gt;</td>
+<td align="center">定义选择列表中的选项</td>
+</tr>
+<tr>
+<td align="center">&lt;fieldset&gt;</td>
+<td align="center">定义围绕表单中元素的边框</td>
+</tr>
+<tr>
+<td align="center">&lt;datalist&gt;</td>
+<td align="center">定义下拉列表</td>
+</tr>
+</tbody></table>
+<p>（4）链接标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;a&gt;</strong></td>
+<td align="center"><strong>定义超链接</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;link&gt;</td>
+<td align="center">定义文档与外部资源的关系</td>
+</tr>
+</tbody></table>
+<p>（5）格式标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;h1&gt;to&lt;h6&gt;</strong></td>
+<td align="center"><strong>定义HTML标题</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;p&gt;</strong></td>
+<td align="center"><strong>定义段落</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;br&gt;</strong></td>
+<td align="center"><strong>定义换行</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;hr&gt;</td>
+<td align="center">定义水平线</td>
+</tr>
+<tr>
+<td align="center">&lt;b&gt;</td>
+<td align="center">定义粗体文本</td>
+</tr>
+<tr>
+<td align="center">&lt;big&gt;</td>
+<td align="center">定义大号文本</td>
+</tr>
+<tr>
+<td align="center">&lt;em&gt;</td>
+<td align="center">定义强调文本</td>
+</tr>
+<tr>
+<td align="center">&lt;i&gt;</td>
+<td align="center">定义斜体文本</td>
+</tr>
+<tr>
+<td align="center">&lt;pre&gt;</td>
+<td align="center">定义预格式文本</td>
+</tr>
+<tr>
+<td align="center">&lt;small&gt;</td>
+<td align="center">定义小号文本</td>
+</tr>
+</tbody></table>
+<p>（6）样式/节标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;style&gt;</strong></td>
+<td align="center"><strong>定义文档的样式信息</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;div&gt;</td>
+<td align="center">定义文档中的分隔区块</td>
+</tr>
+<tr>
+<td align="center">&lt;span&gt;</td>
+<td align="center">定义文档中的节</td>
+</tr>
+</tbody></table>
+<p>（7）表格标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;table&gt;</td>
+<td align="center">定义表格</td>
+</tr>
+<tr>
+<td align="center">&lt;caption&gt;</td>
+<td align="center">定义表格标题</td>
+</tr>
+<tr>
+<td align="center">&lt;th&gt;</td>
+<td align="center">定义表格中的表头单元格</td>
+</tr>
+<tr>
+<td align="center">&lt;td&gt;</td>
+<td align="center">定义表格中的单元格（列）</td>
+</tr>
+<tr>
+<td align="center">&lt;tr&gt;</td>
+<td align="center">定义表格中的行</td>
+</tr>
+</tbody></table>
+<p>（8）框架标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;frame&gt;</td>
+<td align="center">定义框架集的窗口或框架</td>
+</tr>
+<tr>
+<td align="center">&lt;frameset&gt;</td>
+<td align="center">定义框架集</td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;iframe&gt;</strong></td>
+<td align="center"><strong>定义内联框架</strong></td>
+</tr>
+</tbody></table>
+<p>参考链接:<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/index.asp">https://www.w3school.com.cn/tags/index.asp</a></p>
+<h3 id="HTML注释"><a href="#HTML注释" class="headerlink" title="HTML注释"></a>HTML注释</h3><p>（1）注释标签&lt;!– 与 –&gt; 用于在HTML插入注释</p>
+<pre><code class="html">&lt;!-- 在此处写注释 --&gt;</code></pre>
+<p>（2）注释：在开始标签中有一个惊叹号，但是结束标签中没有。</p>
+<p>（3）浏览器不会显示注释，但是能够帮助记录HTML文档。</p>
+<p>（4）可以利用注释在HTML中放置通知和提醒信息。</p>
+<h3 id="HTML实体编码"><a href="#HTML实体编码" class="headerlink" title="HTML实体编码"></a>HTML实体编码</h3><p>（1）HTML实体编码，也即HTML中的转义字符</p>
+<ul>
+<li>在 HTML 中不能使用小于号（&lt;）和大于号（&gt;），这是因为浏览器会误认为它们是标签。</li>
+<li>如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体（character entities）。</li>
+<li>字符实体类似：&entity_name;或者&#entity_number;</li>
+</ul>
+<p>（2）如需显示小于号，我们必须这样写：&amp;lt; 或 &amp;#60;</p>
+<p>（3）使用实体名而不是数字的好处是，名称易于记忆。不过坏处是，浏览器也许并不支持所有实体名称（对实体数字的支持却很好）。</p>
+<p>（4）常见的实体编码，参考链接：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html_entities.asp">https://www.w3school.com.cn/html/html_entities.asp</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">显示结果</th>
+<th align="left">描述</th>
+<th align="left">实体名称</th>
+<th align="left">实体编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"></td>
+<td align="left">空格</td>
+<td align="left">&amp;nbsp;</td>
+<td align="left">&amp;#160;</td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">小于号</td>
+<td align="left">&amp;lt;</td>
+<td align="left">&amp;#60;</td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">大于号</td>
+<td align="left">&amp;gt;</td>
+<td align="left">&amp;#62;</td>
+</tr>
+<tr>
+<td align="left">&amp;</td>
+<td align="left">和号</td>
+<td align="left">&amp;amp;</td>
+<td align="left">&amp;#38;</td>
+</tr>
+<tr>
+<td align="left">“</td>
+<td align="left">引号</td>
+<td align="left">&amp;quot;</td>
+<td align="left">&amp;#34;</td>
+</tr>
+<tr>
+<td align="left">‘</td>
+<td align="left">撇号</td>
+<td align="left">&amp;apos; (IE不支持)</td>
+<td align="left">&amp;#39;</td>
+</tr>
+<tr>
+<td align="left">©</td>
+<td align="left">版权（copyright）</td>
+<td align="left">&amp;copy;</td>
+<td align="left">&amp;#169;</td>
+</tr>
+</tbody></table>
+<p>（5）HTML属性–全局属性</p>
+<p>全局属性是可用于为任何HTML元素赋予意义和语境的属性。</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">class</td>
+<td align="center">规定元素的一个或多个类名(引用样式表中的类)</td>
+</tr>
+<tr>
+<td align="center">hidden</td>
+<td align="center">规定元素进行隐藏</td>
+</tr>
+<tr>
+<td align="center">id</td>
+<td align="center">规定元素的唯一id</td>
+</tr>
+<tr>
+<td align="center">style</td>
+<td align="center">规定元素的行内CSS样式</td>
+</tr>
+<tr>
+<td align="center">title</td>
+<td align="center">规定有关元素的额外信息</td>
+</tr>
+</tbody></table>
+<h2 id="HTML事件属性"><a href="#HTML事件属性" class="headerlink" title="HTML事件属性"></a>HTML事件属性</h2><p>（1）事件型属性是可以使HTML事件触发浏览器中的行为，比方说当用户点击某个HTML元素时启动一段JavaScript。</p>
+<p>（2）事件型属性通常可以分为：全局事件属性，窗口事件属性，表单事件属性，键盘事件属性，鼠标事件属性，多媒体事件属性，其他事件属性。</p>
+<h3 id="Window事件属性—onerror事件"><a href="#Window事件属性—onerror事件" class="headerlink" title="Window事件属性—onerror事件"></a>Window事件属性—onerror事件</h3><p>（1）onerror：在错误发生时运行的脚本。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onerror事件会在文档或图像加载过程中发生错误时被触发。</li>
+<li>在装载文档或图像的过程中如果发生了错误，就会调用该事件句柄。</li>
+</ul>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;!-- onerror 事件会在文档或图像加载过程中发生错误时被触发。--&gt;
+        &lt;img src=&quot;image.gif&quot;
+             onerror=&quot;alert(&#39;The image could not be loaded.&#39;)&quot; /&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/EOgsuHUzaYPecBd.png" alt="image-20210315165838173"></p>
+<h3 id="Window事件属性—onload事件"><a href="#Window事件属性—onload事件" class="headerlink" title="Window事件属性—onload事件"></a>Window事件属性—onload事件</h3><p>（1）onload：页面结束加载之后触发。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onload属性在对象已加载时触发。</li>
+<li>onload常用在&lt;body&gt;中，一旦完全加载所有内容(包括图像、脚本文件、CSS文件等)，就执行一段脚本。</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body onload=&quot;alert(&#39;该页面已加载！&#39;)&quot;&gt;
+        &lt;h1&gt;
+            Hello World!
+        &lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/86aqodCfvhipGBl.png" alt="image-20210315180956314"></p>
+<h3 id="Form事件属性—onchange事件"><a href="#Form事件属性—onchange事件" class="headerlink" title="Form事件属性—onchange事件"></a>Form事件属性—onchange事件</h3><p>（1）onchange：在元素值被改变时运行的脚本。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onchange事件会在域的内容改变时发生。</li>
+<li>onchange事件也可用于单选框与复选框改变后触发的事件</li>
+<li>onchange属性适用于：&lt;input&gt;、&lt;textarea&gt;以及&lt;select&gt;元素。</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            function myFunction()&#123;
+                var x=document.getElementById(&quot;fname&quot;);
+                x.value=x.value.toUpperCase();
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        输入你的名字：&lt;input type=&quot;text&quot; id=&quot;fname&quot; onchange=&quot;myFunction()&quot;&gt;
+        &lt;!--当你离开输入框后，函数将被触发，将小写字母转变为大写字母--&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/nmSdzCarPgTRs1q.png" alt="image-20210315181941724"></p>
+<p><img src="https://i.loli.net/2021/03/15/2olfHGX8RTmL3wS.png" alt="image-20210315181959113"></p>
+<h3 id="Form事件属性—onfocus事件"><a href="#Form事件属性—onfocus事件" class="headerlink" title="Form事件属性—onfocus事件"></a>Form事件属性—onfocus事件</h3><p>（1）onfocus：当元素获得焦点时运行的脚本。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onfocus属性在元素获得焦点时触发</li>
+<li>onfocus常用于&lt;input&gt;、&lt;select&gt;以及&lt;a&gt;</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            function myFunction(x)&#123;
+                x.style.background=&quot;yellow&quot;;
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        输入你的名字：&lt;input type=&quot;text&quot; onfocus=&quot;myFunction(this)&quot;&gt;
+        &lt;!--当输入框获取焦点时，修改背景色将被触发--&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/1G263yPbEOo8qfe.png" alt="image-20210315182624985"></p>
+<p><img src="https://i.loli.net/2021/03/15/vk34qrVUO8FSlwB.png" alt="image-20210315182637474"></p>
+<h3 id="Mouse事件属性—onclick事件"><a href="#Mouse事件属性—onclick事件" class="headerlink" title="Mouse事件属性—onclick事件"></a>Mouse事件属性—onclick事件</h3><p>onclick：元素上发生鼠标点击时触发。</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            function myFunction()&#123;
+                document.getElementById(&quot;demo&quot;).innerHTML=&quot;Hello World&quot;;
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;button onclick=&quot;myFunction()&quot;&gt;
+            点我
+        &lt;/button&gt;
+        &lt;p id=&quot;demo&quot;&gt;
+        &lt;/p&gt;
+        &lt;!-- 点击将触发onclick事件 --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/OsY4WdJU2cRVurM.png" alt="image-20210315184435547"></p>
+<h3 id="Mouse事件属性—onmousemove事件"><a href="#Mouse事件属性—onmousemove事件" class="headerlink" title="Mouse事件属性—onmousemove事件"></a>Mouse事件属性—onmousemove事件</h3><p>onmouseover：当鼠标指针移动到元素时触发</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;input onmouseover=&quot;alert(&#39;The event has been triggered&#39;)&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/4iME3hV2CygcuX1.png" alt="image-20210315185221847"></p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1 onmouseover=&quot;alert(&#39;The event has been triggered&#39;)&quot;&gt;hanker&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/wAdP5poI19yfmJF.png" alt="image-20210315185526053"></p>
+<h3 id="HTML列表"><a href="#HTML列表" class="headerlink" title="HTML列表"></a>HTML列表</h3><p>HTML支持有序、无序列表</p>
+<p>（1）定义无序列表：ul+li</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;ul&gt;
+            &lt;li&gt;咖啡&lt;/li&gt;
+            &lt;li&gt;茶&lt;/li&gt;
+            &lt;li&gt;牛奶&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/vtYNhQykP7JHfWM.png" alt="image-20210315190107145"></p>
+<p>（2）定义有序列表：ol+li</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;ol&gt;
+            &lt;li&gt;咖啡&lt;/li&gt;
+            &lt;li&gt;茶&lt;/li&gt;
+            &lt;li&gt;牛奶&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;ol start=&quot;50&quot;&gt;
+           &lt;li&gt;咖啡&lt;/li&gt;
+           &lt;li&gt;茶&lt;/li&gt;
+           &lt;li&gt;牛奶&lt;/li&gt; 
+        &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/RFi12fZT4vWtKUb.png" alt="image-20210315190327677"></p>
+<h3 id="HTML表单"><a href="#HTML表单" class="headerlink" title="HTML表单"></a>HTML表单</h3><p>（1）HTML表单用于搜集不同类型的用户输入</p>
+<p>（2）&lt;form&gt;元素</p>
+<ul>
+<li>HTML表单用于收集用户输入</li>
+</ul>
+<p>（3）HTML表单包含表单元素。</p>
+<ul>
+<li>表单元素指的是不同类型的input元素、复选框、单选按钮、提交按钮等等。</li>
+</ul>
+<p>（4）&lt;input&gt;元素是最重要的表单元素</p>
+<p>（5）&lt;input&gt;元素有很多形态，根据不同的type属性。</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">text</td>
+<td align="center">定义常规文本输入</td>
+</tr>
+<tr>
+<td align="center">radio</td>
+<td align="center">定义单选按钮输入（选择多个选择之一）</td>
+</tr>
+<tr>
+<td align="center">submit</td>
+<td align="center">定义提交按钮（提交表单）</td>
+</tr>
+</tbody></table>
+<h4 id="文本输入"><a href="#文本输入" class="headerlink" title="文本输入"></a>文本输入</h4><p>&lt;input type=”text”&gt;定义用于文本输入的单行输入字段</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot;/&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;/&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/bpMRWlGhvE3J9jU.png" alt="image-20210315191807882"></p>
+<h4 id="单选按钮"><a href="#单选按钮" class="headerlink" title="单选按钮"></a>单选按钮</h4><p>（1）&lt;input type=”radio”&gt;定义单选按钮</p>
+<p>（2）单选按钮允许用户在有限数量的选项中选择其中之一。</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;/&gt;Male
+            &lt;br&gt;
+            &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;/&gt;Female
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/c3WLbOfRqaQTGnv.png" alt="image-20210315192243280"></p>
+<h4 id="提交按钮"><a href="#提交按钮" class="headerlink" title="提交按钮"></a>提交按钮</h4><p>（1）&lt;input type=”submit”&gt;定义用于向表单处理程序提交表单的按钮</p>
+<p>（2）表单处理程序通常是包含用来处理输入数据的脚本的服务器页面</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form action=&#39;form.php&#39;&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot;/&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;/&gt;
+            &lt;br&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;submit&quot;/&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/uWx9OeFcNGq3bHM.png" alt="image-20210315192941921"></p>
+<p><img src="https://i.loli.net/2021/03/15/UnsfAECtjNOgGla.png" alt="image-20210315193009434"></p>
+<h4 id="各种框总结"><a href="#各种框总结" class="headerlink" title="各种框总结"></a>各种框总结</h4><ul>
+<li>文本框：text</li>
+<li>隐藏文本框：hidden</li>
+<li>密码框：password</li>
+<li>多选框：checkbox</li>
+<li>单选框：radio</li>
+<li>提交按钮：submit</li>
+<li>重置按钮：reset</li>
+<li>多选框：select、option</li>
+</ul>
+<h4 id="action属性"><a href="#action属性" class="headerlink" title="action属性"></a>action属性</h4><p>（1）action属性定义在提交表单时执行的动作</p>
+<p>（2）向服务器提交表单通常做法是使用提交按钮</p>
+<p>（3）通常，表单会被提交到web服务器上的网页</p>
+<pre><code class="html">&lt;form action=&quot;action_page.php&quot;&gt;</code></pre>
+<p>（4）如果省略action属性，则action会被设置为当前页面</p>
+<h4 id="method属性"><a href="#method属性" class="headerlink" title="method属性"></a>method属性</h4><p>（1）method属性规定在提交表单时所用的HTTP方法(GET或POST)</p>
+<pre><code class="html">&lt;form action=&quot;action_page.php&quot; method=&quot;GET&quot;&gt;
+&lt;form action=&quot;action_page.php&quot; method=&quot;POST&quot;&gt;</code></pre>
+<p>（2）如果表单提交是被动的（比如搜索引擎查询），并且没有敏感信息。表单数据在页面地址栏是可见的。这时使用GET.</p>
+<pre><code>action_page.php?firstname=Mickey&amp;lastname=Mouse</code></pre>
+<p>（3）如果表单正在更新数据，或者包含敏感信息(例如密码）。POST的安全性更佳，因为在页面地址栏中被提交的数据是不可见的。</p>
+<h4 id="校验函数"><a href="#校验函数" class="headerlink" title="校验函数"></a>校验函数</h4><p>onsubmit事件在表单提交时触发，当检验不通过时，就不会提交表单内容。</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;login&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h3&gt;
+            Login Please
+        &lt;/h3&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            function check()&#123;
+                alert(&quot;check函数被触发了~&quot;)
+                return true   //此处改为false就不会提交，会返回false
+            &#125;
+        &lt;/script&gt;
+
+        &lt;form action=&quot;/login.php&quot; method=&quot;post&quot; onsubmit=&quot;return check()&quot;&gt;
+            姓名：&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;br&gt;
+            密码：&lt;input type=&quot;text&quot; password=&quot;password&quot;&gt;&lt;br&gt;
+            &lt;input value=&quot;提交&quot; type=&quot;submit&quot; name=&quot;submit&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/Y1lJreIVGRN7zKo.png" alt="image-20210315203458505"></p>
+<h3 id="HTML的form属性"><a href="#HTML的form属性" class="headerlink" title="HTML的form属性"></a>HTML的form属性</h3><p><img src="https://i.loli.net/2021/03/15/1jKqzZuAaE8GdsX.png" alt="image-20210315194714650"></p>
+<h3 id="常见的输入限制"><a href="#常见的输入限制" class="headerlink" title="常见的输入限制"></a>常见的输入限制</h3><p><img src="https://i.loli.net/2021/03/15/cX2CD8gmvsU5NM4.png" alt="image-20210315194834108"></p>
+<h4 id="value属性"><a href="#value属性" class="headerlink" title="value属性"></a>value属性</h4><p>value属性规定输入字段的初始值</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot;&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/EQ3ZUHK25VmNazJ.png" alt="image-20210315200004163"></p>
+<h4 id="readonly属性"><a href="#readonly属性" class="headerlink" title="readonly属性"></a>readonly属性</h4><p>（1）readonly属性规定输入字段为只读（不能修改）</p>
+<p>（2）readonly属性不需要值。它等同于readonly=”readonly”</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot; readonly&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/C5cdxHKPrQlEyks.png" alt="image-20210315200652188"></p>
+<h4 id="disabled属性"><a href="#disabled属性" class="headerlink" title="disabled属性"></a>disabled属性</h4><p>（1）disabled属性规定输入字段是禁用的。</p>
+<p>（2）被禁用的元素是不可用和不可点击的，且被禁用的元素不会被提交</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form action=&quot;&quot;&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot; disabled&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/8coQvE591CNPrse.png" alt="image-20210315201127969"></p>
+<h4 id="maxlength属性"><a href="#maxlength属性" class="headerlink" title="maxlength属性"></a>maxlength属性</h4><p>（1）maxlength属性规定输入字段允许的最大长度，如设置maxlength属性，则输入控件不会接受超过所允许数的字符。</p>
+<p>（2）该属性不会提供任何反馈，如果需要提醒用户，则必须编写JavaScript代码。</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; maxlength=&quot;5&quot;&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/G3P7WS9TyxmajAC.png" alt="image-20210315202015566"></p>
+<h3 id="HTML-DOM"><a href="#HTML-DOM" class="headerlink" title="HTML DOM"></a>HTML DOM</h3><p>（1）HTML的文档对象模型</p>
+<p>（2）HTML的标准编程接口</p>
+<p>（3）HTML DOM定义了所有HTML元素的对象和属性，以及访问他们的方法。</p>
+<p>（4）换言之，HTML DOM 是关于如何获取、修改、添加或删除HTML元素的标准。</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;文档标题&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a href=&quot;http://since1994.cn&quot;&gt;我的链接&lt;/a&gt;
+        &lt;h1&gt;
+            我的标题
+        &lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/6B3MxtUWLwaRqK5.png" alt="image-20210315204251708"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/深入Python语言(六)-函数和代码复用02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1339,7 +2146,7 @@ select * from table LIMIT 95，-1  //检索记录行96之后的所有数据</cod
 <p>（5）PHP语句以分号结尾(;)</p>
 <p>（6）PHP使用//作为注释符号</p>
 <pre><code class="php">&lt;?php
-    //此处时PHP代码
+    //此处是PHP代码
     ?&gt;</code></pre>
 <h3 id="PHP输出"><a href="#PHP输出" class="headerlink" title="PHP输出"></a>PHP输出</h3><p>（1）echo能够输出一个以上的字符串</p>
 <p>（2）echo是一个语言结构，有无括号均可使用：echo或echo()</p>
@@ -1366,7 +2173,7 @@ echo &quot;Hello World!&quot;;
 <pre><code class="HTML">&lt;!--a标签触发get请求--&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;meta charset=&quot;utr-8&quot;&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
         &lt;title&gt;GET请求&lt;/title&gt;
     &lt;/head&gt;
     &lt;body&gt;
@@ -2542,238 +3349,6 @@ main()</code></pre>
 
 
   
-    <article id="post-Python/深入Python语言(四)-程序的控制结构02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/">深入Python语言(四)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/" class="archive-article-date">
-  	<time datetime="2020-12-13T07:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="random库的使用"><a href="#random库的使用" class="headerlink" title="random库的使用"></a>random库的使用</h2><p><strong>要点：随机运算的标准函数库random共提供9个常用函数</strong></p>
-<h3 id="random库描述"><a href="#random库描述" class="headerlink" title="random库描述"></a>random库描述</h3><p>Python内置的random库主要用于产生各种分布的伪随机数序列。random采用梅森旋转算法生成伪随机数序列。主要目的是生成随机数，所有函数都是基于最基本的random.random()函数扩展实现。</p>
-<h3 id="random库解析"><a href="#random库解析" class="headerlink" title="random库解析"></a>random库解析</h3><table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">seed(a=None)</td>
-<td align="center">初始化随机数种子，默认值为当前系统时间</td>
-</tr>
-<tr>
-<td align="center">random()</td>
-<td align="center">生成一个[0.0, 1.0]之间的随机小数</td>
-</tr>
-<tr>
-<td align="center">randint(a, b)</td>
-<td align="center">生成一个[a,  b]之间的整数</td>
-</tr>
-<tr>
-<td align="center">getrandbits(k)</td>
-<td align="center">生成一个k比特长度的随机整数</td>
-</tr>
-<tr>
-<td align="center">randrange(start, stop[, step])</td>
-<td align="center">生成一个[start, stop]之间以step为步数的随机整数</td>
-</tr>
-<tr>
-<td align="center">uniform(a, b)</td>
-<td align="center">生成一个[a, b]之间的随机小数</td>
-</tr>
-<tr>
-<td align="center">choice(seq)</td>
-<td align="center">从序列类型，例如列表中随机返回一个元素</td>
-</tr>
-<tr>
-<td align="center">shuffle(seq)</td>
-<td align="center">将序列类型中的元素随机排列，返回打乱后的序列</td>
-</tr>
-<tr>
-<td align="center">sample(pop, k)</td>
-<td align="center">从pop类型中随机选取k个元素，以列表类型返回</td>
-</tr>
-</tbody></table>
-<p>（1）random库的引用方法与math库一样，可以采用下面两种方式实现：</p>
-<p>import random 或 from random import *</p>
-<pre><code class="python">&gt;&gt;&gt; from random import *
-&gt;&gt;&gt; randrange(0, 100, 4)  #从0开始到100以4递增的元素中随机返回
-20
-&gt;&gt;&gt; choice(range(100))
-82
-&gt;&gt;&gt; list(range(10))
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-&gt;&gt;&gt; ls = list(range(10))
-&gt;&gt;&gt; shuffle(ls)
-&gt;&gt;&gt; print(ls)
-[3, 5, 8, 7, 9, 0, 1, 2, 6, 4]</code></pre>
-<p>（2）生成随机数之前可以通过seed()函数指定随机数种子，随机数种子一般是一个整数，只要种子相同，每次生成的随机数序列也相同。</p>
-<pre><code class="Python">seed(125)  #随机数种子赋值为125
-&gt;&gt;&gt; print(&quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10)))
-&#39;4.4.10&#39;
-&gt;&gt;&gt; print(&quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10)))
-&#39;5.10.3&#39;
-&gt;&gt;&gt; seed(125)   #再次给随机数种子赋值125
-&gt;&gt;&gt; print(&quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10)))
-&#39;4.4.10&#39;</code></pre>
-<p>（3）从上述语句可发现，在设定相同种子后，每次调用随机函数生成的随机数是相同的。这是随机数种子的作用。</p>
-<h2 id="程序的异常处理"><a href="#程序的异常处理" class="headerlink" title="程序的异常处理"></a>程序的异常处理</h2><p><strong>要点：Python通过try、except等保留字提供异常处理功能</strong></p>
-<pre><code class="python">num = eval(input(&quot;请输入一个数字：&quot;))
-print(num**2)</code></pre>
-<p>（1）输入数字时，程序正常执行，若输入数字则会报错。</p>
-<pre><code class="python">请输入一个数字：100
-10000
-&gt;&gt;&gt; 
-
-请输入一个数字：abc
-Traceback (most recent call last):
-  File &quot;&lt;pyshell#2&gt;&quot;, line 1, in &lt;module&gt;      #line1为异常发生的代码行数
-    num = eval(input(&quot;请输入一个数字：&quot;))
-  File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
-NameError: name &#39;abc&#39; is not defined           #NameError为异常类型，后面跟异常内容提示
-&gt;&gt;&gt; </code></pre>
-<h3 id="异常处理：try-except语句"><a href="#异常处理：try-except语句" class="headerlink" title="异常处理：try-except语句"></a>异常处理：try-except语句</h3><p>（1）Python使用try-except语句实现异常处理，其基本语法格式如下：</p>
-<pre><code class="python">try:
-    &lt;语句块1&gt;
-except &lt;异常类型&gt;:
-    &lt;语句块2&gt;</code></pre>
-<p>语句块1是正常执行的内容，当发生异常时执行except保留字后面的语句块。例如：</p>
-<pre><code class="python">try:
-    num = eval(input(&quot;请输入一个数字：&quot;))
-    print(num**2)
-except NameError:
-    print(&quot;输入错误，请输入一个整数。&quot;)</code></pre>
-<p>执行结果：</p>
-<pre><code class="python">请输入一个数字：abc
-输入错误，请输入一个整数。
-&gt;&gt;&gt; </code></pre>
-<h3 id="异常的高级用法"><a href="#异常的高级用法" class="headerlink" title="异常的高级用法"></a>异常的高级用法</h3><p>（1)try-except语句可以支持多个except语句，语法格式如下：</p>
-<pre><code class="python">try:
-    &lt;语句块1&gt;
-except &lt;异常类型1&gt;:
-    &lt;语句块2&gt;
-...
-except &lt;异常类型N&gt;:
-    &lt;语句块N+1&gt;
-except:
-    &lt;语句块N+2&gt;</code></pre>
-<p>（2）其中，第1到第N个except语句后面都指定了异常类型，说明这些except所包含的语句块只处理这些类型的异常。最后一个except语句没有指定任何类型，表示它对应的语句块可以处理所有其他异常。这个过程与if-elif-else语句类似，是分支结构的一种表达方式。例如：</p>
-<pre><code class="python">try:
-    alp = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
-    idx = eval(input(&quot;请输入一个整数：&quot;))
-    print(alp[idx])
-except NameError:
-    print(&quot;输入错误，请输入一个整数!&quot;)
-except:
-    print(&quot;其他错误&quot;)</code></pre>
-<p>（3）上面的程序中，当用户输入非整数字符时，except NameError 异常被捕获到，提示用户输入类型错误，当用户输入数字不再0到25之间时，异常被except捕获，程序打印其错误。执行结果如下：</p>
-<pre><code class="python">&gt;&gt;&gt;
-请输入一个整数：abc
-输入错误，请输入一个整数!
-&gt;&gt;&gt;
-请输入一个整数：100
-其他错误</code></pre>
-<p>（4）除了try和except保留字外，异常语句还可以和else和finally保留字配合使用，语法格式如下：</p>
-<pre><code class="python">try:
-    &lt;语句块1&gt;
-except &lt;异常类型1&gt;:
-    &lt;语句块2&gt;
-else:
-    &lt;语句块3&gt;
-finally:
-    &lt;语句块4&gt;</code></pre>
-<p>（5）else语句与循环中的else一样，当try中的语句块1正常执行结束且没有发生异常时，else中的语句块3执行，可以看作是对try语句块正常执行后的一种追加处理。若except捕获到异常，则不会执行else中的语句块3。</p>
-<p>finally语句块则不同，无论try中的语句块1是否发生异常，语句块4都会执行。因此，可以将程序执行语句块1的一些收尾工作放在这里，例如：关闭、打开文件等。</p>
-<pre><code class="python">try:
-    alp = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
-    idx = eval(input(&quot;请输入一个整数：&quot;))
-    print(alp[idx])
-except NameError:
-    print(&quot;输入错误，请输入一个整数!&quot;)
-except:
-    print(&quot;其他错误&quot;)
-else:
-    print(&quot;没有发生异常&quot;)
-finally:
-    print(&quot;程序执行完毕，不知道是否发生了异常&quot;)</code></pre>
-<p>执行结果：</p>
-<pre><code class="python">&gt;&gt;&gt;
-请输入一个整数：6
-G
-没有发生异常
-程序执行完毕，不知道是否发生了异常
-&gt;&gt;&gt; 
-请输入一个整数：abc
-输入错误，请输入一个整数!
-程序执行完毕，不知道是否发生了异常</code></pre>
-<p>（6）try-except异常一般只用来检测极少发生的情况，编写程序时不应过度依赖try-except这种异常处理机制，应该尽量在程序中采用if语句直接判断，避免通过异常处理来应对可能发生的情况。因为采用try-except语句会影响代码的可读性，增加代码维护难度。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -2884,6 +3459,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全初级</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">安全进阶</a>
               </li>
             
             <div class="clearfix"></div>

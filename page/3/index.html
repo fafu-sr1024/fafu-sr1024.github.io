@@ -152,6 +152,119 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kali/解Misc题常用的kali工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/">解Misc题常用的kali工具</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/" class="archive-article-date">
+  	<time datetime="2020-11-23T13:15:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="binwalk"><a href="#binwalk" class="headerlink" title="binwalk"></a>binwalk</h2><p>binwalk是一款Python编写的工具，在kali中已经预安装了，可以在Python2和Python3的环境下运行，在Python3中运行速度更快。</p>
+<pre><code>apt-get install binwalk         //安装binwalk
+binwalk file                 //查看是否存在隐藏文件
+binwalk -e file              //文件提取</code></pre>
+<h2 id="foremost"><a href="#foremost" class="headerlink" title="foremost"></a>foremost</h2><p>foremost在kali中已经预安装，可用于文件的分离</p>
+<pre><code>apt-get install foremost     //安装foremost
+foremost -t all file         //分离文件，-t 指定文件类型，all则表示全部，后跟要分离的文件</code></pre>
+<h2 id="zsteg"><a href="#zsteg" class="headerlink" title="zsteg"></a>zsteg</h2><p>zsteg可用于检测png和bmp图片里的隐写数据，为了使安装更快，要换为国内源</p>
+<pre><code>gem sources -l             //查看现有源
+gem sources --remove https://rubygems.org/    //删除现有源
+gem sources -a http://gems.ruby-china.com/    //添加新源
+apt-get install gem        //安装gem，若不换源则需要等待许多时间
+gem install zsteg          //安装zsteg
+
+#使用方法，查看lsb数据
+zsteg xxx.bmp
+zsteg xxx.png
+zsteg -a file             //查看各个通道的lsb</code></pre>
+<h2 id="convert"><a href="#convert" class="headerlink" title="convert"></a>convert</h2><p>convert可以分解gif动图，kali自带的工具，无需安装</p>
+<pre><code>convert xxx.gif flag.png       //分解gif动图，得到每一帧的图片按顺序以flag-x.png命名，-x为序号</code></pre>
+<h2 id="montage"><a href="#montage" class="headerlink" title="montage"></a>montage</h2><p>montage用于图片的拼接，kali自带，无需安装，通常结合convert使用</p>
+<pre><code>montage flag*.png -tile x1 -geometry +0+0 flag.png
+//-tile是拼接时每行和每列的图片数，这里用x1，就是只一行
+//-geometry是首选每个图和边框尺寸，边框为0，图照为原始尺寸
+//拼接好的图片命名为flag.png</code></pre>
+<h2 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h2><p>查看可以打印的字符，通常可以借助管道符+grep匹配flag信息</p>
+<pre><code>strings file
+strings file | grep flag</code></pre>
+<h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><p>保存当前的工作区与暂存区的状态，把当前的工作隐藏起来，等需要的时候再恢复</p>
+<pre><code>git log           //查看git记录
+git stash list    //查看修改列表
+git stash show    //校验列表中的存储文件
+git stash apply   //恢复被隐藏的文件</code></pre>
+<h2 id="gnuplot"><a href="#gnuplot" class="headerlink" title="gnuplot"></a>gnuplot</h2><p>gnuplot是一个命令行的交互式绘图工具。</p>
+<pre><code>apt-get install gnuplot       //安装gnuplot工具</code></pre>
+<p>使用：</p>
+<p>在终端输入gnuplot，之后输入plot，后跟坐标文件，回车后即可看到绘制的图片。</p>
+<p>例如BugkuCTF中的图穷匕见：</p>
+<p><img src="https://i.loli.net/2020/11/24/LqcMiNKyJ5enmAl.png" alt="image-20201124170748506"></p>
+<p><img src="https://i.loli.net/2020/11/24/5ySqZlarOGKsB1g.png" alt="image-20201124170808090"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kali/kali的基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1389,101 +1502,6 @@ echo &quot;$a $hello&quot;;
 
 
   
-    <article id="post-BugkuCTF/BugkuCTF_Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-003/">BugkuCTF_Misc_003</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-003/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:02:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="想蹭网先解开密码"><a href="#想蹭网先解开密码" class="headerlink" title="想蹭网先解开密码"></a>想蹭网先解开密码</h2><p><img src="https://img-blog.csdnimg.cn/20201030224918563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（1）用wireshark打开附件<br><img src="https://img-blog.csdnimg.cn/20201030224945875.png#pic_center" alt="在这里插入图片描述"><br>（2）WiFi连接认证的重点在WPA的四次握手包，即eapol协议的包，过滤一下：<br><img src="https://img-blog.csdnimg.cn/20201030225003978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）根据题目，需要爆破WiFi密码，使用密码生成工具crunch生成密码字典（kali自带，无需安装）这里题目提示密码为手机号，所以设置生成11位的字符，并且给出了前7位，则只剩下4位需要破解。<br><img src="https://img-blog.csdnimg.cn/20201030225045290.png#pic_center" alt="在这里插入图片描述"><br>（4）再使用软件aircrack破解WiFi密码（kali自带，无需安装），这里选择第三3个，然后开始破解，即可看到flag。<br><img src="https://img-blog.csdnimg.cn/20201030225105113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225113875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>#字典生成工具crunch：<br>参数:  crunch<br>-t   @/,/%/^<br><br>     @插入小写字母<br>    ，插入大写字母<br>    %插入数字<br>^插入特殊符号<br>例子：<br>（1）生成11个数字组合的密码字典：</p>
-<pre><code>crunch 11 11 0123456789 -o mypwd.txt     //第一个11代表生成的字符串最短几个字符，第二个11代表生成的字符串最长几个字符</code></pre>
-<p>（2）生成4个数字和1391040组合的密码字典：</p>
-<pre><code>crunch 11 11 0123456789 -t 1391040%%%% -o mypwd.txt</code></pre>
-<p>（3）生成4个小写字母和4个数字组合的密码字典：</p>
-<pre><code>crunch 8 8 -t @@@@%%%%  -o mypwd.txt</code></pre>
-<p>#工具aircrack破解WiFi密码：破解WEP/WPA/WPA2加密的主流工具之一</p>
-<pre><code>aircrack-ng -w mypwd.txt wifi.cap       //前面是密码字典的位置，后面是需要破解的握手包即.cap文件的位置，看到KEY FOUND即为找到密码</code></pre>
-<h2 id="Linux2"><a href="#Linux2" class="headerlink" title="Linux2"></a>Linux2</h2><p>（1）用notepad++打开附件，搜索flag，无果。再试试搜key，发现flag。<br><img src="https://img-blog.csdnimg.cn/20201030225632898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225640161.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="细心的大象"><a href="#细心的大象" class="headerlink" title="细心的大象"></a>细心的大象</h2><p>（1）得到一张.jpg的图片，用notepad++打开，发现有两张.jpg的图片，还有一些其他的文件。放到kali中用foremost分解，foremost -t all 1.jpg<br><img src="https://img-blog.csdnimg.cn/20201030225710475.png#pic_center" alt="在这里插入图片描述"><br>（2）分解完后，在output目录下发现有一个压缩包，压缩包里面还有一张2.png图片，但解压需要密码<br><img src="https://img-blog.csdnimg.cn/20201030225727162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）查看原有图片的属性，在“详细信息”里看到备注中的一串字符<br><img src="https://img-blog.csdnimg.cn/2020103022574693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）应该被加密了，用base64解码后得到MSDS456ASD123zz<br><img src="https://img-blog.csdnimg.cn/20201030225802968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）以解码后的字符作为密码，解压压缩包，得到2.png（可将压缩包放到Windows下解压）<br><img src="https://img-blog.csdnimg.cn/2020103022581822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）用notepad++打开2.png，搜索flag或key，无果。修改图片的高度，使其和长度一样<br><img src="https://img-blog.csdnimg.cn/20201030225835951.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225842650.png#pic_center" alt="在这里插入图片描述"><br>（7）看到了flag<br><img src="https://img-blog.csdnimg.cn/20201030225856761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="爆照-08067CTF"><a href="#爆照-08067CTF" class="headerlink" title="爆照(08067CTF)"></a>爆照(08067CTF)</h2><p>（1）得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030225938915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现其中还包含其他文件，放到kali中用foremost分解。得到一个zip文件夹，里面有多个文件<br><img src="https://img-blog.csdnimg.cn/20201030225959464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）用notepad++依次打开8，88，888，8888，88888，888888，8888888，88888888<br>发现88，888，8888都是jpg文件，其他的则是bmp文件（文件头42 4D 76）。修改各个文件的后缀名<br><img src="https://img-blog.csdnimg.cn/20201030230022380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）发现88.jpg有一个二维码，用扫描器得到bilibili<br><img src="https://img-blog.csdnimg.cn/20201030230047182.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）依次查看各图片的属性，在888.jpg中发现base64密文，解密后得到silisili<br><img src="https://img-blog.csdnimg.cn/20201030230105655.png#pic_center" alt="在这里插入图片描述"><br>（6）根据提示，按顺序分析8888.jpg，在notepad++里发现还有一个压缩包<br><img src="https://img-blog.csdnimg.cn/20201030230123626.png#pic_center" alt="在这里插入图片描述"><br>（7）将8888.jpg放到kali中用foremost分解，得到一张二维码图片，扫描后的到panama<br><img src="https://img-blog.csdnimg.cn/20201030230146958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>8）按顺序排列，flag为flag{bilibili_silisili_panama}，注意格式，中间记得要有下划线</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-003/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1594,6 +1612,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全初级</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">安全进阶</a>
               </li>
             
             <div class="clearfix"></div>
