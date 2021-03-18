@@ -152,6 +152,210 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/初识Python语言(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">初识Python语言(二)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/" class="archive-article-date">
+  	<time datetime="2020-11-26T03:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="实例1：温度转换"><a href="#实例1：温度转换" class="headerlink" title="实例1：温度转换"></a>实例1：温度转换</h2><pre><code class="python">&#39;&#39;&#39;
+转换算法：
+C = (F-32)/1.8
+F = C*1.8 + 32
+&#39;&#39;&#39;
+TempStr = input(&quot;请输入带有符号的温度值：&quot;)
+if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
+    C = (eval(TempStr[0:-1]) - 32)/1.8
+    print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
+elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
+    F = 1.8*eval(TempStr[0:-1]) + 32
+    print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
+else:
+    print(&quot;输入格式错误&quot;)</code></pre>
+<p>运行结果：</p>
+<p><img src="https://i.loli.net/2020/11/26/Vgm1Xz6Nl8yWD79.png" alt="image-20201126115434716"></p>
+<h2 id="Python程序语法元素分析"><a href="#Python程序语法元素分析" class="headerlink" title="Python程序语法元素分析"></a>Python程序语法元素分析</h2><h3 id="程序的格式框架"><a href="#程序的格式框架" class="headerlink" title="程序的格式框架"></a>程序的格式框架</h3><p>（1）Python语言用严格的“缩进”来表明程序的格式框架。每行代码前的空白区域即是缩进，用来表示代码之间的包含和层次关系。</p>
+<p>（2）缩进常用Tab键实现，也可用多个空格实现，通常是4个空格。缩进还包括单层缩进和经过嵌套形成的多层缩进。</p>
+<p>（3）一般来说，判断、循环、函数、类等语法形式能够通过缩进包含一批代码。</p>
+<p>（4）Python语法允许在表达式内部标记之间增加空格，这样有助于提高代码的可读性，但不能改变与缩进相关的空格数量，也不能在变量名中间增加空格。</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>Python语言有两种方法：单行注释和多行注释。单行注释以#开头，多行注释则以’’’(3个单引号)开头和结尾。例如:</p>
+<pre><code class="python">&#39;&#39;&#39;
+转换算法：
+C = (F-32)/1.8
+F = C*1.8 + 32
+&#39;&#39;&#39;</code></pre>
+<h3 id="命名与保留字"><a href="#命名与保留字" class="headerlink" title="命名与保留字"></a>命名与保留字</h3><p>（1）Python语言采用大小写字母、数字、下划线和汉字等字符及其组合给变量命名，但首字符不能为数字，且中间不能出现空格，长度没有限制。注意：标识符对大小写敏感。</p>
+<p>（2）保留字（Keyword），也称为关键字，不能用来给变量命名。Python3.x版本共有33个保留字，保留字同样对大小写敏感，例如for是保留字，而For则不是。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>（1）Python语言中，字符串是用两个双引号””或者单引号’’括起来的零个或多个字符。</p>
+<p>（2）字符串是字符的序列，可以按照单个字符或字符片段进行索引。字符串包括两种序号体系：正向递增序号和反向递减序号。二者可以混合使用，若字符串长度为L，则从左到右，正向递增序号为0~L-1;反向递减序号为-L~-1</p>
+<p><img src="https://i.loli.net/2020/11/26/xe7X9WBL5aGA4jI.png" alt="image-20201126163416661"></p>
+<p>（3）Python字符串也提供区间访问方式，采用[N:M]格式，表示字符串从N到M(不包含M)的子字符串，其中N和M都是字符串的索引序号。</p>
+<pre><code class="python">TempStr = &quot;110C&quot;
+print(TempStr[-1])          #只打印最后一个字符，即&#39;C&#39;
+print(TempStr[0:2])         #打印第一第二个字符，即&#39;11&#39;
+print(TempStr[0:-1])        #打印除去最后一个字符的字符串,即&#39;110&#39;;效果和TempStr[0:3]一样
+print(TempStr[:])           #打印全部字符</code></pre>
+<h3 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h3><p>（1）”=”表示赋值，包含等号的语句称为赋值语句，即将等号右侧的计算结果赋给左侧变量。例如：</p>
+<pre><code class="python">TempStr = input(&quot;请输入带有符号的温度值：&quot;)   #将input()函数的结果赋给左侧变量TempStr</code></pre>
+<p>（2）同步赋值语句，可以同时给多个变量赋值。若多个单一赋值语句在功能上表达了相同或相关的含义，或者在程序中属于相同的功能，都可以采用同步赋值语句。基本格式如下：</p>
+<pre><code>&lt;变量1&gt;,…… &lt;变量n&gt; = &lt;表达式1&gt;,…… &lt;表达式n&gt;</code></pre>
+<pre><code class="python">&gt;&gt;&gt;x, y = 10, 20
+&gt;&gt;&gt;print(x,y)
+10 20
+&gt;&gt;&gt;x, y = y, x       //交换x，y的数值不必再借助第三个变量
+&gt;&gt;&gt;print(x,y)
+20 10</code></pre>
+<h3 id="input-函数"><a href="#input-函数" class="headerlink" title="input()函数"></a>input()函数</h3><p>在实例1中，input()函数从控制台获得用户输入，无论用户在控制台输入什么内容，input()函数都以字符串类型返回结果。在获得用户输入之前，input()函数可以包含一些提示性文字。</p>
+<pre><code>&gt;&gt;&gt;input(&quot;请输入：&quot;)
+请输入：Python
+&#39;Python&#39;
+&gt;&gt;&gt;input(&quot;请输入：&quot;)
+请输入：12345
+&#39;12345&#39;</code></pre>
+<p><img src="https://i.loli.net/2020/11/26/JbFk8tzdfEQmjg6.png" alt="image-20201126175216693"></p>
+<h3 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h3><p>分支语句的作用是根据判断条件选择程序执行路径，使用方法如下：</p>
+<pre><code class="python">if &lt;条件1&gt;:
+    &lt;语句块1&gt;
+elif &lt;条件2&gt;:
+    &lt;语句块2&gt;
+...
+
+else:
+    &lt;语句块n&gt;</code></pre>
+<p>其中，if、elif、else都是保留字，else后不再增加条件，表示不满足其他if语句的所有其余情况。例如实例1中的分支语句：</p>
+<pre><code class="python">if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
+elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
+else:</code></pre>
+<p>第一个表达式由保留字”in”组成，表示判断字符串TempStr的最后一个字符(TempStr[-1])是否在一个由’F’或’f’组成的集合中，即TempStr[-1]是否等于’F’或’f’。如果相等，返回True，执行该条件下的语句块；否则返回False，判断下一个条件。其中用方括号和逗号组成的类型叫列表，格式为：[元素1,元素2,…,元素n]。</p>
+<h3 id="eval-函数"><a href="#eval-函数" class="headerlink" title="eval()函数"></a>eval()函数</h3><p>eval(&lt;字符串&gt;)函数能够以Python表达式的方式解析并执行字符串，并将返回结果输出。例如：</p>
+<pre><code class="python">&gt;&gt;&gt;x = 1
+&gt;&gt;&gt;eval(&quot;x + 1&quot;)
+2
+&gt;&gt;&gt;eval(&quot;1.1 + 2.2&quot;)
+3.3</code></pre>
+<p>实例1中eval()函数将用户的部分输入(TempStr[0:-1])由字符串转化为数字，假设用户的输入为“102C”，经过eval()函数处理，转变为Python内部可以进行数学运算的的数值102</p>
+<pre><code class="python">&gt;&gt;&gt;TempStr = &quot;102C&quot;
+&gt;&gt;&gt;eval(TempStr[0:-1])
+102</code></pre>
+<p>使用eval()函数注意事项：</p>
+<p>（1）若直接输入字符串”hello”，eval()函数会去掉两个引号，将其解释为一个变量。由于之前没有定义过hello变量，解释器会报错。</p>
+<p>（2）当输入字符串”‘hello’”时，eval()函数去掉外部双引号后，内部还有一个单引号，则’hello’被解释为字符串。</p>
+<p>（3）若要输入一个数字（小数或负数），并用程序对这个数字进行计算，可以采用eval(input(输入提示字符串))的组合，例如：</p>
+<pre><code class="python">&gt;&gt;&gt;vlaue = eval(input(&quot;请输入要计算的数值：&quot;))
+请输入要计算的数值：1024
+&gt;&gt;&gt;print(value*2)
+2048</code></pre>
+<p>（4）实例1中的代码：</p>
+<pre><code class="python">C = (eval(TempStr[0:-1]) - 32)/1.8</code></pre>
+<p>表示将TempStr字符串中除最后一位外的子串转换成数字，再对其进行运算。</p>
+<h3 id="print-函数"><a href="#print-函数" class="headerlink" title="print()函数"></a>print()函数</h3><p>（1）print()是输出函数，当输出纯字符信息时，加上双引号或单引号即可直接把待输出的内容传递给print()函数。例如：</p>
+<pre><code class="python">&gt;&gt;&gt;print(&quot;我爱我家&quot;)
+我爱我家</code></pre>
+<p>（2）当输出变量值时，需要采用格式化输出方式，通过format()方法将待输出的变量整理成期望输出的格式。例如实例1中：</p>
+<pre><code class="python">print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
+print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))</code></pre>
+<p>print()函数用槽格式和format()方法将变量和字符串结合到一起输出。上述代码中，大括号{}表示一个槽位置，这个大括号的内容由后面的format()方法中的参数C或F填充。其中，大括号{:.2f}中的内容表示变量C(或F)的输出格式，具体为输出数值保留两位小数。</p>
+<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>（1）循环语句的作用是根据判断条件确定一段程序是否再次执行一次或多次。实例1中不包含循环语句，程序执行一次后退出，若要让程序一直运行，连续接收用户的输入，可以采用循环语句进行改造。</p>
+<pre><code class="python">TempStr = input(&quot;请输入带有符号的温度值：&quot;)
+while TempStr[-1] not in [&#39;N&#39;,&#39;n&#39;]:                #改造1，直到用户输入的最后一个字符是N或n时退出
+    if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
+        C = (eval(TempStr[0:-1]) - 32)/1.8
+        print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
+    elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
+        F = 1.8*eval(TempStr[0:-1]) + 32
+        print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
+    else:
+        print(&quot;输入格式错误&quot;)
+    TempStr = input(&quot;请输入带有符号的温度值：&quot;)        #改造2</code></pre>
+<p>（2）循环语句有多种类型，改造后的代码使用了条件循环，其基本过程如下：</p>
+<pre><code class="python">while&lt;条件&gt;:
+    &lt;语句块1&gt;
+&lt;语句块2&gt;</code></pre>
+<p>缩进表达了与while语句的所属关系。当条件为真时，进入循环，执行语句块1；当条件为假时，退出循环，执行语句块2。改造后的代码中的循环条件：</p>
+<pre><code class="python">while TempStr[-1] not in [&#39;N&#39;,&#39;n&#39;]:</code></pre>
+<p>语句中的not是保留字，表示对判断结果取反。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>（1）函数是对一组表达特定功能表达式的封装，能够接收变量并输出结果。input()、print()、eval()都是Python解释器的内置函数。编写代码时，函数的使用有助于阅读和复用，也使得程序模块化更好。</p>
+<p>实例1中，程序按照顺序方式，从头到尾执行，对其进行如下改造：</p>
+<pre><code class="python">def tempConvert(ValueStr):
+    if ValueStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
+        C = (eval(ValueStr[0:-1]) - 32)/1.8
+        print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
+    elif ValueStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
+        F = 1.8*eval(ValueStr[0:-1]) + 32
+        print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
+    else:
+        print(&quot;输入格式错误&quot;) 
+TempStr = input(&quot;请输入带有符号的温度值：&quot;)
+tempConvert(TempStr)</code></pre>
+<p>（2）上述代码中，用def保留字定义了一个名为tmpConvert()的函数，它使用一个参数ValueStr，函数所属代码是def所在行和其后面与之有缩进关系的代码。</p>
+<p>（3）由def保留字定义的函数在程序中不被直接执行，需要使用函数名称调用才能执行。所以程序是从第10行开始执行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/初识Python语言(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1449,143 +1653,6 @@ int main()&#123;
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-005/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BugkuCTF/BugkuCTF_Misc-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-004/">BugkuCTF_Misc_004</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-004/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:07:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="猫片-安恒"><a href="#猫片-安恒" class="headerlink" title="猫片(安恒)"></a>猫片(安恒)</h2><p>（1）将下载的文件后缀名改为png（注：png正常文件头：89 50 4E 47）<br><img src="https://img-blog.csdnimg.cn/20201031123855768.png#pic_center" alt="在这里插入图片描述"><br>（2）根据提示LSB和BGR，用stegsolve工具打开，发现一张png图片<br><img src="https://img-blog.csdnimg.cn/20201031124027360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）将其保存下来，并修改后缀名为.png，但无法打开。用notepad++打开，发现文件头错误<br><img src="https://img-blog.csdnimg.cn/20201031124313322.png#pic_center" alt="在这里插入图片描述"><br>（3）将前面的ff fe删掉并保存，打开图片，是半张二维码<br><img src="https://img-blog.csdnimg.cn/2020103112441746.png#pic_center" alt="在这里插入图片描述"><br>（4）修改图片高度试试，改为和长度一样。<br><img src="https://img-blog.csdnimg.cn/2020103112542257.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201031125455519.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201031125506356.png#pic_center" alt="在这里插入图片描述"><br>（5）看到了完整的二维码，但和正常的有些不一样，中间的正方形应为黑色。用画图工具反色一下（新建–&gt;粘贴来源–&gt;右键–反色–&gt;裁剪）<br><img src="https://img-blog.csdnimg.cn/20201031130018412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201031130038164.png#pic_center" alt="在这里插入图片描述"><br>（6）扫描器扫描，得到一个网址，是一个百度云链接<br><img src="https://img-blog.csdnimg.cn/20201031130224341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020103113034095.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（7）下载下来后，是一个rar压缩包，但解压时出现了问题，可以用WinRAR打开<br><img src="https://img-blog.csdnimg.cn/20201031130626811.png#pic_center" alt="在这里插入图片描述"><br>（8）不过依然得到一个flag.txt文件<br><img src="https://img-blog.csdnimg.cn/20201031130758999.png#pic_center" alt="在这里插入图片描述"><br>（9）根据hint里的提示“NTFS”,用NtfsStreamsEditor查看数据流，然后导出。<br>#flag.rar这个压缩文件一定要用winrar来解压才能找得到数据流。<br><img src="https://img-blog.csdnimg.cn/2020103122191832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（10）一个.pyc文件，放到在线工具<a target="_blank" rel="noopener" href="https://tool.lu/pyc/">https://tool.lu/pyc/</a><br><img src="https://img-blog.csdnimg.cn/20201031133154759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（11）根据这个加密脚本，再写一个解密脚本</p>
-<pre><code>def decode():
-    ciphertext = [
-    &#39;96&#39;,
-    &#39;65&#39;,
-    &#39;93&#39;,
-    &#39;123&#39;,
-    &#39;91&#39;,
-    &#39;97&#39;,
-    &#39;22&#39;,
-    &#39;93&#39;,
-    &#39;70&#39;,
-    &#39;102&#39;,
-    &#39;94&#39;,
-    &#39;132&#39;,
-    &#39;46&#39;,
-    &#39;112&#39;,
-    &#39;64&#39;,
-    &#39;97&#39;,
-    &#39;88&#39;,
-    &#39;80&#39;,
-    &#39;82&#39;,
-    &#39;137&#39;,
-    &#39;90&#39;,
-    &#39;109&#39;,
-    &#39;99&#39;,
-    &#39;112&#39;]
-    ciphertext.reverse()
-    flag = &#39;&#39;
-    for i in range(len(ciphertext)):
-        if i % 2 == 0:
-            s = int(ciphertext[i]) - 10
-        else:
-            s = int(ciphertext[i]) + 10
-        s=chr(i^s)
-        flag += s
-    return flag
-
-def main():
-    flag = decode()
-    print(flag)
-
-if __name__ == &#39;__main__&#39;:
-    main()</code></pre>
-<p>（12）用代码在线工具执行一下<a target="_blank" rel="noopener" href="https://tool.lu/coderunner/">https://tool.lu/coderunner/</a><br><img src="https://img-blog.csdnimg.cn/20201031133531810.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="多彩"><a href="#多彩" class="headerlink" title="多彩"></a>多彩</h2><p>（1）得到一张.png的图片,在notepad++里没有发现有用信息<br><img src="https://img-blog.csdnimg.cn/20201031162838777.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）放到stegsolve里分析，发现了图片中隐藏的数据，是一个压缩包，将其抽取出来<br><img src="https://img-blog.csdnimg.cn/20201031163106844.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）先用notepad++打开这个压缩包，删掉文件头前面的东西，然后保存<br><img src="https://img-blog.csdnimg.cn/20201031163401174.png#pic_center" alt="在这里插入图片描述"><br>（4）把后缀名改为zip，解压，但出错了，后缀名改为.rar也是这样（不执行第3步也会出错）<br><img src="https://img-blog.csdnimg.cn/20201101120011595.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（5）看了一些大佬的writeup，压缩文件是加密的，需要用到图片中的色号。但我这里直接显示出错，没让我输入密码。后面就不会做了。（嘤嘤嘤）</p>
-<pre><code>1,27,59,11,23,7,57,1,1,76,222,1,1,50,214,6,77,50,53,214,6</code></pre>
-<h2 id="旋转跳跃"><a href="#旋转跳跃" class="headerlink" title="旋转跳跃"></a>旋转跳跃</h2><p><img src="https://img-blog.csdnimg.cn/20201101114352899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（1）附件是一个音频文件，使用工具MP3Stego来对音频进行解码。将该音频文件拷贝到MP3Stego目录下，在目录栏里输入cmd打开运行窗口。输入如下命令解码</p>
-<pre><code>Decode.exe -X -P syclovergeek sycgeek-mp3.mp3          //-P后面即为题目提示的密码</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20201101114808149.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）解码完后，在MP3Stego目录下多了一个sycgeek-mp3.mp3.txt文件，打开即可看到flag。<br><img src="https://img-blog.csdnimg.cn/20201101114920512.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="普通的二维码"><a href="#普通的二维码" class="headerlink" title="普通的二维码"></a>普通的二维码</h2><p>（1）下载附件，得到一张二维码，扫描后没有flag。用notepad++打开看看<br><img src="https://img-blog.csdnimg.cn/20201104224511217.png#pic_center" alt="在这里插入图片描述">（2）在最后发现一串数字，想到ASCII码，146作为八进制时对应的是f。然后把这串数字转换成对应的字符，得到flag。<br><img src="https://img-blog.csdnimg.cn/20201104224835832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-004/">展开全文 >></a>
         </p>
       
 

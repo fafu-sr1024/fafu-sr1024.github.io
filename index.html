@@ -152,6 +152,684 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全进阶/PHP与SQL进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/">PHP与SQL进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-03-17T08:28:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="PHP的基础语法"><a href="#PHP的基础语法" class="headerlink" title="PHP的基础语法"></a>PHP的基础语法</h2><p>（1）基本概念：</p>
+<ul>
+<li>PHP文件的默认文件扩展名是”.php”</li>
+<li>PHP脚本可放置于文档中的任何位置</li>
+<li>PHP脚本以**&lt;?php**开头，以**?&gt;**结尾</li>
+<li>PHP语句以分号结尾**;**</li>
+</ul>
+<p>（2）注释：PHP支持三种注释方法，包括单行注释和多行注释</p>
+<pre><code class="php">&lt;?php
+    //这是单行注释
+    #这也是单行注释
+    /*这是多行注释块
+        它横跨了
+        多行      */
+echo &quot;Hello World&quot;;
+?&gt;</code></pre>
+<p>（3）输出语法</p>
+<ul>
+<li>echo：能输出多个字符串</li>
+</ul>
+<pre><code class="php">&lt;?php
+echo &quot;123&quot;,&quot;456&quot;,&quot;789&quot;;
+?&gt;
+
+&lt;?php
+$name=&quot;kangkang&quot;;
+$shuiguo=array(&quot;苹果&quot;,&quot;香蕉&quot;,&quot;西瓜&quot;);
+echo &quot;I am &amp;name,I eat $shuiguo[1]&quot;;
+?&gt;</code></pre>
+<ul>
+<li>print：只能输出一个字符串</li>
+</ul>
+<h3 id="PHP变量"><a href="#PHP变量" class="headerlink" title="PHP变量"></a>PHP变量</h3><p>（1）PHP变量的命名规则：</p>
+<ul>
+<li>变量以$符号开头，其后是变量的名称</li>
+<li>变量名必须以字母或下划线开头</li>
+<li>变量名称不能以数字开头</li>
+<li>变量名称只能包含字母数字字符和下划线(A-z、0-9以及_)</li>
+<li>变量名称对大小写敏感</li>
+</ul>
+<pre><code class="php">&lt;?php
+$txt=&quot;Hello World!&quot;;
+$x=5;
+$y=10.5;
+echo $txt;
+echo &quot;&lt;br/&gt;&quot;;
+echo $x+$y;
+?&gt;</code></pre>
+<p>（2）超全局变量</p>
+<ul>
+<li>在PHP4.1.0中引入，是在全部作用域中始终可用的内置变量。</li>
+<li>PHP中的许多预定义变量都是“超全局的”，这意味着它们在一个脚本的全部作用域中都可用。</li>
+</ul>
+<pre><code class="php">    $_SESSION
+    $_COOKIE
+    $_FILES
+    $_GET
+    $_POST
+    $_REQUEST
+    $_SERVER
+    $GLOBALS</code></pre>
+<p>（3）$_GET &amp; $_POST：获取GET或POST请求参数的值</p>
+<ul>
+<li>get.php</li>
+</ul>
+<pre><code class="php">&lt;?php
+    echo &quot;Hello,your name is &quot;.$_GET[&#39;user&#39;];
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/LXybUOQsDMm3jRd.png" alt="image-20210317185828678"></p>
+<ul>
+<li>post.php</li>
+</ul>
+<pre><code class="php">&lt;?php
+    echo &quot;Hello,your name is &quot;.$_POST[&#39;user&#39;];
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/HN6eUCJisLYTmar.png" alt="image-20210317185705591"></p>
+<p>（4）$_SERVER：保存关于报头、路径和脚本位置的信息。</p>
+<pre><code class="php">&lt;?php
+    echo $_SERVER[&#39;PHP_SELF&#39;].&quot;&lt;br/&gt;&quot;;      //输出当前PHP文件名
+    echo $_SERVER[&#39;SERVER_NAME&#39;].&quot;&lt;br/&gt;&quot;;   //输出当前运行脚本所在的服务器的主机名
+    echo $_SERVER[&#39;HTTP_HOST&#39;].&quot;&lt;br/&gt;&quot;;     //输出当前服务器的主机名
+    echo $_SERVER[&#39;HTTP_REFERER&#39;].&quot;&lt;br/&gt;&quot;;  //返回来自当前请求的host头
+    echo $_SERVER[&#39;HTTP_USER_AGENT&#39;].&quot;&lt;br/&gt;&quot;;//返回当前请求页面的上一个页面URL
+    echo $_SERVER[&#39;HTTP_NAME&#39;].&quot;&lt;br/&gt;&quot;;      //返回当前请求客户端的User-Agent
+    echo $_SERVER[&#39;HTTP_STRING&#39;].&quot;&lt;br/&gt;&quot;;    //返回获取查询语句，一般是问号后面的字符串
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/SWNFo5Pe9uKhxtX.png" alt="image-20210317192027470"></p>
+<p><img src="https://i.loli.net/2021/03/17/NCdmWJTq4w8f6V5.png" alt="image-20210317192044223"></p>
+<p>（5）$GLOBALS</p>
+<ul>
+<li>应用全局作用域中可用的全部变量</li>
+<li>一个包含了全部变量的全局组合数组。变量的名字就是数组的键。</li>
+</ul>
+<pre><code class="php">&lt;?php
+    $_ =&quot;123456&quot;;
+    $a =&quot;&lt;br&gt;hello&quot;;
+    $b =&quot;&lt;br&gt;world&quot;;
+
+    echo $GLOBALS[&#39;_&#39;];
+    echo $GLOBALS[&#39;a&#39;];
+    echo $GLOBALS[&#39;b&#39;];
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/J2txUnQHCuf36j7.png" alt="image-20210317192914226"></p>
+<h3 id="PHP表单处理"><a href="#PHP表单处理" class="headerlink" title="PHP表单处理"></a>PHP表单处理</h3><p>PHP超全局变量$_GET和$_POST用于收集表单数据（form-data）</p>
+<ul>
+<li>form.html</li>
+</ul>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;/&gt;
+        &lt;title&gt;goktech&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;form action=&quot;form.php&quot; method=&quot;POST&quot;&gt;
+        姓名：&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;br/&gt;
+        电邮：&lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;&lt;br/&gt;
+        &lt;input type=&quot;submit&quot;&gt;
+    &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<ul>
+<li>form.php</li>
+</ul>
+<pre><code class="php">&lt;?php
+    $name=$_POST[&#39;name&#39;];
+    $email=$_POST[&#39;email&#39;];
+    echo &quot;Welcome &quot;,$name;
+    echo &quot;&lt;br&gt;&quot;;
+    echo &quot;Your email is &quot;,$email;
+    header(&quot;Content-Type:text/html;charset=UTF-8&quot;);     //解决中文乱码
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/4IPyNqHUoCFzpEK.png" alt="image-20210318095619457"></p>
+<p><img src="https://i.loli.net/2021/03/18/jYD3WQx45qdVewb.png" alt="image-20210318095636257"></p>
+<h3 id="PHP数据类型"><a href="#PHP数据类型" class="headerlink" title="PHP数据类型"></a>PHP数据类型</h3><p>（1）PHP数据类型分为：字符串、整数、浮点数、逻辑、数组、对象、NULL。</p>
+<p>（2）PHP字符串：</p>
+<ul>
+<li>字符串是字符序列，比如“Hello world!”。</li>
+<li>字符串可以是引号内的任何文本。可以使用单引号或双引号</li>
+</ul>
+<p>（3）PHP整数；可以用三种格式规定整数：十进制、十六进制(前缀是0x)或八进制(前缀是0)</p>
+<p>（4）var_dump()会返回变量的数据类型和值</p>
+<pre><code class="php">&lt;?php
+$x=666;
+$y=0x8c;   //十六进制数
+$z=047;    //八进制数
+
+var_dump($x);
+var_dump($y);
+var_dump($z);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/KeEHsqhbv43xl6y.png" alt="image-20210318100414764"></p>
+<p>（5）PHP浮点数：浮点数是有小数点或指数形式的数字。float类型数据强制转换为int类型数据时会造成溢出。</p>
+<pre><code class="php">&lt;?php
+$x=11.123;
+$y=2.4e3;
+$z=8e-5;
+
+var_dump($x);
+var_dump($y);
+var_dump($z);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/1QAOSYM6mHVgoUC.png" alt="image-20210318103306580"></p>
+<p>（6）PHP数组：</p>
+<ul>
+<li>数组能够在单独的变量名中存储一个或多个值。</li>
+<li>在PHP中，array()函数用于创建数组</li>
+<li>在PHP中，有三种数组类型：</li>
+</ul>
+<pre><code>索引数组-带有数字索引的数组
+关联数组-带有指定键的数组
+多维数组-包含一个或多个数组的数组</code></pre>
+<ul>
+<li>获得数组的长度-count()函数：用于返回数组的长度（元素数）</li>
+</ul>
+<p>（7）PHP索引数组：带有数字索引的数组</p>
+<pre><code class="php">&lt;?php
+$shuiguo=array(&quot;苹果&quot;,&quot;香蕉&quot;,&quot;西瓜&quot;);
+echo $shuiguo[0],$shuiguo[1],$shuiguo[2];
+$len=count($shuiguo);
+echo &quot;&lt;br/&gt;&quot;;
+echo $len.&quot;&lt;br/&gt;&quot;;
+
+for ($i=0;$i&lt;$len;$i++)&#123;     //遍历索引数组
+    echo $shuiguo[$i];
+&#125;
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/CuixX4ZEo5sMD9B.png" alt="image-20210318132313725"></p>
+<p>（8）PHP关联数组：带有指定键的数组</p>
+<pre><code class="php">&lt;?php
+$shuiguo=array(&quot;苹果&quot;=&gt;&quot;3&quot;,&quot;香蕉&quot;=&gt;&quot;5&quot;,&quot;西瓜&quot;=&gt;&quot;9&quot;);
+foreach($shuiguo as $x=&gt;$y)&#123;     //用foreach遍历关联数组
+    echo $x.&quot;--&gt;&quot;.$y;
+    echo &quot;&lt;br/&gt;&quot;;
+&#125;
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/6Fz2cg7T3HkYZX5.png" alt="image-20210318132830706"></p>
+<h3 id="PHP函数"><a href="#PHP函数" class="headerlink" title="PHP函数"></a>PHP函数</h3><p>（1）PHP拥有超过1000个内建函数</p>
+<p>（2）PHP默认参数值。以下例子展示了如何使用默认参数。若调用自定义的没有参数的setHeight()函数，它的参数会取默认值50。</p>
+<pre><code class="php">&lt;?php
+function setHeight($minheight=50)&#123;
+    echo &quot;高度是：$minheight &lt;br/&gt;&quot;;
+&#125;
+setHeight(350);
+setHeight();
+setHeight(135);
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/isdQgbrCOHAp2lL.png" alt="image-20210318133544243"></p>
+<pre><code class="php">&lt;?php
+function sum($x,$y)&#123;
+    $z=$x+$y;
+    return $z;      //return定义函数返回值
+&#125;
+echo &quot;5 + 7 =&quot;.sum(5,7).&quot;&lt;br/&gt;&quot;;
+echo &quot;6 + 6 =&quot;.sum(6,6).&quot;&lt;br/&gt;&quot;;
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/ihD1SGJaCnFcV5e.png" alt="image-20210318134041089"></p>
+<h3 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h3><p>（1）PHP是一门类型松散的语言——弱类型</p>
+<ul>
+<li>在定义PHP变量时不必告知变量的数据类型</li>
+<li>不同数据类型在比较时会发生强制类型转换，PHP根据它的值，自动把变量转换为正确的数据类型。</li>
+</ul>
+<p>（2）PHP的两种比较运算符”==”和”===”</p>
+<ul>
+<li>==等于符号，比较时，会先转换成相同的数据类型，然后比较值。</li>
+<li>===全等于符号，比较时，先比较数据类型是否相同，然后比较值</li>
+</ul>
+<pre><code class="php">&lt;?php
+$x=NULL;
+$y=0;
+$z=&quot;abc&quot;;
+
+var_dump($x == $y);   //NULL和整数0，true
+echo &quot;&lt;br/&gt;&quot;;         
+var_dump($x == $z);   //NULL和字符串，false
+echo &quot;&lt;br/&gt;&quot;;
+var_dump($y == $z);   //整数0和字符串，true
+echo &quot;&lt;br/&gt;&quot;;
+echo &quot;&lt;br/&gt;&quot;;
+var_dump($x === $y);  //NULL和整数0，false
+echo &quot;&lt;br/&gt;&quot;;
+var_dump($x === $z);  //NULL和字符串，false
+echo &quot;&lt;br/&gt;&quot;;
+var_dump($y === $z);  //整数0和字符串，false
+echo &quot;&lt;br/&gt;&quot;;
+
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/yGCsctegp4BKAj7.png" alt="image-20210318135601549"></p>
+<p>（3）0e字符串和0x字符串比较时：</p>
+<ul>
+<li>若字符串是0e类型，PHP会将其解析为科学计数法</li>
+<li>若字符串是0x类型，PHP会将其解析为十六进制</li>
+</ul>
+<pre><code class="php">&lt;?php
+$a=1.23e+3;
+$b=&quot;1.23e+3&quot;;
+$c=0x4c;
+$d=&quot;0x4c&quot;;
+
+echo $a.&quot;&lt;br/&gt;&quot;;
+echo $b.&quot;&lt;br/&gt;&quot;;
+echo $c.&quot;&lt;br/&gt;&quot;;
+echo $d.&quot;&lt;br/&gt;&quot;;
+echo &quot;&lt;br/&gt;&quot;;
+var_dump($a == $b);
+echo &quot;&lt;br/&gt;&quot;;
+var_dump($c == $d);
+
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/sTgKS3Rov7jENAz.png" alt="image-20210318141329399"></p>
+<h2 id="SQL的进阶语法"><a href="#SQL的进阶语法" class="headerlink" title="SQL的进阶语法"></a>SQL的进阶语法</h2><h3 id="数据库系统"><a href="#数据库系统" class="headerlink" title="数据库系统"></a>数据库系统</h3><p>（1）数据库：长期存储在计算机内的、有组织的、可共享的数据集合。</p>
+<p>（2）DBMS(DataBase Management System)</p>
+<ul>
+<li>一种操纵和管理数据库的大型软件，用于建立、使用和维护数据库</li>
+<li>它对数据库进行统一的管理和控制，以保证数据库的安全性和完整性</li>
+<li>常见的DBMS包括access、SQLserver、mysql、oracle、DB2等</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/fv8WpUEh1g2FZje.png" alt="image-20210318142031864"></p>
+<h3 id="基础查询语句"><a href="#基础查询语句" class="headerlink" title="基础查询语句"></a>基础查询语句</h3><p>（1）select * from admin;</p>
+<ul>
+<li>select语句用于从表中选取数据，结果被存储在一个结果表中(称结果集)。以下例子说明admin表中有id，role，username，password，city，age这6列，共5行。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/XKT8ZW5nowuz2Cp.png" alt="image-20210318150151954"></p>
+<ul>
+<li>如需有条件地从表中选取数据，可将where子句添加到select语句中。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/VLYn6PwCyrMcDuh.png" alt="image-20210318150401661"></p>
+<p>（2）AND &amp; OR运算符</p>
+<ul>
+<li>AND和OR运算符用于根据多个条件筛选记录。AND优先级高于OR。</li>
+<li>若AND分隔的所有条件为true，则AND运算符显示记录</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/nDVuwvXOTZriCsQ.png" alt="image-20210318151451097"></p>
+<ul>
+<li>若有OR分隔的任何条件为真，则OR运算符显示记录</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/sTIqZpc6YixnH81.png" alt="image-20210318151556785"></p>
+<p>（3）order by排序：默认情况下按升序排序记录</p>
+<p><img src="https://i.loli.net/2021/03/18/kYPTKGzq6fjFAXm.png" alt="image-20210318152040641"></p>
+<ul>
+<li>执行select * from admin order by 6;（按照第6列进行排序，效果同上）</li>
+<li>若列数超出则会报错</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/tg4IJm9X1CvwRT8.png" alt="image-20210318152204167"></p>
+<p>（4）MySQL支持limit子句，用以取回有限数量的记录。</p>
+<p>（5）从第n行开始，显示后面m行：limit n,m （或者limit m offset n）。</p>
+<ul>
+<li>从第0行开始，显示后面1行</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/ZOFJn6rRpVqc2md.png" alt="image-20210318152654793"></p>
+<ul>
+<li>从第2行开始，显示后面3行</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/tQ9UWLkdE3FzsmI.png" alt="image-20210318152726593"></p>
+<h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p>UNION运算符用于组合两个或更多select语句的结果集。</p>
+<ul>
+<li>这些列必须具有相似的数据类型</li>
+<li>每个select语句中的列也必须以相同的顺序排列</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/52lJFVIcEN6La9y.png" alt="image-20210318153258170"></p>
+<ul>
+<li>union查询会按照select的顺序显示结果集</li>
+<li>当不知道另一张表aadmin时，可借助mysql的弱类型达到构造union语句。</li>
+</ul>
+<pre><code class="sql">select * from admin union select 1,2,3,4,5,6;</code></pre>
+<h3 id="SELECT子句"><a href="#SELECT子句" class="headerlink" title="SELECT子句"></a>SELECT子句</h3><p>（1）select查询的结果可作为另一个select查询的列的结果。</p>
+<p>（2）这种查询方式属于SQL子查询的一种。</p>
+<p><img src="https://i.loli.net/2021/03/18/7bKJSaygOLYXlIm.png" alt="image-20210318154404839"></p>
+<h3 id="基本建表和增删改语句"><a href="#基本建表和增删改语句" class="headerlink" title="基本建表和增删改语句"></a>基本建表和增删改语句</h3><p>（1)CREATE 用来建表，格式如下</p>
+<pre><code class="sql">creat table 表名称 (列名称1 数据类型,列名称2 数据类型,列名称3 数据类型,...);</code></pre>
+<p>例如新建一张表test，插入3个列分别为id，username，password</p>
+<pre><code class="sql">creat table test (id int,username varchar(255),password varchar(255));</code></pre>
+<p>（2）INSERT用来增加一条记录</p>
+<pre><code class="sql">insert into test (id,username,password) values(1,&#39;admin&#39;,&#39;admin123&#39;);</code></pre>
+<p>（3）UPDATE用来修改一条记录</p>
+<pre><code class="sql">update test set username=&#39;admin_A&#39;,password=&#39;admin321&#39; where username=&#39;admin&#39;;</code></pre>
+<p>（4）DELETE用来删除一条记录</p>
+<pre><code class="sql">delete from test where username=&#39;admin_A&#39;;</code></pre>
+<h3 id="数据库管理系统的内置数据库"><a href="#数据库管理系统的内置数据库" class="headerlink" title="数据库管理系统的内置数据库"></a>数据库管理系统的内置数据库</h3><p>（1）MySQL有一个默认的内置数据库，信息数据库information_schema</p>
+<p>（2）information_schema有三张关键的表：schemata、tables、columns</p>
+<p>（3）schemata表的schema_name列存放的是所有的数据库名</p>
+<pre><code class="sql">select schema_name from information_schema.schemata;
+或者使用
+show databases;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/F1XeAcMPWNJpgiv.png" alt="image-20210318160004813"></p>
+<p><img src="https://i.loli.net/2021/03/18/dQupgmRqYFH1jVK.png" alt="image-20210318160139745"></p>
+<p>（4）MySQL有一个默认的内置数据库，信息数据库information_schema。</p>
+<p>（5）information_schema有三张关键的表：schemata、tables、columns。</p>
+<p>（6）tables表的table_schema列存放的是所有的数据库名，table_name列存放的是数据库对应的所有表名。</p>
+<ul>
+<li>如要查询数据库mysql的所有表名。</li>
+</ul>
+<pre><code class="sql">select table_name from information_schema.tables where table_schema=&#39;mysql&#39;;
+或者也可以
+use mysql;   //进入或使用mysql数据库
+show tables; //查询数据库mysql的所有表名</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/1682TjYsrg4ZwLz.png" alt="image-20210318160929363"></p>
+<p>（7）columns表的column_name列存放的是所有的列名，table_schema列存放的是数据库对应的所有数据库名，table_name列存放的是数据库对应的所有数据库表名。</p>
+<ul>
+<li>如要查询数据库mysql的user表的所有列</li>
+</ul>
+<pre><code class="sql">select column_name from information_schema.columns where table_schema=&#39;mysql&#39; and table_name=&#39;user&#39;;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/TWgM79RIdoE8HQG.png" alt="image-20210318162436206"></p>
+<h3 id="数据库管理系统的内置函数"><a href="#数据库管理系统的内置函数" class="headerlink" title="数据库管理系统的内置函数"></a>数据库管理系统的内置函数</h3><p>（1）不同的DBMS有各自专属的内置函数，以下是mysql常见的一些内置函数：</p>
+<ul>
+<li>user()查看当前数据库账号的用户名。</li>
+</ul>
+<pre><code class="sql">select user();</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/URcaVqTSufPL3MB.png" alt="image-20210318162714816"></p>
+<ul>
+<li>version()查看当前数据库的版本。</li>
+</ul>
+<pre><code class="sql">select version();</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/KPrsadqNOCEYGvm.png" alt="image-20210318162832065"></p>
+<ul>
+<li>database()查看当前所在查询的数据库名。</li>
+</ul>
+<pre><code class="sql">use dvwa;        //进入数据库dvwa
+select database();</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/8neVsDGyQMBiCbo.png" alt="image-20210318163032842"></p>
+<ul>
+<li>@@datadir查看当前数据库所在物理路径</li>
+</ul>
+<pre><code class="sql">select @@datadir;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/dWr5xZLaBMt3gve.png" alt="image-20210318163155843"></p>
+<ul>
+<li>sleep(n)睡眠函数，运行n秒后返回结果。</li>
+</ul>
+<pre><code class="sql">select sleep(5);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/12GpoYXVtqlrhkU.png" alt="image-20210318163426515"></p>
+<ul>
+<li>length()返回结果长度。</li>
+</ul>
+<pre><code class="sql">select length(&quot;admin&quot;);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/pt8kxOaDSic4neG.png" alt="image-20210318163540873"></p>
+<ul>
+<li>substr(str,n,m)截取函数，从第n位开始截取m。</li>
+</ul>
+<pre><code class="sql">select substr(&quot;admin&quot;,2,3);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/azWsL38ognlNjA1.png" alt="image-20210318163706953"></p>
+<ul>
+<li>if(expr,r1,r2)判断函数，expr条件为真返回r1，为假返回r2。</li>
+</ul>
+<pre><code class="sql">select if((1&gt;2),111,222);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/KEAGFgyRhPWUjeZ.png" alt="image-20210318163855411"></p>
+<ul>
+<li>ord()返回一个字符的ASCII码</li>
+</ul>
+<pre><code class="sql">select ord(&#39;a&#39;);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/f9XRdjrSKckml8Z.png" alt="image-20210318180058349"></p>
+<ul>
+<li>hex()返回一个字符的16进制，相反是unhex()。</li>
+</ul>
+<pre><code class="sql">select hex(&#39;a&#39;);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/dXyhmpuAeQwUPcn.png" alt="image-20210318180229154"></p>
+<ul>
+<li>char()根据ASCII返回对应的字符</li>
+</ul>
+<pre><code class="sql">select char(97);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/hPxKMdlTXVtbIic.png" alt="image-20210318180334990"></p>
+<ul>
+<li>bin()返回一个数的2进制</li>
+</ul>
+<pre><code class="sql">select bin(7);</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/HFRDXcQs4Gnygkt.png" alt="image-20210318180438798"></p>
+<p>（2）concat()用于将多个字符串连接成一个字符串，多列成1列</p>
+<pre><code class="sql">select user_id,&#39;---&#39;,user from users limit 0,1;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png" alt="image-20210318181041151"></p>
+<pre><code class="sql">select concat(user_id,&#39;---&#39;,user) from users limit 0,1;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/uX68S9IN7AOx5ik.png" alt="image-20210318181128328"></p>
+<p>（3）group_concat()用于返回字符串的所有结果，该结果由分组的值连接而成。</p>
+<pre><code class="sql">select user_id,&#39;---&#39;,user from users limit 0,1;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png" alt="image-20210318181041151"></p>
+<pre><code class="sql">select group_concat(user_id,&#39;---&#39;,user)from users limit 0,1;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/FJlRm1ha4uKiNCv.png" alt="image-20210318181515127"></p>
+<h2 id="使用PHP管理SQL"><a href="#使用PHP管理SQL" class="headerlink" title="使用PHP管理SQL"></a>使用PHP管理SQL</h2><h3 id="PHP管理数据库"><a href="#PHP管理数据库" class="headerlink" title="PHP管理数据库"></a>PHP管理数据库</h3><p>（1）在不使用PHP的情况下，管理数据库的基本步骤：连接数据库-&gt;选择数据库-&gt;选择表-&gt;查询SQL语句</p>
+<p><img src="https://i.loli.net/2021/03/18/NrBHuAIcLE8hapj.png" alt="image-20210318184524764"></p>
+<p>（2）PHP连接数据库函数——mysqli_connect(servername,user,pass,database)</p>
+<ul>
+<li>servername：数据库地址</li>
+<li>user：数据库用户名</li>
+<li>pass：数据库密码</li>
+<li>database：数据库名</li>
+</ul>
+<pre><code class="php">&lt;?php
+$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
+if(!$con)&#123;
+    die(&#39;连接失败：&#39;.mysqli_connect_error());
+&#125;
+else&#123;
+    echo &quot;连接成功&quot;;
+&#125;
+mysqli_close($con);
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/Kikf8S9ap1l5Jbu.png" alt="image-20210318185742335"></p>
+<p>（3）PHP执行SQL语句函数——mysqli_query(conn,sql)</p>
+<ul>
+<li>conn：数据库连接函数的结果</li>
+<li>sql：SQL语句</li>
+</ul>
+<pre><code class="php">&lt;?php
+$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
+if(!$con)&#123;
+    die(&#39;连接失败：&#39;.mysqli_connect_error());
+&#125;
+else&#123;
+    echo &quot;连接成功&lt;hr&gt;&quot;;
+&#125;
+
+$sql=&quot;select * from users limit 0,1&quot;;
+$result=mysqli_query($con,$sql);
+var_dump($result);
+
+mysqli_close($con);
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/tJcBy8beNTHK3qw.png" alt="image-20210318190457387"></p>
+<p>（4）PHP获取执行结果函数——mysqli_fetch_array(query)</p>
+<ul>
+<li>query：执行SQL语句函数的结果</li>
+<li>mysqli_num_rows(query)：获取结果数组长度</li>
+</ul>
+<pre><code class="php">&lt;?php
+$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
+$sql=&quot;select * from users limit 0,1&quot;;
+$result=mysqli_query($con,$sql);
+if(mysqli_num_rows($result)&gt;0)&#123;
+    $row=mysqli_fetch_array($result);
+    echo $row[&#39;user_id&#39;].&quot;&lt;br/&gt;&quot;;
+    echo $row[&#39;first_name&#39;].&quot;&lt;br/&gt;&quot;;
+    echo $row[&#39;last_name&#39;].&quot;&lt;br/&gt;&quot;;
+    echo $row[&#39;user&#39;].&quot;&lt;br/&gt;&quot;;
+    echo $row[&#39;password&#39;].&quot;&lt;br/&gt;&quot;;
+&#125;
+
+mysqli_close($con);
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/Ft8EG4y12QASzfR.png" alt="image-20210318192511897"></p>
+<h3 id="根据用户查询返回结果展示"><a href="#根据用户查询返回结果展示" class="headerlink" title="根据用户查询返回结果展示"></a>根据用户查询返回结果展示</h3><pre><code class="php">&lt;?php
+$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
+if(!$con)&#123;
+    die(&#39;连接失败：&#39;.mysqli_connect_error());
+&#125;
+
+$id=$_GET[&#39;user_id&#39;];
+$sql =&quot;select * from `users` where user_id=$id&quot;;    //其中users不是用单引号括住，而是用` `
+
+$result=mysqli_query($con,$sql);
+
+if(mysqli_num_rows($result)&gt;0)&#123;
+    $row=mysqli_fetch_array($result);
+    echo &quot;您查询的用户名是： &quot;.$row[&#39;user&#39;].&quot;&lt;br/&gt;&quot;;
+    echo &quot;您查询的用户名密码是： &quot;.$row[&#39;password&#39;];
+&#125;
+
+mysqli_close($con);
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/18/GEd5cH3gzv9h2Ne.png" alt="image-20210318195520342"></p>
+<h2 id="PHP的会话与权限管理"><a href="#PHP的会话与权限管理" class="headerlink" title="PHP的会话与权限管理"></a>PHP的会话与权限管理</h2><h3 id="Cookie和会话Session"><a href="#Cookie和会话Session" class="headerlink" title="Cookie和会话Session"></a>Cookie和会话Session</h3><p>（1）cookie用来管理服务器和客户之间的状态</p>
+<ul>
+<li>cookie的工作机制是<strong>用户识别及状态管理</strong></li>
+<li>web网站为了管理用户的状态，会通过web浏览器，把一些数据临时写入用户的计算机内。当用户访问该web网站时，可通过通信方式取回之前发放的cookie。</li>
+</ul>
+<p>（2）session会在cookie中出现和传输，属于cookie的一部分</p>
+<ul>
+<li>当web服务器开启会话机制时，用户登录成功后，会将<strong>会话保存在服务器中</strong></li>
+</ul>
+<h3 id="PHP-Cookie"><a href="#PHP-Cookie" class="headerlink" title="PHP Cookie"></a>PHP Cookie</h3><p>（1）下发cookie函数：Setcookie()</p>
+<ul>
+<li>服务端会通过http响应包的set-cookie为浏览器分配cookie字段。</li>
+</ul>
+<pre><code class="php">&lt;?php
+setcookie(&quot;user&quot;,&quot;reborn&quot;,time()+3600);
+header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+
+//创建名为“user”的cookie，并为它赋值“reborn”
+//规定此cookie在一小时后过期
+?&gt;</code></pre>
+<p>（2）取回cookie的值</p>
+<ul>
+<li>PHP的$_COOKIE变量用于取回cookie的值</li>
+</ul>
+<pre><code class="php">&lt;?php
+    echo $_COOKIE[&quot;user&quot;];    //取回cookie的值
+    print_r($_COOKIE);        //查看所有cookie的方法
+?&gt;</code></pre>
+<p>（3）删除cookie</p>
+<ul>
+<li>删除cookie时，应当使过期日期变更为过去的时间点</li>
+</ul>
+<pre><code class="php">&lt;?php
+    setcookie(&quot;user&quot;,&quot;&quot;,time()-3600);    //将过期数据设置为一小时前
+?&gt;</code></pre>
+<h3 id="PHP-Sessions"><a href="#PHP-Sessions" class="headerlink" title="PHP Sessions"></a>PHP Sessions</h3><p>PHP开启会话函数：session_start()</p>
+<ul>
+<li>session_start()函数必须位于&lt;html&gt;标签之前</li>
+</ul>
+<pre><code class="html">&lt;?php session_start(); ?&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        ......
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3 id="存储PHP-Session"><a href="#存储PHP-Session" class="headerlink" title="存储PHP Session"></a>存储PHP Session</h3><p>存储记录Session：$_SESSION</p>
+<pre><code class="php">&lt;?php
+    session_start();
+    $_SESSION[&#39;login_id&#39;]=1003;
+    $_SESSION[&#39;role&#39;]=&quot;student&quot;;
+?&gt;</code></pre>
+<h3 id="终结PHP-Session"><a href="#终结PHP-Session" class="headerlink" title="终结PHP Session"></a>终结PHP Session</h3><p>（1）若需要删除某些session数据，可以使用unset()或session_destroy()函数</p>
+<ul>
+<li>unset()函数用于释放指定的session变量</li>
+</ul>
+<pre><code class="php">&lt;?php
+    unset($_SESSION[&#39;views&#39;])；
+?&gt;</code></pre>
+<p>（2）可以通过session_destroy()函数彻底终结session</p>
+<ul>
+<li>session_destroy()将重置session，将失去所有已存储的session数据</li>
+</ul>
+<pre><code class="php">&lt;?php
+    session_destroy();
+?&gt;</code></pre>
+<h3 id="利用session进行权限管理"><a href="#利用session进行权限管理" class="headerlink" title="利用session进行权限管理"></a>利用session进行权限管理</h3><p>当用户需要访问登录后的页面或特定身份才能访问的页面或数据，则通过session变量来校验用户身份权限和状态，根据校验结果决定是否允许用户进行相关操作。</p>
+<ul>
+<li>用户登录成功时为用户分配session变量</li>
+<li>记录用户的登录状态和身份</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/18/8khDnLWJTZ5cmC7.png" alt="image-20210318203458759"></p>
+<h3 id="header-函数"><a href="#header-函数" class="headerlink" title="header()函数"></a>header()函数</h3><p>header()函数是PHP中进行页面跳转的一种方法。</p>
+<ul>
+<li>header()函数的主要功能是将HTTP协议标头(header)输出到浏览器。</li>
+</ul>
+<pre><code class="php">&lt;?php
+    header(&quot;Location:http://www.qq.com&quot;);   //重定向浏览器
+    exit();   //确保重定向后，后续代码不会被执行
+?&gt;</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全进阶/JavaScript代码进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -582,7 +1260,7 @@ i++;
 <pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;meat charset=&quot;UTF-8&quot;&gt;&lt;/meat&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;/meta&gt;
         &lt;title&gt;Goktech-javascript&lt;/title&gt;
     &lt;/head&gt;
     &lt;body&gt;
@@ -598,7 +1276,7 @@ i++;
 <pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
-        &lt;meat charset=&quot;UTF-8&quot;&gt;&lt;/meat&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;/meta&gt;
         &lt;title&gt;Goktech-javascript&lt;/title&gt;
     &lt;/head&gt;
     &lt;body&gt;
@@ -889,16 +1567,21 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <li>所谓动态网页，就是用户不仅可以浏览网页，还可以与服务器进行交互。例如用户登录某个网站，输入账号密码，由服务器对该用户的账号进行验证，通过验证即可成功登录。</li>
 <li>WEB2.0时代的网页不仅包含绚丽的动画、音频和视频，还可以让用户在网页中进行评论交流、上传和下载文件等。具有良好的交互性。因而不再叫做“网页制作”，而是叫“WEB前端开发”。</li>
 </ul>
+<h3 id="前端网站搭建所需环境"><a href="#前端网站搭建所需环境" class="headerlink" title="前端网站搭建所需环境"></a>前端网站搭建所需环境</h3><p>（1）Web服务程序：Apache或IIS</p>
+<p>（2）数据库服务程序：mysql或mssql</p>
+<p>（3）操作脚本引擎：PHP或JSP</p>
 <h3 id="前端架构核心技术"><a href="#前端架构核心技术" class="headerlink" title="前端架构核心技术"></a>前端架构核心技术</h3><p>（1）网页最主要由3部分组成：结构、表现和行为，目前模式是HTML、CSS和JavaScript。</p>
-<p>（2）HTML是网页的结构，CSS是网页的外观，而JavaScript是页面的行为。</p>
+<p>（2）HTML是网页的结构，便于浏览器进行解析。CSS是网页的外观，使HTML文档更美观。而JavaScript是页面的行为赋予网站一些特定的动作，如放大或缩小图片。</p>
 <p>（3）CSS（Cascading Style Sheets）,用来表现HTML文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
-<h2 id="HTML基本语法"><a href="#HTML基本语法" class="headerlink" title="HTML基本语法"></a>HTML基本语法</h2><h3 id="代码编写编辑器"><a href="#代码编写编辑器" class="headerlink" title="代码编写编辑器"></a>代码编写编辑器</h3><p>（1）离线编辑器：pycharm、Sublime Text3、Notepad++</p>
+<p>（4）HTML文档中可以嵌入css和JavaScript，也可以将css和JavaScript单独卸载css或js文件中，然后引入HTML文档中。</p>
+<h2 id="HTML基本语法"><a href="#HTML基本语法" class="headerlink" title="HTML基本语法"></a>HTML基本语法</h2><h3 id="代码编写编辑器"><a href="#代码编写编辑器" class="headerlink" title="代码编写编辑器"></a>代码编写编辑器</h3><p>（1）离线编辑器：pycharm、Sublime Text3、Notepad++、vsCode</p>
 <p>（2）在线编辑器：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.jq22.com/webide/">https://www.jq22.com/webide/</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp">https://www.w3school.com.cn/tiy/t.asp</a></li>
 <li><a target="_blank" rel="noopener" href="https://c.runoob.com/front-end/61">https://c.runoob.com/front-end/61</a></li>
 </ul>
+<p>（3）VScode快捷键：Ctrl+/  注释、Tab   补全、Alt+B  运行。</p>
 <h3 id="HTML基本概念"><a href="#HTML基本概念" class="headerlink" title="HTML基本概念"></a>HTML基本概念</h3><p>（1）HTML指的是超文本标记语言(Hyper Text Markup Language)</p>
 <p>（2）HTML不是一种编程语言，而是一种标记语言(Markup Language)，标记语言是一套标记标签(Markup Tag)</p>
 <p>（3）HTML使用标记标签来描述网页</p>
@@ -3019,487 +3702,6 @@ show tables;         //查询mysql数据库中的表</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全初级/WEB安全基础(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/">WEB安全基础(一)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="archive-article-date">
-  	<time datetime="2020-12-15T08:19:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="WEB应用安全概述"><a href="#WEB应用安全概述" class="headerlink" title="WEB应用安全概述"></a>WEB应用安全概述</h2><p>（1）WEB应用安全是指WEB应用系统的安全性，由于WEB应用的特点，在安全性方面有许多有别于传统系统安全的内容。</p>
-<p>（2）传统系统安全体系的建立：防火墙、入侵防护系统、漏洞扫描系统。80%以上的攻击通过应用程序漏洞来开展。</p>
-<h3 id="常见WEB应用"><a href="#常见WEB应用" class="headerlink" title="常见WEB应用"></a>常见WEB应用</h3><p>（1）常见应用类型：CMS、论坛、电商平台、业务办理</p>
-<p>（2）常见WEB应用：网站前台和网站后台。二者通常是相对于动态网站而言，即网站建设是基于数据库开发的网站。基于带数据库开发的网站，一般分为网站前台和网站后台。</p>
-<p>（3）网站前台是面向网站用户访问的，通俗的说也就是给访问网站的人看的内容和页面，网站前台访问可以浏览公开发布的内容。</p>
-<p>（4）网站后台，有时也称为网站管理后台，是指用于管理网站前台的一系列操作。网站的后台通常需要账号及密码等信息的登录验证，登录信息正确则验证而后进入网站后台的管理界面进行相关的一系列操作。<strong>由于网站后台具有更高的操作权限，往往是黑客攻击的重要目标.</strong></p>
-<h3 id="WEB应用安全与传统安全的区别"><a href="#WEB应用安全与传统安全的区别" class="headerlink" title="WEB应用安全与传统安全的区别"></a>WEB应用安全与传统安全的区别</h3><table>
-<thead>
-<tr>
-<th align="center">对比项</th>
-<th align="center">传统系统安全</th>
-<th align="center">WEB应用安全</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">通用性</td>
-<td align="center">建立在使用较广的通用软件基础上</td>
-<td align="center">每一个应用相当于一个独立的软件</td>
-</tr>
-<tr>
-<td align="center">开发者</td>
-<td align="center">通常是具有较高专业技术的厂商和人员，对安全有一定的理解</td>
-<td align="center">开发者水平参差不齐，对于安全的理解较为往往不足</td>
-</tr>
-<tr>
-<td align="center">漏洞的检测</td>
-<td align="center">建立在漏洞已知、确定的基础上</td>
-<td align="center">基于业务特点对可能存在的漏洞进行扫描</td>
-</tr>
-<tr>
-<td align="center">漏洞的挖掘</td>
-<td align="center">需要对计算机结构、操作系统原理，底层语言等有很深入的了解，难度大</td>
-<td align="center">只需要掌握一些基础的网站架构、脚本语言、数据库知识就可以开始，难度低</td>
-</tr>
-<tr>
-<td align="center">漏洞的修复</td>
-<td align="center">由专业的厂商提供修复方案</td>
-<td align="center">应用开发人员自行修复</td>
-</tr>
-<tr>
-<td align="center">攻击途径</td>
-<td align="center">多数服务端口不开放在公网上，攻击途径较少</td>
-<td align="center">WEB应用的业务特点导致多数的WEB应用对于互联网是开放的</td>
-</tr>
-<tr>
-<td align="center">攻击特征</td>
-<td align="center">有数据级的攻击特征，攻击行为与正常业务行为的差异明显</td>
-<td align="center">攻击特征不明确，业务逻辑类漏洞在数据层面无攻击特征</td>
-</tr>
-<tr>
-<td align="center">防护难度</td>
-<td align="center">对于已知漏洞的防护较为容易</td>
-<td align="center">防护难度大，容易绕过</td>
-</tr>
-</tbody></table>
-<h2 id="WEB应用的基本架构"><a href="#WEB应用的基本架构" class="headerlink" title="WEB应用的基本架构"></a>WEB应用的基本架构</h2><p>（1）组成：终端用户、应用传输协议http、应用服务器、数据库服务器</p>
-<p>（2）</p>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">客户端</th>
-<th align="center">服务端</th>
-<th align="center">数据库</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">应用</td>
-<td align="center">客户端浏览器(IE、Firefox…)</td>
-<td align="center">服务端WEB应用(IIS、Apache)</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">语言</td>
-<td align="center">HTML、javascript、CSS</td>
-<td align="center">PHP、JSP、ASP</td>
-<td align="center">SQL</td>
-</tr>
-</tbody></table>
-<h3 id="WEB服务的提供者——WEB中间件"><a href="#WEB服务的提供者——WEB中间件" class="headerlink" title="WEB服务的提供者——WEB中间件"></a>WEB服务的提供者——WEB中间件</h3><p>WEB中间件是用来提供WEB服务的应用软件，常说的WEB服务器其实就是部署了WEB中间件能够提供WEB服务的服务器，常见的WEB中间件包括IIS、tomcat、apahce、weblogic、Nginx等。</p>
-<h3 id="简单的WEB服务器搭建"><a href="#简单的WEB服务器搭建" class="headerlink" title="简单的WEB服务器搭建"></a>简单的WEB服务器搭建</h3><p><strong>PHPstudy简介</strong></p>
-<p>（1）PHPstudy是一个PHP调试环境的程序集成包</p>
-<p>（2）该程序包集成最新的Apache+PHP+MySQL+phpMyAdmin+ZendOptimizer，一次性安装，无需配置即可使用。该程序不仅包括PHP调试环境，还包括了开发工具、开发手册等。</p>
-<p>（3）该程序包可以很好地解决Windows下环境配置的问题。</p>
-<p><strong>PHPstudy的使用</strong></p>
-<p>（1）打开phpstudy软件，可看到启动、停止、重启的按钮，可对phpstudy进行相应的操作。</p>
-<p>（2）点击PHP版本，可看见phpstudy有多种版本可供选择。</p>
-<p>（3）点击其他选项菜单——网站根目录，可在里面增加文件，即可通过浏览器访问</p>
-<p><strong>PHPstudy的hello world</strong></p>
-<p>（1）新建一个txt文档，在里面写入hello world，然后保存将后缀名改为test.html</p>
-<p>（2）将test.html放入phpstudy的WWW目录中，即根目录下”/“，在url中可以体现文件的所在路径。</p>
-<p>（3）启动phpstudy，在浏览器中输入[<a target="_blank" rel="noopener" href="http://127.0.0.1/test.html],%E8%AE%BF%E9%97%AE%E7%BB%93%E6%9E%9C%E5%A6%82%E4%B8%8B%EF%BC%9A">http://127.0.0.1/test.html],访问结果如下：</a></p>
-<h2 id="HTTP协议基础"><a href="#HTTP协议基础" class="headerlink" title="HTTP协议基础"></a>HTTP协议基础</h2><p>（1）HTTP是Hyper Text Transfer Protocol(超文本传输协议)的缩写。HTTP协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。</p>
-<p>（2）HTTP是一个<strong>应用层协议</strong>，由<strong>请求和响应</strong>构成，是一个标准的客户端服务器模型。HTTP是一个无状态的协议。</p>
-<h3 id="网页请求的基本过程"><a href="#网页请求的基本过程" class="headerlink" title="网页请求的基本过程"></a>网页请求的基本过程</h3><p><strong>请求触发–&gt;建立TCP连接–&gt;客户端发送HTTP请求–&gt;服务端返回HTTP响应–&gt;客户端显示结果</strong></p>
-<p>当用户在浏览器中输入网址或点击超链接，网页请求就被发出了，其工作过程可分为四步：</p>
-<p>（1）首先客户端与服务器需要建立TCP连接</p>
-<p>（2）建立连接后，客户端发送一个请求给服务器，请求方式的格式为：统一资源标识符(URL)、协议版本号、后边是MIME信息、请求修饰符、客户机信息和可能的内容。</p>
-<p>（3）服务器接到请求后，给予相应的响应信息，其格式为一个状态行，包括信息的协议版本号、一个成功或错误的代码，后边是MIME信息、服务器信息、实体信息和可能的内容。</p>
-<p>（4）客户端接收服务器所返回的信息通过浏览器显示在用户的显示屏上，然后客户机与服务器断开连接。</p>
-<p>若以上过程的某一步出现错误，则产生错误的信息将返回到客户端，通过显示屏输出。对用户来说，这些过程由HTTP自己完成，对用户透明。</p>
-<h3 id="HackBar工具"><a href="#HackBar工具" class="headerlink" title="HackBar工具"></a>HackBar工具</h3><p>HackBar小工具包，包含一些常用的工具。(SQL injection、XSS、加密等)，web开发人员可以利用该工具，快速构建一个http请求，或者用它快速实现某种算法等。</p>
-<h3 id="BurpSuite工具"><a href="#BurpSuite工具" class="headerlink" title="BurpSuite工具"></a>BurpSuite工具</h3><p>（1）Burp Suite是一个集成化的渗透测试工具，它集合了多种渗透测试组件，能更好地完成对web应用的渗透测试和攻击。</p>
-<p>（2）Burp Suite代理工具是以拦截代理的方式，拦截所有通过代理的网络流量。如客户端的请求数据、服务端的返回信息等。Burp Suite主要拦截http和https协议的流量，通过拦截，Burp Suite以中间人的方式，可以对客户端请求数据、服务端返回做各种处理，以达到安全评估、测试的目的。</p>
-<p><strong>BurpSuite的使用</strong></p>
-<p>（1）配置监听选项：Proxy–&gt;Options，在Proxy Listeners中Add一条或者Edit一条监听地址及端口，如本地的8080端口。注意监听的端口不能和本机已使用的端口冲突。</p>
-<p>（2）配置拦截选项：Proxy–&gt;Options，设置拦截请求包，设置拦截返回包</p>
-<p>（3）浏览器的代理地址设置：</p>
-<p>火狐浏览器设置步骤：菜单–&gt;选项–&gt;高级–&gt;网络—&gt;设置</p>
-<p>Edge浏览器的设置步骤：在谷歌应用商店下载SwitchyOmega插件，在proxy情景模式下配置代理服务器，并保存</p>
-<p>（4）请求与响应拦截：打开浏览器，输入访问的网址–&gt;设置浏览器代理–&gt;打开burpsuite，开启Intercept，在浏览器的hackbar中点击Execute–&gt;获取burpsuite抓取http报文–&gt;点击Forward提交、发送，会将访问的页面显示在浏览器上。</p>
-<p>（5）数据报重放：抓取http的数据包后。右键单击——发送到Repeater–&gt;点击Repeater模块，在该模块能够显示请求包和回复包–&gt;在Request请求包里可以修改内容，点击Go之后，可以在Response回复包内容中显示返回在浏览器上的内容。</p>
-<h3 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h3><p>HTTP请求由三部分组成：请求行、消息报头、请求正文</p>
-<h4 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h4><p>包括http请求的种类/方法、请求资源的路径、http协议版本三个部分，以空格(%20)分隔，以回车换行符结尾(%0d%0a)。</p>
-<pre><code class="Python">POST /search.php?searchsubmit=yes HTTP/1.1
-#POST为常见请求的种类/方法，定义了服务器收到请求后的“动作”
-#/search.php?searchsubmit=yes为请求资源的路径
-#HTTP/1.1是协议版本，目前默认为1.1</code></pre>
-<table>
-<thead>
-<tr>
-<th align="center">请求方法</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">GET</td>
-<td align="center">请求指定的页面信息，并返回实体主体。</td>
-</tr>
-<tr>
-<td align="center">POST</td>
-<td align="center">向指定资源提交数据进行请求(例如提交表单或者上传文件)。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</td>
-</tr>
-</tbody></table>
-<p>（3）说明：出于安全考虑，通常要求服务器只允许使用GET和POST方法。</p>
-<p>二者区别：GET请求的所提交的所有数据都在URL中体现，不利于提交复杂的数据，且安全性相对较低，而POST请求可以将主要数据放在请求正文中提交，常用于提交复杂数据或敏感信息。</p>
-<h4 id="URL简介"><a href="#URL简介" class="headerlink" title="URL简介"></a>URL简介</h4><p>（1）URL又称统一资源定位符是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置及浏览器应该怎么处理它。</p>
-<p>（2）URL的基本构成：</p>
-<p>schema://host[:port#]/path/…/[;url-params][?query-string][#anchor]</p>
-<pre><code>http://www.domain.com:1234/path/to/resource?a=b&amp;x=y
-#http为协议(protocol)
-#www.domain.com为host，1234为端口
-#/path/to/resource为资源路径
-#?a=b&amp;x=y为对资源的查询操作(query)</code></pre>
-<p>（3）URL编码是一种浏览器用来打包表单输入的格式。浏览器从表单中获取所有的name和其中的值，将他们以name/value参数编码作为URL的一部分或者分离地发送给服务器，url编码就是一个字符ASCII码的十六进制，然后在其前面部分加上”%”</p>
-<h4 id="消息报头"><a href="#消息报头" class="headerlink" title="消息报头"></a>消息报头</h4><p>（1）请求消息报头说明了客户端的基本信息，以及如何与客户端进行交互；</p>
-<p>（2）消息报头由多行组成，每行以key:value的形式体现，每行末尾包括一个回车换行符(%0a%0d)，消息报头末尾以两个回车换行符作为结束。</p>
-<table>
-<thead>
-<tr>
-<th align="center">Header</th>
-<th align="center">解释</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Accept-Language</td>
-<td align="center">浏览器可以接受的语言</td>
-<td align="center">Accept-Language:en,zh</td>
-</tr>
-<tr>
-<td align="center">Cookie</td>
-<td align="center">HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器</td>
-<td align="center">Cookie:Version=1;Skin=new;</td>
-</tr>
-<tr>
-<td align="center">Content-Length</td>
-<td align="center">请求的内容长度</td>
-<td align="center">Content-Length:348</td>
-</tr>
-<tr>
-<td align="center">Content-Type</td>
-<td align="center">请求的内容对应的MIME信息</td>
-<td align="center">Content-Type:application/x-www-form-urlencoded</td>
-</tr>
-<tr>
-<td align="center">Host</td>
-<td align="center">指定请求的服务器的域名和端口号(必选)</td>
-<td align="center">Host:<a target="_blank" rel="noopener" href="http://www.doone.com/">www.doone.com</a></td>
-</tr>
-<tr>
-<td align="center">Referer</td>
-<td align="center">表示当前是从哪个页面上的链接触发的</td>
-<td align="center">Referer:<a target="_blank" rel="noopener" href="http://www.zcmhi.com/archives/71.html">http://www.zcmhi.com/archives/71.html</a></td>
-</tr>
-<tr>
-<td align="center">User-Agent</td>
-<td align="center">User-Agent的内容包含发出请求的用户信息</td>
-<td align="center">User-Agent:Mozilla/5.0(Linux;X11)</td>
-</tr>
-<tr>
-<td align="center">X-Forwarded-For        client-ip</td>
-<td align="center">用户通过代理服务器访问网站时代理服务器会自动添加该字段用于标记用户的真实IP</td>
-<td align="center">X-Forwarded-For:1.1.1.1             client-ip:2.2.2.2</td>
-</tr>
-</tbody></table>
-<h3 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h3><p>HTTP响应也由三部分组成，分别是：状态行、消息报头、响应正文</p>
-<h4 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h4><p>（1）状态行包括http协议版本、状态码、状态描述三个部分，以空格符(%20)分隔，以回车换行符结尾(%0d%0a)</p>
-<p>（2）状态代码由三位数字组成，第一个数字定义了响应的类别，且有五种可能取值。</p>
-<pre><code>1xx：指示信息--表示请求已接收，继续处理
-2xx：成功--表示请求已被成功接收、理解、接受
-3xx：重定向--要完成请求必须进行更进一步的操作
-4xx：客户端错误--请求有语法错误或请求无法实现
-5xx：服务器端错误--服务器未能实现合法的请求</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/RBwkMDiAU8l1Pus.png" alt="image-20201216191016982"></p>
-<h4 id="消息报头-1"><a href="#消息报头-1" class="headerlink" title="消息报头"></a>消息报头</h4><p>（1）消息报头说明了服务端的基本信息、客户端如何处理返回的消息等</p>
-<p>（2）消息报头由多行组成，每行以key:value的形式体现，每行末尾包括一个回车换行符(%0a%0d)，消息报头末尾以两个回车换行符(%0a%0d)作为结束。</p>
-<table>
-<thead>
-<tr>
-<th align="center">Header</th>
-<th align="center">解释</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Allow</td>
-<td align="center">服务器支持的请求方法，OPTIONS请求方法的响应头</td>
-<td align="center">Allow:GET,HEAD,POST,OPTIONS</td>
-</tr>
-<tr>
-<td align="center">Content-Encoding</td>
-<td align="center">web服务器表明自己使用了什么压缩方法(gzip，deflate)压缩响应正文的内容</td>
-<td align="center">Content-Encoding:gzip</td>
-</tr>
-<tr>
-<td align="center">Content-Length</td>
-<td align="center">响应正文的长度，以字节方式存储的十进制数字来表示</td>
-<td align="center">Content-Length:42</td>
-</tr>
-<tr>
-<td align="center">Content-Type</td>
-<td align="center">响应正文的MIME类型和字符集</td>
-<td align="center">Content-Type:text/html;charset=GB2312</td>
-</tr>
-<tr>
-<td align="center">Location</td>
-<td align="center">用于重定向一个新的位置，包含新的URL地址，表示客户应当到哪里去提取文档</td>
-<td align="center">Location:<a target="_blank" rel="noopener" href="http://www.baidu.com/search/error.html">http://www.baidu.com/search/error.html</a></td>
-</tr>
-<tr>
-<td align="center">Server</td>
-<td align="center">指明HTTP服务器用来处理请求的软件信息</td>
-<td align="center">Server:nginx/1.5.4</td>
-</tr>
-<tr>
-<td align="center">Set-Cookie</td>
-<td align="center">用于把cookie发送到客户端浏览器，每一个写入cookie都会生成一个Set-Cookie</td>
-<td align="center">Set-Cookie:sc=4c31523a;path=/;domain=.doone.com.con</td>
-</tr>
-<tr>
-<td align="center">X-Powered-By</td>
-<td align="center">表示网站使用什么技术开发的</td>
-<td align="center">X-Powered-By:ASP.NET</td>
-</tr>
-</tbody></table>
-<h2 id="HTML基本概念"><a href="#HTML基本概念" class="headerlink" title="HTML基本概念"></a>HTML基本概念</h2><p>（1）HTML是用来描述网页的一种语言</p>
-<p>（2）HTML指的是超文本标记语言(Hyper Text Markup Language)</p>
-<p>（3）HTML不是一种编程语言，而是一种标记语言，标记语言是一套标记标签</p>
-<p>（4）HTML使用标记标签来描述网页</p>
-<p>（5）HTML文档通常用htm和html作为后缀名</p>
-<p>（6）Web浏览器的作用是读取HTML文档，并以网页的形式显示出他们。浏览器不会显示HTML标签，而是使用标签来解释页面的内容。</p>
-<h3 id="HTML基础语法"><a href="#HTML基础语法" class="headerlink" title="HTML基础语法"></a>HTML基础语法</h3><p>（1）HTML文档是由HTML元素定义的，HTML元素以开始标签(start tag)起始，以结束标签(end tag)终止</p>
-<p>（2）元素的内容是开始标签与结束标签之间的内容</p>
-<p>（3）某些HTML元素内容为空，空元素在开始标签中闭合，无结束标签</p>
-<p>（4）大多数HTML元素可拥有属性，属性总是以名称/值对的形式出现，提供了有关HTML元素的更多信息。</p>
-<p>属性总是在HTML元素的开始标签中规定；</p>
-<p>属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没问题。</p>
-<p>（5）有时候没有结束标签元素也可以正常显示，但是可能会出现意外错误，不建议使用</p>
-<p><img src="https://i.loli.net/2020/12/16/ahLjpODg9TUnw6I.png" alt="image-20201216201051807"></p>
-<h3 id="HTML文档结构"><a href="#HTML文档结构" class="headerlink" title="HTML文档结构"></a>HTML文档结构</h3><p><img src="https://i.loli.net/2020/12/16/Zkn2LoxrgEuS4wB.png" alt="image-20201216204841476"></p>
-<pre><code class="html">&lt;!DOCTYPE html/&gt;
-&lt;html&gt;
-    &lt;head&gt;                            #&lt;head&gt;通常不显示
-        &lt;/head&gt;
-        &lt;meta charest=&quot;utf-8&quot;/&gt;       #主体的编码方式
-        &lt;title&gt;文档的标题&lt;/title&gt;       
-    &lt;/head&gt;
-    &lt;body&gt;                           #body元素定义文档的主体
-
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/17/LEjQBNGDzkldbgs.png" alt="image-20201217211426549"></p>
-<h3 id="HTML常见标签"><a href="#HTML常见标签" class="headerlink" title="HTML常见标签"></a>HTML常见标签</h3><p>（1）格式标签：&lt;h1&gt; to &lt;h6&gt;定义HTML标题。  &lt;br/&gt;定义换行</p>
-<p>（2）链接标签：&lt;a&gt;定义超链接</p>
-<p>（3）文本标签：&lt;input&gt;定义文本域</p>
-<p>（4）多媒体标签：&lt;img&gt;定义图像</p>
-<p>（5）&lt;body&gt;元素定义了HTML文档的主体</p>
-<p>（6）&lt;html&gt;元素定义了整个HTML文档</p>
-<h4 id="格式标签"><a href="#格式标签" class="headerlink" title="格式标签"></a>格式标签</h4><p>（1）&lt;h1&gt;标签可定义标题。&lt;h1&gt;定义最大的标题，&lt;h6&gt;定义最小的标题</p>
-<p>（2）示例：</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;h1&gt;
-            这是标题1
-        &lt;/h1&gt;
-        &lt;h2&gt;
-            这是标题2
-        &lt;/h2&gt;
-        &lt;h3&gt;
-            这是标题3
-        &lt;/h3&gt;
-        &lt;h4&gt;
-            这是标题4
-        &lt;/h4&gt;
-        &lt;h5&gt;
-            这是标题5
-        &lt;/h5&gt;
-        &lt;h6&gt;
-            这是标题6
-        &lt;/h6&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/7mebkXYvxLt1SKu.png" alt="image-20201216205838653"></p>
-<h4 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h4><p>（1）&lt;a&gt;标签定义超链接，用于从一个页面链接到另一个页面</p>
-<p>（2）&lt;a&gt;元素最重要的属性是href属性，它指示链接的目标</p>
-<p>（3）示例：</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;a href= &quot;http://www.goktech.cn&quot; &gt;国科科技&lt;/a&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/dKCGo7iguY362Ua.png" alt="image-20201216210422270"></p>
-<p><img src="https://i.loli.net/2020/12/16/ShCtUew8pV9I63k.png" alt="image-20201216210440769"></p>
-<h4 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h4><p>（1）&lt;input&gt;标签用于搜集用户信息。根据不同的type属性值，输入字段拥有很多种形式。</p>
-<p>（2）输入字段可以是文本字段、复选框、掩码后的文本控件、单选按钮、按钮等等。</p>
-<p>（3）示例：</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;form&gt;
-            First name: &lt;input type=&quot;text&quot; name=&quot;fname&quot;/&gt;&lt;br&gt;
-            Last name: &lt;input type= &quot;text&quot; name=&quot;Iname&quot;/&gt;&lt;br&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/xKhX7fDPcCsFkuv.png" alt="image-20201216211427660"></p>
-<h4 id="图像标签"><a href="#图像标签" class="headerlink" title="图像标签"></a>图像标签</h4><p>（1）&lt;img&gt;标签向网页中嵌入一幅图像</p>
-<p>（2）&lt;img&gt;标签有两个必需的属性：src属性和alt属性</p>
-<p>（3）示例：</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;img src=&quot;http://www.goktech.cn/img/img_index/logo2.png&quot;/&gt;
-        &lt;br/&gt;
-        &lt;br&gt;
-        &lt;img src=&quot;/html/images/eg_tulip.jpg&quot;&gt;&lt;br/&gt;
-        &lt;br&gt;
-        &lt;br&gt;
-        &lt;img src=&quot;/images/1.jpg&quot; alt=&quot;玫瑰花&quot;&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/lP7hgsCdaKpWbQo.png" alt="image-20201216213448240"></p>
-<p>若无法显示图像，浏览器将显示替代文本</p>
-<p><img src="https://i.loli.net/2020/12/16/pFnAySDEhsPUoHg.png" alt="image-20201216213511013"></p>
-<h3 id="事件属性与Windos对象方法"><a href="#事件属性与Windos对象方法" class="headerlink" title="事件属性与Windos对象方法"></a>事件属性与Windos对象方法</h3><p>（1）HTML事件属性是一种特殊的属性，提供了事件在浏览器中触发动作的能力，比如当用户点击元素时启动JavaScript</p>
-<p>（2）Window对象方法提供了一些简单的动作，如弹出对话框的能力，window对象方法与事件结合使用可以实现一些简单的交互功能。</p>
-<p>（3）基本用法：</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;input type=&quot;text&quot; onclick=&quot;alert(&#39;您好，请输入&#39;)&quot; /&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/PViqu2ErGCteTg4.png" alt="image-20201216220517460"></p>
-<h3 id="常见事件属性与windows对象方法"><a href="#常见事件属性与windows对象方法" class="headerlink" title="常见事件属性与windows对象方法"></a>常见事件属性与windows对象方法</h3><p><strong>常见事件属性</strong></p>
-<p>（1）鼠标事件：</p>
-<pre><code>Onclick;元素上发生鼠标点击时触发。
-Ondblclick：元素上发生鼠标双击时触发
-0nmouseover：当鼠标指针移动到元素上时触发
-onmouseout：当鼠标指针移除元素时触发</code></pre>
-<p>（2）键盘事件：</p>
-<pre><code>Onkeydown：当用户按下按键时触发</code></pre>
-<p>（3）Form事件：</p>
-<pre><code>Onchange:在元素值被改变时触发
-Onfocus：当元素获得焦点时触发</code></pre>
-<p><strong>常见对象方法</strong></p>
-<p>（1）alert():显示带有一段消息和一个确认按钮的警告框</p>
-<p>（2）confirm():显示带有一段消息以及确认按钮和取消按钮的对话框</p>
-<p>（3）prompt():显示可提示用户输入的对话框</p>
-<h3 id="事件属性与windows对象方法实例"><a href="#事件属性与windows对象方法实例" class="headerlink" title="事件属性与windows对象方法实例"></a>事件属性与windows对象方法实例</h3><p>(1)onmouseover属性在鼠标指针移动到元素上时触发。当用户把鼠标移动到图片上时，会显示可提示用户输入的对话框。</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;img onmouseover=&quot;prompt()&quot; src=&quot;/images/eg_chinarose.jap&quot;&gt;
-    &lt;/head&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/NPQ7xscjLnp43mr.png" alt="image-20201216223834282"></p>
-<p>（2）onchange属性在元素值被改变时触发</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        请输入您的姓名：
-        &lt;input type=&quot;text&quot; onchange=&quot;confirm(&#39;Good Good study,Day Day up!&#39;)&quot; /&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>当在输入框输入姓名回车后，会弹出信息的提示框</p>
-<p><img src="https://i.loli.net/2020/12/16/dESxU2gyarJhoXF.png" alt="image-20201216224229033"></p>
-<h3 id="HTML标签嵌套"><a href="#HTML标签嵌套" class="headerlink" title="HTML标签嵌套"></a>HTML标签嵌套</h3><p>（1)HTML标签通常都是互相嵌套的，通过相互嵌套标签可以实现各类复杂的效果。</p>
-<p>（2）例如：将IMG标签嵌套至A标签的内容位置，可以使得图片变成一个可点击的链接。</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;a href=http://www.baidu.com&gt;
-            &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;baidu&quot; width=&quot;100&quot; height=&quot;42&quot;&gt;
-        &lt;/a&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/BlAofEQndb8RYmL.png" alt="image-20201216235827081"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/">展开全文 >></a>
         </p>
       
 
