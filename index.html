@@ -1573,7 +1573,7 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <h3 id="前端架构核心技术"><a href="#前端架构核心技术" class="headerlink" title="前端架构核心技术"></a>前端架构核心技术</h3><p>（1）网页最主要由3部分组成：结构、表现和行为，目前模式是HTML、CSS和JavaScript。</p>
 <p>（2）HTML是网页的结构，便于浏览器进行解析。CSS是网页的外观，使HTML文档更美观。而JavaScript是页面的行为赋予网站一些特定的动作，如放大或缩小图片。</p>
 <p>（3）CSS（Cascading Style Sheets）,用来表现HTML文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
-<p>（4）HTML文档中可以嵌入css和JavaScript，也可以将css和JavaScript单独卸载css或js文件中，然后引入HTML文档中。</p>
+<p>（4）HTML文档中可以嵌入css和JavaScript，也可以将css和JavaScript单独下载css或js文件中，然后引入HTML文档中。</p>
 <h2 id="HTML基本语法"><a href="#HTML基本语法" class="headerlink" title="HTML基本语法"></a>HTML基本语法</h2><h3 id="代码编写编辑器"><a href="#代码编写编辑器" class="headerlink" title="代码编写编辑器"></a>代码编写编辑器</h3><p>（1）离线编辑器：pycharm、Sublime Text3、Notepad++、vsCode</p>
 <p>（2）在线编辑器：</p>
 <ul>
@@ -1586,9 +1586,10 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <p>（2）HTML不是一种编程语言，而是一种标记语言(Markup Language)，标记语言是一套标记标签(Markup Tag)</p>
 <p>（3）HTML使用标记标签来描述网页</p>
 <p>（4）HTML标签是由尖括号包围的关键词，比如&lt;html&gt;</p>
-<p>（5）HTML标签通常是成对出现的，比如&lt;b&gt;和&lt;/b&gt;</p>
-<p>（6）标签对中第一个标签是开始标签，第二个标签是结束标签</p>
+<p>（5）<strong>HTML标签通常是成对出现的</strong>，比如&lt;b&gt;和&lt;/b&gt;</p>
+<p>（6）<strong>标签对中第一个标签是开始标签，第二个标签是结束标签</strong></p>
 <p>（7）开始标签和结束标签也被称为开放标签和闭合标签</p>
+<p>（8）<strong>编写HTML时，不会出现报错信息，并且具有自动纠错功能。</strong></p>
 <p>PS:<strong>HTML文档通常用htm和html作为后缀名。Web浏览器的作用是读取HTML文档，并以网页的形式显示出他们。浏览器不会显示HTML标签，而是使用标签来解释页面的内容。</strong></p>
 <h3 id="HTML元素"><a href="#HTML元素" class="headerlink" title="HTML元素"></a>HTML元素</h3><p>（1）HTML元素指的是从开始标签(start tag)，到结束标签(end tag)的所有代码。</p>
 <pre><code class="html">&lt;html&gt;
@@ -1619,9 +1620,10 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <p>（4）空的HTML元素</p>
 <ul>
 <li>没有内容的HTML元素被称为空元素。空元素是在开始标签中关闭的。</li>
-<li>&lt;br&gt;就是没有关闭标签的空元素(&lt;br&gt;标签定义换行)</li>
+<li>&lt;br /&gt;就是没有关闭标签的空元素(&lt;br /&gt;标签定义换行)</li>
 </ul>
-<h3 id="常见的HTML标签"><a href="#常见的HTML标签" class="headerlink" title="常见的HTML标签"></a>常见的HTML标签</h3><p>（1）基础标签</p>
+<h3 id="常见的HTML标签"><a href="#常见的HTML标签" class="headerlink" title="常见的HTML标签"></a>常见的HTML标签</h3><p>行标签、块标签、行列块标签</p>
+<p>（1）基础标签</p>
 <table>
 <thead>
 <tr>
@@ -1643,7 +1645,7 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 </tr>
 <tr>
 <td align="center">&lt;head&gt;</td>
-<td align="center">定义关于文档的信息</td>
+<td align="center">定义关于文档的信息，默认换行</td>
 </tr>
 <tr>
 <td align="center">&lt;meta&gt;</td>
@@ -1651,11 +1653,15 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 </tr>
 <tr>
 <td align="center">&lt;title&gt;</td>
-<td align="center">定义文档的标题</td>
+<td align="center">定义文档的题目</td>
 </tr>
 <tr>
 <td align="center">&lt;script&gt;</td>
-<td align="center">定义客户端脚本</td>
+<td align="center">定义客户端脚本，元素内容编写js代码</td>
+</tr>
+<tr>
+<td align="center">&lt;style&gt;</td>
+<td align="center">元素内容编写css代码</td>
 </tr>
 </tbody></table>
 <p>（2）多媒体标签</p>
@@ -1679,6 +1685,10 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <td align="center">定义视频</td>
 </tr>
 </tbody></table>
+<pre><code class="html">&lt;img src=&quot;&quot;  alt=&quot;&quot;&gt;test&lt;/img&gt;
+&lt;audio src=&quot;&quot; controls&gt;&lt;/audio&gt;
+&lt;video src=&quot;&quot; controls&gt;&lt;/video&gt;
+&lt;!-- src和href表示资源路径，如果无法显示图片，浏览器将显示代替文本，即alt的值。controls代表显示控件，可以让用户手动播放音频和视频--&gt;</code></pre>
 <p>（3）表单标签</p>
 <table>
 <thead>
@@ -1724,6 +1734,46 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <td align="center">定义下拉列表</td>
 </tr>
 </tbody></table>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;/head&gt;
+&lt;form action=&quot;1.php&quot; method=&quot;GET&quot;&gt; 
+    &lt;h1&gt;个人信息填写&lt;/h1&gt;
+    &lt;!-- action表示将表单提交到哪里，method表示提交的方法(GET或POST)--&gt;
+    性别：
+    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;&gt;男
+    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;&gt;女
+    &lt;!-- input定义一个输入框，根据type值的不同有不同的输入方式和内容。常用的type的值有：text(文本)、date(日期)、email(邮件)、password(密码)、radio(单选框)、checkbox(复选框)。当参数名称name的值相同时，单选框只能选择一个，提交表单时提价value对应的值。--&gt;
+    &lt;br/&gt;
+    爱好：
+    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;运动
+    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;漫画
+    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;游戏
+    &lt;br/&gt;
+    城市：
+    &lt;!-- 下拉框--&gt;
+    &lt;select name=&quot;&quot; id=&quot;&quot;&gt;
+        &lt;optgroup&gt;
+            &lt;option value=&quot;厦门&quot;&gt;厦门&lt;/option&gt;
+            &lt;option value=&quot;福州&quot;&gt;福州&lt;/option&gt;
+            &lt;option value=&quot;泉州&quot;&gt;泉州&lt;/option&gt;
+        &lt;/optgroup&gt;
+        &lt;br/&gt;
+        &lt;optgroup&gt;
+            &lt;option value=&quot;成都&quot;&gt;成都&lt;/option&gt;
+        &lt;/optgroup&gt;
+    &lt;/select&gt;
+    &lt;br/&gt;
+    个人描述：
+    &lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;500&quot;&gt;&lt;/textarea&gt;
+    &lt;!-- cols表示列数，rows表示行数--&gt;
+    &lt;br/&gt;
+    &lt;input type=&quot;submit&quot; /&gt; &lt;!--一般用于提交表单，而不是botton标签，button一般放在form标签外面--&gt;
+    &lt;input type=&quot;reset&quot; /&gt; &lt;!--重置表单的所有数据--&gt;
+
+&lt;/form&gt;
+&lt;/html&gt;</code></pre>
 <p>（4）链接标签</p>
 <table>
 <thead>
@@ -1737,10 +1787,12 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <td align="center"><strong>定义超链接</strong></td>
 </tr>
 <tr>
-<td align="center">&lt;link&gt;</td>
+<td align="center"><strong>&lt;link&gt;</strong></td>
 <td align="center">定义文档与外部资源的关系</td>
 </tr>
 </tbody></table>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;demo.css&quot;/&gt;
+&lt;!-- 在编写HTML代码时，可用用link标签引入css文件。href表示css文件的存放位置，URL。若HTML文件和css文件在同一个目录下，href值如上 --&gt;</code></pre>
 <p>（5）格式标签</p>
 <table>
 <thead>
@@ -1755,7 +1807,7 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 </tr>
 <tr>
 <td align="center"><strong>&lt;p&gt;</strong></td>
-<td align="center"><strong>定义段落</strong></td>
+<td align="center"><strong>定义段落,默认在前后存在换行</strong></td>
 </tr>
 <tr>
 <td align="center"><strong>&lt;br&gt;</strong></td>
@@ -1789,7 +1841,15 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <td align="center">&lt;small&gt;</td>
 <td align="center">定义小号文本</td>
 </tr>
+<tr>
+<td align="center">&lt;font&gt;</td>
+<td align="center">定义文本的字体大小和颜色</td>
+</tr>
 </tbody></table>
+<pre><code class="html">&lt;hr color=&quot;red&quot; width=&quot;500px&quot; align=&quot;left&quot;&gt;
+&lt;!-- 水平线宽度为500像素，向左居中--&gt;
+&lt;font color=&quot;red&quot; size=&quot;18px&quot;&gt;文本&lt;/font&gt;
+&lt;!-- px为像素单位--&gt;</code></pre>
 <p>（6）样式/节标签</p>
 <table>
 <thead>
