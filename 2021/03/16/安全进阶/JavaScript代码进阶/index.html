@@ -18,6 +18,9 @@
 <meta property="og:image" content="https://i.loli.net/2021/03/16/acUeO5FTR7PVQX8.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/16/PhWa3QA9vnIHszN.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/16/UXLgYtdNaQ9b8AE.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/23/PA4lhXvJHSTzKNu.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/23/kMUy4m59fQAOZY8.png">
+<meta property="og:image" content="https://i.loli.net/2021/03/23/uTtJAC1yasGLEgf.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/16/BwrX6UfFc4VMtxq.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/16/suMivCgGxBAjZFD.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/17/PfxMvwjTXaOmSqb.png">
@@ -26,7 +29,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/03/17/w1kCMUD9ENZ4hma.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/17/3GV4TCYS8IwcXoz.png">
 <meta property="article:published_time" content="2021-03-16T02:00:50.000Z">
-<meta property="article:modified_time" content="2021-03-17T11:47:53.432Z">
+<meta property="article:modified_time" content="2021-03-23T13:23:07.304Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -197,7 +200,9 @@
 <li>动态性</li>
 <li>跨平台性</li>
 </ul>
-<h2 id="JavaScript的基本语法"><a href="#JavaScript的基本语法" class="headerlink" title="JavaScript的基本语法"></a>JavaScript的基本语法</h2><p>（1）JavaScript中的脚本必须位于&lt;script&gt;与&lt;/script&gt;标签之间。</p>
+<h2 id="JavaScript的基本语法"><a href="#JavaScript的基本语法" class="headerlink" title="JavaScript的基本语法"></a>JavaScript的基本语法</h2><p>（1）JavaScript中的脚本必须位于&lt;script&gt;与&lt;/script&gt;标签之间。浏览器的控制台可以执行js代码。</p>
+<pre><code class="javascript">&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&gt;&lt;/script&gt;
+//外部引入js代码，src为资源路径</code></pre>
 <p>（2）脚本可被放置在HTML页面的&lt;body&gt;和&lt;head&gt;部分中。</p>
 <pre><code class="html">&lt;!doctype html&gt;
 &lt;html&gt;
@@ -224,7 +229,7 @@
     不会在页面中被显示*/
     alert(&quot;my first javascript&quot;);
 &lt;/script&gt;</code></pre>
-<h3 id="JavaScript变量"><a href="#JavaScript变量" class="headerlink" title="JavaScript变量"></a>JavaScript变量</h3><p>（1）变量是存储信息的容器；</p>
+<h3 id="JavaScript变量"><a href="#JavaScript变量" class="headerlink" title="JavaScript变量"></a>JavaScript变量</h3><p>（1）变量是存储信息的容器；typeof(a)，打印a的类型</p>
 <pre><code class="javascript">var x=2;
 var y=3;
 var z=x+y;</code></pre>
@@ -246,7 +251,7 @@ carname=&quot;Volvo&quot;;</code></pre>
     job=&quot;CEO&quot;;</code></pre>
 <p>（5）无值变量：只声明了变量，但未为变量赋值，值=undefined</p>
 <pre><code class="javascript">var carname;</code></pre>
-<p>（6）重新声明变量：重新声明变量只要未重新赋值，变量原有的值不变</p>
+<p>（6）重新声明变量：重新声明变量只要未重新赋值，变量原有的值不变，若重新赋值，则该变量的原有值被覆盖。</p>
 <pre><code class="javascript">var carname=&quot;Volvo&quot;; var carname;</code></pre>
 <h3 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h3><p>（1）局部变量：在JavaScript函数内部声明的变量（使用var）是局部变量，所以只能在函数内部访问它。（该变量的作用域是局部的）。可以在不同的函数中使用名称相同的局部变量，因为只有声明过该变量的函数才能识别出该变量。只要函数运行完毕，本地变量就会被删除。</p>
 <p>（2）全局变量：在函数外声明的变量是全局变量，网页上的所有脚本和函数都能访问它。全局变量会在页面关闭后被删除。</p>
@@ -275,7 +280,18 @@ var x = &quot;Bill&quot;; //x为字符串</code></pre>
 var carname=&#39;Bill Gates&#39;;</code></pre>
 <p>（6）JavaScript字符串，允许在字符串中使用引号，只要不匹配字符中的引号即可</p>
 <pre><code class="javascript">var answer=&quot;He is called &#39;Bill&#39;&quot;;
-var answer=&#39;He is called &quot;Bill&quot;&#39;;</code></pre>
+var answer=&#39;He is called &quot;Bill&quot;&#39;;
+var answer=&quot;&quot;\&#39;\&quot;Bill&quot;&#39;&quot;&quot;   //其中\表示转义符，结果为
+var answer=\\\&#39;        //结果为\&#39;
+
+var a=&#39;&quot;&#39;;
+var b=&quot;&#39;&quot;;
+var c=&quot;&lt;div&gt;&quot;;
+var d= a+b+c+b+a      //用加号作为连接符，结果为&quot;&#39;&lt;div&gt;&#39;&quot;
+
+var e=1+2          //结果e为3
+var f=1+&quot;2&quot;        //结果f为12
+var g=1+&quot;&quot;         //结果g为1，但typeof(g)为string</code></pre>
 <p>（7）JavaScript数字：JavaScript只有一种数字类型，数字可以带小数点，也可以不带</p>
 <pre><code class="javascript">var x1=34.00;
 var x2=34;</code></pre>
@@ -558,7 +574,7 @@ i++;
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-<h2 id="JavaScript-DOM"><a href="#JavaScript-DOM" class="headerlink" title="JavaScript DOM"></a>JavaScript DOM</h2><p>（1）HTML DOM（文档对象模型）。当网页被加载时，浏览器会创建页面的文档对象模型，HTML DOM模型被构造为对象的树。</p>
+<h2 id="JavaScript-DOM"><a href="#JavaScript-DOM" class="headerlink" title="JavaScript DOM"></a>JavaScript DOM</h2><p>（1）HTML DOM（文档对象模型）。对当前超文本进行操作的技术。当网页被加载时，浏览器会创建页面的文档对象模型，HTML DOM模型被构造为对象的树。</p>
 <p>（2）通过可编程的对象模型，JavaScript获得了足够的能力来创建动态的HTML。</p>
 <ul>
 <li>JavaScript能够改变页面中的所有HTML元素</li>
@@ -587,11 +603,33 @@ i++;
         &lt;h1 id=&quot;demo&quot;&gt;welcome to gok&lt;/h1&gt;
         &lt;script&gt;
             var a=document.getElementById(&quot;demo&quot;);
-            document.write(&quot;这是基于Id抓取到的内容：&quot;+a.innerHTML);
+            document.write(&quot;这是基于Id抓取到的内容：&quot;+a.innerHTML);   //document基于DOM技术，用到某一个方法要加上一个点.如getElementById函数，表示通过id找到一个标签。innerHTML可修改元素内容。window是基于BOM技术
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/16/UXLgYtdNaQ9b8AE.png" alt="image-20210316183426660"></p>
+<pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script&gt;
+        function test()&#123;
+            document.getElementById(&quot;1&quot;).value=&quot;文本文档1&quot;; //找到id对应的标签后再用value方法修改改标签的值。
+            document.getElementById(&quot;2&quot;).value=&quot;文本文档2&quot;;
+            document.getElementById(&quot;3&quot;).href=&quot;http://www.goktech.cn&quot;;//找到id对应的标签后用href方法修改原a标签的值。
+        &#125;
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;1&quot; onclick=&quot;test()&quot;&gt;  //用onclick调用test函数
+    &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;2&quot; onclick=&quot;test()&quot;&gt;
+    &lt;a href=&quot;www.baidu.com&quot; id=&quot;3&quot; onclick=&quot;test()&quot;&gt;百度&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/23/PA4lhXvJHSTzKNu.png" alt="image-20210323212113175"></p>
+<p><img src="https://i.loli.net/2021/03/23/kMUy4m59fQAOZY8.png" alt="image-20210323212208821"></p>
+<p><img src="https://i.loli.net/2021/03/23/uTtJAC1yasGLEgf.png" alt="image-20210323212231314"></p>
+<h3 id="获取标签-–基于class"><a href="#获取标签-–基于class" class="headerlink" title="获取标签 –基于class"></a>获取标签 –基于class</h3><pre><code class="javascript">document.getElementsClassName(&quot;&quot;)[0]   //由于类并不唯一，所以可以在末尾加上[0]代表要取第一个标签</code></pre>
 <h3 id="获取标签–基于Tagname"><a href="#获取标签–基于Tagname" class="headerlink" title="获取标签–基于Tagname"></a>获取标签–基于Tagname</h3><p>通过TagName获取元素；</p>
 <pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -628,7 +666,7 @@ i++;
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-<h2 id="Javascript-BOM"><a href="#Javascript-BOM" class="headerlink" title="Javascript BOM"></a>Javascript BOM</h2><p>（1）BOM(Browser Object Model)，浏览器对象模型，它使JavaScript有能力与浏览器”对话“</p>
+<h2 id="Javascript-BOM"><a href="#Javascript-BOM" class="headerlink" title="Javascript BOM"></a>Javascript BOM</h2><p>（1）BOM(Browser Object Model)，浏览器对象模型，对浏览器进行操作。它使JavaScript有能力与浏览器”对话“</p>
 <p>（2）所有浏览器都支持window对象。它表示浏览器窗口。</p>
 <ul>
 <li>所有JavaScript全局对象、函数以及变量均自动成为window对象的成员。</li>
@@ -965,7 +1003,7 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">JavaScript简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">JavaScript的基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">JavaScript变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">局部变量和全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">JavaScript的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">JavaScript函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.</span> <span class="toc-text">JavaScript运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.1.</span> <span class="toc-text">算术运算符与赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E5%92%8C%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.2.</span> <span class="toc-text">比较和逻辑运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.6.</span> <span class="toc-text">javascript条件语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.7.</span> <span class="toc-text">JavaScript循环语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break%E5%92%8Ccontinue%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.8.</span> <span class="toc-text">break和continue语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-DOM"><span class="toc-number">3.</span> <span class="toc-text">JavaScript DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8Eid"><span class="toc-number">3.1.</span> <span class="toc-text">获取标签–基于id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8ETagname"><span class="toc-number">3.2.</span> <span class="toc-text">获取标签–基于Tagname</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8EDiv"><span class="toc-number">3.3.</span> <span class="toc-text">获取标签–基于Div</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript-BOM"><span class="toc-number">4.</span> <span class="toc-text">Javascript BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-open"><span class="toc-number">4.1.</span> <span class="toc-text">BOM-window.open</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-close"><span class="toc-number">4.2.</span> <span class="toc-text">BOM-window.close</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bom-window-location-href"><span class="toc-number">4.3.</span> <span class="toc-text">Bom-window.location.href</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-alert"><span class="toc-number">4.4.</span> <span class="toc-text">BOM-消息框-alert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-confirm"><span class="toc-number">4.5.</span> <span class="toc-text">BOM-消息框-confirm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-prompt"><span class="toc-number">4.6.</span> <span class="toc-text">BOM-消息框-prompt</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">AJAX的基本语法及应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AJAX%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">AJAX请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-get%E8%AF%B7%E6%B1%82"><span class="toc-number">5.2.</span> <span class="toc-text">请求实现-get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-POST%E8%AF%B7%E6%B1%82"><span class="toc-number">5.3.</span> <span class="toc-text">请求实现-POST请求</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">JavaScript简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">JavaScript的基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">JavaScript变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">局部变量和全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">JavaScript的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">JavaScript函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.</span> <span class="toc-text">JavaScript运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.1.</span> <span class="toc-text">算术运算符与赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E5%92%8C%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.2.</span> <span class="toc-text">比较和逻辑运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.6.</span> <span class="toc-text">javascript条件语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.7.</span> <span class="toc-text">JavaScript循环语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break%E5%92%8Ccontinue%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.8.</span> <span class="toc-text">break和continue语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-DOM"><span class="toc-number">3.</span> <span class="toc-text">JavaScript DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8Eid"><span class="toc-number">3.1.</span> <span class="toc-text">获取标签–基于id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE-%E2%80%93%E5%9F%BA%E4%BA%8Eclass"><span class="toc-number">3.2.</span> <span class="toc-text">获取标签 –基于class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8ETagname"><span class="toc-number">3.3.</span> <span class="toc-text">获取标签–基于Tagname</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8EDiv"><span class="toc-number">3.4.</span> <span class="toc-text">获取标签–基于Div</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript-BOM"><span class="toc-number">4.</span> <span class="toc-text">Javascript BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-open"><span class="toc-number">4.1.</span> <span class="toc-text">BOM-window.open</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-close"><span class="toc-number">4.2.</span> <span class="toc-text">BOM-window.close</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bom-window-location-href"><span class="toc-number">4.3.</span> <span class="toc-text">Bom-window.location.href</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-alert"><span class="toc-number">4.4.</span> <span class="toc-text">BOM-消息框-alert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-confirm"><span class="toc-number">4.5.</span> <span class="toc-text">BOM-消息框-confirm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-prompt"><span class="toc-number">4.6.</span> <span class="toc-text">BOM-消息框-prompt</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">AJAX的基本语法及应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AJAX%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">AJAX请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-get%E8%AF%B7%E6%B1%82"><span class="toc-number">5.2.</span> <span class="toc-text">请求实现-get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-POST%E8%AF%B7%E6%B1%82"><span class="toc-number">5.3.</span> <span class="toc-text">请求实现-POST请求</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

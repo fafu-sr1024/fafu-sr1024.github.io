@@ -152,6 +152,262 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全初级/WEB安全基础(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">WEB安全基础(二)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="archive-article-date">
+  	<time datetime="2020-12-26T13:25:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="服务端脚本基础"><a href="#服务端脚本基础" class="headerlink" title="服务端脚本基础"></a>服务端脚本基础</h2><h3 id="静态网页与动态网页"><a href="#静态网页与动态网页" class="headerlink" title="静态网页与动态网页"></a>静态网页与动态网页</h3><p>（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。</p>
+<p>（2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。</p>
+<p>​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容。</p>
+<p>​          动态页面内容不是存在于页面上，而是存在数据库中，从而大大降低网站的维护工作量。</p>
+<p>​          采用动态网页技术的网站可以实现更多的功能，如用户注册、用户登录、在线调查、用户管理、订单管理等等；静态页面则无法实现这些功能。</p>
+<p>（3）动态页面与静态页面的区别：</p>
+<p>静态页面：html或htm，是一种静态的页面格式，不需要服务器解析其中的脚本，由浏览器解析。</p>
+<p>动态页面：由相应的脚本引擎来解释执行，根据指令生成静态网页，如PHP、JSP、ASPX等。</p>
+<table>
+<thead>
+<tr>
+<th align="center">静态网页</th>
+<th align="center">动态网页</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">不依赖数据库</td>
+<td align="center">依赖数据库</td>
+</tr>
+<tr>
+<td align="center">灵活性差，制作、更新、维护麻烦</td>
+<td align="center">灵活性好，维护简单</td>
+</tr>
+<tr>
+<td align="center">在功能方面有较大的限制，交互性能差</td>
+<td align="center">交互性好，功能强大</td>
+</tr>
+<tr>
+<td align="center">服务端不处理用户输入，安全性高</td>
+<td align="center">服务端需要处理用户输入，安全性低</td>
+</tr>
+</tbody></table>
+<p>直接的区别是动态页面访问相同的页面，客户端获得的源代码可能不同。</p>
+<h3 id="常见的服务端脚本语言"><a href="#常见的服务端脚本语言" class="headerlink" title="常见的服务端脚本语言"></a>常见的服务端脚本语言</h3><p>（1）ASP：是动态服务器页面(Active Server Pages)的英文缩写，也称为经典ASP，动态产生Web页面。</p>
+<p>（2）ASPX：aspx文件是微软的在服务器端运行的动态网页文件,属于ASP.NET技术。ASP.NET是由微软在·NET Framework框架中所提供，开发Web应用程序的类库，封装在System.Web.dll文件中，显露出System.Web命名空间，并提供ASP.NET网页处理、扩充以及HTTP通道的应用程序与通信处理等工作，以及Web Service的基础架构。ASP.NET是ASP技术的后继者，但它的发展性要比ASP技术强大许多</p>
+<p>（3）JSP：全名为Java Server Pages，中文名叫java服务器页面，其根本是一个简化的Servle设计。</p>
+<p>（4）PHP(Hypertext Preprocessor超文本预处理器)是一种通用开源脚本语言，语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。PHP独特的语法混合了C、Java、Perl以及PHP自创的语法。它可以比CGl或者Perl更快速地执行动态网页。</p>
+<h3 id="PHP语法基础"><a href="#PHP语法基础" class="headerlink" title="PHP语法基础"></a>PHP语法基础</h3><p>（1）PHP文件的默认文件扩展名是”.php”</p>
+<p>（2）PHP脚本可以放置于文档中的任何位置</p>
+<p>（3）PHP文件通常包含HTML标签以及一些PHP脚本代码</p>
+<p>（4）PHP脚本以&lt;?php开头，以?&gt;结尾</p>
+<p>（5）PHP语句以分号结尾(;)</p>
+<p>（6）PHP使用//作为注释符号</p>
+<pre><code class="php">&lt;?php
+    //此处是PHP代码
+    ?&gt;</code></pre>
+<h3 id="PHP输出"><a href="#PHP输出" class="headerlink" title="PHP输出"></a>PHP输出</h3><p>（1）echo能够输出一个以上的字符串</p>
+<p>（2）echo是一个语言结构，有无括号均可使用：echo或echo()</p>
+<p>（3）实例：用echo命令来显示不同的字符串(注意：字符串中能包含HTML标记)</p>
+<pre><code class="php">&lt;?php
+echo &quot;&lt;h2&gt;PHP很有趣!&lt;/h2&gt;&quot;;
+echo &quot;Hello world!&lt;br&gt;&quot;;
+echo &quot;我计划学习PHP! &lt;br&gt;&quot;;
+echo &quot;这段话&quot;,&quot;由&quot;,&quot;多个&quot;,&quot;字符串&quot;,&quot;串接而成。&quot;;
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png" alt="image-20201226220748663"></p>
+<h3 id="PHP与HTML结合"><a href="#PHP与HTML结合" class="headerlink" title="PHP与HTML结合"></a>PHP与HTML结合</h3><pre><code class="php">&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+&lt;body&gt; 
+    &lt;h1&gt;我的第一张PHP页面&lt;/h1&gt;
+&lt;?php 
+echo &quot;Hello World!&quot;; 
+?&gt; 
+
+&lt;/body&gt; 
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/26/4bSYiJCj9IGBHms.png" alt="image-20201226221946820"></p>
+<h3 id="PHP的表单处理"><a href="#PHP的表单处理" class="headerlink" title="PHP的表单处理"></a>PHP的表单处理</h3><h4 id="在HTML上触发GET请求"><a href="#在HTML上触发GET请求" class="headerlink" title="在HTML上触发GET请求"></a>在HTML上触发GET请求</h4><p>（1）HTML可以采用A标签或form表单的形式触发get请求，从带有get方法的表单发送的信息会显示在浏览器的地址栏，并且对发送信息的量也有限制。使用A标签触发get请求时，请求的参数值是固定的。</p>
+<pre><code class="HTML">&lt;!--a标签触发get请求--&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;GET请求&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a href= &quot;get.php?fname=dayang&amp;age=24&quot;&gt;提交请求&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/26/l2r7OuaxcVoyLjT.png" alt="image-20201226223120376"></p>
+<p><img src="https://i.loli.net/2020/12/26/EHOnCwqbfkh8FpT.png" alt="image-20201226223157764"></p>
+<p>（2）form表单触发GET请求</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;urf-8&quot;&gt;
+        &lt;title&gt;GET请求&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!--请求目标页面为get.php,请求方式为get--&gt; 
+        &lt;form action=&quot;get.php&quot; method=&quot;get&quot;&gt;             
+            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
+            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/26/qgwT4RVxsoBFXfS.png" alt="image-20201226225025070"></p>
+<h4 id="GET请求的处理"><a href="#GET请求的处理" class="headerlink" title="GET请求的处理"></a>GET请求的处理</h4><p>$_GET变量用于收集HTTP GET请求中的参数值。服务端处理</p>
+<pre><code class="php">欢迎&lt;?php echo $_GET[&quot;fname&quot;];?&gt;!&lt;br&gt;
+你的年龄是&lt;?php echo $_GET[&quot;age&quot;];?&gt;岁。</code></pre>
+<p><img src="https://i.loli.net/2020/12/26/4sZ7hPrbRnqTIva.png" alt="image-20201226231005000"></p>
+<h4 id="在HTML上触发POST请求"><a href="#在HTML上触发POST请求" class="headerlink" title="在HTML上触发POST请求"></a>在HTML上触发POST请求</h4><p>（1）HTML可以采用form表单的形式触发POST请求，从带有POST方法的表单发送的数据，不会显示在浏览器的地址栏，并且对发送信息的量也没有限制，常用于传输敏感数据或较大量的数据。</p>
+<p>（2）实例：form表单触发POST请求</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;POST请求&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form action=&quot;post.php&quot; method=&quot;post&quot;&gt;
+            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
+            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h4 id="POST请求的处理"><a href="#POST请求的处理" class="headerlink" title="POST请求的处理"></a>POST请求的处理</h4><p>$_POST变量用于收集来自HTTP POST请求中的参数值</p>
+<pre><code class="php">欢迎&lt;?php echo $_POST[&quot;fname&quot;];?&gt;!&lt;br&gt;
+你的年龄是&lt;?php echo $_POST[&quot;age&quot;];?&gt;岁。</code></pre>
+<h2 id="数据库与SQL基础"><a href="#数据库与SQL基础" class="headerlink" title="数据库与SQL基础"></a>数据库与SQL基础</h2><h3 id="数据库系统基本概念"><a href="#数据库系统基本概念" class="headerlink" title="数据库系统基本概念"></a>数据库系统基本概念</h3><p>（1）数据库：长期存储在计算机内、有组织的、可共享的数据集合</p>
+<p>（2）DBMS(DataBase Management Ssytem):一种操纵和管理数据库的大型软件，用于建立、使用和维护数据库，它对数据库进行统一的管理和控制，以保证数据库的安全性和完整性。常见的DBMS包括access、sqlserver、mysql、oracle、DB2等。</p>
+<h3 id="关系型数据库系统特点"><a href="#关系型数据库系统特点" class="headerlink" title="关系型数据库系统特点"></a>关系型数据库系统特点</h3><p>（1）数据结构化和共享性：库、表、字段；结构化查询(SQL)</p>
+<p>（2）数据独立性：物理独立性，逻辑独立性</p>
+<p>（3）数据的完整性约束：</p>
+<p>实体完整性(通过主键约束条件)</p>
+<p>参照完整性(通过主外键约束条件)</p>
+<p>用户自定义完整性(通过CHECK子句)</p>
+<p>（4）数据由DBMS统一管理和控制：查询引擎、事务控制、数据存储模块/组件</p>
+<p><img src="https://i.loli.net/2020/12/26/1bK2sX6JWvpFoCQ.png" alt="image-20201226234112089"></p>
+<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><p>（1）概念：SQL语言，是结构化查询语言(Structured Query Language)的简称。SQL语言是一种数据库查询和程序设计语言，用于存储数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件的扩展名。</p>
+<p>（2）SQL语句格式：在数据库上执行的大部分工作都由SQL语句完成。注意：SQL对大小写不敏感。#和–后的内容代表注释，在浏览器中–要写为–+</p>
+<p><img src="https://i.loli.net/2020/12/26/p6QNkLcKsZrwg5i.png" alt="image-20201226234657011"></p>
+<h4 id="SELECT语句——基本查询"><a href="#SELECT语句——基本查询" class="headerlink" title="SELECT语句——基本查询"></a>SELECT语句——基本查询</h4><p>（1）cmd进入mysql数据库，前提是设置好环境变量在PATH里面添加D:\SecurityTools\WebTools\phpstudy\PHPTutorial\MySQL\bin</p>
+<p>然后运行cmd命令窗口，输入：mysql -u root -p，回车后输入密码即可进入数据库。</p>
+<p>或者直接用phpstudy打开：其他选项菜单–&gt;MySQL工具–&gt;MySQL命令行</p>
+<p>（2）基本查询：</p>
+<pre><code>show databases;      //查询数据库有哪些
+use mysql;           //进入或使用mysql数据库  
+show tables;         //查询mysql数据库中的表</code></pre>
+<p><img src="https://i.loli.net/2020/12/27/WUZ3eGvINQJCnlT.png" alt="image-20201227001655078"></p>
+<h4 id="SELECT语句——AND和OR运算"><a href="#SELECT语句——AND和OR运算" class="headerlink" title="SELECT语句——AND和OR运算"></a>SELECT语句——AND和OR运算</h4><p>（1）AND运算：AND分隔的表达式须同时满足</p>
+<p>（2）OR运算：OR分隔的表达式只需要满足任意一个</p>
+<p><img src="https://i.loli.net/2020/12/27/M9dc7NvyPGBaUbg.png" alt="image-20201227002419442"></p>
+<p><img src="https://i.loli.net/2020/12/27/onBa1mAVIOLfM85.png" alt="image-20201227002127380"></p>
+<p>（3）当AND和OR运算符同时出现时，先进行AND运算，再进行OR运算。优先级=大于and大于or</p>
+<p><img src="https://i.loli.net/2020/12/27/PxGFUetMfmglOI4.png" alt="image-20201227002245210"></p>
+<h2 id="动态页面的工作原理"><a href="#动态页面的工作原理" class="headerlink" title="动态页面的工作原理"></a>动态页面的工作原理</h2><h3 id="动态页面工作流程理解——数据查询"><a href="#动态页面工作流程理解——数据查询" class="headerlink" title="动态页面工作流程理解——数据查询"></a>动态页面工作流程理解——数据查询</h3><p><img src="https://i.loli.net/2020/12/27/9bBDrMq2fA3JXKh.png" alt="image-20201227002758895"></p>
+<p><img src="https://i.loli.net/2020/12/27/SFuhmXac5DQ48E2.png" alt="image-20201227002850094"></p>
+<h4 id="系统登录成功"><a href="#系统登录成功" class="headerlink" title="系统登录成功"></a>系统登录成功</h4><p><img src="https://i.loli.net/2020/12/27/2F3X5vh1WozLGVT.png" alt="image-20201227003308006"></p>
+<h4 id="系统登录失败"><a href="#系统登录失败" class="headerlink" title="系统登录失败"></a>系统登录失败</h4><p><img src="https://i.loli.net/2020/12/27/WgMJ64cFa8hvl5B.png" alt="image-20201227003345200"></p>
+<h3 id="动态网站搭建——DVWA"><a href="#动态网站搭建——DVWA" class="headerlink" title="动态网站搭建——DVWA"></a>动态网站搭建——DVWA</h3><p>（1）首先将DVWA的源代码放进D:\SecurityTools\WebTools\phpstudy\PHPTutorial\WWW中，然后解压DVWA的压缩包。</p>
+<p>（2）配置DVWA链接数据库，打开config文件夹，打开config.inc.php。(注意需要将文件类型改为php)</p>
+<p>（3）需要把db_password修改成root，因为刚安装好的集成环境默认的MySQL连接用户名和密码为root和root。</p>
+<p><img src="https://i.loli.net/2020/12/27/gsv5e4f6WkrwUTN.png" alt="image-20201227004006196"></p>
+<p>（4）登录DVWA，在浏览器地址栏输入127.0.0.1/DVWA/index.php访问</p>
+<p>（5）点击Create/Reset Database后，再次访问。登录初始账号admin，密码password</p>
+<p><img src="https://i.loli.net/2020/12/27/JYNCheTFMkK2wzi.png" alt="image-20201227005759025"></p>
+<p><img src="https://i.loli.net/2020/12/27/N8xrA5q2wlM3eK6.png" alt="image-20201227005235895"></p>
+<h2 id="Burp暴力破解"><a href="#Burp暴力破解" class="headerlink" title="Burp暴力破解"></a>Burp暴力破解</h2><p>暴力破解一般指穷举法，穷举法的基本思想是根据题目的部分条件确定答案的大致范围，并在此范围内对所有可能的情况逐一验证，直到全部情况验证完毕。若某个情况验证符合题目的全部条件，则为本问题的一个解；若全部情况验证后都不符合题目的全部条件，则本题无解。穷举法也称枚举法。</p>
+<h3 id="Burpsuite模块——Intruder模块详解"><a href="#Burpsuite模块——Intruder模块详解" class="headerlink" title="Burpsuite模块——Intruder模块详解"></a>Burpsuite模块——Intruder模块详解</h3><p>（1）Burp Intruder用于自动对Web应用程序自定义的攻击</p>
+<p>（2）Burp Intruder是高度可配置的，并被用来广范围内进行自动化攻击。可以枚举标识符，获取有用数据，漏洞模糊测试。</p>
+<p>（3）合适的攻击类型取决于应用程序的情况，可能包括：</p>
+<p>缺陷测试：SQL注入，跨站点脚本攻击，缓冲区溢出，路径遍历，暴力攻击认证系统，枚举，操纵参数，拖出隐藏的内容和功能，会话令牌测序和会话劫持，数据挖掘，并发攻击，应用层的拒绝服务式攻击。</p>
+<h4 id="模块说明"><a href="#模块说明" class="headerlink" title="模块说明"></a>模块说明</h4><p>（1）Target用于配置目标服务器进行攻击的详细信息</p>
+<p><img src="https://i.loli.net/2020/12/27/pvnqcXkR5i3WDsU.png" alt="image-20201227010741048"></p>
+<p>（2）Positions设置Payloads的插入点以及攻击类型(攻击模式)</p>
+<p>攻击模式：</p>
+<p>sniper：对变量依次进行破解。多个标记依次进行。</p>
+<p>Battering ram：对变量同时进行破解。多个标记同时进行。</p>
+<p>Pitchfork：每一个变量标记对应一个字典，取每个字典对应项。</p>
+<p>Cluster bomb：每个变量对应一个字典，并且进行交集破解，尝试各种组合。适合用于用户名+密码的破解。</p>
+<p><img src="https://i.loli.net/2020/12/27/PjUBe1bpnXo6wiE.png" alt="image-20201227011237538"></p>
+<p>（3）Payloads设置payload，配置字典</p>
+<p><img src="https://i.loli.net/2020/12/27/h3VcGn6eXlEgOUt.png" alt="image-20201227011344398"></p>
+<h4 id="暴力破解——DVWA"><a href="#暴力破解——DVWA" class="headerlink" title="暴力破解——DVWA"></a>暴力破解——DVWA</h4><p>（1）访问DVWA的地址，点击Brute Force</p>
+<p><img src="https://i.loli.net/2020/12/27/uZomrbMh7LBjIdY.png" alt="image-20201227011547962"></p>
+<p>（2）随便输入用户名，密码，浏览器开启代理后，用burp抓包</p>
+<p>（3）将抓到的包发送到Intruder模块</p>
+<p>（4）设置好目标端口，攻击方式选择Cluster bomb</p>
+<p><img src="https://i.loli.net/2020/12/27/HEwQZUdjAmqLbih.png" alt="image-20201227011758916"></p>
+<p>（5）删除$之后，进入payloads模块，添加密码本，也就是要进行暴力破解时依次验证的每个密码。</p>
+<p>（6）全部设置完后，点击star attck 开始攻击</p>
+<p>（7）在弹出的框中，寻找与其他长度不符合的payload，该payload就是最终破解出来的密码，可以点击”length”排序后快速查找。</p>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201227012152047.png" alt="image-20201227012152047"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全初级/WEB安全基础(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -3431,309 +3687,6 @@ print(&quot;每天的努力参数是：&#123;:.3f&#125;。&quot;.format(dayfacto
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/初识Python语言(三)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/">初识Python语言(三)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/" class="archive-article-date">
-  	<time datetime="2020-11-26T14:07:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="实例2：Python蟒蛇绘制"><a href="#实例2：Python蟒蛇绘制" class="headerlink" title="实例2：Python蟒蛇绘制"></a>实例2：Python蟒蛇绘制</h2><pre><code class="python">import turtle
-turtle.setup(650, 350, 200, 200)
-turtle.penup()
-turtle.fd(-250)
-turtle.pendown()
-turtle.pensize(25)
-turtle.pencolor(&quot;purple&quot;)
-turtle.seth(-40)
-for i in range(4):
-    turtle.circle(40, 80)
-    turtle.circle(-40, 80)
-turtle.circle(40, 80/2)
-turtle.fd(40)
-turtle.circle(16, 180)
-turtle.fd(40 * 2/3)</code></pre>
-<p>输出效果：</p>
-<p><img src="https://i.loli.net/2020/11/26/jpJvVGNhOBQ2nFc.png" alt="image-20201126222735656"></p>
-<p>（1）实例2中绝大多数的代码都是&lt;a&gt;.&lt;b&gt;()的形式，这是Python的一种典型表达式。它可以表示调用一个对象&lt;a&gt;的方法&lt;b&gt;，也可以表示调用一个函数库&lt;a&gt;中的函数&lt;b&gt;()。实例2中使用了用于绘制图形的turtle库，并通过保留字import引用这个函数库。</p>
-<p>（2）实例2中通过使用函数库并利用库中函数进行编程的方法，称为“模块编程”。</p>
-<h3 id="import对库的引用"><a href="#import对库的引用" class="headerlink" title="import对库的引用"></a>import对库的引用</h3><p>使用import引用函数库有两种方式。</p>
-<p>（1）第一种：</p>
-<pre><code class="python">import &lt;库名&gt;</code></pre>
-<p>此时，可以调用库名中的所有函数，使用库中函数格式如下：</p>
-<pre><code>&lt;库名&gt;.&lt;函数名&gt;(&lt;函数参数&gt;)</code></pre>
-<p>（2）第二种：</p>
-<pre><code class="python">from &lt;库名&gt; import &lt;函数名,函数名,...,函数名&gt;
-from &lt;库名&gt; import *          #其中，*是通配符，表示所有函数</code></pre>
-<p>此时，调用该库的函数时不再需要使用库名，直接使用如下格式：</p>
-<pre><code>&lt;函数名&gt;(&lt;函数参数&gt;)</code></pre>
-<p>使用第二种库引用方式修改实例2代码，如下：</p>
-<pre><code class="python">from turtle import *       
-&#39;&#39;&#39;
-第一条语句也可用如下两条语句代替:
-from turtle import setup, penup, fd, pendow
-from turtle import pensize, pencolor, seth, circle
-&#39;&#39;&#39;
-setup(650, 350, 200, 200)
-penup()
-fd(-250)
-pendown()
-pensize(25)
-pencolor(&quot;purple&quot;)
-seth(-40)
-for i in range(4):
-    circle(40, 80)
-    circle(-40, 80)
-circle(40, 80/2)
-fd(40)
-circle(16, 180)
-fd(40 * 2/3)</code></pre>
-<table>
-<thead>
-<tr>
-<th align="left">import引用库方法</th>
-<th align="left">优点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">第一种</td>
-<td align="left">能够显示标明函数来源，在引用较多库时代码的可读性更好</td>
-</tr>
-<tr>
-<td align="left">第二种</td>
-<td align="left">利用保留字直接引用库中函数，使代码更简洁，在引用较少库的情况下效果更佳</td>
-</tr>
-</tbody></table>
-<p>（3）注意事项：第一种引用方式，Python解释器将&lt;a&gt;.&lt;b&gt;整体作为函数名。第二种引用方式，解释器将&lt;b&gt;作为函数名，因此第二种引用方式可能会出现：用户自定义的函数名&lt;b&gt;与库中的函数名&lt;b&gt;冲突的情况。</p>
-<h2 id="turtle库语法元素分析"><a href="#turtle库语法元素分析" class="headerlink" title="turtle库语法元素分析"></a>turtle库语法元素分析</h2><p>Python的turtle库是一个直观有趣的图形绘制函数库</p>
-<h3 id="绘图坐标体系"><a href="#绘图坐标体系" class="headerlink" title="绘图坐标体系"></a>绘图坐标体系</h3><p>（1）turtle库绘制图形有一个基本框架：一个小海龟在坐标系中爬行，其爬行轨迹形成了绘制图形。</p>
-<p>（2）刚开始绘制时，小海龟位于画布正中央，坐标为(0,0)，行进方向为水平右方。</p>
-<p><img src="https://i.loli.net/2020/11/27/ulH8p5UXdWftGKx.png" alt="image-20201127105742159"></p>
-<p>（3）实例2中使用了turtle.setup()函数，其作用是设置主窗体的大小和位置，具体定义如下：</p>
-<pre><code>turtle.setup(width, height, startx, starty)</code></pre>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>width</td>
-<td>窗口宽度。若是整数，表示像素值；若是小数，表示窗口宽度与屏幕的比例</td>
-</tr>
-<tr>
-<td>height</td>
-<td>窗口高度。若是整数，表示像素值；若是小数，表示窗口高度与屏幕的比例</td>
-</tr>
-<tr>
-<td>startx</td>
-<td>窗口左侧与屏幕左侧的像素距离。如果值是None，窗口位于屏幕水平中央</td>
-</tr>
-<tr>
-<td>starty</td>
-<td>窗口顶部与屏幕顶部的像素距离。如果值是None，窗口位于屏幕垂直中央</td>
-</tr>
-</tbody></table>
-<h3 id="画笔控制函数"><a href="#画笔控制函数" class="headerlink" title="画笔控制函数"></a>画笔控制函数</h3><h4 id="turtle-penup-和turtle-pendown-函数"><a href="#turtle-penup-和turtle-pendown-函数" class="headerlink" title="turtle.penup()和turtle.pendown()函数"></a>turtle.penup()和turtle.pendown()函数</h4><p>turtle中的画笔(即小海龟)可以通过一组函数来控制，实例2中的penup()和pendown()函数是一组，它们分别表示抬起画笔和落下画笔。</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>别名</th>
-<th>作用</th>
-<th>参数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>turtle.penup()</td>
-<td>turtle.pu()，turtle.up()</td>
-<td>抬起画笔，之后移动画笔不绘制形状</td>
-<td>无</td>
-</tr>
-<tr>
-<td>turtle.pendown()</td>
-<td>turtle.pd()，turtle.down()</td>
-<td>落下画笔，之后移动画笔将绘制形状</td>
-<td>无</td>
-</tr>
-</tbody></table>
-<h4 id="turtle-pensize-函数"><a href="#turtle-pensize-函数" class="headerlink" title="turtle.pensize()函数"></a>turtle.pensize()函数</h4><p>用来设置画笔尺寸。</p>
-<pre><code>定义：turtle.pensize(width)
-别名：turtle.width()
-作用：设置画笔宽度，当无参数输入时返回当前画笔宽度
-参数如下
-#width。设置的画笔线条宽度，如果为None或者为空，则函数返回当前画笔宽度</code></pre>
-<h4 id="turtle-pencolor-函数"><a href="#turtle-pencolor-函数" class="headerlink" title="turtle.pencolor()函数"></a>turtle.pencolor()函数</h4><p>用来给画笔设置颜色。</p>
-<pre><code>定义：turtle.pencolor(colorstring)或turtle.pencolor((r,g,b))
-作用：设置画笔颜色，当无参数输入时返回当前画笔颜色
-参数如下：
-#colorstring：表示颜色的字符串，例如：“purple”、”red“、”blue“等
-#(r,g,b)：颜色对应的RGB数值，例如：(51,204,140)</code></pre>
-<p>很多RGB颜色都有固定的英文名字，这些英文名字可以作为colorstring输入，也可采用(r,g,b)形式直接输入。</p>
-<table>
-<thead>
-<tr>
-<th align="center">英文名称</th>
-<th align="center">RGB</th>
-<th align="center">中文名称</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">white</td>
-<td align="center">255 255 255</td>
-<td align="center">白色</td>
-</tr>
-<tr>
-<td align="center">black</td>
-<td align="center">0 0 0</td>
-<td align="center">黑色</td>
-</tr>
-<tr>
-<td align="center">grey</td>
-<td align="center">190 190 190</td>
-<td align="center">灰色</td>
-</tr>
-<tr>
-<td align="center">darkgreen</td>
-<td align="center">0 100 0</td>
-<td align="center">深绿色</td>
-</tr>
-<tr>
-<td align="center">gold</td>
-<td align="center">255 215 0</td>
-<td align="center">金色</td>
-</tr>
-<tr>
-<td align="center">violet</td>
-<td align="center">238 130 238</td>
-<td align="center">紫罗兰</td>
-</tr>
-<tr>
-<td align="center">purple</td>
-<td align="center">160 32 240</td>
-<td align="center">紫色</td>
-</tr>
-</tbody></table>
-<h3 id="形状绘制函数"><a href="#形状绘制函数" class="headerlink" title="形状绘制函数"></a>形状绘制函数</h3><h4 id="turtle-fd-函数"><a href="#turtle-fd-函数" class="headerlink" title="turtle.fd()函数"></a>turtle.fd()函数</h4><p>用来控制画笔向当前行进方向前进一个距离。</p>
-<pre><code>定义：turtle.fd(distance)
-别名：turtle.forward(distance)
-作用：向小海龟当前行进方向前进distance距离
-参数如下：
-#distance：行进距离的像素值，当值为负数时，表示向相反方向前进</code></pre>
-<h4 id="turtle-seth-函数"><a href="#turtle-seth-函数" class="headerlink" title="turtle.seth()函数"></a>turtle.seth()函数</h4><p>用来改变画笔绘制方向。</p>
-<pre><code>定义：turtle.seth(to_angle)
-别名：turtle.setheading(to_angle)
-作用：设置小海龟当前行进方向为to_angle,该角度是绝对方向角度值
-参数如下：
-#to_angle：角度的整数值</code></pre>
-<p><img src="https://i.loli.net/2020/11/27/VduCgIDaJ9A81ly.png" alt="image-20201127124608385"></p>
-<p>注意：turtle库的角度坐标体系以正东向为绝对0度，这也是小海龟初始爬行方向。正西向为绝对180度。上图的方向坐标体系是方向的绝对方向体系，与小海龟爬向当前方向无关。</p>
-<h4 id="turtle-goto-函数"><a href="#turtle-goto-函数" class="headerlink" title="turtle.goto()函数"></a>turtle.goto()函数</h4><p>可以使用turtle.goto(x,y)方法来让小海龟沿着绝对坐标进行运动，且不打印其爬行轨迹。</p>
-<p>以屏幕中间为原点(0,0)，形成四象限的坐标体系。</p>
-<p><img src="https://i.loli.net/2020/11/27/NdikQ41ZT9EzMFc.png" alt="image-20201127164623691"></p>
-<pre><code class="Python">turtle.goto(0,300)  #x为0,y为300,代表中心向上移动300
-turtle.goto(-100,-100)  #x为-100，代表向左移动100；y为-100，代表向下移动100</code></pre>
-<h4 id="for循环语句"><a href="#for循环语句" class="headerlink" title="for循环语句"></a>for循环语句</h4><p>由保留字for引导的循环称为”遍历循环“，for语句的循环格式如下：</p>
-<pre><code class="python">for i in range(&lt;循环次数&gt;)
-    &lt;语句块1&gt;</code></pre>
-<p>例如实例2中的for循环表示循环内部的两个语句块连续执行4次：</p>
-<pre><code class="python">for i in range(4):
-    turtle.circle(40, 80)
-    turtle.circle(-40, 80)</code></pre>
-<h4 id="turtle-circle-函数"><a href="#turtle-circle-函数" class="headerlink" title="turtle.circle()函数"></a>turtle.circle()函数</h4><p>用来绘制一个弧形。</p>
-<pre><code>定义：turtle.circle(radius, extent=None)
-作用：根据半径radius绘制extent角度的弧形
-参数如下：
-#radius：弧形半径，当值为正数时，半径在小海龟左侧(逆时针)；当值为负数时，半径在小海龟右侧(顺时针)
-#extent：绘制弧形的角度，当不设置参数或参数设置为None时，绘制整个圆形</code></pre>
-<p><img src="https://i.loli.net/2020/11/27/uprBWaQxZbXdn8i.png" alt="image-20201127132201550"></p>
-<p><img src="https://i.loli.net/2020/11/27/InHJazGQuSZW1Ms.png" alt="image-20201127133023244"></p>
-<h3 id="函数的封装"><a href="#函数的封装" class="headerlink" title="函数的封装"></a>函数的封装</h3><p>实例2中的程序代码功能可以分为两类。一类是绘制图形前对画笔的设置，包括颜色、尺寸、初始位置等；另一类则是绘制Python蟒蛇的功能。因此，可以通过保留字def定义一个drawSnake()函数，将蟒蛇的绘制这个独立功能封装起来。代码如下：</p>
-<pre><code class="python">import turtle
-def drawSnake(radius, angle, length):
-    turtle.seth(-40)
-    for i in range(length):
-        turtle.circle(radius, angle)
-        turtle.circle(-radius, angle)
-    turtle.circle(radius, angle/2)
-    turtle.fd(40)
-    turtle.circle(16, 180)
-    turtle.fd(40 * 2/3)
-turtle.setup(650, 350, 200, 200)
-turtle.penup()
-turtle.fd(-250)
-turtle.pendown()
-turtle.pensize(25)
-turtle.pencolor(&quot;purple&quot;)
-drawSnake(40, 80, 4)
-turtle.done()</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/">展开全文 >></a>
         </p>
       
 

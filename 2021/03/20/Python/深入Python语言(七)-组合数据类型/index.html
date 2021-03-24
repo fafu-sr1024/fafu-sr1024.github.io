@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>深入Python语言(七) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/3/index.html">
+  <meta name="description" content="组合数据类型概述要点：组合数据类型为多个同类型或不同类型数据提供单一表示。组合数据类型分3类：序列类型、集合类型和映射类型。 （1）定义： 将多个数据有效组织起来并统一表示，这种能够表示多个数据的类型称为组合数据类型。不同于数字类型，例如整数、浮点数和复数类型，这些类型仅能表示一个数，这种表示单一数据的类型称为基本数据类型。 （2）序列类型是一个元素向量，元素之间存在先后关系，通过需要访问，元素之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入Python语言(七)">
+<meta property="og:url" content="http://example.com/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="组合数据类型概述要点：组合数据类型为多个同类型或不同类型数据提供单一表示。组合数据类型分3类：序列类型、集合类型和映射类型。 （1）定义： 将多个数据有效组织起来并统一表示，这种能够表示多个数据的类型称为组合数据类型。不同于数字类型，例如整数、浮点数和复数类型，这些类型仅能表示一个数，这种表示单一数据的类型称为基本数据类型。 （2）序列类型是一个元素向量，元素之间存在先后关系，通过需要访问，元素之">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/03/20/hVPeXHUaN4W5Id8.png">
+<meta property="article:published_time" content="2021-03-20T12:22:23.000Z">
+<meta property="article:modified_time" content="2021-03-20T15:48:46.584Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/20/hVPeXHUaN4W5Id8.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,261 +157,148 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Python/初识Python语言(三)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Python/深入Python语言(七)-组合数据类型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/">初识Python语言(三)</a>
+    <h1 class="article-title" itemprop="name">
+      深入Python语言(七)
     </h1>
   
 
         
-        <a href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/" class="archive-article-date">
-  	<time datetime="2020-11-26T14:07:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-26</time>
+        <a href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2021-03-20T12:22:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="实例2：Python蟒蛇绘制"><a href="#实例2：Python蟒蛇绘制" class="headerlink" title="实例2：Python蟒蛇绘制"></a>实例2：Python蟒蛇绘制</h2><pre><code class="python">import turtle
-turtle.setup(650, 350, 200, 200)
-turtle.penup()
-turtle.fd(-250)
-turtle.pendown()
-turtle.pensize(25)
-turtle.pencolor(&quot;purple&quot;)
-turtle.seth(-40)
-for i in range(4):
-    turtle.circle(40, 80)
-    turtle.circle(-40, 80)
-turtle.circle(40, 80/2)
-turtle.fd(40)
-turtle.circle(16, 180)
-turtle.fd(40 * 2/3)</code></pre>
-<p>输出效果：</p>
-<p><img src="https://i.loli.net/2020/11/26/jpJvVGNhOBQ2nFc.png" alt="image-20201126222735656"></p>
-<p>（1）实例2中绝大多数的代码都是&lt;a&gt;.&lt;b&gt;()的形式，这是Python的一种典型表达式。它可以表示调用一个对象&lt;a&gt;的方法&lt;b&gt;，也可以表示调用一个函数库&lt;a&gt;中的函数&lt;b&gt;()。实例2中使用了用于绘制图形的turtle库，并通过保留字import引用这个函数库。</p>
-<p>（2）实例2中通过使用函数库并利用库中函数进行编程的方法，称为“模块编程”。</p>
-<h3 id="import对库的引用"><a href="#import对库的引用" class="headerlink" title="import对库的引用"></a>import对库的引用</h3><p>使用import引用函数库有两种方式。</p>
-<p>（1）第一种：</p>
-<pre><code class="python">import &lt;库名&gt;</code></pre>
-<p>此时，可以调用库名中的所有函数，使用库中函数格式如下：</p>
-<pre><code>&lt;库名&gt;.&lt;函数名&gt;(&lt;函数参数&gt;)</code></pre>
-<p>（2）第二种：</p>
-<pre><code class="python">from &lt;库名&gt; import &lt;函数名,函数名,...,函数名&gt;
-from &lt;库名&gt; import *          #其中，*是通配符，表示所有函数</code></pre>
-<p>此时，调用该库的函数时不再需要使用库名，直接使用如下格式：</p>
-<pre><code>&lt;函数名&gt;(&lt;函数参数&gt;)</code></pre>
-<p>使用第二种库引用方式修改实例2代码，如下：</p>
-<pre><code class="python">from turtle import *       
-&#39;&#39;&#39;
-第一条语句也可用如下两条语句代替:
-from turtle import setup, penup, fd, pendow
-from turtle import pensize, pencolor, seth, circle
-&#39;&#39;&#39;
-setup(650, 350, 200, 200)
-penup()
-fd(-250)
-pendown()
-pensize(25)
-pencolor(&quot;purple&quot;)
-seth(-40)
-for i in range(4):
-    circle(40, 80)
-    circle(-40, 80)
-circle(40, 80/2)
-fd(40)
-circle(16, 180)
-fd(40 * 2/3)</code></pre>
+        <h2 id="组合数据类型概述"><a href="#组合数据类型概述" class="headerlink" title="组合数据类型概述"></a>组合数据类型概述</h2><p>要点：<strong>组合数据类型为多个同类型或不同类型数据提供单一表示。组合数据类型分3类：序列类型、集合类型和映射类型。</strong></p>
+<p>（1）定义： 将多个数据有效组织起来并统一表示，这种能够表示多个数据的类型称为<strong>组合数据类型</strong>。不同于数字类型，例如整数、浮点数和复数类型，这些类型仅能表示一个数，这种表示单一数据的类型称为<strong>基本数据类型</strong>。</p>
+<p>（2）序列类型是一个元素向量，元素之间存在<strong>先后关系</strong>，通过需要访问，元素之间不排他。</p>
+<p>（3）集合类型是一个元素集合，元素之间<strong>无序</strong>，相同元素在集合中唯一存在。</p>
+<p>（4）映射类型是”键-值“数据项的集合，**每个元素是一个键值对，表示为(key,value)**。</p>
+<p><img src="https://i.loli.net/2021/03/20/hVPeXHUaN4W5Id8.png" alt="image-20210320204630710"></p>
+<h3 id="序列类型"><a href="#序列类型" class="headerlink" title="序列类型"></a>序列类型</h3><p>（1）序列类型是一维元素向量，元素之间存在先后关系，通过序号访问。当需要访问序列中某个特定值时，只需要通过下标标出即可。</p>
+<p>（2）由于元素之间存在顺序关系，所以<strong>序列中可以存在数值相同但位置不同的元素</strong>。序列类型支持成员关系操作符(in)、长度计算函数(len())、分片([])，元素本身也可以是序列类型。</p>
+<p>（3）Python中比较重要的序列类型：字符串(str)、元组(tuple)、列表(list)。</p>
+<ul>
+<li>字符串可以看成是单一字符的有序组合，属于序列类型。同时，由于字符串类型十分常用且单一字符串只表达一个含义，因此也被看作是基本数据类型。</li>
+<li>元组是包含0个或多个数据项的不可变序列类型，元组生成后是固定的，其中任何数据项不能被替换或删除。</li>
+<li>列表是一个可以修改数据项的数据类型，使用也最灵活。</li>
+</ul>
+<p>（4）<strong>只要是序列类型，都可以使用相同的索引体系，即正向递增序号和反向递减序号。</strong>(详见初始Python语言(二)))</p>
+<p>（5)序列类型有12个通用的操作符和函数</p>
 <table>
 <thead>
 <tr>
-<th align="left">import引用库方法</th>
-<th align="left">优点</th>
+<th align="center">操作符</th>
+<th align="center">描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">第一种</td>
-<td align="left">能够显示标明函数来源，在引用较多库时代码的可读性更好</td>
+<td align="center">x in s</td>
+<td align="center">若x是s的元素，返回True，否则返回False</td>
 </tr>
 <tr>
-<td align="left">第二种</td>
-<td align="left">利用保留字直接引用库中函数，使代码更简洁，在引用较少库的情况下效果更佳</td>
+<td align="center">x not in s</td>
+<td align="center">若x不是s的元素，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">s + t</td>
+<td align="center">连接s和t</td>
+</tr>
+<tr>
+<td align="center">s<em>n或n\</em>s</td>
+<td align="center">将序列s复制n次</td>
+</tr>
+<tr>
+<td align="center">s[i]</td>
+<td align="center">索引，返回序列的第i个元素</td>
+</tr>
+<tr>
+<td align="center">s[i:j]</td>
+<td align="center">分片，返回包含序列s第i到j个元素的子序列（不包含第j个元素）</td>
+</tr>
+<tr>
+<td align="center">s[i:j:k]</td>
+<td align="center">步骤分片，返回包含序列s第i到j个元素以k为步数的子序列</td>
+</tr>
+<tr>
+<td align="center">len(s)</td>
+<td align="center">序列s的元素个数（长度）</td>
+</tr>
+<tr>
+<td align="center">min(s)</td>
+<td align="center">序列s中的最小值</td>
+</tr>
+<tr>
+<td align="center">max(s)</td>
+<td align="center">序列s中的最大值</td>
+</tr>
+<tr>
+<td align="center">s.index(x[,i[,j]])</td>
+<td align="center">序列s中从i开始到j位置中第一次出现元素x的位置</td>
+</tr>
+<tr>
+<td align="center">s.count(x)</td>
+<td align="center">序列s中出现x的总次数</td>
 </tr>
 </tbody></table>
-<p>（3）注意事项：第一种引用方式，Python解释器将&lt;a&gt;.&lt;b&gt;整体作为函数名。第二种引用方式，解释器将&lt;b&gt;作为函数名，因此第二种引用方式可能会出现：用户自定义的函数名&lt;b&gt;与库中的函数名&lt;b&gt;冲突的情况。</p>
-<h2 id="turtle库语法元素分析"><a href="#turtle库语法元素分析" class="headerlink" title="turtle库语法元素分析"></a>turtle库语法元素分析</h2><p>Python的turtle库是一个直观有趣的图形绘制函数库</p>
-<h3 id="绘图坐标体系"><a href="#绘图坐标体系" class="headerlink" title="绘图坐标体系"></a>绘图坐标体系</h3><p>（1）turtle库绘制图形有一个基本框架：一个小海龟在坐标系中爬行，其爬行轨迹形成了绘制图形。</p>
-<p>（2）刚开始绘制时，小海龟位于画布正中央，坐标为(0,0)，行进方向为水平右方。</p>
-<p><img src="https://i.loli.net/2020/11/27/ulH8p5UXdWftGKx.png" alt="image-20201127105742159"></p>
-<p>（3）实例2中使用了turtle.setup()函数，其作用是设置主窗体的大小和位置，具体定义如下：</p>
-<pre><code>turtle.setup(width, height, startx, starty)</code></pre>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>width</td>
-<td>窗口宽度。若是整数，表示像素值；若是小数，表示窗口宽度与屏幕的比例</td>
-</tr>
-<tr>
-<td>height</td>
-<td>窗口高度。若是整数，表示像素值；若是小数，表示窗口高度与屏幕的比例</td>
-</tr>
-<tr>
-<td>startx</td>
-<td>窗口左侧与屏幕左侧的像素距离。如果值是None，窗口位于屏幕水平中央</td>
-</tr>
-<tr>
-<td>starty</td>
-<td>窗口顶部与屏幕顶部的像素距离。如果值是None，窗口位于屏幕垂直中央</td>
-</tr>
-</tbody></table>
-<h3 id="画笔控制函数"><a href="#画笔控制函数" class="headerlink" title="画笔控制函数"></a>画笔控制函数</h3><h4 id="turtle-penup-和turtle-pendown-函数"><a href="#turtle-penup-和turtle-pendown-函数" class="headerlink" title="turtle.penup()和turtle.pendown()函数"></a>turtle.penup()和turtle.pendown()函数</h4><p>turtle中的画笔(即小海龟)可以通过一组函数来控制，实例2中的penup()和pendown()函数是一组，它们分别表示抬起画笔和落下画笔。</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>别名</th>
-<th>作用</th>
-<th>参数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>turtle.penup()</td>
-<td>turtle.pu()，turtle.up()</td>
-<td>抬起画笔，之后移动画笔不绘制形状</td>
-<td>无</td>
-</tr>
-<tr>
-<td>turtle.pendown()</td>
-<td>turtle.pd()，turtle.down()</td>
-<td>落下画笔，之后移动画笔将绘制形状</td>
-<td>无</td>
-</tr>
-</tbody></table>
-<h4 id="turtle-pensize-函数"><a href="#turtle-pensize-函数" class="headerlink" title="turtle.pensize()函数"></a>turtle.pensize()函数</h4><p>用来设置画笔尺寸。</p>
-<pre><code>定义：turtle.pensize(width)
-别名：turtle.width()
-作用：设置画笔宽度，当无参数输入时返回当前画笔宽度
-参数如下
-#width。设置的画笔线条宽度，如果为None或者为空，则函数返回当前画笔宽度</code></pre>
-<h4 id="turtle-pencolor-函数"><a href="#turtle-pencolor-函数" class="headerlink" title="turtle.pencolor()函数"></a>turtle.pencolor()函数</h4><p>用来给画笔设置颜色。</p>
-<pre><code>定义：turtle.pencolor(colorstring)或turtle.pencolor((r,g,b))
-作用：设置画笔颜色，当无参数输入时返回当前画笔颜色
-参数如下：
-#colorstring：表示颜色的字符串，例如：“purple”、”red“、”blue“等
-#(r,g,b)：颜色对应的RGB数值，例如：(51,204,140)</code></pre>
-<p>很多RGB颜色都有固定的英文名字，这些英文名字可以作为colorstring输入，也可采用(r,g,b)形式直接输入。</p>
-<table>
-<thead>
-<tr>
-<th align="center">英文名称</th>
-<th align="center">RGB</th>
-<th align="center">中文名称</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">white</td>
-<td align="center">255 255 255</td>
-<td align="center">白色</td>
-</tr>
-<tr>
-<td align="center">black</td>
-<td align="center">0 0 0</td>
-<td align="center">黑色</td>
-</tr>
-<tr>
-<td align="center">grey</td>
-<td align="center">190 190 190</td>
-<td align="center">灰色</td>
-</tr>
-<tr>
-<td align="center">darkgreen</td>
-<td align="center">0 100 0</td>
-<td align="center">深绿色</td>
-</tr>
-<tr>
-<td align="center">gold</td>
-<td align="center">255 215 0</td>
-<td align="center">金色</td>
-</tr>
-<tr>
-<td align="center">violet</td>
-<td align="center">238 130 238</td>
-<td align="center">紫罗兰</td>
-</tr>
-<tr>
-<td align="center">purple</td>
-<td align="center">160 32 240</td>
-<td align="center">紫色</td>
-</tr>
-</tbody></table>
-<h3 id="形状绘制函数"><a href="#形状绘制函数" class="headerlink" title="形状绘制函数"></a>形状绘制函数</h3><h4 id="turtle-fd-函数"><a href="#turtle-fd-函数" class="headerlink" title="turtle.fd()函数"></a>turtle.fd()函数</h4><p>用来控制画笔向当前行进方向前进一个距离。</p>
-<pre><code>定义：turtle.fd(distance)
-别名：turtle.forward(distance)
-作用：向小海龟当前行进方向前进distance距离
-参数如下：
-#distance：行进距离的像素值，当值为负数时，表示向相反方向前进</code></pre>
-<h4 id="turtle-seth-函数"><a href="#turtle-seth-函数" class="headerlink" title="turtle.seth()函数"></a>turtle.seth()函数</h4><p>用来改变画笔绘制方向。</p>
-<pre><code>定义：turtle.seth(to_angle)
-别名：turtle.setheading(to_angle)
-作用：设置小海龟当前行进方向为to_angle,该角度是绝对方向角度值
-参数如下：
-#to_angle：角度的整数值</code></pre>
-<p><img src="https://i.loli.net/2020/11/27/VduCgIDaJ9A81ly.png" alt="image-20201127124608385"></p>
-<p>注意：turtle库的角度坐标体系以正东向为绝对0度，这也是小海龟初始爬行方向。正西向为绝对180度。上图的方向坐标体系是方向的绝对方向体系，与小海龟爬向当前方向无关。</p>
-<h4 id="turtle-goto-函数"><a href="#turtle-goto-函数" class="headerlink" title="turtle.goto()函数"></a>turtle.goto()函数</h4><p>可以使用turtle.goto(x,y)方法来让小海龟沿着绝对坐标进行运动，且不打印其爬行轨迹。</p>
-<p>以屏幕中间为原点(0,0)，形成四象限的坐标体系。</p>
-<p><img src="https://i.loli.net/2020/11/27/NdikQ41ZT9EzMFc.png" alt="image-20201127164623691"></p>
-<pre><code class="Python">turtle.goto(0,300)  #x为0,y为300,代表中心向上移动300
-turtle.goto(-100,-100)  #x为-100，代表向左移动100；y为-100，代表向下移动100</code></pre>
-<h4 id="for循环语句"><a href="#for循环语句" class="headerlink" title="for循环语句"></a>for循环语句</h4><p>由保留字for引导的循环称为”遍历循环“，for语句的循环格式如下：</p>
-<pre><code class="python">for i in range(&lt;循环次数&gt;)
-    &lt;语句块1&gt;</code></pre>
-<p>例如实例2中的for循环表示循环内部的两个语句块连续执行4次：</p>
-<pre><code class="python">for i in range(4):
-    turtle.circle(40, 80)
-    turtle.circle(-40, 80)</code></pre>
-<h4 id="turtle-circle-函数"><a href="#turtle-circle-函数" class="headerlink" title="turtle.circle()函数"></a>turtle.circle()函数</h4><p>用来绘制一个弧形。</p>
-<pre><code>定义：turtle.circle(radius, extent=None)
-作用：根据半径radius绘制extent角度的弧形
-参数如下：
-#radius：弧形半径，当值为正数时，半径在小海龟左侧(逆时针)；当值为负数时，半径在小海龟右侧(顺时针)
-#extent：绘制弧形的角度，当不设置参数或参数设置为None时，绘制整个圆形</code></pre>
-<p><img src="https://i.loli.net/2020/11/27/uprBWaQxZbXdn8i.png" alt="image-20201127132201550"></p>
-<p><img src="https://i.loli.net/2020/11/27/InHJazGQuSZW1Ms.png" alt="image-20201127133023244"></p>
-<h3 id="函数的封装"><a href="#函数的封装" class="headerlink" title="函数的封装"></a>函数的封装</h3><p>实例2中的程序代码功能可以分为两类。一类是绘制图形前对画笔的设置，包括颜色、尺寸、初始位置等；另一类则是绘制Python蟒蛇的功能。因此，可以通过保留字def定义一个drawSnake()函数，将蟒蛇的绘制这个独立功能封装起来。代码如下：</p>
-<pre><code class="python">import turtle
-def drawSnake(radius, angle, length):
-    turtle.seth(-40)
-    for i in range(length):
-        turtle.circle(radius, angle)
-        turtle.circle(-radius, angle)
-    turtle.circle(radius, angle/2)
-    turtle.fd(40)
-    turtle.circle(16, 180)
-    turtle.fd(40 * 2/3)
-turtle.setup(650, 350, 200, 200)
-turtle.penup()
-turtle.fd(-250)
-turtle.pendown()
-turtle.pensize(25)
-turtle.pencolor(&quot;purple&quot;)
-drawSnake(40, 80, 4)
-turtle.done()</code></pre>
+<p>（6）元组类型（tuple）是序列中比较特殊的类型，因为<strong>它一旦创建就不能修改</strong>。元组类型在表达固定数据项、函数多返回值、多变量同步赋值、循环遍历等情况下十分有用。Python中元组采用逗号和圆括号（可选）来表示。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; creature = &quot;cat&quot;, &quot;dog&quot;, &quot;tiger&quot;, &quot;human&quot;
+&gt;&gt;&gt; creature
+(&#39;cat&#39;, &#39;dog&#39;, &#39;tiger&#39;, &#39;human&#39;)
+&gt;&gt;&gt; color = (&quot;red&quot;, 0x001100, &quot;blue&quot;, creature)
+&gt;&gt;&gt; color
+(&#39;red&#39;, 4352, &#39;blue&#39;, (&#39;cat&#39;, &#39;dog&#39;, &#39;tiger&#39;, &#39;human&#39;))
+&gt;&gt;&gt; color[2]
+&#39;blue&#39;
+&gt;&gt;&gt; color[-1][2]
+&#39;tiger&#39;</code></pre>
+<p>（7）生成元组只需要使用逗号将元素隔离开即可，例如上例中的元组creature，也可以增加圆括号，但圆括号在不混淆语义的情况下不是必须的。<strong>一个元组可以作为另一个元组的元素，可以采用多级索引获取信息，</strong>例如元组color中包含了creature。</p>
+<p>（8）元组除了用于表达固定数据项外，还常用于如下3种情况：函数多返回值、多变量同步赋值、循环遍历，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; def func(x):
+    return x, x**3     #函数多返回值
+
+&gt;&gt;&gt; a, b=&#39;dog&#39;, &#39;tiger&#39;    #多变量同步赋值
+&gt;&gt;&gt; a, b=(b, a)       #多变量同步赋值，括号可省略
+
+&gt;&gt;&gt; import math
+&gt;&gt;&gt; for x, y in ((1,0),(2,5),(3,8)):   #循环遍历
+    print(math.hypot(x,y))       #求多个坐标到原点的距离
+1.0
+5.385164807134504
+8.54400374531753</code></pre>
+<h3 id="集合类型"><a href="#集合类型" class="headerlink" title="集合类型"></a>集合类型</h3><p>（1）集合类型与数学中的集合概念一致，即包含0个或多个数据项的无序组合。<strong>集合中的元素不可重复，元素类型只能是固定数据类型，例如整数、浮点数、字符串、元组等。</strong>列表、字典和集合类型本身都是可变数据类型，不能作为集合的元素出现。</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -424,16 +318,75 @@ turtle.done()</code></pre>
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP与SQL进阶</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -448,1411 +401,32 @@ turtle.done()</code></pre>
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/初识Python语言(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">初识Python语言(二)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/" class="archive-article-date">
-  	<time datetime="2020-11-26T03:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="实例1：温度转换"><a href="#实例1：温度转换" class="headerlink" title="实例1：温度转换"></a>实例1：温度转换</h2><pre><code class="python">&#39;&#39;&#39;
-转换算法：
-C = (F-32)/1.8
-F = C*1.8 + 32
-&#39;&#39;&#39;
-TempStr = input(&quot;请输入带有符号的温度值：&quot;)
-if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-    C = (eval(TempStr[0:-1]) - 32)/1.8
-    print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-    F = 1.8*eval(TempStr[0:-1]) + 32
-    print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
-else:
-    print(&quot;输入格式错误&quot;)</code></pre>
-<p>运行结果：</p>
-<p><img src="https://i.loli.net/2020/11/26/Vgm1Xz6Nl8yWD79.png" alt="image-20201126115434716"></p>
-<h2 id="Python程序语法元素分析"><a href="#Python程序语法元素分析" class="headerlink" title="Python程序语法元素分析"></a>Python程序语法元素分析</h2><h3 id="程序的格式框架"><a href="#程序的格式框架" class="headerlink" title="程序的格式框架"></a>程序的格式框架</h3><p>（1）Python语言用严格的“缩进”来表明程序的格式框架。每行代码前的空白区域即是缩进，用来表示代码之间的包含和层次关系。</p>
-<p>（2）缩进常用Tab键实现，也可用多个空格实现，通常是4个空格。缩进还包括单层缩进和经过嵌套形成的多层缩进。</p>
-<p>（3）一般来说，判断、循环、函数、类等语法形式能够通过缩进包含一批代码。</p>
-<p>（4）Python语法允许在表达式内部标记之间增加空格，这样有助于提高代码的可读性，但不能改变与缩进相关的空格数量，也不能在变量名中间增加空格。</p>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>Python语言有两种方法：单行注释和多行注释。单行注释以#开头，多行注释则以’’’(3个单引号)开头和结尾。例如:</p>
-<pre><code class="python">&#39;&#39;&#39;
-转换算法：
-C = (F-32)/1.8
-F = C*1.8 + 32
-&#39;&#39;&#39;</code></pre>
-<h3 id="命名与保留字"><a href="#命名与保留字" class="headerlink" title="命名与保留字"></a>命名与保留字</h3><p>（1）Python语言采用大小写字母、数字、下划线和汉字等字符及其组合给变量命名，但首字符不能为数字，且中间不能出现空格，长度没有限制。注意：标识符对大小写敏感。</p>
-<p>（2）保留字（Keyword），也称为关键字，不能用来给变量命名。Python3.x版本共有33个保留字，保留字同样对大小写敏感，例如for是保留字，而For则不是。</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>（1）Python语言中，字符串是用两个双引号””或者单引号’’括起来的零个或多个字符。</p>
-<p>（2）字符串是字符的序列，可以按照单个字符或字符片段进行索引。字符串包括两种序号体系：正向递增序号和反向递减序号。二者可以混合使用，若字符串长度为L，则从左到右，正向递增序号为0~L-1;反向递减序号为-L~-1</p>
-<p><img src="https://i.loli.net/2020/11/26/xe7X9WBL5aGA4jI.png" alt="image-20201126163416661"></p>
-<p>（3）Python字符串也提供区间访问方式，采用[N:M]格式，表示字符串从N到M(不包含M)的子字符串，其中N和M都是字符串的索引序号。</p>
-<pre><code class="python">TempStr = &quot;110C&quot;
-print(TempStr[-1])          #只打印最后一个字符，即&#39;C&#39;
-print(TempStr[0:2])         #打印第一第二个字符，即&#39;11&#39;
-print(TempStr[0:-1])        #打印除去最后一个字符的字符串,即&#39;110&#39;;效果和TempStr[0:3]一样
-print(TempStr[:])           #打印全部字符</code></pre>
-<h3 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h3><p>（1）”=”表示赋值，包含等号的语句称为赋值语句，即将等号右侧的计算结果赋给左侧变量。例如：</p>
-<pre><code class="python">TempStr = input(&quot;请输入带有符号的温度值：&quot;)   #将input()函数的结果赋给左侧变量TempStr</code></pre>
-<p>（2）同步赋值语句，可以同时给多个变量赋值。若多个单一赋值语句在功能上表达了相同或相关的含义，或者在程序中属于相同的功能，都可以采用同步赋值语句。基本格式如下：</p>
-<pre><code>&lt;变量1&gt;,…… &lt;变量n&gt; = &lt;表达式1&gt;,…… &lt;表达式n&gt;</code></pre>
-<pre><code class="python">&gt;&gt;&gt;x, y = 10, 20
-&gt;&gt;&gt;print(x,y)
-10 20
-&gt;&gt;&gt;x, y = y, x       //交换x，y的数值不必再借助第三个变量
-&gt;&gt;&gt;print(x,y)
-20 10</code></pre>
-<h3 id="input-函数"><a href="#input-函数" class="headerlink" title="input()函数"></a>input()函数</h3><p>在实例1中，input()函数从控制台获得用户输入，无论用户在控制台输入什么内容，input()函数都以字符串类型返回结果。在获得用户输入之前，input()函数可以包含一些提示性文字。</p>
-<pre><code>&gt;&gt;&gt;input(&quot;请输入：&quot;)
-请输入：Python
-&#39;Python&#39;
-&gt;&gt;&gt;input(&quot;请输入：&quot;)
-请输入：12345
-&#39;12345&#39;</code></pre>
-<p><img src="https://i.loli.net/2020/11/26/JbFk8tzdfEQmjg6.png" alt="image-20201126175216693"></p>
-<h3 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h3><p>分支语句的作用是根据判断条件选择程序执行路径，使用方法如下：</p>
-<pre><code class="python">if &lt;条件1&gt;:
-    &lt;语句块1&gt;
-elif &lt;条件2&gt;:
-    &lt;语句块2&gt;
-...
-
-else:
-    &lt;语句块n&gt;</code></pre>
-<p>其中，if、elif、else都是保留字，else后不再增加条件，表示不满足其他if语句的所有其余情况。例如实例1中的分支语句：</p>
-<pre><code class="python">if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-else:</code></pre>
-<p>第一个表达式由保留字”in”组成，表示判断字符串TempStr的最后一个字符(TempStr[-1])是否在一个由’F’或’f’组成的集合中，即TempStr[-1]是否等于’F’或’f’。如果相等，返回True，执行该条件下的语句块；否则返回False，判断下一个条件。其中用方括号和逗号组成的类型叫列表，格式为：[元素1,元素2,…,元素n]。</p>
-<h3 id="eval-函数"><a href="#eval-函数" class="headerlink" title="eval()函数"></a>eval()函数</h3><p>eval(&lt;字符串&gt;)函数能够以Python表达式的方式解析并执行字符串，并将返回结果输出。例如：</p>
-<pre><code class="python">&gt;&gt;&gt;x = 1
-&gt;&gt;&gt;eval(&quot;x + 1&quot;)
-2
-&gt;&gt;&gt;eval(&quot;1.1 + 2.2&quot;)
-3.3</code></pre>
-<p>实例1中eval()函数将用户的部分输入(TempStr[0:-1])由字符串转化为数字，假设用户的输入为“102C”，经过eval()函数处理，转变为Python内部可以进行数学运算的的数值102</p>
-<pre><code class="python">&gt;&gt;&gt;TempStr = &quot;102C&quot;
-&gt;&gt;&gt;eval(TempStr[0:-1])
-102</code></pre>
-<p>使用eval()函数注意事项：</p>
-<p>（1）若直接输入字符串”hello”，eval()函数会去掉两个引号，将其解释为一个变量。由于之前没有定义过hello变量，解释器会报错。</p>
-<p>（2）当输入字符串”‘hello’”时，eval()函数去掉外部双引号后，内部还有一个单引号，则’hello’被解释为字符串。</p>
-<p>（3）若要输入一个数字（小数或负数），并用程序对这个数字进行计算，可以采用eval(input(输入提示字符串))的组合，例如：</p>
-<pre><code class="python">&gt;&gt;&gt;vlaue = eval(input(&quot;请输入要计算的数值：&quot;))
-请输入要计算的数值：1024
-&gt;&gt;&gt;print(value*2)
-2048</code></pre>
-<p>（4）实例1中的代码：</p>
-<pre><code class="python">C = (eval(TempStr[0:-1]) - 32)/1.8</code></pre>
-<p>表示将TempStr字符串中除最后一位外的子串转换成数字，再对其进行运算。</p>
-<h3 id="print-函数"><a href="#print-函数" class="headerlink" title="print()函数"></a>print()函数</h3><p>（1）print()是输出函数，当输出纯字符信息时，加上双引号或单引号即可直接把待输出的内容传递给print()函数。例如：</p>
-<pre><code class="python">&gt;&gt;&gt;print(&quot;我爱我家&quot;)
-我爱我家</code></pre>
-<p>（2）当输出变量值时，需要采用格式化输出方式，通过format()方法将待输出的变量整理成期望输出的格式。例如实例1中：</p>
-<pre><code class="python">print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))</code></pre>
-<p>print()函数用槽格式和format()方法将变量和字符串结合到一起输出。上述代码中，大括号{}表示一个槽位置，这个大括号的内容由后面的format()方法中的参数C或F填充。其中，大括号{:.2f}中的内容表示变量C(或F)的输出格式，具体为输出数值保留两位小数。</p>
-<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>（1）循环语句的作用是根据判断条件确定一段程序是否再次执行一次或多次。实例1中不包含循环语句，程序执行一次后退出，若要让程序一直运行，连续接收用户的输入，可以采用循环语句进行改造。</p>
-<pre><code class="python">TempStr = input(&quot;请输入带有符号的温度值：&quot;)
-while TempStr[-1] not in [&#39;N&#39;,&#39;n&#39;]:                #改造1，直到用户输入的最后一个字符是N或n时退出
-    if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-        C = (eval(TempStr[0:-1]) - 32)/1.8
-        print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-    elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-        F = 1.8*eval(TempStr[0:-1]) + 32
-        print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
-    else:
-        print(&quot;输入格式错误&quot;)
-    TempStr = input(&quot;请输入带有符号的温度值：&quot;)        #改造2</code></pre>
-<p>（2）循环语句有多种类型，改造后的代码使用了条件循环，其基本过程如下：</p>
-<pre><code class="python">while&lt;条件&gt;:
-    &lt;语句块1&gt;
-&lt;语句块2&gt;</code></pre>
-<p>缩进表达了与while语句的所属关系。当条件为真时，进入循环，执行语句块1；当条件为假时，退出循环，执行语句块2。改造后的代码中的循环条件：</p>
-<pre><code class="python">while TempStr[-1] not in [&#39;N&#39;,&#39;n&#39;]:</code></pre>
-<p>语句中的not是保留字，表示对判断结果取反。</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>（1）函数是对一组表达特定功能表达式的封装，能够接收变量并输出结果。input()、print()、eval()都是Python解释器的内置函数。编写代码时，函数的使用有助于阅读和复用，也使得程序模块化更好。</p>
-<p>实例1中，程序按照顺序方式，从头到尾执行，对其进行如下改造：</p>
-<pre><code class="python">def tempConvert(ValueStr):
-    if ValueStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-        C = (eval(ValueStr[0:-1]) - 32)/1.8
-        print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-    elif ValueStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-        F = 1.8*eval(ValueStr[0:-1]) + 32
-        print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
-    else:
-        print(&quot;输入格式错误&quot;) 
-TempStr = input(&quot;请输入带有符号的温度值：&quot;)
-tempConvert(TempStr)</code></pre>
-<p>（2）上述代码中，用def保留字定义了一个名为tmpConvert()的函数，它使用一个参数ValueStr，函数所属代码是def所在行和其后面与之有缩进关系的代码。</p>
-<p>（3）由def保留字定义的函数在程序中不被直接执行，需要使用函数名称调用才能执行。所以程序是从第10行开始执行。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">组合数据类型概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">序列类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">集合类型</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-Python/初识Python语言(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">初识Python语言(一)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/" class="archive-article-date">
-  	<time datetime="2020-11-24T10:35:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="编译和解释"><a href="#编译和解释" class="headerlink" title="编译和解释"></a>编译和解释</h2><p>（1)高级语言按照计算机执行方式的不同可分成两类：静态语言和脚本语言。这里的执行方式是指计算机执行一个程序的过程，静态语言采用编译执行，脚本语言采用解释执行。</p>
-<p>（2）编译：将源代码(高级语言代码)转换为目标代码(机器语言代码)的过程，执行编译的计算机程序称为编译器。编译是一次性的翻译，一旦程序被编译，则目标代码不再需要编译器就可以运行。</p>
-<p>（3）解释：将源代码逐条转换成目标代码的同时逐条运行目标代码的过程，执行解释的计算机程序称为解释器。</p>
-<p>解释在每次程序运行时都需要解释器和源代码。</p>
-<table>
-<thead>
-<tr>
-<th align="center">语言类型</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">静态语言(编译执行)</td>
-<td align="center">C语言、Java语言</td>
-</tr>
-<tr>
-<td align="center">脚本语言(解释执行)</td>
-<td align="center">JavaScript语言、PHP语言、Python语言</td>
-</tr>
-</tbody></table>
-<p>（4）Python语言虽然采用解释执行方式，但它的解释器也保留了编译器的部分功能，随着程序运行，解释器也会产生一个完整的目标代码。这种将解释器和编译器结合的新解释器是现代脚本语言为了提升计算机性能的一种有益演进。</p>
-<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>可在Python解释器自带的idle下编写Python语句，路径：D:\Python\Lib\idlelib，在该目录下双击idle.bat即可开始编写，也可直接在Windows下的“开始”菜单中搜索关键字”idle”找到快捷方式打开。</p>
-<pre><code class="python">&gt;&gt;&gt;print(&quot;Hello World&quot;)
-Hello World</code></pre>
-<p>其中，第一行的”&gt;&gt;&gt;”是Python语言运行环境的提示符，表示可以在这后面输入Python语句。第二行则是Python语句的执行结果。</p>
-<h2 id="Python语言的特点"><a href="#Python语言的特点" class="headerlink" title="Python语言的特点"></a>Python语言的特点</h2><p>语法简洁、跨平台、可扩展、开源通用、支持中文、模式多样(支持面向过程和面向对象两种编程方式)、类库丰富的脚本语言。</p>
-<h2 id="运行方式"><a href="#运行方式" class="headerlink" title="运行方式"></a>运行方式</h2><p>运行Python程序有两种方式：交互式和文件式。</p>
-<p>交互式指Python解释器即时响应用户输入的每条代码，给出输出结果，一般用于调试少量代码。</p>
-<p>文件式，也称为批量式，指用户将Python程序写在一个或多个文件中，然后启动Python解释器批量执行文件中的代码，是最常用的编程方式。</p>
-<h3 id="交互式启动和运行方法"><a href="#交互式启动和运行方法" class="headerlink" title="交互式启动和运行方法"></a>交互式启动和运行方法</h3><p>交互式有两种启动和运行方法。</p>
-<p>第一种方法，启动Windows命令行工具，Windows键+R快速打开运行窗口，输入”cmd”，在控制台输入”python”，在命令提示符”&gt;&gt;&gt;”后输入程序代码，回车后显示输出结果。在”&gt;&gt;&gt;”提示符后输入exit()或quit()可以退出Python运行环境。</p>
-<p><img src="https://i.loli.net/2020/11/24/4jOUhvayTeZof5m.png" alt="image-20201124195448770"></p>
-<p>第二种方法，通过调用IDLE来启动Python运行环境。</p>
-<p><img src="https://i.loli.net/2020/11/24/4iaNIMPFjfoO5ry.png" alt="image-20201124195840923"></p>
-<h3 id="文件式启动和运行方法"><a href="#文件式启动和运行方法" class="headerlink" title="文件式启动和运行方法"></a>文件式启动和运行方法</h3><p>文件式也有两种运行方式。</p>
-<p>第一种方法，按照Python的语法格式在任意的编辑器中编写代码，可以使用Python安装包中的IDLE编辑器或者notepad++，然后保存为xx.py形式的文件。之后，进入xx.py文件所在目录，打开Windows的命令行窗口，输入</p>
-<pre><code>python xxx.py</code></pre>
-<p>即可运行Python程序文件获得输出。</p>
-<p><img src="https://i.loli.net/2020/11/24/sXkwqECbHKyfrZW.png" alt="image-20201124201902643"></p>
-<p>第二种方法，打开IDLE，按快捷键Ctrl+N打开一个新窗口，或者在菜单中选择File–&gt;New File选项。这个新窗口不再是交互模式，而是一个具备Python语法高亮辅助的编辑器，可进行代码编辑。编写完代码并保存为xx.py文件后，按快捷键F5，或者在菜单中选择Run–&gt;Run Module选项运行该文件。</p>
-<p><img src="https://i.loli.net/2020/11/24/1O45caGsVpeJyhH.png" alt="image-20201124202318979"></p>
-<h3 id="启动和运行方法推荐"><a href="#启动和运行方法推荐" class="headerlink" title="启动和运行方法推荐"></a>启动和运行方法推荐</h3><p>IDLE是一个简单有效的集成开发环境，支持交互式和文件式。其中，最常用且最重要的是采用IDLE的文件式方法。IDLE是小规模Python软件项目的主要编写工具，比IDLE更强大的Python语言集成开发环境是PyCharm，它主要用于中规模及以上的软件开发项目。</p>
-<h2 id="运行Python小程序"><a href="#运行Python小程序" class="headerlink" title="运行Python小程序"></a>运行Python小程序</h2><p>（1）同切圆的绘制</p>
-<p>文件式：</p>
-<pre><code>import turtle            #引入turtle库
-turtle.pensize (2)       #设置画笔宽度为2像素
-turtle.circle (10)       #绘制半径为10像素的圆
-turtle.circle (40)       #绘制半径为40像素的圆
-turtle.circle (80)       #绘制半径为80像素的圆
-turtle.circle (160)      #绘制半径为160像素的圆</code></pre>
-<p>运行结果：</p>
-<p><img src="https://i.loli.net/2020/11/24/eHTuq74hitLckSF.png" alt="image-20201124234947504"></p>
-<p>（2）日期和时间的输出</p>
-<p>交互式：</p>
-<pre><code>&gt;&gt;&gt;from datetime import datetime   #引用datetime库
-&gt;&gt;&gt;now = datetime.now()            #获取当前日期和时间信息
-&gt;&gt;&gt;print(now)
-&gt;&gt;&gt;now.strftime(&quot;%x&quot;)              #输出其中的日期部分
-&gt;&gt;&gt;now.strftime(&quot;%X&quot;)              #输出其中的时间部分</code></pre>
-<p><img src="https://i.loli.net/2020/11/24/N2hJvTAxtF5y1Gw.png" alt="image-20201124235205031"></p>
-<p>文件式：</p>
-<pre><code>from datetime import datetime   #引用datetime库
-now = datetime.now()            #获取当前日期和时间信息
-print(now)
-print(now.strftime(&quot;%x&quot;))       #输出其中的日期部分
-print(now.strftime(&quot;%X&quot;))       #输出其中的时间部分，其中X大写</code></pre>
-<p><img src="https://i.loli.net/2020/11/24/vhlAxUZELmpGYR6.png" alt="image-20201124233441815"></p>
-<p>（3）import保留字用来引入函数库，绘制图形可以使用turtle库，获得系统的日期和时间使用datetime库</p>
-<h2 id="程序的基本编写方法"><a href="#程序的基本编写方法" class="headerlink" title="程序的基本编写方法"></a>程序的基本编写方法</h2><h3 id="IPO程序编写方法"><a href="#IPO程序编写方法" class="headerlink" title="IPO程序编写方法"></a>IPO程序编写方法</h3><p>无论程序规模如何，每个程序都有统一的运算模式：输入数据、处理数据和输出数据。这种运算模式形成了基本的程序编写方法：IPO(Input，Process，Output)方法。</p>
-<h3 id="输入-Input"><a href="#输入-Input" class="headerlink" title="输入(Input)"></a>输入(Input)</h3><p>输入是一个程序的开始。程序要处理的数据有多种来源，因此形成了多种输入方式。</p>
-<table>
-<thead>
-<tr>
-<th align="left">输入方式</th>
-<th align="left">输入来源</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">文件输入</td>
-<td align="left">文件</td>
-</tr>
-<tr>
-<td align="left">网络输入</td>
-<td align="left">互联网上的数据</td>
-</tr>
-<tr>
-<td align="left">控制台输入</td>
-<td align="left">程序使用者输入的信息</td>
-</tr>
-<tr>
-<td align="left">交互界面输入</td>
-<td align="left">通过提供一个图形交互界面从用户处获取</td>
-</tr>
-<tr>
-<td align="left">随机数据输入</td>
-<td align="left">将随机数作为程序输入，需要使用特定的随机数生成器程序或调用相关函数</td>
-</tr>
-<tr>
-<td align="left">内部参数输入</td>
-<td align="left">以程序内部定义的初始化变量作为输入</td>
-</tr>
-</tbody></table>
-<h3 id="输出-Output"><a href="#输出-Output" class="headerlink" title="输出(Output)"></a>输出(Output)</h3><p>输出是程序展示运算成果的方式。</p>
-<table>
-<thead>
-<tr>
-<th>输出方式</th>
-<th>具体实现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>控制台输出</td>
-<td>通过程序运行环境中的命令打印输出结果，例如Windows中的命令行工具、IDLE工具</td>
-</tr>
-<tr>
-<td>图形输出</td>
-<td>在计算机中启动独立的图形输出窗口，根据指令绘制运算结果</td>
-</tr>
-<tr>
-<td>文件输出</td>
-<td>以生成新的文件或修改已有文件方式输出运行结果，是程序常用的输出方式</td>
-</tr>
-<tr>
-<td>网络输出</td>
-<td>以访问网络接口方式输出数据</td>
-</tr>
-<tr>
-<td>操作系统内部变量输出</td>
-<td>程序将运行结果输出到系统内部变量中，这类变量包括管道、线程、信号量等</td>
-</tr>
-</tbody></table>
-<h3 id="处理-Process"><a href="#处理-Process" class="headerlink" title="处理(Process)"></a>处理(Process)</h3><p>处理是程序对输入数据进行计算产生输出结果的过程，计算问题的处理方法统称为“算法”。</p>
-<h3 id="无限循环程序"><a href="#无限循环程序" class="headerlink" title="无限循环程序"></a>无限循环程序</h3><p>无限循环程序没有输入输出，例如：</p>
-<pre><code class="python">while(True)
-   a = 1</code></pre>
-<p>由于没有输入输出，代码会一直执行下去。该程序快速消耗CPU的计算资源，可以用来辅助测试CPU或系统性能。不过，没有输入输出的程序功能十分有限，仅在特殊情况下使用。</p>
-<h2 id="Python语言的版本更迭"><a href="#Python语言的版本更迭" class="headerlink" title="Python语言的版本更迭"></a>Python语言的版本更迭</h2><p>Python2.x已是遗产，Python3.x是这个语言的现在和未来。Python2.x系列的最后一个版本，其主版本号为2.7。</p>
-<p>版本之间的区别：更多区别可以查看Guido的文章：<a target="_blank" rel="noopener" href="https://docs.python.org/3/whatsnew/3.0.html">https://docs.python.org/3/whatsnew/3.0.html</a></p>
-<p>（1）修改编码：3.x系列默认采用UTF-8编码，表达UTF-8编码字符串时，无需在前面加上u或者U</p>
-<p>（2）修改print语句：用print()函数替换了print语句，功能一样，格式不同</p>
-<pre><code class="python">2.x:&gt;&gt;&gt;print &quot;The answer is&quot;, 2*2
-3.x:&gt;&gt;&gt;print(&quot;The answer is&quot;, 2*2)
-2.x:&gt;&gt;&gt;print x
-3.x:&gt;&gt;&gt;print(x,end=&quot;,&quot;)</code></pre>
-<p>（3）修改exec语句：用exec()函数替换了exec语句，功能一样，格式不同</p>
-<p>（4）去掉&lt;&gt;符号，用!=表示“不等于”</p>
-<p>（5）修改比较行为：用&lt;、&lt;=、&gt;=、&gt;符号比较两个元素时，若元素之间不存在有意义的顺序关系，将抛出TypeError错误，不再返回False，例如：</p>
-<pre><code class="python">2.x:&gt;&gt;&gt;1 &lt; &quot;1&quot;
-False
-3.x:&gt;&gt;&gt;1 &lt; &quot;1&quot;
-Traceback (most recent call last):
-  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
-    1 &lt; &quot;1&quot;
-TypeError: &#39;&lt;&#39; not supported between instances of &#39;int&#39; and &#39;str&#39;</code></pre>
-<p>（6）Python3.x系列不再区分整数和长整数类型，只有一个int类型，且无取值范围限制。因此，sys.maxint常量被去掉</p>
-<p>（7）修改整数除法：两个整数的一般除法(/)返回一个浮点数，不再返回一个整数，若想返回整数，则用整数除法(//)</p>
-<pre><code class="python">2.x:&gt;&gt;&gt;3/2
-1
-3.x:&gt;&gt;&gt;3/2
-1.5
-3.x:&gt;&gt;&gt;3//2
-1</code></pre>
-<p>（8）3.x系列八进制整数格式使用0o开头，而不再使用0开头</p>
-<p>（9）增加as、with、True、False、None作为关键字</p>
-<p>（10）去掉raw_input()函数，用input()函数代替，input()返回一个字符串</p>
-<p>（11）修改range()函数，与Python2.x系列中的xrange()类似，不再显示返回一个列表。若要返回列表，则需要通过list()函数转换</p>
-<pre><code class="python">2.x:&gt;&gt;&gt;range(10)
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-3.x:&gt;&gt;&gt;range(10)
-range(0,10)
-3.x:&gt;&gt;&gt;list(range(10))
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
-<p>（12）修改返回类型：除range()外，zip()、map()、filter()、字典类型的key()方法、value()方法、item()方法不再返回列表类型</p>
-<p>（13）修改异常处理表达：使用as关键字标识异常信息，例如：</p>
-<pre><code class="python">2.x:&gt;&gt;&gt;try:
-       ...   wrong_name
-       ...except NameError, err:
-       ...   print err
-       ...
-       name &#39;wrong_name&#39; is not defined
-3.x:&gt;&gt;&gt;try:
-       ...   wrong_name
-       ...except NameError as err:
-       ...   print(err)
-       ...
-name &#39;wrong_name&#39; is not defined</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/解Misc题常用的kali工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/">解Misc题常用的kali工具</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/" class="archive-article-date">
-  	<time datetime="2020-11-23T13:15:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="binwalk"><a href="#binwalk" class="headerlink" title="binwalk"></a>binwalk</h2><p>binwalk是一款Python编写的工具，在kali中已经预安装了，可以在Python2和Python3的环境下运行，在Python3中运行速度更快。</p>
-<pre><code>apt-get install binwalk         //安装binwalk
-binwalk file                 //查看是否存在隐藏文件
-binwalk -e file              //文件提取</code></pre>
-<h2 id="foremost"><a href="#foremost" class="headerlink" title="foremost"></a>foremost</h2><p>foremost在kali中已经预安装，可用于文件的分离</p>
-<pre><code>apt-get install foremost     //安装foremost
-foremost -t all file         //分离文件，-t 指定文件类型，all则表示全部，后跟要分离的文件</code></pre>
-<h2 id="zsteg"><a href="#zsteg" class="headerlink" title="zsteg"></a>zsteg</h2><p>zsteg可用于检测png和bmp图片里的隐写数据，为了使安装更快，要换为国内源</p>
-<pre><code>gem sources -l             //查看现有源
-gem sources --remove https://rubygems.org/    //删除现有源
-gem sources -a http://gems.ruby-china.com/    //添加新源
-apt-get install gem        //安装gem，若不换源则需要等待许多时间
-gem install zsteg          //安装zsteg
-
-#使用方法，查看lsb数据
-zsteg xxx.bmp
-zsteg xxx.png
-zsteg -a file             //查看各个通道的lsb</code></pre>
-<h2 id="convert"><a href="#convert" class="headerlink" title="convert"></a>convert</h2><p>convert可以分解gif动图，kali自带的工具，无需安装</p>
-<pre><code>convert xxx.gif flag.png       //分解gif动图，得到每一帧的图片按顺序以flag-x.png命名，-x为序号</code></pre>
-<h2 id="montage"><a href="#montage" class="headerlink" title="montage"></a>montage</h2><p>montage用于图片的拼接，kali自带，无需安装，通常结合convert使用</p>
-<pre><code>montage flag*.png -tile x1 -geometry +0+0 flag.png
-//-tile是拼接时每行和每列的图片数，这里用x1，就是只一行
-//-geometry是首选每个图和边框尺寸，边框为0，图照为原始尺寸
-//拼接好的图片命名为flag.png</code></pre>
-<h2 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h2><p>查看可以打印的字符，通常可以借助管道符+grep匹配flag信息</p>
-<pre><code>strings file
-strings file | grep flag</code></pre>
-<h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><p>保存当前的工作区与暂存区的状态，把当前的工作隐藏起来，等需要的时候再恢复</p>
-<pre><code>git log           //查看git记录
-git stash list    //查看修改列表
-git stash show    //校验列表中的存储文件
-git stash apply   //恢复被隐藏的文件</code></pre>
-<h2 id="gnuplot"><a href="#gnuplot" class="headerlink" title="gnuplot"></a>gnuplot</h2><p>gnuplot是一个命令行的交互式绘图工具。</p>
-<pre><code>apt-get install gnuplot       //安装gnuplot工具</code></pre>
-<p>使用：</p>
-<p>在终端输入gnuplot，之后输入plot，后跟坐标文件，回车后即可看到绘制的图片。</p>
-<p>例如BugkuCTF中的图穷匕见：</p>
-<p><img src="https://i.loli.net/2020/11/24/LqcMiNKyJ5enmAl.png" alt="image-20201124170748506"></p>
-<p><img src="https://i.loli.net/2020/11/24/5ySqZlarOGKsB1g.png" alt="image-20201124170808090"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali的基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">kali的基本使用</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-11-20T09:13:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基本守则"><a href="#基本守则" class="headerlink" title="基本守则"></a>基本守则</h2><p>（1）Linux系统大小写敏感</p>
-<p>（2）文件名前带“.”是隐藏文件</p>
-<p>（3）配置文件#开头代表是注释行，程序不执行改行</p>
-<p>（4）Linux系统下的“/”相当于DOS下的“\”</p>
-<p>（5）超级用户“#”，普通用户“$”</p>
-<h2 id="转义符"><a href="#转义符" class="headerlink" title="转义符"></a>转义符</h2><p>将特殊字符转换成普通字符</p>
-<p>（1）\        反斜杠，对单个字符进行转义</p>
-<p>（2）’’        单引号，对一串字符进行转义</p>
-<p>（3）``     反引号，可将命令二次处理</p>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="X-windows（图形化）与控制台（shell）间的切换"><a href="#X-windows（图形化）与控制台（shell）间的切换" class="headerlink" title="X-windows（图形化）与控制台（shell）间的切换"></a>X-windows（图形化）与控制台（shell）间的切换</h3><p>（1）X-windows切换到控制台：</p>
-<pre><code>init 3</code></pre>
-<p>或使用快捷键：Ctrl+alt+F3</p>
-<p>（2）控制台切换到X-windows：</p>
-<pre><code>startx
-或
-init 5</code></pre>
-<h3 id="设置默认开机界面"><a href="#设置默认开机界面" class="headerlink" title="设置默认开机界面"></a>设置默认开机界面</h3><p>（1）查看当前系统默认开机界面</p>
-<pre><code>systemctl get-default</code></pre>
-<p>（2）设置开机默认为X-windows</p>
-<pre><code>systemctl set-default graphical.target</code></pre>
-<p>（3）设置开机默认为控制台</p>
-<pre><code>systemclt set-default multi-user.target</code></pre>
-<p>（4）命令可用tab键补全</p>
-<h3 id="关机，重启，注销用户，锁屏，解锁"><a href="#关机，重启，注销用户，锁屏，解锁" class="headerlink" title="关机，重启，注销用户，锁屏，解锁"></a>关机，重启，注销用户，锁屏，解锁</h3><p>（1）关机，三种方式：</p>
-<pre><code>shutdown -h now
-halt
-init0</code></pre>
-<p>（2）重启，三种方式：</p>
-<pre><code>shutdown -r now
-reboot
-init 6</code></pre>
-<p>（3）注销用户，退出登录</p>
-<p>控制台界面下：</p>
-<pre><code>exit    或快捷键Ctrl+D</code></pre>
-<p>X-windows界面或shell下：</p>
-<pre><code>pkill -kill -t tty7</code></pre>
-<p>（4）锁屏，快捷键：Ctrl+s</p>
-<p>（5）解锁，快捷键：Ctrl+q</p>
-<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><table>
-<thead>
-<tr>
-<th align="center">命令</th>
-<th align="center">解释</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">history</td>
-<td align="center">显示历史命令</td>
-<td align="center">!5      //执行第5行的命令</td>
-</tr>
-<tr>
-<td align="center">echo</td>
-<td align="center">回显命令</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">uname</td>
-<td align="center">显示系统信息</td>
-<td align="center">-a参数     //显示全部信息</td>
-</tr>
-<tr>
-<td align="center">hostname</td>
-<td align="center">显示主机名</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">date</td>
-<td align="center">显示或修改系统时间</td>
-<td align="center">-s “20201120 12:12:00”</td>
-</tr>
-<tr>
-<td align="center">cal</td>
-<td align="center">显示日历</td>
-<td align="center">cal 01 2020 //显示2020年1月的日历</td>
-</tr>
-<tr>
-<td align="center">who、w</td>
-<td align="center">查看登录用户信息</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">whoami</td>
-<td align="center">显示用户名</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">which</td>
-<td align="center">显示命令所在位置</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">whereis</td>
-<td align="center">显示文件位于系统中的什么位置</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">whatis</td>
-<td align="center">显示命令的简短描述</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">命令 –help</td>
-<td align="center">显示命令的使用摘要和参数列表</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">man</td>
-<td align="center">显示命令的说明文档</td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<p>ps：man命令：查看文档时，直接输入/keyword  即可在文档中搜索keyword这个关键字，n跳到下一个关键字，N跳到上一个关键字，键q离开说明文档</p>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
-<thead>
-<tr>
-<th align="center">tab</th>
-<th align="center">自动补全命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Ctrl+a</td>
-<td align="center">把光标移动到命令行最开始的地方</td>
-</tr>
-<tr>
-<td align="center">Ctrl+e</td>
-<td align="center">把光标移动到命令行末尾</td>
-</tr>
-<tr>
-<td align="center">Ctrl+u</td>
-<td align="center">删除当前光标前的所有内容</td>
-</tr>
-</tbody></table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali2020.1安装过程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">kali2020.1安装过程</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2020-11-18T11:39:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="准备资源"><a href="#准备资源" class="headerlink" title="准备资源"></a>准备资源</h2><p>（1）kali2020.1镜像，下载链接:<a target="_blank" rel="noopener" href="https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso">https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso</a></p>
-<p>（2）VMware</p>
-<p>（3）良好的网络环境</p>
-<p>（4）物理计算机至少有8G的内存，以保证在后续使用虚拟机时的流畅</p>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="新建一个虚拟机"><a href="#新建一个虚拟机" class="headerlink" title="新建一个虚拟机"></a>新建一个虚拟机</h3><p>（1）打开VMware，新建一个虚拟机</p>
-<p><img src="https://i.loli.net/2020/11/18/5XWaNzcn7CAwHh9.png" alt="image-20201118194822750"></p>
-<p>（2）会弹出两种安装方式，这里我选择自定义安装</p>
-<p><img src="https://i.loli.net/2020/11/18/TSrnQKmefyx51MA.png" alt="image-20201118194943515"></p>
-<p>（3）默认选择下一步，直到“安装客户机操作系统”，这里选择“稍后安装操作系统”</p>
-<p><img src="https://i.loli.net/2020/11/18/4ipg25EmeGxB3wO.png" alt="image-20201118195206604"></p>
-<p>（4）选择操作系统及其版本</p>
-<p><img src="https://i.loli.net/2020/11/18/ShvCRwpOme84uQA.png" alt="image-20201118195449341"></p>
-<p>（5）给虚拟机命名，并给其选择存放位置，这里建议在VMware目录下新建一个与虚拟机名称一样的文件夹，将虚拟机存在这个文件夹里。</p>
-<p><img src="https://i.loli.net/2020/11/18/sFnwLfxpku4M2zt.png" alt="image-20201118195753952"></p>
-<p>（6）配置处理器数量</p>
-<p><img src="https://i.loli.net/2020/11/20/3sUfFGozpgAjuZC.png" alt="image-20201119125125453"></p>
-<p>（7）为虚拟机分配内存，这里可以分配多一点，以便在后续的安装中更快</p>
-<p><img src="https://i.loli.net/2020/11/18/Q8PkLYq3iTphnxO.png" alt="image-20201118200631782"></p>
-<p>（8）网络类型选择NAT模式，桥接模式需要一个真实的IP，在校园里一般都是NAT模式。</p>
-<p>（9）之后便一直默认下一步，直到为虚拟机分配磁盘容量，这里可自行定义</p>
-<p><img src="https://i.loli.net/2020/11/18/XsACzh1xDS8IPla.png" alt="image-20201118200852936"></p>
-<p>（10）默认下一步，直到“自定义硬件”，这里可以移除一些平时不用的硬件配置，比如USB控制器、声卡、打印机。点击“自定义硬件”即可在里面移除不用的硬件，然后点击完成。</p>
-<p><img src="https://i.loli.net/2020/11/18/moWHl74GbhLCOsP.png" alt="image-20201118221327164"></p>
-<p>（11）可看到已经创建好了一个虚拟机，此时便要用到下载好的镜像了。点击“CD/DVD(IDE)”,选择“使用ISO映像文件”，添加下载好的镜像，点击确定。</p>
-<p><img src="https://i.loli.net/2020/11/18/LC2yNAH1boZ47pU.png" alt="image-20201118202005823"></p>
-<p><img src="https://i.loli.net/2020/11/18/IDyEQuATq85SnWj.png" alt="image-20201118202118646"></p>
-<h3 id="安装Kali"><a href="#安装Kali" class="headerlink" title="安装Kali"></a>安装Kali</h3><p>（1）点击开启虚拟机</p>
-<p><img src="https://i.loli.net/2020/11/18/ASMQzZ1RUPepvkX.png" alt="image-20201118202451736"></p>
-<p>（2）再出现的页面里选择Graphical install，回车，进行GUI界面安装</p>
-<p><img src="https://i.loli.net/2020/11/18/NZmAzXrL3S2HdBe.png" alt="image-20201118202651265"></p>
-<p>（3）选择一种语言，这里我选择English，选好后点击continue</p>
-<p><img src="https://i.loli.net/2020/11/18/QpMaZgdkzuIHoXS.png" alt="image-20201118202755157"></p>
-<p>（4）选择国家、领地或地区</p>
-<p><img src="https://i.loli.net/2020/11/20/lbFrZzvmwgCDYnW.png" alt="image-20201120124026274"></p>
-<p>（5）选择键盘映射</p>
-<p><img src="https://i.loli.net/2020/11/20/2avsNCjpUz4xcBV.png" alt="image-20201120124328490"></p>
-<p>（6）稍等1分钟。填写主机名</p>
-<p><img src="https://i.loli.net/2020/11/18/S8ypjUHImC7Lgds.png" alt="image-20201118203301686"></p>
-<p>（7）填写域名，这里可不填</p>
-<p><img src="https://i.loli.net/2020/11/18/fTXeW3Q9rFk8UaR.png" alt="image-20201118203351174"></p>
-<p>（8）设置一个用户名来取代root执行非管理任务的普通用户账号，因为2020版本的kali系统打破了传统默认是root的默认账号。</p>
-<p><img src="https://i.loli.net/2020/11/18/wX2eKgRrWLMvyup.png" alt="image-20201118203930694"></p>
-<p>（9）这里会填入上一步的用户名，可改可不改，这里是在登录界面用的用户名。</p>
-<p><img src="https://i.loli.net/2020/11/18/G4vhds7uL6WtT2F.png" alt="image-20201118204113340"></p>
-<p>（10）输入密码，二次输入确认密码</p>
-<p><img src="https://i.loli.net/2020/11/18/sXLcI6UMtRElZAr.png" alt="image-20201118204212719"></p>
-<p>（11）稍等1到两分钟，选择时区</p>
-<p><img src="https://i.loli.net/2020/11/18/B8RTg3AunV29rSw.png" alt="image-20201118204421448"></p>
-<p>（12）进入磁盘分区选项，点击continue</p>
-<p><img src="https://i.loli.net/2020/11/18/x9GhY3UWQiA5kjH.png" alt="image-20201118204704353"></p>
-<p>（13）默认并一直点击continue，直到最后一项，选择“yes”，将改动写入磁盘</p>
-<p><img src="https://i.loli.net/2020/11/20/BLOSzmAFR7cdjpn.png" alt="image-20201120124504208"></p>
-<p>（14）稍等1分钟，进入配置软件包管理器。这里若没有http代理信息，可忽略，点击continue</p>
-<p><img src="https://i.loli.net/2020/11/20/Feq3szcvNxDMw2E.png" alt="image-20201120124628480"></p>
-<p><img src="https://i.loli.net/2020/11/18/yO9kegB2uZ6CYtX.png" alt="image-20201118205218688"></p>
-<p>（15）默认即可，continue</p>
-<p><img src="https://i.loli.net/2020/11/18/DhuOtkTaMrH27Sy.png" alt="image-20201118215722620"></p>
-<p>（16）之后便是“选择并安装软件”，这里需要一点时间，安装完成后，便是将GRUB安装至硬盘，选择“yes”</p>
-<p><img src="https://i.loli.net/2020/11/20/BgtskKXzbRdjPa2.png" alt="image-20201120122137530"></p>
-<p>（17）选择/dev/sda</p>
-<p><img src="https://i.loli.net/2020/11/20/rXnxbWyJYhfejLq.png" alt="image-20201120122345533"></p>
-<p>（18）安装完成</p>
-<p><img src="https://i.loli.net/2020/11/20/wj8yP64sCcK9ndh.png" alt="image-20201120122609322"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali中的文件-目录操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">kali中的文件/目录操作</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2020-11-16T07:04:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="文件操作常见命令"><a href="#文件操作常见命令" class="headerlink" title="文件操作常见命令"></a>文件操作常见命令</h2><p>以下内容都是基于kali2020.1版本的，在此列出命令的一些常见使用参数及用法，若要获取详细的使用方法，在命令后面加上 –help即可查看，或者使用man也可查看命令的帮助文档</p>
-<pre><code>命令 --help
-man 命令</code></pre>
-<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><pre><code>cd dir             //进入一个目录dir
-cd .               //验证&quot;.&quot;代表当前目录
-cd ..              //进入当前目录的上一级（cd ../.. 进入当前目录的上两级目录）
-cd -               //返回进入此目录之前所在的目录</code></pre>
-<p><img src="https://i.loli.net/2020/11/17/QOJ7eMRVEADYHPC.png" alt="image-20201117193550828"></p>
-<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>显示当前所在的工作目录</p>
-<p><img src="https://i.loli.net/2020/11/17/ASpWwGgIdYsPHbq.png" alt="image-20201117193616793"></p>
-<h3 id="ls-参数-对象-显示目录中的文件"><a href="#ls-参数-对象-显示目录中的文件" class="headerlink" title="ls [参数] [对象]       显示目录中的文件"></a>ls [参数] [对象]       显示目录中的文件</h3><pre><code>-a               //显示所有文件（包含隐藏文件）
--l               //显示文件或目录的详细信息
--lh              //将文件大小以K为单位显示
--i               //显示文件或目录的indoes</code></pre>
-<p>这里直接使用’ll’命令，其效果和’ls -l’一样，但初次使用’ll’会报错，系统会提示未找到该命令。</p>
-<p>解决方法：</p>
-<p>（1）编辑以下文档</p>
-<pre><code>vim ~/.bashrc     //进入编辑模式</code></pre>
-<p>（2）将alias ll=’ls -l‘前面的注释符号#删掉，保存并退出编辑</p>
-<p>（3）重启即可</p>
-<p><img src="https://i.loli.net/2020/11/17/ewixY9GIWPm8qLX.png" alt="image-20201117200316254"></p>
-<h3 id="touch，vi-创建文件"><a href="#touch，vi-创建文件" class="headerlink" title="touch，vi     创建文件"></a>touch，vi     创建文件</h3><pre><code>touch file            //立即生成文件，若文件存在，则更新文件的时间戳
-vi file               //必须要保存才能生成相应的文件</code></pre>
-<h3 id="mkdir-dir-创建目录"><a href="#mkdir-dir-创建目录" class="headerlink" title="mkdir  dir    创建目录"></a>mkdir  dir    创建目录</h3><h3 id="rmdir-删除空目录"><a href="#rmdir-删除空目录" class="headerlink" title="rmdir            删除空目录"></a>rmdir            删除空目录</h3><pre><code>rmdir dir           //只能删除空目录</code></pre>
-<p>若要删除非空目录：</p>
-<pre><code>rm -rf dir</code></pre>
-<h3 id="cp-参数-sou-dst-复制文件或目录"><a href="#cp-参数-sou-dst-复制文件或目录" class="headerlink" title="cp [参数] sou dst     复制文件或目录"></a>cp [参数] sou dst     复制文件或目录</h3><pre><code>cp file1 file2 /dir          //若sou为文件，dst为目录，则可复制多个文件到该目录，但要加上目录所在路径
-cp file1 file2               //若sou和dst均为文件，则将file1的内容复制到file2中
-cp -r dir1 dir2              //若sou和dst均为目录，则将dir2复制到dir1中，需要加上参数-r  </code></pre>
-<h3 id="mv-sou-dst-重命名、移动文件"><a href="#mv-sou-dst-重命名、移动文件" class="headerlink" title="mv sou dst      重命名、移动文件"></a>mv sou dst      重命名、移动文件</h3><pre><code>mv file1 file2             //若sou和dst均为文件，则将file1重命名为file2
-mv file dir                //若sou为文件，dst为目录，则将file移动到目录dir中，且可以移动多个文件</code></pre>
-<h3 id="rm-参数-删除文件或目录"><a href="#rm-参数-删除文件或目录" class="headerlink" title="rm [参数]         删除文件或目录"></a>rm [参数]         删除文件或目录</h3><pre><code>-i                 //删除之前系统会进行一次确认
--r                 //递归删除，用于删除目录
--f                 //强制删除，没有提示和确认</code></pre>
-<h3 id="file"><a href="#file" class="headerlink" title="file"></a>file</h3><pre><code>file file_name     //显示文件类型等基本信息</code></pre>
-<h3 id="ln-s-target-link-name-建立文件或目录链接"><a href="#ln-s-target-link-name-建立文件或目录链接" class="headerlink" title="ln [-s] target link_name         建立文件或目录链接"></a>ln [-s] target link_name         建立文件或目录链接</h3><p>（1）target最好指定为绝对路径，可使用pwd命令快速地获取路径，在后面加上需要链接的文件或目录即可</p>
-<p>（2）建立的链接相当于windows中的快捷方式，但和target文件有不同的inodes。</p>
-<p><img src="https://i.loli.net/2020/11/17/eIcms43GCbuO9YZ.png" alt="image-20201117210654615"></p>
-<p><img src="https://i.loli.net/2020/11/17/L7PSbIX1kYcOMEH.png" alt="image-20201117210722443"></p>
-<h3 id="find-path-expr-在路径path中查找符合表达式expr的文件"><a href="#find-path-expr-在路径path中查找符合表达式expr的文件" class="headerlink" title="find [path] [expr]              在路径path中查找符合表达式expr的文件"></a>find [path] [expr]              在路径path中查找符合表达式expr的文件</h3><p>（1）以下为表达式内容</p>
-<pre><code>-name flag         //查找文件名符合flag的文件，-iname忽略大小写
--empty             //查找空文件
--user root         //查找在系统中属于root这个用户的文件
--group root        //查找在系统中属于root这个组的文件
--amin -n           //查找系统中最后n分钟被访问的文件
--atime -n          //查找系统中最后n天被访问的文件</code></pre>
-<p>（2）查找相关文件，并执行相关命令</p>
-<pre><code>//将查找到的文件执行command操作
--exc command &#123;&#125; \;          
-| xargs command
-
-eg:
-//删除查找到的文件名符合flag的文件
-find / -name flag -exec rm -rf &#123;&#125; \;         
-find / -name flag | xargs rm -rf</code></pre>
-<p>{}表示find搜索出来的每个文件</p>
-<p>{}和\之间有空格，命令的结尾必须是”;“不要忘记最后的分号</p>
-<p>“|”为管道符，即把前一个命令的输出作为后一个命令的输入</p>
-<h2 id="压缩，解压缩命令"><a href="#压缩，解压缩命令" class="headerlink" title="压缩，解压缩命令"></a>压缩，解压缩命令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><pre><code>tar cvf file.tar dir    //打包目录中的文件，后面也可跟多个文件
-tar xvf file.tar        //解包
-#tar是打包，不是压缩</code></pre>
-<h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><pre><code>gzip file           //压缩
-gunzip file.gz      //解压
-gzip -d file.gz     //解压</code></pre>
-<h3 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h3><pre><code>tar zcvf file.tar.gz dir //压缩
-tar zxvf file.tar.gz     //解压</code></pre>
-<h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><pre><code>bzip2 (-z) file      //压缩，有无参数z都可
-bunzip2 file.bz2     //解压
-bzip2 -d file.bz2    //解压</code></pre>
-<h3 id="tar-bz2"><a href="#tar-bz2" class="headerlink" title=".tar.bz2"></a>.tar.bz2</h3><pre><code>tar jcvf file.tar.bz2 dir   //压缩
-tar jxvf file.tar.bz2       //解压</code></pre>
-<h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><pre><code>zip file.zip file/dir     //压缩文件或目录
-unzip file.zip            //解压</code></pre>
-<h3 id="tgz"><a href="#tgz" class="headerlink" title=".tgz"></a>.tgz</h3><pre><code>tar zcvf file.tar.tgz file1 file2   //压缩
-tar zxvf file.tar.tgz      //解压</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali下root用户的配色问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">kali下root用户的配色问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-11-15T15:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc</p>
-<pre><code class="javascript">vim /root/.bashrc</code></pre>
-<p>（2）粘贴内容如下：</p>
-<pre><code class="javascript"># set variable identifying the chroot you work in (used in the prompt below)
-if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&amp; [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we &quot;want&quot; color)
-case &quot;$TERM&quot; in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n &quot;$force_color_prompt&quot; ]; then
-    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
-    # We have color support; assume it&#39;s compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-    else
-    color_prompt=
-    fi
-fi
-
-if [ &quot;$color_prompt&quot; = yes ]; then
-    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;
-else
-    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#39;
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case &quot;$TERM&quot; in
-xterm*|rxvt*)
-    PS1=&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/.dircolors)&quot; || eval &quot;$(dircolors -b)&quot;
-    alias ls=&#39;ls --color=auto&#39;
-    #alias dir=&#39;dir --color=auto&#39;
-    #alias vdir=&#39;vdir --color=auto&#39;
-
-    #alias grep=&#39;grep --color=auto&#39;
-    #alias fgrep=&#39;fgrep --color=auto&#39;
-    #alias egrep=&#39;egrep --color=auto&#39;
-fi
-
-# some more ls aliases
-#alias ll=&#39;ls -l&#39;
-#alias la=&#39;ls -A&#39;
-#alias l=&#39;ls -CF&#39;
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don&#39;t need to enable
-# this, if it&#39;s already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi</code></pre>
-<p>（3）执行命令source /root/.bashrc即可</p>
-<pre><code class="javascript">source /root/.bashrc</code></pre>
-<p>（4）配置前：</p>
-<p><img src="https://i.loli.net/2020/11/15/kmhGaFQ2cq5uB7O.png" alt="image-20201115235207538"></p>
-<p>（5）配置后：</p>
-<p><img src="https://i.loli.net/2020/11/15/QBd9eWJRlyckqts.png" alt="image-20201115235233882"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/安装kali后修改系统时间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">安装kali后修改系统时间</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/" class="archive-article-date">
-  	<time datetime="2020-11-15T15:25:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>（1）tzselect命令执行</p>
-<pre><code>tzselect</code></pre>
-<p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p>
-<p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p>
-<p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
-<p>（3）修改配置文件，修改时区，输入以下命令</p>
-<pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
-rm -f /etc/localtime             
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime    //链接到上海时区文件  </code></pre>
-<p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BugkuCTF/BugkuCTF_Misc-006" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/">BugkuCTF_Misc_006</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:10:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="听首音乐"><a href="#听首音乐" class="headerlink" title="听首音乐"></a>听首音乐</h2><p>（1）下载附件，是一个音频文件，用audacity工具打开<br><img src="https://img-blog.csdnimg.cn/20201114181337328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）波形图上有些东西，Ctrl+鼠标滚轮，放大，是莫尔斯电码<br><img src="https://img-blog.csdnimg.cn/20201114181702980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）得到….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.用在线工具解码，得到flag为5BC925649CB0188F52E617D70929191C，这里注意字母为大写，直接提交就可以。<br><img src="https://img-blog.csdnimg.cn/20201114181823245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1875,8 +449,8 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime    //链接到上海时�
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
