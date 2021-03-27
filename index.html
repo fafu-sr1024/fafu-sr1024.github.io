@@ -172,7 +172,339 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="jieba库的使用"><a href="#jieba库的使用" class="headerlink" title="jieba库的使用"></a>jieba库的使用</h2><h3 id="jieba概述"><a href="#jieba概述" class="headerlink" title="jieba概述"></a>jieba概述</h3><p>（1）对于一段英文文本，若要提取其中的单词，只需使用<strong>字符串处理的split()方法</strong>即可。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;China is a great country&quot;.split()#split通过指定分隔符对字符串进行分片，默认以空格进行分片。
+[&#39;China&#39;, &#39;is&#39;, &#39;a&#39;, &#39;great&#39;, &#39;country&#39;]
+
+
+&gt;&gt;&gt;print str.split(&#39; &#39;, 1 ); # 以空格为分隔符，分隔成两个(num+1)子字符串</code></pre>
+<p>（2）对于一段中文文本，若要提取其中的单词则会缺少分隔符，因此需要引入jieba库。<strong>jieba（“结巴”）是Python中一个重要的第三方中文分词函数库，</strong>例如：</p>
+<pre><code class="python">&gt;&gt;&gt;import jieba
+&gt;&gt;&gt;jieba.lcut(&quot;中国是一个伟大的国家&quot;)
+[&#39;中国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]</code></pre>
+<p>（3）jieba是第三方库，不是Python安装包自带的，因此需要通过pip指令安装，pip安装命令如下：</p>
+<pre><code>:\&gt;pip install jieba #或者 pip3 install jieba</code></pre>
+<p>（4）jieba库的分词原理是利用一个中文词库，将待分词的内容与分词词库进行比对，通过图结构和动态规划方法找到最大概率的词组。除了分词，<strong>jieba还提供增加自定义中文单词的功能。</strong></p>
+<p>（5）jieba库支持3种分词模式：</p>
+<ul>
+<li>精确模式，将句子最精确地切开，适合文本分析。</li>
+<li>全模式，把句子中所有可以成词的词语都扫描出来，速度很快，但不能消除歧义。</li>
+<li>搜索引擎模式，在精确模式的基础上，对长词再次切分，提高召回率，适用于搜索引擎分词。 </li>
+</ul>
+<h3 id="jieba库解析"><a href="#jieba库解析" class="headerlink" title="jieba库解析"></a>jieba库解析</h3><p>（1）jieba库主要提供分词功能，可以辅助自定义分词词典。jieba库中包含的主要函数如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">jieba.cut(s)</td>
+<td align="center">精确模式，返回一可迭代的数据类型</td>
+</tr>
+<tr>
+<td align="center">jieba.cut(s,cut_all=True)</td>
+<td align="center">全模式，输出文本s中所有可能的单词</td>
+</tr>
+<tr>
+<td align="center">jieba.cut_for_search(s)</td>
+<td align="center">搜索引擎模式，适合搜索引擎建立索引的分词结果</td>
+</tr>
+<tr>
+<td align="center"><strong>jieba.lcut(s)</strong></td>
+<td align="center"><strong>精确模式，返回一个列表类型，建议使用</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>jieba.lcut(s,cut_all=True)</strong></td>
+<td align="center"><strong>全模式，返回一个列表类型，建议使用</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>jieba.lcut_for_search(s)</strong></td>
+<td align="center"><strong>搜素引擎模式，返回一个列表类型，建议使用</strong></td>
+</tr>
+<tr>
+<td align="center">jieba.add_word(w)</td>
+<td align="center">向分词词典中增加新词w</td>
+</tr>
+</tbody></table>
+<p>（2）针对上述分词函数，举例如下：</p>
+<pre><code class="python">&gt;&gt;&gt; jieba.lcut(&quot;中华人民共和国是一个伟大的国家&quot;)
+[&#39;中华人民共和国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]
+&gt;&gt;&gt; jieba.lcut(&quot;中华人民共和国是一个伟大的国家&quot;, cut_all=True)
+[&#39;中华&#39;, &#39;中华人民&#39;, &#39;中华人民共和国&#39;, &#39;华人&#39;, &#39;人民&#39;, &#39;人民共和国&#39;, &#39;共和&#39;, &#39;共和国&#39;, &#39;国是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]
+&gt;&gt;&gt; jieba.lcut_for_search(&quot;中华人民共和国是一个伟大的国家&quot;)
+[&#39;中华&#39;, &#39;华人&#39;, &#39;人民&#39;, &#39;共和&#39;, &#39;共和国&#39;, &#39;中华人民共和国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]</code></pre>
+<p>（3）jieba.lcut()函数返回精确模式，<strong>输出的分词能够完整且不多余地组成原始文本；</strong>jieba.lcut(,True)函数返回全模式，<strong>输出原始文本中可能产生的所有问题，冗余性最大；</strong>jieba.lcut_for_search()函数返回搜索引擎模式，<strong>该模式首先执行精确模式，然后再对其中的长词进一步切分获得结果。</strong></p>
+<p>（4）默认情况下，上述表格中的6个分词函数可以较高概率识别自定义的新词，例如名字或缩写。而对于无法识别的分词，也可以通过jieba.add_word()函数向分词库添加，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; jieba.lcut(&quot;嵩天老师在努力教学Python语言&quot;)
+[&#39;嵩天&#39;, &#39;老师&#39;, &#39;在&#39;, &#39;努力&#39;, &#39;教学&#39;, &#39;Python&#39;, &#39;语言&#39;]
+&gt;&gt;&gt; jieba.lcut(&quot;习大大期盼有更好的教育&quot;)
+[&#39;习&#39;, &#39;大大&#39;, &#39;期盼&#39;, &#39;有&#39;, &#39;更好&#39;, &#39;的&#39;, &#39;教育&#39;]
+&gt;&gt;&gt; jieba.add_word(&quot;习大大&quot;)
+&gt;&gt;&gt; jieba.lcut(&quot;习大大期盼有更好的教育&quot;)
+[&#39;习大大&#39;, &#39;期盼&#39;, &#39;有&#39;, &#39;更好&#39;, &#39;的&#39;, &#39;教育&#39;]</code></pre>
+<p>拓展：<strong>第三方库</strong></p>
+<ul>
+<li>Python语言的第三方库指不在Python安装包中的函数库，也是非标准函数库，这类函数库一般由全球各领域专业人士结合专业特点和兴趣开发。</li>
+<li>Python语言构建了一个开放和自由的生态环境，随着Python语言的发展，一些稳定的第三方库不断被加入标准库。</li>
+</ul>
+<h2 id="文本词频统计"><a href="#文本词频统计" class="headerlink" title="文本词频统计"></a>文本词频统计</h2><p>词频统计只是累加问题，可用字典来解决。以词语为键，计数器为值，构成&lt;单词&gt;:&lt;出现次数&gt;的键值对即可。</p>
+<h3 id="Hamlet-《哈姆雷特》英文词频统计"><a href="#Hamlet-《哈姆雷特》英文词频统计" class="headerlink" title="Hamlet-《哈姆雷特》英文词频统计"></a>Hamlet-《哈姆雷特》英文词频统计</h3><p>（1）统计英文词频的第一步：<strong>分解并提取英文文章的单词。</strong>，同一个单词会存在大小写不同形式，但计数却不能区分大小写。假设Hamlet文本由变量txt表示，</p>
+<ul>
+<li><strong>可以通过txt.lower()函数将字母变成小写，</strong>排除原文大小写差异对词频统计的干扰。</li>
+<li>英文单词的分隔可以是空格、标点符号或者特殊符号。<strong>可以将各特殊字符和标点符号使用txt.replace()方法替换成空格，再提取单词。</strong></li>
+</ul>
+<p>（2）统计词频的第二步：对每个单词进行计数。假设将单词保存在变量word中，使用一个字典类型counts={}，统计单词出现的次数可采用如下代码：</p>
+<pre><code class="python">counts[word] = counts[word] + 1</code></pre>
+<ul>
+<li>当遇到一个新词时，单词没有出现在字典结构中，则需要再字典中新建键值对：</li>
+</ul>
+<pre><code class="python">counts[new_word] = 1</code></pre>
+<ul>
+<li>因此，无论词是否在字典中，加入字典counts中的处理逻辑可以统一表示如下：</li>
+</ul>
+<pre><code class="python">if word in counts:
+    counts[word] = counts[word] + 1
+else:
+    counts[word] = 1
+
+#或者，这个处理逻辑可以更简洁地表示如下代码：
+counts[word] = counts.get(word,0) + 1    
+#若word在counts中,则返回word对应的值，若word不再counts中，则默认返回0</code></pre>
+<p>（3）统计词频的第三步：对单词的统计值从高到低进行排序，输出前20个高频单词，并格式化打印输出。由于字典类型没有顺序，需要将其转换为有顺序的列表类型，再使用<strong>sort()方法和lambda函数配合实现根据单词出现的次数对元素进行排序。</strong>最后输出排序前10位的单词。</p>
+<pre><code class="python">items = list(counts.items())     #将字典转换为记录列表
+items.sort(key=lambda x:x[1], reverse=True)    #指定记录第2列排序 ，降序排序
+&#39;&#39;&#39;
+sort() 函数用于对原列表进行排序，如果指定参数，则使用比较函数指定的比较函数。
+list.sort( key=None, reverse=False)
+reverse = True 降序， reverse = False 升序（默认）。
+&#39;&#39;&#39;
+
+&#39;&#39;&#39;匿名函数
+&lt;函数名&gt; = lambda &lt;参数列表&gt;： &lt;表达式&gt;
+等价于：
+def &lt;函数名&gt;(&lt;参数列表&gt;)：
+   #return &lt;表达式&gt;
+&#39;&#39;&#39;</code></pre>
+<ul>
+<li>采用函数对获取和整理文本进行封装，以下是完整代码：</li>
+</ul>
+<pre><code class="python">def getText():
+    txt = open(&quot;hamlet.txt&quot;, &quot;r&quot;).read()
+    txt = txt.lower()
+    for ch in &#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#39;:
+        txt = txt.replace(ch, &quot; &quot;)  #将文本中的特殊字符替换为空格
+    return txt
+hamletTxt = getText()
+words = hamletTxt.split()           #默认以空格对文本分片
+counts = &#123;&#125;
+for word in words:
+    counts[word] = counts.get(word,0) + 1
+items = list(counts.items())
+#print(items)
+items.sort(key=lambda x:x[1], reverse=True)
+for i in range(10):
+    word, count = items[i]
+    print(&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count)) #0代表word,&lt;表示向左对齐；1代表count,&gt;表示向右对齐，默认采用空格填充。
+
+#运行结果如下：
+the        1138
+and         965
+to          754
+of          669
+you         550
+i           542
+a           542
+my          514
+hamlet      462
+in          436</code></pre>
+<ul>
+<li>观察输出结果可知，高频单词大多数是冠词、代词、连接词等语法型词汇，并不能代表文章含义。因此，需要采用<strong>集合类型构建一个排除词汇库excludes</strong>，在输出结果中排除这个词汇库中的内容，具备这样功能程序的完整代码如下：</li>
+</ul>
+<pre><code class="python">excludes = &#123;&quot;the&quot;,&quot;and&quot;,&quot;of&quot;,&quot;you&quot;,&quot;a&quot;,&quot;i&quot;,&quot;my&quot;,&quot;in&quot;&#125;
+def getText():
+    txt = open(&quot;hamlet.txt&quot;, &quot;r&quot;).read()
+    txt = txt.lower()
+    for ch in &#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#39;:
+        txt = txt.replace(ch, &quot; &quot;)
+    return txt
+hamletTxt = getText()
+words = hamletTxt.split()
+counts = &#123;&#125;
+for word in words:
+    counts[word] = counts.get(word,0) + 1
+for word in excludes:
+    del(counts[word])
+items = list(counts.items())
+items.sort(key=lambda x:x[1], reverse=True)
+#print(items)
+for i in range(10):
+    word, count = items[i]
+    print(&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
+
+#运行结果如下：
+&gt;&gt;&gt;
+to          754
+hamlet      462
+it          416
+that        391
+is          340
+not         314
+lord        309
+his         296
+this        295
+but         269
+#可通过继续增加excludes中的内容，以排除更多的词汇。</code></pre>
+<h3 id="《三国演义》人物出场统计"><a href="#《三国演义》人物出场统计" class="headerlink" title="《三国演义》人物出场统计"></a>《三国演义》人物出场统计</h3><p>（1）中文文章需要用到jieba库才能进行词频统计，代码如下：</p>
+<pre><code class="python">import jieba
+txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
+words = jieba.lcut(txt)
+counts = &#123;&#125;
+for word in words:
+    if len(word) == 1 :
+        continue
+    else:
+        counts[word] = counts.get(word,0) + 1
+items = list(counts.items())
+items.sort(key = lambda x:x[1], reverse=True)
+for i in range(15):
+    word,count=items[i]
+    print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
+
+#运行结果如下：
+&gt;&gt;&gt;
+曹操          939
+孔明          831
+将军          746
+却说          647
+玄德          570
+丞相          489
+关公          484
+二人          464
+不可          430
+荆州          413
+孔明曰         384
+玄德曰         383
+不能          381
+如此          375
+张飞          349</code></pre>
+<ul>
+<li>增加排除词库exclude</li>
+</ul>
+<pre><code class="python">import jieba
+excludes = &#123;&quot;将军&quot;,&quot;却说&quot;,&quot;荆州&quot;,&quot;二人&quot;,&quot;不可&quot;,&quot;不能&quot;,&quot;如此&quot;&#125;
+txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
+words = jieba.lcut(txt)
+counts = &#123;&#125;
+for word in words:
+    if len(word) == 1 :
+        continue
+    elif word==&quot;诸葛亮&quot; or word== &quot;孔明曰&quot;:
+        rword = &quot;孔明&quot;
+    elif word==&quot;关公&quot; or word==&quot;云长&quot;:
+        rword = &quot;关羽&quot;
+    elif word == &quot;玄德&quot; or word == &quot;玄德曰&quot;:
+        rword = &quot;刘备&quot;
+    elif word ==&quot;孟德&quot; or word == &quot;丞相&quot;:
+        rword = &quot;曹操&quot;
+    else:
+        rword = word
+    counts[rword] = counts.get(rword,0) + 1
+for word in excludes:
+    del(counts[word])
+items = list(counts.items())
+items.sort(key = lambda x:x[1], reverse=True)
+for i in range(5):
+    word,count=items[i]
+    print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
+
+#运行结果
+&gt;&gt;&gt;
+曹操         1435
+孔明         1378
+刘备         1225
+关羽          753
+张飞          349</code></pre>
+<h2 id="Python之禅"><a href="#Python之禅" class="headerlink" title="Python之禅"></a>Python之禅</h2><p>（1）Python编译器以函数库的形式内置了一个有趣的文件，被称为“Python之禅”（The Zen of Python）。当调用如下一行语句后，会出现一段有趣的结果。</p>
+<pre><code class="python">import this
+
+#运行结果
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&#39;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you&#39;re Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it&#39;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let&#39;s do more of those!</code></pre>
+<p>（2）在Python安装目录中找到Lib/this.py文件，该程序内容如下：</p>
+<pre><code class="python">s = &quot;&quot;&quot;Gur Mra bs Clguba, ol Gvz Crgref
+
+Ornhgvshy vf orggre guna htyl.
+Rkcyvpvg vf orggre guna vzcyvpvg.
+Fvzcyr vf orggre guna pbzcyrk.
+Pbzcyrk vf orggre guna pbzcyvpngrq.
+Syng vf orggre guna arfgrq.
+Fcnefr vf orggre guna qrafr.
+Ernqnovyvgl pbhagf.
+Fcrpvny pnfrf nera&#39;g fcrpvny rabhtu gb oernx gur ehyrf.
+Nygubhtu cenpgvpnyvgl orngf chevgl.
+Reebef fubhyq arire cnff fvyragyl.
+Hayrff rkcyvpvgyl fvyraprq.
+Va gur snpr bs nzovthvgl, ershfr gur grzcgngvba gb thrff.
+Gurer fubhyq or bar-- naq cersrenoyl bayl bar --boivbhf jnl gb qb vg.
+Nygubhtu gung jnl znl abg or boivbhf ng svefg hayrff lbh&#39;er Qhgpu.
+Abj vf orggre guna arire.
+Nygubhtu arire vf bsgra orggre guna *evtug* abj.
+Vs gur vzcyrzragngvba vf uneq gb rkcynva, vg&#39;f n onq vqrn.
+Vs gur vzcyrzragngvba vf rnfl gb rkcynva, vg znl or n tbbq vqrn.
+Anzrfcnprf ner bar ubaxvat terng vqrn -- yrg&#39;f qb zber bs gubfr!&quot;&quot;&quot;
+
+d = &#123;&#125;
+for c in (65, 97):
+    for i in range(26):
+        d[chr(i+c)] = chr((i+13) % 26 + c)
+
+print(&quot;&quot;.join([d.get(c, c) for c in s]))
+
+
+&#39;&#39;&#39;
+最后一行代码
+首先是一个循环for c in s，这个就是变量输入的字符串；
+然后d.get(c,c) for c in s，对于每一个c，从d里面获取对应的value；
+最后&quot;&quot;.join把上面的结果拼接成一个字符串。
+等价于如下：
+tmp = []
+for c in s:
+    tmp.append(d.get(c, c))
+print &quot;&quot;.join(tmp)
+&#39;&#39;&#39;</code></pre>
+<p>（3)该程序从第1行到第21行是一个字符串s，但该字符串并非明文。将s转换成明文的代码是从23行到28行。</p>
+<ul>
+<li>第23行定义了一个空字典。</li>
+<li>第26行对字典d填充了内容，这个填充<strong>将i+c对应的字符替换为(i+13)%26+c，即将编号循环增加了13。</strong></li>
+<li>chr(65)代表字符’A’，chr(97)代表字符’a’，因此，第23到第26行建立了字母a到z和字母A到Z的一个13位循环移动的对应表。</li>
+</ul>
+<p>密文： A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+<p>原文： N O P Q R S T U V W X Y Z A B C D E F G H I J K L M</p>
+<p>密文： a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+<p>原文： n o p q r s t u v w x y z a b c d e f g h i j k l m </p>
+<p>（4）该算法可看作是凯撒密码的一种扩展，相比凯撒密码，这个算法采用循环移动13个位置，直接好处是原文和密文之间的相互转换可以使用同一个程序。</p>
+
       
 
       
@@ -1914,7 +2246,7 @@ i++;
 <li>通过标签名找到HTML元素</li>
 <li>通过类名找到HTML元素</li>
 </ul>
-<p>（4）DOM可以获取浏览器的cookie。在浏览器中使用快捷键F12进入控制台(console)，输入document.cookie就能获取浏览器的cookie。</p>
+<p>（4）DOM可以获取网站的cookie。在浏览器中使用快捷键F12进入控制台(console)，输入document.cookie就能获取当前网站的cookie。</p>
 <p><img src="https://i.loli.net/2021/03/16/acUeO5FTR7PVQX8.png" alt="image-20210316181503816"></p>
 <p>（5）DOM可以获取URL的数据，在控制台输入window.location就可获取到浏览器的URL数据</p>
 <p><img src="https://i.loli.net/2021/03/16/PhWa3QA9vnIHszN.png" alt="image-20210316181801514"></p>
@@ -1940,9 +2272,9 @@ i++;
     &lt;title&gt;Document&lt;/title&gt;
     &lt;script&gt;
         function test()&#123;
-            document.getElementById(&quot;1&quot;).value=&quot;文本文档1&quot;; //找到id对应的标签后再用value方法修改改标签的值。
-            document.getElementById(&quot;2&quot;).value=&quot;文本文档2&quot;;
-            document.getElementById(&quot;3&quot;).href=&quot;http://www.goktech.cn&quot;;//找到id对应的标签后用href方法修改原a标签的值。
+            document.getElementsById(&quot;1&quot;).value=&quot;文本文档1&quot;; //找到id对应的标签后再用value方法修改改标签的值。
+            document.getElementsById(&quot;2&quot;).value=&quot;文本文档2&quot;;
+            document.getElementsById(&quot;3&quot;).href=&quot;http://www.goktech.cn&quot;;//找到id对应的标签后用href方法修改原a标签的值。
         &#125;
     &lt;/script&gt;
 &lt;/head&gt;
@@ -1967,7 +2299,7 @@ i++;
         &lt;h1&gt;welcome to gok!&lt;/h1&gt;
         &lt;h1&gt;Javascript DOM&lt;/h1&gt;
         &lt;script&gt;
-            var b=document.getElementByTagName(&quot;h1&quot;);
+            var b=document.getElementsByTagName(&quot;h1&quot;);
             document.write(&quot;这是基于TagName抓取到的内容：&quot;+b[0].innerHTML);
         &lt;/script&gt;
     &lt;/body&gt;
@@ -1986,8 +2318,8 @@ i++;
         &lt;/div&gt;
 
         &lt;script&gt;
-            var a=document.getElementById(&quot;demo&quot;);
-            var b=document.getElementByTagName(&quot;h1&quot;);
+            var a=document.getElementsById(&quot;demo&quot;);
+            var b=document.getElementsByTagName(&quot;h1&quot;);
             document.write(&quot;这是基于Div抓取到的内容：&quot;+b[0].innerHTML);
         &lt;/script&gt;
     &lt;/body&gt;
@@ -2015,7 +2347,7 @@ i++;
 &lt;/html&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/16/BwrX6UfFc4VMtxq.png" alt="image-20210316224229904"></p>
 <p><img src="https://i.loli.net/2021/03/16/suMivCgGxBAjZFD.png" alt="image-20210316224252251"></p>
-<h3 id="BOM-window-close"><a href="#BOM-window-close" class="headerlink" title="BOM-window.close"></a>BOM-window.close</h3><p>window.close()实现的功能是关闭当前窗口，在本例中预先设置执行代码后会弹出一个新窗口，当点击设置的按钮后，此新窗口会被关闭，代码及现象如图：</p>
+<h3 id="BOM-window-close"><a href="#BOM-window-close" class="headerlink" title="BOM-window.close"></a>BOM-window.close</h3><p>window.close()实现的功能是<strong>关闭当前窗口</strong>，在本例中预先设置执行代码后会弹出一个新窗口，当点击设置的按钮后，此新窗口会被关闭，代码及现象如图：</p>
 <pre><code class="html">&lt;html&gt;
     &lt;head&gt;
         &lt;script type=&quot;text/javascript&quot;&gt;
@@ -2033,7 +2365,8 @@ i++;
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/17/PfxMvwjTXaOmSqb.png" alt="image-20210317145808454"></p>
-<h3 id="Bom-window-location-href"><a href="#Bom-window-location-href" class="headerlink" title="Bom-window.location.href"></a>Bom-window.location.href</h3><p>window.location.href()实现的功能是页面跳转，利用window.location.href()设置一个想要跳转的页面，当执行代码时就会跳转到相应的位置，代码及现象如下：</p>
+<h3 id="Bom-window-location-href"><a href="#Bom-window-location-href" class="headerlink" title="Bom-window.location.href"></a>Bom-window.location.href</h3><p>（1）window.location可以查看当前网页的属性。</p>
+<p>（2）window.location.href()是修改当前网页的href属性，实现的功能是页面跳转，利用window.location.href()设置一个想要跳转的页面，当执行代码时就会跳转到相应的位置，代码及现象如下：</p>
 <pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2082,11 +2415,19 @@ i++;
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/17/3GV4TCYS8IwcXoz.png" alt="image-20210317152036718"></p>
+<p>扩展：jQuery是一个JavaScript库，极大简化了JavaScript。</p>
+<pre><code>&lt;script src=&quot;jquery-3.4.1.js&quot;&gt;&lt;/script&gt;
+function Jquery_Test()&#123;
+    $(&quot;p&quot;)    //定位到p标签
+    $(&quot;#p1&quot;).html(&quot;test&quot;)   //找到到id为p1的元素，给它添加元素
+    $(&quot;#input1&quot;).val(&quot;123&quot;)
+&#125;</code></pre>
 <h2 id="AJAX的基本语法及应用"><a href="#AJAX的基本语法及应用" class="headerlink" title="AJAX的基本语法及应用"></a>AJAX的基本语法及应用</h2><p>（1）AJAX=Asynchronous JavScript and XML（异步的JavaScript和XML）</p>
 <p>（2）AJAX是一种用于创建快速动态网页的技术。AJAX不是一种新的语言，而是一种新的标准方法；</p>
 <p>（3）传统的网页（不使用AJAX）如果需要更新内容，必须重载整个网页面。AJAX技术通过在后台与服务器进行少量数据交换，AJAX可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
 <p>（4）使用AJAX的应用程序案例：新浪微博、Google地图、开心网等等。</p>
-<h3 id="AJAX请求方法"><a href="#AJAX请求方法" class="headerlink" title="AJAX请求方法"></a>AJAX请求方法</h3><p>如需将请求发送到服务器，使用XMLHttpRequest对象的open()和send()方法；</p>
+<p>HTML – AJAX – 访问服务器的某个页面 – 数据库</p>
+<h3 id="AJAX请求方法"><a href="#AJAX请求方法" class="headerlink" title="AJAX请求方法"></a>AJAX请求方法</h3><p>如需将请求发送到服务器，使用XMLHttpRequest类的open()和send()方法；</p>
 <pre><code class="javascript">xmlhttp.open(&quot;GET&quot;,&quot;test1.txt&quot;,true);
 xmlhttp.sen();</code></pre>
 <table>
@@ -2102,7 +2443,9 @@ xmlhttp.sen();</code></pre>
 </tr>
 </tbody></table>
 <h3 id="请求实现-get请求"><a href="#请求实现-get请求" class="headerlink" title="请求实现-get请求"></a>请求实现-get请求</h3><p>（1）一个简单的GET请求：</p>
-<pre><code>xmlhttp.open(&quot;GET&quot;,&quot;demo_get.asp&quot;,true);
+<pre><code>var xmlthhp = new XMLHttpRequest   //创建的xmlthhp是XMLHttpRequest类的对象
+
+xmlhttp.open(&quot;GET&quot;,&quot;demo_get.asp&quot;,true);
 xmlhttp.send();</code></pre>
 <p>（2）通过GET方法发送信息，请向URL添加信息：</p>
 <pre><code>xmlhttp.open(&quot;GET&quot;,&quot;demo_get2.asp?fname=Bill&amp;lname=Gates&quot;,true);
@@ -2492,8 +2835,8 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
 <td align="center">定义文档与外部资源的关系</td>
 </tr>
 </tbody></table>
-<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;demo.css&quot;/&gt;
-&lt;!-- 在编写HTML代码时，可用用link标签引入css文件。href表示css文件的存放位置，URL。若HTML文件和css文件在同一个目录下，href值如上 --&gt;</code></pre>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;demo.css&quot; target=&quot;_blank&quot;/&gt;
+&lt;!-- 在编写HTML代码时，可用用link标签引入css文件。href表示css文件的存放位置，URL。若HTML文件和css文件在同一个目录下，href值如上.target=&quot;_blank&quot;表示打开一个新窗口，值为_self为打开当前窗口 --&gt;</code></pre>
 <p>（5）格式标签</p>
 <table>
 <thead>
