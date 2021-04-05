@@ -152,6 +152,397 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-kali/kali中的文件-目录操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">kali中的文件/目录操作</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  	<time datetime="2020-11-16T07:04:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="文件操作常见命令"><a href="#文件操作常见命令" class="headerlink" title="文件操作常见命令"></a>文件操作常见命令</h2><p>以下内容都是基于kali2020.1版本的，在此列出命令的一些常见使用参数及用法，若要获取详细的使用方法，在命令后面加上 –help即可查看，或者使用man也可查看命令的帮助文档</p>
+<pre><code>命令 --help
+man 命令</code></pre>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><pre><code>cd dir             //进入一个目录dir
+cd .               //验证&quot;.&quot;代表当前目录
+cd ..              //进入当前目录的上一级（cd ../.. 进入当前目录的上两级目录）
+cd -               //返回进入此目录之前所在的目录</code></pre>
+<p><img src="https://i.loli.net/2020/11/17/QOJ7eMRVEADYHPC.png" alt="image-20201117193550828"></p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>显示当前所在的工作目录</p>
+<p><img src="https://i.loli.net/2020/11/17/ASpWwGgIdYsPHbq.png" alt="image-20201117193616793"></p>
+<h3 id="ls-参数-对象-显示目录中的文件"><a href="#ls-参数-对象-显示目录中的文件" class="headerlink" title="ls [参数] [对象]       显示目录中的文件"></a>ls [参数] [对象]       显示目录中的文件</h3><pre><code>-a               //显示所有文件（包含隐藏文件）
+-l               //显示文件或目录的详细信息
+-lh              //将文件大小以K为单位显示
+-i               //显示文件或目录的indoes</code></pre>
+<p>这里直接使用’ll’命令，其效果和’ls -l’一样，但初次使用’ll’会报错，系统会提示未找到该命令。</p>
+<p>解决方法：</p>
+<p>（1）编辑以下文档</p>
+<pre><code>vim ~/.bashrc     //进入编辑模式</code></pre>
+<p>（2）将alias ll=’ls -l‘前面的注释符号#删掉，保存并退出编辑</p>
+<p>（3）重启即可</p>
+<p><img src="https://i.loli.net/2020/11/17/ewixY9GIWPm8qLX.png" alt="image-20201117200316254"></p>
+<h3 id="touch，vi-创建文件"><a href="#touch，vi-创建文件" class="headerlink" title="touch，vi     创建文件"></a>touch，vi     创建文件</h3><pre><code>touch file            //立即生成文件，若文件存在，则更新文件的时间戳
+vi file               //必须要保存才能生成相应的文件</code></pre>
+<h3 id="mkdir-dir-创建目录"><a href="#mkdir-dir-创建目录" class="headerlink" title="mkdir  dir    创建目录"></a>mkdir  dir    创建目录</h3><h3 id="rmdir-删除空目录"><a href="#rmdir-删除空目录" class="headerlink" title="rmdir            删除空目录"></a>rmdir            删除空目录</h3><pre><code>rmdir dir           //只能删除空目录</code></pre>
+<p>若要删除非空目录：</p>
+<pre><code>rm -rf dir</code></pre>
+<h3 id="cp-参数-sou-dst-复制文件或目录"><a href="#cp-参数-sou-dst-复制文件或目录" class="headerlink" title="cp [参数] sou dst     复制文件或目录"></a>cp [参数] sou dst     复制文件或目录</h3><pre><code>cp file1 file2 /dir          //若sou为文件，dst为目录，则可复制多个文件到该目录，但要加上目录所在路径
+cp file1 file2               //若sou和dst均为文件，则将file1的内容复制到file2中
+cp -r dir1 dir2              //若sou和dst均为目录，则将dir2复制到dir1中，需要加上参数-r  </code></pre>
+<h3 id="mv-sou-dst-重命名、移动文件"><a href="#mv-sou-dst-重命名、移动文件" class="headerlink" title="mv sou dst      重命名、移动文件"></a>mv sou dst      重命名、移动文件</h3><pre><code>mv file1 file2             //若sou和dst均为文件，则将file1重命名为file2
+mv file dir                //若sou为文件，dst为目录，则将file移动到目录dir中，且可以移动多个文件</code></pre>
+<h3 id="rm-参数-删除文件或目录"><a href="#rm-参数-删除文件或目录" class="headerlink" title="rm [参数]         删除文件或目录"></a>rm [参数]         删除文件或目录</h3><pre><code>-i                 //删除之前系统会进行一次确认
+-r                 //递归删除，用于删除目录
+-f                 //强制删除，没有提示和确认</code></pre>
+<h3 id="file"><a href="#file" class="headerlink" title="file"></a>file</h3><pre><code>file file_name     //显示文件类型等基本信息</code></pre>
+<h3 id="ln-s-target-link-name-建立文件或目录链接"><a href="#ln-s-target-link-name-建立文件或目录链接" class="headerlink" title="ln [-s] target link_name         建立文件或目录链接"></a>ln [-s] target link_name         建立文件或目录链接</h3><p>（1）target最好指定为绝对路径，可使用pwd命令快速地获取路径，在后面加上需要链接的文件或目录即可</p>
+<p>（2）建立的链接相当于windows中的快捷方式，但和target文件有不同的inodes。</p>
+<p><img src="https://i.loli.net/2020/11/17/eIcms43GCbuO9YZ.png" alt="image-20201117210654615"></p>
+<p><img src="https://i.loli.net/2020/11/17/L7PSbIX1kYcOMEH.png" alt="image-20201117210722443"></p>
+<h3 id="find-path-expr-在路径path中查找符合表达式expr的文件"><a href="#find-path-expr-在路径path中查找符合表达式expr的文件" class="headerlink" title="find [path] [expr]              在路径path中查找符合表达式expr的文件"></a>find [path] [expr]              在路径path中查找符合表达式expr的文件</h3><p>（1）以下为表达式内容</p>
+<pre><code>-name flag         //查找文件名符合flag的文件，-iname忽略大小写
+-empty             //查找空文件
+-user root         //查找在系统中属于root这个用户的文件
+-group root        //查找在系统中属于root这个组的文件
+-amin -n           //查找系统中最后n分钟被访问的文件
+-atime -n          //查找系统中最后n天被访问的文件</code></pre>
+<p>（2）查找相关文件，并执行相关命令</p>
+<pre><code>//将查找到的文件执行command操作
+-exc command &#123;&#125; \;          
+| xargs command
+
+eg:
+//删除查找到的文件名符合flag的文件
+find / -name flag -exec rm -rf &#123;&#125; \;         
+find / -name flag | xargs rm -rf</code></pre>
+<p>{}表示find搜索出来的每个文件</p>
+<p>{}和\之间有空格，命令的结尾必须是”;“不要忘记最后的分号</p>
+<p>“|”为管道符，即把前一个命令的输出作为后一个命令的输入</p>
+<h2 id="压缩，解压缩命令"><a href="#压缩，解压缩命令" class="headerlink" title="压缩，解压缩命令"></a>压缩，解压缩命令</h2><h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><pre><code>tar cvf file.tar dir    //打包目录中的文件，后面也可跟多个文件
+tar xvf file.tar        //解包
+#tar是打包，不是压缩</code></pre>
+<h3 id="gz"><a href="#gz" class="headerlink" title=".gz"></a>.gz</h3><pre><code>gzip file           //压缩
+gunzip file.gz      //解压
+gzip -d file.gz     //解压</code></pre>
+<h3 id="tar-gz"><a href="#tar-gz" class="headerlink" title=".tar.gz"></a>.tar.gz</h3><pre><code>tar zcvf file.tar.gz dir //压缩
+tar zxvf file.tar.gz     //解压</code></pre>
+<h3 id="bz2"><a href="#bz2" class="headerlink" title=".bz2"></a>.bz2</h3><pre><code>bzip2 (-z) file      //压缩，有无参数z都可
+bunzip2 file.bz2     //解压
+bzip2 -d file.bz2    //解压</code></pre>
+<h3 id="tar-bz2"><a href="#tar-bz2" class="headerlink" title=".tar.bz2"></a>.tar.bz2</h3><pre><code>tar jcvf file.tar.bz2 dir   //压缩
+tar jxvf file.tar.bz2       //解压</code></pre>
+<h3 id="zip"><a href="#zip" class="headerlink" title=".zip"></a>.zip</h3><pre><code>zip file.zip file/dir     //压缩文件或目录
+unzip file.zip            //解压</code></pre>
+<h3 id="tgz"><a href="#tgz" class="headerlink" title=".tgz"></a>.tgz</h3><pre><code>tar zcvf file.tar.tgz file1 file2   //压缩
+tar zxvf file.tar.tgz      //解压</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali/kali下root用户的配色问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">kali下root用户的配色问题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-11-15T15:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc</p>
+<pre><code class="javascript">vim /root/.bashrc</code></pre>
+<p>（2）粘贴内容如下：</p>
+<pre><code class="javascript"># set variable identifying the chroot you work in (used in the prompt below)
+if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&amp; [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we &quot;want&quot; color)
+case &quot;$TERM&quot; in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n &quot;$force_color_prompt&quot; ]; then
+    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
+    # We have color support; assume it&#39;s compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;
+else
+    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#39;
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case &quot;$TERM&quot; in
+xterm*|rxvt*)
+    PS1=&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/.dircolors)&quot; || eval &quot;$(dircolors -b)&quot;
+    alias ls=&#39;ls --color=auto&#39;
+    #alias dir=&#39;dir --color=auto&#39;
+    #alias vdir=&#39;vdir --color=auto&#39;
+
+    #alias grep=&#39;grep --color=auto&#39;
+    #alias fgrep=&#39;fgrep --color=auto&#39;
+    #alias egrep=&#39;egrep --color=auto&#39;
+fi
+
+# some more ls aliases
+#alias ll=&#39;ls -l&#39;
+#alias la=&#39;ls -A&#39;
+#alias l=&#39;ls -CF&#39;
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don&#39;t need to enable
+# this, if it&#39;s already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi</code></pre>
+<p>（3）执行命令source /root/.bashrc即可</p>
+<pre><code class="javascript">source /root/.bashrc</code></pre>
+<p>（4）配置前：</p>
+<p><img src="https://i.loli.net/2020/11/15/kmhGaFQ2cq5uB7O.png" alt="image-20201115235207538"></p>
+<p>（5）配置后：</p>
+<p><img src="https://i.loli.net/2020/11/15/QBd9eWJRlyckqts.png" alt="image-20201115235233882"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali/安装kali后修改系统时间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">安装kali后修改系统时间</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/" class="archive-article-date">
+  	<time datetime="2020-11-15T15:25:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（1）tzselect命令执行</p>
+<pre><code>tzselect</code></pre>
+<p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p>
+<p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p>
+<p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
+<p>（3）修改配置文件，修改时区，输入以下命令</p>
+<pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
+rm -f /etc/localtime             
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime    //链接到上海时区文件  </code></pre>
+<p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-BugkuCTF/BugkuCTF_Misc-006" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -932,443 +1323,9 @@ echo &quot;$a $hello&quot;;
 
 
   
-    <article id="post-XCTF/XCTF_Misc-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Misc-004/">XCTF_Misc_004</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/XCTF_Misc-004/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:48:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h2><p>（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。<br><img src="https://i.loli.net/2020/11/15/l9KHhroMWP7OiYN.png" alt="在这里插入图片描述"><br>（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag<br><img src="https://i.loli.net/2020/11/15/KQ4ziVuqCkgvbwj.png" alt="在这里插入图片描述"><br><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"><br>（3）在kaili中用strings命令找到flag</p>
-<pre><code>strings misc_02.pcapng | grep flag</code></pre>
-<p><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"></p>
-<h2 id="MISCall"><a href="#MISCall" class="headerlink" title="MISCall"></a>MISCall</h2><p>（1）下载附件，得到一个没有后缀名的文件，放到kali中binwalk一下，发现是一个bzip2类型的压缩包，为了方便，重命名一下，改为1.bzip2</p>
-<p><img src="https://i.loli.net/2020/11/15/pMuYPblFTah97om.png" alt="image-20201115185454990"></p>
-<p>（2）解压</p>
-<pre><code>tar xvf 1.bzip2</code></pre>
-<p><img src="https://i.loli.net/2020/11/15/S3n7zFvPRj6dhit.png" alt="image-20201115190744053"></p>
-<p>（3）发现了一个flag.txt和.git文件夹，但flag.txt中没有flag。利用.git目录，git stash进行恢复以前修改/删除的文件。查看git 记录，给出了一个最近上传的文件，但这个文件并不存在</p>
-<pre><code>git log  //查看git记录</code></pre>
-<p><img src="https://i.loli.net/2020/11/15/5IsbF7Vqx1W8aQy.png" alt="image-20201115220941620"></p>
-<p>（4）查看修改列表，存储列表中有一条记录</p>
-<pre><code>git stash list   //查看修改列表</code></pre>
-<p><img src="https://i.loli.net/2020/11/15/Zj3pUFvGExP9o6R.png" alt="image-20201115221415569"></p>
-<p>（5）校验列表中的存储文件</p>
-<p><img src="https://i.loli.net/2020/11/15/GE9BMlFo1pnQqv2.png" alt="image-20201115221608681"></p>
-<p>（6）恢复上面的文件，直接执行 git stash apply 时，会提示文件覆盖自动终止，可以先把原来的flag.txt删除再执行</p>
-<pre><code>git stash apply   //恢复文件</code></pre>
-<p><img src="https://i.loli.net/2020/11/15/QDfqhwAg72E1UIM.png" alt="image-20201115222553488"></p>
-<p>（7）运行s.py得到flag</p>
-<pre><code>python s.py</code></pre>
-<h2 id="Get-the-key-txt"><a href="#Get-the-key-txt" class="headerlink" title="Get-the-key.txt"></a>Get-the-key.txt</h2><p>（1）下载附件，得到一个压缩包，解压后是一个没有后缀名的文件，放到kali中binwalk一下查看文件类型，也可使用file命令</p>
-<pre><code>file fileName</code></pre>
-<p><img src="https://i.loli.net/2020/11/16/zsJpYd4Vtui18rM.png" alt="image-20201116162315709"></p>
-<p>（2）发现是Linux的文件系统数据，在/tmp下创建forensic文件夹，并将文件挂载到该目录下</p>
-<pre><code>mkdir /tmp/forensic
-mount -o loop forensic100 /tmp/forensic    //挂载</code></pre>
-<p>（3）进入新创建的目录下，发现大量文件</p>
-<p><img src="https://i.loli.net/2020/11/16/7S92HjkdNI3FWyJ.png" alt="image-20201116162837956"></p>
-<p>（4）根据题目提示 get-the-key.txt，使用如下命令进行文件匹配</p>
-<pre><code>grep -r key.txt</code></pre>
-<p><img src="https://i.loli.net/2020/11/16/Y54CSjGl1qNLPFz.png" alt="image-20201116163043401"></p>
-<p>（5)得到一个二进制的名为1的文件，查看其类型</p>
-<p><img src="https://i.loli.net/2020/11/16/FAKorPwyYfG5xWs.png" alt="image-20201116163215732"></p>
-<p>（6）是gzip压缩包，但用gunzip 1解压会出错，tar xvf 1也不行，最后使用gunzip &lt; 1得到flag：SECCON{@]NL7n+-s75FrET]vU=7Z}</p>
-<p>（7）还有一种方法，在得知1的类型为gzip压缩文件后，修改后缀，文件名改为1.gz，然后解压</p>
-<pre><code>gunzip 1.gz</code></pre>
-<p>（8）解压成功，依然得到一个名为1的文件，再次查看该文件类型</p>
-<pre><code>file 1</code></pre>
-<p><img src="https://i.loli.net/2020/11/16/HrIy7Ua2vbnmzD5.png" alt="image-20201116165042375"></p>
-<p>（9）是一个ASCII码的文件，用cat查看内容，得到flag</p>
-<p><img src="https://i.loli.net/2020/11/16/JVIY64MigQ9Hdsz.png" alt="image-20201116165159099"></p>
-<h2 id="就在其中"><a href="#就在其中" class="headerlink" title="就在其中"></a>就在其中</h2><p>（1）下载附件，得到一个流量包，用wireshark打开，搜索字符flag，但并没有任何信息</p>
-<p>（2）将该流量包放到kali中binwalk一下，查看是否存在隐藏文件</p>
-<p><img src="https://i.loli.net/2020/11/20/BHCYuVwWea1DPhn.png" alt="image-20201120202514449"></p>
-<p>（3）确实存在隐藏文件，用foremost工具分离文件，得到jpg、pdf、zip三个文件夹</p>
-<p><img src="https://i.loli.net/2020/11/20/Up1ZiB2VeNnJzuL.png" alt="image-20201120202620317"></p>
-<p>（4）其中jpg和pdf文件夹下并没有明显的flag信息，zip下有一个压缩包，加压后得到一个文档key.txt，但却是一串奇怪的字符</p>
-<p><img src="https://i.loli.net/2020/11/20/IjmJZKQ9RCN54ak.png" alt="image-20201120203033157"></p>
-<p>（5）再次打开流量包，搜索key字符</p>
-<p><img src="https://i.loli.net/2020/11/20/3EqQp7hHclIzkw5.png" alt="image-20201120204201790"></p>
-<p>（6）可以看到先进行tcp连接，再进行ftp传输，应该是一个在传输某些文档的流量包，flag信息应该和传输的文档有关，追踪tcp流，发现了RSA私钥</p>
-<p><img src="https://i.loli.net/2020/11/20/TYaGp3WhDRorI1M.png" alt="image-20201120205800250"></p>
-<p>（7）将这串字符全部复制到一个文本中，命名为rsa.key，放到kali中的openssl进行解密</p>
-<pre><code>openssl rsautl -decrypt -in key.txt -inkey rsa.key -out flag.txt
-// -in 为要解密的加密文档   -inkey  为密钥      -out  为输出文档</code></pre>
-<p><img src="https://i.loli.net/2020/11/20/wdJftIDXWbpjoxV.png" alt="image-20201120210306217"></p>
-<p>（8）查看flag.txt</p>
-<p><img src="https://i.loli.net/2020/11/20/k21zZ48GylfohpR.png" alt="image-20201120210509016"></p>
-<h2 id="Reverse-it"><a href="#Reverse-it" class="headerlink" title="Reverse-it"></a>Reverse-it</h2><p>（1）下载得到一个附件，用010 editor打开，但无法明显看出是什么类型的文件，再放到kali中binwalk一下，依然没有发现。</p>
-<p>（2）根据题目Reverse-it，逆向它，再仔细观察010 editor里的十六进制编码</p>
-<p><img src="https://i.loli.net/2020/11/22/MEG51FuCgRwp83r.png" alt="image-20201122164943736"></p>
-<p><img src="https://i.loli.net/2020/11/22/5jTNkhSzX46lYGr.png" alt="image-20201122165014259"></p>
-<p>（3）在文件头和文件尾发现了特殊的编码，联想jpg的图片格式，以FF D8开头，FF D9结尾。所以整个文件被倒过来了，需要再将其逆转回去。这里借助Python脚本。</p>
-<pre><code class="python">import os
-f = open(&#39;1&#39;,&quot;rb&quot;)#二进制形式打开
-f = f.read()[::-1]
-for i in f:
-    ans = str(hex(i))[2:][::-1]
-    if len(ans) == 1:
-        ans = ans + &#39;0&#39;
-    print(ans,end=&#39;&#39;)</code></pre>
-<p>（4）将得到的新文件保存并名为jpg格式，得到一张图片</p>
-<p><img src="https://i.loli.net/2020/11/22/mzhyvHuLsipbgt8.png" alt="image-20201122165457966"></p>
-<p>（5）可以看到是张翻转过的图片，这里可以使用windows下的画图工具将其水平翻转过来，也可以利用Python脚本。</p>
-<pre><code class="python">from PIL import Image
-im = Image.open(&quot;t.jpg&quot;)
-pim = im.load()
-an = Image.open(&quot;t.jpg&quot;)
-ans = an.load()
-for i in range(im.size[0]):
-    for j in range(im.size[1]):
-        ans[i, j] = pim[im.size[0]-i-1, j]
-an.show()</code></pre>
-<p><img src="https://i.loli.net/2020/11/22/fvH2PcDKqViZsFA.png" alt="image-20201122165652047"></p>
-<h2 id="打野"><a href="#打野" class="headerlink" title="打野"></a>打野</h2><p>（1）得到一张坤坤的bmp格式图片，放到kali中binwalk一下，并没有发现隐藏的文件。再用strings查看，同样没有得到flag的信息。最后使用kali中的zsteg工具，该工具可以检测png和bmp图片里的隐写数据。</p>
-<pre><code>zsteg &#39;文件路径&#39;
-zsteg /root/Desktop/CTF/XCTF/Misc/005/瞅啥.bmp</code></pre>
-<p><img src="https://i.loli.net/2020/11/23/K3pOT2NVXjUgEtd.png" alt="image-20201123204350799"></p>
-<p>（2）得到flag</p>
-<h2 id="倒立屋"><a href="#倒立屋" class="headerlink" title="倒立屋"></a>倒立屋</h2><p>（1）下载附件，得到一个png图片。放到kali下binwalk一下，发现存在zlib压缩数据</p>
-<p><img src="https://i.loli.net/2020/11/27/fWNTdMEnOlRx2cB.png" alt="image-20201127205100279"></p>
-<p>（2）用kali中的工具zsteg看看图片中的隐藏数据</p>
-<p><img src="https://i.loli.net/2020/11/27/bxRwAtQX8spzrKc.png" alt="image-20201127205231331"></p>
-<p>（3）得到字符IsCc_2019,但直接提交是错误的，根据题意，需要倒过来，所以就是flag{9102_cCsI}</p>
-<h2 id="2017-Dating-in-Singapore"><a href="#2017-Dating-in-Singapore" class="headerlink" title="2017_Dating_in_Singapore"></a>2017_Dating_in_Singapore</h2><p>（1）下载附件，得到一份PDF文件，是2017年新加坡的日历。再看看提示，由’-‘分隔了12串数字，联想到对应的12个月。</p>
-<p><img src="https://i.loli.net/2020/12/02/tF7KdViY8BfLwhj.png" alt="image-20201202180623816"></p>
-<p>（2）将上述12串字符放到一个文本文档中，并分类为12行。</p>
-<p><img src="https://i.loli.net/2020/12/02/DraloOHzsf5xWbG.png" alt="image-20201202180924011"></p>
-<p>（3）每串数字对应一个月的日期，将其分为两两一组。</p>
-<p><img src="https://i.loli.net/2020/12/02/4UzN7R6TObxAGec.png" alt="image-20201202181311182"></p>
-<p>（5）对比一开始得到的PDF文件，得到HITB{CTFFUN}</p>
-<p><img src="https://i.loli.net/2020/12/02/AfM5WVNdiwLzKt9.png" alt="image-20201202181507644"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Misc-004/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-XCTF/XCTF_Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Misc-003/">XCTF_Misc_003</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/XCTF_Misc-003/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="simple-transfer"><a href="#simple-transfer" class="headerlink" title="simple_transfer"></a>simple_transfer</h2><p>（1）下载附件，得到一个流量包，用wireshark打开，在搜索框输入tcp contains flag查找flag，并没有发现有用信息。<br><img src="https://img-blog.csdnimg.cn/20201104185840360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）放到kali下，用foremost分解，得到一个pdf文件，打开看到flag。<br><img src="https://img-blog.csdnimg.cn/20201104185953178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Hear-with-your-Eyes"><a href="#Hear-with-your-Eyes" class="headerlink" title="Hear-with-your-Eyes"></a>Hear-with-your-Eyes</h2><p>（1）下载附件，一个.gz文件，解压后是一个没有后缀名的文件，用notepad++打开，没有flag信息。直接用7-zip工具打开，发现了一个sound.wav音频文件。<br><img src="https://img-blog.csdnimg.cn/20201104193005337.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据提示“用眼睛看这段音频”，使用audacity工具打开这个wav文件，点击“sound”切换到频谱图，就能看到flag。<br>audacity官网下载地址：<a target="_blank" rel="noopener" href="https://www.audacityteam.org/">https://www.audacityteam.org/</a><br><img src="https://img-blog.csdnimg.cn/20201104194048622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Ditf"><a href="#Ditf" class="headerlink" title="Ditf"></a>Ditf</h2><p>（1）下载得到一张png图片，notepad++打开，没发现啥信息，修改下图片高度看看。<br><img src="https://img-blog.csdnimg.cn/20201105114640452.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201105120341660.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）发现一串字符StRe1izia，应该是一个密码，将图片放到kali下用foremost分解，得到一个压缩包，解压需要密码，输入该串字符，成功解压。</p>
-<p><img src="https://img-blog.csdnimg.cn/20201105120813523.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>。<br>（3）解压后得到一个Ditf.pcapng文件，用wireshark打开。Ctrl+F，选择字符串，搜索flag，无果。再搜索png，发现一个kiss.png。<br><img src="https://img-blog.csdnimg.cn/20201105123523762.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）追踪http流，发现一串特征明显的代码<br><img src="https://img-blog.csdnimg.cn/202011051236377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（5）用base64解码，得到flag。<br><img src="https://img-blog.csdnimg.cn/20201105123710874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="神奇的Modbus"><a href="#神奇的Modbus" class="headerlink" title="神奇的Modbus"></a>神奇的Modbus</h2><p>（1）用wireshark打开附件，根据题意，输入modbus过滤，并追踪tcp流，可发现flag。<br><img src="https://img-blog.csdnimg.cn/20201107144903770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/2020110714492428.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）提交flag时注意题目格式为sctf{xxx}，但提交sctf{Easy_Mdbus}错误，仔细观察，根据题目，应提交sctf{Easy_Modbus}，多加一个o</p>
-<h2 id="glance-50"><a href="#glance-50" class="headerlink" title="glance-50"></a>glance-50</h2><p>（1）附件是一张长条状的gif动图，很有可能就是分离gif的每一帧然后拼接形成图片得到flag。<br><img src="https://img-blog.csdnimg.cn/20201108120310683.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）将该图片放到kali里，用convert命令可以分解GIF图片</p>
-<pre><code>convert 9266eadf353d4ada94ededaeb96d0c50.gif flag.png</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20201108121130666.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201108120605449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）用convert分解出了200张图片，接下来就是图片的拼接。依旧使用kali下的工具montage。</p>
-<pre><code>montage flag*.png -tile x1 -geometry +0+0 flag.png
-//-tile是拼接时每行和每列的图片数，这里用x1，就是只一行
-//-geometry是首选每个图和边框尺寸，边框为0，图照原始尺寸即可</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20201108121230526.png#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201108121308124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（4）flag为TWCTF{Bliss by Charles O’Rear}</p>
-<h2 id="What-is-this"><a href="#What-is-this" class="headerlink" title="What-is-this"></a>What-is-this</h2><p>（1）得到一个.gz的压缩包，直接用7-zip工具打开，附件进行了两次压缩，最后得到两张类似的图片<br><img src="https://img-blog.csdnimg.cn/20201112194655132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20201112194718517.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）用stegsolve工具将两张图片合成一下，得到flag<br><img src="https://img-blog.csdnimg.cn/20201112194751259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="再见李华"><a href="#再见李华" class="headerlink" title="再见李华"></a>再见李华</h2><p>（1）下载附件得到一张图片，图上是md5的信息，但解密不出来。放到kali中binwalk一下，发现还有一个压缩包。用foremost分离文件，得到压缩包，但解压需要密码。<br><img src="https://img-blog.csdnimg.cn/20201114112042304.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题目提示，1000个字，署名，LiHua<br>猜测1000个字是4位，LiHua是密码的一部分，将这两个部分组合起来，用ARCHPR进行爆破<br><img src="https://img-blog.csdnimg.cn/20201114112209518.png#pic_center" alt="在这里插入图片描述"><br>（3）爆破时攻击类型选择“掩码”，并设置掩码“????LiHua”<br><img src="https://img-blog.csdnimg.cn/20201114112817329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）成功破解，得到密码15CCLiHua，解压后得到flag<br><img src="https://img-blog.csdnimg.cn/20201114112938259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Misc-003/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-XCTF/XCTF_Web-005" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Web-005/">XCTF_Web_005</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/XCTF_Web-005/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:40:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="NaNNaNNaNNaN-Batman"><a href="#NaNNaNNaNNaN-Batman" class="headerlink" title="NaNNaNNaNNaN-Batman"></a>NaNNaNNaNNaN-Batman</h2><p>（1）下载附件，是一个没有后缀名的文件，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201104203101152.png#pic_center" alt="在这里插入图片描述">（2）很多乱码，但从&lt;script&gt;中可以看出是这是一段js代码，需要用浏览器打开。将文件后缀名改为.html，点击打开。<br><img src="https://img-blog.csdnimg.cn/20201104203445934.png#pic_center" alt="在这里插入图片描述">（3）有一个输入框，但是输什么都没有反应。查看网页源代码，发现源代码里有乱码。<br><img src="https://img-blog.csdnimg.cn/20201104203642634.png#pic_center" alt="在这里插入图片描述"></p>
-<p>(4）出现乱码是因为 html 无法识别某些编码，在“eval”前添加一句“alert(_);”。重新用浏览器打开，即显示出正常代码。<br><img src="https://img-blog.csdnimg.cn/20201104210527470.png#pic_center" alt="在这里插入图片描述">（5）使用在线网站将这段js代码对齐 <a target="_blank" rel="noopener" href="https://beautifier.io/">https://beautifier.io/</a><br><img src="https://img-blog.csdnimg.cn/20201104211100387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（6）可以看到需要满足几个 if 中的正则表达式条件，^表示开始，$表示结尾，同时还要满足长度为16位。<br>把匹配出来的值be0f233ac7be98aa，输入到网页中的输入框就得到了flag。<br><img src="https://img-blog.csdnimg.cn/20201104212001550.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201104212019299.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>（1）打开网址，根据注释中的提示，逆向加密算法，解密$miwen就能得到flag<br><img src="https://img-blog.csdnimg.cn/20201114164452564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）分析其中的PHP内置函数</p>
-<pre><code>strrev(string): 反转字符串
-strlen(string): 返回字符串的长度
-substr(string, start, length): 返回字符串的一部分   
-//string: 所需要的字符串
-//start: 在字符串何处开始
-//length: 可选。规定被返回字符串的长度。默认是直到字符串的结尾
-
-ord(string): 返回字符串首个字符的 ASCII 值
-chr(): 从指定的 ASCII 值返回对应的字符
-str_rot13(string): 对字符串执行 ROT13 编码。
-//ROT13 编码把每一个字母在字母表中向前移动 13 个字母。数字和非字母字符保持不变
-
-base64_encode(string): 使用 MIME base64 对数据进行编码</code></pre>
-<p>(3)分析网址中的函数</p>
-<pre><code>&lt;?php
-$miwen=&quot;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&quot;;
-
-function encode($str)&#123;                //给encode一个参数 $str
-    $_o=strrev($str);                 //将所传参数 $str 通过 strrev() 函数反转字符串操作并赋值给 $_o
-    // echo $_o;
-
-    for($_0=0;$_0&lt;strlen($_o);$_0++)&#123;          //循环遍历 变量 $_o
-
-        $_c=substr($_o,$_0,1);    //在for循环中首先依次取字符串 $_o 的第 $_0 个值，赋值给 $_c
-        $__=ord($_c)+1;  //将变量 $c 转化为 ASCII码 并 +1，赋值给 $_
-        $_c=chr($__);   //将 $__ 转化为该ASCII码所对应的字符，赋值给 $_c
-        $_=$_.$_c;     //拼接字符串，赋值给$_
-    &#125; 
-    return str_rot13(strrev(base64_encode($_)));  
-    //将拼接好后的字符串 $_ 先进行 base64编码，再将编码后的值进行反转字符串操作，
-    //最后对反转后的字符串进行 rot13 加密，得出结果为$miwen
-&#125;
-
-highlight_file(__FILE__);
-/*
-   逆向加密算法，解密$miwen就是flag
-*/
-?&gt;</code></pre>
-<p>（4）用在线工具写出逆向代码 <a target="_blank" rel="noopener" href="https://tool.lu/coderunner/">https://tool.lu/coderunner/</a></p>
-<pre><code>&lt;?php
-$str=&#39;a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws&#39;;
-$_ = base64_decode(strrev(str_rot13($str)));
-
-$_o=NULL;
-for($_0=0;$_0&lt;strlen($_);$_0++)&#123;  
-
-        $_c=substr($_,$_0,1);  
-
-        $__=ord($_c)-1;  
-
-        $_c=chr($__);  
-
-        $_o=$_o.$_c;   
-    &#125; 
-
-
-echo strrev($_o);
-
-?&gt;</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Web进阶区//" class="article-tag-list-link color2">XCTF_Web进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Web-005/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
