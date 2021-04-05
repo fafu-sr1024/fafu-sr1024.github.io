@@ -505,7 +505,160 @@ fw.close()</code></pre>
 <ul>
 <li>XML对key值要存储两次（&lt;key&gt;&lt;/key&gt;），而JSON只需要存储一次，且在数据交换时产生更少的网络带宽和存储需求，因此，JSON更为常用。</li>
 </ul>
-<h2 id="json库的使用"><a href="#json库的使用" class="headerlink" title="json库的使用"></a>json库的使用</h2>
+<h2 id="json库的使用"><a href="#json库的使用" class="headerlink" title="json库的使用"></a>json库的使用</h2><h3 id="json库概述"><a href="#json库概述" class="headerlink" title="json库概述"></a>json库概述</h3><p>（1）json库是处理JSON格式的Python标准库，一般用于JSON格式和其他类型格式转换，导入方式如下：</p>
+<pre><code class="python">import json</code></pre>
+<p>（2）json库主要包括两类函数：操作类函数和解析类函数。</p>
+<ul>
+<li>操作类函数主要完成外部JSON格式和程序内部数据类型之间的转换功能。</li>
+<li>解析类函数主要用于解析键值对内容。</li>
+</ul>
+<p>（3）json格式包括<strong>对象和数组</strong>，用大括号{}和方括号[]表示，分别对应键值对的组合关系和对等关系。一般来说，JSON格式的<strong>对象将被json库解析为字典，JSON格式的数组将被解析为列表。</strong></p>
+<h3 id="json库解析"><a href="#json库解析" class="headerlink" title="json库解析"></a>json库解析</h3><p>（1）json库包含两个过程：编码（encoding）和解码（decoding）。</p>
+<ul>
+<li>编码是将Python数据类型变换成JSON格式的过程</li>
+<li>解码是从JSON格式中解析数据对应到Python数据类型的过程</li>
+<li>本质上，编码和解码是<strong>数据类型序列化和反序列化的过程</strong></li>
+</ul>
+<p>扩展：<strong>序列化和反序列化</strong></p>
+<ul>
+<li>序列化是指将对象数据类型转换为可以存储或网络传输格式的过程，传输格式一般为JSON或XML</li>
+<li>反序列化指从存储区域中将JSON或XML格式读出并重建对象的过程。</li>
+<li>JSON序列化和反序列化的过程分别是编码和解码</li>
+</ul>
+<p>（2）下表列出了json库的4个操作类函数，其中dumps()和loads()分别对应编码和解码功能</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">json.dumps(obj,sort_keys=False,indent=None)</td>
+<td align="center">将Python的数据类型转换为JSON格式，编码过程</td>
+</tr>
+<tr>
+<td align="center">json.loads(string)</td>
+<td align="center">将JSON格式字符串转换为Python的数据类型，解码过程</td>
+</tr>
+<tr>
+<td align="center">json.dump(obj,fp,sort_keys=False,indent=None)</td>
+<td align="center">与dumps()功能一致，输出到文件fp</td>
+</tr>
+<tr>
+<td align="center">json.load(fp)</td>
+<td align="center">与loads()功能一致，从文件fp读入</td>
+</tr>
+</tbody></table>
+<p>（3）json.dumps()中的</p>
+<ul>
+<li><strong>obj可以是Python的列表或字典类型</strong>，当输入字典类型时，dumps()函数将其变为JSON格式字符串。</li>
+<li><strong>默认生成的字符串是顺序存放的</strong>，sort_keys可以对字典元素按照key进行排序，控制输出结果。</li>
+<li><strong>indent参数用于增加数据缩进</strong>，使得生成的JSON格式字符串更具有可读性。</li>
+</ul>
+<pre><code class="python">&gt;&gt;&gt; import json
+&gt;&gt;&gt; dt = &#123;&#39;b&#39;:2,&#39;c&#39;:4,&#39;a&#39;:6&#125;
+&gt;&gt;&gt; s1 = json.dumps(dt)          #dumps返回JSON格式的字符串类型
+&gt;&gt;&gt; s2 = json.dumps(dt,sort_keys=True,indent=4)
+&gt;&gt;&gt; print(s1)
+&#123;&quot;b&quot;: 2, &quot;c&quot;: 4, &quot;a&quot;: 6&#125;
+&gt;&gt;&gt; print(s2)
+&#123;
+    &quot;a&quot;: 6,
+    &quot;b&quot;: 2,
+    &quot;c&quot;: 4
+&#125;
+&gt;&gt;&gt; print(s1==s2)
+False
+&gt;&gt;&gt; dt2 = json.loads(s2)
+&gt;&gt;&gt; print(dt2,type(dt2))
+&#123;&#39;a&#39;: 6, &#39;b&#39;: 2, &#39;c&#39;: 4&#125; &lt;class &#39;dict&#39;&gt;</code></pre>
+<h2 id="CSV和JSON格式相互转换"><a href="#CSV和JSON格式相互转换" class="headerlink" title="CSV和JSON格式相互转换"></a>CSV和JSON格式相互转换</h2><p>（1）CSV格式常用于一二维数据表示和存储，它是一种纯文本形式存储表格数据的表示方法。JSON也可以表示一二维数据。在网络信息传输中，可能需要统一表示，因此，需要在二者之间相互转换。</p>
+<h3 id="CSV转JSON"><a href="#CSV转JSON" class="headerlink" title="CSV转JSON"></a>CSV转JSON</h3><p>（2）以price2021.csv作为输入，希望输出的JSON格式对应于每行数据如下：</p>
+<pre><code>&quot;同比&quot;: &quot;120.7&quot;,
+&quot;城市&quot;: &quot;北京&quot;,
+&quot;定基&quot;: &quot;121.4&quot;,
+&quot;环比&quot;: &quot;101.5&quot;</code></pre>
+<p>将CSV格式转换成JSON格式的代码如下：</p>
+<pre><code class="python">import json
+fr = open(&quot;price2021.csv&quot;, &quot;r&quot;)
+ls = []
+for line in fr:
+    line = line.replace(&quot;\n&quot;,&quot;&quot;)
+    ls.append(line.split(&#39;,&#39;))
+fr.close()
+fw = open(&quot;price2021.json&quot;, &quot;w&quot;)
+for i in range(1,len(ls)):
+    ls[i] = dict(zip(ls[0], ls[i]))  
+    #dict()用于创建一个字典，zip()是一个内置函数，能够将两个长度相同的列表组合成一个关系对
+json.dump(ls[1:],fw, sort_keys=True, indent=4)
+fw.close()
+
+#执行结果部分内容
+[
+    &#123;
+        &quot;\u540c\u6bd4&quot;: &quot;120.7&quot;,
+        &quot;\u57ce\u5e02&quot;: &quot;\u5317\u4eac&quot;,
+        &quot;\u5b9a\u57fa&quot;: &quot;121.4&quot;,
+        &quot;\u73af\u6bd4&quot;: &quot;101.5&quot;
+    &#125;,
+    ...</code></pre>
+<p>（3）zip()函数适合用于生成键值对。</p>
+<pre><code class="python">&gt;&gt;&gt; x = [1,2,3]
+&gt;&gt;&gt; y = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]
+&gt;&gt;&gt; list(zip(x,y)) 
+[(1, &#39;a&#39;), (2, &#39;b&#39;), (3, &#39;c&#39;)]</code></pre>
+<p>（4）上例转换代码没有输出中文字符，原内容的中文字符被替换成了Unicode编码。<strong>json库默认采用Unicode编码处理非西文字符，主要为了避免网络传输中因编码方式不同带来的问题。</strong></p>
+<p>（5）可以通过在dump()函数中修改ensure_ascii参数默认值使json库输出中文字符。修改实例中第12行代码：</p>
+<pre><code class="python">json.dump(ls[1:],fw, sort_keys=True, indent=4, ensure_ascii=False)</code></pre>
+<ul>
+<li>修改后的代码执行结果：</li>
+</ul>
+<pre><code>[
+    &#123;
+        &quot;同比&quot;: &quot;120.7&quot;,
+        &quot;城市&quot;: &quot;北京&quot;,
+        &quot;定基&quot;: &quot;121.4&quot;,
+        &quot;环比&quot;: &quot;101.5&quot;
+    &#125;,
+    &#123;
+        &quot;同比&quot;: &quot;127.3&quot;,
+        &quot;城市&quot;: &quot;上海&quot;,
+        &quot;定基&quot;: &quot;127.8&quot;,
+        &quot;环比&quot;: &quot;101.2&quot;
+    &#125;,
+    &#123;
+        &quot;同比&quot;: &quot;119.4&quot;,
+        &quot;城市&quot;: &quot;广州&quot;,
+        &quot;定基&quot;: &quot;120&quot;,
+        &quot;环比&quot;: &quot;101.3&quot;
+    &#125;,
+    &#123;
+        &quot;同比&quot;: &quot;140.9&quot;,
+        &quot;城市&quot;: &quot;深圳&quot;,
+        &quot;定基&quot;: &quot;145.5&quot;,
+        &quot;环比&quot;: &quot;102&quot;
+    &#125;,
+    &#123;
+        &quot;同比&quot;: &quot;101.4&quot;,
+        &quot;城市&quot;: &quot;沈阳&quot;,
+        &quot;定基&quot;: &quot;101.6&quot;,
+        &quot;环比&quot;: &quot;100.1&quot;
+    &#125;
+]</code></pre>
+<h3 id="JSON转CSV"><a href="#JSON转CSV" class="headerlink" title="JSON转CSV"></a>JSON转CSV</h3><pre><code class="python">import json
+fr = open(&quot;price2021.json&quot;,&quot;r&quot;)
+ls = json.load(fr)
+data = [ list(ls[0].keys())]    #keys()方法返回所有的键
+for item in ls:
+    data.append(list(item.values()))   #使用 list() 来转换为列表，列表为字典中的所有值。
+fr.close()
+fw = open(&quot;price2021_form_json.csv&quot;, &quot;w&quot;)
+for item in data:
+    fw.write(&quot;,&quot;.join(item) + &quot;\n&quot;)#join() 方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
+fw.close()</code></pre>
+<p>扩展：Python的数据类型转换</p>
+
       
 
       
