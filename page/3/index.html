@@ -152,6 +152,487 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全初级/WEB安全基础(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/">WEB安全基础(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/" class="archive-article-date">
+  	<time datetime="2020-12-15T08:19:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="WEB应用安全概述"><a href="#WEB应用安全概述" class="headerlink" title="WEB应用安全概述"></a>WEB应用安全概述</h2><p>（1）WEB应用安全是指WEB应用系统的安全性，由于WEB应用的特点，在安全性方面有许多有别于传统系统安全的内容。</p>
+<p>（2）传统系统安全体系的建立：防火墙、入侵防护系统、漏洞扫描系统。80%以上的攻击通过应用程序漏洞来开展。</p>
+<h3 id="常见WEB应用"><a href="#常见WEB应用" class="headerlink" title="常见WEB应用"></a>常见WEB应用</h3><p>（1）常见应用类型：CMS、论坛、电商平台、业务办理</p>
+<p>（2）常见WEB应用：网站前台和网站后台。二者通常是相对于动态网站而言，即网站建设是基于数据库开发的网站。基于带数据库开发的网站，一般分为网站前台和网站后台。</p>
+<p>（3）网站前台是面向网站用户访问的，通俗的说也就是给访问网站的人看的内容和页面，网站前台访问可以浏览公开发布的内容。</p>
+<p>（4）网站后台，有时也称为网站管理后台，是指用于管理网站前台的一系列操作。网站的后台通常需要账号及密码等信息的登录验证，登录信息正确则验证而后进入网站后台的管理界面进行相关的一系列操作。<strong>由于网站后台具有更高的操作权限，往往是黑客攻击的重要目标.</strong></p>
+<h3 id="WEB应用安全与传统安全的区别"><a href="#WEB应用安全与传统安全的区别" class="headerlink" title="WEB应用安全与传统安全的区别"></a>WEB应用安全与传统安全的区别</h3><table>
+<thead>
+<tr>
+<th align="center">对比项</th>
+<th align="center">传统系统安全</th>
+<th align="center">WEB应用安全</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">通用性</td>
+<td align="center">建立在使用较广的通用软件基础上</td>
+<td align="center">每一个应用相当于一个独立的软件</td>
+</tr>
+<tr>
+<td align="center">开发者</td>
+<td align="center">通常是具有较高专业技术的厂商和人员，对安全有一定的理解</td>
+<td align="center">开发者水平参差不齐，对于安全的理解较为往往不足</td>
+</tr>
+<tr>
+<td align="center">漏洞的检测</td>
+<td align="center">建立在漏洞已知、确定的基础上</td>
+<td align="center">基于业务特点对可能存在的漏洞进行扫描</td>
+</tr>
+<tr>
+<td align="center">漏洞的挖掘</td>
+<td align="center">需要对计算机结构、操作系统原理，底层语言等有很深入的了解，难度大</td>
+<td align="center">只需要掌握一些基础的网站架构、脚本语言、数据库知识就可以开始，难度低</td>
+</tr>
+<tr>
+<td align="center">漏洞的修复</td>
+<td align="center">由专业的厂商提供修复方案</td>
+<td align="center">应用开发人员自行修复</td>
+</tr>
+<tr>
+<td align="center">攻击途径</td>
+<td align="center">多数服务端口不开放在公网上，攻击途径较少</td>
+<td align="center">WEB应用的业务特点导致多数的WEB应用对于互联网是开放的</td>
+</tr>
+<tr>
+<td align="center">攻击特征</td>
+<td align="center">有数据级的攻击特征，攻击行为与正常业务行为的差异明显</td>
+<td align="center">攻击特征不明确，业务逻辑类漏洞在数据层面无攻击特征</td>
+</tr>
+<tr>
+<td align="center">防护难度</td>
+<td align="center">对于已知漏洞的防护较为容易</td>
+<td align="center">防护难度大，容易绕过</td>
+</tr>
+</tbody></table>
+<h2 id="WEB应用的基本架构"><a href="#WEB应用的基本架构" class="headerlink" title="WEB应用的基本架构"></a>WEB应用的基本架构</h2><p>（1）组成：终端用户、应用传输协议http、应用服务器、数据库服务器</p>
+<p>（2）</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">客户端</th>
+<th align="center">服务端</th>
+<th align="center">数据库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用</td>
+<td align="center">客户端浏览器(IE、Firefox…)</td>
+<td align="center">服务端WEB应用(IIS、Apache)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">语言</td>
+<td align="center">HTML、javascript、CSS</td>
+<td align="center">PHP、JSP、ASP</td>
+<td align="center">SQL</td>
+</tr>
+</tbody></table>
+<h3 id="WEB服务的提供者——WEB中间件"><a href="#WEB服务的提供者——WEB中间件" class="headerlink" title="WEB服务的提供者——WEB中间件"></a>WEB服务的提供者——WEB中间件</h3><p>WEB中间件是用来提供WEB服务的应用软件，常说的WEB服务器其实就是部署了WEB中间件能够提供WEB服务的服务器，常见的WEB中间件包括IIS、tomcat、apahce、weblogic、Nginx等。</p>
+<h3 id="简单的WEB服务器搭建"><a href="#简单的WEB服务器搭建" class="headerlink" title="简单的WEB服务器搭建"></a>简单的WEB服务器搭建</h3><p><strong>PHPstudy简介</strong></p>
+<p>（1）PHPstudy是一个PHP调试环境的程序集成包</p>
+<p>（2）该程序包集成最新的Apache+PHP+MySQL+phpMyAdmin+ZendOptimizer，一次性安装，无需配置即可使用。该程序不仅包括PHP调试环境，还包括了开发工具、开发手册等。</p>
+<p>（3）该程序包可以很好地解决Windows下环境配置的问题。</p>
+<p><strong>PHPstudy的使用</strong></p>
+<p>（1）打开phpstudy软件，可看到启动、停止、重启的按钮，可对phpstudy进行相应的操作。</p>
+<p>（2）点击PHP版本，可看见phpstudy有多种版本可供选择。</p>
+<p>（3）点击其他选项菜单——网站根目录，可在里面增加文件，即可通过浏览器访问</p>
+<p><strong>PHPstudy的hello world</strong></p>
+<p>（1）新建一个txt文档，在里面写入hello world，然后保存将后缀名改为test.html</p>
+<p>（2）将test.html放入phpstudy的WWW目录中，即根目录下”/“，在url中可以体现文件的所在路径。</p>
+<p>（3）启动phpstudy，在浏览器中输入[<a target="_blank" rel="noopener" href="http://127.0.0.1/test.html],%E8%AE%BF%E9%97%AE%E7%BB%93%E6%9E%9C%E5%A6%82%E4%B8%8B%EF%BC%9A">http://127.0.0.1/test.html],访问结果如下：</a></p>
+<h2 id="HTTP协议基础"><a href="#HTTP协议基础" class="headerlink" title="HTTP协议基础"></a>HTTP协议基础</h2><p>（1）HTTP是Hyper Text Transfer Protocol(超文本传输协议)的缩写。HTTP协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。</p>
+<p>（2）HTTP是一个<strong>应用层协议</strong>，由<strong>请求和响应</strong>构成，是一个标准的客户端服务器模型。HTTP是一个无状态的协议。</p>
+<h3 id="网页请求的基本过程"><a href="#网页请求的基本过程" class="headerlink" title="网页请求的基本过程"></a>网页请求的基本过程</h3><p><strong>请求触发–&gt;建立TCP连接–&gt;客户端发送HTTP请求–&gt;服务端返回HTTP响应–&gt;客户端显示结果</strong></p>
+<p>当用户在浏览器中输入网址或点击超链接，网页请求就被发出了，其工作过程可分为四步：</p>
+<p>（1）首先客户端与服务器需要建立TCP连接</p>
+<p>（2）建立连接后，客户端发送一个请求给服务器，请求方式的格式为：统一资源标识符(URL)、协议版本号、后边是MIME信息、请求修饰符、客户机信息和可能的内容。</p>
+<p>（3）服务器接到请求后，给予相应的响应信息，其格式为一个状态行，包括信息的协议版本号、一个成功或错误的代码，后边是MIME信息、服务器信息、实体信息和可能的内容。</p>
+<p>（4）客户端接收服务器所返回的信息通过浏览器显示在用户的显示屏上，然后客户机与服务器断开连接。</p>
+<p>若以上过程的某一步出现错误，则产生错误的信息将返回到客户端，通过显示屏输出。对用户来说，这些过程由HTTP自己完成，对用户透明。</p>
+<h3 id="HackBar工具"><a href="#HackBar工具" class="headerlink" title="HackBar工具"></a>HackBar工具</h3><p>HackBar小工具包，包含一些常用的工具。(SQL injection、XSS、加密等)，web开发人员可以利用该工具，快速构建一个http请求，或者用它快速实现某种算法等。</p>
+<h3 id="BurpSuite工具"><a href="#BurpSuite工具" class="headerlink" title="BurpSuite工具"></a>BurpSuite工具</h3><p>（1）Burp Suite是一个集成化的渗透测试工具，它集合了多种渗透测试组件，能更好地完成对web应用的渗透测试和攻击。</p>
+<p>（2）Burp Suite代理工具是以拦截代理的方式，拦截所有通过代理的网络流量。如客户端的请求数据、服务端的返回信息等。Burp Suite主要拦截http和https协议的流量，通过拦截，Burp Suite以中间人的方式，可以对客户端请求数据、服务端返回做各种处理，以达到安全评估、测试的目的。</p>
+<p><strong>BurpSuite的使用</strong></p>
+<p>（1）配置监听选项：Proxy–&gt;Options，在Proxy Listeners中Add一条或者Edit一条监听地址及端口，如本地的8080端口。注意监听的端口不能和本机已使用的端口冲突。</p>
+<p>（2）配置拦截选项：Proxy–&gt;Options，设置拦截请求包，设置拦截返回包</p>
+<p>（3）浏览器的代理地址设置：</p>
+<p>火狐浏览器设置步骤：菜单–&gt;选项–&gt;高级–&gt;网络—&gt;设置</p>
+<p>Edge浏览器的设置步骤：在谷歌应用商店下载SwitchyOmega插件，在proxy情景模式下配置代理服务器，并保存</p>
+<p>（4）请求与响应拦截：打开浏览器，输入访问的网址–&gt;设置浏览器代理–&gt;打开burpsuite，开启Intercept，在浏览器的hackbar中点击Execute–&gt;获取burpsuite抓取http报文–&gt;点击Forward提交、发送，会将访问的页面显示在浏览器上。</p>
+<p>（5）数据报重放：抓取http的数据包后。右键单击——发送到Repeater–&gt;点击Repeater模块，在该模块能够显示请求包和回复包–&gt;在Request请求包里可以修改内容，点击Go之后，可以在Response回复包内容中显示返回在浏览器上的内容。</p>
+<h3 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h3><p>HTTP请求由三部分组成：请求行、消息报头、请求正文</p>
+<h4 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h4><p>包括http请求的种类/方法、请求资源的路径、http协议版本三个部分，以空格(%20)分隔，以回车换行符结尾(%0d%0a)。</p>
+<pre><code class="Python">POST /search.php?searchsubmit=yes HTTP/1.1
+#POST为常见请求的种类/方法，定义了服务器收到请求后的“动作”
+#/search.php?searchsubmit=yes为请求资源的路径
+#HTTP/1.1是协议版本，目前默认为1.1</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">请求方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GET</td>
+<td align="center">请求指定的页面信息，并返回实体主体。</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">向指定资源提交数据进行请求(例如提交表单或者上传文件)。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</td>
+</tr>
+</tbody></table>
+<p>（3）说明：出于安全考虑，通常要求服务器只允许使用GET和POST方法。</p>
+<p>二者区别：GET请求的所提交的所有数据都在URL中体现，不利于提交复杂的数据，且安全性相对较低，而POST请求可以将主要数据放在请求正文中提交，常用于提交复杂数据或敏感信息。</p>
+<h4 id="URL简介"><a href="#URL简介" class="headerlink" title="URL简介"></a>URL简介</h4><p>（1）URL又称统一资源定位符是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置及浏览器应该怎么处理它。</p>
+<p>（2）URL的基本构成：</p>
+<p>schema://host[:port#]/path/…/[;url-params][?query-string][#anchor]</p>
+<pre><code>http://www.domain.com:1234/path/to/resource?a=b&amp;x=y
+#http为协议(protocol)
+#www.domain.com为host，1234为端口
+#/path/to/resource为资源路径
+#?a=b&amp;x=y为对资源的查询操作(query)</code></pre>
+<p>（3）URL编码是一种浏览器用来打包表单输入的格式。浏览器从表单中获取所有的name和其中的值，将他们以name/value参数编码作为URL的一部分或者分离地发送给服务器，url编码就是一个字符ASCII码的十六进制，然后在其前面部分加上”%”</p>
+<h4 id="消息报头"><a href="#消息报头" class="headerlink" title="消息报头"></a>消息报头</h4><p>（1）请求消息报头说明了客户端的基本信息，以及如何与客户端进行交互；</p>
+<p>（2）消息报头由多行组成，每行以key:value的形式体现，每行末尾包括一个回车换行符(%0a%0d)，消息报头末尾以两个回车换行符作为结束。</p>
+<table>
+<thead>
+<tr>
+<th align="center">Header</th>
+<th align="center">解释</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Accept-Language</td>
+<td align="center">浏览器可以接受的语言</td>
+<td align="center">Accept-Language:en,zh</td>
+</tr>
+<tr>
+<td align="center">Cookie</td>
+<td align="center">HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器</td>
+<td align="center">Cookie:Version=1;Skin=new;</td>
+</tr>
+<tr>
+<td align="center">Content-Length</td>
+<td align="center">请求的内容长度</td>
+<td align="center">Content-Length:348</td>
+</tr>
+<tr>
+<td align="center">Content-Type</td>
+<td align="center">请求的内容对应的MIME信息</td>
+<td align="center">Content-Type:application/x-www-form-urlencoded</td>
+</tr>
+<tr>
+<td align="center">Host</td>
+<td align="center">指定请求的服务器的域名和端口号(必选)</td>
+<td align="center">Host:<a target="_blank" rel="noopener" href="http://www.doone.com/">www.doone.com</a></td>
+</tr>
+<tr>
+<td align="center">Referer</td>
+<td align="center">表示当前是从哪个页面上的链接触发的</td>
+<td align="center">Referer:<a target="_blank" rel="noopener" href="http://www.zcmhi.com/archives/71.html">http://www.zcmhi.com/archives/71.html</a></td>
+</tr>
+<tr>
+<td align="center">User-Agent</td>
+<td align="center">User-Agent的内容包含发出请求的用户信息</td>
+<td align="center">User-Agent:Mozilla/5.0(Linux;X11)</td>
+</tr>
+<tr>
+<td align="center">X-Forwarded-For        client-ip</td>
+<td align="center">用户通过代理服务器访问网站时代理服务器会自动添加该字段用于标记用户的真实IP</td>
+<td align="center">X-Forwarded-For:1.1.1.1             client-ip:2.2.2.2</td>
+</tr>
+</tbody></table>
+<h3 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h3><p>HTTP响应也由三部分组成，分别是：状态行、消息报头、响应正文</p>
+<h4 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h4><p>（1）状态行包括http协议版本、状态码、状态描述三个部分，以空格符(%20)分隔，以回车换行符结尾(%0d%0a)</p>
+<p>（2）状态代码由三位数字组成，第一个数字定义了响应的类别，且有五种可能取值。</p>
+<pre><code>1xx：指示信息--表示请求已接收，继续处理
+2xx：成功--表示请求已被成功接收、理解、接受
+3xx：重定向--要完成请求必须进行更进一步的操作
+4xx：客户端错误--请求有语法错误或请求无法实现
+5xx：服务器端错误--服务器未能实现合法的请求</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/RBwkMDiAU8l1Pus.png" alt="image-20201216191016982"></p>
+<h4 id="消息报头-1"><a href="#消息报头-1" class="headerlink" title="消息报头"></a>消息报头</h4><p>（1）消息报头说明了服务端的基本信息、客户端如何处理返回的消息等</p>
+<p>（2）消息报头由多行组成，每行以key:value的形式体现，每行末尾包括一个回车换行符(%0a%0d)，消息报头末尾以两个回车换行符(%0a%0d)作为结束。</p>
+<table>
+<thead>
+<tr>
+<th align="center">Header</th>
+<th align="center">解释</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Allow</td>
+<td align="center">服务器支持的请求方法，OPTIONS请求方法的响应头</td>
+<td align="center">Allow:GET,HEAD,POST,OPTIONS</td>
+</tr>
+<tr>
+<td align="center">Content-Encoding</td>
+<td align="center">web服务器表明自己使用了什么压缩方法(gzip，deflate)压缩响应正文的内容</td>
+<td align="center">Content-Encoding:gzip</td>
+</tr>
+<tr>
+<td align="center">Content-Length</td>
+<td align="center">响应正文的长度，以字节方式存储的十进制数字来表示</td>
+<td align="center">Content-Length:42</td>
+</tr>
+<tr>
+<td align="center">Content-Type</td>
+<td align="center">响应正文的MIME类型和字符集</td>
+<td align="center">Content-Type:text/html;charset=GB2312</td>
+</tr>
+<tr>
+<td align="center">Location</td>
+<td align="center">用于重定向一个新的位置，包含新的URL地址，表示客户应当到哪里去提取文档</td>
+<td align="center">Location:<a target="_blank" rel="noopener" href="http://www.baidu.com/search/error.html">http://www.baidu.com/search/error.html</a></td>
+</tr>
+<tr>
+<td align="center">Server</td>
+<td align="center">指明HTTP服务器用来处理请求的软件信息</td>
+<td align="center">Server:nginx/1.5.4</td>
+</tr>
+<tr>
+<td align="center">Set-Cookie</td>
+<td align="center">用于把cookie发送到客户端浏览器，每一个写入cookie都会生成一个Set-Cookie</td>
+<td align="center">Set-Cookie:sc=4c31523a;path=/;domain=.doone.com.con</td>
+</tr>
+<tr>
+<td align="center">X-Powered-By</td>
+<td align="center">表示网站使用什么技术开发的</td>
+<td align="center">X-Powered-By:ASP.NET</td>
+</tr>
+</tbody></table>
+<h2 id="HTML基本概念"><a href="#HTML基本概念" class="headerlink" title="HTML基本概念"></a>HTML基本概念</h2><p>（1）HTML是用来描述网页的一种语言</p>
+<p>（2）HTML指的是超文本标记语言(Hyper Text Markup Language)</p>
+<p>（3）HTML不是一种编程语言，而是一种标记语言，标记语言是一套标记标签</p>
+<p>（4）HTML使用标记标签来描述网页</p>
+<p>（5）HTML文档通常用htm和html作为后缀名</p>
+<p>（6）Web浏览器的作用是读取HTML文档，并以网页的形式显示出他们。浏览器不会显示HTML标签，而是使用标签来解释页面的内容。</p>
+<h3 id="HTML基础语法"><a href="#HTML基础语法" class="headerlink" title="HTML基础语法"></a>HTML基础语法</h3><p>（1）HTML文档是由HTML元素定义的，HTML元素以开始标签(start tag)起始，以结束标签(end tag)终止</p>
+<p>（2）元素的内容是开始标签与结束标签之间的内容</p>
+<p>（3）某些HTML元素内容为空，空元素在开始标签中闭合，无结束标签</p>
+<p>（4）大多数HTML元素可拥有属性，属性总是以名称/值对的形式出现，提供了有关HTML元素的更多信息。</p>
+<p>属性总是在HTML元素的开始标签中规定；</p>
+<p>属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没问题。</p>
+<p>（5）有时候没有结束标签元素也可以正常显示，但是可能会出现意外错误，不建议使用</p>
+<p><img src="https://i.loli.net/2020/12/16/ahLjpODg9TUnw6I.png" alt="image-20201216201051807"></p>
+<h3 id="HTML文档结构"><a href="#HTML文档结构" class="headerlink" title="HTML文档结构"></a>HTML文档结构</h3><p><img src="https://i.loli.net/2020/12/16/Zkn2LoxrgEuS4wB.png" alt="image-20201216204841476"></p>
+<pre><code class="html">&lt;!DOCTYPE html/&gt;
+&lt;html&gt;
+    &lt;head&gt;                            #&lt;head&gt;通常不显示
+        &lt;/head&gt;
+        &lt;meta charest=&quot;utf-8&quot;/&gt;       #主体的编码方式
+        &lt;title&gt;文档的标题&lt;/title&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;                           #body元素定义文档的主体
+
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/17/LEjQBNGDzkldbgs.png" alt="image-20201217211426549"></p>
+<h3 id="HTML常见标签"><a href="#HTML常见标签" class="headerlink" title="HTML常见标签"></a>HTML常见标签</h3><p>（1）格式标签：&lt;h1&gt; to &lt;h6&gt;定义HTML标题。  &lt;br/&gt;定义换行</p>
+<p>（2）链接标签：&lt;a&gt;定义超链接</p>
+<p>（3）文本标签：&lt;input&gt;定义文本域</p>
+<p>（4）多媒体标签：&lt;img&gt;定义图像</p>
+<p>（5）&lt;body&gt;元素定义了HTML文档的主体</p>
+<p>（6）&lt;html&gt;元素定义了整个HTML文档</p>
+<h4 id="格式标签"><a href="#格式标签" class="headerlink" title="格式标签"></a>格式标签</h4><p>（1）&lt;h1&gt;标签可定义标题。&lt;h1&gt;定义最大的标题，&lt;h6&gt;定义最小的标题</p>
+<p>（2）示例：</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1&gt;
+            这是标题1
+        &lt;/h1&gt;
+        &lt;h2&gt;
+            这是标题2
+        &lt;/h2&gt;
+        &lt;h3&gt;
+            这是标题3
+        &lt;/h3&gt;
+        &lt;h4&gt;
+            这是标题4
+        &lt;/h4&gt;
+        &lt;h5&gt;
+            这是标题5
+        &lt;/h5&gt;
+        &lt;h6&gt;
+            这是标题6
+        &lt;/h6&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/7mebkXYvxLt1SKu.png" alt="image-20201216205838653"></p>
+<h4 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h4><p>（1）&lt;a&gt;标签定义超链接，用于从一个页面链接到另一个页面</p>
+<p>（2）&lt;a&gt;元素最重要的属性是href属性，它指示链接的目标</p>
+<p>（3）示例：</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;a href= &quot;http://www.goktech.cn&quot; &gt;国科科技&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/dKCGo7iguY362Ua.png" alt="image-20201216210422270"></p>
+<p><img src="https://i.loli.net/2020/12/16/ShCtUew8pV9I63k.png" alt="image-20201216210440769"></p>
+<h4 id="文本域"><a href="#文本域" class="headerlink" title="文本域"></a>文本域</h4><p>（1）&lt;input&gt;标签用于搜集用户信息。根据不同的type属性值，输入字段拥有很多种形式。</p>
+<p>（2）输入字段可以是文本字段、复选框、掩码后的文本控件、单选按钮、按钮等等。</p>
+<p>（3）示例：</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name: &lt;input type=&quot;text&quot; name=&quot;fname&quot;/&gt;&lt;br&gt;
+            Last name: &lt;input type= &quot;text&quot; name=&quot;Iname&quot;/&gt;&lt;br&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/xKhX7fDPcCsFkuv.png" alt="image-20201216211427660"></p>
+<h4 id="图像标签"><a href="#图像标签" class="headerlink" title="图像标签"></a>图像标签</h4><p>（1）&lt;img&gt;标签向网页中嵌入一幅图像</p>
+<p>（2）&lt;img&gt;标签有两个必需的属性：src属性和alt属性</p>
+<p>（3）示例：</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;img src=&quot;http://www.goktech.cn/img/img_index/logo2.png&quot;/&gt;
+        &lt;br/&gt;
+        &lt;br&gt;
+        &lt;img src=&quot;/html/images/eg_tulip.jpg&quot;&gt;&lt;br/&gt;
+        &lt;br&gt;
+        &lt;br&gt;
+        &lt;img src=&quot;/images/1.jpg&quot; alt=&quot;玫瑰花&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/lP7hgsCdaKpWbQo.png" alt="image-20201216213448240"></p>
+<p>若无法显示图像，浏览器将显示替代文本</p>
+<p><img src="https://i.loli.net/2020/12/16/pFnAySDEhsPUoHg.png" alt="image-20201216213511013"></p>
+<h3 id="事件属性与Windos对象方法"><a href="#事件属性与Windos对象方法" class="headerlink" title="事件属性与Windos对象方法"></a>事件属性与Windos对象方法</h3><p>（1）HTML事件属性是一种特殊的属性，提供了事件在浏览器中触发动作的能力，比如当用户点击元素时启动JavaScript</p>
+<p>（2）Window对象方法提供了一些简单的动作，如弹出对话框的能力，window对象方法与事件结合使用可以实现一些简单的交互功能。</p>
+<p>（3）基本用法：</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;input type=&quot;text&quot; onclick=&quot;alert(&#39;您好，请输入&#39;)&quot; /&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/PViqu2ErGCteTg4.png" alt="image-20201216220517460"></p>
+<h3 id="常见事件属性与windows对象方法"><a href="#常见事件属性与windows对象方法" class="headerlink" title="常见事件属性与windows对象方法"></a>常见事件属性与windows对象方法</h3><p><strong>常见事件属性</strong></p>
+<p>（1）鼠标事件：</p>
+<pre><code>Onclick;元素上发生鼠标点击时触发。
+Ondblclick：元素上发生鼠标双击时触发
+0nmouseover：当鼠标指针移动到元素上时触发
+onmouseout：当鼠标指针移除元素时触发</code></pre>
+<p>（2）键盘事件：</p>
+<pre><code>Onkeydown：当用户按下按键时触发</code></pre>
+<p>（3）Form事件：</p>
+<pre><code>Onchange:在元素值被改变时触发
+Onfocus：当元素获得焦点时触发</code></pre>
+<p><strong>常见对象方法</strong></p>
+<p>（1）alert():显示带有一段消息和一个确认按钮的警告框</p>
+<p>（2）confirm():显示带有一段消息以及确认按钮和取消按钮的对话框</p>
+<p>（3）prompt():显示可提示用户输入的对话框</p>
+<h3 id="事件属性与windows对象方法实例"><a href="#事件属性与windows对象方法实例" class="headerlink" title="事件属性与windows对象方法实例"></a>事件属性与windows对象方法实例</h3><p>(1)onmouseover属性在鼠标指针移动到元素上时触发。当用户把鼠标移动到图片上时，会显示可提示用户输入的对话框。</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;img onmouseover=&quot;prompt()&quot; src=&quot;/images/eg_chinarose.jap&quot;&gt;
+    &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/NPQ7xscjLnp43mr.png" alt="image-20201216223834282"></p>
+<p>（2）onchange属性在元素值被改变时触发</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        请输入您的姓名：
+        &lt;input type=&quot;text&quot; onchange=&quot;confirm(&#39;Good Good study,Day Day up!&#39;)&quot; /&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>当在输入框输入姓名回车后，会弹出信息的提示框</p>
+<p><img src="https://i.loli.net/2020/12/16/dESxU2gyarJhoXF.png" alt="image-20201216224229033"></p>
+<h3 id="HTML标签嵌套"><a href="#HTML标签嵌套" class="headerlink" title="HTML标签嵌套"></a>HTML标签嵌套</h3><p>（1)HTML标签通常都是互相嵌套的，通过相互嵌套标签可以实现各类复杂的效果。</p>
+<p>（2）例如：将IMG标签嵌套至A标签的内容位置，可以使得图片变成一个可点击的链接。</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a href=http://www.baidu.com&gt;
+            &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;baidu&quot; width=&quot;100&quot; height=&quot;42&quot;&gt;
+        &lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/BlAofEQndb8RYmL.png" alt="image-20201216235827081"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/深入Python语言(五)-函数和代码复用01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -3253,210 +3734,6 @@ turtle.done()</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%89)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/初识Python语言(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">初识Python语言(二)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/" class="archive-article-date">
-  	<time datetime="2020-11-26T03:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="实例1：温度转换"><a href="#实例1：温度转换" class="headerlink" title="实例1：温度转换"></a>实例1：温度转换</h2><pre><code class="python">&#39;&#39;&#39;
-转换算法：
-C = (F-32)/1.8
-F = C*1.8 + 32
-&#39;&#39;&#39;
-TempStr = input(&quot;请输入带有符号的温度值：&quot;)
-if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-    C = (eval(TempStr[0:-1]) - 32)/1.8
-    print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-    F = 1.8*eval(TempStr[0:-1]) + 32
-    print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
-else:
-    print(&quot;输入格式错误&quot;)</code></pre>
-<p>运行结果：</p>
-<p><img src="https://i.loli.net/2020/11/26/Vgm1Xz6Nl8yWD79.png" alt="image-20201126115434716"></p>
-<h2 id="Python程序语法元素分析"><a href="#Python程序语法元素分析" class="headerlink" title="Python程序语法元素分析"></a>Python程序语法元素分析</h2><h3 id="程序的格式框架"><a href="#程序的格式框架" class="headerlink" title="程序的格式框架"></a>程序的格式框架</h3><p>（1）Python语言用严格的“缩进”来表明程序的格式框架。每行代码前的空白区域即是缩进，用来表示代码之间的包含和层次关系。</p>
-<p>（2）缩进常用Tab键实现，也可用多个空格实现，通常是4个空格。缩进还包括单层缩进和经过嵌套形成的多层缩进。</p>
-<p>（3）一般来说，判断、循环、函数、类等语法形式能够通过缩进包含一批代码。</p>
-<p>（4）Python语法允许在表达式内部标记之间增加空格，这样有助于提高代码的可读性，但不能改变与缩进相关的空格数量，也不能在变量名中间增加空格。</p>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>Python语言有两种方法：单行注释和多行注释。单行注释以#开头，多行注释则以’’’(3个单引号)开头和结尾。例如:</p>
-<pre><code class="python">&#39;&#39;&#39;
-转换算法：
-C = (F-32)/1.8
-F = C*1.8 + 32
-&#39;&#39;&#39;</code></pre>
-<h3 id="命名与保留字"><a href="#命名与保留字" class="headerlink" title="命名与保留字"></a>命名与保留字</h3><p>（1）Python语言采用大小写字母、数字、下划线和汉字等字符及其组合给变量命名，但首字符不能为数字，且中间不能出现空格，长度没有限制。注意：标识符对大小写敏感。</p>
-<p>（2）保留字（Keyword），也称为关键字，不能用来给变量命名。Python3.x版本共有33个保留字，保留字同样对大小写敏感，例如for是保留字，而For则不是。</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>（1）Python语言中，字符串是用两个双引号””或者单引号’’括起来的零个或多个字符。</p>
-<p>（2）字符串是字符的序列，可以按照单个字符或字符片段进行索引。字符串包括两种序号体系：正向递增序号和反向递减序号。二者可以混合使用，若字符串长度为L，则从左到右，正向递增序号为0~L-1;反向递减序号为-L~-1</p>
-<p><img src="https://i.loli.net/2020/11/26/xe7X9WBL5aGA4jI.png" alt="image-20201126163416661"></p>
-<p>（3）Python字符串也提供区间访问方式，采用[N:M]格式，表示字符串从N到M(不包含M)的子字符串，其中N和M都是字符串的索引序号。</p>
-<pre><code class="python">TempStr = &quot;110C&quot;
-print(TempStr[-1])          #只打印最后一个字符，即&#39;C&#39;
-print(TempStr[0:2])         #打印第一第二个字符，即&#39;11&#39;
-print(TempStr[0:-1])        #打印除去最后一个字符的字符串,即&#39;110&#39;;效果和TempStr[0:3]一样
-print(TempStr[:])           #打印全部字符</code></pre>
-<h3 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h3><p>（1）”=”表示赋值，包含等号的语句称为赋值语句，即将等号右侧的计算结果赋给左侧变量。例如：</p>
-<pre><code class="python">TempStr = input(&quot;请输入带有符号的温度值：&quot;)   #将input()函数的结果赋给左侧变量TempStr</code></pre>
-<p>（2）同步赋值语句，可以同时给多个变量赋值。若多个单一赋值语句在功能上表达了相同或相关的含义，或者在程序中属于相同的功能，都可以采用同步赋值语句。基本格式如下：</p>
-<pre><code>&lt;变量1&gt;,…… &lt;变量n&gt; = &lt;表达式1&gt;,…… &lt;表达式n&gt;</code></pre>
-<pre><code class="python">&gt;&gt;&gt;x, y = 10, 20
-&gt;&gt;&gt;print(x,y)
-10 20
-&gt;&gt;&gt;x, y = y, x       //交换x，y的数值不必再借助第三个变量
-&gt;&gt;&gt;print(x,y)
-20 10</code></pre>
-<h3 id="input-函数"><a href="#input-函数" class="headerlink" title="input()函数"></a>input()函数</h3><p>在实例1中，input()函数从控制台获得用户输入，无论用户在控制台输入什么内容，input()函数都以字符串类型返回结果。在获得用户输入之前，input()函数可以包含一些提示性文字。</p>
-<pre><code>&gt;&gt;&gt;input(&quot;请输入：&quot;)
-请输入：Python
-&#39;Python&#39;
-&gt;&gt;&gt;input(&quot;请输入：&quot;)
-请输入：12345
-&#39;12345&#39;</code></pre>
-<p><img src="https://i.loli.net/2020/11/26/JbFk8tzdfEQmjg6.png" alt="image-20201126175216693"></p>
-<h3 id="分支语句"><a href="#分支语句" class="headerlink" title="分支语句"></a>分支语句</h3><p>分支语句的作用是根据判断条件选择程序执行路径，使用方法如下：</p>
-<pre><code class="python">if &lt;条件1&gt;:
-    &lt;语句块1&gt;
-elif &lt;条件2&gt;:
-    &lt;语句块2&gt;
-...
-
-else:
-    &lt;语句块n&gt;</code></pre>
-<p>其中，if、elif、else都是保留字，else后不再增加条件，表示不满足其他if语句的所有其余情况。例如实例1中的分支语句：</p>
-<pre><code class="python">if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-else:</code></pre>
-<p>第一个表达式由保留字”in”组成，表示判断字符串TempStr的最后一个字符(TempStr[-1])是否在一个由’F’或’f’组成的集合中，即TempStr[-1]是否等于’F’或’f’。如果相等，返回True，执行该条件下的语句块；否则返回False，判断下一个条件。其中用方括号和逗号组成的类型叫列表，格式为：[元素1,元素2,…,元素n]。</p>
-<h3 id="eval-函数"><a href="#eval-函数" class="headerlink" title="eval()函数"></a>eval()函数</h3><p>eval(&lt;字符串&gt;)函数能够以Python表达式的方式解析并执行字符串，并将返回结果输出。例如：</p>
-<pre><code class="python">&gt;&gt;&gt;x = 1
-&gt;&gt;&gt;eval(&quot;x + 1&quot;)
-2
-&gt;&gt;&gt;eval(&quot;1.1 + 2.2&quot;)
-3.3</code></pre>
-<p>实例1中eval()函数将用户的部分输入(TempStr[0:-1])由字符串转化为数字，假设用户的输入为“102C”，经过eval()函数处理，转变为Python内部可以进行数学运算的的数值102</p>
-<pre><code class="python">&gt;&gt;&gt;TempStr = &quot;102C&quot;
-&gt;&gt;&gt;eval(TempStr[0:-1])
-102</code></pre>
-<p>使用eval()函数注意事项：</p>
-<p>（1）若直接输入字符串”hello”，eval()函数会去掉两个引号，将其解释为一个变量。由于之前没有定义过hello变量，解释器会报错。</p>
-<p>（2）当输入字符串”‘hello’”时，eval()函数去掉外部双引号后，内部还有一个单引号，则’hello’被解释为字符串。</p>
-<p>（3）若要输入一个数字（小数或负数），并用程序对这个数字进行计算，可以采用eval(input(输入提示字符串))的组合，例如：</p>
-<pre><code class="python">&gt;&gt;&gt;vlaue = eval(input(&quot;请输入要计算的数值：&quot;))
-请输入要计算的数值：1024
-&gt;&gt;&gt;print(value*2)
-2048</code></pre>
-<p>（4）实例1中的代码：</p>
-<pre><code class="python">C = (eval(TempStr[0:-1]) - 32)/1.8</code></pre>
-<p>表示将TempStr字符串中除最后一位外的子串转换成数字，再对其进行运算。</p>
-<h3 id="print-函数"><a href="#print-函数" class="headerlink" title="print()函数"></a>print()函数</h3><p>（1）print()是输出函数，当输出纯字符信息时，加上双引号或单引号即可直接把待输出的内容传递给print()函数。例如：</p>
-<pre><code class="python">&gt;&gt;&gt;print(&quot;我爱我家&quot;)
-我爱我家</code></pre>
-<p>（2）当输出变量值时，需要采用格式化输出方式，通过format()方法将待输出的变量整理成期望输出的格式。例如实例1中：</p>
-<pre><code class="python">print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))</code></pre>
-<p>print()函数用槽格式和format()方法将变量和字符串结合到一起输出。上述代码中，大括号{}表示一个槽位置，这个大括号的内容由后面的format()方法中的参数C或F填充。其中，大括号{:.2f}中的内容表示变量C(或F)的输出格式，具体为输出数值保留两位小数。</p>
-<h3 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h3><p>（1）循环语句的作用是根据判断条件确定一段程序是否再次执行一次或多次。实例1中不包含循环语句，程序执行一次后退出，若要让程序一直运行，连续接收用户的输入，可以采用循环语句进行改造。</p>
-<pre><code class="python">TempStr = input(&quot;请输入带有符号的温度值：&quot;)
-while TempStr[-1] not in [&#39;N&#39;,&#39;n&#39;]:                #改造1，直到用户输入的最后一个字符是N或n时退出
-    if TempStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-        C = (eval(TempStr[0:-1]) - 32)/1.8
-        print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-    elif TempStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-        F = 1.8*eval(TempStr[0:-1]) + 32
-        print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
-    else:
-        print(&quot;输入格式错误&quot;)
-    TempStr = input(&quot;请输入带有符号的温度值：&quot;)        #改造2</code></pre>
-<p>（2）循环语句有多种类型，改造后的代码使用了条件循环，其基本过程如下：</p>
-<pre><code class="python">while&lt;条件&gt;:
-    &lt;语句块1&gt;
-&lt;语句块2&gt;</code></pre>
-<p>缩进表达了与while语句的所属关系。当条件为真时，进入循环，执行语句块1；当条件为假时，退出循环，执行语句块2。改造后的代码中的循环条件：</p>
-<pre><code class="python">while TempStr[-1] not in [&#39;N&#39;,&#39;n&#39;]:</code></pre>
-<p>语句中的not是保留字，表示对判断结果取反。</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>（1）函数是对一组表达特定功能表达式的封装，能够接收变量并输出结果。input()、print()、eval()都是Python解释器的内置函数。编写代码时，函数的使用有助于阅读和复用，也使得程序模块化更好。</p>
-<p>实例1中，程序按照顺序方式，从头到尾执行，对其进行如下改造：</p>
-<pre><code class="python">def tempConvert(ValueStr):
-    if ValueStr[-1] in [&#39;F&#39;,&#39;f&#39;]:
-        C = (eval(ValueStr[0:-1]) - 32)/1.8
-        print(&quot;转换后的温度是&#123;:.2f&#125;C&quot;.format(C))
-    elif ValueStr[-1] in [&#39;C&#39;,&#39;c&#39;]:
-        F = 1.8*eval(ValueStr[0:-1]) + 32
-        print(&quot;转换后的温度是&#123;:.2f&#125;F&quot;.format(F))
-    else:
-        print(&quot;输入格式错误&quot;) 
-TempStr = input(&quot;请输入带有符号的温度值：&quot;)
-tempConvert(TempStr)</code></pre>
-<p>（2）上述代码中，用def保留字定义了一个名为tmpConvert()的函数，它使用一个参数ValueStr，函数所属代码是def所在行和其后面与之有缩进关系的代码。</p>
-<p>（3）由def保留字定义的函数在程序中不被直接执行，需要使用函数名称调用才能执行。所以程序是从第10行开始执行。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/26/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)/">展开全文 >></a>
         </p>
       
 
