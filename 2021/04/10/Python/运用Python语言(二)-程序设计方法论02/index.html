@@ -16,8 +16,9 @@
 <meta property="og:description" content="计算生态和模块编程（1）开源运动产生了深植于个信息技术领域的大量可重用资源，直接且有力地支撑了信息技术超越其他技术领域的发展速度，形成了“计算生态”。 （2）Python官方网站提供了第三方库索引功能（PyPI），网址：https:&#x2F;&#x2F;pypi.python.org&#x2F;pypi （3）上述网址列出了Python语言9万多个第三方库的基本信息，这些函数库覆盖信息领域技术所有技术方向。 （4）Pytho">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.loli.net/2021/04/10/KFJ91dbGvkozIAH.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/10/IPpXBJv8ikF2ux9.png">
 <meta property="article:published_time" content="2021-04-10T08:23:19.000Z">
-<meta property="article:modified_time" content="2021-04-10T12:00:10.342Z">
+<meta property="article:modified_time" content="2021-04-10T15:26:24.444Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -376,6 +377,55 @@ try:
     print(&quot;Successful&quot;)
 except:
     print(&quot;Failed Somehow&quot;)</code></pre>
+<h2 id="You-Get"><a href="#You-Get" class="headerlink" title="You-Get"></a>You-Get</h2><p>（1）You-Get是一个基于Python3的视频下载工具，支持多数国内外主流视频站点的视频下载。（以下语句均在命令行执行）</p>
+<p>（2）用pip工具安装You-Get库</p>
+<pre><code>pip3 install you-get</code></pre>
+<p>（3）常规下载</p>
+<pre><code>you-get https://www.bilibili.com/video/BV17U4y1h7qF</code></pre>
+<p>（4）不下载，仅查看视频信息</p>
+<pre><code>you-get -i https://www.bilibili.com/video/BV17U4y1h7qF</code></pre>
+<p>（5）将视频下载到指定位置，例如，Windows下保存到D盘根目录</p>
+<pre><code>you-get -o D:/ https://www.bilibili.com/video/BV17U4y1h7qF</code></pre>
+<p>注意：</p>
+<ul>
+<li>各大视频网站需要登录观看的视频无法直接下载</li>
+<li>有些网站视频需要设置代理</li>
+</ul>
+<h2 id="Wordcloud"><a href="#Wordcloud" class="headerlink" title="Wordcloud"></a>Wordcloud</h2><pre><code class="python">import jieba
+import wordcloud
+excludes = &#123;&quot;将军&quot;,&quot;却说&quot;,&quot;荆州&quot;,&quot;二人&quot;,&quot;不可&quot;,&quot;不能&quot;,&quot;如此&quot;,&quot;次日&quot;,&quot;大喜&quot;&#125;
+txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
+words = jieba.lcut(txt)
+counts = &#123;&#125;
+for word in words:
+    if len(word) == 1 :
+        continue
+    elif word==&quot;诸葛亮&quot; or word== &quot;孔明曰&quot;:
+        rword = &quot;孔明&quot;
+    elif word==&quot;关公&quot; or word==&quot;云长&quot;:
+        rword = &quot;关羽&quot;
+    elif word == &quot;玄德&quot; or word == &quot;玄德曰&quot;:
+        rword = &quot;刘备&quot;
+    elif word ==&quot;孟德&quot; or word == &quot;丞相&quot;:
+        rword = &quot;曹操&quot;
+    else:
+        rword = word
+    counts[rword] = counts.get(rword,0) + 1
+for word in excludes:
+    del(counts[word])
+items = list(counts.items())
+items.sort(key = lambda x:x[1], reverse=True)
+ls = []
+for i in range(20):
+    word,count=items[i]
+    #print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
+    ls.append(items[i][0])
+txt1 = &#39; &#39;.join(ls)
+w=wordcloud.WordCloud(width=1000,height=500,background_color=&#39;white&#39;,\
+                      max_words=20,font_path=&#39;msyh.ttc&#39;)
+w.generate(txt1)
+w.to_file(&#39;2.jpg&#39;)</code></pre>
+<p><img src="https://i.loli.net/2021/04/10/IPpXBJv8ikF2ux9.png" alt="image-20210410232605044"></p>
 
       
 
@@ -509,7 +559,7 @@ except:
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%94%9F%E6%80%81%E5%92%8C%E6%A8%A1%E5%9D%97%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">计算生态和模块编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">Python第三方库的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">pip工具安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9AWindows%E4%B8%8B%E7%9A%84pip%E6%8D%A2%E6%BA%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">扩展：Windows下的pip换源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">自定义安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">4.</span> <span class="toc-text">文件安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9Awhl%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.0.1.</span> <span class="toc-text">扩展：whl格式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pip%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC"><span class="toc-number">5.</span> <span class="toc-text">pip安装脚本</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%94%9F%E6%80%81%E5%92%8C%E6%A8%A1%E5%9D%97%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">计算生态和模块编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">Python第三方库的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">pip工具安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9AWindows%E4%B8%8B%E7%9A%84pip%E6%8D%A2%E6%BA%90"><span class="toc-number">2.1.1.</span> <span class="toc-text">扩展：Windows下的pip换源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">自定义安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">4.</span> <span class="toc-text">文件安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9Awhl%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.0.1.</span> <span class="toc-text">扩展：whl格式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pip%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC"><span class="toc-number">5.</span> <span class="toc-text">pip安装脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#You-Get"><span class="toc-number">6.</span> <span class="toc-text">You-Get</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wordcloud"><span class="toc-number">7.</span> <span class="toc-text">Wordcloud</span></a></li></ol>
                     </div>
                 </span>
             </div>
