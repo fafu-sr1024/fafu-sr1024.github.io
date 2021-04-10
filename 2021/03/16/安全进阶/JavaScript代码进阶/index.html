@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/03/17/w1kCMUD9ENZ4hma.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/17/3GV4TCYS8IwcXoz.png">
 <meta property="article:published_time" content="2021-03-16T02:00:50.000Z">
-<meta property="article:modified_time" content="2021-03-28T12:39:49.661Z">
+<meta property="article:modified_time" content="2021-04-10T02:20:20.249Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -766,12 +766,12 @@ function Jquery_Test()&#123;
 &#125;</code></pre>
 <h2 id="AJAX的基本语法及应用"><a href="#AJAX的基本语法及应用" class="headerlink" title="AJAX的基本语法及应用"></a>AJAX的基本语法及应用</h2><p>（1）AJAX=Asynchronous JavScript and XML（异步的JavaScript和XML）</p>
 <p>（2）AJAX是一种用于创建快速动态网页的技术。AJAX不是一种新的语言，而是一种新的标准方法；</p>
-<p>（3）传统的网页（不使用AJAX）如果需要更新内容，必须重载整个网页面。AJAX技术通过在后台与服务器进行少量数据交换，AJAX可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<p>（3）传统的网页（不使用AJAX）如果需要更新内容，必须重载整个网页。AJAX技术通过在后台与服务器进行少量数据交换，AJAX可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
 <p>（4）使用AJAX的应用程序案例：新浪微博、Google地图、开心网等等。</p>
 <p>HTML – AJAX – 访问服务器的某个页面 – 数据库</p>
 <h3 id="AJAX请求方法"><a href="#AJAX请求方法" class="headerlink" title="AJAX请求方法"></a>AJAX请求方法</h3><p>如需将请求发送到服务器，使用XMLHttpRequest类的open()和send()方法；</p>
 <pre><code class="javascript">xmlhttp.open(&quot;GET&quot;,&quot;test1.txt&quot;,true);
-xmlhttp.sen();</code></pre>
+xmlhttp.send();</code></pre>
 <table>
 <thead>
 <tr>
@@ -872,6 +872,55 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
     &lt;div id=&quot;myDiv&quot;&gt;&lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+<p>扩展：</p>
+<h2 id="AJAX的GET请求"><a href="#AJAX的GET请求" class="headerlink" title="AJAX的GET请求"></a>AJAX的GET请求</h2><pre><code class="javascript">function ajax1()&#123;
+    //1.创建一个XMLHttpRequest对象
+    //打开浏览器
+    var xmlhttp = new XMLHttpRequest()
+    //2.使用open方法，表明请求的方式
+    //在浏览器上输入请求的URL
+        //1.GET/POST
+        //2.page
+        //3.true 异步
+    xmlhttp.open(&quot;GET&quot;,&quot;./AJAX_Back.html&quot;,true)
+    //3.使用send方法，发送请求的数据
+    //敲下回车，发送数据
+    xmlhttp.send()
+    //4.判断ajax是否从请求的页面中收到了数据
+    //当网页给响应时，将响应显示在页面上
+    xmlhttp.onload=function()&#123;
+        //xmlhttp.responeseText用于获取ajax接收到的响应
+        document.querySelectorAll(&quot;.container&quot;)[0].innerHTML=xmlhttp.responseText
+    &#125;
+&#125;</code></pre>
+<h2 id="AJAX的POST请求"><a href="#AJAX的POST请求" class="headerlink" title="AJAX的POST请求"></a>AJAX的POST请求</h2><p>post请求特征：</p>
+<ul>
+<li>post请求Header部分一定会存在一个字段Content-Type，用于判断post提交数据的类型</li>
+<li>如果post请求提交的是一串数据，则Content-Type: application/x-www-form-urlencoded</li>
+</ul>
+<pre><code class="javascript">function ajax1()&#123;
+    //1.创建一个XMLHttpRequest对象
+    //打开浏览器
+    var xmlhttp = new XMLHttpRequest()
+    //2.使用open方法，表明请求的方式
+    //在浏览器上输入请求的URL
+        //1.GET/POST
+        //2.page
+        //3.true
+    xmlhttp.open(&quot;POST&quot;,&quot;./AJAX_Back.html&quot;,true)
+    //3.使用setRequestHeader方法，设置请求头，表示需要提交数据
+    xmlhttp.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;)
+    //3.使用send方法，发送请求的数据.POSTData表示需要发送的数据
+    //敲下回车，发送数据
+    xmlhttp.send(&quot;POSTData&quot;)
+    //4.判断ajax是否从请求的页面中收到了数据
+    //当网页给响应时，将响应显示在页面上
+    xmlhttp.onload=function()&#123;
+        //xmlhttp.responeseText用于获取ajax接收到的响应
+        document.querySelectorAll(&quot;.container&quot;)[0].innerHTML=xmlhttp.responseText
+    &#125;
+&#125;</code></pre>
+<h2 id="AJAX请求数据库"><a href="#AJAX请求数据库" class="headerlink" title="AJAX请求数据库"></a>AJAX请求数据库</h2><p>浏览器触发AJAX请求–&gt;使用AJAX请求对后端HTML(PHP)页面进行请求–&gt;使用PHP语句向MySQL数据库进行请求–&gt;MySQL将数据响应给PHP页面–&gt;PHP页面将数据响应给前端AJAX请求的页面–&gt;AJAX将得到的请求显示在浏览器上。</p>
 
       
 
@@ -1014,7 +1063,7 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">JavaScript简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">JavaScript的基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">JavaScript变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">局部变量和全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">JavaScript的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">JavaScript函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.</span> <span class="toc-text">JavaScript运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.1.</span> <span class="toc-text">算术运算符与赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E5%92%8C%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.2.</span> <span class="toc-text">比较和逻辑运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.6.</span> <span class="toc-text">javascript条件语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.7.</span> <span class="toc-text">JavaScript循环语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break%E5%92%8Ccontinue%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.8.</span> <span class="toc-text">break和continue语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-DOM"><span class="toc-number">3.</span> <span class="toc-text">JavaScript DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8Eid"><span class="toc-number">3.1.</span> <span class="toc-text">获取标签–基于id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE-%E2%80%93%E5%9F%BA%E4%BA%8Eclass"><span class="toc-number">3.2.</span> <span class="toc-text">获取标签 –基于class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8ETagname"><span class="toc-number">3.3.</span> <span class="toc-text">获取标签–基于Tagname</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8EDiv"><span class="toc-number">3.4.</span> <span class="toc-text">获取标签–基于Div</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript-BOM"><span class="toc-number">4.</span> <span class="toc-text">Javascript BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-open"><span class="toc-number">4.1.</span> <span class="toc-text">BOM-window.open</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-close"><span class="toc-number">4.2.</span> <span class="toc-text">BOM-window.close</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bom-window-location-href"><span class="toc-number">4.3.</span> <span class="toc-text">Bom-window.location.href</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-alert"><span class="toc-number">4.4.</span> <span class="toc-text">BOM-消息框-alert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-confirm"><span class="toc-number">4.5.</span> <span class="toc-text">BOM-消息框-confirm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-prompt"><span class="toc-number">4.6.</span> <span class="toc-text">BOM-消息框-prompt</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">AJAX的基本语法及应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AJAX%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">AJAX请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-get%E8%AF%B7%E6%B1%82"><span class="toc-number">5.2.</span> <span class="toc-text">请求实现-get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-POST%E8%AF%B7%E6%B1%82"><span class="toc-number">5.3.</span> <span class="toc-text">请求实现-POST请求</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">JavaScript简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">JavaScript的基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%8F%98%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">JavaScript变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">局部变量和全局变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">JavaScript的基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%87%BD%E6%95%B0"><span class="toc-number">2.4.</span> <span class="toc-text">JavaScript函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.</span> <span class="toc-text">JavaScript运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.1.</span> <span class="toc-text">算术运算符与赋值运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E5%92%8C%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.5.2.</span> <span class="toc-text">比较和逻辑运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.6.</span> <span class="toc-text">javascript条件语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.7.</span> <span class="toc-text">JavaScript循环语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break%E5%92%8Ccontinue%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.8.</span> <span class="toc-text">break和continue语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-DOM"><span class="toc-number">3.</span> <span class="toc-text">JavaScript DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8Eid"><span class="toc-number">3.1.</span> <span class="toc-text">获取标签–基于id</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE-%E2%80%93%E5%9F%BA%E4%BA%8Eclass"><span class="toc-number">3.2.</span> <span class="toc-text">获取标签 –基于class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8ETagname"><span class="toc-number">3.3.</span> <span class="toc-text">获取标签–基于Tagname</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%A0%87%E7%AD%BE%E2%80%93%E5%9F%BA%E4%BA%8EDiv"><span class="toc-number">3.4.</span> <span class="toc-text">获取标签–基于Div</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript-BOM"><span class="toc-number">4.</span> <span class="toc-text">Javascript BOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-open"><span class="toc-number">4.1.</span> <span class="toc-text">BOM-window.open</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-window-close"><span class="toc-number">4.2.</span> <span class="toc-text">BOM-window.close</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bom-window-location-href"><span class="toc-number">4.3.</span> <span class="toc-text">Bom-window.location.href</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-alert"><span class="toc-number">4.4.</span> <span class="toc-text">BOM-消息框-alert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-confirm"><span class="toc-number">4.5.</span> <span class="toc-text">BOM-消息框-confirm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E6%B6%88%E6%81%AF%E6%A1%86-prompt"><span class="toc-number">4.6.</span> <span class="toc-text">BOM-消息框-prompt</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">AJAX的基本语法及应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AJAX%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">AJAX请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-get%E8%AF%B7%E6%B1%82"><span class="toc-number">5.2.</span> <span class="toc-text">请求实现-get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0-POST%E8%AF%B7%E6%B1%82"><span class="toc-number">5.3.</span> <span class="toc-text">请求实现-POST请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX%E7%9A%84GET%E8%AF%B7%E6%B1%82"><span class="toc-number">6.</span> <span class="toc-text">AJAX的GET请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX%E7%9A%84POST%E8%AF%B7%E6%B1%82"><span class="toc-number">7.</span> <span class="toc-text">AJAX的POST请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AJAX%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">8.</span> <span class="toc-text">AJAX请求数据库</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -1143,6 +1192,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">deepin</a>
               </li>
             
             <div class="clearfix"></div>

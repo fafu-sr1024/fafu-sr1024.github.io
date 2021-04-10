@@ -68,7 +68,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/03/18/GEd5cH3gzv9h2Ne.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/18/8khDnLWJTZ5cmC7.png">
 <meta property="article:published_time" content="2021-03-17T08:28:15.000Z">
-<meta property="article:modified_time" content="2021-03-18T12:59:22.495Z">
+<meta property="article:modified_time" content="2021-04-10T02:00:51.732Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -260,6 +260,36 @@ echo &quot;I am &amp;name,I eat $shuiguo[1]&quot;;
 <ul>
 <li>print：只能输出一个字符串</li>
 </ul>
+<h3 id="HTML和PHP的嵌套关系"><a href="#HTML和PHP的嵌套关系" class="headerlink" title="HTML和PHP的嵌套关系"></a>HTML和PHP的嵌套关系</h3><p>（1）要在PHP文件中写入PHP的语句（脚本），在整段代码的最前面写上&lt;?php，在整段代码的最后面写上?&gt;</p>
+<p>（2）PHP文件内可以写入HTML标签、PHP脚本</p>
+<p>（3）PHP文件中可以嵌套HTML标签、HTML标签又能嵌套PHP脚本、PHP脚本中可以嵌套HTML标签</p>
+<pre><code class="php">&lt;?php
+    echo &quot;test1&quot;;
+    echo &quot;&lt;br&gt;&quot;;
+    echo &quot;test2&quot;;
+?&gt;</code></pre>
+<h3 id="HTML和PHP的作用"><a href="#HTML和PHP的作用" class="headerlink" title="HTML和PHP的作用"></a>HTML和PHP的作用</h3><p>（1）HTML用于静态网页的制作。</p>
+<p>（2）PHP的作用:用于解决HTML的缺陷,可以和用户进行对应的交互以达到用户能够看到属于自己个性化的页面。</p>
+<ul>
+<li>前端页面:正常的用户可以去查看到的HTML页面。前端页面可以由PHP或HTML编写，一般用HTML。</li>
+<li>后端页面:页面不会显示任何内容，页面通常用于处理前端页面得到的数据。后端页面只能由服务端脚本引擎编写。</li>
+</ul>
+<h3 id="PHP的动态交互"><a href="#PHP的动态交互" class="headerlink" title="PHP的动态交互"></a>PHP的动态交互</h3><h4 id="浏览器提交请求"><a href="#浏览器提交请求" class="headerlink" title="浏览器提交请求"></a>浏览器提交请求</h4><p><strong>用户如何发送自己的需求（用户在浏览器中输入的内容如何提交给服务器）</strong></p>
+<p>（1）HTML form表单提交数据</p>
+<p>（2）JS  AJAX提交输入数据</p>
+<h4 id="服务器端接收请求"><a href="#服务器端接收请求" class="headerlink" title="服务器端接收请求"></a>服务器端接收请求</h4><pre><code>    $_SESSION 
+    $_COOKIE
+    $_FILES
+    $_GET
+    $_POST
+    $_REQUEST
+    $_SERVER
+    $GLOBALS</code></pre>
+<h4 id="网站用户状态保持"><a href="#网站用户状态保持" class="headerlink" title="网站用户状态保持"></a>网站用户状态保持</h4><p>（1）HTTP无状态协议，为了保持用户登录状态，HTTP引入了Cookie和Session机制。</p>
+<p>（2）cookie中，大部分用于保存客户端和服务器之间的状态（PHPSESSID–PHP Session ID–存放某串Session），但网站开发人员可以自行对cookie进行设置和使用。</p>
+<h4 id="Cookie和Session判断登录状态"><a href="#Cookie和Session判断登录状态" class="headerlink" title="Cookie和Session判断登录状态"></a>Cookie和Session判断登录状态</h4><p>（1）PHPSESSID中的值会和服务器中的session值进行判断</p>
+<p>（2）若有session值，则代表浏览器访问过这个页面</p>
+<p>（3）此时服务器会对session进行判断，如果session中写入的为“可以登录”,那么可登录成功，否则登录失败。</p>
 <h3 id="PHP变量"><a href="#PHP变量" class="headerlink" title="PHP变量"></a>PHP变量</h3><p>（1）PHP变量的命名规则：</p>
 <ul>
 <li>变量以$符号开头，其后是变量的名称</li>
@@ -281,15 +311,15 @@ echo $x+$y;
 <li>在PHP4.1.0中引入，是在全部作用域中始终可用的内置变量。</li>
 <li>PHP中的许多预定义变量都是“超全局的”，这意味着它们在一个脚本的全部作用域中都可用。</li>
 </ul>
-<pre><code class="php">    $_SESSION
-    $_COOKIE
-    $_FILES
-    $_GET
-    $_POST
-    $_REQUEST
-    $_SERVER
-    $GLOBALS</code></pre>
-<p>（3）$_GET &amp; $_POST：获取GET或POST请求参数的值</p>
+<pre><code class="php">    $_SESSION 获取保存的SESSION信息
+    $_COOKIE 获取保存的COOKIE信息
+    $_FILES 接收前端以任意形式传输的文件
+    $_GET 接收前端以GET形式传输的参数
+    $_POST 接收前端以POST形式传输的参数
+    $_REQUEST 接收前端以任意形式传输的参数
+    $_SERVER 保存关于报头、路径和脚本位置的信息。
+    $GLOBALS 保存PHP中所有的参数（包括超全局变量中的参数)</code></pre>
+<p>（3）$_GET &amp; $_POST：接收前端以GET或POST形式传输的参数</p>
 <ul>
 <li>get.php</li>
 </ul>
@@ -351,12 +381,22 @@ echo $x+$y;
 <ul>
 <li>form.php</li>
 </ul>
-<pre><code class="php">&lt;?php
+<pre><code class="php">&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;?php
     $name=$_POST[&#39;name&#39;];
     $email=$_POST[&#39;email&#39;];
     echo &quot;Welcome &quot;,$name;
     echo &quot;&lt;br&gt;&quot;;
     echo &quot;Your email is &quot;,$email;
+//将用户名和电邮保存在数据库中
+    //1.构造SQL语句
+    //INSERT INTO user (username,email) VALUES (&quot;xxx&quot;,&quot;xxx&quot;) 将两个xxx看作是变量，第一个xxx前的内容看作一个字符串，两个xxx之间的内容为一个字符串，第二个xxx后的内容看作是一个字符串。
+    //PHP拼接符&quot;.&quot;
+    //$a定义变量a
+    $sql=&#39;INSERT INTO user (username,email) VALUES (&quot;&#39;.$name.&#39;&quot;,&quot;&#39;.$email.&#39;&#39;&quot;)&#39;;
+或者不用连接符：
+    $sql=&quot;INSERT INTO user (username,email) VALUES (&#39;$name&#39;,&#39;$email&#39;)&quot;;
+    //2.使用PHP去向数据库进行查询，查询的内容就位构造好的SQL语句
     header(&quot;Content-Type:text/html;charset=UTF-8&quot;);     //解决中文乱码
 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/18/4IPyNqHUoCFzpEK.png" alt="image-20210318095619457"></p>
@@ -754,7 +794,7 @@ mysqli_close($con);
 header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/18/GEd5cH3gzv9h2Ne.png" alt="image-20210318195520342"></p>
-<h2 id="PHP的会话与权限管理"><a href="#PHP的会话与权限管理" class="headerlink" title="PHP的会话与权限管理"></a>PHP的会话与权限管理</h2><h3 id="Cookie和会话Session"><a href="#Cookie和会话Session" class="headerlink" title="Cookie和会话Session"></a>Cookie和会话Session</h3><p>（1）cookie用来管理服务器和客户之间的状态</p>
+<h2 id="PHP的会话与权限管理"><a href="#PHP的会话与权限管理" class="headerlink" title="PHP的会话与权限管理"></a>PHP的会话与权限管理</h2><h3 id="Cookie和会话Session"><a href="#Cookie和会话Session" class="headerlink" title="Cookie和会话Session"></a>Cookie和会话Session</h3><p>（1）cookie用来管理服务器和客户之间的状态。</p>
 <ul>
 <li>cookie的工作机制是<strong>用户识别及状态管理</strong></li>
 <li>web网站为了管理用户的状态，会通过web浏览器，把一些数据临时写入用户的计算机内。当用户访问该web网站时，可通过通信方式取回之前发放的cookie。</li>
@@ -762,6 +802,8 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 <p>（2）session会在cookie中出现和传输，属于cookie的一部分</p>
 <ul>
 <li>当web服务器开启会话机制时，用户登录成功后，会将<strong>会话保存在服务器中</strong></li>
+<li>PHPSESSID–php session id–存放某串session</li>
+<li>session可在浏览器中用f12打开开发者工具–&gt;Application–&gt;Cookie查看</li>
 </ul>
 <h3 id="PHP-Cookie"><a href="#PHP-Cookie" class="headerlink" title="PHP Cookie"></a>PHP Cookie</h3><p>（1）下发cookie函数：Setcookie()</p>
 <ul>
@@ -975,7 +1017,7 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E7%9A%84%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">PHP的基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.</span> <span class="toc-text">PHP变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">PHP表单处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">PHP数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">PHP函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%BC%B1%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.5.</span> <span class="toc-text">PHP弱类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E7%9A%84%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">SQL的进阶语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.</span> <span class="toc-text">数据库系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.2.</span> <span class="toc-text">基础查询语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.3.</span> <span class="toc-text">联合查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SELECT%E5%AD%90%E5%8F%A5"><span class="toc-number">2.4.</span> <span class="toc-text">SELECT子句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%BB%BA%E8%A1%A8%E5%92%8C%E5%A2%9E%E5%88%A0%E6%94%B9%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.5.</span> <span class="toc-text">基本建表和增删改语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.6.</span> <span class="toc-text">数据库管理系统的内置数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">2.7.</span> <span class="toc-text">数据库管理系统的内置函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8PHP%E7%AE%A1%E7%90%86SQL"><span class="toc-number">3.</span> <span class="toc-text">使用PHP管理SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">3.1.</span> <span class="toc-text">PHP管理数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">3.2.</span> <span class="toc-text">根据用户查询返回结果展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E7%9A%84%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">PHP的会话与权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E5%92%8C%E4%BC%9A%E8%AF%9DSession"><span class="toc-number">4.1.</span> <span class="toc-text">Cookie和会话Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-Cookie"><span class="toc-number">4.2.</span> <span class="toc-text">PHP Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-Sessions"><span class="toc-number">4.3.</span> <span class="toc-text">PHP Sessions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8PHP-Session"><span class="toc-number">4.4.</span> <span class="toc-text">存储PHP Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%BB%93PHP-Session"><span class="toc-number">4.5.</span> <span class="toc-text">终结PHP Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8session%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">4.6.</span> <span class="toc-text">利用session进行权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#header-%E5%87%BD%E6%95%B0"><span class="toc-number">4.7.</span> <span class="toc-text">header()函数</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E7%9A%84%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">PHP的基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML%E5%92%8CPHP%E7%9A%84%E5%B5%8C%E5%A5%97%E5%85%B3%E7%B3%BB"><span class="toc-number">1.1.</span> <span class="toc-text">HTML和PHP的嵌套关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML%E5%92%8CPHP%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">HTML和PHP的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E7%9A%84%E5%8A%A8%E6%80%81%E4%BA%A4%E4%BA%92"><span class="toc-number">1.3.</span> <span class="toc-text">PHP的动态交互</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%90%E4%BA%A4%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.1.</span> <span class="toc-text">浏览器提交请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.2.</span> <span class="toc-text">服务器端接收请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81%E4%BF%9D%E6%8C%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">网站用户状态保持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie%E5%92%8CSession%E5%88%A4%E6%96%AD%E7%99%BB%E5%BD%95%E7%8A%B6%E6%80%81"><span class="toc-number">1.3.4.</span> <span class="toc-text">Cookie和Session判断登录状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%8F%98%E9%87%8F"><span class="toc-number">1.4.</span> <span class="toc-text">PHP变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86"><span class="toc-number">1.5.</span> <span class="toc-text">PHP表单处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.6.</span> <span class="toc-text">PHP数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%87%BD%E6%95%B0"><span class="toc-number">1.7.</span> <span class="toc-text">PHP函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%BC%B1%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.8.</span> <span class="toc-text">PHP弱类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E7%9A%84%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">SQL的进阶语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.</span> <span class="toc-text">数据库系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.2.</span> <span class="toc-text">基础查询语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.3.</span> <span class="toc-text">联合查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SELECT%E5%AD%90%E5%8F%A5"><span class="toc-number">2.4.</span> <span class="toc-text">SELECT子句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%BB%BA%E8%A1%A8%E5%92%8C%E5%A2%9E%E5%88%A0%E6%94%B9%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.5.</span> <span class="toc-text">基本建表和增删改语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.6.</span> <span class="toc-text">数据库管理系统的内置数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">2.7.</span> <span class="toc-text">数据库管理系统的内置函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8PHP%E7%AE%A1%E7%90%86SQL"><span class="toc-number">3.</span> <span class="toc-text">使用PHP管理SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">3.1.</span> <span class="toc-text">PHP管理数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">3.2.</span> <span class="toc-text">根据用户查询返回结果展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E7%9A%84%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">PHP的会话与权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E5%92%8C%E4%BC%9A%E8%AF%9DSession"><span class="toc-number">4.1.</span> <span class="toc-text">Cookie和会话Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-Cookie"><span class="toc-number">4.2.</span> <span class="toc-text">PHP Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-Sessions"><span class="toc-number">4.3.</span> <span class="toc-text">PHP Sessions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8PHP-Session"><span class="toc-number">4.4.</span> <span class="toc-text">存储PHP Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%BB%93PHP-Session"><span class="toc-number">4.5.</span> <span class="toc-text">终结PHP Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8session%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">4.6.</span> <span class="toc-text">利用session进行权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#header-%E5%87%BD%E6%95%B0"><span class="toc-number">4.7.</span> <span class="toc-text">header()函数</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -1104,6 +1146,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">deepin</a>
               </li>
             
             <div class="clearfix"></div>

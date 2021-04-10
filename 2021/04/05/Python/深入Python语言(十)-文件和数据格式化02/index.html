@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/04/01/yGYlsv9O2uoWEwi.png">
 <meta property="og:image" content="https://i.loli.net/2021/04/01/St9sTude8MIV3bf.png">
 <meta property="article:published_time" content="2021-04-05T04:19:52.000Z">
-<meta property="article:modified_time" content="2021-04-05T11:13:25.878Z">
+<meta property="article:modified_time" content="2021-04-06T09:29:51.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -573,7 +573,67 @@ fw = open(&quot;price2021_form_json.csv&quot;, &quot;w&quot;)
 for item in data:
     fw.write(&quot;,&quot;.join(item) + &quot;\n&quot;)#join() 方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
 fw.close()</code></pre>
-<p>扩展：Python的数据类型转换</p>
+<p>扩展：Python的数据类型转换函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int(x,[,base])</td>
+<td align="center">将字符串x转换为一个整数</td>
+</tr>
+<tr>
+<td align="center">float(x)</td>
+<td align="center">将字符串x转换为一个浮点数</td>
+</tr>
+<tr>
+<td align="center">complex(real,[,image])</td>
+<td align="center">根据real和image创建一个浮点数</td>
+</tr>
+<tr>
+<td align="center">str(x)</td>
+<td align="center">将对象x转换为字符串</td>
+</tr>
+<tr>
+<td align="center">repr(obj)</td>
+<td align="center">将对象obj当作Python语句执行，返回结果的字符串形式</td>
+</tr>
+<tr>
+<td align="center">eval(str)</td>
+<td align="center">计算字符串中的有效Python表达式，返回结果</td>
+</tr>
+<tr>
+<td align="center">tuple(s)</td>
+<td align="center">将序列s转换为一个元组</td>
+</tr>
+<tr>
+<td align="center">list(s)</td>
+<td align="center">将序列s转换为一个列表</td>
+</tr>
+<tr>
+<td align="center">chr(x)</td>
+<td align="center">将一个整数转换为一个字符</td>
+</tr>
+<tr>
+<td align="center">unichr(x)</td>
+<td align="center">将一个整数转换为Unicode字符</td>
+</tr>
+<tr>
+<td align="center">ord(x)</td>
+<td align="center">将一个字符转换为它的整数值</td>
+</tr>
+<tr>
+<td align="center">hex(x)</td>
+<td align="center">将一个整数转换为一个十六进制字符串</td>
+</tr>
+<tr>
+<td align="center">oct(x)</td>
+<td align="center">将一个整数转换为一个八进制字符串</td>
+</tr>
+</tbody></table>
 
       
 
@@ -678,11 +738,11 @@ fw.close()</code></pre>
   
 <nav id="article-nav">
   
-    <a href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Linux下进行Python3的pip换源操作
+          deepin下进行Python3的pip换源操作
         
       </div>
     </a>
@@ -845,6 +905,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">deepin</a>
               </li>
             
             <div class="clearfix"></div>

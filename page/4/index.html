@@ -152,6 +152,720 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/初识Python语言(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">初识Python语言(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/" class="archive-article-date">
+  	<time datetime="2020-11-24T10:35:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="编译和解释"><a href="#编译和解释" class="headerlink" title="编译和解释"></a>编译和解释</h2><p>（1)高级语言按照计算机执行方式的不同可分成两类：静态语言和脚本语言。这里的执行方式是指计算机执行一个程序的过程，静态语言采用编译执行，脚本语言采用解释执行。</p>
+<p>（2）编译：将源代码(高级语言代码)转换为目标代码(机器语言代码)的过程，执行编译的计算机程序称为编译器。编译是一次性的翻译，一旦程序被编译，则目标代码不再需要编译器就可以运行。</p>
+<p>（3）解释：将源代码逐条转换成目标代码的同时逐条运行目标代码的过程，执行解释的计算机程序称为解释器。</p>
+<p>解释在每次程序运行时都需要解释器和源代码。</p>
+<table>
+<thead>
+<tr>
+<th align="center">语言类型</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">静态语言(编译执行)</td>
+<td align="center">C语言、Java语言</td>
+</tr>
+<tr>
+<td align="center">脚本语言(解释执行)</td>
+<td align="center">JavaScript语言、PHP语言、Python语言</td>
+</tr>
+</tbody></table>
+<p>（4）Python语言虽然采用解释执行方式，但它的解释器也保留了编译器的部分功能，随着程序运行，解释器也会产生一个完整的目标代码。这种将解释器和编译器结合的新解释器是现代脚本语言为了提升计算机性能的一种有益演进。</p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>可在Python解释器自带的idle下编写Python语句，路径：D:\Python\Lib\idlelib，在该目录下双击idle.bat即可开始编写，也可直接在Windows下的“开始”菜单中搜索关键字”idle”找到快捷方式打开。</p>
+<pre><code class="python">&gt;&gt;&gt;print(&quot;Hello World&quot;)
+Hello World</code></pre>
+<p>其中，第一行的”&gt;&gt;&gt;”是Python语言运行环境的提示符，表示可以在这后面输入Python语句。第二行则是Python语句的执行结果。</p>
+<h2 id="Python语言的特点"><a href="#Python语言的特点" class="headerlink" title="Python语言的特点"></a>Python语言的特点</h2><p>语法简洁、跨平台、可扩展、开源通用、支持中文、模式多样(支持面向过程和面向对象两种编程方式)、类库丰富的脚本语言。</p>
+<h2 id="运行方式"><a href="#运行方式" class="headerlink" title="运行方式"></a>运行方式</h2><p>运行Python程序有两种方式：交互式和文件式。</p>
+<p>交互式指Python解释器即时响应用户输入的每条代码，给出输出结果，一般用于调试少量代码。</p>
+<p>文件式，也称为批量式，指用户将Python程序写在一个或多个文件中，然后启动Python解释器批量执行文件中的代码，是最常用的编程方式。</p>
+<h3 id="交互式启动和运行方法"><a href="#交互式启动和运行方法" class="headerlink" title="交互式启动和运行方法"></a>交互式启动和运行方法</h3><p>交互式有两种启动和运行方法。</p>
+<p>第一种方法，启动Windows命令行工具，Windows键+R快速打开运行窗口，输入”cmd”，在控制台输入”python”，在命令提示符”&gt;&gt;&gt;”后输入程序代码，回车后显示输出结果。在”&gt;&gt;&gt;”提示符后输入exit()或quit()可以退出Python运行环境。</p>
+<p><img src="https://i.loli.net/2020/11/24/4jOUhvayTeZof5m.png" alt="image-20201124195448770"></p>
+<p>第二种方法，通过调用IDLE来启动Python运行环境。</p>
+<p><img src="https://i.loli.net/2020/11/24/4iaNIMPFjfoO5ry.png" alt="image-20201124195840923"></p>
+<h3 id="文件式启动和运行方法"><a href="#文件式启动和运行方法" class="headerlink" title="文件式启动和运行方法"></a>文件式启动和运行方法</h3><p>文件式也有两种运行方式。</p>
+<p>第一种方法，按照Python的语法格式在任意的编辑器中编写代码，可以使用Python安装包中的IDLE编辑器或者notepad++，然后保存为xx.py形式的文件。之后，进入xx.py文件所在目录，打开Windows的命令行窗口，输入</p>
+<pre><code>python xxx.py</code></pre>
+<p>即可运行Python程序文件获得输出。</p>
+<p><img src="https://i.loli.net/2020/11/24/sXkwqECbHKyfrZW.png" alt="image-20201124201902643"></p>
+<p>第二种方法，打开IDLE，按快捷键Ctrl+N打开一个新窗口，或者在菜单中选择File–&gt;New File选项。这个新窗口不再是交互模式，而是一个具备Python语法高亮辅助的编辑器，可进行代码编辑。编写完代码并保存为xx.py文件后，按快捷键F5，或者在菜单中选择Run–&gt;Run Module选项运行该文件。</p>
+<p><img src="https://i.loli.net/2020/11/24/1O45caGsVpeJyhH.png" alt="image-20201124202318979"></p>
+<h3 id="启动和运行方法推荐"><a href="#启动和运行方法推荐" class="headerlink" title="启动和运行方法推荐"></a>启动和运行方法推荐</h3><p>IDLE是一个简单有效的集成开发环境，支持交互式和文件式。其中，最常用且最重要的是采用IDLE的文件式方法。IDLE是小规模Python软件项目的主要编写工具，比IDLE更强大的Python语言集成开发环境是PyCharm，它主要用于中规模及以上的软件开发项目。</p>
+<h2 id="运行Python小程序"><a href="#运行Python小程序" class="headerlink" title="运行Python小程序"></a>运行Python小程序</h2><p>（1）同切圆的绘制</p>
+<p>文件式：</p>
+<pre><code>import turtle            #引入turtle库
+turtle.pensize (2)       #设置画笔宽度为2像素
+turtle.circle (10)       #绘制半径为10像素的圆
+turtle.circle (40)       #绘制半径为40像素的圆
+turtle.circle (80)       #绘制半径为80像素的圆
+turtle.circle (160)      #绘制半径为160像素的圆</code></pre>
+<p>运行结果：</p>
+<p><img src="https://i.loli.net/2020/11/24/eHTuq74hitLckSF.png" alt="image-20201124234947504"></p>
+<p>（2）日期和时间的输出</p>
+<p>交互式：</p>
+<pre><code>&gt;&gt;&gt;from datetime import datetime   #引用datetime库
+&gt;&gt;&gt;now = datetime.now()            #获取当前日期和时间信息
+&gt;&gt;&gt;print(now)
+&gt;&gt;&gt;now.strftime(&quot;%x&quot;)              #输出其中的日期部分
+&gt;&gt;&gt;now.strftime(&quot;%X&quot;)              #输出其中的时间部分</code></pre>
+<p><img src="https://i.loli.net/2020/11/24/N2hJvTAxtF5y1Gw.png" alt="image-20201124235205031"></p>
+<p>文件式：</p>
+<pre><code>from datetime import datetime   #引用datetime库
+now = datetime.now()            #获取当前日期和时间信息
+print(now)
+print(now.strftime(&quot;%x&quot;))       #输出其中的日期部分
+print(now.strftime(&quot;%X&quot;))       #输出其中的时间部分，其中X大写</code></pre>
+<p><img src="https://i.loli.net/2020/11/24/vhlAxUZELmpGYR6.png" alt="image-20201124233441815"></p>
+<p>（3）import保留字用来引入函数库，绘制图形可以使用turtle库，获得系统的日期和时间使用datetime库</p>
+<h2 id="程序的基本编写方法"><a href="#程序的基本编写方法" class="headerlink" title="程序的基本编写方法"></a>程序的基本编写方法</h2><h3 id="IPO程序编写方法"><a href="#IPO程序编写方法" class="headerlink" title="IPO程序编写方法"></a>IPO程序编写方法</h3><p>无论程序规模如何，每个程序都有统一的运算模式：输入数据、处理数据和输出数据。这种运算模式形成了基本的程序编写方法：IPO(Input，Process，Output)方法。</p>
+<h3 id="输入-Input"><a href="#输入-Input" class="headerlink" title="输入(Input)"></a>输入(Input)</h3><p>输入是一个程序的开始。程序要处理的数据有多种来源，因此形成了多种输入方式。</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入方式</th>
+<th align="left">输入来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">文件输入</td>
+<td align="left">文件</td>
+</tr>
+<tr>
+<td align="left">网络输入</td>
+<td align="left">互联网上的数据</td>
+</tr>
+<tr>
+<td align="left">控制台输入</td>
+<td align="left">程序使用者输入的信息</td>
+</tr>
+<tr>
+<td align="left">交互界面输入</td>
+<td align="left">通过提供一个图形交互界面从用户处获取</td>
+</tr>
+<tr>
+<td align="left">随机数据输入</td>
+<td align="left">将随机数作为程序输入，需要使用特定的随机数生成器程序或调用相关函数</td>
+</tr>
+<tr>
+<td align="left">内部参数输入</td>
+<td align="left">以程序内部定义的初始化变量作为输入</td>
+</tr>
+</tbody></table>
+<h3 id="输出-Output"><a href="#输出-Output" class="headerlink" title="输出(Output)"></a>输出(Output)</h3><p>输出是程序展示运算成果的方式。</p>
+<table>
+<thead>
+<tr>
+<th>输出方式</th>
+<th>具体实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>控制台输出</td>
+<td>通过程序运行环境中的命令打印输出结果，例如Windows中的命令行工具、IDLE工具</td>
+</tr>
+<tr>
+<td>图形输出</td>
+<td>在计算机中启动独立的图形输出窗口，根据指令绘制运算结果</td>
+</tr>
+<tr>
+<td>文件输出</td>
+<td>以生成新的文件或修改已有文件方式输出运行结果，是程序常用的输出方式</td>
+</tr>
+<tr>
+<td>网络输出</td>
+<td>以访问网络接口方式输出数据</td>
+</tr>
+<tr>
+<td>操作系统内部变量输出</td>
+<td>程序将运行结果输出到系统内部变量中，这类变量包括管道、线程、信号量等</td>
+</tr>
+</tbody></table>
+<h3 id="处理-Process"><a href="#处理-Process" class="headerlink" title="处理(Process)"></a>处理(Process)</h3><p>处理是程序对输入数据进行计算产生输出结果的过程，计算问题的处理方法统称为“算法”。</p>
+<h3 id="无限循环程序"><a href="#无限循环程序" class="headerlink" title="无限循环程序"></a>无限循环程序</h3><p>无限循环程序没有输入输出，例如：</p>
+<pre><code class="python">while(True)
+   a = 1</code></pre>
+<p>由于没有输入输出，代码会一直执行下去。该程序快速消耗CPU的计算资源，可以用来辅助测试CPU或系统性能。不过，没有输入输出的程序功能十分有限，仅在特殊情况下使用。</p>
+<h2 id="Python语言的版本更迭"><a href="#Python语言的版本更迭" class="headerlink" title="Python语言的版本更迭"></a>Python语言的版本更迭</h2><p>Python2.x已是遗产，Python3.x是这个语言的现在和未来。Python2.x系列的最后一个版本，其主版本号为2.7。</p>
+<p>版本之间的区别：更多区别可以查看Guido的文章：<a target="_blank" rel="noopener" href="https://docs.python.org/3/whatsnew/3.0.html">https://docs.python.org/3/whatsnew/3.0.html</a></p>
+<p>（1）修改编码：3.x系列默认采用UTF-8编码，表达UTF-8编码字符串时，无需在前面加上u或者U</p>
+<p>（2）修改print语句：用print()函数替换了print语句，功能一样，格式不同</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;print &quot;The answer is&quot;, 2*2
+3.x:&gt;&gt;&gt;print(&quot;The answer is&quot;, 2*2)
+2.x:&gt;&gt;&gt;print x
+3.x:&gt;&gt;&gt;print(x,end=&quot;,&quot;)</code></pre>
+<p>（3）修改exec语句：用exec()函数替换了exec语句，功能一样，格式不同</p>
+<p>（4）去掉&lt;&gt;符号，用!=表示“不等于”</p>
+<p>（5）修改比较行为：用&lt;、&lt;=、&gt;=、&gt;符号比较两个元素时，若元素之间不存在有意义的顺序关系，将抛出TypeError错误，不再返回False，例如：</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;1 &lt; &quot;1&quot;
+False
+3.x:&gt;&gt;&gt;1 &lt; &quot;1&quot;
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
+    1 &lt; &quot;1&quot;
+TypeError: &#39;&lt;&#39; not supported between instances of &#39;int&#39; and &#39;str&#39;</code></pre>
+<p>（6）Python3.x系列不再区分整数和长整数类型，只有一个int类型，且无取值范围限制。因此，sys.maxint常量被去掉</p>
+<p>（7）修改整数除法：两个整数的一般除法(/)返回一个浮点数，不再返回一个整数，若想返回整数，则用整数除法(//)</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;3/2
+1
+3.x:&gt;&gt;&gt;3/2
+1.5
+3.x:&gt;&gt;&gt;3//2
+1</code></pre>
+<p>（8）3.x系列八进制整数格式使用0o开头，而不再使用0开头</p>
+<p>（9）增加as、with、True、False、None作为关键字</p>
+<p>（10）去掉raw_input()函数，用input()函数代替，input()返回一个字符串</p>
+<p>（11）修改range()函数，与Python2.x系列中的xrange()类似，不再显示返回一个列表。若要返回列表，则需要通过list()函数转换</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+3.x:&gt;&gt;&gt;range(10)
+range(0,10)
+3.x:&gt;&gt;&gt;list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<p>（12）修改返回类型：除range()外，zip()、map()、filter()、字典类型的key()方法、value()方法、item()方法不再返回列表类型</p>
+<p>（13）修改异常处理表达：使用as关键字标识异常信息，例如：</p>
+<pre><code class="python">2.x:&gt;&gt;&gt;try:
+       ...   wrong_name
+       ...except NameError, err:
+       ...   print err
+       ...
+       name &#39;wrong_name&#39; is not defined
+3.x:&gt;&gt;&gt;try:
+       ...   wrong_name
+       ...except NameError as err:
+       ...   print(err)
+       ...
+name &#39;wrong_name&#39; is not defined</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/24/Python/%E5%88%9D%E8%AF%86Python%E8%AF%AD%E8%A8%80(%E4%B8%80)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali/解Misc题常用的kali工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/">解Misc题常用的kali工具</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/" class="archive-article-date">
+  	<time datetime="2020-11-23T13:15:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="binwalk"><a href="#binwalk" class="headerlink" title="binwalk"></a>binwalk</h2><p>binwalk是一款Python编写的工具，在kali中已经预安装了，可以在Python2和Python3的环境下运行，在Python3中运行速度更快。</p>
+<pre><code>apt-get install binwalk         //安装binwalk
+binwalk file                 //查看是否存在隐藏文件
+binwalk -e file              //文件提取</code></pre>
+<h2 id="foremost"><a href="#foremost" class="headerlink" title="foremost"></a>foremost</h2><p>foremost在kali中已经预安装，可用于文件的分离</p>
+<pre><code>apt-get install foremost     //安装foremost
+foremost -t all file         //分离文件，-t 指定文件类型，all则表示全部，后跟要分离的文件</code></pre>
+<h2 id="zsteg"><a href="#zsteg" class="headerlink" title="zsteg"></a>zsteg</h2><p>zsteg可用于检测png和bmp图片里的隐写数据，为了使安装更快，要换为国内源</p>
+<pre><code>gem sources -l             //查看现有源
+gem sources --remove https://rubygems.org/    //删除现有源
+gem sources -a http://gems.ruby-china.com/    //添加新源
+apt-get install gem        //安装gem，若不换源则需要等待许多时间
+gem install zsteg          //安装zsteg
+
+#使用方法，查看lsb数据
+zsteg xxx.bmp
+zsteg xxx.png
+zsteg -a file             //查看各个通道的lsb</code></pre>
+<h2 id="convert"><a href="#convert" class="headerlink" title="convert"></a>convert</h2><p>convert可以分解gif动图，kali自带的工具，无需安装</p>
+<pre><code>convert xxx.gif flag.png       //分解gif动图，得到每一帧的图片按顺序以flag-x.png命名，-x为序号</code></pre>
+<h2 id="montage"><a href="#montage" class="headerlink" title="montage"></a>montage</h2><p>montage用于图片的拼接，kali自带，无需安装，通常结合convert使用</p>
+<pre><code>montage flag*.png -tile x1 -geometry +0+0 flag.png
+//-tile是拼接时每行和每列的图片数，这里用x1，就是只一行
+//-geometry是首选每个图和边框尺寸，边框为0，图照为原始尺寸
+//拼接好的图片命名为flag.png</code></pre>
+<h2 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h2><p>查看可以打印的字符，通常可以借助管道符+grep匹配flag信息</p>
+<pre><code>strings file
+strings file | grep flag</code></pre>
+<h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><p>保存当前的工作区与暂存区的状态，把当前的工作隐藏起来，等需要的时候再恢复</p>
+<pre><code>git log           //查看git记录
+git stash list    //查看修改列表
+git stash show    //校验列表中的存储文件
+git stash apply   //恢复被隐藏的文件</code></pre>
+<h2 id="gnuplot"><a href="#gnuplot" class="headerlink" title="gnuplot"></a>gnuplot</h2><p>gnuplot是一个命令行的交互式绘图工具。</p>
+<pre><code>apt-get install gnuplot       //安装gnuplot工具</code></pre>
+<p>使用：</p>
+<p>在终端输入gnuplot，之后输入plot，后跟坐标文件，回车后即可看到绘制的图片。</p>
+<p>例如BugkuCTF中的图穷匕见：</p>
+<p><img src="https://i.loli.net/2020/11/24/LqcMiNKyJ5enmAl.png" alt="image-20201124170748506"></p>
+<p><img src="https://i.loli.net/2020/11/24/5ySqZlarOGKsB1g.png" alt="image-20201124170808090"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/23/kali/%E8%A7%A3Misc%E9%A2%98%E5%B8%B8%E7%94%A8%E7%9A%84kali%E5%B7%A5%E5%85%B7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali/kali的基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">kali的基本使用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-11-20T09:13:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本守则"><a href="#基本守则" class="headerlink" title="基本守则"></a>基本守则</h2><p>（1）Linux系统大小写敏感</p>
+<p>（2）文件名前带“.”是隐藏文件</p>
+<p>（3）配置文件#开头代表是注释行，程序不执行改行</p>
+<p>（4）Linux系统下的“/”相当于DOS下的“\”</p>
+<p>（5）超级用户“#”，普通用户“$”</p>
+<h2 id="转义符"><a href="#转义符" class="headerlink" title="转义符"></a>转义符</h2><p>将特殊字符转换成普通字符</p>
+<p>（1）\        反斜杠，对单个字符进行转义</p>
+<p>（2）’’        单引号，对一串字符进行转义</p>
+<p>（3）``     反引号，可将命令二次处理</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="X-windows（图形化）与控制台（shell）间的切换"><a href="#X-windows（图形化）与控制台（shell）间的切换" class="headerlink" title="X-windows（图形化）与控制台（shell）间的切换"></a>X-windows（图形化）与控制台（shell）间的切换</h3><p>（1）X-windows切换到控制台：</p>
+<pre><code>init 3</code></pre>
+<p>或使用快捷键：Ctrl+alt+F3</p>
+<p>（2）控制台切换到X-windows：</p>
+<pre><code>startx
+或
+init 5</code></pre>
+<h3 id="设置默认开机界面"><a href="#设置默认开机界面" class="headerlink" title="设置默认开机界面"></a>设置默认开机界面</h3><p>（1）查看当前系统默认开机界面</p>
+<pre><code>systemctl get-default</code></pre>
+<p>（2）设置开机默认为X-windows</p>
+<pre><code>systemctl set-default graphical.target</code></pre>
+<p>（3）设置开机默认为控制台</p>
+<pre><code>systemclt set-default multi-user.target</code></pre>
+<p>（4）命令可用tab键补全</p>
+<h3 id="关机，重启，注销用户，锁屏，解锁"><a href="#关机，重启，注销用户，锁屏，解锁" class="headerlink" title="关机，重启，注销用户，锁屏，解锁"></a>关机，重启，注销用户，锁屏，解锁</h3><p>（1）关机，三种方式：</p>
+<pre><code>shutdown -h now
+halt
+init0</code></pre>
+<p>（2）重启，三种方式：</p>
+<pre><code>shutdown -r now
+reboot
+init 6</code></pre>
+<p>（3）注销用户，退出登录</p>
+<p>控制台界面下：</p>
+<pre><code>exit    或快捷键Ctrl+D</code></pre>
+<p>X-windows界面或shell下：</p>
+<pre><code>pkill -kill -t tty7</code></pre>
+<p>（4）锁屏，快捷键：Ctrl+s</p>
+<p>（5）解锁，快捷键：Ctrl+q</p>
+<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">解释</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">history</td>
+<td align="center">显示历史命令</td>
+<td align="center">!5      //执行第5行的命令</td>
+</tr>
+<tr>
+<td align="center">echo</td>
+<td align="center">回显命令</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">uname</td>
+<td align="center">显示系统信息</td>
+<td align="center">-a参数     //显示全部信息</td>
+</tr>
+<tr>
+<td align="center">hostname</td>
+<td align="center">显示主机名</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">date</td>
+<td align="center">显示或修改系统时间</td>
+<td align="center">-s “20201120 12:12:00”</td>
+</tr>
+<tr>
+<td align="center">cal</td>
+<td align="center">显示日历</td>
+<td align="center">cal 01 2020 //显示2020年1月的日历</td>
+</tr>
+<tr>
+<td align="center">who、w</td>
+<td align="center">查看登录用户信息</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">whoami</td>
+<td align="center">显示用户名</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">which</td>
+<td align="center">显示命令所在位置</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">whereis</td>
+<td align="center">显示文件位于系统中的什么位置</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">whatis</td>
+<td align="center">显示命令的简短描述</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">命令 –help</td>
+<td align="center">显示命令的使用摘要和参数列表</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">man</td>
+<td align="center">显示命令的说明文档</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>ps：man命令：查看文档时，直接输入/keyword  即可在文档中搜索keyword这个关键字，n跳到下一个关键字，N跳到上一个关键字，键q离开说明文档</p>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th align="center">tab</th>
+<th align="center">自动补全命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Ctrl+a</td>
+<td align="center">把光标移动到命令行最开始的地方</td>
+</tr>
+<tr>
+<td align="center">Ctrl+e</td>
+<td align="center">把光标移动到命令行末尾</td>
+</tr>
+<tr>
+<td align="center">Ctrl+u</td>
+<td align="center">删除当前光标前的所有内容</td>
+</tr>
+</tbody></table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/20/kali/kali%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kali/kali2020.1安装过程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">kali2020.1安装过程</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2020-11-18T11:39:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="准备资源"><a href="#准备资源" class="headerlink" title="准备资源"></a>准备资源</h2><p>（1）kali2020.1镜像，下载链接:<a target="_blank" rel="noopener" href="https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso">https://cdimage.kali.org/kali-2020.1/kali-linux-2020.1-installer-amd64.iso</a></p>
+<p>（2）VMware</p>
+<p>（3）良好的网络环境</p>
+<p>（4）物理计算机至少有8G的内存，以保证在后续使用虚拟机时的流畅</p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="新建一个虚拟机"><a href="#新建一个虚拟机" class="headerlink" title="新建一个虚拟机"></a>新建一个虚拟机</h3><p>（1）打开VMware，新建一个虚拟机</p>
+<p><img src="https://i.loli.net/2020/11/18/5XWaNzcn7CAwHh9.png" alt="image-20201118194822750"></p>
+<p>（2）会弹出两种安装方式，这里我选择自定义安装</p>
+<p><img src="https://i.loli.net/2020/11/18/TSrnQKmefyx51MA.png" alt="image-20201118194943515"></p>
+<p>（3）默认选择下一步，直到“安装客户机操作系统”，这里选择“稍后安装操作系统”</p>
+<p><img src="https://i.loli.net/2020/11/18/4ipg25EmeGxB3wO.png" alt="image-20201118195206604"></p>
+<p>（4）选择操作系统及其版本</p>
+<p><img src="https://i.loli.net/2020/11/18/ShvCRwpOme84uQA.png" alt="image-20201118195449341"></p>
+<p>（5）给虚拟机命名，并给其选择存放位置，这里建议在VMware目录下新建一个与虚拟机名称一样的文件夹，将虚拟机存在这个文件夹里。</p>
+<p><img src="https://i.loli.net/2020/11/18/sFnwLfxpku4M2zt.png" alt="image-20201118195753952"></p>
+<p>（6）配置处理器数量</p>
+<p><img src="https://i.loli.net/2020/11/20/3sUfFGozpgAjuZC.png" alt="image-20201119125125453"></p>
+<p>（7）为虚拟机分配内存，这里可以分配多一点，以便在后续的安装中更快</p>
+<p><img src="https://i.loli.net/2020/11/18/Q8PkLYq3iTphnxO.png" alt="image-20201118200631782"></p>
+<p>（8）网络类型选择NAT模式，桥接模式需要一个真实的IP，在校园里一般都是NAT模式。</p>
+<p>（9）之后便一直默认下一步，直到为虚拟机分配磁盘容量，这里可自行定义</p>
+<p><img src="https://i.loli.net/2020/11/18/XsACzh1xDS8IPla.png" alt="image-20201118200852936"></p>
+<p>（10）默认下一步，直到“自定义硬件”，这里可以移除一些平时不用的硬件配置，比如USB控制器、声卡、打印机。点击“自定义硬件”即可在里面移除不用的硬件，然后点击完成。</p>
+<p><img src="https://i.loli.net/2020/11/18/moWHl74GbhLCOsP.png" alt="image-20201118221327164"></p>
+<p>（11）可看到已经创建好了一个虚拟机，此时便要用到下载好的镜像了。点击“CD/DVD(IDE)”,选择“使用ISO映像文件”，添加下载好的镜像，点击确定。</p>
+<p><img src="https://i.loli.net/2020/11/18/LC2yNAH1boZ47pU.png" alt="image-20201118202005823"></p>
+<p><img src="https://i.loli.net/2020/11/18/IDyEQuATq85SnWj.png" alt="image-20201118202118646"></p>
+<h3 id="安装Kali"><a href="#安装Kali" class="headerlink" title="安装Kali"></a>安装Kali</h3><p>（1）点击开启虚拟机</p>
+<p><img src="https://i.loli.net/2020/11/18/ASMQzZ1RUPepvkX.png" alt="image-20201118202451736"></p>
+<p>（2）再出现的页面里选择Graphical install，回车，进行GUI界面安装</p>
+<p><img src="https://i.loli.net/2020/11/18/NZmAzXrL3S2HdBe.png" alt="image-20201118202651265"></p>
+<p>（3）选择一种语言，这里我选择English，选好后点击continue</p>
+<p><img src="https://i.loli.net/2020/11/18/QpMaZgdkzuIHoXS.png" alt="image-20201118202755157"></p>
+<p>（4）选择国家、领地或地区</p>
+<p><img src="https://i.loli.net/2020/11/20/lbFrZzvmwgCDYnW.png" alt="image-20201120124026274"></p>
+<p>（5）选择键盘映射</p>
+<p><img src="https://i.loli.net/2020/11/20/2avsNCjpUz4xcBV.png" alt="image-20201120124328490"></p>
+<p>（6）稍等1分钟。填写主机名</p>
+<p><img src="https://i.loli.net/2020/11/18/S8ypjUHImC7Lgds.png" alt="image-20201118203301686"></p>
+<p>（7）填写域名，这里可不填</p>
+<p><img src="https://i.loli.net/2020/11/18/fTXeW3Q9rFk8UaR.png" alt="image-20201118203351174"></p>
+<p>（8）设置一个用户名来取代root执行非管理任务的普通用户账号，因为2020版本的kali系统打破了传统默认是root的默认账号。</p>
+<p><img src="https://i.loli.net/2020/11/18/wX2eKgRrWLMvyup.png" alt="image-20201118203930694"></p>
+<p>（9）这里会填入上一步的用户名，可改可不改，这里是在登录界面用的用户名。</p>
+<p><img src="https://i.loli.net/2020/11/18/G4vhds7uL6WtT2F.png" alt="image-20201118204113340"></p>
+<p>（10）输入密码，二次输入确认密码</p>
+<p><img src="https://i.loli.net/2020/11/18/sXLcI6UMtRElZAr.png" alt="image-20201118204212719"></p>
+<p>（11）稍等1到两分钟，选择时区</p>
+<p><img src="https://i.loli.net/2020/11/18/B8RTg3AunV29rSw.png" alt="image-20201118204421448"></p>
+<p>（12）进入磁盘分区选项，点击continue</p>
+<p><img src="https://i.loli.net/2020/11/18/x9GhY3UWQiA5kjH.png" alt="image-20201118204704353"></p>
+<p>（13）默认并一直点击continue，直到最后一项，选择“yes”，将改动写入磁盘</p>
+<p><img src="https://i.loli.net/2020/11/20/BLOSzmAFR7cdjpn.png" alt="image-20201120124504208"></p>
+<p>（14）稍等1分钟，进入配置软件包管理器。这里若没有http代理信息，可忽略，点击continue</p>
+<p><img src="https://i.loli.net/2020/11/20/Feq3szcvNxDMw2E.png" alt="image-20201120124628480"></p>
+<p><img src="https://i.loli.net/2020/11/18/yO9kegB2uZ6CYtX.png" alt="image-20201118205218688"></p>
+<p>（15）默认即可，continue</p>
+<p><img src="https://i.loli.net/2020/11/18/DhuOtkTaMrH27Sy.png" alt="image-20201118215722620"></p>
+<p>（16）之后便是“选择并安装软件”，这里需要一点时间，安装完成后，便是将GRUB安装至硬盘，选择“yes”</p>
+<p><img src="https://i.loli.net/2020/11/20/BgtskKXzbRdjPa2.png" alt="image-20201120122137530"></p>
+<p>（17）选择/dev/sda</p>
+<p><img src="https://i.loli.net/2020/11/20/rXnxbWyJYhfejLq.png" alt="image-20201120122345533"></p>
+<p>（18）安装完成</p>
+<p><img src="https://i.loli.net/2020/11/20/wj8yP64sCcK9ndh.png" alt="image-20201120122609322"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/18/kali/kali2020.1%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-kali/kali中的文件-目录操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -901,428 +1615,6 @@ if __name__ == &#39;__main__&#39;:
 
 
   
-    <article id="post-BugkuCTF/BugkuCTF_Web-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/">BugkuCTF_Web_001</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:04:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h2><p>直接在URL前加“view-source:”，查看源代码，发现flag</p>
-<h2 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h2><p>（1）打开网址，是计算两个数的和，但结果只能输入一位数字。<br><img src="https://img-blog.csdnimg.cn/20201031181135297.png#pic_center" alt="在这里插入图片描述">（2）查看源代码<br><img src="https://img-blog.csdnimg.cn/20201031181300527.png#pic_center" alt="在这里插入图片描述">（3）指出了字符串的最大长度为1，直接修改这个最大长度，只要改为比结果的位数大就行<br><img src="https://img-blog.csdnimg.cn/20201031181506727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（4）然后计算出正确的结果就能得到flag<br><img src="https://img-blog.csdnimg.cn/20201031181616802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web基础-GET"><a href="#web基础-GET" class="headerlink" title="web基础$_GET"></a>web基础$_GET</h2><p>用get方法输入一个参数，参数名为“what”，值为“flag”<br>?用来间隔URL和请求参数，若要输入多个参数，用&amp;间隔。<br><img src="https://img-blog.csdnimg.cn/20201031182115891.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web基础-POST"><a href="#web基础-POST" class="headerlink" title="web基础$_POST"></a>web基础$_POST</h2><p>用post方法输入一个参数，借助hackbar工具，传一个what参数，值为flag<br><img src="https://img-blog.csdnimg.cn/20201031182732284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"> </p>
-<h2 id="矛盾"><a href="#矛盾" class="headerlink" title="矛盾"></a>矛盾</h2><p>（1）一串php代码<br><img src="https://img-blog.csdnimg.cn/20201031184550585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）用get方法传入一个num参数，其不能为数字，但又要等于1。这里涉及php代码弱类型比较，数字和字符混合的字符串转换为整数后只保留数字部分。所以num可以构造为1xiaosong，字符部分随便。<br><img src="https://img-blog.csdnimg.cn/20201031185112888.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>#<img src="https://img-blog.csdnimg.cn/20201031185229655.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h2><p>（1）打开网址，一直是重复的页面<br><img src="https://img-blog.csdnimg.cn/20201031185735566.png#pic_center" alt="在这里插入图片描述">（2）用view-source:查看源代码，在最下面发现一串unicode编码<br><img src="https://img-blog.csdnimg.cn/20201031185849413.png#pic_center" alt="在这里插入图片描述">（3）用在线工具转为ASCII码得到flag ( <a target="_blank" rel="noopener" href="http://tool.chinaz.com/tools/unicode.aspx">http://tool.chinaz.com/tools/unicode.aspx</a>)<br><img src="https://img-blog.csdnimg.cn/2020103118594657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p><img src="https://img-blog.csdnimg.cn/20201031191427635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（1）根据题目的意思，将域名flag.baidu.com指向到IP地址123.206.87.240<br>windows平台在C:\Windows\System32\drivers\etc\host中最后一行加入120.24.86.145 flag.bugku.com  （这里用notepad++打开host文件，修改后保存）<br><img src="https://img-blog.csdnimg.cn/20201031192314845.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）修改完后，打开浏览器访问flag.baidu.com，得到flag<br><img src="https://img-blog.csdnimg.cn/20201031192355246.png#pic_center" alt="在这里插入图片描述"></p>
-<p>#如果是linux平台，则在/etc/host中加入123.206.87.240   flag.baidu.com </p>
-<h2 id="你必须让他停下"><a href="#你必须让他停下" class="headerlink" title="你必须让他停下"></a>你必须让他停下</h2><p>（1）打开网址，页面一直刷新，用burp抓包<br><img src="https://img-blog.csdnimg.cn/20201031194439430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）发送到Repeater，点击发送，每发送一次，图片都会来一次变化，这是随机的，不断地发送，在出现10.jpg的时候发现了flag<br><img src="https://img-blog.csdnimg.cn/20201031194748327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h2><p>（1）打开网址，发现一段php代码<br><img src="https://img-blog.csdnimg.cn/20201101173036596.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>（2）对代码的解释：</p>
-<pre><code>&lt;?php  
-
-error_reporting(0);                            //关闭php错误显示
-include &quot;flag1.php&quot;;                           //引入flag1.php文件代码
-highlight_file(__file__);
-if(isset($_GET[&#39;args&#39;]))&#123;                     //通过get方式传递 args变量才能执行if里面的代码
-    $args = $_GET[&#39;args&#39;];
-    if(!preg_match(&quot;/^\w+$/&quot;,$args))&#123;    //正则表达式的意思是匹配任意[A-Z,a-z，0-9,_]的字符，就是任意大小写字母和0-9以及下划线组成
-        die(&quot;args error!&quot;);
-    &#125;
-    eval(&quot;var_dump($$args);&quot;);
-&#125;
-?&gt;</code></pre>
-<p>（3）可变变量(<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.variable.php">https://www.php.net/manual/zh/language.variables.variable.php</a>)<br>#一个变量的变量名可以动态的设置和使用。一个普通的变量通过声明来设置，例如： </p>
-<pre><code>&lt;?php
-$a = &#39;hello&#39;;
-?&gt;</code></pre>
-<p>#一个可变变量获取了一个普通变量的值作为这个可变变量的变量名。例如：</p>
-<pre><code>&lt;?php
-$$a = &#39;world&#39;;
-?&gt;</code></pre>
-<p>#这时，两个变量都被定义了：$a 的内容是“hello”并且 $hello 的内容是“world”。因此，以下语句： </p>
-<pre><code>&lt;?php
-echo &quot;$a $&#123;$a&#125;&quot;;
-?&gt;</code></pre>
-<p>与以下语句输出完全相同的结果,都会输出hello world： </p>
-<pre><code>&lt;?php
-echo &quot;$a $hello&quot;;
-?&gt;</code></pre>
-<p>#要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下$$a[1] 时，解析器需要知道是想要 $a[1] 作为一个变量呢，还是想要 $$a 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 ${$a[1]}，对第二种情况用 ${$a}[1]。 </p>
-<p>#在 PHP 的函数和类的方法中，超全局变量不能用作可变变量。$this 变量也是一个特殊变量，不能被动态引用。 </p>
-<p>（4）超全局变量是在全部作用域中始终可用的内置变量<br>这些超全局变量是：</p>
-<pre><code>    $GLOBALS
-    $_SERVER
-    $_GET
-    $_POST
-    $_FILES
-    $_COOKIE
-    $_SESSION
-    $_REQUEST
-    $_ENV</code></pre>
-<p>（5）所以只需给变量传入一个全局变量就可以了，将其变量名传入。构造参数：?args=GLOBALS，就能得到flag。<br><img src="https://img-blog.csdnimg.cn/20201101175938899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h2><p><img src="https://img-blog.csdnimg.cn/20201101184046587.png#pic_center" alt="在这里插入图片描述"></p>
-<p>（1）查看网页源代码，发现一串特殊的字符<br><img src="https://img-blog.csdnimg.cn/20201101184313987.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（2）根据题目的提示，JSFuck是用6个字符 [ ] ( ) ! +来编写JavaScript程序。将源代码中的特殊字符放到浏览器的console控制台上进行解密。粘贴到控制台后按回车即可。<br><img src="https://img-blog.csdnimg.cn/20201101184717920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">（3）注意提交格式，要求大写。CTF{WHATFK}</p>
-<p>#Jother是一种运用于javascript语言中利用少量字符构造精简的匿名函数方法对于字符串进行的编码方式。其中8个少量字符包括：[ ] ( ) ! + { }  只用这些字符就能完成对任意字符串的编码。（可以在浏览器的console控制台上直接解密）</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-Web//" class="article-tag-list-link color3">BugkuCTF_Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Web-001/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BugkuCTF/BugkuCTF_Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-003/">BugkuCTF_Misc_003</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-003/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:02:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="想蹭网先解开密码"><a href="#想蹭网先解开密码" class="headerlink" title="想蹭网先解开密码"></a>想蹭网先解开密码</h2><p><img src="https://img-blog.csdnimg.cn/20201030224918563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（1）用wireshark打开附件<br><img src="https://img-blog.csdnimg.cn/20201030224945875.png#pic_center" alt="在这里插入图片描述"><br>（2）WiFi连接认证的重点在WPA的四次握手包，即eapol协议的包，过滤一下：<br><img src="https://img-blog.csdnimg.cn/20201030225003978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）根据题目，需要爆破WiFi密码，使用密码生成工具crunch生成密码字典（kali自带，无需安装）这里题目提示密码为手机号，所以设置生成11位的字符，并且给出了前7位，则只剩下4位需要破解。<br><img src="https://img-blog.csdnimg.cn/20201030225045290.png#pic_center" alt="在这里插入图片描述"><br>（4）再使用软件aircrack破解WiFi密码（kali自带，无需安装），这里选择第三3个，然后开始破解，即可看到flag。<br><img src="https://img-blog.csdnimg.cn/20201030225105113.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225113875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>#字典生成工具crunch：<br>参数:  crunch<br>-t   @/,/%/^<br><br>     @插入小写字母<br>    ，插入大写字母<br>    %插入数字<br>^插入特殊符号<br>例子：<br>（1）生成11个数字组合的密码字典：</p>
-<pre><code>crunch 11 11 0123456789 -o mypwd.txt     //第一个11代表生成的字符串最短几个字符，第二个11代表生成的字符串最长几个字符</code></pre>
-<p>（2）生成4个数字和1391040组合的密码字典：</p>
-<pre><code>crunch 11 11 0123456789 -t 1391040%%%% -o mypwd.txt</code></pre>
-<p>（3）生成4个小写字母和4个数字组合的密码字典：</p>
-<pre><code>crunch 8 8 -t @@@@%%%%  -o mypwd.txt</code></pre>
-<p>#工具aircrack破解WiFi密码：破解WEP/WPA/WPA2加密的主流工具之一</p>
-<pre><code>aircrack-ng -w mypwd.txt wifi.cap       //前面是密码字典的位置，后面是需要破解的握手包即.cap文件的位置，看到KEY FOUND即为找到密码</code></pre>
-<h2 id="Linux2"><a href="#Linux2" class="headerlink" title="Linux2"></a>Linux2</h2><p>（1）用notepad++打开附件，搜索flag，无果。再试试搜key，发现flag。<br><img src="https://img-blog.csdnimg.cn/20201030225632898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225640161.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="细心的大象"><a href="#细心的大象" class="headerlink" title="细心的大象"></a>细心的大象</h2><p>（1）得到一张.jpg的图片，用notepad++打开，发现有两张.jpg的图片，还有一些其他的文件。放到kali中用foremost分解，foremost -t all 1.jpg<br><img src="https://img-blog.csdnimg.cn/20201030225710475.png#pic_center" alt="在这里插入图片描述"><br>（2）分解完后，在output目录下发现有一个压缩包，压缩包里面还有一张2.png图片，但解压需要密码<br><img src="https://img-blog.csdnimg.cn/20201030225727162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）查看原有图片的属性，在“详细信息”里看到备注中的一串字符<br><img src="https://img-blog.csdnimg.cn/2020103022574693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）应该被加密了，用base64解码后得到MSDS456ASD123zz<br><img src="https://img-blog.csdnimg.cn/20201030225802968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）以解码后的字符作为密码，解压压缩包，得到2.png（可将压缩包放到Windows下解压）<br><img src="https://img-blog.csdnimg.cn/2020103022581822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）用notepad++打开2.png，搜索flag或key，无果。修改图片的高度，使其和长度一样<br><img src="https://img-blog.csdnimg.cn/20201030225835951.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030225842650.png#pic_center" alt="在这里插入图片描述"><br>（7）看到了flag<br><img src="https://img-blog.csdnimg.cn/20201030225856761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="爆照-08067CTF"><a href="#爆照-08067CTF" class="headerlink" title="爆照(08067CTF)"></a>爆照(08067CTF)</h2><p>（1）得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030225938915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现其中还包含其他文件，放到kali中用foremost分解。得到一个zip文件夹，里面有多个文件<br><img src="https://img-blog.csdnimg.cn/20201030225959464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）用notepad++依次打开8，88，888，8888，88888，888888，8888888，88888888<br>发现88，888，8888都是jpg文件，其他的则是bmp文件（文件头42 4D 76）。修改各个文件的后缀名<br><img src="https://img-blog.csdnimg.cn/20201030230022380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）发现88.jpg有一个二维码，用扫描器得到bilibili<br><img src="https://img-blog.csdnimg.cn/20201030230047182.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）依次查看各图片的属性，在888.jpg中发现base64密文，解密后得到silisili<br><img src="https://img-blog.csdnimg.cn/20201030230105655.png#pic_center" alt="在这里插入图片描述"><br>（6）根据提示，按顺序分析8888.jpg，在notepad++里发现还有一个压缩包<br><img src="https://img-blog.csdnimg.cn/20201030230123626.png#pic_center" alt="在这里插入图片描述"><br>（7）将8888.jpg放到kali中用foremost分解，得到一张二维码图片，扫描后的到panama<br><img src="https://img-blog.csdnimg.cn/20201030230146958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>8）按顺序排列，flag为flag{bilibili_silisili_panama}，注意格式，中间记得要有下划线</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-003/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BugkuCTF/BugkuCTF_Misc-002" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-002/">BugkuCTF_Misc_002</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-002/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:59:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="宽带信息泄露"><a href="#宽带信息泄露" class="headerlink" title="宽带信息泄露"></a>宽带信息泄露</h2><p>（1）附件是一个后缀名为bin的文件，用路由器密码备份文件RouterPassView打开<br><img src="https://img-blog.csdnimg.cn/20201030223405664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据提示flag为宽带用户名，在RouterPassView中用Ctrl+F搜索username，即为flag<br><img src="https://img-blog.csdnimg.cn/20201030223420108.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="隐写2"><a href="#隐写2" class="headerlink" title="隐写2"></a>隐写2</h2><p>（1）附件是一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030223453487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223505673.png#pic_center" alt="在这里插入图片描述"><br>（2）确认以FF D8开头后，查找结尾FF D9，发现了一个压缩包<br><img src="https://img-blog.csdnimg.cn/2020103022354151.png#pic_center" alt="在这里插入图片描述"><br>（3）该图片后缀名为zip，解压，得到提示.jpg和flag.rar，查看提示，flag.rar的解压密码为3位数<br><img src="https://img-blog.csdnimg.cn/2020103022360534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>4）用暴力破解工具破解密码，得到密码为871，成功解压flag.rar，得到一张图片<br><img src="https://img-blog.csdnimg.cn/20201030223633765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223640406.png#pic_center" alt="在这里插入图片描述"><br>（5）用notepad++打开图片，发现被加密的flag，用base64解码得到真正的flag内容<br><img src="https://img-blog.csdnimg.cn/20201030223716672.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="多种方法解决"><a href="#多种方法解决" class="headerlink" title="多种方法解决"></a>多种方法解决</h2><p>（1）附件解压后是一个exe文件，无法打开，放到notepad++里分析，发现一串base64编码的字符串<br><img src="https://img-blog.csdnimg.cn/20201030223745276.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题目提示，解题过程中会得到一个二维码图片，用在线工具把base64还原为图片<br><img src="https://img-blog.csdnimg.cn/20201030223801887.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020103022380953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）用二维码扫描器打开，得到flag</p>
-<h2 id="闪的好快"><a href="#闪的好快" class="headerlink" title="闪的好快"></a>闪的好快</h2><p>（1）附件是一张gif的二维码动图，用stegsolve工具打开，对其进行分解。一共18张二维码图片<br><img src="https://img-blog.csdnimg.cn/20201030223853420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）一张张保存后，用二维码扫描工具一张张扫过去，并记录在记事本里，最终得到flag<br><img src="https://img-blog.csdnimg.cn/20201030223911472.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="come-game"><a href="#come-game" class="headerlink" title="come_game"></a>come_game</h2><p>（1）解压后得到一个exe文件，是个游戏，进去玩一玩<br><img src="https://img-blog.csdnimg.cn/2020103022394692.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223957648.png#pic_center" alt="在这里插入图片描述"><br>（2）发现生成了3个文件，分别用notepad++打开，发现save文件是表示关卡的意思<br><img src="https://img-blog.csdnimg.cn/20201030224015199.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）将2改为3，对应的十六进制改为33，然后重新打开游戏就会跳到下一个关卡。以此类推，在第5关发现了flag，注意最后的提交格式为SYC{}<br><img src="https://img-blog.csdnimg.cn/20201030224034984.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="白哥的鸽子"><a href="#白哥的鸽子" class="headerlink" title="白哥的鸽子"></a>白哥的鸽子</h2><p>（1）得到一张jpg格式的图片，用notepad++打开，在图片结尾FF D9后面发现一串特殊的字符<br><img src="https://img-blog.csdnimg.cn/20201030224108166.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030224128873.png#pic_center" alt="在这里插入图片描述"><br>（2）将其十六进制数转为字符串fg2ivyo}l{2s3_o@aw__rcl@<br><img src="https://img-blog.csdnimg.cn/20201030224200744.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）得到的字符使用了栅栏密码，用CTFcrackTools解码，找到flag，最后的两个@@是干扰，去掉。<br><img src="https://img-blog.csdnimg.cn/20201030224222135.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>得到一个1.tar.gz的文件<br>解法一（快速）：直接用7-zip打开，直到发现flag.txt文本<br><img src="https://img-blog.csdnimg.cn/20201030224315674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>解法二:<br>（1）放到linux底下解压，tar -xvf 1.tar.gz<br><img src="https://img-blog.csdnimg.cn/20201030224351426.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）查看flag里可打印的字符：strings flag    或者也可以直接查看flag里的内容cat flag<br><img src="https://img-blog.csdnimg.cn/20201030224424537.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030224431429.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030224453287.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030224500494.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="隐写3"><a href="#隐写3" class="headerlink" title="隐写3"></a>隐写3</h2><p>（1）附件是一张图片，放到notepad++里，没有发现什么有用信息<br><img src="https://img-blog.csdnimg.cn/20201030224538196.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）再仔细查看图片，图片下面应该还有一部分，则notepad++里修改图片的高度，改为和长度一样试试<br><img src="https://img-blog.csdnimg.cn/20201030224553705.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030224601164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）看到了flag<br><img src="https://img-blog.csdnimg.cn/20201030224632724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-002/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BugkuCTF/BugkuCTF_Misc-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/">BugkuCTF_Misc_001</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T08:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="隐写"><a href="#隐写" class="headerlink" title="隐写"></a>隐写</h2><p>（1）解压附件，发现有一张图片，并没有有用的信息<br><img src="https://img-blog.csdnimg.cn/20201030222021275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题意，flag被隐藏起来了，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222050891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）红色方框部分代表的是图片的像素，也可以理解为长和高，发现图片的高度比长度小了不少，将高度修改为长度的值。<br><img src="https://img-blog.csdnimg.cn/20201030222126820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）保存后重新打开图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222143936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="眼见非实-ISCCCTF"><a href="#眼见非实-ISCCCTF" class="headerlink" title="眼见非实(ISCCCTF)"></a>眼见非实(ISCCCTF)</h2><p>（1）下载附件，得到一个名为zip没有后缀名的文件<br>（2）用notepad++打开，发现文件头是50 4B 03 04，说明是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222246657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）修改文件后缀名为.zip，解压后得到一个文档<br><img src="https://img-blog.csdnimg.cn/20201030222313691.png#pic_center" alt="在这里插入图片描述"><br>（4）双击打开后并没有发现有用信息，再用notepad++打开，发现又是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222346825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）修改后缀名为.zip，解压后得到一个文件夹<br><img src="https://img-blog.csdnimg.cn/20201030222418463.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222429644.png#pic_center" alt="在这里插入图片描述"><br>（6）最终在word文件夹里找到flag，可用记事本或notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222459970.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222507509.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="啊哒"><a href="#啊哒" class="headerlink" title="啊哒"></a>啊哒</h2><p>（1）打开附件，解压后得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222548608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）文件头确实是以FF D8 开头，寻找结尾FF D9<br><img src="https://img-blog.csdnimg.cn/20201030222607981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）发现FF D9后面还有一个压缩文件，50 4B 03 04，将原来的图片改后缀名为.zip，也可以在kali下用命令foremost -t all ada.jap 分离文件。<br><img src="https://img-blog.csdnimg.cn/20201030222638392.png#pic_center" alt="在这里插入图片描述"><br>（4）解压，但发现需要密码<br><img src="https://img-blog.csdnimg.cn/20201030222716140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）查看图片属性，发现一串字符，作为密码输入，但显示密码错误<br><img src="https://img-blog.csdnimg.cn/20201030222737816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）将这串十六进制字符转为ASCII码字符，得到sdnisc_2018，将其作为解压密码，得到flag<br><img src="https://img-blog.csdnimg.cn/20201030222759359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222809753.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="又一张图片，还单纯吗"><a href="#又一张图片，还单纯吗" class="headerlink" title="又一张图片，还单纯吗"></a>又一张图片，还单纯吗</h2><p>（1）附件是一张.jpg的图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222856237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）确实以FF D8开头，寻找图片结尾FF D9，接连找到几个FF D9后，又发现了一张以FF D8开头的.jpg图片<br><img src="https://img-blog.csdnimg.cn/20201030222917608.png#pic_center" alt="在这里插入图片描述"><br>（3）用kali输入命令foremost -t -all 2.jpg分离文件，则又得到了一张图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222940899.png#" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202010302230013.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223007998.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="猜"><a href="#猜" class="headerlink" title="猜"></a>猜</h2><p>（1）附件是一张图片，根据提示是某人的名字，直接百度搜索图片，是刘亦菲，名字拼音即flag<br><img src="https://img-blog.csdnimg.cn/20201030223039681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223048756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1437,6 +1729,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">deepin</a>
               </li>
             
             <div class="clearfix"></div>

