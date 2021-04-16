@@ -6,73 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>PHP与SQL进阶 | Hexo</title>
+  <title>运用Python语言(三)-科学计算和可视化01 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="PHP的基础语法（1）基本概念：  PHP文件的默认文件扩展名是”.php” PHP脚本可放置于文档中的任何位置 PHP脚本以**&lt;?php**开头，以**?&gt;**结尾 PHP语句以分号结尾**;**  （2）注释：PHP支持三种注释方法，包括单行注释和多行注释 &lt;?php     &#x2F;&#x2F;这是单行注释     #这也是单行注释     &#x2F;*这是多行注释块         它横跨了">
+  <meta name="description" content="问题概述科学计算需要采用矩阵运算库numpy和绘制库matplotlib。 （1）开展基本的科学计算需要两个步骤：组织数据和展示数据。  组织数据是运算的基础，也是将客观世界数字化的必要手段。 展示数据是体现运算结果的重要方式，也是展示结论的有力武器。  （2）科学计算以矩阵而不是单一数值为基础，增加了计算密度，能够表达更为复杂的数据运算逻辑。 （3）矩阵有维度概念，一维矩阵是线性的，类似于列表，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP与SQL进阶">
-<meta property="og:url" content="http://example.com/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:title" content="运用Python语言(三)-科学计算和可视化01">
+<meta property="og:url" content="http://example.com/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="PHP的基础语法（1）基本概念：  PHP文件的默认文件扩展名是”.php” PHP脚本可放置于文档中的任何位置 PHP脚本以**&lt;?php**开头，以**?&gt;**结尾 PHP语句以分号结尾**;**  （2）注释：PHP支持三种注释方法，包括单行注释和多行注释 &lt;?php     &#x2F;&#x2F;这是单行注释     #这也是单行注释     &#x2F;*这是多行注释块         它横跨了">
+<meta property="og:description" content="问题概述科学计算需要采用矩阵运算库numpy和绘制库matplotlib。 （1）开展基本的科学计算需要两个步骤：组织数据和展示数据。  组织数据是运算的基础，也是将客观世界数字化的必要手段。 展示数据是体现运算结果的重要方式，也是展示结论的有力武器。  （2）科学计算以矩阵而不是单一数值为基础，增加了计算密度，能够表达更为复杂的数据运算逻辑。 （3）矩阵有维度概念，一维矩阵是线性的，类似于列表，">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2021/03/17/LXybUOQsDMm3jRd.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/17/HN6eUCJisLYTmar.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/17/SWNFo5Pe9uKhxtX.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/17/NCdmWJTq4w8f6V5.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/17/J2txUnQHCuf36j7.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/4IPyNqHUoCFzpEK.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/jYD3WQx45qdVewb.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/KeEHsqhbv43xl6y.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/1QAOSYM6mHVgoUC.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/CuixX4ZEo5sMD9B.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/6Fz2cg7T3HkYZX5.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/isdQgbrCOHAp2lL.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/ihD1SGJaCnFcV5e.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/yGCsctegp4BKAj7.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/sTgKS3Rov7jENAz.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/fv8WpUEh1g2FZje.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/XKT8ZW5nowuz2Cp.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/VLYn6PwCyrMcDuh.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/nDVuwvXOTZriCsQ.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/sTIqZpc6YixnH81.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/kYPTKGzq6fjFAXm.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/tg4IJm9X1CvwRT8.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/ZOFJn6rRpVqc2md.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/tQ9UWLkdE3FzsmI.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/52lJFVIcEN6La9y.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/7bKJSaygOLYXlIm.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/F1XeAcMPWNJpgiv.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/dQupgmRqYFH1jVK.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/1682TjYsrg4ZwLz.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/TWgM79RIdoE8HQG.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/URcaVqTSufPL3MB.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/KPrsadqNOCEYGvm.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/8neVsDGyQMBiCbo.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/dWr5xZLaBMt3gve.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/12GpoYXVtqlrhkU.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/pt8kxOaDSic4neG.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/azWsL38ognlNjA1.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/KEAGFgyRhPWUjeZ.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/f9XRdjrSKckml8Z.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/dXyhmpuAeQwUPcn.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/hPxKMdlTXVtbIic.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/HFRDXcQs4Gnygkt.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/uX68S9IN7AOx5ik.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/FJlRm1ha4uKiNCv.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/NrBHuAIcLE8hapj.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/Kikf8S9ap1l5Jbu.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/tJcBy8beNTHK3qw.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/Ft8EG4y12QASzfR.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/GEd5cH3gzv9h2Ne.png">
-<meta property="og:image" content="https://i.loli.net/2021/03/18/8khDnLWJTZ5cmC7.png">
-<meta property="article:published_time" content="2021-03-17T08:28:15.000Z">
-<meta property="article:modified_time" content="2021-04-13T12:40:15.918Z">
+<meta property="og:image" content="https://i.loli.net/2021/04/16/wxBbIqke2Yg39z5.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/16/ylFrb7gNPiwvZXx.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/16/VOraQjwLHiRk1PU.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/16/yq2GjIDdptJ4X6Z.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/16/8WoF4DqVz1YsagP.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/16/faVxdl8psUnWJBe.png">
+<meta property="article:published_time" content="2021-04-10T15:28:08.000Z">
+<meta property="article:modified_time" content="2021-04-16T09:52:47.951Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="安全进阶">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/03/17/LXybUOQsDMm3jRd.png">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/16/wxBbIqke2Yg39z5.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -208,788 +162,437 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-安全进阶/PHP与SQL进阶" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Python/运用Python语言(三)-科学计算和可视化01" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      PHP与SQL进阶
+      运用Python语言(三)-科学计算和可视化01
     </h1>
   
 
         
-        <a href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-17T08:28:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
+        <a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/" class="archive-article-date">
+  	<time datetime="2021-04-10T15:28:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="PHP的基础语法"><a href="#PHP的基础语法" class="headerlink" title="PHP的基础语法"></a>PHP的基础语法</h2><p>（1）基本概念：</p>
+        <h2 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h2><p><strong>科学计算需要采用矩阵运算库numpy和绘制库matplotlib。</strong></p>
+<p>（1）开展基本的科学计算需要两个步骤：组织数据和展示数据。</p>
 <ul>
-<li>PHP文件的默认文件扩展名是”.php”</li>
-<li>PHP脚本可放置于文档中的任何位置</li>
-<li>PHP脚本以**&lt;?php**开头，以**?&gt;**结尾</li>
-<li>PHP语句以分号结尾**;**</li>
+<li>组织数据是运算的基础，也是<strong>将客观世界数字化</strong>的必要手段。</li>
+<li>展示数据是<strong>体现运算结果</strong>的重要方式，也是展示结论的有力武器。</li>
 </ul>
-<p>（2）注释：PHP支持三种注释方法，包括单行注释和多行注释</p>
-<pre><code class="php">&lt;?php
-    //这是单行注释
-    #这也是单行注释
-    /*这是多行注释块
-        它横跨了
-        多行      */
-echo &quot;Hello World&quot;;
-?&gt;</code></pre>
-<p>（3）输出语法</p>
+<p>（2）科学计算以<strong>矩阵</strong>而不是单一数值为基础，增加了计算密度，能够表达更为复杂的数据运算逻辑。</p>
+<p>（3）矩阵有维度概念，一维矩阵是线性的，类似于列表，二维矩阵是表格状的，这是常用的数据表示形式。</p>
+<h2 id="numpy库的使用"><a href="#numpy库的使用" class="headerlink" title="numpy库的使用"></a>numpy库的使用</h2><p><strong>numpy是用于处理含有同种元素的多维数组运算的第三方库</strong></p>
+<h3 id="numpy库概述"><a href="#numpy库概述" class="headerlink" title="numpy库概述"></a>numpy库概述</h3><p>（1）Python标准库中提供了一个array类型，用于保存数组类型数据，然而这个类型不支持多维数据，处理函数也不够丰富，不适合数值运算。因此，第三方库numpy得到了迅速发展，至今，<strong>numpy已经成为了科学计算事实上的标准库</strong>。</p>
+<p>（2）<strong>numpy库处理的最基础数据类型是由同种元素构成的多维数组</strong>。数组中所有元素的类型必须相同，数组中元素可以用整数索引，序号从0开始。</p>
+<p>（3）ndarray类型的维度叫做轴（axes），轴的个数叫做秩（rank）。一维数组的秩为1，二维数组的秩为2，二维数组相当于由两个一维数组构成。</p>
+<p>（4）由于numpy库中函数较多且命名容易与常用名混淆，建议采用如下方式引用numpy库：</p>
+<pre><code class="python">import numpy as np
+#as保留字与import一起使用能够改变后续代码中库的命名空间，有助于提高代码的可读性。简单地说，在程序的后续部分，np代替numpy</code></pre>
+<h3 id="numpy库解析"><a href="#numpy库解析" class="headerlink" title="numpy库解析"></a>numpy库解析</h3><p>（1）numpy库常用的创建数组（ndarray类型）函数有7个，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.array([x,y,z],dtype=int)</td>
+<td align="center">从Python列表和元组创造数组</td>
+</tr>
+<tr>
+<td align="center">np.arange(x,y,i)</td>
+<td align="center">创建一个由x到y，以i为步长的数组</td>
+</tr>
+<tr>
+<td align="center">np.linspace(x,y,n)</td>
+<td align="center">创建一个由x到y，等分成n个元素的数组</td>
+</tr>
+<tr>
+<td align="center">np.indices((m,n))</td>
+<td align="center">创建一个m行n列的矩阵</td>
+</tr>
+<tr>
+<td align="center">np.random.rand(m,n)</td>
+<td align="center">创建一个m行n列的随机数组</td>
+</tr>
+<tr>
+<td align="center">np.ones((m,n),dtype)</td>
+<td align="center">创建一个m行n列全1的数组，dtype是数据类型</td>
+</tr>
+<tr>
+<td align="center">np.empty((m,n),dtype)</td>
+<td align="center">创建一个m行n列全0的数组，dtype是数组类型</td>
+</tr>
+</tbody></table>
+<p>（2）创建一个简单的数组后，可以查看ndarray类的基本属性，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ndarray.ndim</td>
+<td align="center">数组轴的个数，也被称作秩</td>
+</tr>
+<tr>
+<td align="center">ndarray.shape</td>
+<td align="center">数组在每个维度上大小的的整数元组</td>
+</tr>
+<tr>
+<td align="center">ndarray.size</td>
+<td align="center">数组元素的总个数</td>
+</tr>
+<tr>
+<td align="center">ndarray.dtype</td>
+<td align="center">数组元素的数据类型，dtype类型可用于创建数组</td>
+</tr>
+<tr>
+<td align="center">ndarray.itemsize</td>
+<td align="center">数组中每个元素的字节大小</td>
+</tr>
+<tr>
+<td align="center">ndarray.data</td>
+<td align="center">包含实际数组元素的缓冲区地址</td>
+</tr>
+<tr>
+<td align="center">ndarray.flat</td>
+<td align="center">数组元素的迭代器</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; a = np.ones((4,5))
+&gt;&gt;&gt; print(a)
+[[1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]]
+&gt;&gt;&gt; a.ndim
+2
+&gt;&gt;&gt; a.shape
+(4, 5)
+&gt;&gt;&gt; a.dtype
+dtype(&#39;float64&#39;)</code></pre>
+<p>（3）数组在numpy中被当做对象，可以采用&lt;a&gt;.&lt;b&gt;()方式调用一些方法。下表给出了改变数组基础形态的操作方法，例如改变和调换数组维度等。其中，<strong>np.flatten()函数用于数组降维，相当于平铺数组中的数据，</strong>该功能在矩阵运算和图像处理中用处很大。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ndarray.reshape(n,m)</td>
+<td align="center">不改变数组ndarray，返回一个维度为(n,m)的数组</td>
+</tr>
+<tr>
+<td align="center">ndarray.resize(new_shape)</td>
+<td align="center">与reshape()作用相同，直接修改ndarray</td>
+</tr>
+<tr>
+<td align="center">ndarray.swqpaxes(ax1,ax2)</td>
+<td align="center">将数组n个维度中任意两个维度进行调换</td>
+</tr>
+<tr>
+<td align="center"><strong>ndarray.flatten()</strong></td>
+<td align="center">对数组进行降维，返回一个折叠后的一维数组</td>
+</tr>
+<tr>
+<td align="center">ndarray.ravel()</td>
+<td align="center">作用通np.flatten(),但是返回数组的一个视图</td>
+</tr>
+</tbody></table>
+<p>（4）下表给出了ndarray类的索引和切片方法。数组切片得到的是原始数组的视图，所有修改都会直接反映到源数组。如果需要得到ndarray切片的一份副本，需要进行复制操作，比如arange[5:8].copy()。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x[i]</td>
+<td align="center">索引第i个元素</td>
+</tr>
+<tr>
+<td align="center">x[-i]</td>
+<td align="center">从后向前索引第i个元素</td>
+</tr>
+<tr>
+<td align="center">x[n:m]</td>
+<td align="center">默认步长为1，从前往后索引，不包含m</td>
+</tr>
+<tr>
+<td align="center">x[-m:-n]</td>
+<td align="center">默认步长为，从后往前索引，<strong>结束位置为n</strong>,(不是-n)</td>
+</tr>
+<tr>
+<td align="center">x[n：m：i]</td>
+<td align="center">指定i步长的由n到m的索引</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; a = np.random.rand(5,3)  #生成5*3的数组，用随机数填充
+&gt;&gt;&gt; a[2]  #获取第2行的数据
+array([0.31158762, 0.82371017, 0.73224191])
+&gt;&gt;&gt; a[1:3]
+array([[0.53039082, 0.14939241, 0.12996747],
+       [0.31158762, 0.82371017, 0.73224191]])
+&gt;&gt;&gt; a[-5:-2:2]
+array([[0.86506778, 0.97968013, 0.35782942],
+       [0.31158762, 0.82371017, 0.73224191]])
+&gt;&gt;&gt; print(a)
+[[0.86506778 0.97968013 0.35782942]
+ [0.53039082 0.14939241 0.12996747]
+ [0.31158762 0.82371017 0.73224191]
+ [0.12440417 0.96267856 0.6107584 ]
+ [0.3656373  0.35113364 0.08881953]]</code></pre>
+<p><strong>注意</strong>：上例中，</p>
 <ul>
-<li>echo：能输出多个字符串</li>
+<li>从前往后索引，依次为a[0]、a[1]、a[2]、a[3]、a[4]</li>
+<li>从后往前索引，依次为a[-1]、a[-2]、a[-3]、a[-4]、a[-5]</li>
 </ul>
-<pre><code class="php">&lt;?php
-echo &quot;123&quot;,&quot;456&quot;,&quot;789&quot;;
-?&gt;
-
-&lt;?php
-$name=&quot;kangkang&quot;;
-$shuiguo=array(&quot;苹果&quot;,&quot;香蕉&quot;,&quot;西瓜&quot;);
-echo &quot;I am &amp;name,I eat $shuiguo[1]&quot;;
-?&gt;</code></pre>
+<p>（5）除了ndarray类型方法外，numpy库提供了一批运算函数，如下表所示。这些函数中，输出参数y可选，如果没有指定，将创建并返回一个新的数组保存计算结果；如果指定参数，则将结果保存到参数中。</p>
 <ul>
-<li>print：只能输出一个字符串</li>
+<li>例如，两个数组相加可以简单写为a+b，而np.add(a,b,a)则表示a+=b。</li>
 </ul>
-<h3 id="HTML和PHP的嵌套关系"><a href="#HTML和PHP的嵌套关系" class="headerlink" title="HTML和PHP的嵌套关系"></a>HTML和PHP的嵌套关系</h3><p>（1）要在PHP文件中写入PHP的语句（脚本），在整段代码的最前面写上&lt;?php，在整段代码的最后面写上?&gt;</p>
-<p>（2）PHP文件内可以写入HTML标签、PHP脚本</p>
-<p>（3）PHP文件中可以嵌套HTML标签、HTML标签又能嵌套PHP脚本、PHP脚本中可以嵌套HTML标签</p>
-<pre><code class="php">&lt;?php
-    echo &quot;test1&quot;;
-    echo &quot;&lt;br&gt;&quot;;
-    echo &quot;test2&quot;;
-?&gt;</code></pre>
-<h3 id="HTML和PHP的作用"><a href="#HTML和PHP的作用" class="headerlink" title="HTML和PHP的作用"></a>HTML和PHP的作用</h3><p>（1）HTML用于静态网页的制作。</p>
-<p>（2）PHP的作用:用于解决HTML的缺陷,可以和用户进行对应的交互以达到用户能够看到属于自己个性化的页面。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.add(x1,x2[,y])</td>
+<td align="center">y = x1 + x2</td>
+</tr>
+<tr>
+<td align="center">np.subtract(x1,x2[,y])</td>
+<td align="center">y = x1 - x2</td>
+</tr>
+<tr>
+<td align="center">np.multiply(x1,x2[,y])</td>
+<td align="center">y = x1 * x2</td>
+</tr>
+<tr>
+<td align="center">np.divide(x1,x2[,y])</td>
+<td align="center">y = x1 / x2</td>
+</tr>
+<tr>
+<td align="center">np floor_divide(x1,x2[,y])</td>
+<td align="center">y = x1 // x2,返回值取整</td>
+</tr>
+<tr>
+<td align="center">np.negative(x[,y])</td>
+<td align="center">y = -x</td>
+</tr>
+<tr>
+<td align="center">np.power(x1,x2[,y])</td>
+<td align="center">y = x1 ** x2</td>
+</tr>
+<tr>
+<td align="center">np.remainder(x1,x2[,y])</td>
+<td align="center">y = x1 % x2</td>
+</tr>
+</tbody></table>
+<p>（6）下表列出了numpy库的比较运算符，该表将返回一个布尔数组，它包含两个数组中对应元素值的比较结果。其中，where()函数是三元表达式x if condition else y的矢量版本。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.equal(x1,x2[,y])</td>
+<td align="center">y = x1 == x2</td>
+</tr>
+<tr>
+<td align="center">np.not_equal(x1,x2[,y])</td>
+<td align="center">y = x1 != x2</td>
+</tr>
+<tr>
+<td align="center">np.less(x1,x2[,y])</td>
+<td align="center">y = x1 &lt; x2</td>
+</tr>
+<tr>
+<td align="center">np.less_equal(x1,x2[,y])</td>
+<td align="center">y = x1 &lt;= x2</td>
+</tr>
+<tr>
+<td align="center">np.greater(x1,x2[,y])</td>
+<td align="center">y = x1 &gt; x2</td>
+</tr>
+<tr>
+<td align="center">np.greater_equal(x1,x2[,y])</td>
+<td align="center">y = x1 &gt;= x2</td>
+</tr>
+<tr>
+<td align="center">np.where(condition[x,y])</td>
+<td align="center">根据给出的条件判断输出x还是y</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt;import numpy as np
+&gt;&gt;&gt; np.less([1,2],[2,2])
+array([ True, False])</code></pre>
+<p>（7）numpy的其他<strong>有趣而操作方便的函数</strong>，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.abs(x)</td>
+<td align="center">计算基于元素的整型、浮点或复数的绝对值</td>
+</tr>
+<tr>
+<td align="center">np.sqrt(x)</td>
+<td align="center">计算每个元素的平方根</td>
+</tr>
+<tr>
+<td align="center">np.squre(x)</td>
+<td align="center">计算每个元素的平方</td>
+</tr>
+<tr>
+<td align="center">np.sign(x)</td>
+<td align="center">计算每个元素的符号：1(+)、0、-1(-)</td>
+</tr>
+<tr>
+<td align="center">np.ceil(x)</td>
+<td align="center">计算大于或等于每个元素的最小值</td>
+</tr>
+<tr>
+<td align="center">np.floor(x)</td>
+<td align="center">计算小于或等于每个元素的最小值</td>
+</tr>
+<tr>
+<td align="center">np.rint(x[,out])</td>
+<td align="center">圆整，取每个元素为最近的整数，保留数据类型</td>
+</tr>
+<tr>
+<td align="center">np.exp(x[,out])</td>
+<td align="center">计算每个元素的指数值</td>
+</tr>
+<tr>
+<td align="center">np.log(x),np.log10(x),np.log2(x)</td>
+<td align="center">计算自然对数(e)，基于10、2的对数，log(1+x)</td>
+</tr>
+</tbody></table>
+<p>（8）numpy库还包括<strong>三角运算函数、傅里叶变换、随机和概率分布、基本数值统计、位运算、矩阵运算等非常丰富的功能</strong>。可在官网查询。</p>
+<h2 id="图像的手绘效果"><a href="#图像的手绘效果" class="headerlink" title="图像的手绘效果"></a>图像的手绘效果</h2><p><strong>这是一个使用numpy和PIL库提取图像特征形成手绘效果的实例</strong></p>
+<h3 id="图像的数组表示"><a href="#图像的数组表示" class="headerlink" title="图像的数组表示"></a>图像的数组表示</h3><p>（1）图像是有规则的二维数据，可以用numpy库将图像转换成数组对象。</p>
+<pre><code class="python">&gt;&gt;&gt; from PIL import Image
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; im = np.array(Image.open(&#39;01.jpg&#39;))#open()中为图片存放路径，该路径不得出现中文。可用相对路径
+&gt;&gt;&gt; print(im.shape,im.dtype)
+(1711, 2560, 3) uint8</code></pre>
+<p>（2）图像转换对应的ndarray类型是<strong>三维数据</strong>，如（881,1266,3），其中，前两维表示图像的<strong>长度和宽度</strong>，单位是<strong>像素</strong>，第三维表示每个像素点的<strong>RGB</strong>值，每个RGB值是一个单字节整数。</p>
+<p>（3）PIL库包括图像转换函数，能够改变图像单个像素的表示形式。<strong>使用convert()函数，这是’L’模式，表示将像素从RGB的3字节形式转变为单一数值形式，这个数值范围为0~255，表示灰度色彩变化。</strong>此时，图像从彩色变为带有灰度的黑白色。<strong>转换后，图像的adarray类型变为二维数据，</strong>每个像素点色彩只由一个整数表示。</p>
+<pre><code class="python">&gt;&gt;&gt; im = np.array(Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;))
+&gt;&gt;&gt; print(im.shape,im.dtype)
+(1711, 2560) uint8</code></pre>
+<p>（4）通过对图像的数组转换，可以利用numpy访问图像上的任意像素值。例如，获取位于坐标(20,300)像素的颜色值或获取图像中最大和最小的像素值。也可以采用切片方式获取指定行或列的元素值，甚至修改这些值。</p>
+<pre><code class="python">&gt;&gt;&gt; print(im[20,300])
+220
+&gt;&gt;&gt; print(int(im.min()),int(im.max()))
+0 255
+&gt;&gt;&gt; print(im[10,:])   #获取坐标x=10的所有像素点的值
+[246 246 246 ...  47  47  47]</code></pre>
+<p>（5）<strong>将图像读入ndarray数组对象后，可以通过任意数学操作来获取相应的图像变换。</strong>以灰度变换为例，分别对灰度变化后的图像进行<strong>反变换、区间变化和像素值平方处理。</strong></p>
 <ul>
-<li>前端页面:正常的用户可以去查看到的HTML页面。前端页面可以由PHP或HTML编写，一般用HTML。</li>
-<li>后端页面:页面不会显示任何内容，页面通常用于处理前端页面得到的数据。后端页面只能由服务端脚本引擎编写。</li>
+<li>注意：有些数学变换会改变图像的数据类型，如变成整数类型等，所以在<strong>重新生成PIL图像前要先将数据类型通过numpy.uint()变换成整数。</strong></li>
 </ul>
-<h3 id="PHP的动态交互"><a href="#PHP的动态交互" class="headerlink" title="PHP的动态交互"></a>PHP的动态交互</h3><h4 id="浏览器提交请求"><a href="#浏览器提交请求" class="headerlink" title="浏览器提交请求"></a>浏览器提交请求</h4><p><strong>用户如何发送自己的需求（用户在浏览器中输入的内容如何提交给服务器）</strong></p>
-<p>（1）HTML form表单提交数据</p>
-<p>（2）JS  AJAX提交输入数据</p>
-<h4 id="服务器端接收请求"><a href="#服务器端接收请求" class="headerlink" title="服务器端接收请求"></a>服务器端接收请求</h4><pre><code>    $_SESSION 
-    $_COOKIE
-    $_FILES
-    $_GET
-    $_POST
-    $_REQUEST
-    $_SERVER
-    $GLOBALS</code></pre>
-<h4 id="网站用户状态保持"><a href="#网站用户状态保持" class="headerlink" title="网站用户状态保持"></a>网站用户状态保持</h4><p>（1）HTTP无状态协议，为了保持用户登录状态，HTTP引入了Cookie和Session机制。</p>
-<p>（2）cookie中，大部分用于保存客户端和服务器之间的状态（PHPSESSID–PHP Session ID–存放某串Session），但网站开发人员可以自行对cookie进行设置和使用。</p>
-<h4 id="Cookie和Session判断登录状态"><a href="#Cookie和Session判断登录状态" class="headerlink" title="Cookie和Session判断登录状态"></a>Cookie和Session判断登录状态</h4><p>（1）PHPSESSID中的值会和服务器中的session值进行判断</p>
-<p>（2）若有session值，则代表浏览器访问过这个页面</p>
-<p>（3）此时服务器会对session进行判断，如果session中写入的为“可以登录”,那么可登录成功，否则登录失败。</p>
-<h3 id="PHP变量"><a href="#PHP变量" class="headerlink" title="PHP变量"></a>PHP变量</h3><p>（1）PHP变量的命名规则：</p>
+<pre><code class="python">&gt;&gt;&gt; from PIL import Image
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; im0 = np.array(Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;))
+&gt;&gt;&gt; im1 = 255 - im0     #反变换
+&gt;&gt;&gt; im2 = (100/255)*im0 + 150    #区间变换
+&gt;&gt;&gt; im3 = 255*(im1/255)**2       #像素平方处理
+&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im1))
+&gt;&gt;&gt; pil_im.show()
+&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im2))
+&gt;&gt;&gt; pil_im.show()
+&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im3))
+&gt;&gt;&gt; pil_im.show()</code></pre>
 <ul>
-<li>变量以$符号开头，其后是变量的名称</li>
-<li>变量名必须以字母或下划线开头</li>
-<li>变量名称不能以数字开头</li>
-<li>变量名称只能包含字母数字字符和下划线(A-z、0-9以及_)</li>
-<li>变量名称对大小写敏感</li>
+<li>原图像</li>
 </ul>
-<pre><code class="php">&lt;?php
-$txt=&quot;Hello World!&quot;;
-$x=5;
-$y=10.5;
-echo $txt;
-echo &quot;&lt;br/&gt;&quot;;
-echo $x+$y;
-?&gt;</code></pre>
-<p>（2）超全局变量</p>
+<p><img src="https://i.loli.net/2021/04/16/wxBbIqke2Yg39z5.png" alt="image-20210416153015688"></p>
 <ul>
-<li>在PHP4.1.0中引入，是在全部作用域中始终可用的内置变量。</li>
-<li>PHP中的许多预定义变量都是“超全局的”，这意味着它们在一个脚本的全部作用域中都可用。</li>
+<li>对im1执行结果</li>
 </ul>
-<pre><code class="php">    $_SESSION 获取保存的SESSION信息
-    $_COOKIE 获取保存的COOKIE信息
-    $_FILES 接收前端以任意形式传输的文件
-    $_GET 接收前端以GET形式传输的参数
-    $_POST 接收前端以POST形式传输的参数
-    $_REQUEST 接收前端以任意形式传输的参数
-    $_SERVER 保存关于报头、路径和脚本位置的信息。
-    $GLOBALS 保存PHP中所有的参数（包括超全局变量中的参数)</code></pre>
-<p>（3）$_GET &amp; $_POST：接收前端以GET或POST形式传输的参数</p>
+<p><img src="https://i.loli.net/2021/04/16/ylFrb7gNPiwvZXx.png" alt="image-20210416153206984"></p>
 <ul>
-<li>get.php</li>
+<li>对im2执行结果</li>
 </ul>
-<pre><code class="php">&lt;?php
-    echo &quot;Hello,your name is &quot;.$_GET[&#39;user&#39;];
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/LXybUOQsDMm3jRd.png" alt="image-20210317185828678"></p>
+<p><img src="https://i.loli.net/2021/04/16/VOraQjwLHiRk1PU.png" alt="image-20210416153347977"></p>
 <ul>
-<li>post.php</li>
+<li>对im3执行结果</li>
 </ul>
-<pre><code class="php">&lt;?php
-    echo &quot;Hello,your name is &quot;.$_POST[&#39;user&#39;];
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/HN6eUCJisLYTmar.png" alt="image-20210317185705591"></p>
-<p>（4）$_SERVER：保存关于报头、路径和脚本位置的信息。</p>
-<pre><code class="php">&lt;?php
-    echo $_SERVER[&#39;PHP_SELF&#39;].&quot;&lt;br/&gt;&quot;;      //输出当前PHP文件名
-    echo $_SERVER[&#39;SERVER_NAME&#39;].&quot;&lt;br/&gt;&quot;;   //输出当前运行脚本所在的服务器的主机名
-    echo $_SERVER[&#39;HTTP_HOST&#39;].&quot;&lt;br/&gt;&quot;;     //输出当前服务器的主机名
-    echo $_SERVER[&#39;HTTP_REFERER&#39;].&quot;&lt;br/&gt;&quot;;  //返回来自当前请求的host头
-    echo $_SERVER[&#39;HTTP_USER_AGENT&#39;].&quot;&lt;br/&gt;&quot;;//返回当前请求页面的上一个页面URL
-    echo $_SERVER[&#39;HTTP_NAME&#39;].&quot;&lt;br/&gt;&quot;;      //返回当前请求客户端的User-Agent
-    echo $_SERVER[&#39;HTTP_STRING&#39;].&quot;&lt;br/&gt;&quot;;    //返回获取查询语句，一般是问号后面的字符串
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/SWNFo5Pe9uKhxtX.png" alt="image-20210317192027470"></p>
-<p><img src="https://i.loli.net/2021/03/17/NCdmWJTq4w8f6V5.png" alt="image-20210317192044223"></p>
-<p>（5）$GLOBALS</p>
+<p><img src="https://i.loli.net/2021/04/16/yq2GjIDdptJ4X6Z.png" alt="image-20210416153503923"></p>
+<h3 id="扩展：灰度值"><a href="#扩展：灰度值" class="headerlink" title="扩展：灰度值"></a>扩展：灰度值</h3><p>（1）灰度值指黑白图像中点的颜色深度，范围从0到255，黑色为0，白色为255。因此，黑白图像也被称为灰度图像。</p>
+<p>（2）RGB彩色图片可以通过如下公式转换成灰度值：</p>
 <ul>
-<li>应用全局作用域中可用的全部变量</li>
-<li>一个包含了全部变量的全局组合数组。变量的名字就是数组的键。</li>
+<li>Gray=R<em>0.3+G\</em>0.59+B*0.11</li>
 </ul>
-<pre><code class="php">&lt;?php
-    $_ =&quot;123456&quot;;
-    $a =&quot;&lt;br&gt;hello&quot;;
-    $b =&quot;&lt;br&gt;world&quot;;
-
-    echo $GLOBALS[&#39;_&#39;];
-    echo $GLOBALS[&#39;a&#39;];
-    echo $GLOBALS[&#39;b&#39;];
-    var_dump($GLOBALS) //查看$GLOBALS的类型和值
-    $GLOBALS[&#39;_GET&#39;] //获取超全局变量中_GET的变量,相当于$_GET
-    $GLOBALS[&#39;_GET&#39;][&#39;username&#39;] //获取前端以GET形式传输的username的值
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/J2txUnQHCuf36j7.png" alt="image-20210317192914226"></p>
-<p>扩展：CTF中如何绕过判断：</p>
-<pre><code class="php">//输入你想要的变量，$flag
-$want = $_GET[&#39;want&#39;];
-// $want=GLOBALS[&#39;flag&#39;]绕过if语句
-if($want==&#39;flag&#39;)&#123;
-    die(&quot;hacker!&quot;);
-&#125;
-else&#123;
-    echo $$want;
-    //GLOBALS[&#39;flag&#39;]
-&#125;
-//$want 利用正则表达式
-//want = flag</code></pre>
-<h3 id="PHP表单处理"><a href="#PHP表单处理" class="headerlink" title="PHP表单处理"></a>PHP表单处理</h3><p>PHP超全局变量$_GET和$_POST用于收集表单数据（form-data）</p>
+<h3 id="图形的手绘效果"><a href="#图形的手绘效果" class="headerlink" title="图形的手绘效果"></a>图形的手绘效果</h3><p>（1）获得铅笔画风格图像常采用ImageFilter.CONTOUR滤镜，它能够将图像的轮廓信息提取出来，但却缺乏立体感。可由程序给出图像的手绘效果，让图像更具立体感。</p>
 <ul>
-<li>form.html</li>
+<li>图像轮廓</li>
 </ul>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;/&gt;
-        &lt;title&gt;goktech&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-    &lt;form action=&quot;form.php&quot; method=&quot;POST&quot;&gt;
-        姓名：&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;br/&gt;
-        电邮：&lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;&lt;br/&gt;
-        &lt;input type=&quot;submit&quot;&gt;
-    &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/04/16/8WoF4DqVz1YsagP.png" alt="image-20210416160955896"></p>
+<p>（2）为实现手绘风格，首先需要读取原图像的明暗变化，<strong>即灰度值。</strong></p>
+<p>（3）从直观视觉感受上定义，图像灰度值显著变化的地方就是梯度，它描述了图像灰度变化的强度。</p>
+<p>（4）通常可以使用梯度计算来提取图像轮廓，numpy中提供了直接获取灰度图像梯度的函数gradient()，传入图像数组表示即可返回代表x和y各自方向上梯度变化的二维元组。</p>
+<pre><code class="python">from PIL import Image
+import numpy as np
+vec_el = np.pi/2.2      #光源的俯视角度，弧度值
+vec_az = np.pi/4.       #光源的方位角度，弧度值
+depth = 10.             #0-100
+im = Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;)
+a = np.asarray(im).astype(&#39;float&#39;)   #astype实现变量类型转换
+grad = np.gradient(a)   #取图像灰度的梯度值
+grad_x, grad_y = grad   #分别取横纵图像梯度值
+grad_x = grad_x*depth/100.
+grad_y = grad_y*depth/100.
+dx = np.cos(vec_el)*np.cos(vec_az) #光源对x轴的影响
+dy = np.cos(vec_el)*np.sin(vec_az) #光源对y轴的影响
+dz = np.sin(vec_el)                #光源对z轴的影响
+A = np.sqrt(grad_x**2 + grad_y**2 + 1.)
+uni_x = grad_x/A
+uni_y = grad_y/A
+uni_z = 1./A
+a2 = 255*(dx*uni_x + dy*uni_y +dz*uni_z) #光源归一化
+a2 = a2.clip(0,255)
+im2 = Image.fromarray(a2.astype(&#39;uint8&#39;))#重构图像
+im2.save(&#39;fcityHandDraw.jpg&#39;)</code></pre>
 <ul>
-<li>form.php</li>
+<li>手绘效果</li>
 </ul>
-<pre><code class="php">&lt;meta charset=&quot;utf-8&quot;&gt;
-&lt;?php
-    $name=$_POST[&#39;name&#39;];
-    $email=$_POST[&#39;email&#39;];
-    echo &quot;Welcome &quot;,$name;
-    echo &quot;&lt;br&gt;&quot;;
-    echo &quot;Your email is &quot;,$email;
-//将用户名和电邮保存在数据库中
-    //1.构造SQL语句
-    //INSERT INTO user (username,email) VALUES (&quot;xxx&quot;,&quot;xxx&quot;) 将两个xxx看作是变量，第一个xxx前的内容看作一个字符串，两个xxx之间的内容为一个字符串，第二个xxx后的内容看作是一个字符串。
-    //PHP拼接符&quot;.&quot;
-    //$a定义变量a
-    $sql=&#39;INSERT INTO user (username,email) VALUES (&quot;&#39;.$name.&#39;&quot;,&quot;&#39;.$email.&#39;&#39;&quot;)&#39;;
-或者不用连接符：
-    $sql=&quot;INSERT INTO user (username,email) VALUES (&#39;$name&#39;,&#39;$email&#39;)&quot;;
-    //2.使用PHP去向数据库进行查询，查询的内容就位构造好的SQL语句
-    header(&quot;Content-Type:text/html;charset=UTF-8&quot;);     //解决中文乱码
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/4IPyNqHUoCFzpEK.png" alt="image-20210318095619457"></p>
-<p><img src="https://i.loli.net/2021/03/18/jYD3WQx45qdVewb.png" alt="image-20210318095636257"></p>
-<h3 id="PHP数据类型"><a href="#PHP数据类型" class="headerlink" title="PHP数据类型"></a>PHP数据类型</h3><p>（1）PHP数据类型分为：字符串、整数、浮点数、逻辑、数组、对象、NULL。</p>
-<p>（2）PHP字符串：</p>
+<p><img src="https://i.loli.net/2021/04/16/faVxdl8psUnWJBe.png" alt="image-20210416160914116"></p>
+<p>（5）手绘图像的基本思想是利用像素之间的梯度值（而不是像素本身）重构每个像素值。为了体现光照效果，<strong>设计一个光源，</strong>建立光源对各点梯度值的影响函数，进而运算出新的像素值，从而体现边界点灰度变化，形成手绘效果。</p>
+<p>（6）为了更好的立体感，<strong>增加一个z方向梯度值</strong>，并给x和y方向梯度值赋权值depth。这种坐标空间变化相当于给物体加上一个虚拟光源，根据灰度值大小模拟各部分相对于人视角的远近程度，使画面显得有“深度”。</p>
+<p>（7）在利用梯度重构图像时，对应不同梯度取0~255之间不同的灰度值，<strong>depth</strong>的作用在于调节这个对应关系。</p>
 <ul>
-<li>字符串是字符序列，比如“Hello world!”。</li>
-<li>字符串可以是引号内的任何文本。可以使用单引号或双引号</li>
+<li>depth较小时，背景区域接近白色，画面显示轮廓描绘；</li>
+<li>depth较大时，整体画面灰度值较深，近似于浮雕效果</li>
 </ul>
-<p>（3）PHP整数；可以用三种格式规定整数：十进制、十六进制(前缀是0x)或八进制(前缀是0)</p>
-<p>（4）var_dump()会返回变量的数据类型和值</p>
-<pre><code class="php">&lt;?php
-$x=666;
-$y=0x8c;   //十六进制数
-$z=047;    //八进制数
-
-var_dump($x);
-var_dump($y);
-var_dump($z);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/KeEHsqhbv43xl6y.png" alt="image-20210318100414764"></p>
-<p>扩展:ctf如何绕过判断：</p>
-<pre><code class="php">//$want = 0x01 ，利用十六进制绕过
-if($want === 1)&#123;
-    die(&quot;try!&quot;);
-&#125;
-else&#123;
-    if($want == 1)&#123;
-        echo $flag;时
-        //$want等于1
-    &#125;
-    else&#123;
-        die(&quot;hacker!&quot;);
-    &#125;
-&#125;</code></pre>
-<p>（5）PHP浮点数：浮点数是有小数点或指数形式的数字。float类型数据强制转换为int类型数据时会造成溢出。</p>
-<pre><code class="php">&lt;?php
-$x=11.123;
-$y=2.4e3;
-$z=8e-5;
-
-var_dump($x);
-var_dump($y);
-var_dump($z);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/1QAOSYM6mHVgoUC.png" alt="image-20210318103306580"></p>
-<p>（6）PHP数组：</p>
-<ul>
-<li>数组能够在单独的变量名中存储一个或多个值。</li>
-<li>在PHP中，array()函数用于创建数组</li>
-<li>在PHP中，有三种数组类型：</li>
-</ul>
-<pre><code>索引数组-带有数字索引的数组
-关联数组-带有指定键的数组
-多维数组-包含一个或多个数组的数组</code></pre>
-<ul>
-<li>获得数组的长度-count()函数：用于返回数组的长度（元素数）</li>
-</ul>
-<p>（7）PHP索引数组：带有数字索引的数组</p>
-<pre><code class="php">&lt;?php
-$shuiguo=array(&quot;苹果&quot;,&quot;香蕉&quot;,&quot;西瓜&quot;);
-echo $shuiguo[0],$shuiguo[1],$shuiguo[2];
-$len=count($shuiguo);
-echo &quot;&lt;br/&gt;&quot;;
-echo $len.&quot;&lt;br/&gt;&quot;;
-
-for ($i=0;$i&lt;$len;$i++)&#123;     //遍历索引数组
-    echo $shuiguo[$i];
-&#125;
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/CuixX4ZEo5sMD9B.png" alt="image-20210318132313725"></p>
-<p>（8）PHP关联数组：带有指定键的数组</p>
-<pre><code class="php">&lt;?php
-$shuiguo=array(&quot;苹果&quot;=&gt;&quot;3&quot;,&quot;香蕉&quot;=&gt;&quot;5&quot;,&quot;西瓜&quot;=&gt;&quot;9&quot;);
-foreach($shuiguo as $x=&gt;$y)&#123;     //用foreach遍历关联数组
-    echo $x.&quot;--&gt;&quot;.$y;
-    echo &quot;&lt;br/&gt;&quot;;
-&#125;
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/6Fz2cg7T3HkYZX5.png" alt="image-20210318132830706"></p>
-<h3 id="PHP函数"><a href="#PHP函数" class="headerlink" title="PHP函数"></a>PHP函数</h3><p>（1）PHP拥有超过1000个内建函数</p>
-<p>（2）PHP默认参数值。以下例子展示了如何使用默认参数。若调用自定义的没有参数的setHeight()函数，它的参数会取默认值50。</p>
-<pre><code class="php">&lt;?php
-function setHeight($minheight=50)&#123;
-    echo &quot;高度是：$minheight &lt;br/&gt;&quot;;
-&#125;
-setHeight(350);
-setHeight();
-setHeight(135);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/isdQgbrCOHAp2lL.png" alt="image-20210318133544243"></p>
-<pre><code class="php">&lt;?php
-function sum($x,$y)&#123;
-    $z=$x+$y;
-    return $z;      //return定义函数返回值
-&#125;
-echo &quot;5 + 7 =&quot;.sum(5,7).&quot;&lt;br/&gt;&quot;;
-echo &quot;6 + 6 =&quot;.sum(6,6).&quot;&lt;br/&gt;&quot;;
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/ihD1SGJaCnFcV5e.png" alt="image-20210318134041089"></p>
-<h3 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h3><p>（1）PHP是一门类型松散的语言——弱类型</p>
-<ul>
-<li>在定义PHP变量时不必告知变量的数据类型</li>
-<li>不同数据类型在比较时会发生强制类型转换，PHP根据它的值，自动把变量转换为正确的数据类型。</li>
-</ul>
-<p>（2）PHP的两种比较运算符”==”和”===”</p>
-<ul>
-<li>==等于符号，比较时，会先转换成相同的数据类型，然后比较值。</li>
-<li>===全等于符号，比较时，先比较数据类型是否相同，然后比较值</li>
-</ul>
-<pre><code class="php">&lt;?php
-$x=NULL;
-$y=0;
-$z=&quot;abc&quot;;
-
-var_dump($x == $y);   //NULL和整数0，true
-echo &quot;&lt;br/&gt;&quot;;         
-var_dump($x == $z);   //NULL和字符串，false
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($y == $z);   //整数0和字符串，true
-echo &quot;&lt;br/&gt;&quot;;
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($x === $y);  //NULL和整数0，false
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($x === $z);  //NULL和字符串，false
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($y === $z);  //整数0和字符串，false
-echo &quot;&lt;br/&gt;&quot;;
-
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/yGCsctegp4BKAj7.png" alt="image-20210318135601549"></p>
-<p>（3）0e字符串和0x字符串比较时：</p>
-<ul>
-<li>若字符串是0e类型，PHP会将其解析为科学计数法</li>
-<li>若字符串是0x类型，PHP会将其解析为十六进制</li>
-</ul>
-<pre><code class="php">&lt;?php
-$a=1.23e+3;
-$b=&quot;1.23e+3&quot;;
-$c=0x4c;
-$d=&quot;0x4c&quot;;
-
-echo $a.&quot;&lt;br/&gt;&quot;;
-echo $b.&quot;&lt;br/&gt;&quot;;
-echo $c.&quot;&lt;br/&gt;&quot;;
-echo $d.&quot;&lt;br/&gt;&quot;;
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($a == $b);
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($c == $d);
-
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/sTgKS3Rov7jENAz.png" alt="image-20210318141329399"></p>
-<h2 id="SQL的进阶语法"><a href="#SQL的进阶语法" class="headerlink" title="SQL的进阶语法"></a>SQL的进阶语法</h2><h3 id="数据库系统"><a href="#数据库系统" class="headerlink" title="数据库系统"></a>数据库系统</h3><p>（1）数据库：长期存储在计算机内的、有组织的、可共享的数据集合。</p>
-<p>（2）DBMS(DataBase Management System)</p>
-<ul>
-<li>一种操纵和管理数据库的大型软件，用于建立、使用和维护数据库</li>
-<li>它对数据库进行统一的管理和控制，以保证数据库的安全性和完整性</li>
-<li>常见的DBMS包括access、SQLserver、mysql、oracle、DB2等</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/fv8WpUEh1g2FZje.png" alt="image-20210318142031864"></p>
-<h3 id="基础查询语句"><a href="#基础查询语句" class="headerlink" title="基础查询语句"></a>基础查询语句</h3><p>（1）select * from admin;</p>
-<ul>
-<li>select语句用于从表中选取数据，结果被存储在一个结果表中(称结果集)。以下例子说明admin表中有id，role，username，password，city，age这6列，共5行。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/XKT8ZW5nowuz2Cp.png" alt="image-20210318150151954"></p>
-<ul>
-<li>如需有条件地从表中选取数据，可将where子句添加到select语句中。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/VLYn6PwCyrMcDuh.png" alt="image-20210318150401661"></p>
-<p>（2）AND &amp; OR运算符</p>
-<ul>
-<li>AND和OR运算符用于根据多个条件筛选记录。AND优先级高于OR。</li>
-<li>若AND分隔的所有条件为true，则AND运算符显示记录</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/nDVuwvXOTZriCsQ.png" alt="image-20210318151451097"></p>
-<ul>
-<li>若有OR分隔的任何条件为真，则OR运算符显示记录</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/sTIqZpc6YixnH81.png" alt="image-20210318151556785"></p>
-<p>（3）order by排序：默认情况下按升序排序记录</p>
-<p><img src="https://i.loli.net/2021/03/18/kYPTKGzq6fjFAXm.png" alt="image-20210318152040641"></p>
-<ul>
-<li>执行select * from admin order by 6;（按照第6列进行排序，效果同上）</li>
-<li>若列数超出则会报错</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/tg4IJm9X1CvwRT8.png" alt="image-20210318152204167"></p>
-<p>（4）MySQL支持limit子句，用以取回有限数量的记录。</p>
-<p>（5）从第n行开始，显示后面m行：limit n,m （或者limit m offset n）。</p>
-<ul>
-<li>从第0行开始，显示后面1行</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/ZOFJn6rRpVqc2md.png" alt="image-20210318152654793"></p>
-<ul>
-<li>从第2行开始，显示后面3行</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/tQ9UWLkdE3FzsmI.png" alt="image-20210318152726593"></p>
-<p>（6）count(*)查询，返回记录的个数</p>
-<pre><code class="sql">SELECT count(*) FROM `test` WHERE City=&#39;Hangzhou&#39; AND Country=&#39;China&#39;;</code></pre>
-<h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p>UNION运算符用于组合两个或更多select语句的结果集。</p>
-<ul>
-<li>这些列必须具有相似的数据类型</li>
-<li>每个select语句中的列也必须以相同的顺序排列</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/52lJFVIcEN6La9y.png" alt="image-20210318153258170"></p>
-<ul>
-<li>union查询会按照select的顺序显示结果集</li>
-<li>当不知道另一张表aadmin时，可借助mysql的弱类型达到构造union语句。</li>
-</ul>
-<pre><code class="sql">select * from admin union select 1,2,3,4,5,6;</code></pre>
-<h3 id="SELECT子句"><a href="#SELECT子句" class="headerlink" title="SELECT子句"></a>SELECT子句</h3><p>（1）select查询的结果可作为另一个select查询的列的结果。</p>
-<p>（2）这种查询方式属于SQL子查询的一种。</p>
-<p><img src="https://i.loli.net/2021/03/18/7bKJSaygOLYXlIm.png" alt="image-20210318154404839"></p>
-<h3 id="基本建表和增删改语句"><a href="#基本建表和增删改语句" class="headerlink" title="基本建表和增删改语句"></a>基本建表和增删改语句</h3><p>（1)CREATE 用来建表，格式如下</p>
-<pre><code class="sql">create table 表名称 (列名称1 数据类型,列名称2 数据类型,列名称3 数据类型,...);</code></pre>
-<p>例如新建一张表test，插入3个列分别为id，username，password</p>
-<pre><code class="sql">create table test (id int,username varchar(255),password varchar(255));</code></pre>
-<p>（2）INSERT用来增加一条记录</p>
-<pre><code class="sql">insert into test (id,username,password) values(1,&#39;admin&#39;,&#39;admin123&#39;);</code></pre>
-<p>（3）UPDATE用来修改一条记录</p>
-<pre><code class="sql">update test set username=&#39;admin_A&#39;,password=&#39;admin321&#39; where username=&#39;admin&#39;;</code></pre>
-<p>（4）DELETE用来删除一条记录</p>
-<pre><code class="sql">delete from test where username=&#39;admin_A&#39;;</code></pre>
-<h3 id="MySQL数据库中设置属性为自增属性"><a href="#MySQL数据库中设置属性为自增属性" class="headerlink" title="MySQL数据库中设置属性为自增属性"></a>MySQL数据库中设置属性为自增属性</h3><pre><code class="sql">--+设置users表中的id属性为自增属性
-alter table users change id id int not null auto_increment primary key; 
---+设置users表中的自增属性从指定的1004开始自增，该命令可根据需要重复使用
-alter table users auto_increment = 1004;
-
---+MySQL中删除主键需要执行两步命令.
---+一、有auto_increment自增属性的，先删除自增；
---+二、删除主键约束 primary key，完成
-
---+删除id的auto_increment自增属性。
-alter table users change id id int;
---+然后删除id的primary key主键约束.
-alter table users drop primary key;</code></pre>
-<h3 id="数据库管理系统的内置数据库"><a href="#数据库管理系统的内置数据库" class="headerlink" title="数据库管理系统的内置数据库"></a>数据库管理系统的内置数据库</h3><p>（1）MySQL有一个默认的内置数据库，信息数据库information_schema</p>
-<p>（2）information_schema有三张关键的表：schemata、tables、columns</p>
-<p>（3）schemata表的schema_name列存放的是所有的数据库名</p>
-<pre><code class="sql">select schema_name from information_schema.schemata;
-或者使用
-show databases;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/F1XeAcMPWNJpgiv.png" alt="image-20210318160004813"></p>
-<p><img src="https://i.loli.net/2021/03/18/dQupgmRqYFH1jVK.png" alt="image-20210318160139745"></p>
-<p>（4）MySQL有一个默认的内置数据库，信息数据库information_schema。</p>
-<p>（5）information_schema有三张关键的表：schemata、tables、columns。</p>
-<p>（6）tables表的table_schema列存放的是所有的数据库名，table_name列存放的是数据库对应的所有表名。</p>
-<ul>
-<li>如要查询数据库mysql的所有表名。</li>
-</ul>
-<pre><code class="sql">select table_name from information_schema.tables where table_schema=&#39;mysql&#39;;
-或者也可以
-use mysql;   //进入或使用mysql数据库
-show tables; //查询数据库mysql的所有表名</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/1682TjYsrg4ZwLz.png" alt="image-20210318160929363"></p>
-<p>（7）columns表的column_name列存放的是所有的列名，table_schema列存放的是数据库对应的所有数据库名，table_name列存放的是数据库对应的所有数据库表名。</p>
-<ul>
-<li>如要查询数据库mysql的user表的所有列</li>
-</ul>
-<pre><code class="sql">select column_name from information_schema.columns where table_schema=&#39;mysql&#39; and table_name=&#39;user&#39;;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/TWgM79RIdoE8HQG.png" alt="image-20210318162436206"></p>
-<h3 id="数据库管理系统的内置函数"><a href="#数据库管理系统的内置函数" class="headerlink" title="数据库管理系统的内置函数"></a>数据库管理系统的内置函数</h3><p>（1）不同的DBMS有各自专属的内置函数，以下是mysql常见的一些内置函数：</p>
-<ul>
-<li>user()查看当前数据库账号的用户名。</li>
-</ul>
-<pre><code class="sql">select user();</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/URcaVqTSufPL3MB.png" alt="image-20210318162714816"></p>
-<ul>
-<li>version()查看当前数据库的版本。</li>
-</ul>
-<pre><code class="sql">select version();</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/KPrsadqNOCEYGvm.png" alt="image-20210318162832065"></p>
-<ul>
-<li>database()查看当前所在查询的数据库名。</li>
-</ul>
-<pre><code class="sql">use dvwa;        //进入数据库dvwa
-select database();</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/8neVsDGyQMBiCbo.png" alt="image-20210318163032842"></p>
-<ul>
-<li>@@datadir查看当前数据库所在物理路径</li>
-</ul>
-<pre><code class="sql">select @@datadir;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/dWr5xZLaBMt3gve.png" alt="image-20210318163155843"></p>
-<ul>
-<li>sleep(n)睡眠函数，运行n秒后返回结果。</li>
-</ul>
-<pre><code class="sql">select sleep(5);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/12GpoYXVtqlrhkU.png" alt="image-20210318163426515"></p>
-<ul>
-<li>length()返回结果长度。</li>
-</ul>
-<pre><code class="sql">select length(&quot;admin&quot;);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/pt8kxOaDSic4neG.png" alt="image-20210318163540873"></p>
-<ul>
-<li>substr(str,n,m)截取函数，从第n位开始截取m。</li>
-</ul>
-<pre><code class="sql">select substr(&quot;admin&quot;,2,3);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/azWsL38ognlNjA1.png" alt="image-20210318163706953"></p>
-<ul>
-<li>if(expr,r1,r2)判断函数，expr条件为真返回r1，为假返回r2。</li>
-</ul>
-<pre><code class="sql">select if((1&gt;2),111,222);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/KEAGFgyRhPWUjeZ.png" alt="image-20210318163855411"></p>
-<ul>
-<li>ord()返回一个字符的ASCII码</li>
-</ul>
-<pre><code class="sql">select ord(&#39;a&#39;);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/f9XRdjrSKckml8Z.png" alt="image-20210318180058349"></p>
-<ul>
-<li>hex()返回一个字符的16进制，相反是unhex()。</li>
-</ul>
-<pre><code class="sql">select hex(&#39;a&#39;);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/dXyhmpuAeQwUPcn.png" alt="image-20210318180229154"></p>
-<ul>
-<li>char()根据ASCII返回对应的字符</li>
-</ul>
-<pre><code class="sql">select char(97);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/hPxKMdlTXVtbIic.png" alt="image-20210318180334990"></p>
-<ul>
-<li>bin()返回一个数的2进制</li>
-</ul>
-<pre><code class="sql">select bin(7);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/HFRDXcQs4Gnygkt.png" alt="image-20210318180438798"></p>
-<p>（2）concat()用于将多个字符串连接成一个字符串，多列成1列</p>
-<pre><code class="sql">select user_id,&#39;---&#39;,user from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png" alt="image-20210318181041151"></p>
-<pre><code class="sql">select concat(user_id,&#39;---&#39;,user) from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/uX68S9IN7AOx5ik.png" alt="image-20210318181128328"></p>
-<p>（3）group_concat()用于返回字符串的所有结果，该结果由分组的值连接而成。</p>
-<pre><code class="sql">select user_id,&#39;---&#39;,user from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png" alt="image-20210318181041151"></p>
-<pre><code class="sql">select group_concat(user_id,&#39;---&#39;,user)from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/FJlRm1ha4uKiNCv.png" alt="image-20210318181515127"></p>
-<h2 id="使用PHP管理SQL"><a href="#使用PHP管理SQL" class="headerlink" title="使用PHP管理SQL"></a>使用PHP管理SQL</h2><h3 id="PHP管理数据库"><a href="#PHP管理数据库" class="headerlink" title="PHP管理数据库"></a>PHP管理数据库</h3><p>（1）在不使用PHP的情况下，管理数据库的基本步骤：连接数据库-&gt;选择数据库-&gt;选择表-&gt;查询SQL语句</p>
-<p><img src="https://i.loli.net/2021/03/18/NrBHuAIcLE8hapj.png" alt="image-20210318184524764"></p>
-<p>（2）PHP连接数据库函数——mysqli_connect(servername,user,pass,database)</p>
-<ul>
-<li>servername：数据库地址</li>
-<li>user：数据库用户名</li>
-<li>pass：数据库密码</li>
-<li>database：数据库名</li>
-</ul>
-<pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-if(!$con)&#123;
-    die(&#39;连接失败：&#39;.mysqli_connect_error());
-&#125;
-else&#123;
-    echo &quot;连接成功&quot;;
-&#125;
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/Kikf8S9ap1l5Jbu.png" alt="image-20210318185742335"></p>
-<pre><code class="php">mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,&quot;test&quot;)//连接数据库</code></pre>
-<p><strong>扩展</strong>：可在相同路径下新建一个database.inc.php文件，用于存放需要传入的参数。然后通过<strong>include</strong>来调用。</p>
-<pre><code class="php">//database.inc.php文件
-&lt;?php
-    $dbserver = &quot;127.0.0.1&quot;;
-    $dbuser = &quot;root&quot;;
-    $dbpass = &quot;root&quot;;
-    $dbdatabase = &quot;test&quot;;
-    mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
-?&gt;</code></pre>
-<pre><code class="php">&lt;?php
-    include &quot;database.inc.php&quot;;
-?&gt;</code></pre>
-<p>（3）查询:PHP执行SQL语句函数——mysqli_query(conn,sql)</p>
-<ul>
-<li>conn：数据库连接函数的结果</li>
-<li>sql：SQL语句</li>
-</ul>
-<pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-if(!$con)&#123;
-    die(&#39;连接失败：&#39;.mysqli_connect_error());
-&#125;
-else&#123;
-    echo &quot;连接成功&lt;hr&gt;&quot;;
-&#125;
-
-$sql=&quot;select * from users limit 0,1&quot;;
-$result=mysqli_query($con,$sql);
-var_dump($result);
-
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/tJcBy8beNTHK3qw.png" alt="image-20210318190457387"></p>
-<p><strong>扩展</strong>：可在相同路径下新建一个database.inc.php文件，用于存放需要传入的参数。然后通过<strong>include</strong>来调用。</p>
-<pre><code class="php">//database.in.php文件
-&lt;?php
-    $dbserver = &quot;127.0.0.1&quot;;
-    $dbuser = &quot;root&quot;;
-    $dbpass = &quot;root&quot;;
-    $dbdatabase = &quot;test&quot;;
-    $con = mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
-?&gt;</code></pre>
-<pre><code class="php">&lt;?php
-    include &quot;database.inc.php&quot;;
-    $query = mysqli_query($con,$sql);
-?&gt;</code></pre>
-<p>（4）PHP获取执行结果函数——mysqli_fetch_array(query)</p>
-<ul>
-<li>query：执行SQL语句函数的结果</li>
-<li>mysqli_num_rows(query)：获取结果数组长度</li>
-</ul>
-<pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-$sql=&quot;select * from users limit 0,1&quot;;
-$result=mysqli_query($con,$sql);
-if(@mysqli_num_rows($result)&gt;0)&#123;       //加@符可避免报错
-    $row=mysqli_fetch_array($result);
-    echo $row[&#39;user_id&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;first_name&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;last_name&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;user&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;password&#39;].&quot;&lt;br/&gt;&quot;;
-&#125;
-
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/Ft8EG4y12QASzfR.png" alt="image-20210318192511897"></p>
-<p><strong>扩展</strong>：根据用户输入用户名和密码判断是否正确，进行数据库操作</p>
-<ul>
-<li>login.html文件</li>
-</ul>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;form action=&quot;login.php&quot; method=&quot;get&quot;&gt;
-            City:
-            &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
-            &lt;br&gt;
-            Country:
-            &lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;
-            &lt;br&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;查询&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<ul>
-<li>login.php文件</li>
-</ul>
-<pre><code class="php">&lt;?php
-    $user = $_GET[&#39;username&#39;];
-    $pass = $_GET[&#39;password&#39;];
-    $sql = &quot;select * from test where City=&#39;&quot;.$user.&quot;&#39; and Country=&#39;&quot;.$pass.&quot;&#39;&quot;;
-    include &quot;database.inc.php&quot;;
-    $query = mysqli_query($con,$sql);
-    $result = mysqli_fetch_array($query);
-    var_dump($result)
-    echo &quot;&lt;br&gt;&quot;;
-    echo $result[&#39;CompanyName&#39;];
-?&gt;</code></pre>
-<ul>
-<li>database.inc.php文件</li>
-</ul>
-<pre><code class="php">&lt;?php
-    $dbserver = &quot;127.0.0.1&quot;;
-    $dbuser = &quot;root&quot;;
-    $dbpass = &quot;root&quot;;
-    $dbdatabase = &quot;test&quot;;
-    $con = mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
-    function query($con,$sql)&#123;
-        mysqli_query($con,$sql);
-    &#125;
-?&gt;</code></pre>
-<h3 id="根据用户查询返回结果展示"><a href="#根据用户查询返回结果展示" class="headerlink" title="根据用户查询返回结果展示"></a>根据用户查询返回结果展示</h3><pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-if(!$con)&#123;
-    die(&#39;连接失败：&#39;.mysqli_connect_error());
-&#125;
-
-$id=$_GET[&#39;user_id&#39;];
-$sql =&quot;select * from `users` where user_id=$id&quot;;    //其中users不是用单引号括住，而是用` `
-
-$result=mysqli_query($con,$sql);
-
-if(mysqli_num_rows($result)&gt;0)&#123;
-    $row=mysqli_fetch_array($result);
-    echo &quot;您查询的用户名是： &quot;.$row[&#39;user&#39;].&quot;&lt;br/&gt;&quot;;
-    echo &quot;您查询的用户名密码是： &quot;.$row[&#39;password&#39;];
-&#125;
-
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/GEd5cH3gzv9h2Ne.png" alt="image-20210318195520342"></p>
-<h2 id="PHP的会话与权限管理"><a href="#PHP的会话与权限管理" class="headerlink" title="PHP的会话与权限管理"></a>PHP的会话与权限管理</h2><h3 id="Cookie和会话Session"><a href="#Cookie和会话Session" class="headerlink" title="Cookie和会话Session"></a>Cookie和会话Session</h3><p>（1）cookie用来管理服务器和客户之间的状态。</p>
-<ul>
-<li>cookie的工作机制是<strong>用户识别及状态管理</strong></li>
-<li>web网站为了管理用户的状态，会通过web浏览器，把一些数据临时写入用户的计算机内。当用户访问该web网站时，可通过通信方式取回之前发放的cookie。</li>
-</ul>
-<p>（2）session会在cookie中出现和传输，属于cookie的一部分</p>
-<ul>
-<li>当web服务器开启会话机制时，用户登录成功后，会将<strong>会话保存在服务器中</strong></li>
-<li>PHPSESSID–php session id–存放某串session</li>
-<li>session可在浏览器中用f12打开开发者工具–&gt;Application–&gt;Cookie查看</li>
-</ul>
-<h3 id="PHP-Cookie"><a href="#PHP-Cookie" class="headerlink" title="PHP Cookie"></a>PHP Cookie</h3><p>（1）下发cookie函数：Setcookie()</p>
-<ul>
-<li>服务端会通过http响应包的set-cookie为浏览器分配cookie字段。</li>
-</ul>
-<pre><code class="php">&lt;?php
-setcookie(&quot;user&quot;,&quot;reborn&quot;,time()+3600);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-
-//创建名为“user”的cookie，并为它赋值“reborn”
-//规定此cookie在一小时后过期
-?&gt;</code></pre>
-<p>（2）取回cookie的值</p>
-<ul>
-<li>PHP的$_COOKIE变量用于取回cookie的值</li>
-</ul>
-<pre><code class="php">&lt;?php
-    echo $_COOKIE[&quot;user&quot;];    //取回cookie的值
-    print_r($_COOKIE);        //查看所有cookie的方法
-?&gt;</code></pre>
-<p>（3）删除cookie</p>
-<ul>
-<li>删除cookie时，应当使过期日期变更为过去的时间点</li>
-</ul>
-<pre><code class="php">&lt;?php
-    setcookie(&quot;user&quot;,&quot;&quot;,time()-3600);    //将过期数据设置为一小时前
-?&gt;</code></pre>
-<h3 id="PHP-Sessions"><a href="#PHP-Sessions" class="headerlink" title="PHP Sessions"></a>PHP Sessions</h3><p>PHP开启会话函数：session_start()</p>
-<ul>
-<li>session_start()函数必须位于&lt;html&gt;标签之前</li>
-</ul>
-<pre><code class="html">&lt;?php session_start(); ?&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        ......
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3 id="存储PHP-Session"><a href="#存储PHP-Session" class="headerlink" title="存储PHP Session"></a>存储PHP Session</h3><p>存储记录Session：$_SESSION</p>
-<pre><code class="php">&lt;?php
-    session_start();
-    $_SESSION[&#39;login_id&#39;]=1003;
-    $_SESSION[&#39;role&#39;]=&quot;student&quot;;
-?&gt;</code></pre>
-<h3 id="终结PHP-Session"><a href="#终结PHP-Session" class="headerlink" title="终结PHP Session"></a>终结PHP Session</h3><p>（1）若需要删除某些session数据，可以使用unset()或session_destroy()函数</p>
-<ul>
-<li>unset()函数用于释放指定的session变量</li>
-</ul>
-<pre><code class="php">&lt;?php
-    unset($_SESSION[&#39;views&#39;])；
-?&gt;</code></pre>
-<p>（2）可以通过session_destroy()函数彻底终结session</p>
-<ul>
-<li>session_destroy()将重置session，将失去所有已存储的session数据</li>
-</ul>
-<pre><code class="php">&lt;?php
-    session_destroy();
-?&gt;</code></pre>
-<h3 id="利用session进行权限管理"><a href="#利用session进行权限管理" class="headerlink" title="利用session进行权限管理"></a>利用session进行权限管理</h3><p>当用户需要访问登录后的页面或特定身份才能访问的页面或数据，则通过session变量来校验用户身份权限和状态，根据校验结果决定是否允许用户进行相关操作。</p>
-<ul>
-<li>用户登录成功时为用户分配session变量</li>
-<li>记录用户的登录状态和身份</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/8khDnLWJTZ5cmC7.png" alt="image-20210318203458759"></p>
-<h3 id="header-函数"><a href="#header-函数" class="headerlink" title="header()函数"></a>header()函数</h3><p>header()函数是PHP中进行页面跳转的一种方法。</p>
-<ul>
-<li>header()函数的主要功能是将HTTP协议标头(header)输出到浏览器。</li>
-</ul>
-<pre><code class="php">&lt;?php
-    header(&quot;Location:http://www.qq.com&quot;);   //重定向浏览器
-    exit();   //确保重定向后，后续代码不会被执行
-?&gt;</code></pre>
+<p>（8）将光源定义为3个参数：<strong>方位角vec_az、俯视角vec_el和深度权值depth</strong>。两个角度的设定和单位向量构成了基础的柱坐标系，体现物体相对于虚拟光源的位置。例如代码的第3行到第5行。</p>
+<p>（9）通过<strong>np.gradient()函数</strong>计算图像梯度值作为新色彩计算的基础。为了更直观地进行计算，可以把角度对应的柱坐标转换为xyz立体坐标系。dx、dy、dz是像素点在施加模拟光源后在x、y、z方向上明暗变化的加权向量，如代码第12到第14行。</p>
+<p>（10）A是梯度值，也是梯度大小。<strong>各个方向上总梯度除以幅值得到每个像素单元的梯度值</strong>。利用每个单元的梯度值和方向加权向量合成灰度值，<strong>clip函数用于预防溢出</strong>，并归一化到0~255区间。最后从数组中恢复图像并保存。</p>
 
       
 
@@ -1024,7 +627,7 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -1080,7 +683,7 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -1094,18 +697,9 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
   
 <nav id="article-nav">
   
-    <a href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          深入Python语言(七)-组合数据类型01
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaScript代码进阶</div>
+    <a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA02/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">运用Python语言(二)-程序设计方法论02</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -1132,7 +726,7 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E7%9A%84%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">PHP的基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML%E5%92%8CPHP%E7%9A%84%E5%B5%8C%E5%A5%97%E5%85%B3%E7%B3%BB"><span class="toc-number">1.1.</span> <span class="toc-text">HTML和PHP的嵌套关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML%E5%92%8CPHP%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">HTML和PHP的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E7%9A%84%E5%8A%A8%E6%80%81%E4%BA%A4%E4%BA%92"><span class="toc-number">1.3.</span> <span class="toc-text">PHP的动态交互</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%90%E4%BA%A4%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.1.</span> <span class="toc-text">浏览器提交请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.2.</span> <span class="toc-text">服务器端接收请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81%E4%BF%9D%E6%8C%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">网站用户状态保持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie%E5%92%8CSession%E5%88%A4%E6%96%AD%E7%99%BB%E5%BD%95%E7%8A%B6%E6%80%81"><span class="toc-number">1.3.4.</span> <span class="toc-text">Cookie和Session判断登录状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%8F%98%E9%87%8F"><span class="toc-number">1.4.</span> <span class="toc-text">PHP变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86"><span class="toc-number">1.5.</span> <span class="toc-text">PHP表单处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.6.</span> <span class="toc-text">PHP数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%87%BD%E6%95%B0"><span class="toc-number">1.7.</span> <span class="toc-text">PHP函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E5%BC%B1%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.8.</span> <span class="toc-text">PHP弱类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E7%9A%84%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">SQL的进阶语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.</span> <span class="toc-text">数据库系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.2.</span> <span class="toc-text">基础查询语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.3.</span> <span class="toc-text">联合查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SELECT%E5%AD%90%E5%8F%A5"><span class="toc-number">2.4.</span> <span class="toc-text">SELECT子句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%BB%BA%E8%A1%A8%E5%92%8C%E5%A2%9E%E5%88%A0%E6%94%B9%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.5.</span> <span class="toc-text">基本建表和增删改语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E8%AE%BE%E7%BD%AE%E5%B1%9E%E6%80%A7%E4%B8%BA%E8%87%AA%E5%A2%9E%E5%B1%9E%E6%80%A7"><span class="toc-number">2.6.</span> <span class="toc-text">MySQL数据库中设置属性为自增属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.7.</span> <span class="toc-text">数据库管理系统的内置数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">2.8.</span> <span class="toc-text">数据库管理系统的内置函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8PHP%E7%AE%A1%E7%90%86SQL"><span class="toc-number">3.</span> <span class="toc-text">使用PHP管理SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">3.1.</span> <span class="toc-text">PHP管理数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">3.2.</span> <span class="toc-text">根据用户查询返回结果展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E7%9A%84%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">PHP的会话与权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie%E5%92%8C%E4%BC%9A%E8%AF%9DSession"><span class="toc-number">4.1.</span> <span class="toc-text">Cookie和会话Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-Cookie"><span class="toc-number">4.2.</span> <span class="toc-text">PHP Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-Sessions"><span class="toc-number">4.3.</span> <span class="toc-text">PHP Sessions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8PHP-Session"><span class="toc-number">4.4.</span> <span class="toc-text">存储PHP Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%BB%93PHP-Session"><span class="toc-number">4.5.</span> <span class="toc-text">终结PHP Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8session%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">4.6.</span> <span class="toc-text">利用session进行权限管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#header-%E5%87%BD%E6%95%B0"><span class="toc-number">4.7.</span> <span class="toc-text">header()函数</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">问题概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#numpy%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">numpy库的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#numpy%E5%BA%93%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text">numpy库概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#numpy%E5%BA%93%E8%A7%A3%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text">numpy库解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E6%89%8B%E7%BB%98%E6%95%88%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">图像的手绘效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E6%95%B0%E7%BB%84%E8%A1%A8%E7%A4%BA"><span class="toc-number">3.1.</span> <span class="toc-text">图像的数组表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E7%81%B0%E5%BA%A6%E5%80%BC"><span class="toc-number">3.2.</span> <span class="toc-text">扩展：灰度值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%9A%84%E6%89%8B%E7%BB%98%E6%95%88%E6%9E%9C"><span class="toc-number">3.3.</span> <span class="toc-text">图形的手绘效果</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

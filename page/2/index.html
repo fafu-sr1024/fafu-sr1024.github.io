@@ -152,6 +152,598 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/深入Python语言(七)-组合数据类型01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">深入Python语言(七)-组合数据类型01</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/" class="archive-article-date">
+  	<time datetime="2021-03-20T12:22:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="组合数据类型概述"><a href="#组合数据类型概述" class="headerlink" title="组合数据类型概述"></a>组合数据类型概述</h2><p>要点：<strong>组合数据类型为多个同类型或不同类型数据提供单一表示。组合数据类型分3类：序列类型、集合类型和映射类型。</strong></p>
+<p>（1）定义： 将多个数据有效组织起来并统一表示，这种能够表示多个数据的类型称为<strong>组合数据类型</strong>。不同于数字类型，例如整数、浮点数和复数类型，这些类型仅能表示一个数，这种表示单一数据的类型称为<strong>基本数据类型</strong>。</p>
+<p>（2）序列类型是一个元素向量，元素之间存在<strong>先后关系</strong>，通过需要访问，元素之间不排他。</p>
+<p>（3）集合类型是一个元素集合，元素之间<strong>无序</strong>，相同元素在集合中唯一存在。</p>
+<p>（4）映射类型是”键-值“数据项的集合，**每个元素是一个键值对，表示为(key,value)**。</p>
+<p><img src="https://i.loli.net/2021/03/20/hVPeXHUaN4W5Id8.png" alt="image-20210320204630710"></p>
+<h3 id="序列类型"><a href="#序列类型" class="headerlink" title="序列类型"></a>序列类型</h3><p>（1）序列类型是一维元素向量，元素之间存在先后关系，通过序号访问。当需要访问序列中某个特定值时，只需要通过下标标出即可。</p>
+<p>（2）由于元素之间存在顺序关系，所以<strong>序列中可以存在数值相同但位置不同的元素</strong>。序列类型支持成员关系操作符(in)、长度计算函数(len())、分片([])，元素本身也可以是序列类型。</p>
+<p>（3）Python中比较重要的序列类型：字符串(str)、元组(tuple)、列表(list)。</p>
+<ul>
+<li>字符串可以看成是单一字符的有序组合，属于序列类型。同时，由于字符串类型十分常用且单一字符串只表达一个含义，因此也被看作是基本数据类型。</li>
+<li>元组是包含0个或多个数据项的不可变序列类型，元组生成后是固定的，其中任何数据项不能被替换或删除。</li>
+<li>列表是一个可以修改数据项的数据类型，使用也最灵活。</li>
+</ul>
+<p>（4）<strong>只要是序列类型，都可以使用相同的索引体系，即正向递增序号和反向递减序号。</strong>(详见初始Python语言(二)))</p>
+<p>（5)序列类型有12个通用的操作符和函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x in s</td>
+<td align="center">若x是s的元素，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">x not in s</td>
+<td align="center">若x不是s的元素，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">s + t</td>
+<td align="center">连接s和t</td>
+</tr>
+<tr>
+<td align="center">s<em>n或n\</em>s</td>
+<td align="center">将序列s复制n次</td>
+</tr>
+<tr>
+<td align="center">s[i]</td>
+<td align="center">索引，返回序列的第i个元素</td>
+</tr>
+<tr>
+<td align="center">s[i:j]</td>
+<td align="center">分片，返回包含序列s第i到j个元素的子序列（不包含第j个元素）</td>
+</tr>
+<tr>
+<td align="center">s[i:j:k]</td>
+<td align="center">步骤分片，返回包含序列s第i到j个元素以k为步数的子序列</td>
+</tr>
+<tr>
+<td align="center">len(s)</td>
+<td align="center">序列s的元素个数（长度）</td>
+</tr>
+<tr>
+<td align="center">min(s)</td>
+<td align="center">序列s中的最小值</td>
+</tr>
+<tr>
+<td align="center">max(s)</td>
+<td align="center">序列s中的最大值</td>
+</tr>
+<tr>
+<td align="center">s.index(x[,i[,j]])</td>
+<td align="center">序列s中从i开始到j位置中第一次出现元素x的位置</td>
+</tr>
+<tr>
+<td align="center">s.count(x)</td>
+<td align="center">序列s中出现x的总次数</td>
+</tr>
+</tbody></table>
+<p>（6）元组类型（tuple）是序列中比较特殊的类型，因为<strong>它一旦创建就不能修改</strong>。元组类型在表达固定数据项、函数多返回值、多变量同步赋值、循环遍历等情况下十分有用。Python中元组采用逗号和圆括号（可选）来表示。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; creature = &quot;cat&quot;, &quot;dog&quot;, &quot;tiger&quot;, &quot;human&quot;
+&gt;&gt;&gt; creature
+(&#39;cat&#39;, &#39;dog&#39;, &#39;tiger&#39;, &#39;human&#39;)
+&gt;&gt;&gt; color = (&quot;red&quot;, 0x001100, &quot;blue&quot;, creature)
+&gt;&gt;&gt; color
+(&#39;red&#39;, 4352, &#39;blue&#39;, (&#39;cat&#39;, &#39;dog&#39;, &#39;tiger&#39;, &#39;human&#39;))
+&gt;&gt;&gt; color[2]
+&#39;blue&#39;
+&gt;&gt;&gt; color[-1][2]
+&#39;tiger&#39;</code></pre>
+<p>（7）生成元组只需要使用逗号将元素隔离开即可，例如上例中的元组creature，也可以增加圆括号，但圆括号在不混淆语义的情况下不是必须的。<strong>一个元组可以作为另一个元组的元素，可以采用多级索引获取信息，</strong>例如元组color中包含了creature。</p>
+<p>（8）元组除了用于表达固定数据项外，还常用于如下3种情况：函数多返回值、多变量同步赋值、循环遍历，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; def func(x):
+    return x, x**3     #函数多返回值
+
+&gt;&gt;&gt; a, b=&#39;dog&#39;, &#39;tiger&#39;    #多变量同步赋值
+&gt;&gt;&gt; a, b=(b, a)       #多变量同步赋值，括号可省略
+
+&gt;&gt;&gt; import math
+&gt;&gt;&gt; for x, y in ((1,0),(2,5),(3,8)):   #循环遍历
+    print(math.hypot(x,y))       #求多个坐标到原点的距离
+1.0
+5.385164807134504
+8.54400374531753</code></pre>
+<h3 id="集合类型"><a href="#集合类型" class="headerlink" title="集合类型"></a>集合类型</h3><p>（1）集合类型与数学中的集合概念一致，即包含0个或多个数据项的无序组合。<strong>集合中的元素不可重复，元素类型只能是固定数据类型，例如整数、浮点数、字符串、元组等。</strong>列表、字典和集合类型本身都是可变数据类型，不能作为集合的元素出现。</p>
+<p>（2）Python编译器中界定固定数据与否主要考察类型是否能够进行<strong>哈希运算</strong>。<strong>能够进行哈希运算的类型都可作为集合元素。</strong></p>
+<p>（4）哈希运算：哈希运算可以将任意长度的二进制值映射为较短的<strong>固定长度的二进制值</strong>，这个小的二进制值称为哈希值。Python提供了一个内置的哈希运算函数<strong>hash()**，它可以对大多数数据类型产生一个哈希值。哈希值与哈希前的内容无关，可以说，</strong>哈希是数据在另一个数据维度的体现。**例如：</p>
+<pre><code class="python">&gt;&gt;&gt; hash(&quot;PYTHON&quot;)
+4643938005541540506
+&gt;&gt;&gt; hash(&quot;IS&quot;)
+-2450861983417858884
+&gt;&gt;&gt; hash(&quot;GOOD&quot;)
+-1174573472557134882
+&gt;&gt;&gt; hash(&quot;PYTHON IS GOOD&quot;)
+-1199702010419733010</code></pre>
+<p>（5）集合是无序组合，没有索引和位置的概念，不能分片，集合中元素可以动态增加或删除。集合用大括号{}表示，可以用赋值语句生成一个集合。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; S =&#123;425, &quot;BIT&quot;,(10,&quot;CS&quot;),424&#125;
+&gt;&gt;&gt; S
+&#123;424, 425, (10, &#39;CS&#39;), &#39;BIT&#39;&#125;
+&gt;&gt;&gt; T =&#123;425, &quot;BIT&quot;,(10,&quot;CS&quot;), 424, 425,&quot;BIT&quot;&#125;
+&gt;&gt;&gt; T
+&#123;424, 425, (10, &#39;CS&#39;), &#39;BIT&#39;&#125;</code></pre>
+<p>（6）由于集合元素是无序的，集合的打印效果与定义顺序可以不一致。由于<strong>集合元素独一无二，使用集合类型能够过滤掉重复元素。</strong></p>
+<p>（7）set(x)函数可以用于生成集合，输入的参数可以是任何组合数据类型，返回结果是一个无重复且排序任意的集合，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; W = set(&quot;apple&quot;)
+&gt;&gt;&gt; W
+&#123;&#39;l&#39;, &#39;p&#39;, &#39;e&#39;, &#39;a&#39;&#125;
+&gt;&gt;&gt; V = set((&quot;cat&quot;,&quot;dog&quot;,&quot;tiger&quot;,&quot;human&quot;))
+&gt;&gt;&gt; V
+&#123;&#39;tiger&#39;, &#39;cat&#39;, &#39;human&#39;, &#39;dog&#39;&#125;</code></pre>
+<p>（8）集合类型有10个操作符。</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">S - T</td>
+<td align="center">返回一个新集合，包括在集合S但不在集合T中的元素</td>
+</tr>
+<tr>
+<td align="center">S -= T</td>
+<td align="center">更新集合S，包括在集合S但不在集合T中的元素</td>
+</tr>
+<tr>
+<td align="center">S &amp; T</td>
+<td align="center">返回一个新集合，包括同时在集合S和集合T中的元素</td>
+</tr>
+<tr>
+<td align="center">S &amp;= T</td>
+<td align="center">更新集合S，包括同时在集合S和集合T中的元素</td>
+</tr>
+<tr>
+<td align="center">S ^ T</td>
+<td align="center">返回一个新集合，包括集合S和集合T中的元素，但不包括同时在其中的元素</td>
+</tr>
+<tr>
+<td align="center">S ^= T</td>
+<td align="center">更新集合S，包括集合S和集合T中的元素，但不包括同时在其中的元素</td>
+</tr>
+<tr>
+<td align="center">S | T</td>
+<td align="center">返回一个新集合，包括集合S和集合T中的所有元素</td>
+</tr>
+<tr>
+<td align="center">S |= T</td>
+<td align="center">更新集合S，包括集合S和集合T中的所有元素</td>
+</tr>
+<tr>
+<td align="center">S &lt;= T</td>
+<td align="center">如果S与T相同或S是T的子集，返回True，否则返回False，可以用S&lt;T判断S是否是T的真子集</td>
+</tr>
+<tr>
+<td align="center">S &gt;= T</td>
+<td align="center">如果S与T相同或S是T的超集，返回True，否则返回False，可以用S&gt;T判断S是否是T的真超集</td>
+</tr>
+</tbody></table>
+<p>上述操作符表达了集合类型的4种基本操作：交集（&amp;）、并集（|）、差集（-）、补集（^）、操作逻辑与数学定义相同。</p>
+<p><img src="https://i.loli.net/2021/03/25/iAeX67WxPvm3K1u.png" alt="image-20210325150549210"></p>
+<p>（9）集合类型有10个操作函数或方法</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作函数或方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">S.add(x)</td>
+<td align="center">如果数据项x不在集合S中，将x增加到s</td>
+</tr>
+<tr>
+<td align="center">S.clear()</td>
+<td align="center">移除S中的所有数据项</td>
+</tr>
+<tr>
+<td align="center">S.copy()</td>
+<td align="center">返回集合S的一个副本</td>
+</tr>
+<tr>
+<td align="center">S.pop()</td>
+<td align="center">随机返回集合S中的一个元素，如果S为空，产生KeyError异常</td>
+</tr>
+<tr>
+<td align="center">S.discard(x)</td>
+<td align="center">如果x在集合S中，移除该元素；如果x不在集合S中，不报错</td>
+</tr>
+<tr>
+<td align="center">S.remove(x)</td>
+<td align="center">如果x在集合S中，移除该元素；不在则产生KeyError异常</td>
+</tr>
+<tr>
+<td align="center">S.isdisjoint(T)</td>
+<td align="center">如果集合S与T没有相同元素，返回True</td>
+</tr>
+<tr>
+<td align="center">len(S)</td>
+<td align="center">返回集合S的元素的个数</td>
+</tr>
+<tr>
+<td align="center">x in S</td>
+<td align="center">如果x是S的元素，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">x not in S</td>
+<td align="center">如果x不是S的元素，返回True，否则返回False</td>
+</tr>
+</tbody></table>
+<p>（10）集合类型主要用于3个场景：<strong>成员关系测试、元素去重和删除数据项</strong>，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;BIT&quot; in &#123;&quot;PYTHON&quot;, &quot;BIT&quot;, 123, &quot;good&quot;&#125;      #成员关系测试
+True
+&gt;&gt;&gt; tup = &#123;&quot;PYTHON&quot;, &quot;BIT&quot;, 123, &quot;GOOD&quot;, 123&#125;     #元素去重
+&gt;&gt;&gt; set (tup)
+&#123;&#39;PYTHON&#39;, 123, &#39;GOOD&#39;, &#39;BIT&#39;&#125;
+&gt;&gt;&gt; newtup = tuple(set(tup)-&#123;&#39;PYTHON&#39;&#125;)          #去重同时删除数据项
+&gt;&gt;&gt; newtup
+(&#39;BIT&#39;, 123, &#39;GOOD&#39;)</code></pre>
+<h3 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h3><p>（1）映射类型是“键-值数据项的组合，每个元素是一个键值对，即元素是(key,value),元素之间是无序的。键值对(key,value)是一种二元关系，源于属性和值的映射关系。</p>
+<p>（2）键（key）表示一个属性，也可以理解为一个类别或项目，值（value）是属性的内容，键值对刻画了一个属性和它的值。键值对将映射关系结构化，用于存储和表达。在Python中，映射类型主要以字典(dict)体现。</p>
+<h2 id="列表类型和操作"><a href="#列表类型和操作" class="headerlink" title="列表类型和操作"></a>列表类型和操作</h2><p>要点：<strong>列表是包含0个或多个对象引用的有序序列，没有长度限制，可自由增删元素，使用灵活。</strong></p>
+<h3 id="列表类型的概念"><a href="#列表类型的概念" class="headerlink" title="列表类型的概念"></a>列表类型的概念</h3><p>（1）列表（list）属于序列类型，与元组不同，列表的长度和内容都是可变的。</p>
+<p>（2）由于列表属于序列类型，所以列表页支持成员关系操作符（in）、长度计算函数（len()）、分片（[]）。列表可以同时使用正向递增序号和反向递减序号，可以采用标准的比较操作符（&lt;、&lt;=、==、!=、&gt;=、&gt;）进行比较，<strong>列表的比较实际上是单个数据项的逐个比较。</strong></p>
+<p>（3）列表用中括号[]表示，也可以通过list()函数将元组或字符串转化成列表。直接使用list()函数会返回一个空列表。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; ls =[425, &quot;BIT&quot;, [10, &quot;CS&quot;], 425]
+&gt;&gt;&gt; ls
+[425, &#39;BIT&#39;, [10, &#39;CS&#39;], 425]
+&gt;&gt;&gt; ls[2][-1][0]
+&#39;C&#39;
+&gt;&gt;&gt; list((425, &quot;BTI&quot;, [10, &quot;CS&quot;], 425))
+[425, &#39;BTI&#39;, [10, &#39;CS&#39;], 425]
+&gt;&gt;&gt; list(&quot;中国是一个伟大的国家&quot;)
+[&#39;中&#39;, &#39;国&#39;, &#39;是&#39;, &#39;一&#39;, &#39;个&#39;, &#39;伟&#39;, &#39;大&#39;, &#39;的&#39;, &#39;国&#39;, &#39;家&#39;]
+&gt;&gt;&gt; list()
+[]</code></pre>
+<p>扩展：列表和数组。二者都是表示一组元素的方法，C语言采用数组，Python采用列表。二者区别：</p>
+<ul>
+<li>数组需要预先分配大小，列表则不需要</li>
+<li>数组要求元素类型一致，列表则不需要</li>
+</ul>
+<p>（4）列表要处理一组数据，因此，<strong>列表必须通过显示的数据赋值才能完成，简单将一个列表赋值给另一个列表不会生成新的列表对象。</strong>例如：</p>
+<pre><code class="python">&gt;&gt;&gt; ls = [425, &quot;BIT&quot;, 1024]     #用数据赋值产生列表ls
+&gt;&gt;&gt; lt =ls                  #lt是ls所对应数据的引用，lt并不包含真实数据
+&gt;&gt;&gt; ls[0]=0
+&gt;&gt;&gt; lt
+[0, &#39;BIT&#39;, 1024]</code></pre>
+<p>（5）如上例所示，ls由实际数据赋值产生，为列表对象。将ls赋值给列表lt仅能产生对列表ls的一个新的引用，此时lt和ls变量都是实际数据的表示或引用，真实数据只存储一份。因此，修改ls也同时修改了lt。</p>
+<h3 id="列表类型的操作"><a href="#列表类型的操作" class="headerlink" title="列表类型的操作"></a>列表类型的操作</h3><p>（1）列表是序列类型，因此，序列类型的12个通用操作符和函数都可应用于列表类型。但列表是可变的，以下列出了列表类型额外的14个常用函数或方法，主要处理列表的增删改等功能。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数或方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ls[i] = x</td>
+<td align="center">替换列表ls第i数据项为x</td>
+</tr>
+<tr>
+<td align="center">ls[i:j] = lt</td>
+<td align="center">用列表lt替换列表ls中第i到第j项数据项(不含第j向，下同)</td>
+</tr>
+<tr>
+<td align="center">ls[i:j:k] = lt</td>
+<td align="center">用列表lt替换列表ls中第i到第j项以k为步数的数据</td>
+</tr>
+<tr>
+<td align="center">del ls[i:j]</td>
+<td align="center">删除列表ls第i到第j项数据，等价于ls[i:j] = []</td>
+</tr>
+<tr>
+<td align="center">del ls[i:j:k]</td>
+<td align="center">删除列表ls第i到第j项k为步数的数据</td>
+</tr>
+<tr>
+<td align="center">ls+=lt或ls.extend(lt)</td>
+<td align="center">将列表lt元素增加到列表ls中</td>
+</tr>
+<tr>
+<td align="center">ls *= n</td>
+<td align="center">更新列表，其元素重复n次</td>
+</tr>
+<tr>
+<td align="center">ls.append(x)</td>
+<td align="center">在列表ls最后增加一个元素x</td>
+</tr>
+<tr>
+<td align="center">ls.clear()</td>
+<td align="center">删除ls中的所有元素</td>
+</tr>
+<tr>
+<td align="center">ls.copy()</td>
+<td align="center">生成一个新列表，复制ls中的所有元素</td>
+</tr>
+<tr>
+<td align="center">ls.inset(i,x)</td>
+<td align="center">在列表ls的第i位置增加元素x</td>
+</tr>
+<tr>
+<td align="center">ls.pop(i)</td>
+<td align="center">将列表ls中的第i项元素取出并删除该元素</td>
+</tr>
+<tr>
+<td align="center">ls.remove(x)</td>
+<td align="center">将列表中出现的第一个元素x删除</td>
+</tr>
+<tr>
+<td align="center">ls.reverse(x)</td>
+<td align="center">列表ls中的元素反转</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; vlist = list(range(5))
+&gt;&gt;&gt; vlist
+[0, 1, 2, 3, 4]
+&gt;&gt;&gt; len (vlist[2:])    #计算从第3个元素开始到结尾的子串长度
+3
+&gt;&gt;&gt; vlist[2:]
+[2, 3, 4]
+&gt;&gt;&gt; 2 in vlist        #判断2是否在列表vlist中
+True
+&gt;&gt;&gt; vlist[3]=&quot;python&quot;  #修改序号3的元素值和类型
+&gt;&gt;&gt; vlist
+[0, 1, 2, &#39;python&#39;, 4]
+&gt;&gt;&gt; vlist[1:3]=&#123;&quot;bit&quot;, &quot;computer&quot;&#125;  
+&gt;&gt;&gt; vlist
+[0, &#39;computer&#39;, &#39;bit&#39;, &#39;python&#39;, 4]</code></pre>
+<p>（2）当使用一个列表改变另一个列表的值时，Python不要求两个列表的长度一样，但遵循“多增少减”的原则。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; vlist
+[0, &#39;computer&#39;, &#39;bit&#39;, &#39;python&#39;, 4]
+&gt;&gt;&gt; vlist[1:3] = [&quot;new_bit&quot;,&quot;new_computer&quot;, 123]
+&gt;&gt;&gt; vlist
+[0, &#39;new_bit&#39;, &#39;new_computer&#39;, 123, &#39;python&#39;, 4]
+&gt;&gt;&gt; vlist[1:3]=[&quot;fewer&quot;]
+&gt;&gt;&gt; vlist
+[0, &#39;fewer&#39;, 123, &#39;python&#39;, 4]</code></pre>
+<p>（3）vlist[1:3]子序列包含了两个元素，对其赋值时却给了3个元素，最后vlist的结果会包含赋值列表中多余的元素。同样，当使用包含更少的元素赋值时，原列表元素会相应减少。<strong>可通过赋给更多或更少元素实现对列表元素的插入或删除</strong>。</p>
+<p>（4）与元组一样，列表可以通过for-in语句对其元素进行遍历，基本语法结构如下：</p>
+<pre><code class="python">for &lt;任意变量名&gt; in &lt;列表名&gt;:
+    &lt;语句块&gt;
+
+&gt;&gt;&gt; vlist
+[0, &#39;fewer&#39;, 123, &#39;python&#39;, 4]
+&gt;&gt;&gt; for e in vlist:
+    print(e, end=&quot; &quot;)
+0 fewer 123 python 4 
+&gt;&gt;&gt; </code></pre>
+<p>（5）列表是一个十分灵活的数据结构，它具有处理任意长度、混合类型数据的能力，并提供了丰富的基础操作符合方法。<strong>当程序需要使用组合数据类型管理批量数据时，应尽量使用列表类型。</strong></p>
+<h2 id="实例9：基本统计值计算"><a href="#实例9：基本统计值计算" class="headerlink" title="实例9：基本统计值计算"></a>实例9：基本统计值计算</h2><pre><code class="python">from math import sqrt
+def getNum():       #获取用户输入
+    nums = []
+    isNumStr = input(&quot;请输入数字(直接输入回车退出)：&quot;)
+    while isNumStr != &quot;&quot;:
+        nums.append(eval(isNumStr))
+        isNumStr = input(&quot;请输入数字(直接输入回车退出)：&quot;)
+    return nums
+def mean(numbers):     #计算平均值
+    s = 0.0
+    for num in numbers:
+        s = s +num
+    return s / len(numbers)
+def dev(numbers, mean):     #计算方差
+    sdev = 0.0
+    for num in numbers:
+        sdev =sdev + (num -mean)**2
+    b = sqrt(sdev / (len(numbers)-1))
+    return b
+def median(numbers):        #计算中位数
+    ls = sorted(numbers)#sorted返回重新排序的列表,返回新的列表,而不是在原列表上操作,原来的列表不变
+    size = len(numbers)
+    if size % 2 == 0:
+        med = (numbers[size//2-1] + numbers[size//2]) / 2
+    else:
+        med = numbers[size//2]
+    return med
+n = getNum() #主体函数
+m = mean(n)
+print(&quot;平均值：&#123;&#125;,方差：&#123;:.2&#125;,中位数：&#123;&#125;.&quot;.format(m,dev(n,m),median(n)))</code></pre>
+<p>运行结果如下：</p>
+<pre><code class="python">&gt;&gt;&gt;
+请输入数字(直接输入回车退出)：99
+请输入数字(直接输入回车退出)：98
+请输入数字(直接输入回车退出)：97
+请输入数字(直接输入回车退出)：96
+请输入数字(直接输入回车退出)：95
+请输入数字(直接输入回车退出)：
+平均值：97.0,方差：1.6,中位数：97.</code></pre>
+<p>列表在实现基本数据统计时发挥了很重要的作用，主要表现在以下3个方面：</p>
+<ul>
+<li>列表是一个动态长度的数据结构，可以根据需求增加或减少元素。</li>
+<li>列表的一系列方法或操作符为计算提供了简单的元素运算手段。</li>
+<li>列表提供了对每个元素的简单访问方式及所有元素的遍历方式。</li>
+</ul>
+<h2 id="字典类型和操作"><a href="#字典类型和操作" class="headerlink" title="字典类型和操作"></a>字典类型和操作</h2><h3 id="字典类型的概念"><a href="#字典类型的概念" class="headerlink" title="字典类型的概念"></a>字典类型的概念</h3><p>（1）访问列表的元素时，可以通过元素在列表的序号进行查找，即&lt;整数序号&gt;查找&lt;被索引内容&gt;</p>
+<p>（2）实际生活中，需要更为灵活的信息查找方式。例如学生信息，需要基于身份证号进行查找，而不是信息存储序号。</p>
+<p>（3）<strong>根据一个信息查找另一个信息的方式构成了“键值对”</strong>，它表示索引用的键和对应的值构成的成对关系，即通过特定的键（身份证号）来访问值（学生信息）。<strong>由于键不是序号，无法使用列表类型进行有效存储和索引。</strong></p>
+<p>（4）通过任意键信息查找一组数据中值信息的过程叫<strong>映射</strong>，Python中通过字典实现映射。字典可以通过大括号{}建立，模式如下：</p>
+<pre><code>&#123;&lt;键1&gt;:&lt;值1&gt;, &lt;键2&gt;:&lt;值2&gt;, ... , &lt;键n&gt;:&lt;值n&gt;&#125;</code></pre>
+<p>（5）在Python中，大括号{}可以表示集合，所以字典类型也具有和集合类似的性质，<strong>即键值对之间没有顺序且不能重复</strong>。也就是说，可以把<strong>字典看成元素是键值队的集合</strong>。例如下面的一个简单字典：</p>
+<pre><code class="python">&gt;&gt;&gt; Dcountry=&#123;&quot;中国&quot;:&quot;北京&quot;, &quot;美国&quot;:&quot;华盛顿&quot;, &quot;法国&quot;:&quot;巴黎&quot;&#125;
+&gt;&gt;&gt; print(Dcountry)
+&#123;&#39;中国&#39;: &#39;北京&#39;, &#39;美国&#39;: &#39;华盛顿&#39;, &#39;法国&#39;: &#39;巴黎&#39;&#125;</code></pre>
+<p>（6）字典中的各个元素没有顺序之分，<strong>若想保持一个集合中元素的顺序，需要使用列表，而不是字典。</strong>字典最主要的用法是查找与特定键相对应的值，这通过索引符号来实现。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; Dcountry[&quot;中国&quot;]
+&#39;北京&#39;</code></pre>
+<p>（7）字典中键值队的访问模式如下，采用<strong>中括号</strong>格式：</p>
+<pre><code class="python">&lt;值&gt; = &lt;字典变量&gt;[&lt;键&gt;]</code></pre>
+<p>（8）字典中对某个键值的修改可以通过中括号的访问和赋值实现，例如；</p>
+<pre><code class="python">&gt;&gt;&gt; Dcountry[&quot;中国&quot;] = &#39;大北京&#39;
+&gt;&gt;&gt; print(Dcountry)
+&#123;&#39;中国&#39;: &#39;大北京&#39;, &#39;美国&#39;: &#39;华盛顿&#39;, &#39;法国&#39;: &#39;巴黎&#39;&#125;</code></pre>
+<p>（9）字典是存储可变数量键值对的数据结构，键和值可以是任意数据类型，包括程序自定义的类型。Python字典效率非常高，甚至可以存储几十万项内容。</p>
+<p>扩展：<strong>索引是按照一定顺序检索内容的体系。Python中，字符串、列表、元素等都采用数字索引，字典采用字符索引。</strong></p>
+<h3 id="字典类型的操作"><a href="#字典类型的操作" class="headerlink" title="字典类型的操作"></a>字典类型的操作</h3><p>（1）字典通过大括号创建，并指定初始的值；通过中括号可以增加新的元素，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; Dcountry=&#123;&quot;中国&quot;:&quot;北京&quot;, &quot;美国&quot;:&quot;华盛顿&quot;, &quot;法国&quot;:&quot;巴黎&quot;&#125;
+&gt;&gt;&gt; Dcountry[&quot;英国&quot;]=&quot;伦敦&quot;
+&gt;&gt;&gt; print(Dcountry)
+&#123;&#39;中国&#39;: &#39;大北京&#39;, &#39;美国&#39;: &#39;华盛顿&#39;, &#39;法国&#39;: &#39;巴黎&#39;, &#39;英国&#39;: &#39;伦敦&#39;&#125;</code></pre>
+<p>（2）直接使用大括号{}可以创建一个空的字典，并通过中括号[]向其增加元素，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; Dp=&#123;&#125;
+&gt;&gt;&gt; Dp[&#39;2^10&#39;]=1024
+&gt;&gt;&gt; print(Dp)
+&#123;&#39;2^10&#39;: 1024&#125;</code></pre>
+<p>（3）注意：尽管集合类型也用大括号{}表示，<strong>但直接使用大括号{}生成的是一个字典，而不是集合。生成集合需要用set()函数。</strong></p>
+<p>（4）字典在Python中也已采用面向对象方式实现，所以也有一些对应的方法，采用&lt;a&gt;.&lt;b&gt;()格式。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数和方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;d&gt;.keys()</td>
+<td align="center">返回所有的键信息</td>
+</tr>
+<tr>
+<td align="center">&lt;d&gt;.values()</td>
+<td align="center">返回所有的值信息</td>
+</tr>
+<tr>
+<td align="center">&lt;d&gt;.items()</td>
+<td align="center">返回所有的键值对</td>
+</tr>
+<tr>
+<td align="center">&lt;d&gt;.get(&lt;key&gt;,&lt;default&gt;)</td>
+<td align="center">键存在则返回相应值，否则返回默认值</td>
+</tr>
+<tr>
+<td align="center">&lt;d&gt;.pop(&lt;key&gt;,&lt;default&gt;)</td>
+<td align="center">键存在则返回相应值，同时删除键值对，否则返回默认值</td>
+</tr>
+<tr>
+<td align="center">&lt;d&gt;.popitem()</td>
+<td align="center">随机从字典中取出一个键值对，以元组(key,value)形式返回</td>
+</tr>
+<tr>
+<td align="center">&lt;d&gt;.clear()</td>
+<td align="center">删除所有的键值对</td>
+</tr>
+<tr>
+<td align="center">del&lt;d&gt;[&lt;key&gt;]</td>
+<td align="center">删除字典中某一个键值对</td>
+</tr>
+<tr>
+<td align="center">&lt;key&gt;in&lt;d&gt;</td>
+<td align="center">如果键在字典中则返回True，否则返回False</td>
+</tr>
+</tbody></table>
+<p>（5）若希望keys()、values()和items()方法返回列表类型，可以<strong>采用list()函数将返回值转换成列表</strong>。</p>
+<pre><code class="python">&gt;&gt;&gt; Dcountry.keys()
+dict_keys([&#39;中国&#39;, &#39;美国&#39;, &#39;法国&#39;, &#39;英国&#39;])
+&gt;&gt;&gt; list(Dcountry.values())
+[&#39;大北京&#39;, &#39;华盛顿&#39;, &#39;巴黎&#39;, &#39;伦敦&#39;]
+&gt;&gt;&gt; Dcountry.items()
+dict_items([(&#39;中国&#39;, &#39;大北京&#39;), (&#39;美国&#39;, &#39;华盛顿&#39;), (&#39;法国&#39;, &#39;巴黎&#39;), (&#39;英国&#39;, &#39;伦敦&#39;)])
+&gt;&gt;&gt; &#39;中国&#39; in Dcountry          #只对键进行判断
+True
+&gt;&gt;&gt; Dcountry.get(&#39;美国&#39;,&#39;悉尼&#39;)     #&#39;美国&#39;在字典中存在
+&#39;华盛顿&#39;
+&gt;&gt;&gt; Dcountry.get(&#39;澳大利亚&#39;, &#39;悉尼&#39;)   #&#39;澳大利亚&#39;在字典中不存在
+&#39;悉尼&#39;</code></pre>
+<p>（6）字典可以通过for-in语句对其元素进行遍历，基本语法结构如下：</p>
+<pre><code>for &lt;变量名&gt; in &lt;字典名&gt;:
+    &lt;语句块&gt;</code></pre>
+<p>（7）键相当于索引，因此，for循环返回的变量名是字典的索引值。若需要获得键对应的值，可以在语句块中get()方法获得。</p>
+<pre><code class="python">&gt;&gt;&gt; for key in Dcountry:
+    print(key)
+
+中国
+美国
+法国
+英国
+&gt;&gt;&gt; for key in Dcountry:
+    print(Dcountry.get(key,&#39;不存在&#39;))
+大北京
+华盛顿
+巴黎
+伦敦</code></pre>
+<p>（8）字典是实现键值对映射的数据结构，它采用固定数据类型的键数据作为索引，十分灵活，具有处理任意长度、混合类型键值对的能力。以下是字典的基本原则：</p>
+<ul>
+<li>字典是一个键值对的集合，该集合以键为索引，<strong>一个键信息只对应一个值信息。</strong></li>
+<li>字典中元素以键信息为索引访问。</li>
+<li>字典长度是可变的，可以通过对键信息赋值实现增加或修改键值对。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全进阶/PHP与SQL进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -303,8 +895,24 @@ echo $x+$y;
     echo $GLOBALS[&#39;_&#39;];
     echo $GLOBALS[&#39;a&#39;];
     echo $GLOBALS[&#39;b&#39;];
+    var_dump($GLOBALS) //查看$GLOBALS的类型和值
+    $GLOBALS[&#39;_GET&#39;] //获取超全局变量中_GET的变量,相当于$_GET
+    $GLOBALS[&#39;_GET&#39;][&#39;username&#39;] //获取前端以GET形式传输的username的值
 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/17/J2txUnQHCuf36j7.png" alt="image-20210317192914226"></p>
+<p>扩展：CTF中如何绕过判断：</p>
+<pre><code class="php">//输入你想要的变量，$flag
+$want = $_GET[&#39;want&#39;];
+// $want=GLOBALS[&#39;flag&#39;]绕过if语句
+if($want==&#39;flag&#39;)&#123;
+    die(&quot;hacker!&quot;);
+&#125;
+else&#123;
+    echo $$want;
+    //GLOBALS[&#39;flag&#39;]
+&#125;
+//$want 利用正则表达式
+//want = flag</code></pre>
 <h3 id="PHP表单处理"><a href="#PHP表单处理" class="headerlink" title="PHP表单处理"></a>PHP表单处理</h3><p>PHP超全局变量$_GET和$_POST用于收集表单数据（form-data）</p>
 <ul>
 <li>form.html</li>
@@ -363,6 +971,20 @@ var_dump($y);
 var_dump($z);
 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/18/KeEHsqhbv43xl6y.png" alt="image-20210318100414764"></p>
+<p>扩展:ctf如何绕过判断：</p>
+<pre><code class="php">//$want = 0x01 ，利用十六进制绕过
+if($want === 1)&#123;
+    die(&quot;try!&quot;);
+&#125;
+else&#123;
+    if($want == 1)&#123;
+        echo $flag;时
+        //$want等于1
+    &#125;
+    else&#123;
+        die(&quot;hacker!&quot;);
+    &#125;
+&#125;</code></pre>
 <p>（5）PHP浮点数：浮点数是有小数点或指数形式的数字。float类型数据强制转换为int类型数据时会造成溢出。</p>
 <pre><code class="php">&lt;?php
 $x=11.123;
@@ -531,6 +1153,8 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 <li>从第2行开始，显示后面3行</li>
 </ul>
 <p><img src="https://i.loli.net/2021/03/18/tQ9UWLkdE3FzsmI.png" alt="image-20210318152726593"></p>
+<p>（6）count(*)查询，返回记录的个数</p>
+<pre><code class="sql">SELECT count(*) FROM `test` WHERE City=&#39;Hangzhou&#39; AND Country=&#39;China&#39;;</code></pre>
 <h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p>UNION运算符用于组合两个或更多select语句的结果集。</p>
 <ul>
 <li>这些列必须具有相似的数据类型</li>
@@ -546,15 +1170,28 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 <p>（2）这种查询方式属于SQL子查询的一种。</p>
 <p><img src="https://i.loli.net/2021/03/18/7bKJSaygOLYXlIm.png" alt="image-20210318154404839"></p>
 <h3 id="基本建表和增删改语句"><a href="#基本建表和增删改语句" class="headerlink" title="基本建表和增删改语句"></a>基本建表和增删改语句</h3><p>（1)CREATE 用来建表，格式如下</p>
-<pre><code class="sql">creat table 表名称 (列名称1 数据类型,列名称2 数据类型,列名称3 数据类型,...);</code></pre>
+<pre><code class="sql">create table 表名称 (列名称1 数据类型,列名称2 数据类型,列名称3 数据类型,...);</code></pre>
 <p>例如新建一张表test，插入3个列分别为id，username，password</p>
-<pre><code class="sql">creat table test (id int,username varchar(255),password varchar(255));</code></pre>
+<pre><code class="sql">create table test (id int,username varchar(255),password varchar(255));</code></pre>
 <p>（2）INSERT用来增加一条记录</p>
 <pre><code class="sql">insert into test (id,username,password) values(1,&#39;admin&#39;,&#39;admin123&#39;);</code></pre>
 <p>（3）UPDATE用来修改一条记录</p>
 <pre><code class="sql">update test set username=&#39;admin_A&#39;,password=&#39;admin321&#39; where username=&#39;admin&#39;;</code></pre>
 <p>（4）DELETE用来删除一条记录</p>
 <pre><code class="sql">delete from test where username=&#39;admin_A&#39;;</code></pre>
+<h3 id="MySQL数据库中设置属性为自增属性"><a href="#MySQL数据库中设置属性为自增属性" class="headerlink" title="MySQL数据库中设置属性为自增属性"></a>MySQL数据库中设置属性为自增属性</h3><pre><code class="sql">--+设置users表中的id属性为自增属性
+alter table users change id id int not null auto_increment primary key; 
+--+设置users表中的自增属性从指定的1004开始自增，该命令可根据需要重复使用
+alter table users auto_increment = 1004;
+
+--+MySQL中删除主键需要执行两步命令.
+--+一、有auto_increment自增属性的，先删除自增；
+--+二、删除主键约束 primary key，完成
+
+--+删除id的auto_increment自增属性。
+alter table users change id id int;
+--+然后删除id的primary key主键约束.
+alter table users drop primary key;</code></pre>
 <h3 id="数据库管理系统的内置数据库"><a href="#数据库管理系统的内置数据库" class="headerlink" title="数据库管理系统的内置数据库"></a>数据库管理系统的内置数据库</h3><p>（1）MySQL有一个默认的内置数据库，信息数据库information_schema</p>
 <p>（2）information_schema有三张关键的表：schemata、tables、columns</p>
 <p>（3）schemata表的schema_name列存放的是所有的数据库名</p>
@@ -673,7 +1310,20 @@ mysqli_close($con);
 header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/18/Kikf8S9ap1l5Jbu.png" alt="image-20210318185742335"></p>
-<p>（3）PHP执行SQL语句函数——mysqli_query(conn,sql)</p>
+<pre><code class="php">mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,&quot;test&quot;)//连接数据库</code></pre>
+<p><strong>扩展</strong>：可在相同路径下新建一个database.inc.php文件，用于存放需要传入的参数。然后通过<strong>include</strong>来调用。</p>
+<pre><code class="php">//database.inc.php文件
+&lt;?php
+    $dbserver = &quot;127.0.0.1&quot;;
+    $dbuser = &quot;root&quot;;
+    $dbpass = &quot;root&quot;;
+    $dbdatabase = &quot;test&quot;;
+    mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
+?&gt;</code></pre>
+<pre><code class="php">&lt;?php
+    include &quot;database.inc.php&quot;;
+?&gt;</code></pre>
+<p>（3）查询:PHP执行SQL语句函数——mysqli_query(conn,sql)</p>
 <ul>
 <li>conn：数据库连接函数的结果</li>
 <li>sql：SQL语句</li>
@@ -695,6 +1345,19 @@ mysqli_close($con);
 header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/18/tJcBy8beNTHK3qw.png" alt="image-20210318190457387"></p>
+<p><strong>扩展</strong>：可在相同路径下新建一个database.inc.php文件，用于存放需要传入的参数。然后通过<strong>include</strong>来调用。</p>
+<pre><code class="php">//database.in.php文件
+&lt;?php
+    $dbserver = &quot;127.0.0.1&quot;;
+    $dbuser = &quot;root&quot;;
+    $dbpass = &quot;root&quot;;
+    $dbdatabase = &quot;test&quot;;
+    $con = mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
+?&gt;</code></pre>
+<pre><code class="php">&lt;?php
+    include &quot;database.inc.php&quot;;
+    $query = mysqli_query($con,$sql);
+?&gt;</code></pre>
 <p>（4）PHP获取执行结果函数——mysqli_fetch_array(query)</p>
 <ul>
 <li>query：执行SQL语句函数的结果</li>
@@ -704,7 +1367,7 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 $con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
 $sql=&quot;select * from users limit 0,1&quot;;
 $result=mysqli_query($con,$sql);
-if(mysqli_num_rows($result)&gt;0)&#123;
+if(@mysqli_num_rows($result)&gt;0)&#123;       //加@符可避免报错
     $row=mysqli_fetch_array($result);
     echo $row[&#39;user_id&#39;].&quot;&lt;br/&gt;&quot;;
     echo $row[&#39;first_name&#39;].&quot;&lt;br/&gt;&quot;;
@@ -717,6 +1380,50 @@ mysqli_close($con);
 header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/03/18/Ft8EG4y12QASzfR.png" alt="image-20210318192511897"></p>
+<p><strong>扩展</strong>：根据用户输入用户名和密码判断是否正确，进行数据库操作</p>
+<ul>
+<li>login.html文件</li>
+</ul>
+<pre><code class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;form action=&quot;login.php&quot; method=&quot;get&quot;&gt;
+            City:
+            &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+            &lt;br&gt;
+            Country:
+            &lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;
+            &lt;br&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;查询&quot;&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<ul>
+<li>login.php文件</li>
+</ul>
+<pre><code class="php">&lt;?php
+    $user = $_GET[&#39;username&#39;];
+    $pass = $_GET[&#39;password&#39;];
+    $sql = &quot;select * from test where City=&#39;&quot;.$user.&quot;&#39; and Country=&#39;&quot;.$pass.&quot;&#39;&quot;;
+    include &quot;database.inc.php&quot;;
+    $query = mysqli_query($con,$sql);
+    $result = mysqli_fetch_array($query);
+    var_dump($result)
+    echo &quot;&lt;br&gt;&quot;;
+    echo $result[&#39;CompanyName&#39;];
+?&gt;</code></pre>
+<ul>
+<li>database.inc.php文件</li>
+</ul>
+<pre><code class="php">&lt;?php
+    $dbserver = &quot;127.0.0.1&quot;;
+    $dbuser = &quot;root&quot;;
+    $dbpass = &quot;root&quot;;
+    $dbdatabase = &quot;test&quot;;
+    $con = mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
+    function query($con,$sql)&#123;
+        mysqli_query($con,$sql);
+    &#125;
+?&gt;</code></pre>
 <h3 id="根据用户查询返回结果展示"><a href="#根据用户查询返回结果展示" class="headerlink" title="根据用户查询返回结果展示"></a>根据用户查询返回结果展示</h3><pre><code class="php">&lt;?php
 $con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
 if(!$con)&#123;
@@ -1317,9 +2024,9 @@ i++;
     &lt;title&gt;Document&lt;/title&gt;
     &lt;script&gt;
         function test()&#123;
-            document.getElementsById(&quot;1&quot;).value=&quot;文本文档1&quot;; //找到id对应的标签后再用value方法修改改标签的值。
-            document.getElementsById(&quot;2&quot;).value=&quot;文本文档2&quot;;
-            document.getElementsById(&quot;3&quot;).href=&quot;http://www.goktech.cn&quot;;//找到id对应的标签后用href方法修改原a标签的值。
+            document.getElementById(&quot;1&quot;).value=&quot;文本文档1&quot;; //找到id对应的标签后再用value方法修改改标签的值。
+            document.getElementById(&quot;2&quot;).value=&quot;文本文档2&quot;;
+            document.getElementById(&quot;3&quot;).href=&quot;http://www.goktech.cn&quot;;//找到id对应的标签后用href方法修改原a标签的值。
         &#125;
     &lt;/script&gt;
 &lt;/head&gt;
@@ -1514,7 +2221,7 @@ xmlhttp.send();</code></pre>
                 document.getElementById(&quot;myDiv&quot;).innerHTML=xmlhttp.responseText;
             &#125;
         &#125;
-        xmlhttp.open(&quot;GET&quot;,&quot;/ajax/demo_get2.asp?fname=Bill&amp;name=Gates&quot;,true);]
+        xmlhttp.open(&quot;GET&quot;,&quot;/ajax/demo_get2.asp?fname=Bill&amp;name=Gates&quot;,true);
         xmlhttp.send();
     &#125;
     &lt;/script&gt;
@@ -3707,262 +4414,6 @@ select * from table LIMIT 95，-1  //检索记录行96之后的所有数据</cod
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/27/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%A9%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全初级/WEB安全基础(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">WEB安全基础(二)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="archive-article-date">
-  	<time datetime="2020-12-26T13:25:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="服务端脚本基础"><a href="#服务端脚本基础" class="headerlink" title="服务端脚本基础"></a>服务端脚本基础</h2><h3 id="静态网页与动态网页"><a href="#静态网页与动态网页" class="headerlink" title="静态网页与动态网页"></a>静态网页与动态网页</h3><p>（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。</p>
-<p>（2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。</p>
-<p>​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容。</p>
-<p>​          动态页面内容不是存在于页面上，而是存在数据库中，从而大大降低网站的维护工作量。</p>
-<p>​          采用动态网页技术的网站可以实现更多的功能，如用户注册、用户登录、在线调查、用户管理、订单管理等等；静态页面则无法实现这些功能。</p>
-<p>（3）动态页面与静态页面的区别：</p>
-<p>静态页面：html或htm，是一种静态的页面格式，不需要服务器解析其中的脚本，由浏览器解析。</p>
-<p>动态页面：由相应的脚本引擎来解释执行，根据指令生成静态网页，如PHP、JSP、ASPX等。</p>
-<table>
-<thead>
-<tr>
-<th align="center">静态网页</th>
-<th align="center">动态网页</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">不依赖数据库</td>
-<td align="center">依赖数据库</td>
-</tr>
-<tr>
-<td align="center">灵活性差，制作、更新、维护麻烦</td>
-<td align="center">灵活性好，维护简单</td>
-</tr>
-<tr>
-<td align="center">在功能方面有较大的限制，交互性能差</td>
-<td align="center">交互性好，功能强大</td>
-</tr>
-<tr>
-<td align="center">服务端不处理用户输入，安全性高</td>
-<td align="center">服务端需要处理用户输入，安全性低</td>
-</tr>
-</tbody></table>
-<p>直接的区别是动态页面访问相同的页面，客户端获得的源代码可能不同。</p>
-<h3 id="常见的服务端脚本语言"><a href="#常见的服务端脚本语言" class="headerlink" title="常见的服务端脚本语言"></a>常见的服务端脚本语言</h3><p>（1）ASP：是动态服务器页面(Active Server Pages)的英文缩写，也称为经典ASP，动态产生Web页面。</p>
-<p>（2）ASPX：aspx文件是微软的在服务器端运行的动态网页文件,属于ASP.NET技术。ASP.NET是由微软在·NET Framework框架中所提供，开发Web应用程序的类库，封装在System.Web.dll文件中，显露出System.Web命名空间，并提供ASP.NET网页处理、扩充以及HTTP通道的应用程序与通信处理等工作，以及Web Service的基础架构。ASP.NET是ASP技术的后继者，但它的发展性要比ASP技术强大许多</p>
-<p>（3）JSP：全名为Java Server Pages，中文名叫java服务器页面，其根本是一个简化的Servle设计。</p>
-<p>（4）PHP(Hypertext Preprocessor超文本预处理器)是一种通用开源脚本语言，语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。PHP独特的语法混合了C、Java、Perl以及PHP自创的语法。它可以比CGl或者Perl更快速地执行动态网页。</p>
-<h3 id="PHP语法基础"><a href="#PHP语法基础" class="headerlink" title="PHP语法基础"></a>PHP语法基础</h3><p>（1）PHP文件的默认文件扩展名是”.php”</p>
-<p>（2）PHP脚本可以放置于文档中的任何位置</p>
-<p>（3）PHP文件通常包含HTML标签以及一些PHP脚本代码</p>
-<p>（4）PHP脚本以&lt;?php开头，以?&gt;结尾</p>
-<p>（5）PHP语句以分号结尾(;)</p>
-<p>（6）PHP使用//作为注释符号</p>
-<pre><code class="php">&lt;?php
-    //此处是PHP代码
-    ?&gt;</code></pre>
-<h3 id="PHP输出"><a href="#PHP输出" class="headerlink" title="PHP输出"></a>PHP输出</h3><p>（1）echo能够输出一个以上的字符串</p>
-<p>（2）echo是一个语言结构，有无括号均可使用：echo或echo()</p>
-<p>（3）实例：用echo命令来显示不同的字符串(注意：字符串中能包含HTML标记)</p>
-<pre><code class="php">&lt;?php
-echo &quot;&lt;h2&gt;PHP很有趣!&lt;/h2&gt;&quot;;
-echo &quot;Hello world!&lt;br&gt;&quot;;
-echo &quot;我计划学习PHP! &lt;br&gt;&quot;;
-echo &quot;这段话&quot;,&quot;由&quot;,&quot;多个&quot;,&quot;字符串&quot;,&quot;串接而成。&quot;;
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png" alt="image-20201226220748663"></p>
-<h3 id="PHP与HTML结合"><a href="#PHP与HTML结合" class="headerlink" title="PHP与HTML结合"></a>PHP与HTML结合</h3><pre><code class="php">&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;body&gt; 
-    &lt;h1&gt;我的第一张PHP页面&lt;/h1&gt;
-&lt;?php 
-echo &quot;Hello World!&quot;; 
-?&gt; 
-
-&lt;/body&gt; 
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/4bSYiJCj9IGBHms.png" alt="image-20201226221946820"></p>
-<h3 id="PHP的表单处理"><a href="#PHP的表单处理" class="headerlink" title="PHP的表单处理"></a>PHP的表单处理</h3><h4 id="在HTML上触发GET请求"><a href="#在HTML上触发GET请求" class="headerlink" title="在HTML上触发GET请求"></a>在HTML上触发GET请求</h4><p>（1）HTML可以采用A标签或form表单的形式触发get请求，从带有get方法的表单发送的信息会显示在浏览器的地址栏，并且对发送信息的量也有限制。使用A标签触发get请求时，请求的参数值是固定的。</p>
-<pre><code class="HTML">&lt;!--a标签触发get请求--&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;GET请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;a href= &quot;get.php?fname=dayang&amp;age=24&quot;&gt;提交请求&lt;/a&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/l2r7OuaxcVoyLjT.png" alt="image-20201226223120376"></p>
-<p><img src="https://i.loli.net/2020/12/26/EHOnCwqbfkh8FpT.png" alt="image-20201226223157764"></p>
-<p>（2）form表单触发GET请求</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;urf-8&quot;&gt;
-        &lt;title&gt;GET请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;!--请求目标页面为get.php,请求方式为get--&gt; 
-        &lt;form action=&quot;get.php&quot; method=&quot;get&quot;&gt;             
-            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
-            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/qgwT4RVxsoBFXfS.png" alt="image-20201226225025070"></p>
-<h4 id="GET请求的处理"><a href="#GET请求的处理" class="headerlink" title="GET请求的处理"></a>GET请求的处理</h4><p>$_GET变量用于收集HTTP GET请求中的参数值。服务端处理</p>
-<pre><code class="php">欢迎&lt;?php echo $_GET[&quot;fname&quot;];?&gt;!&lt;br&gt;
-你的年龄是&lt;?php echo $_GET[&quot;age&quot;];?&gt;岁。</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/4sZ7hPrbRnqTIva.png" alt="image-20201226231005000"></p>
-<h4 id="在HTML上触发POST请求"><a href="#在HTML上触发POST请求" class="headerlink" title="在HTML上触发POST请求"></a>在HTML上触发POST请求</h4><p>（1）HTML可以采用form表单的形式触发POST请求，从带有POST方法的表单发送的数据，不会显示在浏览器的地址栏，并且对发送信息的量也没有限制，常用于传输敏感数据或较大量的数据。</p>
-<p>（2）实例：form表单触发POST请求</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;POST请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;form action=&quot;post.php&quot; method=&quot;post&quot;&gt;
-            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
-            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h4 id="POST请求的处理"><a href="#POST请求的处理" class="headerlink" title="POST请求的处理"></a>POST请求的处理</h4><p>$_POST变量用于收集来自HTTP POST请求中的参数值</p>
-<pre><code class="php">欢迎&lt;?php echo $_POST[&quot;fname&quot;];?&gt;!&lt;br&gt;
-你的年龄是&lt;?php echo $_POST[&quot;age&quot;];?&gt;岁。</code></pre>
-<h2 id="数据库与SQL基础"><a href="#数据库与SQL基础" class="headerlink" title="数据库与SQL基础"></a>数据库与SQL基础</h2><h3 id="数据库系统基本概念"><a href="#数据库系统基本概念" class="headerlink" title="数据库系统基本概念"></a>数据库系统基本概念</h3><p>（1）数据库：长期存储在计算机内、有组织的、可共享的数据集合</p>
-<p>（2）DBMS(DataBase Management Ssytem):一种操纵和管理数据库的大型软件，用于建立、使用和维护数据库，它对数据库进行统一的管理和控制，以保证数据库的安全性和完整性。常见的DBMS包括access、sqlserver、mysql、oracle、DB2等。</p>
-<h3 id="关系型数据库系统特点"><a href="#关系型数据库系统特点" class="headerlink" title="关系型数据库系统特点"></a>关系型数据库系统特点</h3><p>（1）数据结构化和共享性：库、表、字段；结构化查询(SQL)</p>
-<p>（2）数据独立性：物理独立性，逻辑独立性</p>
-<p>（3）数据的完整性约束：</p>
-<p>实体完整性(通过主键约束条件)</p>
-<p>参照完整性(通过主外键约束条件)</p>
-<p>用户自定义完整性(通过CHECK子句)</p>
-<p>（4）数据由DBMS统一管理和控制：查询引擎、事务控制、数据存储模块/组件</p>
-<p><img src="https://i.loli.net/2020/12/26/1bK2sX6JWvpFoCQ.png" alt="image-20201226234112089"></p>
-<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><p>（1）概念：SQL语言，是结构化查询语言(Structured Query Language)的简称。SQL语言是一种数据库查询和程序设计语言，用于存储数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件的扩展名。</p>
-<p>（2）SQL语句格式：在数据库上执行的大部分工作都由SQL语句完成。注意：SQL对大小写不敏感。#和–后的内容代表注释，在浏览器中–要写为–+</p>
-<p><img src="https://i.loli.net/2020/12/26/p6QNkLcKsZrwg5i.png" alt="image-20201226234657011"></p>
-<h4 id="SELECT语句——基本查询"><a href="#SELECT语句——基本查询" class="headerlink" title="SELECT语句——基本查询"></a>SELECT语句——基本查询</h4><p>（1）cmd进入mysql数据库，前提是设置好环境变量在PATH里面添加D:\SecurityTools\WebTools\phpstudy\PHPTutorial\MySQL\bin</p>
-<p>然后运行cmd命令窗口，输入：mysql -u root -p，回车后输入密码即可进入数据库。</p>
-<p>或者直接用phpstudy打开：其他选项菜单–&gt;MySQL工具–&gt;MySQL命令行</p>
-<p>（2）基本查询：</p>
-<pre><code>show databases;      //查询数据库有哪些
-use mysql;           //进入或使用mysql数据库  
-show tables;         //查询mysql数据库中的表</code></pre>
-<p><img src="https://i.loli.net/2020/12/27/WUZ3eGvINQJCnlT.png" alt="image-20201227001655078"></p>
-<h4 id="SELECT语句——AND和OR运算"><a href="#SELECT语句——AND和OR运算" class="headerlink" title="SELECT语句——AND和OR运算"></a>SELECT语句——AND和OR运算</h4><p>（1）AND运算：AND分隔的表达式须同时满足</p>
-<p>（2）OR运算：OR分隔的表达式只需要满足任意一个</p>
-<p><img src="https://i.loli.net/2020/12/27/M9dc7NvyPGBaUbg.png" alt="image-20201227002419442"></p>
-<p><img src="https://i.loli.net/2020/12/27/onBa1mAVIOLfM85.png" alt="image-20201227002127380"></p>
-<p>（3）当AND和OR运算符同时出现时，先进行AND运算，再进行OR运算。优先级=大于and大于or</p>
-<p><img src="https://i.loli.net/2020/12/27/PxGFUetMfmglOI4.png" alt="image-20201227002245210"></p>
-<h2 id="动态页面的工作原理"><a href="#动态页面的工作原理" class="headerlink" title="动态页面的工作原理"></a>动态页面的工作原理</h2><h3 id="动态页面工作流程理解——数据查询"><a href="#动态页面工作流程理解——数据查询" class="headerlink" title="动态页面工作流程理解——数据查询"></a>动态页面工作流程理解——数据查询</h3><p><img src="https://i.loli.net/2020/12/27/9bBDrMq2fA3JXKh.png" alt="image-20201227002758895"></p>
-<p><img src="https://i.loli.net/2020/12/27/SFuhmXac5DQ48E2.png" alt="image-20201227002850094"></p>
-<h4 id="系统登录成功"><a href="#系统登录成功" class="headerlink" title="系统登录成功"></a>系统登录成功</h4><p><img src="https://i.loli.net/2020/12/27/2F3X5vh1WozLGVT.png" alt="image-20201227003308006"></p>
-<h4 id="系统登录失败"><a href="#系统登录失败" class="headerlink" title="系统登录失败"></a>系统登录失败</h4><p><img src="https://i.loli.net/2020/12/27/WgMJ64cFa8hvl5B.png" alt="image-20201227003345200"></p>
-<h3 id="动态网站搭建——DVWA"><a href="#动态网站搭建——DVWA" class="headerlink" title="动态网站搭建——DVWA"></a>动态网站搭建——DVWA</h3><p>（1）首先将DVWA的源代码放进D:\SecurityTools\WebTools\phpstudy\PHPTutorial\WWW中，然后解压DVWA的压缩包。</p>
-<p>（2）配置DVWA链接数据库，打开config文件夹，打开config.inc.php。(注意需要将文件类型改为php)</p>
-<p>（3）需要把db_password修改成root，因为刚安装好的集成环境默认的MySQL连接用户名和密码为root和root。</p>
-<p><img src="https://i.loli.net/2020/12/27/gsv5e4f6WkrwUTN.png" alt="image-20201227004006196"></p>
-<p>（4）登录DVWA，在浏览器地址栏输入127.0.0.1/DVWA/index.php访问</p>
-<p>（5）点击Create/Reset Database后，再次访问。登录初始账号admin，密码password</p>
-<p><img src="https://i.loli.net/2020/12/27/JYNCheTFMkK2wzi.png" alt="image-20201227005759025"></p>
-<p><img src="https://i.loli.net/2020/12/27/N8xrA5q2wlM3eK6.png" alt="image-20201227005235895"></p>
-<h2 id="Burp暴力破解"><a href="#Burp暴力破解" class="headerlink" title="Burp暴力破解"></a>Burp暴力破解</h2><p>暴力破解一般指穷举法，穷举法的基本思想是根据题目的部分条件确定答案的大致范围，并在此范围内对所有可能的情况逐一验证，直到全部情况验证完毕。若某个情况验证符合题目的全部条件，则为本问题的一个解；若全部情况验证后都不符合题目的全部条件，则本题无解。穷举法也称枚举法。</p>
-<h3 id="Burpsuite模块——Intruder模块详解"><a href="#Burpsuite模块——Intruder模块详解" class="headerlink" title="Burpsuite模块——Intruder模块详解"></a>Burpsuite模块——Intruder模块详解</h3><p>（1）Burp Intruder用于自动对Web应用程序自定义的攻击</p>
-<p>（2）Burp Intruder是高度可配置的，并被用来广范围内进行自动化攻击。可以枚举标识符，获取有用数据，漏洞模糊测试。</p>
-<p>（3）合适的攻击类型取决于应用程序的情况，可能包括：</p>
-<p>缺陷测试：SQL注入，跨站点脚本攻击，缓冲区溢出，路径遍历，暴力攻击认证系统，枚举，操纵参数，拖出隐藏的内容和功能，会话令牌测序和会话劫持，数据挖掘，并发攻击，应用层的拒绝服务式攻击。</p>
-<h4 id="模块说明"><a href="#模块说明" class="headerlink" title="模块说明"></a>模块说明</h4><p>（1）Target用于配置目标服务器进行攻击的详细信息</p>
-<p><img src="https://i.loli.net/2020/12/27/pvnqcXkR5i3WDsU.png" alt="image-20201227010741048"></p>
-<p>（2）Positions设置Payloads的插入点以及攻击类型(攻击模式)</p>
-<p>攻击模式：</p>
-<p>sniper：对变量依次进行破解。多个标记依次进行。</p>
-<p>Battering ram：对变量同时进行破解。多个标记同时进行。</p>
-<p>Pitchfork：每一个变量标记对应一个字典，取每个字典对应项。</p>
-<p>Cluster bomb：每个变量对应一个字典，并且进行交集破解，尝试各种组合。适合用于用户名+密码的破解。</p>
-<p><img src="https://i.loli.net/2020/12/27/PjUBe1bpnXo6wiE.png" alt="image-20201227011237538"></p>
-<p>（3）Payloads设置payload，配置字典</p>
-<p><img src="https://i.loli.net/2020/12/27/h3VcGn6eXlEgOUt.png" alt="image-20201227011344398"></p>
-<h4 id="暴力破解——DVWA"><a href="#暴力破解——DVWA" class="headerlink" title="暴力破解——DVWA"></a>暴力破解——DVWA</h4><p>（1）访问DVWA的地址，点击Brute Force</p>
-<p><img src="https://i.loli.net/2020/12/27/uZomrbMh7LBjIdY.png" alt="image-20201227011547962"></p>
-<p>（2）随便输入用户名，密码，浏览器开启代理后，用burp抓包</p>
-<p>（3）将抓到的包发送到Intruder模块</p>
-<p>（4）设置好目标端口，攻击方式选择Cluster bomb</p>
-<p><img src="https://i.loli.net/2020/12/27/HEwQZUdjAmqLbih.png" alt="image-20201227011758916"></p>
-<p>（5）删除$之后，进入payloads模块，添加密码本，也就是要进行暴力破解时依次验证的每个密码。</p>
-<p>（6）全部设置完后，点击star attck 开始攻击</p>
-<p>（7）在弹出的框中，寻找与其他长度不符合的payload，该payload就是最终破解出来的密码，可以点击”length”排序后快速查找。</p>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201227012152047.png" alt="image-20201227012152047"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/">展开全文 >></a>
         </p>
       
 
