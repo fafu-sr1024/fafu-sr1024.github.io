@@ -6,46 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>WEB安全基础(二) | Hexo</title>
+  <title>运用Python语言(四)-科学计算和可视化02 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="服务端脚本基础静态网页与动态网页（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。 （2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。 ​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容">
+  <meta name="description" content="matplotlib库的使用matplotlib是提供数据绘图功能的第三方库，其pyplot子库主要用于实现各种数据展示图形的绘制 matplotlib.pyplot库概述（1）matplotlib.pyplot是matplotlib的子库，引用方式如下： &gt;&gt;&gt;import matplotlib.pyplot as plt #后续程序中，plt将代替matplotlib.pyp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WEB安全基础(二)">
-<meta property="og:url" content="http://example.com/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/index.html">
+<meta property="og:title" content="运用Python语言(四)-科学计算和可视化02">
+<meta property="og:url" content="http://example.com/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="服务端脚本基础静态网页与动态网页（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。 （2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。 ​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容">
+<meta property="og:description" content="matplotlib库的使用matplotlib是提供数据绘图功能的第三方库，其pyplot子库主要用于实现各种数据展示图形的绘制 matplotlib.pyplot库概述（1）matplotlib.pyplot是matplotlib的子库，引用方式如下： &gt;&gt;&gt;import matplotlib.pyplot as plt #后续程序中，plt将代替matplotlib.pyp">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/4bSYiJCj9IGBHms.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/l2r7OuaxcVoyLjT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/EHOnCwqbfkh8FpT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/qgwT4RVxsoBFXfS.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/4sZ7hPrbRnqTIva.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/1bK2sX6JWvpFoCQ.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/p6QNkLcKsZrwg5i.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/WUZ3eGvINQJCnlT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/M9dc7NvyPGBaUbg.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/onBa1mAVIOLfM85.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/PxGFUetMfmglOI4.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/9bBDrMq2fA3JXKh.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/SFuhmXac5DQ48E2.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/2F3X5vh1WozLGVT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/WgMJ64cFa8hvl5B.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/gsv5e4f6WkrwUTN.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/JYNCheTFMkK2wzi.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/N8xrA5q2wlM3eK6.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/pvnqcXkR5i3WDsU.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/PjUBe1bpnXo6wiE.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/h3VcGn6eXlEgOUt.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/uZomrbMh7LBjIdY.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/HEwQZUdjAmqLbih.png">
-<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201227012152047.png">
-<meta property="article:published_time" content="2020-12-26T13:25:55.000Z">
-<meta property="article:modified_time" content="2021-04-23T12:07:30.333Z">
+<meta property="og:image" content="https://i.loli.net/2021/04/17/eDwWkaCUdbRng2I.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/17/MGgRwy7FZj2orLb.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/17/ZP32HJmWCGBtkSQ.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/17/KRIyBVuktdjeqJY.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/17/8znfgdYXk9KUowq.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/17/yhvMBaQ2HW8e7PU.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/17/zpKIPkvLClZGeT8.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/18/apjLAPcXIixFnqy.png">
+<meta property="article:published_time" content="2021-04-16T09:54:32.000Z">
+<meta property="article:modified_time" content="2021-04-18T06:19:54.434Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="安全初级">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/17/eDwWkaCUdbRng2I.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -181,209 +164,515 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-安全初级/WEB安全基础(二)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Python/运用Python语言(四)-科学计算和可视化02" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      WEB安全基础(二)
+      运用Python语言(四)-科学计算和可视化02
     </h1>
   
 
         
-        <a href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="archive-article-date">
-  	<time datetime="2020-12-26T13:25:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-26</time>
+        <a href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/" class="archive-article-date">
+  	<time datetime="2021-04-16T09:54:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="服务端脚本基础"><a href="#服务端脚本基础" class="headerlink" title="服务端脚本基础"></a>服务端脚本基础</h2><h3 id="静态网页与动态网页"><a href="#静态网页与动态网页" class="headerlink" title="静态网页与动态网页"></a>静态网页与动态网页</h3><p>（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。</p>
-<p>（2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。</p>
-<p>​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容。</p>
-<p>​          动态页面内容不是存在于页面上，而是存在数据库中，从而大大降低网站的维护工作量。</p>
-<p>​          采用动态网页技术的网站可以实现更多的功能，如用户注册、用户登录、在线调查、用户管理、订单管理等等；静态页面则无法实现这些功能。</p>
-<p>（3）动态页面与静态页面的区别：</p>
-<p>静态页面：html或htm，是一种静态的页面格式，不需要服务器解析其中的脚本，由浏览器解析。</p>
-<p>动态页面：由相应的脚本引擎来解释执行，根据指令生成静态网页，如PHP、JSP、ASPX等。</p>
+        <h2 id="matplotlib库的使用"><a href="#matplotlib库的使用" class="headerlink" title="matplotlib库的使用"></a>matplotlib库的使用</h2><p><strong>matplotlib是提供数据绘图功能的第三方库，其pyplot子库主要用于实现各种数据展示图形的绘制</strong></p>
+<h3 id="matplotlib-pyplot库概述"><a href="#matplotlib-pyplot库概述" class="headerlink" title="matplotlib.pyplot库概述"></a>matplotlib.pyplot库概述</h3><p>（1）matplotlib.pyplot是matplotlib的子库，引用方式如下：</p>
+<pre><code class="python">&gt;&gt;&gt;import matplotlib.pyplot as plt #后续程序中，plt将代替matplotlib.pyplot</code></pre>
+<p>（2）为了正确显示中文字体，使用以下代码更改默认设置，其中’SimHei’表示黑体字。</p>
+<pre><code class="python">&gt;&gt;&gt; import matplotlib
+&gt;&gt;&gt; matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+&gt;&gt;&gt; matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]</code></pre>
+<p>（3）字体名称的中英文对照</p>
 <table>
 <thead>
 <tr>
-<th align="center">静态网页</th>
-<th align="center">动态网页</th>
+<th align="center">字体名称</th>
+<th align="center">字体英文表示</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">不依赖数据库</td>
-<td align="center">依赖数据库</td>
+<td align="center">宋体</td>
+<td align="center">SimSun</td>
 </tr>
 <tr>
-<td align="center">灵活性差，制作、更新、维护麻烦</td>
-<td align="center">灵活性好，维护简单</td>
+<td align="center">黑体</td>
+<td align="center">SimHei</td>
 </tr>
 <tr>
-<td align="center">在功能方面有较大的限制，交互性能差</td>
-<td align="center">交互性好，功能强大</td>
+<td align="center">楷体</td>
+<td align="center">KaiTi</td>
 </tr>
 <tr>
-<td align="center">服务端不处理用户输入，安全性高</td>
-<td align="center">服务端需要处理用户输入，安全性低</td>
+<td align="center">微软雅黑</td>
+<td align="center">Microsoft YaHei</td>
+</tr>
+<tr>
+<td align="center">隶书</td>
+<td align="center">LiSu</td>
+</tr>
+<tr>
+<td align="center">仿宋</td>
+<td align="center">FangSong</td>
+</tr>
+<tr>
+<td align="center">幼圆</td>
+<td align="center">YouYuan</td>
+</tr>
+<tr>
+<td align="center">华文宋体</td>
+<td align="center">STSong</td>
+</tr>
+<tr>
+<td align="center">华文黑体</td>
+<td align="center">STHeiti</td>
+</tr>
+<tr>
+<td align="center">苹果丽中黑</td>
+<td align="center">Apple LiGothic Medium</td>
 </tr>
 </tbody></table>
-<p>直接的区别是动态页面访问相同的页面，客户端获得的源代码可能不同。</p>
-<h3 id="常见的服务端脚本语言"><a href="#常见的服务端脚本语言" class="headerlink" title="常见的服务端脚本语言"></a>常见的服务端脚本语言</h3><p>（1）ASP：是动态服务器页面(Active Server Pages)的英文缩写，也称为经典ASP，动态产生Web页面。</p>
-<p>（2）ASPX：aspx文件是微软的在服务器端运行的动态网页文件,属于ASP.NET技术。ASP.NET是由微软在·NET Framework框架中所提供，开发Web应用程序的类库，封装在System.Web.dll文件中，显露出System.Web命名空间，并提供ASP.NET网页处理、扩充以及HTTP通道的应用程序与通信处理等工作，以及Web Service的基础架构。ASP.NET是ASP技术的后继者，但它的发展性要比ASP技术强大许多</p>
-<p>（3）JSP：全名为Java Server Pages，中文名叫java服务器页面，其根本是一个简化的Servle设计。</p>
-<p>（4）PHP(Hypertext Preprocessor超文本预处理器)是一种通用开源脚本语言，语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。PHP独特的语法混合了C、Java、Perl以及PHP自创的语法。它可以比CGl或者Perl更快速地执行动态网页。</p>
-<h3 id="PHP语法基础"><a href="#PHP语法基础" class="headerlink" title="PHP语法基础"></a>PHP语法基础</h3><p>（1）PHP文件的默认文件扩展名是”.php”</p>
-<p>（2）PHP脚本可以放置于文档中的任何位置</p>
-<p>（3）PHP文件通常包含HTML标签以及一些PHP脚本代码</p>
-<p>（4）PHP脚本以&lt;?php开头，以?&gt;结尾</p>
-<p>（5）PHP语句以分号结尾(;)</p>
-<p>（6）PHP使用//作为注释符号</p>
-<pre><code class="php">&lt;?php
-    //此处是PHP代码
-    ?&gt;</code></pre>
-<h3 id="PHP输出"><a href="#PHP输出" class="headerlink" title="PHP输出"></a>PHP输出</h3><p>（1）echo能够输出一个以上的字符串</p>
-<p>（2）echo是一个语言结构，有无括号均可使用：echo或echo()</p>
-<p>（3）实例：用echo命令来显示不同的字符串(注意：字符串中能包含HTML标记)</p>
-<pre><code class="php">&lt;?php
-echo &quot;&lt;h2&gt;PHP很有趣!&lt;/h2&gt;&quot;;
-echo &quot;Hello world!&lt;br&gt;&quot;;
-echo &quot;我计划学习PHP! &lt;br&gt;&quot;;
-echo &quot;这段话&quot;,&quot;由&quot;,&quot;多个&quot;,&quot;字符串&quot;,&quot;串接而成。&quot;;
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png" alt="image-20201226220748663"></p>
-<h3 id="PHP与HTML结合"><a href="#PHP与HTML结合" class="headerlink" title="PHP与HTML结合"></a>PHP与HTML结合</h3><pre><code class="php">&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;body&gt; 
-    &lt;h1&gt;我的第一张PHP页面&lt;/h1&gt;
-&lt;?php 
-echo &quot;Hello World!&quot;; 
-?&gt; 
+<p>（4）matplotlib库由一系列有组织有隶属关心的对象构成，对于基础绘图操作来说过于复杂。因此matplotlib提供了一套快捷命令式的绘图接口函数，<strong>即pyplot子模块</strong>。</p>
+<p>（5）pyplot将绘图所需要的对象构建过程封装在函数中，对用户提供了更加友好的接口。pyplot模块提供一批预定义的绘图函数，大多数函数可以从函数名辨别它的功能。</p>
+<h3 id="matplotlib-pyplot库解析"><a href="#matplotlib-pyplot库解析" class="headerlink" title="matplotlib.pyplot库解析"></a>matplotlib.pyplot库解析</h3><p>（1）以下内容使用plt代替matplotlib.pyplot。plt子库提供了一批操作和绘图函数，每个函数代表对图像进行的一个操作，比如创建绘图区域、添加标注或修改坐标轴等。这些函数采用了plt.&lt;b&gt;()形式调用，其中&lt;b&gt;是具体函数名称。</p>
+<p>（2）plt子库中包含了4个与绘图区域有关的函数，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.figure(figsize=None,facecolor=None)</td>
+<td align="center">创建一个全局绘图区域</td>
+</tr>
+<tr>
+<td align="center">plt.axes(rect,axisbg=’w’)</td>
+<td align="center">创建一个坐标系风格的子绘图区域，axisbg指背景色，默认为white</td>
+</tr>
+<tr>
+<td align="center">plt.subplot(nrows,ncols,plot_number)</td>
+<td align="center">在全局绘图区域中创建一个子绘图区域</td>
+</tr>
+<tr>
+<td align="center">plt.subplots_adjust()</td>
+<td align="center">调整子绘图区域的布局</td>
+</tr>
+</tbody></table>
+<p>（3）使用figure()函数创建一个全局绘图区域，并且使它成为当前的绘图对象，<strong>figsize参数可以指定绘图区域的宽度和高度，单位为英寸。</strong>鉴于figure()函数参数较多，这里采用指定参数名称的方式输入参数。</p>
+<pre><code class="python">plt.figure(figsize(8,4))</code></pre>
+<p>（4）绘制图像之前也不可调用figure()函数创建全局绘图区域，此时，plt子库会自动创建一个默认的绘图区域。显示绘图区域的代码如下：</p>
+<pre><code class="python">&gt;&gt;&gt;plt.figure(figsize(8,4))
+&gt;&gt;&gt;plt.show()</code></pre>
+<p>（5）<strong>subplot()**用于在全局绘图区域内创建子绘图区域，其参数表示将全局绘图区域分成</strong>nrows行和ncols列<strong>，并根据</strong>先行后列的计数方式**在plot_number位置生成一个坐标系。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; plt.subplot(324)    #全局绘图区域被分割成3*2的表格，其中，在第4个位置绘制了一个坐标系。
+&gt;&gt;&gt; plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/eDwWkaCUdbRng2I.png" alt="image-20210417102315753"></p>
+<p>（6）axes()默认创建一个subplot(111)坐标系，参数rect=[left,bottom,width,height]中<strong>4个变量的范围都为[0,1]，</strong>表示坐标系与全局绘图区域的关系；axisbg指背景色，默认为white。</p>
+<pre><code class="python">&gt;&gt;&gt; plt.axes([0.1,0.1,0.7,0.3], axisbg=&#39;y&#39;)
+&gt;&gt;&gt; plt.show()</code></pre>
+<p>（7）plt子库提供了一组读取和显示相关的函数，用于在绘图区域中增加显示内容及读入数据，这些函数需要与其他函数搭配使用，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.legend()</td>
+<td align="center">在绘图区域中放置绘图标签（也称图注）</td>
+</tr>
+<tr>
+<td align="center">plt.show()</td>
+<td align="center">显示创建的绘图对象</td>
+</tr>
+<tr>
+<td align="center">plt.matshow()</td>
+<td align="center">在窗口显示数组矩阵</td>
+</tr>
+<tr>
+<td align="center">plt.imshow()</td>
+<td align="center">在axes上显示图像</td>
+</tr>
+<tr>
+<td align="center">plt.imsave()</td>
+<td align="center">保存数组为图像文件</td>
+</tr>
+<tr>
+<td align="center">plt.imread()</td>
+<td align="center">从文件图像中读取数组</td>
+</tr>
+</tbody></table>
+<p>（8）pyplot模块提供了17个用于绘制“基础图表”的常用函数，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>plt.plot(x,y,label,color,width)</strong></td>
+<td align="center">根据x，y数组绘制直、曲线</td>
+</tr>
+<tr>
+<td align="center">plt.boxplot(data,notch,position)</td>
+<td align="center">绘制一个箱型图</td>
+</tr>
+<tr>
+<td align="center">plt.bar(left,height,width,bottom)</td>
+<td align="center">绘制一个条形图</td>
+</tr>
+<tr>
+<td align="center">plt.barh(bottom,width,height,left)</td>
+<td align="center">绘制一个横向条形图</td>
+</tr>
+<tr>
+<td align="center">plt.polar(theta,r)</td>
+<td align="center">绘制极坐标图</td>
+</tr>
+<tr>
+<td align="center">plt.pie(data,explode)</td>
+<td align="center">绘制饼图</td>
+</tr>
+<tr>
+<td align="center">plt.psd(x,NFFT=256,pad_to,Fs)</td>
+<td align="center">绘制功率谱密度图</td>
+</tr>
+<tr>
+<td align="center">plt.specgram(x,NFFT=256,pad_to,F)</td>
+<td align="center">绘制谱图</td>
+</tr>
+<tr>
+<td align="center">plt.cohere(x,y,NFFT=256,Fs)</td>
+<td align="center">绘制X-Y的相关性函数</td>
+</tr>
+<tr>
+<td align="center">plt.scatter()</td>
+<td align="center">绘制散点图(x,y是长度相同的序列)</td>
+</tr>
+<tr>
+<td align="center">plt.step(x,y,where)</td>
+<td align="center">绘制步阶图</td>
+</tr>
+<tr>
+<td align="center">plt.hist(x,bins,normed)</td>
+<td align="center">绘制直方图</td>
+</tr>
+<tr>
+<td align="center">plt.contour(X,Y,Z,N)</td>
+<td align="center">绘制等值线</td>
+</tr>
+<tr>
+<td align="center">plt.vlines()</td>
+<td align="center">绘制垂直线</td>
+</tr>
+<tr>
+<td align="center">plt.stem(x,y,linefmt,markerfmt,basefmt)</td>
+<td align="center">绘制曲线每个点到水平轴线的垂线</td>
+</tr>
+<tr>
+<td align="center">plt.plot_data()</td>
+<td align="center">绘制数据日期</td>
+</tr>
+<tr>
+<td align="center">plt.plotfile()</td>
+<td align="center">绘制数据后写入文件</td>
+</tr>
+</tbody></table>
+<p>（9）plot()函数是用于绘制直线的最基础的函数，调用方式灵活，x和y可以是numpy计算出的数组，并用关键字参数指定各种属性。其中，labe表示设置标签并在图例中显示，color表示曲线的颜色，linewidth表示曲线的宽度。<strong>在字符串前后添加$符号，matplotlib会使用其内置的latex引擎绘制数学公式。</strong></p>
+<p>（10）实例：在坐标系中绘制基本的三角函数</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+x = np.linspace(0, 6, 100)
+y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
+plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,linewidth=3,linestyle=&quot;-&quot;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/MGgRwy7FZj2orLb.png" alt="image-20210417111653192"></p>
+<p>（11）plt库有两个坐标体系，<strong>图像坐标和数据坐标。</strong></p>
+<ul>
+<li>图像坐标将图像所在区域左下角视为原点，将x方向和y方向长度设定为1。整体绘图区域有一个图像坐标，每个axes()和subplot()函数产生的子图也有属于自己的图像坐标。**axes()函数参数rect指当前产生的子区域相对于整个绘图区域的图像坐标。</li>
+<li>数据坐标以当前绘图区域的坐标轴为参考，显示每个点的相对位置，这与坐标系里面标记数据点一致。</li>
+</ul>
+<p>（12）下表给出了与plt库的坐标轴设置相关的函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.axis(‘v’,’off’,’equal’,’scaled’,’tight’,’image’)</td>
+<td align="center">获取设置轴属性的快捷方法</td>
+</tr>
+<tr>
+<td align="center">plt.xlim(xmin,xmax)</td>
+<td align="center">设置当前x轴取值范围</td>
+</tr>
+<tr>
+<td align="center">plt.ylim(ymin,ymax)</td>
+<td align="center">设置当前y轴取值范围</td>
+</tr>
+<tr>
+<td align="center">plt.xscale()</td>
+<td align="center">设置x轴缩放</td>
+</tr>
+<tr>
+<td align="center">plt.yscale()</td>
+<td align="center">设置y轴缩放</td>
+</tr>
+<tr>
+<td align="center">plt.autoscale()</td>
+<td align="center">自动缩放轴视图的数据</td>
+</tr>
+<tr>
+<td align="center">plt.text(x,y,s,fontdic,withdash)</td>
+<td align="center">为axes图轴添加注释</td>
+</tr>
+<tr>
+<td align="center">plt.thetagrids(angles,labels,fmt,frac)</td>
+<td align="center">设置极坐标网络theta的位置</td>
+</tr>
+<tr>
+<td align="center">plt.grid(on/off)</td>
+<td align="center">打开或者关闭坐标网络</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; plt.plot([1,2,4],[1,2,3])
+&gt;&gt;&gt; plt.axis()   #获得当前坐标轴范围
+(0.85, 4.15, 0.9, 3.1)
+&gt;&gt;&gt; plt.axis([0,5,0,8]) #4个变量分别是[xmin,xmax,ymin,ymax]
+&gt;&gt;&gt; plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/ZP32HJmWCGBtkSQ.png" alt="image-20210417113325710"></p>
+<p>（13）下表给出了13个设置坐标系标签的相关函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.figlegend(handles,label,loc)</td>
+<td align="center">为全局绘图区域放置图注</td>
+</tr>
+<tr>
+<td align="center">plt.legend()</td>
+<td align="center">为当前坐标图放置图注</td>
+</tr>
+<tr>
+<td align="center">plt.xlabel(s)</td>
+<td align="center">设置当前x轴的标签</td>
+</tr>
+<tr>
+<td align="center">plt.ylabel(s)</td>
+<td align="center">设置当前y轴的标签</td>
+</tr>
+<tr>
+<td align="center">plt.xticks(array,’a’,’b’,’c’)</td>
+<td align="center">设置当前x轴刻度位置的标签和值</td>
+</tr>
+<tr>
+<td align="center">plt.yticks(array,’a,’b’,’c’)</td>
+<td align="center">设置当前y轴刻度位置的标签和值</td>
+</tr>
+<tr>
+<td align="center">plt.clabel(cs,v)</td>
+<td align="center">为等值线图设置标签</td>
+</tr>
+<tr>
+<td align="center">plt.get_figlabels()</td>
+<td align="center">返回当前绘图区域的标签列表</td>
+</tr>
+<tr>
+<td align="center">plt.figtext(x,y,s,fontdic)</td>
+<td align="center">为全局绘图区域添加文字</td>
+</tr>
+<tr>
+<td align="center">plt.title()</td>
+<td align="center">设置标题</td>
+</tr>
+<tr>
+<td align="center">plt.suptitle()</td>
+<td align="center">为当前绘图区域添加中心标题</td>
+</tr>
+<tr>
+<td align="center">plt.text(x,y,fontdic,withdash)</td>
+<td align="center">为坐标图轴添加注释</td>
+</tr>
+<tr>
+<td align="center">plt.annotate(note,xy,xytext,xycoords,textcoords,arrowprops)</td>
+<td align="center">用箭头在指定数据点创建一个注释或一段文本</td>
+</tr>
+</tbody></table>
+<p>（14）绘制一个带标签的坐标系</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+plt.plot([1,2,4],[1,2,3])
+plt.title(&quot;坐标系标题&quot;)
+plt.xlabel(&#39;时间(s)&#39;)
+plt.ylabel(&#39;范围(m)&#39;)
+plt.xticks([1,2,3,4,5],[r&#39;$\pi/3$&#39;,r&#39;$2\pi/3$&#39;,r&#39;$\pi$&#39;,\
+                        r&#39;$4\pi/3$&#39;,r&#39;$5\pi/3$&#39;])
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/KRIyBVuktdjeqJY.png" alt="image-20210417125952062"></p>
+<p>（15）plt库提供了3个区域填充函数，对绘图区域填充颜色，如下表示所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">fill(x,y,c,color)</td>
+<td align="center">填充多边形</td>
+</tr>
+<tr>
+<td align="center">fill_between(x,y1,y2,where,color)</td>
+<td align="center">填充两条曲线围成的多边形</td>
+</tr>
+<tr>
+<td align="center">fill_betweenx(y,x1,x2,where,hold)</td>
+<td align="center">填充两条水平线之间的区域</td>
+</tr>
+</tbody></table>
+<p>（16）绘制一个带局部阴影的坐标系。</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+import numpy as np
+x = np.linspace(0,10,1000)
+y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
+plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,label=&quot;$exp-decay$&quot;,linewidth=3)
+plt.axis([0,6,0,1.8])
+ix = (x&gt;0.8) &amp; (x&lt;3)
+plt.fill_between(x,y,0,where=ix,\
+                 facecolor=&#39;gray&#39;,alpha=0.25)
+plt.text(0.5*(0.8+3),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
+         horizontalalignment=&#39;center&#39;)
+plt.legend()
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/8znfgdYXk9KUowq.png" alt="image-20210417131059448"></p>
+<h2 id="实例：科学坐标图绘制"><a href="#实例：科学坐标图绘制" class="headerlink" title="实例：科学坐标图绘制"></a>实例：科学坐标图绘制</h2><p>（1）科学坐标图有4个要素：<strong>坐标轴、数据曲线、标题和图注</strong>。本实例以阻尼衰减曲线绘制来具体阐述科学坐标系的绘制方法。</p>
+<p>（2）本实例同时展示了在同一个区域用不同颜色和线条绘制两种曲线的方法，两条曲线分别为(x,y)和(x,z)。</p>
+<pre><code class="python">x = np.linspace(0.0, 6.0, 100)
+y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
+z = 0.5 * np.cos(x ** 2)+0.8</code></pre>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+def Draw(pcolor, nt_point, nt_text, nt_size):   #Draw()函数用于绘制曲线
+    plt.plot(x,y,&#39;k&#39;,label=&quot;$exp_decay$&quot;,color=pcolor,\  #根据x、y数组绘制直、曲线
+             linewidth=3, linestyle=&#39;-&#39;)
+    plt.plot(x,z,&quot;b--&quot;,label=&quot;$cos(x^2)$&quot;, linewidth=1)
+    plt.xlabel(&#39;时间(s)&#39;)
+    plt.ylabel(&#39;幅度(mV)&#39;)
+    plt.title(&#39;阻尼衰减曲线绘制&#39;)
+    plt.annotate(&#39;$\cos(2 \pi t) \exp(-t)$&#39;,xy=nt_point,\   #用箭头在指定数据点创建一个注释或一段文本
+                 xytext=nt_text,fontsize=nt_size,arrowprops= \
+                 dict(arrowstyle=&#39;-&gt;&#39;, connectionstyle=&quot;arc3,rad=.1&quot;))
+def Shadow(a,b):                             #Shadow()函数用于设置阴影
+    ix = (x&gt;a) &amp; (x&lt;b)
+    plt.fill_between(x,y,0,where=ix,facecolor=&#39;gray&#39;,alpha=0.25)
+    plt.text(0.5*(a+b),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
+             horizontalalignment=&#39;center&#39;)
+def XY_Axis(x_start, x_end, y_start, y_end): #XY_Axis()函数用于修改坐标轴
+    plt.xlim(x_start,x_end)   #设置当前x轴的取值范围
+    plt.ylim(y_start,y_end)
+    plt.xticks([np.pi/3,2 * np.pi/3, 1*np.pi, 4*np.pi/3,\     #设置当前x轴刻度位置的标签和值
+                5*np.pi/3],[&#39;$\pi/3$&#39;,&#39;$2\pi/3$&#39;,&#39;$\pi$&#39;,&#39;$4\pi/3$&#39;,&#39;$5\pi/3$&#39;])
+x = np.linspace(0.0, 6.0, 100)      #创建一个由0.0到6.0，等分成100个元素的数组
+y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
+z = 0.5 * np.cos(x ** 2)+0.8
+note_point,note_text,note_size=(1,np.cos(2*np.pi)*\
+                                np.exp(-1)+0.8),(1,1.4), 14
+fig = plt.figure(figsize=(8, 6),facecolor=&quot;white&quot;)   #创建一个全局绘图区域
+plt.subplot(111)                                     #在全局绘图区域中创建一个子绘图区域
+Draw(&quot;red&quot;,note_point,note_text,note_size)
+XY_Axis(0,5,0,1.8)
+Shadow(0.8,3)
+plt.legend()               #为当前坐标图放置图注
+plt.savefig(&#39;sample.JPG&#39;)  #将产生的坐标图保存为文件
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/yhvMBaQ2HW8e7PU.png" alt="image-20210417190906901"></p>
+<p>（3）其中第13行的annotate()函数配合箭头在曲线绘图界面添加动态注释，箭头的线条和尖端都有多种样式和参数，可以通过arrowprops和connetionstyle选择，具体可参考官方文档。</p>
+<h2 id="实例：多级雷达图绘制"><a href="#实例：多级雷达图绘制" class="headerlink" title="实例：多级雷达图绘制"></a>实例：多级雷达图绘制</h2><h3 id="单一数据雷达图"><a href="#单一数据雷达图" class="headerlink" title="单一数据雷达图"></a>单一数据雷达图</h3><p>（1）雷达图是通过多个离散属性比较对象的最直观工具。</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;       #第3行到第5用于支持中文
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+labels = np.array([&#39;综合&#39;,&#39;KDA&#39;,&#39;发育&#39;,&#39;推进&#39;,&#39;生存&#39;,&#39;输出&#39;]) #设置属性标签，包含6个属性
+nAttr = 6
+data = np.array([7, 5, 6, 9, 8, 7]) #预设一组玩家数据值
+angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
+data = np.concatenate((data, [data[0]]))    #对data进行封闭
+angles = np.concatenate((angles, [angles[0]]))   #对angles进行封闭
+labels=np.concatenate((labels,[labels[0]]))    #对labels进行封闭，若不对此进行封闭则会报错
+fig = plt.figure(facecolor=&quot;white&quot;)
+plt.subplot(111, polar=True)     #在全局绘图区域中创建一个子绘图区域
+plt.plot(angles,data,&#39;bo-&#39;,color = &#39;g&#39;,linewidth=2)
+plt.fill(angles,data,facecolor=&#39;g&#39;,alpha=0.25)
+plt.thetagrids(angles*180/np.pi,labels)
+plt.figtext(0.52, 0.95, &#39;DOTA能力值雷达图&#39;,ha=&#39;center&#39;)    #为全局绘图区域添加文字
+plt.grid(True)
+plt.savefig(&#39;dota_radar.JPG&#39;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/zpKIPkvLClZGeT8.png" alt="image-20210417215652944"></p>
+<p>（2）np.linspace()函数设定起点为0、末值为2π、返回一个两端点间数值平均分布的长为nAttr的数组angles，<strong>它表示从一个属性点到下一个属性点笔画需要旋转的角</strong>度，它取决于属性<strong>nAttr的大小，也是雷达图的多边形边数。</strong></p>
+<p>（3）np.concatenate()函数用于将数据和角度的数组首尾闭合起来，便于调用plot()函数绘制。</p>
+<p>（4）建立基本绘图对象后，使用subplot()函数建立极坐标系的子分区。<strong>polar参数指定了绘制类型为极坐标</strong>，这是subplot()除默认正方形坐标系外唯一支持的内置坐标图。</p>
+<p>（5）建立极坐标后，使用plot()函数依照data提供的数据画出不规则六边形，然后使用fill()函数填充半透明颜色。</p>
+<p>（6）thetagrids()函数为极坐标设置标签，这里把标签放在六角形的顶点上，需要将角度数据和文字一起作为参数传给thetagrids函数。</p>
+<h3 id="多数据雷达图"><a href="#多数据雷达图" class="headerlink" title="多数据雷达图"></a>多数据雷达图</h3><p><strong>霍兰德人格分析雷达图</strong></p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]
+radar_labels = np.array([&#39;研究型(I)&#39;,&#39;艺术型(A)&#39;,&#39;社会型(S)&#39;,\
+                         &#39;企业型(E)&#39;,&#39;常规型(C)&#39;,&#39;现实型(R)&#39;])
 
-&lt;/body&gt; 
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/4bSYiJCj9IGBHms.png" alt="image-20201226221946820"></p>
-<h3 id="PHP的表单处理"><a href="#PHP的表单处理" class="headerlink" title="PHP的表单处理"></a>PHP的表单处理</h3><h4 id="在HTML上触发GET请求"><a href="#在HTML上触发GET请求" class="headerlink" title="在HTML上触发GET请求"></a>在HTML上触发GET请求</h4><p>（1）HTML可以采用A标签或form表单的形式触发get请求，从带有get方法的表单发送的信息会显示在浏览器的地址栏，并且对发送信息的量也有限制。使用A标签触发get请求时，请求的参数值是固定的。</p>
-<pre><code class="HTML">&lt;!--a标签触发get请求--&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;GET请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;a href= &quot;get.php?fname=dayang&amp;age=24&quot;&gt;提交请求&lt;/a&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/l2r7OuaxcVoyLjT.png" alt="image-20201226223120376"></p>
-<p><img src="https://i.loli.net/2020/12/26/EHOnCwqbfkh8FpT.png" alt="image-20201226223157764"></p>
-<p>（2）form表单触发GET请求</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;urf-8&quot;&gt;
-        &lt;title&gt;GET请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;!--请求目标页面为get.php,请求方式为get--&gt; 
-        &lt;form action=&quot;get.php&quot; method=&quot;get&quot;&gt;             
-            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
-            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/qgwT4RVxsoBFXfS.png" alt="image-20201226225025070"></p>
-<h4 id="GET请求的处理"><a href="#GET请求的处理" class="headerlink" title="GET请求的处理"></a>GET请求的处理</h4><p>$_GET变量用于收集HTTP GET请求中的参数值。服务端处理</p>
-<pre><code class="php">欢迎&lt;?php echo $_GET[&quot;fname&quot;];?&gt;!&lt;br&gt;
-你的年龄是&lt;?php echo $_GET[&quot;age&quot;];?&gt;岁。</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/4sZ7hPrbRnqTIva.png" alt="image-20201226231005000"></p>
-<h4 id="在HTML上触发POST请求"><a href="#在HTML上触发POST请求" class="headerlink" title="在HTML上触发POST请求"></a>在HTML上触发POST请求</h4><p>（1）HTML可以采用form表单的形式触发POST请求，从带有POST方法的表单发送的数据，不会显示在浏览器的地址栏，并且对发送信息的量也没有限制，常用于传输敏感数据或较大量的数据。</p>
-<p>（2）实例：form表单触发POST请求</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;POST请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;form action=&quot;post.php&quot; method=&quot;post&quot;&gt;
-            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
-            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h4 id="POST请求的处理"><a href="#POST请求的处理" class="headerlink" title="POST请求的处理"></a>POST请求的处理</h4><p>$_POST变量用于收集来自HTTP POST请求中的参数值</p>
-<pre><code class="php">欢迎&lt;?php echo $_POST[&quot;fname&quot;];?&gt;!&lt;br&gt;
-你的年龄是&lt;?php echo $_POST[&quot;age&quot;];?&gt;岁。</code></pre>
-<h2 id="数据库与SQL基础"><a href="#数据库与SQL基础" class="headerlink" title="数据库与SQL基础"></a>数据库与SQL基础</h2><h3 id="数据库系统基本概念"><a href="#数据库系统基本概念" class="headerlink" title="数据库系统基本概念"></a>数据库系统基本概念</h3><p>（1）数据库：长期存储在计算机内、有组织的、可共享的数据集合</p>
-<p>（2）DBMS(DataBase Management Ssytem):一种操纵和管理数据库的大型软件，用于建立、使用和维护数据库，它对数据库进行统一的管理和控制，以保证数据库的安全性和完整性。常见的DBMS包括access、sqlserver、mysql、oracle、DB2等。</p>
-<h3 id="关系型数据库系统特点"><a href="#关系型数据库系统特点" class="headerlink" title="关系型数据库系统特点"></a>关系型数据库系统特点</h3><p>（1）数据结构化和共享性：库、表、字段；结构化查询(SQL)</p>
-<p>（2）数据独立性：物理独立性，逻辑独立性</p>
-<p>（3）数据的完整性约束：</p>
-<p>实体完整性(通过主键约束条件)</p>
-<p>参照完整性(通过主外键约束条件)</p>
-<p>用户自定义完整性(通过CHECK子句)</p>
-<p>（4）数据由DBMS统一管理和控制：查询引擎、事务控制、数据存储模块/组件</p>
-<p><img src="https://i.loli.net/2020/12/26/1bK2sX6JWvpFoCQ.png" alt="image-20201226234112089"></p>
-<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><p>（1）概念：SQL语言，是结构化查询语言(Structured Query Language)的简称。SQL语言是一种数据库查询和程序设计语言，用于存储数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件的扩展名。</p>
-<p>（2）SQL语句格式：在数据库上执行的大部分工作都由SQL语句完成。注意：SQL对大小写不敏感。#和–后的内容代表注释，在浏览器中–要写为–+</p>
-<p><img src="https://i.loli.net/2020/12/26/p6QNkLcKsZrwg5i.png" alt="image-20201226234657011"></p>
-<h4 id="SELECT语句——基本查询"><a href="#SELECT语句——基本查询" class="headerlink" title="SELECT语句——基本查询"></a>SELECT语句——基本查询</h4><p>（1）cmd进入mysql数据库，前提是设置好环境变量在PATH里面添加D:\SecurityTools\WebTools\phpstudy\PHPTutorial\MySQL\bin</p>
-<p>然后运行cmd命令窗口，输入：mysql -u root -p，回车后输入密码即可进入数据库。</p>
-<p>或者直接用phpstudy打开：其他选项菜单–&gt;MySQL工具–&gt;MySQL命令行</p>
-<p>（2）基本查询：</p>
-<pre><code>show databases;      //查询数据库有哪些
-use mysql;           //进入或使用mysql数据库  
-show tables;         //查询mysql数据库中的表</code></pre>
-<p><img src="https://i.loli.net/2020/12/27/WUZ3eGvINQJCnlT.png" alt="image-20201227001655078"></p>
-<h4 id="SELECT语句——AND和OR运算"><a href="#SELECT语句——AND和OR运算" class="headerlink" title="SELECT语句——AND和OR运算"></a>SELECT语句——AND和OR运算</h4><p>（1）AND运算：AND分隔的表达式须同时满足</p>
-<p>（2）OR运算：OR分隔的表达式只需要满足任意一个</p>
-<p><img src="https://i.loli.net/2020/12/27/M9dc7NvyPGBaUbg.png" alt="image-20201227002419442"></p>
-<p><img src="https://i.loli.net/2020/12/27/onBa1mAVIOLfM85.png" alt="image-20201227002127380"></p>
-<p>（3）当AND和OR运算符同时出现时，先进行AND运算，再进行OR运算。优先级=大于and大于or</p>
-<p><img src="https://i.loli.net/2020/12/27/PxGFUetMfmglOI4.png" alt="image-20201227002245210"></p>
-<h2 id="动态页面的工作原理"><a href="#动态页面的工作原理" class="headerlink" title="动态页面的工作原理"></a>动态页面的工作原理</h2><h3 id="动态页面工作流程理解——数据查询"><a href="#动态页面工作流程理解——数据查询" class="headerlink" title="动态页面工作流程理解——数据查询"></a>动态页面工作流程理解——数据查询</h3><p><img src="https://i.loli.net/2020/12/27/9bBDrMq2fA3JXKh.png" alt="image-20201227002758895"></p>
-<p><img src="https://i.loli.net/2020/12/27/SFuhmXac5DQ48E2.png" alt="image-20201227002850094"></p>
-<h4 id="系统登录成功"><a href="#系统登录成功" class="headerlink" title="系统登录成功"></a>系统登录成功</h4><p><img src="https://i.loli.net/2020/12/27/2F3X5vh1WozLGVT.png" alt="image-20201227003308006"></p>
-<h4 id="系统登录失败"><a href="#系统登录失败" class="headerlink" title="系统登录失败"></a>系统登录失败</h4><p><img src="https://i.loli.net/2020/12/27/WgMJ64cFa8hvl5B.png" alt="image-20201227003345200"></p>
-<h3 id="动态网站搭建——DVWA"><a href="#动态网站搭建——DVWA" class="headerlink" title="动态网站搭建——DVWA"></a>动态网站搭建——DVWA</h3><p>（1）首先将DVWA的源代码放进D:\SecurityTools\WebTools\phpstudy\PHPTutorial\WWW中，然后解压DVWA的压缩包。</p>
-<p>（2）配置DVWA链接数据库，打开config文件夹，打开config.inc.php。(注意需要将文件类型改为php)</p>
-<p>（3）需要把db_password修改成root，因为刚安装好的集成环境默认的MySQL连接用户名和密码为root和root。</p>
-<p><img src="https://i.loli.net/2020/12/27/gsv5e4f6WkrwUTN.png" alt="image-20201227004006196"></p>
-<p>（4）登录DVWA，在浏览器地址栏输入127.0.0.1/DVWA/index.php访问</p>
-<p>（5）点击Create/Reset Database后，再次访问。登录初始账号admin，密码password</p>
-<p><img src="https://i.loli.net/2020/12/27/JYNCheTFMkK2wzi.png" alt="image-20201227005759025"></p>
-<p><img src="https://i.loli.net/2020/12/27/N8xrA5q2wlM3eK6.png" alt="image-20201227005235895"></p>
-<h2 id="Burp暴力破解"><a href="#Burp暴力破解" class="headerlink" title="Burp暴力破解"></a>Burp暴力破解</h2><p>暴力破解一般指穷举法，穷举法的基本思想是根据题目的部分条件确定答案的大致范围，并在此范围内对所有可能的情况逐一验证，直到全部情况验证完毕。若某个情况验证符合题目的全部条件，则为本问题的一个解；若全部情况验证后都不符合题目的全部条件，则本题无解。穷举法也称枚举法。</p>
-<h3 id="Burpsuite模块——Intruder模块详解"><a href="#Burpsuite模块——Intruder模块详解" class="headerlink" title="Burpsuite模块——Intruder模块详解"></a>Burpsuite模块——Intruder模块详解</h3><p>（1）Burp Intruder用于自动对Web应用程序自定义的攻击</p>
-<p>（2）Burp Intruder是高度可配置的，并被用来广范围内进行自动化攻击。可以枚举标识符，获取有用数据，漏洞模糊测试。</p>
-<p>（3）合适的攻击类型取决于应用程序的情况，可能包括：</p>
-<p>缺陷测试：SQL注入，跨站点脚本攻击，缓冲区溢出，路径遍历，暴力攻击认证系统，枚举，操纵参数，拖出隐藏的内容和功能，会话令牌测序和会话劫持，数据挖掘，并发攻击，应用层的拒绝服务式攻击。</p>
-<h4 id="模块说明"><a href="#模块说明" class="headerlink" title="模块说明"></a>模块说明</h4><p>（1）Target用于配置目标服务器进行攻击的详细信息</p>
-<p><img src="https://i.loli.net/2020/12/27/pvnqcXkR5i3WDsU.png" alt="image-20201227010741048"></p>
-<p>（2）Positions设置Payloads的插入点以及攻击类型(攻击模式)</p>
-<p>攻击模式：</p>
-<p>sniper：单个字典，单个变量，若有多个变量，对变量依次进行破解。多个标记依次进行。</p>
-<p>Battering ram：多个变量设置一个字典，对变量同时进行破解。多个标记同时进行。</p>
-<p>Pitchfork：每一个变量标记对应一个字典，取每个字典对应项。</p>
-<p>Cluster bomb：每个变量对应一个字典，并且进行交集破解，尝试各种组合。适合用于用户名+密码的破解。</p>
-<p><img src="https://i.loli.net/2020/12/27/PjUBe1bpnXo6wiE.png" alt="image-20201227011237538"></p>
-<p>（3）Payloads设置payload，配置字典</p>
-<p><img src="https://i.loli.net/2020/12/27/h3VcGn6eXlEgOUt.png" alt="image-20201227011344398"></p>
-<h4 id="暴力破解——DVWA"><a href="#暴力破解——DVWA" class="headerlink" title="暴力破解——DVWA"></a>暴力破解——DVWA</h4><p>（1）访问DVWA的地址，点击Brute Force</p>
-<p><img src="https://i.loli.net/2020/12/27/uZomrbMh7LBjIdY.png" alt="image-20201227011547962"></p>
-<p>（2）随便输入用户名，密码，浏览器开启代理后，用burp抓包</p>
-<p>（3）将抓到的包发送到Intruder模块</p>
-<p>（4）设置好目标端口，攻击方式选择Cluster bomb</p>
-<p><img src="https://i.loli.net/2020/12/27/HEwQZUdjAmqLbih.png" alt="image-20201227011758916"></p>
-<p>（5）删除$之后，进入payloads模块，添加密码本，也就是要进行暴力破解时依次验证的每个密码。</p>
-<p>（6）全部设置完后，点击star attck 开始攻击</p>
-<p>（7）在弹出的框中，寻找与其他长度不符合的payload，该payload就是最终破解出来的密码，可以点击”length”排序后快速查找。</p>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201227012152047.png" alt="image-20201227012152047"></p>
+nAttr = 6
+data = np.array([[0.40, 0.32, 0.35, 0.30, 0.30, 0.88],
+                 [0.85, 0.35, 0.30, 0.40, 0.40, 0.30],
+                 [0.43, 0.89, 0.30, 0.28, 0.22, 0.30],
+                 [0.30, 0.25, 0.48, 0.85, 0.45, 0.40],
+                 [0.20, 0.38, 0.87, 0.45, 0.32, 0.28],
+                 [0.34, 0.31, 0.38, 0.40, 0.92, 0.28]]) #数据值
+data_labels=(&#39;工程师&#39;,&#39;实验员&#39;,&#39;艺术家&#39;,&#39;推销员&#39;,&#39;社会工作者&#39;,&#39;记事员&#39;)
+angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
+data = np.concatenate((data,[data[0]]))
+angles = np.concatenate((angles,[angles[0]]))
+radar_labels = np.concatenate((radar_labels,[radar_labels[0]]))
+fig = plt.figure(facecolor=&quot;white&quot;)
+plt.subplot(111,polar=True)
+#plt.plot(angles,data,&#39;bo-&#39;, color=&#39;gray&#39;,linewidth=1,alpha=0.2)
+
+plt.plot(angles,data,&#39;o-&#39;,linewidth=1.5,alpha=0.2)
+plt.fill(angles,data,alpha=0.25)
+plt.thetagrids(angles*180/np.pi, radar_labels)
+plt.figtext(0.52,0.95,&#39;霍兰德人格分析&#39;, ha=&#39;center&#39;, size=20)
+legend=plt.legend(data_labels,loc=(0.94,0.80),labelspacing=0.1) #为当前坐标图放置图注
+plt.setp(legend.get_texts(),fontsize=&#39;small&#39;)
+plt.grid(True)
+plt.savefig(&#39;holland_radar.JPG&#39;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/18/apjLAPcXIixFnqy.png" alt="image-20210418141558700"></p>
 
       
 
@@ -418,7 +707,7 @@ show tables;         //查询mysql数据库中的表</code></pre>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -474,7 +763,7 @@ show tables;         //查询mysql数据库中的表</code></pre>
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -488,18 +777,18 @@ show tables;         //查询mysql数据库中的表</code></pre>
   
 <nav id="article-nav">
   
-    <a href="/2020/12/27/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%A9%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          SQL注入的原理与利用
+          SQL注入原理与实践进阶
         
       </div>
     </a>
   
   
-    <a href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">WEB安全基础(一)</div>
+    <a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">运用Python语言(三)-科学计算和可视化01</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -526,7 +815,7 @@ show tables;         //查询mysql数据库中的表</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">服务端脚本基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E4%B8%8E%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5"><span class="toc-number">1.1.</span> <span class="toc-text">静态网页与动态网页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.</span> <span class="toc-text">常见的服务端脚本语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">PHP语法基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E8%BE%93%E5%87%BA"><span class="toc-number">1.4.</span> <span class="toc-text">PHP输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E4%B8%8EHTML%E7%BB%93%E5%90%88"><span class="toc-number">1.5.</span> <span class="toc-text">PHP与HTML结合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E7%9A%84%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86"><span class="toc-number">1.6.</span> <span class="toc-text">PHP的表单处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8HTML%E4%B8%8A%E8%A7%A6%E5%8F%91GET%E8%AF%B7%E6%B1%82"><span class="toc-number">1.6.1.</span> <span class="toc-text">在HTML上触发GET请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GET%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">1.6.2.</span> <span class="toc-text">GET请求的处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8HTML%E4%B8%8A%E8%A7%A6%E5%8F%91POST%E8%AF%B7%E6%B1%82"><span class="toc-number">1.6.3.</span> <span class="toc-text">在HTML上触发POST请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">1.6.4.</span> <span class="toc-text">POST请求的处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">数据库与SQL基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">数据库系统基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%89%B9%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">关系型数据库系统特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL"><span class="toc-number">2.3.</span> <span class="toc-text">SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SELECT%E8%AF%AD%E5%8F%A5%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.3.1.</span> <span class="toc-text">SELECT语句——基本查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SELECT%E8%AF%AD%E5%8F%A5%E2%80%94%E2%80%94AND%E5%92%8COR%E8%BF%90%E7%AE%97"><span class="toc-number">2.3.2.</span> <span class="toc-text">SELECT语句——AND和OR运算</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">动态页面的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%90%86%E8%A7%A3%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.1.</span> <span class="toc-text">动态页面工作流程理解——数据查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F"><span class="toc-number">3.1.1.</span> <span class="toc-text">系统登录成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E5%A4%B1%E8%B4%A5"><span class="toc-number">3.1.2.</span> <span class="toc-text">系统登录失败</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%E2%80%94%E2%80%94DVWA"><span class="toc-number">3.2.</span> <span class="toc-text">动态网站搭建——DVWA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Burp%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">Burp暴力破解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Burpsuite%E6%A8%A1%E5%9D%97%E2%80%94%E2%80%94Intruder%E6%A8%A1%E5%9D%97%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">Burpsuite模块——Intruder模块详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E"><span class="toc-number">4.1.1.</span> <span class="toc-text">模块说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E2%80%94%E2%80%94DVWA"><span class="toc-number">4.1.2.</span> <span class="toc-text">暴力破解——DVWA</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#matplotlib%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">matplotlib库的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#matplotlib-pyplot%E5%BA%93%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">matplotlib.pyplot库概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matplotlib-pyplot%E5%BA%93%E8%A7%A3%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">matplotlib.pyplot库解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E7%A7%91%E5%AD%A6%E5%9D%90%E6%A0%87%E5%9B%BE%E7%BB%98%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">实例：科学坐标图绘制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E5%A4%9A%E7%BA%A7%E9%9B%B7%E8%BE%BE%E5%9B%BE%E7%BB%98%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">实例：多级雷达图绘制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%B8%80%E6%95%B0%E6%8D%AE%E9%9B%B7%E8%BE%BE%E5%9B%BE"><span class="toc-number">3.1.</span> <span class="toc-text">单一数据雷达图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%95%B0%E6%8D%AE%E9%9B%B7%E8%BE%BE%E5%9B%BE"><span class="toc-number">3.2.</span> <span class="toc-text">多数据雷达图</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

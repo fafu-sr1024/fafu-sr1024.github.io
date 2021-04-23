@@ -152,6 +152,1328 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/深入Python语言(二)-基本数据类型02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">深入Python语言(二)-基本数据类型02</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/" class="archive-article-date">
+  	<time datetime="2020-11-29T01:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="字符串类型及其操作"><a href="#字符串类型及其操作" class="headerlink" title="字符串类型及其操作"></a>字符串类型及其操作</h2><p>要点：字符串是字符的序列表示，可以通过基本的字符串操作符、内置字符串处理函数和字符串处理方法等对字符串进行操作。</p>
+<h3 id="字符串类型的表示"><a href="#字符串类型的表示" class="headerlink" title="字符串类型的表示"></a>字符串类型的表示</h3><p>（1）字符串可以由一对单引号(‘)、双引号(“)或三引号(“‘)构成。其中，单引号和双引号都可以表示单行字符串，两者作用相同。三引号可以表示单行或者多行字符串。</p>
+<table>
+<thead>
+<tr>
+<th>表示方法</th>
+<th>可行操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单引号字符串</td>
+<td>可以使用双引号作为字符串的一部分</td>
+</tr>
+<tr>
+<td>双引号字符串</td>
+<td>可以使用单引号作为字符串的一部分</td>
+</tr>
+<tr>
+<td>三引号字符串</td>
+<td>可以使用双引号、单引号，也可以换行</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; print(&#39;我爱&quot;中国&quot;这个伟大的国家&#39;)
+我爱&quot;中国&quot;这个伟大的国家
+&gt;&gt;&gt; print(&quot;她有着&#39;960万平方公里&#39;的土地&quot;)
+她有着&#39;960万平方公里&#39;的土地
+&gt;&gt;&gt; print(&#39;&#39;&#39;她还有&quot;14亿&quot;的人口
+是&#39;世界第二大经济体&#39;
+&#39;&#39;&#39;)
+她还有&quot;14亿&quot;的人口
+是&#39;世界第二大经济体&#39;
+
+&gt;&gt;&gt; </code></pre>
+<p>（2）input()函数将用户的输入内容当做一个字符串类型，print()函数可以直接打印字符串。</p>
+<pre><code class="Python">&gt;&gt;&gt;name = input(&quot;请输入名字：&quot;)
+请输入名字：Python
+&gt;&gt;&gt;print(name)
+Python</code></pre>
+<p>（3）字符串以Unicode编码存储，因此，字符串的英文字符和中文字符都算作1个字符。</p>
+<pre><code class="python">&gt;&gt;&gt; name = &quot;Python语言程序设计&quot;
+&gt;&gt;&gt; print(name[0], name[7], name[-1])
+P 言 计
+&gt;&gt;&gt; print(name[2:-4])
+thon语言
+&gt;&gt;&gt; print(name[:6])
+Python
+&gt;&gt;&gt; print(name[6:])
+语言程序设计
+&gt;&gt;&gt; print(name[:])
+Python语言程序设计</code></pre>
+<p>（4）反斜杠字符\是一个特殊字符，在字符串中表示转义，即该字符与后面相邻的一个字符共同组成了新的含义。例如，\n表示换行、\\表示反斜杠、\‘表示单引号、\“表示双引号、\t表示制表符(Tab)等。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; print(&quot;Python\n语言\t程序\t设计&quot;)
+Python
+语言    程序    设计</code></pre>
+<h3 id="基本的字符串操作符"><a href="#基本的字符串操作符" class="headerlink" title="基本的字符串操作符"></a>基本的字符串操作符</h3><p>（1）5个基本的字符串操作符</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x + y</td>
+<td align="center">连接两个字符串x与y</td>
+</tr>
+<tr>
+<td align="center">x * n 或 n * x</td>
+<td align="center">复制n次字符串x</td>
+</tr>
+<tr>
+<td align="center">x in s</td>
+<td align="center">如果x是s的子串，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">str[i]</td>
+<td align="center">索引，返回第i个字符</td>
+</tr>
+<tr>
+<td align="center">str[N:M]</td>
+<td align="center">切片，返回索引第N到第M的子串，其中不包含M</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; &quot;Python语言&quot; + &quot;程序设计&quot;
+&#39;Python语言程序设计&#39;
+&gt;&gt;&gt; name = &quot;Python语言&quot; + &quot;程序设计&quot; + &quot;基础&quot;
+&gt;&gt;&gt; name
+&#39;Python语言程序设计基础&#39;
+&gt;&gt;&gt; &quot;Python语言&quot; in name
+True
+&gt;&gt;&gt; &quot;good&quot; in name
+False
+&gt;&gt;&gt; &quot;good!&quot; * 3
+&#39;good!good!good!&#39;</code></pre>
+<p>（2）获取星期字符串，例如：输入3，返回“星期三”。</p>
+<pre><code class="python">weekstr = &quot;星期一星期二星期三星期四星期五星期六星期日&quot;
+weekid = eval(input(&quot;请输入星期数字(1-7)：&quot;))
+pos = (weekid - 1)*3
+print(weekstr[pos:pos+3])</code></pre>
+<p>运行结果：</p>
+<pre><code class="python">&gt;&gt;&gt;
+请输入星期数字(1-7)：3
+星期三</code></pre>
+<h3 id="内置的字符串处理函数"><a href="#内置的字符串处理函数" class="headerlink" title="内置的字符串处理函数"></a>内置的字符串处理函数</h3><p>（1）共6个</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">len(x)</td>
+<td align="center">返回字符串x的长度，也可返回其他组合数据类型元素个数</td>
+</tr>
+<tr>
+<td align="center">str(x)</td>
+<td align="center">返回任意类型x所对应的字符串形式</td>
+</tr>
+<tr>
+<td align="center">chr(x)</td>
+<td align="center">返回Unicode编码x对应的单字符</td>
+</tr>
+<tr>
+<td align="center">ord(x)</td>
+<td align="center">返回单字符表示的Unicode编码</td>
+</tr>
+<tr>
+<td align="center">hex(x)</td>
+<td align="center">返回整数x对应十六进制数的小写形式字符串</td>
+</tr>
+<tr>
+<td align="center">oct(x)</td>
+<td align="center">返回整数x对应八进制数的小写形式字符串</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; len(&quot;Python语言程序设计&quot;)
+12
+&gt;&gt;&gt; str(3.1415926)
+&#39;3.1415926&#39;</code></pre>
+<p>（2）Python字符串中每个字符都是用Unicode编码表示，因为相比ASCII编码，Unicode编码能支持几乎所有书写语言的字符。chr()和ord()函数用于在单字符和Unicode编码值之间进行转换。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;1 + 1 = 2 &quot; + chr(10004)
+&#39;1 + 1 = 2 ✔&#39;
+&gt;&gt;&gt; &quot;金牛座字符♉对应的Unicode值：&quot; + str(ord(&quot;♉&quot;))
+&#39;金牛座字符♉对应的Unicode值：9801&#39;</code></pre>
+<p>（3）凯撒密码，采用了替换方法，对信息中的每一个英文字符循环替换为字母表序列中该字符后面第三个字符。</p>
+<p>设明文为P,密文为C，则满足：</p>
+<pre><code class="python">加密:C = (P+3) mod 26
+解密:P = (C-3) mod 26</code></pre>
+<pre><code class="Python">#加密，使用的信息仅包含小写字母
+plaincode = input(&quot;请输入明文：&quot;)
+for p in plaincode:
+    if ord(&quot;a&quot;) &lt;= ord(p) &lt;= ord(&quot;z&quot;):
+        print(chr(ord(&quot;a&quot;) + (ord(p) - ord(&quot;a&quot;) + 3)%26), end=&#39;&#39;)
+    else:
+        print(p, end=&#39; &#39;)
+
+#解密
+plaincode = input(&quot;请输入密文：&quot;)
+for c in plaincode:
+    if ord(&quot;a&quot;) &lt;= ord(c) &lt;= ord(&quot;z&quot;):
+        print(chr(ord(&quot;a&quot;) + (ord(c) - ord(&quot;a&quot;) - 3)%26), end=&#39;&#39;)
+    else:
+        print(c, end=&#39;&#39;)</code></pre>
+<pre><code class="python">#加密结果
+&gt;&gt;&gt;
+请输入明文：python is an excellent language.
+sbwkrq  lv  dq  hafhoohqw  odqjxdjh. 
+
+#解密结果
+&gt;&gt;&gt;
+请输入密文：sbwkrq  lv  dq  hafhoohqw  odqjxdjh.
+python  is  an  excellent  language.</code></pre>
+<h3 id="内置的字符串处理方法"><a href="#内置的字符串处理方法" class="headerlink" title="内置的字符串处理方法"></a>内置的字符串处理方法</h3><p>（1）在Python解释器内部，所有数据类型都采用面向对象方式实现，封装为一个类。字符串也是一个类，具有类似&lt;a&gt;.&lt;b&gt;()形式的字符串处理函数。在面向对象中，这类函数也被称为“方法”。str为字符串</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">str.lower()</td>
+<td align="center">返回字符串str的副本，全部字符小写</td>
+</tr>
+<tr>
+<td align="center">str.upper()</td>
+<td align="center">返回字符串str的副本，全部字符大写</td>
+</tr>
+<tr>
+<td align="center">str.islower()</td>
+<td align="center">当str所有字符都是小写时，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">str.isprintable()</td>
+<td align="center">当str所有字符都是可打印的，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">str.isnumeric()</td>
+<td align="center">当str所有字符都是数字时，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">str.isspace()</td>
+<td align="center">当str所有字符都是空格时，返回True，否则返回False</td>
+</tr>
+<tr>
+<td align="center">str.split(sep=None,maxsplit=-1)</td>
+<td align="center">返回一个列表，由str根据sep被分隔的部分构成</td>
+</tr>
+<tr>
+<td align="center">str.center(width[,fillchar])</td>
+<td align="center">字符串居中函数</td>
+</tr>
+<tr>
+<td align="center">str.zfill(width)</td>
+<td align="center">返回字符串str的副本，长度为width，不足部分在左侧添0</td>
+</tr>
+</tbody></table>
+<p>（2）str.split(sep=None,maxsplit=-1)方法返回一个列表，列表是一种存储多个数据的数据类型。其中，分隔str的标识符是sep，默认分隔符为空格。若给出参数maxsplit，则只分隔前maxsplit个字符，该参数默认可不给出。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;Python is an excellent language.&quot;.split()
+[&#39;Python&#39;, &#39;is&#39;, &#39;an&#39;, &#39;excellent&#39;, &#39;language.&#39;]</code></pre>
+<p>（3）str.center(width[,fillchar])方法返回长度为width的字符串。其中，str处于新字符串中心位置，两侧用新增字符fillchar填充。当width小于字符串长度时，返回str。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;python&quot;.center(40,&#39;=&#39;)
+&#39;=================python=================&#39;</code></pre>
+<p>（4）str.zfill(width)方法返回长度为width的字符串，若字符串长度不足width，在左侧添加字符”0”。但如果str最左侧是字符”+”或者”-“，则从第二个字符左侧添加”0”。同样，若width小于字符串长度，则返回str。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;123&quot;.zfill(40)
+&#39;0000000000000000000000000000000000000123&#39;
+&gt;&gt;&gt; &quot;-123&quot;.zfill(40)
+&#39;-000000000000000000000000000000000000123&#39;</code></pre>
+<h2 id="字符串类型的格式化"><a href="#字符串类型的格式化" class="headerlink" title="字符串类型的格式化"></a>字符串类型的格式化</h2><p>（1）要点：字符串通过format()方法进行格式化处理。</p>
+<p>（2）字符串是程序向控制台、网络、文件等介质输出运算结果的主要形式之一，字符串类型的格式化有助于提供更好的可读性和灵活性。</p>
+<h3 id="format-方法的基本使用"><a href="#format-方法的基本使用" class="headerlink" title="format()方法的基本使用"></a>format()方法的基本使用</h3><p>（1）基本使用格式：&lt;模板字符串&gt;.format(&lt;逗号分隔的参数&gt;)</p>
+<p>（2）模板字符串由一系列槽组成，用来将format()方法中逗号分隔的参数按照序号关系替换到模板字符串的槽中。</p>
+<p>（3）槽用大括号{}表示。若大括号中没有序号，则按照出现顺序替换；若大括号中指定了使用参数的序号，则按照序号对应的参数替换。序号从0开始编号。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;&#125;：计算机&#123;&#125;的CPU占用率为&#123;&#125;%。&quot;.format(&quot;2020-11-30&quot;,&quot;python&quot;,&quot;10&quot;) #按出现顺序0,1，2替换
+&#39;2020-11-30：计算机python的CPU占用率为10%。&#39;</code></pre>
+<p>（4）format()方法可以连接不同类型的变量或内容。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;&#125;&#123;&#125;&#123;&#125;&quot;.format(&quot;圆周率是&quot;,3.1415926,&quot;...&quot;)
+&#39;圆周率是3.1415926...&#39;
+&gt;&gt;&gt; &quot;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&quot;.format(&quot;无理数&quot;,3.1415926,&quot;...&quot;)
+&#39;圆周率&#123;3.1415926...&#125;是无理数&#39;
+
+&gt;&gt;&gt; s=&quot;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&quot;           #大括号本身是字符串的一部分
+&gt;&gt;&gt; s
+&#39;圆周率&#123;&#123;&#123;1&#125;&#123;2&#125;&#125;&#125;是&#123;0&#125;&#39;
+&gt;&gt;&gt; s.format(&quot;无理数&quot;,3.1415926,&quot;...&quot;)  #当调用format()时解析大括号
+&#39;圆周率&#123;3.1415926...&#125;是无理数&#39;</code></pre>
+<h3 id="format-方法的格式控制"><a href="#format-方法的格式控制" class="headerlink" title="format()方法的格式控制"></a>format()方法的格式控制</h3><p>（1）format()方法中模本字符串的槽除了包括参数序号，还可以包括格式控制信息。其中，格式控制标记可以用来控制参数显示时的格式。槽内部信息如下：</p>
+<pre><code>&#123;&lt;参数信号&gt;: &lt;格式控制标记&gt;&#125;</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">格式控制标记</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">:</td>
+<td align="center">引导符号</td>
+</tr>
+<tr>
+<td align="center">&lt;填充&gt;</td>
+<td align="center">用于填充单个字符</td>
+</tr>
+<tr>
+<td align="center">&lt;对齐&gt;</td>
+<td align="center">&lt; 左对齐、&gt;右对齐、^居中对齐</td>
+</tr>
+<tr>
+<td align="center">&lt;宽度&gt;</td>
+<td align="center">槽的设定输出宽度</td>
+</tr>
+<tr>
+<td align="center">&lt;,&gt;</td>
+<td align="center">数字的千分分隔符，适用于整数和浮点数</td>
+</tr>
+<tr>
+<td align="center">&lt;.精度&gt;</td>
+<td align="center">浮点数小数部分的精度或字符串的最大输出长度</td>
+</tr>
+<tr>
+<td align="center">&lt;类型&gt;</td>
+<td align="center">整数类型b，c，d，o，x，X；浮点数类型e，E，f，%</td>
+</tr>
+</tbody></table>
+<p>（2）&lt;宽度&gt;指当前槽的设定输出字符宽度，如果该槽对应的format()参数长度比&lt;宽度&gt;大，则使用参数实际长度；若该值的实际位数小于指定宽度，则位数将被默认以空格字符补充。</p>
+<pre><code class="python">&gt;&gt;&gt;s=&quot;python&quot;
+&gt;&gt;&gt; &quot;&#123;0:30&#125;&quot;.format(s)           #默认左对齐
+&#39;python                        &#39;
+&gt;&gt;&gt; &quot;&#123;0:3&#125;&quot;.format(s)            #参数比宽度大，直接输出字符实际长度 
+&#39;python&#39;</code></pre>
+<p>（3）&lt;对齐&gt;指参数在宽度内输出时的对齐方式。&lt;填充&gt;指宽度内除了参数外的字符采用什么方式表示，默认采用空格，可以通过填充更换。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:&gt;30&#125;&quot;.format(s)             #右对齐
+&#39;                        python&#39;
+&gt;&gt;&gt; &quot;&#123;0:*^30&#125;&quot;.format(s)            #居中对齐且使用*填充
+&#39;************python************&#39;</code></pre>
+<p>（4）格式控制标记中的逗号(,)用于显示数字类型的千位分隔符。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:-^20,&#125;&quot;.format(1234567890)
+&#39;---1,234,567,890----&#39;
+&gt;&gt;&gt; &quot;&#123;0:-^20,&#125;&quot;.format(12345.67890)
+&#39;----12,345.6789-----&#39;</code></pre>
+<p>（5）&lt;.精度&gt;表示两个含义，由小数点(.)开头。对于浮点数，精度表示小数部分输出的有效位。对于字符串，精度表示最大输出长度。</p>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:.2f&#125;&quot;.format(12345.67890)
+&#39;12345.68&#39;
+&gt;&gt;&gt; &quot;&#123;0:.4&#125;&quot;.format(&quot;python&quot;)
+&#39;pyth&#39;</code></pre>
+<p>（6）&lt;类型&gt;表示输出整数和浮点数类型的格式规则。</p>
+<table>
+<thead>
+<tr>
+<th align="center">整数类型输出格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">b</td>
+<td align="center">输出整数的二进制方式</td>
+</tr>
+<tr>
+<td align="center">c</td>
+<td align="center">输出整数对应的Unicode字符</td>
+</tr>
+<tr>
+<td align="center">d</td>
+<td align="center">输出整数的十进制方式</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">输出整数的八进制方式</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">输出整数的小写十六进制方式</td>
+</tr>
+<tr>
+<td align="center">X</td>
+<td align="center">输出整数的大写十六进制方式</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:b&#125;,&#123;0:c&#125;,&#123;0:d&#125;,&#123;0:o&#125;,&#123;0:x&#125;,&#123;0:X&#125;&quot;.format(425)
+&#39;110101001,Ʃ,425,651,1a9,1A9&#39;</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">浮点数类型输出格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">e</td>
+<td align="center">输出浮点数对应的小写字母e的指数形式</td>
+</tr>
+<tr>
+<td align="center">E</td>
+<td align="center">输出浮点数对应的大写字母e的指数形式</td>
+</tr>
+<tr>
+<td align="center">f</td>
+<td align="center">输出浮点数的标准浮点形式</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">输出浮点数的百分形式</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; &quot;&#123;0:.2e&#125;,&#123;0:.2E&#125;,&#123;0:.2f&#125;,&#123;0:.2%&#125;&quot;.format(3.14)
+&#39;3.14e+00,3.14E+00,3.14,314.00%&#39;</code></pre>
+<h2 id="实例：文本进度条"><a href="#实例：文本进度条" class="headerlink" title="实例：文本进度条"></a>实例：文本进度条</h2><h3 id="非刷新文本进度条"><a href="#非刷新文本进度条" class="headerlink" title="非刷新文本进度条"></a>非刷新文本进度条</h3><p>（1）按照任务执行百分比将整个任务划分为100个单位，每执行N%输出一次进度条。每一行输出包含进度百分比，代表已完成的部分(**)和未完成的部分(..)的两种字符，以及一个跟随完成度前进的小箭头。</p>
+<p>（2）由于直接进行字符输出几乎是瞬间完成，为了便于观察，调用Python标准时间库time，使用time.sleep()函数将当前程序暂时挂起为t秒，t可以是小数。以此模拟进度条效果输出。</p>
+<pre><code class="python">import time
+scale = 10                              #scale表示输出进度条的精度，修改后会有不同的效果
+print(&quot;------执行开始------&quot;)             #print()函数在输出结尾处会自动产生一个&#39;\n&#39;，即换行符
+for i in range(scale+1):
+    a, b = &#39;**&#39; * i, &#39;..&#39; * (scale - i)
+    c = (i/scale)*100
+    print(&quot;%&#123;:^3.0f&#125;[&#123;&#125;-&gt;&#123;&#125;]&quot;.format(c, a, b))
+    time.sleep(0.1)
+print(&quot;------执行结束------&quot;)</code></pre>
+<p>（3）运行结果：</p>
+<pre><code class="python">&gt;&gt;&gt;
+------执行开始------
+% 0 [-&gt;....................]
+%10 [**-&gt;..................]
+%20 [****-&gt;................]
+%30 [******-&gt;..............]
+%40 [********-&gt;............]
+%50 [**********-&gt;..........]
+%60 [************-&gt;........]
+%70 [**************-&gt;......]
+%80 [****************-&gt;....]
+%90 [******************-&gt;..]
+%100[********************-&gt;]
+------执行结束------</code></pre>
+<h3 id="单行动态刷新"><a href="#单行动态刷新" class="headerlink" title="单行动态刷新"></a>单行动态刷新</h3><p>（1）将每一次精度输出都固定在同一行，不断用新生成的字符串覆盖之前的输出，形成单行动态刷新的效果。</p>
+<p>（2）采用print()函数，在该函数中更换参数end的默认值为’’，即每次使用print()函数输出时不换行。此时，系统输出指针还停留在上一次输出的行尾，下一次输出在字符串前部增加转义符’\r’,该转义符把输出指针移动到行首而不换行。</p>
+<pre><code class="python">import time
+for i in range(101):
+    print(&quot;\r&#123;:3&#125;%&quot;.format(i),end=&#39;&#39;)
+    time.sleep(0.05)</code></pre>
+<p>（3）运行结果：</p>
+<p><img src="https://i.loli.net/2020/11/30/YB5wiGKdHyn2LWz.png" alt="image-20201130190704002"></p>
+<p>（4）由于IDLE本身屏蔽了单行刷新功能，所以运行结果并没有出现单行刷新。若要获得刷新效果，选择到e4.2TextProgressBar.py文件所在目录，使用命令行工具cmd执行如下命令:</p>
+<pre><code>python e4.2TextProgressBar.py</code></pre>
+<p>也可使用PyCharm运行这个单行动态刷新程序，可直接看到单行刷新效果。</p>
+<p><img src="https://i.loli.net/2020/11/30/Y2vryMeVR9ZwTtF.png" alt="image-20201130192609421"></p>
+<h3 id="带刷新的文本进度条"><a href="#带刷新的文本进度条" class="headerlink" title="带刷新的文本进度条"></a>带刷新的文本进度条</h3><p>（1）在文本进度条中增加运行时间的监控。</p>
+<p>（2）这里采用time库中的time.clock()函数。time.clock()函数一般多次出现，第一次调用时计时开始，同一程序中第二次及后续调用时返回与第一次计时之间的时间差，单位为秒。该函数主要用来统计程序运行时间，增加用户体验。</p>
+<pre><code class="python">import time
+scale = 50
+print(&quot;执行开始&quot;.center(scale // 2,&#39;-&#39;))
+t = time.clock()
+for i in range(scale+1):
+    a = &#39;*&#39; * i
+    b = &#39;.&#39; * (scale-i)
+    c = (i/scale)*100
+    t = time.clock() - t
+    print(&quot;\r&#123;:^3.0f&#125;%[&#123;&#125;-&gt;&#123;&#125;]&#123;:.2f&#125;s&quot;.format(c, a, b, t), end=&#39;&#39;)
+    time.sleep(0.05)
+print(&quot;\n&quot;+&quot;执行结束&quot;.center(scale // 2,&#39;-&#39;))</code></pre>
+<p>（3）在PyCharm中运行结果：</p>
+<p><img src="https://i.loli.net/2020/11/30/nTDRXCghKbp6xHf.png" alt="image-20201130195623749"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/29/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全初级/信息收集技术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/28/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%8A%80%E6%9C%AF/">信息收集技术</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/28/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%8A%80%E6%9C%AF/" class="archive-article-date">
+  	<time datetime="2020-11-28T12:23:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><p>（1）渗透测试，是通过模拟恶意黑客的攻击方法，来评估计算机网络系统安全的一种评估方法。</p>
+<p>（2）黑客攻击模型(渗透测试思路）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">踩点</td>
+<td align="center">信息收集(前提)</td>
+</tr>
+<tr>
+<td align="center">定位</td>
+<td align="center">分析目标，寻找漏洞:系统漏洞(ms17-010)、web漏洞(sql、xss)</td>
+</tr>
+<tr>
+<td align="center">入侵</td>
+<td align="center">利用漏洞，通过工具或构造攻击代码(payload)实施攻击，获取权限(shell界面)</td>
+</tr>
+<tr>
+<td align="center">上传木马文件(留后门)或病毒</td>
+<td align="center">方便再次进入或实施破坏</td>
+</tr>
+<tr>
+<td align="center">抹去痕迹</td>
+<td align="center">清理入侵记录</td>
+</tr>
+</tbody></table>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>信息收集，俗称踩点，是渗透测试的前提，也是最重要的阶段之一。为了启动渗透测试，用户需要收集关于目标网络资产等信息。用户得到的信息越多，渗透测试成功的概率也就越高。</p>
+<h3 id="域名信息收集"><a href="#域名信息收集" class="headerlink" title="域名信息收集"></a>域名信息收集</h3><p>（1）whois协议，用来查询域名是否已经被注册，以及注册域名的详细信息的数据库(如域名所有人、域名注册商)。在线查询工具：站长之家<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></p>
+<p>（2）子域名，是顶级域名(.com、.cn、.top)的下一级，域名整体包括两个”.”或包括一个”/“。例如：百度的顶级域名为baidu.com。其下的子域名有：news.baidu.com、tieba.baidu.com、zhidao.baidu.com……收集子域名可以很大程度知道目标所拥有的网站等资产信息。</p>
+<p>（3）子域名查询在线工具：<a target="_blank" rel="noopener" href="https://phpinfo.me/domain/">https://phpinfo.me/domain/</a>。其他工具：FuzzDomain、子域名挖掘机</p>
+<h3 id="旁站C段"><a href="#旁站C段" class="headerlink" title="旁站C段"></a>旁站C段</h3><p>（1）查询旁站指某个服务器同一个IP地址的所有域名</p>
+<p>（2）查询C段指某个服务器IP地址所在C段IP地址的所有域名</p>
+<p>（3）注释：IP地址：A段.B段.C段.D段 C段查询就是ABC段相同，D段不同的IP地址下的所有域名；旁站查询是同IP地址下的所有域名。<br>例：旁站查询：192.168.193.2的所有域名，C段查询：192.168.193.0同网段下的所有域名</p>
+<p>（3）在线查询工具：<a target="_blank" rel="noopener" href="https://chapangzhan.com/">https://chapangzhan.com</a></p>
+<h3 id="征信查询"><a href="#征信查询" class="headerlink" title="征信查询"></a>征信查询</h3><p>（1）企业征信机构记录了一家企业的基本信息，历史沿革，股东及出资等信息的平台。</p>
+<p>（2）查询：<a target="_blank" rel="noopener" href="https://icredit.jd.com/">https://icredit.jd.com</a>、天眼查：<a target="_blank" rel="noopener" href="https://www.tianyancha.com/">https://www.tianyancha.com</a></p>
+<h3 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h3><p>（1）获取域名或者IP地址，并进行反向查找以快速显示同一服务器承载的所有其他域。</p>
+<p>（2）查询：Viewdns：<a target="_blank" rel="noopener" href="http://viewdns.info/">http://viewdns.info</a>、DNSdb：<a target="_blank" rel="noopener" href="https://www.dnsdb.io/">https://www.dnsdb.io</a> 也可用命令nslookup [域名]</p>
+<h3 id="IP查询"><a href="#IP查询" class="headerlink" title="IP查询"></a>IP查询</h3><p>（1）根据IP地址查询同一IP地址的其他信息</p>
+<p>（2）在线查询：114best：<a target="_blank" rel="noopener" href="http://www.114best.com/">http://www.114best.com</a></p>
+<h3 id="备案号查询"><a href="#备案号查询" class="headerlink" title="备案号查询"></a>备案号查询</h3><p>（1）备案号是网站是否合法注册经营的标志，一个网站域名要上线必然要经过备案程序，通过备案号反查可查询目标的所有合法网站。</p>
+<p>（2）在线查询：<a target="_blank" rel="noopener" href="http://icp.chinaz.com/">http://icp.chinaz.com</a></p>
+<h3 id="密码收集"><a href="#密码收集" class="headerlink" title="密码收集"></a>密码收集</h3><p>（1）gitHub是全球最大的面向开源及私有软件项目的托管平台。许多企业的开发人员在上传开源代码到github往往忽略了将密码等敏感信息删除导致信息泄露。</p>
+<p>（2）在github上搜索网站及关键字，在Code中查看。通常查看到的密码都使用了MD5加密，可用在线工具进行破解。 <a target="_blank" rel="noopener" href="https://github.com/">github.com</a></p>
+<p><img src="https://i.loli.net/2020/11/29/xUcBnq5HYrawLOJ.png" alt="image-20201129121609316"></p>
+<h3 id="Google-hacking"><a href="#Google-hacking" class="headerlink" title="Google hacking"></a>Google hacking</h3><p>（1）搜索引擎都会提供相应搜索语法，通过搜索语法可以快速得到想要的信息。</p>
+<p>（2）推荐搜索引擎：必应：bing.com、百度：baidu.com、谷歌：google.com</p>
+<p>（3）推荐语法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">语法</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Intitle:</td>
+<td align="center">搜索网站标题含有的关键字</td>
+</tr>
+<tr>
+<td align="center">Inurl:</td>
+<td align="center">搜索url含有的关键字</td>
+</tr>
+<tr>
+<td align="center">Intext:</td>
+<td align="center">搜索网页正文含有的关键字</td>
+</tr>
+<tr>
+<td align="center">Site:</td>
+<td align="center">搜索特定网站和网站域名</td>
+</tr>
+<tr>
+<td align="center">Filetype:</td>
+<td align="center">搜索特定文档格式</td>
+</tr>
+</tbody></table>
+<pre><code>intitle:&quot;index of&quot;        //搜索网站目录泄露页面
+intext:京ICP备09031924号   //备案号查询
+intext:&quot;@163.com&quot;         //邮箱搜集</code></pre>
+<p><img src="https://i.loli.net/2020/11/28/nUJAZcvkyDB7d24.png" alt="image-20201128215731922"></p>
+<p><img src="https://i.loli.net/2020/11/28/dLP9H6cIqkbnjN7.png" alt="image-20201128214905209"></p>
+<p>（4）URL采集器：快速切换搜索引擎，快速获得搜索结果</p>
+<p><img src="https://i.loli.net/2020/12/01/tH5kBC9zT7DQueR.png" alt="image-20201201223132842"></p>
+<h2 id="端口扫描技术"><a href="#端口扫描技术" class="headerlink" title="端口扫描技术"></a>端口扫描技术</h2><p>（1）端口扫描通常使用专门的端口扫描工具来进行。可以详细收集目标开放的端口、服务、应用版本、操作系统、活跃主机等多种信息。</p>
+<p>（2）端口扫描流程：</p>
+<table>
+<thead>
+<tr>
+<th align="center">扫描流程(按顺序)</th>
+<th align="center">相关操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">存活判断</td>
+<td align="center">Ping、TCP扫描、UDP扫描</td>
+</tr>
+<tr>
+<td align="center">端口扫描</td>
+<td align="center">TCP扫描、UDP扫描</td>
+</tr>
+<tr>
+<td align="center">服务识别</td>
+<td align="center">基于端口、基于banner、基于指纹</td>
+</tr>
+</tbody></table>
+<p>（3）端口探测技术，一般通过发送建立连接过程涉及的相关报文，根据返回包的情况来判断目标端口是否开放。主流的扫描方式有：利用TCP面向连接三次握手、四次挥手过程包，UDP非面向连接请求</p>
+<p>（4）服务识别技术，用于识别端口上运行的服务。识别方式有三种，实际使用通常需要相互配合使用</p>
+<table>
+<thead>
+<tr>
+<th align="center">识别方式</th>
+<th align="center">判断方式</th>
+<th align="center">准确率</th>
+<th align="center">效率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">基于端口</td>
+<td align="center">根据端口默认运行的服务进行判断</td>
+<td align="center">低</td>
+<td align="center">高</td>
+</tr>
+<tr>
+<td align="center">基于banner</td>
+<td align="center">根据访问端口获取的欢迎界面来判断</td>
+<td align="center">中</td>
+<td align="center">高</td>
+</tr>
+<tr>
+<td align="center">基于指纹</td>
+<td align="center">根据不同系统不同服务具有不同的TCP/IP协议栈来判断</td>
+<td align="center">高</td>
+<td align="center">低</td>
+</tr>
+</tbody></table>
+<p>banner：访问一个主机端口时，该端口所运行的服务有时会返回对应服务和版本号。</p>
+<p><img src="https://i.loli.net/2020/11/28/DIPsx5gLSfU2ETn.png" alt="image-20201128222945585"></p>
+<h2 id="Nmap端口扫描器"><a href="#Nmap端口扫描器" class="headerlink" title="Nmap端口扫描器"></a>Nmap端口扫描器</h2><p>（1）诸神之眼——Nmap(Network Mapper)，在网络中具有强大的信息收集能力。</p>
+<p>（2）Nmap具备主机探测、服务/版本检测、操作系统检测、网络路由跟踪、Nmap脚本引擎的功能。</p>
+<p>（3）Nmap是kali中自带的工具，命令格式：nmap [参数] IP/IP段/主机名。例如：</p>
+<pre><code>nmap -v -sS -O 10.2.2.2</code></pre>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><p>（1）Nmap TCP扫描端口选项</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-sP或-sn</td>
+<td align="center">用ping的方式判断是否有存活主机，不扫描端口(要加上掩码，例:10.10.10.0/24)</td>
+</tr>
+<tr>
+<td align="center">-sT</td>
+<td align="center">使用TCP全连接扫描，对目标主机所有端口进行完整的三次握手，如果成功建立连接，则端口是开放的。速度慢，</td>
+</tr>
+<tr>
+<td align="center">-sS</td>
+<td align="center">使用半开连接(SYN stealth)扫描，使用SYN标记位的数据包进行端口探测，收到SYN/ACK包,不再回复ACK包，则端口是开放的，收到RST/ACK包，则端口是关闭的。速度快</td>
+</tr>
+<tr>
+<td align="center">-sA</td>
+<td align="center">TCP ACK扫描使用ACK标志位数据包，若目标主机回复RST数据包，则目标端口没有被过滤(用于发现防火墙的过滤规则)</td>
+</tr>
+</tbody></table>
+<p>（2）Nmap UDP扫描端口选项：</p>
+<p>-sU    使用UDP数据包进行扫描，返回UDP报文，则端口是开放的；返回不可达则端口处于关闭或过滤状态。</p>
+<p>（3）Nmap 目标端口选项：</p>
+<pre><code>-p          //扫描指定端口(常用)
+-F          //快速扫描100个常用的端口(常用)
+-Pn         //开放的端口服务
+-r          //顺序扫描，按从小到大的顺序进行端口扫描</code></pre>
+<p>（4）Nmap 输出选项：</p>
+<pre><code>-oN       //标准输出为指定的文件,也可用导出符&#39;&gt;&#39;,例&gt; 1.txt
+-oX       //生成XML格式文件可以转换成HTML文件</code></pre>
+<p>（5）其他常用选项:</p>
+<pre><code>-sV      //检测服务端软件版本信息(常用)
+-O       //检测操作系统信息(常用)
+-Pn      //禁用nmap的主机检测功能
+-A       //探测服务版本、对操作系统进行识别、进行脚本扫描、进行路由探测</code></pre>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><pre><code>#使用TCP的SYN扫描检测baidu.com站点的服务版本，系统信息以及扫描常见100个端口
+nmap -sS -sV -O -F www.baidu.com</code></pre>
+<p><img src="https://i.loli.net/2020/11/28/mVWkoXBKMt9vAY8.png" alt="image-20201128225426693"></p>
+<pre><code>#使用UDP探测scanme.nmap.org的DNS(53),SNMP(161),NTP(123)服务
+nmap -sU -p 53,161,123 scanme.nmap.org
+
+#open   开放
+#close  关闭
+#filtered 被过滤</code></pre>
+<p><img src="https://i.loli.net/2021/01/31/SoxlKWvh6ftqMXy.png" alt="image-20210131150814806"></p>
+<pre><code>#获取IP地址段10.10.10.0/24所有在线主机
+nmap -sP 10.10.10.0/24</code></pre>
+<p><img src="https://i.loli.net/2020/11/28/euU1NCdqnDxoZ4b.png" alt="image-20201128230406623"></p>
+<pre><code>#找出192.168.100.0/24网段所有开放80端口的IP，并把结果保存到result.txt
+nmap -sT -p 80 --open 192.168.100.0/24  -oN result.txt</code></pre>
+<p><img src="https://i.loli.net/2020/11/28/KrloWijMNvsghxn.png" alt="image-20201128231811428"></p>
+<h3 id="Nmap图形化–Zenmap"><a href="#Nmap图形化–Zenmap" class="headerlink" title="Nmap图形化–Zenmap"></a>Nmap图形化–Zenmap</h3><p>Zenmap是用Python开发的nmap图形化界面，直接在kali终端中输入zenmap即可打开。使用方法：</p>
+<p>（1）输入目标主机的IP地址或域名</p>
+<p>（2）选择一种扫描方式</p>
+<p>（3）根据扫描结果，更改扫描的配置参数或扫描方式，进行再次扫描，以获得更多可利用的、有效的信息。</p>
+<p>（4）开始扫描</p>
+<p>（5）分析zenmap的扫描结果，利用有效信息进一步渗透。</p>
+<p><img src="https://i.loli.net/2020/11/28/Z7a9l8cUomfEbCr.png" alt="image-20201128232633401"></p>
+<h2 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h2><p>在黑客术语里面，”拖库“是指黑客入侵有价值的网络站点，把注册用户的资料数据库全部盗走的行为，因为谐音，也经常被称作“脱裤”，360的库带计划，奖励提交漏洞的白帽子，也是因此而得名。在取得大量的用户数据之后，黑客会通过一系列的技术手段和黑色产业链将有价值的用户数据变现，这通常也被称作“洗库”。最后黑客将得到的数据在其它网站上进行尝试登陆，叫做”撞库“，因为很多用户喜欢使用统一的用户名密码，”撞库“也可以使黑客收获颇丰。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/28/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%8A%80%E6%9C%AF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python/深入Python语言(一)-基本数据类型01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">深入Python语言(一)-基本数据类型01</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/" class="archive-article-date">
+  	<time datetime="2020-11-27T16:03:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h2><p>表示数字或数值的数据类型称为数字类型，Python语言提供3种数字类型：整数、浮点数和复数，分别对应数学中的整数、实数和复数。</p>
+<h3 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h3><p>（1）整数类型与数学中的整数概念一致，整数类型共有4种进制表示：十进制、二进制、八进制和十六进制。默认情况，整数采用十进制，其他进制需要增加引导符号。</p>
+<table>
+<thead>
+<tr>
+<th align="center">进制种类</th>
+<th align="center">引导符号</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">十进制</td>
+<td align="center">无</td>
+<td align="center">默认情况下使用</td>
+</tr>
+<tr>
+<td align="center">二进制</td>
+<td align="center">0b 或 0B</td>
+<td align="center">由0和1组成，例如：0b101,0B101</td>
+</tr>
+<tr>
+<td align="center">八进制</td>
+<td align="center">0o 或 0O</td>
+<td align="center">由字符0到7组成，例如：0o711,0O711</td>
+</tr>
+<tr>
+<td align="center">十六进制</td>
+<td align="center">0x 或 0X</td>
+<td align="center">由字符0到9、a到f、A到F组成，例如0xABC</td>
+</tr>
+</tbody></table>
+<p>（2）整数类型理论上的取值范围是负无穷到正无穷，实际上的取值范围受限于运行Python程序的计算机内存大小。除极大数的运算外，一般认为整数类型没有取值范围限制。</p>
+<p>（3）pow(x,y)函数是Python语言的一个内置函数，用来计算x的y次方。可以使用该函数来测试整数类型的取值范围。例如：</p>
+<pre><code class="python">&gt;&gt;&gt;pow(2,100)
+1267650600228229401496703205376
+&gt;&gt;&gt;pow(2,500)
+3273390607896141870013189696827599152216642046043064789483291368096133796404674554883270092325904157150886684127560071009217256545885393053328527589376</code></pre>
+<p>（4）pow()函数还可以嵌套使用</p>
+<pre><code class="python">&gt;&gt;&gt;pow(2,pow(2,15))</code></pre>
+<h3 id="浮点数类型"><a href="#浮点数类型" class="headerlink" title="浮点数类型"></a>浮点数类型</h3><p>（1）浮点数类型与数学中实数的概念一致，表示带有小数的数值。Python语言要求所有浮点数必须带有小数部分，小数部分可以是0，这样可以区分浮点数和整数类型。</p>
+<p>（2）浮点数有两种表示方法：十进制表示和科学计数法表示。</p>
+<p>科学计数法使用字母e或E作为幂的符号，以10为基数，含义如下：</p>
+<pre><code>&lt;a&gt;e&lt;b&gt; = a * pow(10,b)
+例如：
+4.3e-3 =4 .3*pow(10,-3)
+9.6E5 = 9.6*pow(10,5)     #9.6E5也可表示为9.6E+5</code></pre>
+<p>浮点数类型和整数类型由计算机的不同硬件单元执行，处理方法不同。尽管浮点数0.0与整数0值相同，但在计算机内部的表示不同。</p>
+<p>（3）Python浮点数的数值范围和小数精度受不同计算机系统的限制，sys.float_info详细列出了Python解释器所运行系统的浮点数各项参数。</p>
+<pre><code class="python">&gt;&gt;&gt;import sys    #引入sys函数库
+&gt;&gt;&gt;sys.float_info
+sys.float_info(max=1.7976931348623157e+308, max_exp=1024, max_10_exp=308, min=2.2250738585072014e-308, min_exp=-1021, min_10_exp=-307, dig=15, mant_dig=53, epsilon=2.220446049250313e-16, radix=2, rounds=1)
+&#39;&#39;&#39;
+上述输出给出了浮点数类型所能表示的最大值(max)、最小值(min)。
+科学计数法表示下：
+基数(radix)为2时最大值的幂(max_exp)
+最大值的幂(max_10_exp)
+最小值的幂(min_10_exp)
+能准确计算的浮点数最大个数(dig)
+系数(&lt;a&gt;)的最大精度(mant_dig)
+计算机所能分辨的两个相邻浮点数的最小差值(epsilon)
+&#39;&#39;&#39;
+&gt;&gt;&gt;sys.float_info.max
+1.7976931348623157e+308</code></pre>
+<p>（4）浮点数类型直接表示或科学计数法表示中的系数(&lt;a&gt;)最长可输出16个数字，浮点数运算结果中最长可输出17个数字。然而，根据sys.float_info结果，计算机只能提供15个数字(dig)的准确性，例如：</p>
+<pre><code class="python">&gt;&gt;&gt;3.1415926535897924     #17个数字
+3.1415926535897922        #17个数字，最后一位由计算机根据二进制计算结果确定
+&gt;&gt;&gt; 987654321123456.789
+987654321123456.8</code></pre>
+<p>（5）浮点数运算输出17个数字长度的结果，但是只有前15个数字是确定正确的，存在误差。因此浮点数无法进行高精度的数学运算，要获得高精度的运算结果，往往采用整数。使用整数表达浮点数的方法是高精度运算的基本方式之一。</p>
+<pre><code class="python">&gt;&gt;&gt; 3.141592653*1.234567898
+3.8785094379864535
+&gt;&gt;&gt; 3141592653*1234567898
+3878509437986453394</code></pre>
+<p>（6）扩展：Python通过标准库decimal提供了一个更精确的数字类型Decimal，并可以使用getcontext().prec参数自定义浮点数精度的位数，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; import decimal
+&gt;&gt;&gt; a = decimal.Decimal(&#39;3.141592653&#39;)
+&gt;&gt;&gt; b = decimal.Decimal(&#39;1.234567898&#39;)
+&gt;&gt;&gt; decimal.getcontext().prec = 19     #自定义精度超过19位数，仍以19位数精度输出
+&gt;&gt;&gt; a * b
+Decimal(&#39;3.878509437986453394&#39;)</code></pre>
+<h3 id="复数类型"><a href="#复数类型" class="headerlink" title="复数类型"></a>复数类型</h3><p>（1）复数可以看做是二元有序实数对(a,b)，表示为a+bj。其中，a是实数部分，简称实部；b是虚数部分，简称虚部；j表示”逆时针旋转90度”。复数是实数在二维平面空间旋转的一种表示。</p>
+<p>（2）Python语言中，复数的虚数部分通过后缀”J”或”j”来表示，例如:</p>
+<pre><code>12.3+4j    -5.6+7j     1.23e-4+5.67e+89j</code></pre>
+<p>（3）复数类型中实数部分和虚数部分的数值都是浮点类型。对于复数z，可以用z.real和z.imag分别获得它的实数部分和虚数部分，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; (1.23e-4+5.67e+89j).real
+0.000123
+&gt;&gt;&gt; (1.23e-4+5.67e+89j).imag
+5.67e+89</code></pre>
+<h2 id="数字类型的操作"><a href="#数字类型的操作" class="headerlink" title="数字类型的操作"></a>数字类型的操作</h2><p>Python解释器为数字类型提供数值运算操作符、数值运算函数、类型转换函数等操作方法</p>
+<h3 id="内置的数值运算操作符"><a href="#内置的数值运算操作符" class="headerlink" title="内置的数值运算操作符"></a>内置的数值运算操作符</h3><p>(1)内置操作符(共有9个)有Python解释器直接提供，不需要引用标准或第三方函数库。</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x + y</td>
+<td align="center">x与y之和</td>
+</tr>
+<tr>
+<td align="center">x - y</td>
+<td align="center">x与y之差</td>
+</tr>
+<tr>
+<td align="center">x * y</td>
+<td align="center">x与y之积</td>
+</tr>
+<tr>
+<td align="center">x / y</td>
+<td align="center">x与y之商</td>
+</tr>
+<tr>
+<td align="center">x // y</td>
+<td align="center">x与y之整数商，即不大于x与y之商的最大整数</td>
+</tr>
+<tr>
+<td align="center">x % y</td>
+<td align="center">x与y之商的余数，也称为模运算</td>
+</tr>
+<tr>
+<td align="center">-x</td>
+<td align="center">x的负值，即x*(-1)</td>
+</tr>
+<tr>
+<td align="center">+x</td>
+<td align="center">x本身</td>
+</tr>
+<tr>
+<td align="center">x ** y</td>
+<td align="center">x的y次幂</td>
+</tr>
+</tbody></table>
+<p>(2)操作符的运算结果可能改变数字类型，所产生的的结果是”更宽”的类型，基本规则如下：</p>
+<pre><code class="python">#整数之间运算，若数学意义上的结果是小数，结果是浮点数
+#整数之间运算，若数学意义上的结果是整数，结果是整数
+#整数和浮点数混合运算，输出结果是浮点数
+#整数或浮点数与复数运算，输出结果是复数
+&gt;&gt;&gt;100 / 3
+33.333333333333336
+&gt;&gt;&gt; 100 // 3
+33
+&gt;&gt;&gt; 123 + 4.0
+127.0
+&gt;&gt;&gt; 10.0 - 1 + 2j   #等价于(10.0 - 1) + 2j
+(9+2j)</code></pre>
+<p>（3）增强赋值操作符(+=、-=、*=、/=、%=、**=)。若用op表示这些二元数学操作符，则下面的赋值操作等价。注意，二元操作符之间没有空格：</p>
+<pre><code>x op= y
+等价于
+x = x op y</code></pre>
+<h3 id="内置的数值运算函数"><a href="#内置的数值运算函数" class="headerlink" title="内置的数值运算函数"></a>内置的数值运算函数</h3><table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">abs(x)</td>
+<td align="center">x的绝对值</td>
+</tr>
+<tr>
+<td align="center">divmod(x,y)</td>
+<td align="center">(x//y,x%y)，输出为二元组形式(也称元组类型)</td>
+</tr>
+<tr>
+<td align="center">pow(x,y[,z])</td>
+<td align="center">(x**y)%z,其中参数z是可选的。使用z时，模运算与幂运算同时进行，速度很快</td>
+</tr>
+<tr>
+<td align="center">round(x,[,ndigits])</td>
+<td align="center">对x四舍五入，保留ndigits为小数。round()返回四舍五入的整数值</td>
+</tr>
+<tr>
+<td align="center">max(x1,x2,…,xn)</td>
+<td align="center">x1,x2,…,xn的最大值，n没有限定</td>
+</tr>
+<tr>
+<td align="center">min(x1,x2,…,xn)</td>
+<td align="center">x1,x2,…,xn的最小值，n没有限定</td>
+</tr>
+</tbody></table>
+<p>注：abs()可以计算复数的绝对值。因此，复数的绝对值是二维坐标系中复数位置到坐标原点的长度，例如：</p>
+<pre><code class="python">&gt;&gt;&gt;abs(-3+4j)
+5.0</code></pre>
+<h3 id="内置的数字类型转换函数"><a href="#内置的数字类型转换函数" class="headerlink" title="内置的数字类型转换函数"></a>内置的数字类型转换函数</h3><p>浮点数类型转换为整数类型时，小数部分会被舍弃。复数不能直接转换为其他数字类型，可以通过.real和.imag将复数的实部或虚部分别转换。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">int(x)</td>
+<td align="center">将x转换为整数，x可以是浮点数或字符串</td>
+</tr>
+<tr>
+<td align="center">float(x)</td>
+<td align="center">将x转换为浮点数，x可以是整数或字符串</td>
+</tr>
+<tr>
+<td align="center">complex(re[,im])</td>
+<td align="center">生成一个复数，实部为re，虚部为im。re可以是整数、浮点数或字符串，im可以是整数或浮点数，但不能为字符串</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; int(10.99)
+10
+&gt;&gt;&gt; complex(10.99)
+(10.99+0j)
+&gt;&gt;&gt; float(10 + 99j)          #复数不能直接转换，解释器会报错
+Traceback (most recent call last):
+  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
+    float(10 + 99j)
+TypeError: can&#39;t convert complex to float
+&gt;&gt;&gt; float((10 + 99j).imag)     #转换后的虚数部分为99
+99.0</code></pre>
+<h2 id="math库的使用"><a href="#math库的使用" class="headerlink" title="math库的使用"></a>math库的使用</h2><h3 id="math库概述"><a href="#math库概述" class="headerlink" title="math库概述"></a>math库概述</h3><p>（1）利用函数库编程是Python语言的重要特点，这些库分为Python环境中默认支持的函数库，以及第三方提供需要进行安装的函数库。其中，默认支持的函数库也叫标准函数库或内置函数库。</p>
+<p>（2）math库是内置函数库，仅支持整数和浮点数运算，不支持复数类型。</p>
+<p>（3）引入形式：</p>
+<pre><code class="Python">import math                #对math库中函数采用math.&lt;b&gt;()形式使用
+from math import &lt;函数名&gt;   #采用&lt;函数名&gt;()形式使用
+from math import *         #math库中所有函数都可以采用&lt;函数名&gt;()形式使用</code></pre>
+<h3 id="math库解析"><a href="#math库解析" class="headerlink" title="math库解析"></a>math库解析</h3><p>（1）4个数学常数</p>
+<table>
+<thead>
+<tr>
+<th align="center">常数</th>
+<th align="center">数学表示</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.pi</td>
+<td align="center">π</td>
+<td align="center">圆周率，值为3.141 592 653 589 793</td>
+</tr>
+<tr>
+<td align="center">math.e</td>
+<td align="center">e</td>
+<td align="center">自然对数，值为2.718 281 828 459 045</td>
+</tr>
+<tr>
+<td align="center">math.inf</td>
+<td align="center">∞</td>
+<td align="center">正无穷大，负无穷大为-math.inf</td>
+</tr>
+<tr>
+<td align="center">math.nan</td>
+<td align="center"></td>
+<td align="center">非浮点数标记，NaN(not a number)</td>
+</tr>
+</tbody></table>
+<p>（2）16个数值表示函数，这里只列出比较常用的</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">数学表示</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.fabs(x)</td>
+<td align="center">|x|</td>
+<td align="center">返回x的绝对值</td>
+</tr>
+<tr>
+<td align="center">math.fmod(x)</td>
+<td align="center">x%y</td>
+<td align="center">返回x与y的模</td>
+</tr>
+<tr>
+<td align="center">math.fsum([x,y,…])</td>
+<td align="center">x+y+…</td>
+<td align="center">浮点数精确求和</td>
+</tr>
+<tr>
+<td align="center">math.ceil(x)</td>
+<td align="center"></td>
+<td align="center">向上取整，返回不小于x的最小整数</td>
+</tr>
+<tr>
+<td align="center">math.floor(x)</td>
+<td align="center"></td>
+<td align="center">向下取整，返回不大于x的最大整数</td>
+</tr>
+<tr>
+<td align="center">math.factorial(x)</td>
+<td align="center">x!</td>
+<td align="center">返回x的阶乘，若x为小数或负数，返回ValueError</td>
+</tr>
+<tr>
+<td align="center">math.gcd(a,b)</td>
+<td align="center"></td>
+<td align="center">返回a与b的最大公约数</td>
+</tr>
+<tr>
+<td align="center">math.modf(x)</td>
+<td align="center"></td>
+<td align="center">返回x的小数和整数部分</td>
+</tr>
+<tr>
+<td align="center">math.trunc(x)</td>
+<td align="center"></td>
+<td align="center">返回x的整数部分</td>
+</tr>
+<tr>
+<td align="center">math.isclose(a,b)</td>
+<td align="center"></td>
+<td align="center">比较a和b的相似性，返回True或False</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; 0.1 + 0.2 + 0.3
+0.6000000000000001
+&gt;&gt;&gt; import math
+&gt;&gt;&gt; math.fsum([0.1, 0.2, 0.3])
+0.6</code></pre>
+<p>在涉及浮点数运算及结果比较时，建议采用math库提供的函数，而不直接使用Python提供的运算符，以避免精度尾数带来的影响</p>
+<p>（3）8个幂对函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.pow(x,y)</td>
+<td align="center">返回x的y次幂</td>
+</tr>
+<tr>
+<td align="center">math.exp(x)</td>
+<td align="center">返回e的x次幂，e是自然对数</td>
+</tr>
+<tr>
+<td align="center">math.sqrt(x)</td>
+<td align="center">返回x的平方根</td>
+</tr>
+<tr>
+<td align="center">math.log(x[,base])</td>
+<td align="center">返回x的对数值，只输入x时，底数为e，即lnx</td>
+</tr>
+<tr>
+<td align="center">math.log2(x)</td>
+<td align="center">返回x的2对数值</td>
+</tr>
+<tr>
+<td align="center">math.log10(x)</td>
+<td align="center">返回x的10对数值</td>
+</tr>
+<tr>
+<td align="center">math.log1p(x)</td>
+<td align="center">返回1+x的自然对数值，ln(1+x)</td>
+</tr>
+<tr>
+<td align="center">math.expml(x)</td>
+<td align="center">返回e的x次幂减1</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt;math.pow(10, 1/3)
+2.154434690031884</code></pre>
+<p>（4）16个三角运算函数，这里只列出部分函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">数学表示</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">math.degrees(x)</td>
+<td align="center"></td>
+<td align="center">角度x的弧度值转角度值</td>
+</tr>
+<tr>
+<td align="center">math.radians(x)</td>
+<td align="center"></td>
+<td align="center">角度x的角度值转弧度值</td>
+</tr>
+<tr>
+<td align="center">math.hypot(x,y)</td>
+<td align="center"></td>
+<td align="center">返回(x,y)坐标到原点(0,0)的距离，联想勾股定理</td>
+</tr>
+<tr>
+<td align="center">math.sin(x)</td>
+<td align="center">sinx</td>
+<td align="center">返回x的正弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.cos(x)</td>
+<td align="center">cosx</td>
+<td align="center">返回x的余弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.tan(x)</td>
+<td align="center">tanx</td>
+<td align="center">返回x的正切函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.asin(x)</td>
+<td align="center">arcsinx</td>
+<td align="center">返回x的反正弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.acos(x)</td>
+<td align="center">arccosx</td>
+<td align="center">返回x的反余弦函数值，x是弧度值</td>
+</tr>
+<tr>
+<td align="center">math.atan(x)</td>
+<td align="center">arctanx</td>
+<td align="center">返回x的反正切函数值，x是弧度值</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; math.atan(1)*4      #arctan1的值是π/4
+3.141592653589793</code></pre>
+<h2 id="天天向上的力量"><a href="#天天向上的力量" class="headerlink" title="天天向上的力量"></a>天天向上的力量</h2><p>（1）一年365天，初始能力值为1.0，好好学习相比前一天提高0.1%，没有学习则相比前一天下降0.1%。分别计算一年下来，每天努力和每天放任的能力值。天天向上的力量是(1+0.001)的365次方，放任的力量是(1-0.001)的365次方。</p>
+<pre><code class="Python">import math
+dayup = math.pow((1.0 + 0.001), 365)   #提高0.1%
+daydown = math.pow((1.0-0.001), 365)   #放任0.1%
+print(&quot;向上：&#123;:.2f&#125;，向下：&#123;:.2f&#125;。&quot;.format(dayup, daydown))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上：1.44，向下：0.69。</code></pre>
+<p>可见，每天提高0.1%，一年将提高44%。</p>
+<p>（2）若学习时每天提高0.5%，放任时下降0.5%。</p>
+<pre><code class="python">import math
+dayup = math.pow((1.0 + 0.005), 365)   #提高0.5%
+daydown = math.pow((1.0-0.005), 365)   #放任0.5%
+print(&quot;向上：&#123;:.2f&#125;，向下：&#123;:.2f&#125;。&quot;.format(dayup, daydown))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上：6.17，向下：0.16。</code></pre>
+<p>每天努力0.5%，一年将提高6倍。</p>
+<p>（3）上面的两个代码中，0.1%、0.5%，这个每天努力的因素根据需求的不同而不断变化。因此，可以用一个变量dayfactor来表示，这样每次只需要修改这个变量值即可。新代码如下：</p>
+<pre><code class="python">import math
+dayfactor = 0.01
+dayup = math.pow((1.0 + dayfactor), 365)     #提高1%
+daydown = math.pow((1.0-dayfactor), 365)     #放任1%
+print(&quot;向上：&#123;:.2f&#125;，向下：&#123;:.2f&#125;。&quot;.format(dayup, daydown))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上：37.78，向下：0.03。</code></pre>
+<p>每天努力1%，一年将提高37倍。</p>
+<p>（4）每天努力提高1%，放任下降1%。一周努力5天，放任2天。</p>
+<pre><code class="python">dayup, dayfactor = 1.0, 0.01
+for i in range(365):
+    if (i % 7) in [6, 0]:
+        dayup = dayup * (1 - dayfactor)
+    else:
+        dayup = dayup * (1 + dayfactor)
+print(&quot;向上5天向下2天的力量：&#123;:.2f&#125;。&quot;.format(dayup))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+向上5天向下2天的力量：4.63。</code></pre>
+<p>可得，每周努力5天，休息2天，一年仅提高4倍，比起每天坚持所提高的37倍相去甚远。</p>
+<p>（5）同样每周努力5天，休息2天，那么每天需要努力多少才能与天天学习的效果一样。</p>
+<pre><code class="python">def dayUP(df):
+    dayup = 1.0
+    for i in range(365):
+        if (i % 7) in [6, 0]:
+            dayup = dayup * (1-0.01)
+        else:
+            dayup = dayup * (1+df)
+    return dayup                   #保留字return返回dayUP()的运行结果
+dayfactor = 0.01
+while (dayUP(dayfactor) &lt; 37.78):
+    dayfactor += 0.001
+print(&quot;每天的努力参数是：&#123;:.3f&#125;。&quot;.format(dayfactor))</code></pre>
+<pre><code class="python">&gt;&gt;&gt;
+每天的努力参数是：0.019。</code></pre>
+<p>所以每天要努力1.9%才能达到和天天坚持一样的效果。这就是天天向上的力量！</p>
+<p><strong>学习如逆水行舟，不进则退。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/28/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/初识Python语言(三)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1492,334 +2814,6 @@ tar zxvf file.tar.tgz      //解压</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/11/16/kali/kali%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/kali下root用户的配色问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">kali下root用户的配色问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-11-15T15:46:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>（1）在该文件夹中粘贴颜色配置：vim /root/.bashrc</p>
-<pre><code class="javascript">vim /root/.bashrc</code></pre>
-<p>（2）粘贴内容如下：</p>
-<pre><code class="javascript"># set variable identifying the chroot you work in (used in the prompt below)
-if [ -z &quot;$&#123;debian_chroot:-&#125;&quot; ] &amp;&amp; [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we &quot;want&quot; color)
-case &quot;$TERM&quot; in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n &quot;$force_color_prompt&quot; ]; then
-    if [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; then
-    # We have color support; assume it&#39;s compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-    else
-    color_prompt=
-    fi
-fi
-
-if [ &quot;$color_prompt&quot; = yes ]; then
-    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;
-else
-    PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h:\w\$ &#39;
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case &quot;$TERM&quot; in
-xterm*|rxvt*)
-    PS1=&quot;\[\e]0;$&#123;debian_chroot:+($debian_chroot)&#125;\u@\h: \w\a\]$PS1&quot;
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors &amp;&amp; eval &quot;$(dircolors -b ~/.dircolors)&quot; || eval &quot;$(dircolors -b)&quot;
-    alias ls=&#39;ls --color=auto&#39;
-    #alias dir=&#39;dir --color=auto&#39;
-    #alias vdir=&#39;vdir --color=auto&#39;
-
-    #alias grep=&#39;grep --color=auto&#39;
-    #alias fgrep=&#39;fgrep --color=auto&#39;
-    #alias egrep=&#39;egrep --color=auto&#39;
-fi
-
-# some more ls aliases
-#alias ll=&#39;ls -l&#39;
-#alias la=&#39;ls -A&#39;
-#alias l=&#39;ls -CF&#39;
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don&#39;t need to enable
-# this, if it&#39;s already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi</code></pre>
-<p>（3）执行命令source /root/.bashrc即可</p>
-<pre><code class="javascript">source /root/.bashrc</code></pre>
-<p>（4）配置前：</p>
-<p><img src="https://i.loli.net/2020/11/15/kmhGaFQ2cq5uB7O.png" alt="image-20201115235207538"></p>
-<p>（5）配置后：</p>
-<p><img src="https://i.loli.net/2020/11/15/QBd9eWJRlyckqts.png" alt="image-20201115235233882"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/kali/kali%E4%B8%8Broot%E7%94%A8%E6%88%B7%E7%9A%84%E9%85%8D%E8%89%B2%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kali/安装kali后修改系统时间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">安装kali后修改系统时间</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/" class="archive-article-date">
-  	<time datetime="2020-11-15T15:25:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>（1）tzselect命令执行</p>
-<pre><code>tzselect</code></pre>
-<p><img src="https://i.loli.net/2020/11/15/obZ6UA8tWxnidGH.png" alt="image-20201115232743756"></p>
-<p>（2）依次选择Asia - China - Beijing Time - Yes，只要输入选项前面的数字即可。</p>
-<p><img src="https://i.loli.net/2020/11/15/QfUEhtYTjOB1GZp.png" alt="image-20201115233034860"></p>
-<p>（3）修改配置文件，修改时区，输入以下命令</p>
-<pre><code>echo &quot;ZONE=Asia/Shanghai&quot; &gt;&gt; /etc/sysconfig
-rm -f /etc/localtime             
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime    //链接到上海时区文件  </code></pre>
-<p>（4）执行完毕后重启，即可看到系统修改时间已完成</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">kali</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/kali/%E5%AE%89%E8%A3%85kali%E5%90%8E%E4%BF%AE%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-BugkuCTF/BugkuCTF_Misc-006" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/">BugkuCTF_Misc_006</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/" class="archive-article-date">
-  	<time datetime="2020-11-15T09:10:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="听首音乐"><a href="#听首音乐" class="headerlink" title="听首音乐"></a>听首音乐</h2><p>（1）下载附件，是一个音频文件，用audacity工具打开<br><img src="https://img-blog.csdnimg.cn/20201114181337328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）波形图上有些东西，Ctrl+鼠标滚轮，放大，是莫尔斯电码<br><img src="https://img-blog.csdnimg.cn/20201114181702980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）得到….. -… -.-. —-. ..— ….. -…. ….- —-. -.-. -… —– .—- —.. —.. ..-. ….. ..— . -…. .—- –… -.. –… —– —-. ..— —-. .—- —-. .—- -.-.用在线工具解码，得到flag为5BC925649CB0188F52E617D70929191C，这里注意字母为大写，直接提交就可以。<br><img src="https://img-blog.csdnimg.cn/20201114181823245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-006/">展开全文 >></a>
         </p>
       
 

