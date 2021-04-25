@@ -172,7 +172,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
+        <h2 id="MSSQL数据库注入的利用"><a href="#MSSQL数据库注入的利用" class="headerlink" title="MSSQL数据库注入的利用"></a>MSSQL数据库注入的利用</h2><h3 id="MSSQL内置函数"><a href="#MSSQL内置函数" class="headerlink" title="MSSQL内置函数"></a>MSSQL内置函数</h3><p>（1）host_name() ：返回服务器端计算机名称</p>
+<p>（2）db_name () ：返回当前数据库的名称</p>
+<p>（3）current_user：返回当前数据库的用户名</p>
+<p>（4）subString (string,m,n) ：字符串截取函数，截取从第m个字符到第n个字符</p>
+<p>（5）CHAR() ：ascii转字符函数</p>
+<p>（6）@@version：查看数据库版本</p>
+<p>（7）ISNULL(NULL,m) ：判断查询是否带有NULL，有则用m替换</p>
+<pre><code class="sql">select ISNULL(db_name(),0)    -- 若当前数据库为dvwa，查询结果为dvwa
+select ISNULL(NULL,123)    -- 查询结果为123</code></pre>
+<p>（8）CAST(a as type) 字符类型转换，将a装换为type类型，如果转换失败会将a结果显示在页面上</p>
+<p>（9）object_id() 根据表名返回数据库表名ID</p>
+<p>（10）object_name() 根据ID返回数据库表名</p>
+<p>（11）col_name ( object_id , column_id )函数 ：返回指定表中指定字段（列）的名称</p>
+<h3 id="内置系统表"><a href="#内置系统表" class="headerlink" title="内置系统表"></a>内置系统表</h3><p>（1）sysdatabases表：该表只保存在master数据库中，这个表中保存的是所有的库名,以及库的ID，和一些相关信息。</p>
+<p>name列存放着数据库名。</p>
+<pre><code class="sql">select name from master..sysdatabases;
+select name from master.dbo.sysdatabases;</code></pre>
+<p>（2）</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
 <p>PHP连接MySQL数据库、MSSQL数据库流程一致</p>
 <pre><code>mysqli_connect mysqli_query mysqli_fetch_array
 mssqli_connect mssqli_query mssqli_fetch_array</code></pre>

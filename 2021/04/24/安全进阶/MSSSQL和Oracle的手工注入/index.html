@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>MSSSQL和Oracle的手工注入 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="课堂笔记MSSQL（Microsoft SQL) &#x3D; SQL server PHP连接MySQL数据库、MSSQL数据库流程一致 mysqli_connect mysqli_query mysqli_fetch_array mssqli_connect mssqli_query mssqli_fetch_array 注入的关键在于是否有一个数据库或者表存放了数据库名称、表名称、字段名称。 其他数据">
+  <meta name="description" content="MSSQL数据库注入的利用MSSQL内置函数（1）host_name() ：返回服务器端计算机名称 （2）db_name () ：返回当前数据库的名称 （3）current_user：返回当前数据库的用户名 （4）subString (string,m,n) ：字符串截取函数，截取从第m个字符到第n个字符 （5）CHAR() ：ascii转字符函数 （6）@@version：查看数据库版本 （7）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MSSSQL和Oracle的手工注入">
 <meta property="og:url" content="http://example.com/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="课堂笔记MSSQL（Microsoft SQL) &#x3D; SQL server PHP连接MySQL数据库、MSSQL数据库流程一致 mysqli_connect mysqli_query mysqli_fetch_array mssqli_connect mssqli_query mssqli_fetch_array 注入的关键在于是否有一个数据库或者表存放了数据库名称、表名称、字段名称。 其他数据">
+<meta property="og:description" content="MSSQL数据库注入的利用MSSQL内置函数（1）host_name() ：返回服务器端计算机名称 （2）db_name () ：返回当前数据库的名称 （3）current_user：返回当前数据库的用户名 （4）subString (string,m,n) ：字符串截取函数，截取从第m个字符到第n个字符 （5）CHAR() ：ascii转字符函数 （6）@@version：查看数据库版本 （7）">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-24T01:45:05.000Z">
-<meta property="article:modified_time" content="2021-04-24T09:08:52.966Z">
+<meta property="article:modified_time" content="2021-04-25T14:43:24.530Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
+        <h2 id="MSSQL数据库注入的利用"><a href="#MSSQL数据库注入的利用" class="headerlink" title="MSSQL数据库注入的利用"></a>MSSQL数据库注入的利用</h2><h3 id="MSSQL内置函数"><a href="#MSSQL内置函数" class="headerlink" title="MSSQL内置函数"></a>MSSQL内置函数</h3><p>（1）host_name() ：返回服务器端计算机名称</p>
+<p>（2）db_name () ：返回当前数据库的名称</p>
+<p>（3）current_user：返回当前数据库的用户名</p>
+<p>（4）subString (string,m,n) ：字符串截取函数，截取从第m个字符到第n个字符</p>
+<p>（5）CHAR() ：ascii转字符函数</p>
+<p>（6）@@version：查看数据库版本</p>
+<p>（7）ISNULL(NULL,m) ：判断查询是否带有NULL，有则用m替换</p>
+<pre><code class="sql">select ISNULL(db_name(),0)    -- 若当前数据库为dvwa，查询结果为dvwa
+select ISNULL(NULL,123)    -- 查询结果为123</code></pre>
+<p>（8）CAST(a as type) 字符类型转换，将a装换为type类型，如果转换失败会将a结果显示在页面上</p>
+<p>（9）object_id() 根据表名返回数据库表名ID</p>
+<p>（10）object_name() 根据ID返回数据库表名</p>
+<p>（11）col_name ( object_id , column_id )函数 ：返回指定表中指定字段（列）的名称</p>
+<h3 id="内置系统表"><a href="#内置系统表" class="headerlink" title="内置系统表"></a>内置系统表</h3><p>（1）sysdatabases表：该表只保存在master数据库中，这个表中保存的是所有的库名,以及库的ID，和一些相关信息。</p>
+<p>name列存放着数据库名。</p>
+<pre><code class="sql">select name from master..sysdatabases;
+select name from master.dbo.sysdatabases;</code></pre>
+<p>（2）</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
 <p>PHP连接MySQL数据库、MSSQL数据库流程一致</p>
 <pre><code>mysqli_connect mysqli_query mysqli_fetch_array
 mssqli_connect mssqli_query mssqli_fetch_array</code></pre>
@@ -387,7 +405,7 @@ select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">课堂笔记</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MSSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">MSSQL数据库注入的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MSSQL%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">MSSQL内置函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E7%B3%BB%E7%BB%9F%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">内置系统表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">2.</span> <span class="toc-text">扩展</span></a></li></ol>
                     </div>
                 </span>
             </div>
