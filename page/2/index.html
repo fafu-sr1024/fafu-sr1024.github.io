@@ -152,6 +152,186 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/Linux下进行Python3的pip换源操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">Linux下进行Python3的pip换源操作</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  	<time datetime="2021-04-05T04:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1）sudo apt install python3-pip</p>
+<p>（2）python3 -V #查看Python3的版本</p>
+<p>（3）pip3 -V #查看pip3的版本</p>
+<p>（4）sudo python3 -m pip install –upgrade pip #升级pip版本，pip3版本大于10可忽略此步骤</p>
+<ul>
+<li>若该命令执行失败，可以在resolv配置文件中增加nameserevr后再次执行。</li>
+</ul>
+<pre><code>sudo vim /etc/resolv.conf
+nameserver 8.8.8.8</code></pre>
+<p>（5）pip3 config set global.index-url 源链接 #若pip3版本大于10，则可使用这条命令进行换源，无需进行其它新建文件操作</p>
+<p>（6）pip3 install 库名称 #换源成功后下载第三方库</p>
+<p>（7）国内源地址</p>
+<pre><code>清华大学 https：//pypi.tuna.tsinghua.edu.cn/simple/ 
+阿里云 http：//mirrors.aliyun.com/pypi/simple/ 
+中国科技大学 https：//pypi.mirrors.ustc.edu.cn/simple/ 
+豆瓣(douban) http：//pypi.douban.com/simple/ 
+中国科学技术大学 http：//pypi.mirrors.ustc.edu.cn/simple/</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-deepin/deepin下进行Python3的pip换源操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">deepin下进行Python3的pip换源操作</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  	<time datetime="2021-04-05T04:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1）sudo apt install python3-pip</p>
+<p>（2）python3 -V #查看Python3的版本</p>
+<p>（3）pip3 -V #查看pip3的版本</p>
+<p>（4）sudo python3 -m pip install –upgrade pip #升级pip版本，pip3版本大于10可忽略此步骤</p>
+<ul>
+<li>若该命令执行失败，可以在resolv配置文件中增加nameserevr后再次执行。</li>
+</ul>
+<pre><code>sudo vim /etc/resolv.conf
+nameserver 8.8.8.8</code></pre>
+<p>（5）pip3 config set global.index-url 源链接 #若pip3版本大于10，则可使用这条命令进行换源，无需进行其它新建文件操作</p>
+<p>（6）pip3 install 库名称 #换源成功后下载第三方库</p>
+<p>（7）国内源地址</p>
+<pre><code>清华大学 https：//pypi.tuna.tsinghua.edu.cn/simple/ 
+阿里云 http：//mirrors.aliyun.com/pypi/simple/ 
+中国科技大学 https：//pypi.mirrors.ustc.edu.cn/simple/ 
+豆瓣(douban) http：//pypi.douban.com/simple/ 
+中国科学技术大学 http：//pypi.mirrors.ustc.edu.cn/simple/</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/深入Python语言(十)-文件和数据格式化02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -5025,290 +5205,9 @@ True
 
 
   
-    <article id="post-安全初级/WEB漏洞扫描与渗透测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">WEB漏洞扫描与渗透测试</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2021-02-01T03:36:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="WEB漏洞扫描器AWVS"><a href="#WEB漏洞扫描器AWVS" class="headerlink" title="WEB漏洞扫描器AWVS"></a>WEB漏洞扫描器AWVS</h2><p>AWVS（Acunetix Web Vulnerability Scanner）自动化的Web漏洞扫描器，审查漏洞如SQL注入，XSS跨站脚本攻击等其他能被黑客利用存在漏洞的网页应用。</p>
-<p>AWVS的使用步骤：</p>
-<p>①　打开浏览器访问：<a href="https://localhost:3443（其中localhost可为存在AWVS工具的主机IP）">https://localhost:3443（其中localhost可为存在AWVS工具的主机IP）</a></p>
-<p>②　在Targets栏，创建一个新的扫描目标</p>
-<p>③　填写目标地址和扫描描述并点击创建目标</p>
-<p>④　若无需登录扫描，则下一步点击scan开始扫描</p>
-<p>⑤　选择扫描类型和报告类型，一般选择Full Scan和Affected Items</p>
-<p>⑥　点击Create Scan开始进行扫描</p>
-<p>⑦　可以在Scans模块查看扫描进度，和漏洞信息</p>
-<p>⑧　在Reports，可以将扫描结果导出成PDF或者HTML格式的报告</p>
-<h2 id="WEB漏洞扫描与验证"><a href="#WEB漏洞扫描与验证" class="headerlink" title="WEB漏洞扫描与验证"></a>WEB漏洞扫描与验证</h2><h3 id="漏洞验证的基本流程："><a href="#漏洞验证的基本流程：" class="headerlink" title="漏洞验证的基本流程："></a>漏洞验证的基本流程：</h3><p>一般步骤是：先提取关键信息–&gt;验证漏洞是否存在–&gt;判断漏洞危害性–&gt;重新记录整理报告</p>
-<p>每个步骤所需要做到的：</p>
-<table>
-<thead>
-<tr>
-<th align="center">提取关键信息</th>
-<th align="center">验证漏洞是否存在</th>
-<th align="center">判断漏洞危害性</th>
-<th align="center">漏洞记录</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">漏洞类型</td>
-<td align="center">存在</td>
-<td align="center">高风险</td>
-<td align="center">基本信息</td>
-</tr>
-<tr>
-<td align="center">漏洞位置</td>
-<td align="center">不存在</td>
-<td align="center">中风险</td>
-<td align="center">验证过程</td>
-</tr>
-<tr>
-<td align="center">漏洞判断依据</td>
-<td align="center"></td>
-<td align="center">低风险</td>
-<td align="center">解决方案</td>
-</tr>
-</tbody></table>
-<h3 id="解读漏洞报告"><a href="#解读漏洞报告" class="headerlink" title="解读漏洞报告"></a>解读漏洞报告</h3><ul>
-<li>漏洞名称：漏洞的名称，通常包括了漏洞的具体类型</li>
-<li>风险等级：描述漏洞的风险等级</li>
-<li>漏洞描述：描述漏洞的基本概念、原理、产生原因等</li>
-<li>漏洞详情：通常包括漏洞的URL、关键参数、漏洞验证payload以及漏洞判断依据等，部分扫描还会提供验证漏洞的请求包和响应包等信息</li>
-<li>漏洞危害：描述漏洞可能会产生什么样的危害</li>
-<li>修复建议：如何修复漏洞的建议</li>
-<li>参考资料：包括补充说明、参考链接等，对于一些组件漏洞通常包含CVE编号或厂家的漏洞说明等</li>
-</ul>
-<h3 id="漏洞记录编写"><a href="#漏洞记录编写" class="headerlink" title="漏洞记录编写"></a>漏洞记录编写</h3><p>主要分为：</p>
-<p>①　漏洞记录表：记录漏洞的类型、风险等级、漏洞描述、漏洞该位置和修复建议信息</p>
-<p>②　漏洞验证过程记录：主要包含验证过程使用的关键payload，详细的漏洞复现步骤，并配有图文描述。</p>
-<h2 id="WEB渗透思路"><a href="#WEB渗透思路" class="headerlink" title="WEB渗透思路"></a>WEB渗透思路</h2><p>WEB应用渗透的目标：通过webshell控制服务器，这个过程通常被称为Getshell</p>
-<p>常见的Getshell过程：</p>
-<p>(1) 漏洞扫描：通过扫描器发现网站存在的漏洞，重点关注SQL注入、命令执行、文件上传等漏洞。</p>
-<p>(2) 后台发现：通过搜索引擎或扫描器发现网站后台登录页面或敏感文件。</p>
-<p>(3) 后台登录：通过SQL注入、暴力破解、敏感文件下载等方式登录网站后台。</p>
-<p>(4) 文件上传：查找文件上传漏洞，上传webshell控制服务器。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/01/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/WEB%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全初级/OWASP与常见WEB漏洞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/23/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/OWASP%E4%B8%8E%E5%B8%B8%E8%A7%81WEB%E6%BC%8F%E6%B4%9E/">OWASP与常见WEB漏洞</a>
-    </h1>
-  
-
-        
-        <a href="/2021/01/23/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/OWASP%E4%B8%8E%E5%B8%B8%E8%A7%81WEB%E6%BC%8F%E6%B4%9E/" class="archive-article-date">
-  	<time datetime="2021-01-23T11:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="OWASP介绍"><a href="#OWASP介绍" class="headerlink" title="OWASP介绍"></a>OWASP介绍</h2><p>（1）OWASP是一个开源的、非盈利的全球性安全组织，致力于应用软件的安全研究。<strong>OWASP的使命是使应用软件更加安全，使企业和组织能够对应用安全风险做出更清晰的决策。</strong>截至2020年，OWASP全球拥有250个分部近7万名会员，共同推动了安全标准、安全测试工具、安全指导手册等应用安全技术的发展。</p>
-<p>（2）官网：<a target="_blank" rel="noopener" href="http://www.owasp.org.cn/">http://www.owasp.org.cn/</a></p>
-<p>（3）OWASP TOP10指出了WEB应用面临最大风险的10类向题，是目前WEB应用安全方面最权威的项目。</p>
-<h2 id="OWASP-TOP-10与常见漏洞讲解"><a href="#OWASP-TOP-10与常见漏洞讲解" class="headerlink" title="OWASP TOP 10与常见漏洞讲解"></a>OWASP TOP 10与常见漏洞讲解</h2><h3 id="OWASP-TOP-10-2017年版"><a href="#OWASP-TOP-10-2017年版" class="headerlink" title="OWASP TOP 10(2017年版)"></a>OWASP TOP 10(2017年版)</h3><p>A1：注入</p>
-<p>A2：失效的身份认证</p>
-<p>A3：敏感数据泄露</p>
-<p>A4：XML外部实体</p>
-<p>A5：失效的访问控制</p>
-<p>A6：安全配置错误</p>
-<p>A7：跨站请求脚本（XSS）</p>
-<p>A8：跨站请求伪造（CSRF）</p>
-<p>A9：不安全的反序列化</p>
-<p>A10：使用含有已知漏洞的组件</p>
-<h3 id="A1：注入"><a href="#A1：注入" class="headerlink" title="A1：注入"></a>A1：注入</h3><p>（1）注入：用户的输入被当成命令/代码执行或者解析了。</p>
-<p>（2）SQL注入攻击指的是：通过构建特殊的输入作为参数传入WEB应用程序，改变原有的SQL语句的语义来执行攻击者所要的操作。</p>
-<p>（3）其主要原因是：程序没有采用必要的措施避免用户输入内容改变原有SQL语句的语义。</p>
-<p>（4）SQL注入的危害：</p>
-<ul>
-<li>绕过登录验证：使用万能密码登录网站后台等。</li>
-<li>获取敏感数据：获取网站管理员账号、密码等。</li>
-<li>文件系统操作：列目录，读取、写入文件等。</li>
-<li>注册表操作：读取、写入、删除注册表等。</li>
-<li>执行系统命令：远程执行命令。</li>
-</ul>
-<h3 id="A2：失效的身份认证-业务逻辑漏洞"><a href="#A2：失效的身份认证-业务逻辑漏洞" class="headerlink" title="A2：失效的身份认证(业务逻辑漏洞)"></a>A2：失效的身份认证(业务逻辑漏洞)</h3><p>因为各种代码或者逻辑缺陷，导致绕过登陆或者匿名顶替登陆等</p>
-<p>通常的漏洞存在形式：</p>
-<ul>
-<li>暴力破解登录</li>
-<li>撞库</li>
-<li>默认口令</li>
-<li>二次校验失败</li>
-<li>数据明文传输</li>
-<li>URL暴露会话ID</li>
-<li>用户登录后不会更换会话ID（固定会话攻击）</li>
-<li>会话不会失败</li>
-</ul>
-<h3 id="A3：敏感数据泄漏"><a href="#A3：敏感数据泄漏" class="headerlink" title="A3：敏感数据泄漏"></a>A3：敏感数据泄漏</h3><p>许多Web应用程序和API都无法正确保护敏感数据。由于未加密的敏感数据容易受到破坏，因此，我们需要对敏感数据加密，这些数据包括：传输过程中的数据、存储的数据以及浏览器的交互数据。</p>
-<h3 id="A4：XML-外部实体（XXE）"><a href="#A4：XML-外部实体（XXE）" class="headerlink" title="A4：XML 外部实体（XXE）"></a>A4：XML 外部实体（XXE）</h3><p>XML是一种类似HTML的标记性语言，可以用来标记数据、定义数据类型，是一种允许用户对自己语言进行定义的源语言。</p>
-<p>（1）xml引用实体格式如下：<br>&lt;!ENTITY 实体引用名 “引用内容”&gt;</p>
-<p>（2）实体分两类：一般实体和参数实体</p>
-<p>（3）一般实体，可以在XML文档中的任何位置出现的实体称为一般实体。实体可以声明为内部实体还是外部实体。外部实体分SYSTEM和PUBLIC两种。<br>SYSTEM引用本地计算机，PUBLIC引用公共计算机，外部实体格式如下：<br>&lt;!ENTITY 引用名 SYSTEM(PUBLIC) “URL地址”&gt;</p>
-<h3 id="A5：失效的访问控制-业务逻辑漏洞"><a href="#A5：失效的访问控制-业务逻辑漏洞" class="headerlink" title="A5：失效的访问控制(业务逻辑漏洞)"></a>A5：失效的访问控制(业务逻辑漏洞)</h3><p>（1）失效的访问控制就是越权访问漏洞。</p>
-<p>（2）未对通过身份验证的用户实施恰当的访问控制。攻击者可以利用这些缺陷访问未经授权的功能或数据，例如：访问其他用户的帐户、查看敏感文件、修改其他用户的数据、更改访问权限等。</p>
-<p>（3）越权访问分为垂直越权和水平越权。</p>
-<ul>
-<li>垂直越权：低权限用户可以访问更高权限用户才能访问的资源</li>
-<li>水平越权：同级权限用户之间的权限控制失效</li>
-</ul>
-<h3 id="A6：安全配置错误"><a href="#A6：安全配置错误" class="headerlink" title="A6：安全配置错误"></a>A6：安全配置错误</h3><p>（1）安全配置错误是最常见的安全问题，这通常是由于不安全的默认配置、不完整的临时配置、开源云存储、错误的HTTP标头配置以及包含敏感信息的详细错误信息所造成。</p>
-<p>（2）防范方法：需要对所有的操作系统、框架、库和应用程序进行安全配置，而且必须及时修补和升级它们。</p>
-<h3 id="A7：跨站脚本（XSS）"><a href="#A7：跨站脚本（XSS）" class="headerlink" title="A7：跨站脚本（XSS）"></a>A7：跨站脚本（XSS）</h3><p>（1）当应用程序的新网页中包含不受信任的、未经恰当验证或转移的数据时，或者使用可以创建HTML或JavaScript的浏览器API更新现有的网页时，就会出现XSS缺陷。XSS让攻击者能够在受害者的浏览器中执行脚本，并劫持用户会话、破坏网站或将用户重定向到恶意站点。</p>
-<p>（2）三种类型XSS：</p>
-<ul>
-<li>反射式XSS:应用程序或API包括未经验证转义的用户输入，作为HTML输出的一部分。一个成功的攻击可以让攻击者在受害者的浏览器中执行任意的HTML和JavaScript。通常，用户将需要与指向攻击者控制页面的某些恶意链接进行交互，例如恶意漏洞网站，广告或类似内容。</li>
-<li>存储式XSS：应用程序或者API将未净化的用户输入存储下来了，并在后期在其他用户或者管理员的页面展示出来。该类型XSS一般被认为是高危或严重的风险。</li>
-<li>基于DOM的XSS：会动态的将攻击者可控的内容加入页面的JavaScript框架、单页面程序或API存在这种类型的漏洞。</li>
-</ul>
-<h3 id="A8：2013-跨站请求伪造（CSRF）"><a href="#A8：2013-跨站请求伪造（CSRF）" class="headerlink" title="A8：2013 跨站请求伪造（CSRF）"></a>A8：2013 跨站请求伪造（CSRF）</h3><p>跨站请求伪造原理：一个跨站请求伪造攻击会迫使登录用户的浏览器将伪造的HTTP请求，包括该用户的会话cookie和其他认证信息，发送到一个存在漏洞的web应用程序。这就允许了攻击者迫使用户浏览器向存在漏洞的web应用程序发送请求，而这些请求会被应用程序认为是用户的合法请求。</p>
-<h3 id="A9：不安全的反序列化"><a href="#A9：不安全的反序列化" class="headerlink" title="A9：不安全的反序列化"></a>A9：不安全的反序列化</h3><p>（1）序列化指将对象转换为字节序列的过程，就是一种用来处理对象流的机制，所谓对象流也就是将对象的内容进行流化。可以对流化后的对象进行读写操作，也可将流化后的对象传输于网络之间。</p>
-<p>（2）序列化的目的：为了解决在对对象流进行读写操作时所引发的问题。以某种存储形式使自定义对象持久化，将对象从一个地方传递到另一个地方；使程序更具维护性。</p>
-<p>（3）反序列化原理：将二进制数据转换为原对象，即从一些列字节提取数据结构的反向操作。</p>
-<p>（4）不安全的反序列化会导致远程代码执行。即使反序列化缺陷不会导致远程代码执行，攻击者也可以利用它们来执行攻击，包括：重播攻击、注入攻击和特权升级攻击。</p>
-<p>（5）对反序列化的利用是有点困难的。因为在不更改或调整底层可被利用代码的情况下，现成的反序列化漏洞很难被使用。</p>
-<p>（6）可能导致的两种主要类型的攻击：</p>
-<ul>
-<li>如果应用中存在可以在反序列过程中或者之后被改变行为的类，则攻击者可以通过改变应用逻辑或者实现远程代码执行攻击。我们将其称为对象和数据结构攻击。</li>
-<li>典型的数据篡改攻击，如访问控制相关的攻击，其中使用了现有的数据结构，但内容发生了变化。</li>
-</ul>
-<h3 id="A10：使用含有已知漏洞的组件"><a href="#A10：使用含有已知漏洞的组件" class="headerlink" title="A10：使用含有已知漏洞的组件"></a>A10：使用含有已知漏洞的组件</h3><p>（1）组件（例如：库、框架和其他软件模块）拥有和应用程序相同的权限。如果应用程序中含有已知漏洞的组件被攻击者利用，可能会造成严重的数据丢失或服务器接管。同时，使用含有已知漏洞的组件的应用程序和API可能会破坏应用程序防御、造成各种攻击并产生严重影响。</p>
-<p>（2）经常爆出漏洞的组件：</p>
-<ul>
-<li>Weblogic</li>
-<li>Strust-2</li>
-</ul>
-<p>（3）使用K8工具对Struts2进行利用</p>
-<p><img src="https://i.loli.net/2021/02/01/SkxCHF5qPGWOIvl.png" alt="image-20210201113438259"></p>
-<p><img src="https://i.loli.net/2021/02/01/fasUSd1K5Ao7jXh.png" alt="image-20210201113503859"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全初级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/01/23/%E5%AE%89%E5%85%A8%E5%88%9D%E7%BA%A7/OWASP%E4%B8%8E%E5%B8%B8%E8%A7%81WEB%E6%BC%8F%E6%B4%9E/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 

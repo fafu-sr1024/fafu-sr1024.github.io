@@ -152,6 +152,282 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-BugkuCTF/BugkuCTF_Misc-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/">BugkuCTF_Misc_001</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/" class="archive-article-date">
+  	<time datetime="2020-11-15T08:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="隐写"><a href="#隐写" class="headerlink" title="隐写"></a>隐写</h2><p>（1）解压附件，发现有一张图片，并没有有用的信息<br><img src="https://img-blog.csdnimg.cn/20201030222021275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据题意，flag被隐藏起来了，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222050891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）红色方框部分代表的是图片的像素，也可以理解为长和高，发现图片的高度比长度小了不少，将高度修改为长度的值。<br><img src="https://img-blog.csdnimg.cn/20201030222126820.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）保存后重新打开图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222143936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="眼见非实-ISCCCTF"><a href="#眼见非实-ISCCCTF" class="headerlink" title="眼见非实(ISCCCTF)"></a>眼见非实(ISCCCTF)</h2><p>（1）下载附件，得到一个名为zip没有后缀名的文件<br>（2）用notepad++打开，发现文件头是50 4B 03 04，说明是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222246657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）修改文件后缀名为.zip，解压后得到一个文档<br><img src="https://img-blog.csdnimg.cn/20201030222313691.png#pic_center" alt="在这里插入图片描述"><br>（4）双击打开后并没有发现有用信息，再用notepad++打开，发现又是一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201030222346825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）修改后缀名为.zip，解压后得到一个文件夹<br><img src="https://img-blog.csdnimg.cn/20201030222418463.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222429644.png#pic_center" alt="在这里插入图片描述"><br>（6）最终在word文件夹里找到flag，可用记事本或notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222459970.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222507509.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="啊哒"><a href="#啊哒" class="headerlink" title="啊哒"></a>啊哒</h2><p>（1）打开附件，解压后得到一张.jpg图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222548608.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）文件头确实是以FF D8 开头，寻找结尾FF D9<br><img src="https://img-blog.csdnimg.cn/20201030222607981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）发现FF D9后面还有一个压缩文件，50 4B 03 04，将原来的图片改后缀名为.zip，也可以在kali下用命令foremost -t all ada.jap 分离文件。<br><img src="https://img-blog.csdnimg.cn/20201030222638392.png#pic_center" alt="在这里插入图片描述"><br>（4）解压，但发现需要密码<br><img src="https://img-blog.csdnimg.cn/20201030222716140.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）查看图片属性，发现一串字符，作为密码输入，但显示密码错误<br><img src="https://img-blog.csdnimg.cn/20201030222737816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）将这串十六进制字符转为ASCII码字符，得到sdnisc_2018，将其作为解压密码，得到flag<br><img src="https://img-blog.csdnimg.cn/20201030222759359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030222809753.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="又一张图片，还单纯吗"><a href="#又一张图片，还单纯吗" class="headerlink" title="又一张图片，还单纯吗"></a>又一张图片，还单纯吗</h2><p>（1）附件是一张.jpg的图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201030222856237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）确实以FF D8开头，寻找图片结尾FF D9，接连找到几个FF D9后，又发现了一张以FF D8开头的.jpg图片<br><img src="https://img-blog.csdnimg.cn/20201030222917608.png#pic_center" alt="在这里插入图片描述"><br>（3）用kali输入命令foremost -t -all 2.jpg分离文件，则又得到了一张图片，发现flag<br><img src="https://img-blog.csdnimg.cn/20201030222940899.png#" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/202010302230013.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223007998.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="猜"><a href="#猜" class="headerlink" title="猜"></a>猜</h2><p>（1）附件是一张图片，根据提示是某人的名字，直接百度搜索图片，是刘亦菲，名字拼音即flag<br><img src="https://img-blog.csdnimg.cn/20201030223039681.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201030223048756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/BugkuCTF-杂项//" class="article-tag-list-link color2">BugkuCTF_杂项</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/BugkuCTF/BugkuCTF_Misc-001/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-XCTF/XCTF_Misc-004" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Misc-004/">XCTF_Misc_004</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/15/XCTF/XCTF_Misc-004/" class="archive-article-date">
+  	<time datetime="2020-11-15T08:48:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h2><p>（1）下载附件，是一个流量包，用wireshark打开，输入tcp contains flag，并追踪tcp流，找了很久，没有找到。<br><img src="https://i.loli.net/2020/11/15/l9KHhroMWP7OiYN.png" alt="在这里插入图片描述"><br>（2）放到kali中，用foremost分离文件，得到大量的htm文件和一张jpg图片，但没有找到flag<br><img src="https://i.loli.net/2020/11/15/KQ4ziVuqCkgvbwj.png" alt="在这里插入图片描述"><br><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"><br>（3）在kaili中用strings命令找到flag</p>
+<pre><code>strings misc_02.pcapng | grep flag</code></pre>
+<p><img src="https://i.loli.net/2020/11/15/cY5Id2ngUBJ3XFZ.png" alt="在这里插入图片描述"></p>
+<h2 id="MISCall"><a href="#MISCall" class="headerlink" title="MISCall"></a>MISCall</h2><p>（1）下载附件，得到一个没有后缀名的文件，放到kali中binwalk一下，发现是一个bzip2类型的压缩包，为了方便，重命名一下，改为1.bzip2</p>
+<p><img src="https://i.loli.net/2020/11/15/pMuYPblFTah97om.png" alt="image-20201115185454990"></p>
+<p>（2）解压</p>
+<pre><code>tar xvf 1.bzip2</code></pre>
+<p><img src="https://i.loli.net/2020/11/15/S3n7zFvPRj6dhit.png" alt="image-20201115190744053"></p>
+<p>（3）发现了一个flag.txt和.git文件夹，但flag.txt中没有flag。利用.git目录，git stash进行恢复以前修改/删除的文件。查看git 记录，给出了一个最近上传的文件，但这个文件并不存在</p>
+<pre><code>git log  //查看git记录</code></pre>
+<p><img src="https://i.loli.net/2020/11/15/5IsbF7Vqx1W8aQy.png" alt="image-20201115220941620"></p>
+<p>（4）查看修改列表，存储列表中有一条记录</p>
+<pre><code>git stash list   //查看修改列表</code></pre>
+<p><img src="https://i.loli.net/2020/11/15/Zj3pUFvGExP9o6R.png" alt="image-20201115221415569"></p>
+<p>（5）校验列表中的存储文件</p>
+<p><img src="https://i.loli.net/2020/11/15/GE9BMlFo1pnQqv2.png" alt="image-20201115221608681"></p>
+<p>（6）恢复上面的文件，直接执行 git stash apply 时，会提示文件覆盖自动终止，可以先把原来的flag.txt删除再执行</p>
+<pre><code>git stash apply   //恢复文件</code></pre>
+<p><img src="https://i.loli.net/2020/11/15/QDfqhwAg72E1UIM.png" alt="image-20201115222553488"></p>
+<p>（7）运行s.py得到flag</p>
+<pre><code>python s.py</code></pre>
+<h2 id="Get-the-key-txt"><a href="#Get-the-key-txt" class="headerlink" title="Get-the-key.txt"></a>Get-the-key.txt</h2><p>（1）下载附件，得到一个压缩包，解压后是一个没有后缀名的文件，放到kali中binwalk一下查看文件类型，也可使用file命令</p>
+<pre><code>file fileName</code></pre>
+<p><img src="https://i.loli.net/2020/11/16/zsJpYd4Vtui18rM.png" alt="image-20201116162315709"></p>
+<p>（2）发现是Linux的文件系统数据，在/tmp下创建forensic文件夹，并将文件挂载到该目录下</p>
+<pre><code>mkdir /tmp/forensic
+mount -o loop forensic100 /tmp/forensic    //挂载</code></pre>
+<p>（3）进入新创建的目录下，发现大量文件</p>
+<p><img src="https://i.loli.net/2020/11/16/7S92HjkdNI3FWyJ.png" alt="image-20201116162837956"></p>
+<p>（4）根据题目提示 get-the-key.txt，使用如下命令进行文件匹配</p>
+<pre><code>grep -r key.txt</code></pre>
+<p><img src="https://i.loli.net/2020/11/16/Y54CSjGl1qNLPFz.png" alt="image-20201116163043401"></p>
+<p>（5)得到一个二进制的名为1的文件，查看其类型</p>
+<p><img src="https://i.loli.net/2020/11/16/FAKorPwyYfG5xWs.png" alt="image-20201116163215732"></p>
+<p>（6）是gzip压缩包，但用gunzip 1解压会出错，tar xvf 1也不行，最后使用gunzip &lt; 1得到flag：SECCON{@]NL7n+-s75FrET]vU=7Z}</p>
+<p>（7）还有一种方法，在得知1的类型为gzip压缩文件后，修改后缀，文件名改为1.gz，然后解压</p>
+<pre><code>gunzip 1.gz</code></pre>
+<p>（8）解压成功，依然得到一个名为1的文件，再次查看该文件类型</p>
+<pre><code>file 1</code></pre>
+<p><img src="https://i.loli.net/2020/11/16/HrIy7Ua2vbnmzD5.png" alt="image-20201116165042375"></p>
+<p>（9）是一个ASCII码的文件，用cat查看内容，得到flag</p>
+<p><img src="https://i.loli.net/2020/11/16/JVIY64MigQ9Hdsz.png" alt="image-20201116165159099"></p>
+<h2 id="就在其中"><a href="#就在其中" class="headerlink" title="就在其中"></a>就在其中</h2><p>（1）下载附件，得到一个流量包，用wireshark打开，搜索字符flag，但并没有任何信息</p>
+<p>（2）将该流量包放到kali中binwalk一下，查看是否存在隐藏文件</p>
+<p><img src="https://i.loli.net/2020/11/20/BHCYuVwWea1DPhn.png" alt="image-20201120202514449"></p>
+<p>（3）确实存在隐藏文件，用foremost工具分离文件，得到jpg、pdf、zip三个文件夹</p>
+<p><img src="https://i.loli.net/2020/11/20/Up1ZiB2VeNnJzuL.png" alt="image-20201120202620317"></p>
+<p>（4）其中jpg和pdf文件夹下并没有明显的flag信息，zip下有一个压缩包，加压后得到一个文档key.txt，但却是一串奇怪的字符</p>
+<p><img src="https://i.loli.net/2020/11/20/IjmJZKQ9RCN54ak.png" alt="image-20201120203033157"></p>
+<p>（5）再次打开流量包，搜索key字符</p>
+<p><img src="https://i.loli.net/2020/11/20/3EqQp7hHclIzkw5.png" alt="image-20201120204201790"></p>
+<p>（6）可以看到先进行tcp连接，再进行ftp传输，应该是一个在传输某些文档的流量包，flag信息应该和传输的文档有关，追踪tcp流，发现了RSA私钥</p>
+<p><img src="https://i.loli.net/2020/11/20/TYaGp3WhDRorI1M.png" alt="image-20201120205800250"></p>
+<p>（7）将这串字符全部复制到一个文本中，命名为rsa.key，放到kali中的openssl进行解密</p>
+<pre><code>openssl rsautl -decrypt -in key.txt -inkey rsa.key -out flag.txt
+// -in 为要解密的加密文档   -inkey  为密钥      -out  为输出文档</code></pre>
+<p><img src="https://i.loli.net/2020/11/20/wdJftIDXWbpjoxV.png" alt="image-20201120210306217"></p>
+<p>（8）查看flag.txt</p>
+<p><img src="https://i.loli.net/2020/11/20/k21zZ48GylfohpR.png" alt="image-20201120210509016"></p>
+<h2 id="Reverse-it"><a href="#Reverse-it" class="headerlink" title="Reverse-it"></a>Reverse-it</h2><p>（1）下载得到一个附件，用010 editor打开，但无法明显看出是什么类型的文件，再放到kali中binwalk一下，依然没有发现。</p>
+<p>（2）根据题目Reverse-it，逆向它，再仔细观察010 editor里的十六进制编码</p>
+<p><img src="https://i.loli.net/2020/11/22/MEG51FuCgRwp83r.png" alt="image-20201122164943736"></p>
+<p><img src="https://i.loli.net/2020/11/22/5jTNkhSzX46lYGr.png" alt="image-20201122165014259"></p>
+<p>（3）在文件头和文件尾发现了特殊的编码，联想jpg的图片格式，以FF D8开头，FF D9结尾。所以整个文件被倒过来了，需要再将其逆转回去。这里借助Python脚本。</p>
+<pre><code class="python">import os
+f = open(&#39;1&#39;,&quot;rb&quot;)#二进制形式打开
+f = f.read()[::-1]
+for i in f:
+    ans = str(hex(i))[2:][::-1]
+    if len(ans) == 1:
+        ans = ans + &#39;0&#39;
+    print(ans,end=&#39;&#39;)</code></pre>
+<p>（4）将得到的新文件保存并名为jpg格式，得到一张图片</p>
+<p><img src="https://i.loli.net/2020/11/22/mzhyvHuLsipbgt8.png" alt="image-20201122165457966"></p>
+<p>（5）可以看到是张翻转过的图片，这里可以使用windows下的画图工具将其水平翻转过来，也可以利用Python脚本。</p>
+<pre><code class="python">from PIL import Image
+im = Image.open(&quot;t.jpg&quot;)
+pim = im.load()
+an = Image.open(&quot;t.jpg&quot;)
+ans = an.load()
+for i in range(im.size[0]):
+    for j in range(im.size[1]):
+        ans[i, j] = pim[im.size[0]-i-1, j]
+an.show()</code></pre>
+<p><img src="https://i.loli.net/2020/11/22/fvH2PcDKqViZsFA.png" alt="image-20201122165652047"></p>
+<h2 id="打野"><a href="#打野" class="headerlink" title="打野"></a>打野</h2><p>（1）得到一张坤坤的bmp格式图片，放到kali中binwalk一下，并没有发现隐藏的文件。再用strings查看，同样没有得到flag的信息。最后使用kali中的zsteg工具，该工具可以检测png和bmp图片里的隐写数据。</p>
+<pre><code>zsteg &#39;文件路径&#39;
+zsteg /root/Desktop/CTF/XCTF/Misc/005/瞅啥.bmp</code></pre>
+<p><img src="https://i.loli.net/2020/11/23/K3pOT2NVXjUgEtd.png" alt="image-20201123204350799"></p>
+<p>（2）得到flag</p>
+<h2 id="倒立屋"><a href="#倒立屋" class="headerlink" title="倒立屋"></a>倒立屋</h2><p>（1）下载附件，得到一个png图片。放到kali下binwalk一下，发现存在zlib压缩数据</p>
+<p><img src="https://i.loli.net/2020/11/27/fWNTdMEnOlRx2cB.png" alt="image-20201127205100279"></p>
+<p>（2）用kali中的工具zsteg看看图片中的隐藏数据</p>
+<p><img src="https://i.loli.net/2020/11/27/bxRwAtQX8spzrKc.png" alt="image-20201127205231331"></p>
+<p>（3）得到字符IsCc_2019,但直接提交是错误的，根据题意，需要倒过来，所以就是flag{9102_cCsI}</p>
+<h2 id="2017-Dating-in-Singapore"><a href="#2017-Dating-in-Singapore" class="headerlink" title="2017_Dating_in_Singapore"></a>2017_Dating_in_Singapore</h2><p>（1）下载附件，得到一份PDF文件，是2017年新加坡的日历。再看看提示，由’-‘分隔了12串数字，联想到对应的12个月。</p>
+<p><img src="https://i.loli.net/2020/12/02/tF7KdViY8BfLwhj.png" alt="image-20201202180623816"></p>
+<p>（2）将上述12串字符放到一个文本文档中，并分类为12行。</p>
+<p><img src="https://i.loli.net/2020/12/02/DraloOHzsf5xWbG.png" alt="image-20201202180924011"></p>
+<p>（3）每串数字对应一个月的日期，将其分为两两一组。</p>
+<p><img src="https://i.loli.net/2020/12/02/4UzN7R6TObxAGec.png" alt="image-20201202181311182"></p>
+<p>（5）对比一开始得到的PDF文件，得到HITB{CTFFUN}</p>
+<p><img src="https://i.loli.net/2020/12/02/AfM5WVNdiwLzKt9.png" alt="image-20201202181507644"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Misc-004/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XCTF/XCTF_Misc-003" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1075,246 +1351,9 @@ int main()&#123;
 
 
   
-    <article id="post-XCTF/XCTF_Misc-001" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Misc-001/">XCTF_Misc_001</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/XCTF_Misc-001/" class="archive-article-date">
-  	<time datetime="2020-11-15T07:47:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="base64÷4"><a href="#base64÷4" class="headerlink" title="base64÷4"></a>base64÷4</h2><p><img src="https://img-blog.csdnimg.cn/20201029233527346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029233823554.png#pic_center" alt="在这里插入图片描述"><br>（1）根据题目提示，直接用base16解密得到flag</p>
-<p><img src="https://img-blog.csdnimg.cn/20201029233921359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="reverseMe"><a href="#reverseMe" class="headerlink" title="reverseMe"></a>reverseMe</h2><p>（1）打开附件，发现是一张图片<br><img src="https://img-blog.csdnimg.cn/20201029234035117.png#pic_center" alt="在这里插入图片描述"><br>（2）用画图工具打开该图片，使用水平翻转，即可查看到flag<br><img src="https://img-blog.csdnimg.cn/20201029234114796.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029234125317.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="something-in-image"><a href="#something-in-image" class="headerlink" title="something_in_image"></a>something_in_image</h2><p>解法一：<br>（1）使用记事本或010 editor工具打开附件，Ctrl+F搜索flag<br><img src="https://img-blog.csdnimg.cn/20201029234240873.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029234254152.png#pic_center" alt="在这里插入图片描述"><br>解法二：<br>根据题目包含image，使用kali，命令：strings badimages | grep Flag    （注，根据记事本中常出现的“Flag”，而不是“flag”进行搜索）<br><img src="https://img-blog.csdnimg.cn/2020102923435872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="wireshark-1"><a href="#wireshark-1" class="headerlink" title="wireshark-1"></a>wireshark-1</h2><p>（1）用wireshark打开附件，输入表达式http contains flag查找flag信息，根据题目，看到登录应该查找HTTP post请求，追踪筛选出的报文追踪tcp流，即可看到flag<br><img src="https://img-blog.csdnimg.cn/2020102923460010.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029234609210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="pure-color"><a href="#pure-color" class="headerlink" title="pure_color"></a>pure_color</h2><p>（1）附件是一张全白的png图片<br><img src="https://img-blog.csdnimg.cn/20201029234704614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）用notepad++打开没有发现flag信息<br>（3）用stegsolve打开，打开 File Format Analysis 没有flag的线索<br><img src="https://img-blog.csdnimg.cn/2020102923475148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4)最后在最底下的’&lt;’按钮发现了flag<br><img src="https://img-blog.csdnimg.cn/202010292348317.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Aesop-secret"><a href="#Aesop-secret" class="headerlink" title="Aesop_secret"></a>Aesop_secret</h2><p>（1）下载附件得到一张gif的动图，通过stegsolve工具分解得到9张图片<br><img src="https://img-blog.csdnimg.cn/20201029235041213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）用画图工具分别将这九张图通过旋转、裁剪一系列操作，得到9张裁剪过的图，再将这9张裁剪过的图片拼在一起（这里耗费了较多时间），得到如下图<br><img src="https://img-blog.csdnimg.cn/20201029235123359.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029235133815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）图片显示为ISCC，显然不是flag，再用notepad++打开原来的gif动图，发现一串密文<br><img src="https://img-blog.csdnimg.cn/20201029235235364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）用base64解码，无果，根据题目和上面图片的ISCC，联想到AES加密，ISCC则为密钥<br><img src="https://img-blog.csdnimg.cn/202010292352570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）解码后仍然是一串密文，再次解密，得到flag<br><img src="https://img-blog.csdnimg.cn/20201029235319285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="a-good-idea"><a href="#a-good-idea" class="headerlink" title="a_good_idea"></a>a_good_idea</h2><p>（1）打开附件，是一张.jpg格式的图片，用notepad++打开<br><img src="https://img-blog.csdnimg.cn/20201029235355127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020102923541217.png#pic_center" alt="在这里插入图片描述"><br>（2）确实以FF D8开头，寻找图片结尾FF D9，发现后面还有一个压缩文件<br><img src="https://img-blog.csdnimg.cn/20201029235436753.png#pic_center" alt="在这里插入图片描述"><br>（3）将原图片后缀名改为.zip，解压后得到一个文件夹，里面是两张相同的图片和一个hint提示文本<br><img src="https://img-blog.csdnimg.cn/20201029235502674.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029235519348.png#pic_center" alt="在这里插入图片描述"><br>（4）hint为“试着找出像素的秘密”，用stegsolve工具合成这两张图片，发现一些红点，貌似是二维码<br><img src="https://img-blog.csdnimg.cn/20201029235544453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（5）用wps图片编辑，在“工具”中选择“色彩”，将亮度和饱和度调到最高<br><img src="https://img-blog.csdnimg.cn/2020102923562537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（6）发现还是不太明显，先保存这张图片，再用wps图片工具打开，再调一遍亮度和饱和度<br><img src="https://img-blog.csdnimg.cn/20201029235702553.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（7）可以看到清晰的二维码图片，用二维码扫描工具扫描图片，发现flag<br><img src="https://img-blog.csdnimg.cn/2020102923573284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="Training-Stegano-1"><a href="#Training-Stegano-1" class="headerlink" title="Training-Stegano-1"></a>Training-Stegano-1</h2><p>一张bmp格式的图片，直接用notepad++打开，即可看flag，注意提交时不用加flag{}<br><img src="https://img-blog.csdnimg.cn/20201029235912499.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="can-has-stdio"><a href="#can-has-stdio" class="headerlink" title="can_has_stdio?"></a>can_has_stdio?</h2><p>（1）用notepad++打开附件<br><img src="https://img-blog.csdnimg.cn/20201029235946797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）发现是Brainfuck文件，用在线解析工具得到flag<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/brain.html">http://ctf.ssleye.com/brain.html</a><br><img src="https://img-blog.csdnimg.cn/20201030000056979.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>#Brainfuck解析规则：<br>     “&gt;”: 指针位置右移一位<br>    “&lt;”: 指针位置左移一位<br>     +: 指针所指向的位置里面的值加1<br>     -: 指针所指向的位置里面的值减1<br>     . :输出指针当前位置指向单元格中的内容<br>     [: 如果指针指向的单元值为零，向后跳转到对应的]指令的次一指令处<br>     ]:如果指针指向的单元值不为零，向前跳转到对应的[指令的次一指令处(额…好像比较难理解,只是用于循环某一段代码而已,两个一般联合使用)</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc进阶区//" class="article-tag-list-link color3">XCTF_Misc进阶区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Misc-001/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-XCTF/XCTF_Misc练习区" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/15/XCTF/XCTF_Misc%E7%BB%83%E4%B9%A0%E5%8C%BA/">XCTF_Misc练习区</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/15/XCTF/XCTF_Misc%E7%BB%83%E4%B9%A0%E5%8C%BA/" class="archive-article-date">
-  	<time datetime="2020-11-15T03:43:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ext3"><a href="#ext3" class="headerlink" title="ext3"></a>ext3</h2><p>(1)附件是一个没有后缀的文件，使用notepad++打开，Ctrl+F出现搜索框，搜索flag<br><img src="https://img-blog.csdnimg.cn/20201029151711345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029151757386.png#pic_center" alt="在这里插入图片描述"><br>（2）发现在O7avZhikgKgbF目录下有个flag文件，用7-ZIP工具打开附件，找到flag.txt文件。<br><img src="https://img-blog.csdnimg.cn/20201029151943811.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020102915202880.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029152125452.png#pic_center" alt="在这里插入图片描述"><br>（3）出现了一串base64加密的字符串，这里我用的是CaptfEncoder工具，解码后得flag{sajbcmbzskjjcnbhsbvcjbjszcszbkzj}<br><img src="https://img-blog.csdnimg.cn/20201029152641255.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="功夫再高也怕菜刀"><a href="#功夫再高也怕菜刀" class="headerlink" title="功夫再高也怕菜刀"></a>功夫再高也怕菜刀</h2><p>（1）附件是一个.pcapng文件，使用Wireshark打开文件查看报文查找flag信息，输入表达式http contains flag查看http协议的报文是否包含flag 的信息<br><img src="https://img-blog.csdnimg.cn/20201029152930291.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）根据筛选出的报文，追踪tcp流，在第1150个报文中发现一串十六进制的流信息，其中，FFD8是jpg文件头标志，FFD9是结束标志，说明这里有一张jpg格式的图片。<br><img src="https://img-blog.csdnimg.cn/202010291533526.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029153359337.png#pic_center" alt="在这里插入图片描述"><br>（3）将这部分信息复制到一个文本文档.txt中保存，用010 editor工具以十六进制导入，并另存为jpg格式，得到一张图片<br><img src="https://img-blog.csdnimg.cn/20201029153505599.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029153603932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）接着在kali中用foremost分离附件.pcapng文件，得到一个zip文件，里面有一个压缩包，包含flag文件。使用上面图片中的“Th1s_1s_p4sswd_!!!”作为密码，获取flag。</p>
-<p>#foremost已在kali中预安装，使用如下命令安装</p>
-<pre><code class="javascript">$sudo apt-get install foremost       //非管理员需要加上sudo</code></pre>
-<p>#分离文件</p>
-<pre><code class="javascript">$foremost -t all ctf.pcapng         </code></pre>
-<p>#执行完上面的语句后，会生成一个output目录，进入该目录即可查看分离的文件。</p>
-<h2 id="give-you-flag"><a href="#give-you-flag" class="headerlink" title="give_you_flag"></a>give_you_flag</h2><p>（1）附件是一张gif的动图，查看后可发现图片里存在一个二维码。于是这里用stegsolve工具将动图分解为一张张图片，以便查看。<br><img src="https://img-blog.csdnimg.cn/2020102916030193.png#pic_center" alt="在这里插入图片描述"><br>（2）找到那张出现二维码的图片，发现定位点缺失。百度下载一张二维码定位点图片，接着打开Windows自带的画图工具，选择“新建”，然后依次把定位点图片和二维码图片通过“粘贴来源“导入，将定位点拖拽到缺失的地方，保存即可。（不会ps只能这样了，嘤嘤嘤~）<br>#下载的定位点图片可能会有一些白色边框，在合成图片时可能会覆盖掉二维码。同样可以在画图工具里，打开定位点图片，通过多次“旋转”的操作，然后不断调整白色画布的大小去掉边框，去掉边框后保存就可以了。<br><img src="https://img-blog.csdnimg.cn/20201029161225356.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）二维码图片补全后，用二维码扫描器扫描就可以得到flag了。<br><img src="https://img-blog.csdnimg.cn/20201029162926218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>#stegsolve工具：<br>File Format:文件格式，这个主要是查看图片的具体信息<br>Data Extract:数据抽取，图片中隐藏数据的抽取<br>Frame Browser:帧浏览器，主要是对GIF之类的动图进行分解，动图变成一张张图片，便于查看<br>Image Combiner:拼图，图片拼接<br>#stegsolve打开方式：<br>（1）首先需要添加java环境，这里就不赘述了。<br>（2）打开stegsolve所在目录，在目录框输入cmd，打开运行窗口<br><img src="https://img-blog.csdnimg.cn/20201029163702280.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020102916372191.png#pic_center" alt="在这里插入图片描述"><br>（3）在运行窗口输入以下命令即可打开：</p>
-<pre><code>java -jar stegsolve.jar</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20201029163957823.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029164057932.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="坚持60s"><a href="#坚持60s" class="headerlink" title="坚持60s"></a>坚持60s</h2><p>（1）附件是一个.jar文件，在cmd下用java -jar xxxx.jar查看<br><img src="https://img-blog.csdnimg.cn/20201029164458822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）用jd-gui工具反编译，在cn.bjsxt.plane.PlaneGameFrame.class文件下发现flag（Ctrl+F搜索）<br><img src="https://img-blog.csdnimg.cn/20201029165606637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="gif"><a href="#gif" class="headerlink" title="gif"></a>gif</h2><p>（1）解压附件，在gif文件夹下看到许多黑白的图片，联想到二进制<br><img src="https://img-blog.csdnimg.cn/20201029170006125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）将各个图片转化为对应的二进制，使用在线二进制转字符串工具<a target="_blank" rel="noopener" href="http://www.txttool.com/WenBen_BinaryStr.asp">http://www.txttool.com/WenBen_BinaryStr.asp</a>即可得到flag。</p>
-<h2 id="掀桌子"><a href="#掀桌子" class="headerlink" title="掀桌子"></a>掀桌子</h2><p><img src="https://img-blog.csdnimg.cn/20201029172950592.png#pic_center" alt="在这里插入图片描述"><br>（1）获取的报文内容为0-9，a-f，考虑十六进制。但该串十六进制数无法直接转化为字符串（ASCII值）<br>（2）把十六进制两两一组转换为十进制；接着将十进制数减去128（因为ASCII码值为0~127），让其落到ASCII码表上，然后计算出对应ASCII码值的字符，获取flag。<br>（3）采用如下java编写的代码：</p>
-<pre><code>public class Misc &#123;
-
-    public static void main(String[] args) &#123;
-        // TODO Auto-generated method stub
-        String hex=&quot;c8e9aca0c6f2e5f3e8c4efe7a1a0d4e8e5a0e6ece1e7a0e9f3baa0e8eafae3f9e4eafae2eae4e3eaebfaebe3f5e7e9f3e4e3e8eaf9eaf3e2e4e6f2&quot;;
-        String temp=&quot;&quot;;
-        String flag=&quot;&quot;;
-        for(int i = 0; i &lt; hex.length();i+=2) &#123;
-            temp=hex.substring(i,i+2);   //获取相邻的字符
-            long dec=Long.parseLong(temp,16);    //将两个字符转换为十进制
-            flag=Long.toString(dec-128);         //将Long型的十进制值减去128，再转换为String
-            System.out.print((char)Integer.parseInt(flag));   //解析flag为十进制整数，并强制转换为char，存取字符
-
-        &#125;
-    &#125;
-
-&#125;</code></pre>
-<p>（4）查看执行结果<br><img src="https://img-blog.csdnimg.cn/20201029173408937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="如来十三掌"><a href="#如来十三掌" class="headerlink" title="如来十三掌"></a>如来十三掌</h2><p>（1）附件是一串禅语<br><img src="https://img-blog.csdnimg.cn/2020102917361431.png#pic_center" alt="在这里插入图片描述"><br>（2）使用在线工具使用“与佛论禅”来进行解码（解码时记得在原文字的开头加上“佛曰：”）在线工具：<a target="_blank" rel="noopener" href="http://www.keyfc.net/bbs/tools/tudoucode.aspx">http://www.keyfc.net/bbs/tools/tudoucode.aspx</a><br><img src="https://img-blog.csdnimg.cn/20201029173842414.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（3）根据题目提示的13掌，用rot-13解码</p>
-<p>#rot13使用一个简单的替换加密算法，类似凯撒密码<br><img src="https://img-blog.csdnimg.cn/20201029174109664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（4）又是一串密文，用base64试试，看到flag。<br><img src="https://img-blog.csdnimg.cn/20201029174247479.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="stegano"><a href="#stegano" class="headerlink" title="stegano"></a>stegano</h2><p>（1）附件是一个pdf文件，全选后复制到一个word文档里，发现了一串特殊的字符<br><img src="https://img-blog.csdnimg.cn/20201029174606857.png#pic_center" alt="在这里插入图片描述"><br>（2）看到AB，但不是培根密码，培根密码是5个一组，联想到摩斯密码将A替换为. ，B替换为-，可以自己写个代码转换一下（这里我用的c语言）</p>
-<pre><code>int main()&#123;
-    char word[200];
-    gets(word);
-    int i=0;
-    while(word[i] != 0)&#123;
-        if(word[i] == &#39;A&#39;)&#123;
-            word[i]=&#39;.&#39;;
-            printf(&quot;%c&quot;,word[i]);
-        &#125;
-        if(word[i]  == &#39; &#39;)&#123;
-            printf(&quot; &quot;);
-        &#125;
-        if(word[i] == &#39;B&#39;)&#123;
-            word[i]=&#39;-&#39;;
-            printf(&quot;%c&quot;,word[i]);
-        &#125;
-//        printf(&quot;%s&quot;,word[i]);
-        i++;
-    &#125;
-
-    system(&quot;pause&quot;);
-    return 0;</code></pre>
-<p>（3）然后放到在线摩斯密码加解密上解密<a target="_blank" rel="noopener" href="http://www.txttool.com/t/?id=Mzg1">http://www.txttool.com/t/?id=Mzg1</a>（注意分割的时候空格也要输入）<br><img src="https://img-blog.csdnimg.cn/20201029175536902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="SimpleRAR"><a href="#SimpleRAR" class="headerlink" title="SimpleRAR"></a>SimpleRAR</h2><p>（1）解压附件得到一张两帧的图片<br><img src="https://img-blog.csdnimg.cn/20201029180040104.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>（2）现将这两帧图片分别保存，然后用stegsolve分别打开，发现是都是缺失一半的二维码图片<br><img src="https://img-blog.csdnimg.cn/20201029180455273.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020102918051475.png#pic_center" alt="在这里插入图片描述"><br>（3）利用画图工具，将两张图拼在一起，并将定位点补充完整，用二维码扫描器扫描即可<br><img src="https://img-blog.csdnimg.cn/20201029180621881.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201029180648595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ZBRlV4aWFvc29uZw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CTF靶场</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/XCTF-Misc练习区//" class="article-tag-list-link color3">XCTF_Misc练习区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/15/XCTF/XCTF_Misc%E7%BB%83%E4%B9%A0%E5%8C%BA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+      <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
     </nav>
   
 

