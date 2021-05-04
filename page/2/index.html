@@ -152,6 +152,466 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/运用Python语言(一)-程序设计方法论01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/">运用Python语言(一)-程序设计方法论01</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/" class="archive-article-date">
+  	<time datetime="2021-04-08T12:48:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="计算思维"><a href="#计算思维" class="headerlink" title="计算思维"></a>计算思维</h2><p>（1）计算思维的本质是<strong>抽象（Abstraction）</strong>和<strong>自动化（Automation）</strong>。</p>
+<p>（2）人类在认识世界、改造世界过程中表现出的思维特征：</p>
+<ul>
+<li>以实验和验证为特征的实证思维，以物理学科为代表</li>
+<li>以推理和演绎为特征的逻辑思维，以数学学科为代表</li>
+<li>以设计和构造为特征的计算思维，以计算机学科为代表</li>
+</ul>
+<p>（3）在程序设计范畴，计算思维主要反映在：</p>
+<ul>
+<li>理解问题的计算特性</li>
+<li>将计算特性抽象为计算问题</li>
+<li>通过程序设计语言实现问题的自动求解</li>
+</ul>
+<p><strong>扩展：</strong>ENIAC是世界上第一台通用计算机，于1946年诞生于美国宾夕法尼亚大学摩尔实验室。</p>
+<h2 id="体育竞技分析"><a href="#体育竞技分析" class="headerlink" title="体育竞技分析"></a>体育竞技分析</h2><p>（1）<strong>模拟</strong>是用来解决现实世界问题的重要手段和技术</p>
+<p>（2）模拟与仿真：</p>
+<ul>
+<li>模拟(simulation)是抽象原系统某些行为特征并用另一系统来表示这些特征的过程。常用于设计初期的模拟验证。</li>
+<li>仿真(emulation)则更进一步，需要模仿系统真实能做的事情，接受同样的数据，获得同样的结果，只是实现的过程不同。一般用于处理兼容性问题或在资源有限的条件下实现系统原型。</li>
+</ul>
+<p>（3）问题的IPO描述如下：</p>
+<ul>
+<li>输入：两个球员（球员A和球员B）的能力概率，模拟比赛的场次</li>
+<li>处理：模拟比赛过程</li>
+<li>输出：球员A和球员B分别赢得球赛的概率</li>
+</ul>
+<h2 id="自顶向下和自底向上"><a href="#自顶向下和自底向上" class="headerlink" title="自顶向下和自底向上"></a>自顶向下和自底向上</h2><p>要点：程序设计需要采用<strong>自顶向下</strong>的<strong>设计方法</strong>，采用<strong>自底向上</strong>的<strong>执行方法</strong></p>
+<p>自顶向下的设计方法，其基本思想是：</p>
+<ul>
+<li>以一个总问题开始，试图把它表达为很多小问题组成的解决方案</li>
+<li>再用同样的技术依次攻破每个小问题，最终问题变得非常小，以至于可以很容易解决</li>
+<li>最后只需把所有的碎片组合起来，就可以得到一个程序</li>
+</ul>
+<h3 id="自顶向下设计"><a href="#自顶向下设计" class="headerlink" title="自顶向下设计"></a>自顶向下设计</h3><h4 id="1-顶层设计"><a href="#1-顶层设计" class="headerlink" title="1.顶层设计"></a>1.顶层设计</h4><p>（1）以体育竞技分析为例，从问题的IPO描述开始，以下是一个基础设计的4个步骤：</p>
+<ul>
+<li>步骤1：打印程序的介绍性信息</li>
+<li>步骤2：获得程序运行需要的参数，即probA、proB、n</li>
+<li>步骤3：利用球员A和B的的能力值proA和proB，模拟n次比赛</li>
+<li>步骤4：输出球员A和球员B获胜比赛的场次和概率</li>
+</ul>
+<p>以上的基础设计是从IPO描述获得，可以作为<strong>自顶向下的顶层设计</strong></p>
+<p>（2）步骤1输出一些介绍信息，下面是该步骤的Python代码，<strong>顶层设计一般不给出具体代码，仅给出函数定义</strong>。</p>
+<pre><code class="python">def main():
+    printIntro()      #pirntIntro()函数打印一些必要的说明</code></pre>
+<p>（3）步骤2获得用户输入。<strong>通过函数将输入语句及输入格式等细节封装或隐藏，</strong>只需假设程序如果调用了getInputs()函数即可获取变量probA、probB和n的值。这个函数必须为主程序返回这些值。</p>
+<pre><code class="python">def main():
+    printIntro()
+    probA, probB, n = getInputs()</code></pre>
+<p>（4）步骤3需要使用probA、probB模拟n场比赛。可类似步骤2，设计一个simNGames()函数来模拟n场比赛，并返回结果。按要求，<strong>该函数需要模拟n场比赛，并给出球员A和球员B赢得比赛的结果。</strong></p>
+<pre><code class="python">def main():
+    printIntro()
+    probA, probB, n = getInputs()
+    winsA, winsB = simNGames(n, probA, probB)</code></pre>
+<p>（5）步骤4输出结果，仍然只规划功能和函数。</p>
+<pre><code class="python">def main():
+    printIntro()
+    probA, probB, n = getInputs()
+    winsA, winsB = simNGames(n, probA, probB)
+    printSummary(winsA, winsB)</code></pre>
+<p>（6）完成以上4个步骤后，程序<strong>框架</strong>已经清晰，但main()函数并没有做什么。原问题被划分为4个独立的函数：printIntro()、getInputs()、simNGames()和printSummary()。并且这些函数名称、输入参数和预期返回值都已确定。</p>
+<p><img src="https://i.loli.net/2021/04/10/LESiWt7gCAjchs5.png" alt="image-20210410115248745"></p>
+<h4 id="2-第n层设计"><a href="#2-第n层设计" class="headerlink" title="2.第n层设计"></a>2.第n层设计</h4><p>（1）经过顶层设计，main()函数成为体育竞技分析的顶层结构，该设计可表示为上图，其中每层按照从左至右的顺序执行。连接两个矩形之间的线表示上面函数对下面函数的调用关系。箭头表示函数之间的输入和输出。</p>
+<p>（2）每层设计中，<strong>参数和返回值如何设计是重点</strong>。<strong>确定事件的重要特征而忽略其他细节过程称为抽象。</strong></p>
+<p>（3）<strong>自顶向下设计的第二阶段是实现或进一步抽象第二层函数。</strong></p>
+<p>（4）printIntro()函数应该输出一个程序介绍，这个功能的代码如下：</p>
+<pre><code class="python">def printIntro():
+    print(&quot;这个程序模拟两个选手A和B的某种竞技比赛&quot;)
+    print(&quot;程序运行需要A和B的能力值(以0到1之间的小数表示)&quot;)</code></pre>
+<p>（5）getInputs()函数根据提示得到3个需要返回主程序的值，代码如下：</p>
+<pre><code class="python">def getInputs():
+    a = eval(input(&quot;请输入选手A的能力值（0-1）：&quot;))
+    b = eval(input(&quot;请输入选手B的能力值（0-1）：&quot;))
+    n = eval(input(&quot;模拟比赛的场次：&quot;))
+    return a, b, n</code></pre>
+<p>（6）simNGames()函数是整个程序的核心，<strong>其基本思路是模拟n场比赛，并跟踪记录每个球员赢得了多少比赛。</strong>”模拟n场比赛“直观感受像一个<strong>计数循环</strong>，而跟踪记录获胜场次更像<strong>计数过程</strong>。代码如下：</p>
+<pre><code class="python">def simNGames(n, probA, probB):
+    winsA, winsB = 0, 0
+    for i in range(n):
+        sorceA, sorceB = simOneGame(probA,probB)
+        if sorceA &gt; sorceB:
+            winsA += 1
+        else:
+            winsB += 1
+    return winsA, winsB</code></pre>
+<p>（7）代码中设计了simOneGame()函数，用于模拟一场比赛，**这个函数需要知道每个球员的的能力值，返回两个球员的得分，该设计对整体设计的更新如下：</p>
+<p><img src="https://i.loli.net/2021/04/10/786Y1FbcQviez3o.png" alt="image-20210410124832003"></p>
+<p>（8）实现simOneGame()函数。</p>
+<ul>
+<li>根据比赛规则，两个球员要持续对攻直至比赛结束，可以采用无限循环直到比赛结束条件成立。</li>
+<li>记录比赛得分，保留发球局标记。</li>
+<li>通过随机数和概率，可以确定发球方是否赢得了比分(random()&lt;prob)</li>
+<li>若球员A发球，则需要使用A的概率，接着根据发球的结果，更新是球员A等分还是将球权交给B。</li>
+</ul>
+<p>代码如下：</p>
+<pre><code class="python">def simOneGame(probA, probB):
+    sorceA, sorceB = 0, 0
+    serving = &quot;A&quot;
+    while not gameOver(sorceA,sorceB):
+        if serving == &quot;A&quot;:
+            if random() &lt; probA:
+                sorceA += 1
+            else:
+                serving = &quot;B&quot;
+        else:
+            if random() &lt; probB:
+                sorceB += 1
+            else:
+                serving = &quot;A&quot;
+    return sorceA, sorceB</code></pre>
+<p>（9）上述代码中进一步设计了gameOver()函数，用来表示一场比赛结束的条件（首先达到15分的球员赢得一场比赛）。更新的结构图如下：</p>
+<p><img src="https://i.loli.net/2021/04/10/1Oo4GadYniS3P7V.png" alt="image-20210410130915968"></p>
+<p>（10）实现gameOver()函数，首先达到15分的球员赢得一场比赛，代码如下：</p>
+<pre><code class="python">def gameOver(a,b):
+    return a == 15 or b == 15</code></pre>
+<p>（11）最后是printSummary()函数，代码如下：</p>
+<pre><code class="python">def printSummary(winsA, winsB):
+    n = winsA + winsB
+    print(&quot;竞技分析开始，共模拟&#123;&#125;场比赛&quot;.format(n))
+    print(&quot;选手A获胜&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsA,winsA/n))
+    print(&quot;选手B火舌&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsB,winsB/n))</code></pre>
+<p>（12）将上述所有代码连接在一起，则形成了一个完整的代码：</p>
+<pre><code class="python">from random import random
+def printIntro():
+    print(&quot;这个程序模拟两个选手A和B的某种竞技比赛&quot;)
+    print(&quot;程序运行需要A和B的能力值(以0到1之间的小数表示)&quot;)
+def getInputs():
+    a = eval(input(&quot;请输入选手A的能力值（0-1）：&quot;))
+    b = eval(input(&quot;请输入选手B的能力值（0-1）：&quot;))
+    n = eval(input(&quot;模拟比赛的场次：&quot;))
+    return a, b, n
+def simNGames(n, probA, probB):
+    winsA, winsB = 0, 0
+    for i in range(n):
+        sorceA, sorceB = simOneGame(probA,probB)
+        if sorceA &gt; sorceB:
+            winsA += 1
+        else:
+            winsB += 1
+    return winsA, winsB
+def simOneGame(probA, probB):
+    sorceA, sorceB = 0, 0
+    serving = &quot;A&quot;
+    while not gameOver(sorceA,sorceB):
+        if serving == &quot;A&quot;:
+            if random() &lt; probA:
+                sorceA += 1
+            else:
+                serving = &quot;B&quot;
+        else:
+            if random() &lt; probB:
+                sorceB += 1
+            else:
+                serving = &quot;A&quot;
+    return sorceA, sorceB
+def gameOver(a,b):
+    return a == 15 or b == 15
+def printSummary(winsA, winsB):
+    n = winsA + winsB
+    print(&quot;竞技分析开始，共模拟&#123;&#125;场比赛&quot;.format(n))
+    print(&quot;选手A获胜&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsA,winsA/n))
+    print(&quot;选手B火舌&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsB,winsB/n))
+def main():
+    printIntro()
+    probA, probB, n = getInputs()
+    winsA, winsB = simNGames(n, probA, probB)
+    printSummary(winsA, winsB)
+main()</code></pre>
+<p>该程序运行结果如下：</p>
+<pre><code class="python">&gt;&gt;&gt;
+这个程序模拟两个选手A和B的某种竞技比赛
+程序运行需要A和B的能力值(以0到1之间的小数表示)
+请输入选手A的能力值（0-1）：0.45
+请输入选手B的能力值（0-1）：0.5
+模拟比赛的场次：1000
+竞技分析开始，共模拟1000场比赛
+选手A获胜369场比赛，占比36.9%
+选手B火舌631场比赛，占比63.1%</code></pre>
+<h4 id="3-设计过程总结"><a href="#3-设计过程总结" class="headerlink" title="3.设计过程总结"></a>3.设计过程总结</h4><p>自顶向下的设计过程从问题的输入输出开始，整体设计逐渐向下进行。<strong>每一层以大体算法描述开始，然后逐步细化成代码</strong>，细节被函数封装。该设计方法通过封装实现抽象，利用了<strong>模块化设计</strong>的思想。整个过程可以概括为以下4个步骤：</p>
+<ul>
+<li>步骤1：将算法表达为一系列小问题。</li>
+<li>步骤2：为每个小问题设计接口。</li>
+<li>步骤3：通过将算法表达为接口关联的多个小问题来细化算法。</li>
+<li>步骤4：为每个小问题重复上述过程。</li>
+</ul>
+<h3 id="自底向上执行"><a href="#自底向上执行" class="headerlink" title="自底向上执行"></a>自底向上执行</h3><p>（1）程序编写后，需要经过测试。</p>
+<ul>
+<li>小规模程序，直接运行即可</li>
+<li>大规模程序，则是将程序分成小部分逐个测试。</li>
+</ul>
+<p>（2）执行中等规模程序的最好方法是从结构图的最底层开始，而不是从顶部开始，然后逐步上升。或者说，<strong>先运行和测试每一个基本函数，再测试由基础函数组成的整体函数，这样有助于定位错误</strong>。以体育竞技分析为例，可以从gameOver()函数开始测试。</p>
+<p>（3）Python解释器提供import保留字辅助开展单元测试，语法格式如下：</p>
+<pre><code class="python">import &lt;源文件名称&gt;  #这里注意，import要求源文件名称中不能出现英文句号.</code></pre>
+<p>（4）在源文件的路径下打开cmd，运行python环境，对gameOver()函数进行单元测试如下：</p>
+<pre><code class="python">&gt;&gt;&gt; import matchAnalysis
+这个程序模拟两个选手A和B的某种竞技比赛
+程序运行需要A和B的能力值(以0到1之间的小数表示)
+请输入选手A的能力值（0-1）：0.45
+请输入选手B的能力值（0-1）：0.5
+模拟比赛的场次：1000
+竞技分析开始，共模拟1000场比赛
+选手A获胜374场比赛，占比37.4%
+选手B火舌626场比赛，占比62.6%
+&gt;&gt;&gt; matchAnalysis.gameOver(15,10)
+True
+&gt;&gt;&gt; matchAnalysis.gameOver(10,1)
+False</code></pre>
+<p>（5）根据gameOver的测试结果，说明gameOver()函数是正确的。可以进一步测试simOneGame()函数，代码如下：</p>
+<pre><code class="python">&gt;&gt;&gt; matchAnalysis.simOneGame(0.45,0.5)
+(10, 15)
+&gt;&gt;&gt; matchAnalysis.simOneGame(0.45,0.5)
+(9, 15)</code></pre>
+<p>（6）通过这样的<strong>单元测试</strong>可以检测程序中的每个函数，<strong>独立检验</strong>每个函数更容易发现错误。</p>
+<h2 id="pyinstaller库的使用"><a href="#pyinstaller库的使用" class="headerlink" title="pyinstaller库的使用"></a>pyinstaller库的使用</h2><h3 id="pyinstaller概述"><a href="#pyinstaller概述" class="headerlink" title="pyinstaller概述"></a>pyinstaller概述</h3><p>（1）pyinstaller是一个将Python语言脚本(.py文件)打包成可执行文件的第三方库，它能够在Windows、Linux、Mac OS X等操作系统下将Python源文件打包，<strong>通过对源文件打包，Python程序可以在没有安装Python的环境下运行，</strong>也可以作为一个独立文件方便传递和管理。</p>
+<p>（2）pyinstaller需要再命令行下用pip工具安装，代码如下：</p>
+<pre><code>pip3 install pyinstaller</code></pre>
+<p>（3）pyinstaller的官方网站网址为<a target="_blank" rel="noopener" href="http://www.pyinstaller.org/">http://www.pyinstaller.org</a></p>
+<p>（4）pyinstaller库会自动将pyinstaller命令安装到Python解释器目录中，与pip3命令路径相同，因此可以<strong>直接使用。</strong>在<strong>Windows平台的命令行</strong>中输入Python源文件名称，可以使用相对路径或绝对路径，代码如下：</p>
+<pre><code>pyinstaller hello.py  //pyinstaller不支持源文件名中有英文句号(.)存在
+或
+pyinstaller D:\Python\program\第一章\hello.py</code></pre>
+<p>（5）执行完毕后，<strong>源文件所在目录将生成dist和build两个文件夹。</strong>其中，</p>
+<ul>
+<li>build目录是pyinstaller存储临时文件的目录，可以安全删除。</li>
+<li><strong>最终打包程序在dist内部的dpython中。</strong>目录中的其他文件是可执行文件hello.exe的动态链接库。</li>
+</ul>
+<p>（6）<strong>可以通过-F参数对Python源文件生成一个独立的可执行文件</strong>，代码如下：</p>
+<pre><code>pyinstaller -F hello.py</code></pre>
+<p>（7）执行后<strong>在dist目录中出现了hello.exe文件，没有任何依赖库，执行它即可。</strong></p>
+<p>（8）使用pyinstaller库需要注意以下问题：</p>
+<ul>
+<li>文件路径中不能出现空格和英文句号(.)</li>
+<li>源文件必须是UTF-8编码，暂不支持其他编码类型。采用idle编写的源文件都保存为UTF-8编码形式，可直接使用。</li>
+</ul>
+<h4 id="扩展：动态链接"><a href="#扩展：动态链接" class="headerlink" title="扩展：动态链接"></a>扩展：<strong>动态链接</strong></h4><p>（1）动态链接提供了一种方法，能够使进程在运行时实际调用不属于其程序的代码。</p>
+<p>（2）如果其他代码由操作系统提供，则应用程序由于不包含这些代码而变得十分精简。</p>
+<p>（3）Windows平台提供大量的动态链接库，一般使用dll或ocx为扩展名。</p>
+<p>（4）静态链接与动态链接相对，指程序中自包含其所调用的所有代码，这使得程序可以在系统间移动而无需考虑库函数是否一致。</p>
+<h3 id="pyinstaller解析"><a href="#pyinstaller解析" class="headerlink" title="pyinstaller解析"></a>pyinstaller解析</h3><p>（1）pyinstaller的常用参数。</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-h, –help</td>
+<td align="center">查看帮助</td>
+</tr>
+<tr>
+<td align="center">-v, –version</td>
+<td align="center">查看pyinstaller版本</td>
+</tr>
+<tr>
+<td align="center">–clean</td>
+<td align="center">清理打包过程中的临时文件</td>
+</tr>
+<tr>
+<td align="center">-D, –onedir</td>
+<td align="center">默认值，生产dist目录</td>
+</tr>
+<tr>
+<td align="center">-F, –onefile</td>
+<td align="center">在dist文件夹中只生成独立的打包文件</td>
+</tr>
+<tr>
+<td align="center">-p DIR, –paths DIR</td>
+<td align="center">添加python文件使用的第三方库路径</td>
+</tr>
+<tr>
+<td align="center">-i &lt;.ico or .exe,ID or .icns&gt;,   -icon &lt;.ico or .exe,ID or .icns&gt;</td>
+<td align="center">指定打包程序使用的图标(icon)文件</td>
+</tr>
+</tbody></table>
+<p>（2）pyinstaller命令不需要在Python源文件中增加代码，只需通过命令行进行打包即可。</p>
+<p>（3）-F 参数最为常用，对于包含第三方库的源文件，可以使用-p添加第三方库所在路径。若第三方库由pip安装且在Python环境目录中，则不需要使用-p参数。</p>
+<p>（4）在生成的打包文件下执行代码</p>
+<pre><code>PS D:\Python\program\第一章\dist&gt; ./hello.exe
+Hello World</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-deepin/deepin下搭建hexo博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">deepin下搭建hexo博客</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2021-04-06T08:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（1）安装git</p>
+<pre><code>sudo apt install git</code></pre>
+<p>（2）安装npm</p>
+<pre><code>sudo apt install npm</code></pre>
+<p>（3）配置ssh key</p>
+<pre><code>git config --global user.name &quot;username&quot;   //username是你的GitHub用户名
+git config --global user.email &quot;XXXX@XX.com&quot;  //XXXX@XX.com 填你注册GitHub的邮箱
+ssh-keygen -t rsa -C &quot;XXXX@eXX.com&quot; //XXXX@XX.com 填你注册GitHub的邮箱，该步骤按3下回车初始化sshkey</code></pre>
+<p>最终会成生成一个文件在用户目录下(/home/username/.ssh)，找到id_rsa.pub文件，复制文件的内容。接着登陆github，依次点击：头像–&gt;Settings–&gt;SSH and GPG kyes –&gt;New SSH key将ssh key粘贴到github上，title可随意命名。</p>
+<pre><code>ssh -T git@github.com      //测试是否成功，注意邮箱地址不用改  
+/*
+如果提示Are you sure you want to continue connecting (yes/no)?，输入yes，然后会看到：
+Hi liuxianan! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+*/</code></pre>
+<p>（4）将npm换为国内源，使用阿里定制的cnpm命令行工具代替默认的npm</p>
+<pre><code>sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
+<p>（5）安装hexo</p>
+<pre><code>sudo cnpm install -g hexo</code></pre>
+<p>（6）在电脑中新建一个hexo文件夹，在该文件夹下打开终端，初始化hexo</p>
+<pre><code>hexo init     //该命令执行完后会自动下载一些文件到当前路径下</code></pre>
+<p>接着把Windows中的hexo目录下的文件，从scaffolds开始的所有文件复制并替换到Linux下hexo目录下。</p>
+<pre><code>hexo g //生成静态页面
+hexo s //启动服务</code></pre>
+<p>（7）安装插件</p>
+<pre><code>sudo cnpm install hexo-deployer-git --save  </code></pre>
+<p>安装完插件后就可以使用如下命令提交改动的代码</p>
+<pre><code>hexo d</code></pre>
+<p>扩展：在Deepin 15.9.3系统中将/etc/NetworkManager/NetworkManager.conf文件中的下面两行前面加上#注释掉，即：</p>
+<p>#[connectivity]</p>
+<p>#uri=<a target="_blank" rel="noopener" href="http://packages.deepin.com/misc/check_network_status.txt">http://packages.deepin.com/misc/check_network_status.txt</a></p>
+<p>然后保存修改的NetworkManager.conf文件。</p>
+<p>2、在系统终端中重新启动网络</p>
+<p>运行以下命令：</p>
+<p>systemctl restart network-manager</p>
+<p>做完以上两步，通常情况下屏幕就可以调节色温了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/Linux下进行Python3的pip换源操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -184,11 +644,11 @@ nameserver 8.8.8.8</code></pre>
 <p>（5）pip3 config set global.index-url 源链接 #若pip3版本大于10，则可使用这条命令进行换源，无需进行其它新建文件操作</p>
 <p>（6）pip3 install 库名称 #换源成功后下载第三方库</p>
 <p>（7）国内源地址</p>
-<pre><code>清华大学 https：//pypi.tuna.tsinghua.edu.cn/simple/ 
-阿里云 http：//mirrors.aliyun.com/pypi/simple/ 
-中国科技大学 https：//pypi.mirrors.ustc.edu.cn/simple/ 
-豆瓣(douban) http：//pypi.douban.com/simple/ 
-中国科学技术大学 http：//pypi.mirrors.ustc.edu.cn/simple/</code></pre>
+<pre><code>清华大学 https://pypi.tuna.tsinghua.edu.cn/simple/ 
+阿里云 http://mirrors.aliyun.com/pypi/simple/ 
+中国科技大学 https://pypi.mirrors.ustc.edu.cn/simple/ 
+豆瓣(douban) http://pypi.douban.com/simple/ 
+中国科学技术大学 http://pypi.mirrors.ustc.edu.cn/simple/</code></pre>
 
       
 
@@ -4039,1143 +4499,6 @@ xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全进阶/HTML代码进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">HTML代码进阶</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-15T06:47:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="网站前端架构介绍"><a href="#网站前端架构介绍" class="headerlink" title="网站前端架构介绍"></a>网站前端架构介绍</h2><h3 id="WEB应用的基本架构"><a href="#WEB应用的基本架构" class="headerlink" title="WEB应用的基本架构"></a>WEB应用的基本架构</h3><p><img src="https://i.loli.net/2021/03/15/52cAsmaUxB4gwnF.png" alt="image-20210315145057858"></p>
-<h3 id="从网页制作到前端开发"><a href="#从网页制作到前端开发" class="headerlink" title="从网页制作到前端开发"></a>从网页制作到前端开发</h3><p>（1）WEB1.0时代的产物是“网页制作”，这时候的网页主要是静态网页，即没有与用户进行交互，而仅仅供读者浏览的网页，例如一篇日志、博文等展示性文章。（缺乏交互性）</p>
-<p>（2）WEB2.0时代，网页有静态网页和动态网页。</p>
-<ul>
-<li>所谓动态网页，就是用户不仅可以浏览网页，还可以与服务器进行交互。例如用户登录某个网站，输入账号密码，由服务器对该用户的账号进行验证，通过验证即可成功登录。</li>
-<li>WEB2.0时代的网页不仅包含绚丽的动画、音频和视频，还可以让用户在网页中进行评论交流、上传和下载文件等。具有良好的交互性。因而不再叫做“网页制作”，而是叫“WEB前端开发”。</li>
-</ul>
-<h3 id="前端网站搭建所需环境"><a href="#前端网站搭建所需环境" class="headerlink" title="前端网站搭建所需环境"></a>前端网站搭建所需环境</h3><p>（1）Web服务程序：Apache或IIS</p>
-<p>（2）数据库服务程序：mysql或mssql</p>
-<p>（3）操作脚本引擎：PHP或JSP</p>
-<h3 id="前端架构核心技术"><a href="#前端架构核心技术" class="headerlink" title="前端架构核心技术"></a>前端架构核心技术</h3><p>（1）网页最主要由3部分组成：结构、表现和行为，目前模式是HTML、CSS和JavaScript。</p>
-<p>（2）HTML是网页的结构，便于浏览器进行解析。CSS是网页的外观，使HTML文档更美观。而JavaScript是页面的行为赋予网站一些特定的动作，如放大或缩小图片。</p>
-<p>（3）CSS（Cascading Style Sheets）,用来表现HTML文件样式的计算机语言。CSS不仅可以静态地修饰网页，还可以配合各种脚本语言动态地对网页各元素进行格式化。</p>
-<p>（4）HTML文档中可以嵌入css和JavaScript，也可以将css和JavaScript单独下载css或js文件中，然后引入HTML文档中。</p>
-<h2 id="HTML基本语法"><a href="#HTML基本语法" class="headerlink" title="HTML基本语法"></a>HTML基本语法</h2><h3 id="代码编写编辑器"><a href="#代码编写编辑器" class="headerlink" title="代码编写编辑器"></a>代码编写编辑器</h3><p>（1）离线编辑器：pycharm、Sublime Text3、Notepad++、vsCode</p>
-<p>（2）在线编辑器：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.jq22.com/webide/">https://www.jq22.com/webide/</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tiy/t.asp">https://www.w3school.com.cn/tiy/t.asp</a></li>
-<li><a target="_blank" rel="noopener" href="https://c.runoob.com/front-end/61">https://c.runoob.com/front-end/61</a></li>
-</ul>
-<p>（3）VScode快捷键：Ctrl+/  注释、Tab   补全、Alt+B  运行。</p>
-<h3 id="HTML基本概念"><a href="#HTML基本概念" class="headerlink" title="HTML基本概念"></a>HTML基本概念</h3><p>（1）HTML指的是超文本标记语言(Hyper Text Markup Language)</p>
-<p>（2）HTML不是一种编程语言，而是一种标记语言(Markup Language)，标记语言是一套标记标签(Markup Tag)</p>
-<p>（3）HTML使用标记标签来描述网页</p>
-<p>（4）HTML标签是由尖括号包围的关键词，比如&lt;html&gt;</p>
-<p>（5）<strong>HTML标签通常是成对出现的</strong>，比如&lt;b&gt;和&lt;/b&gt;</p>
-<p>（6）<strong>标签对中第一个标签是开始标签，第二个标签是结束标签</strong></p>
-<p>（7）开始标签和结束标签也被称为开放标签和闭合标签</p>
-<p>（8）<strong>编写HTML时，不会出现报错信息，并且具有自动纠错功能。</strong></p>
-<p>PS:<strong>HTML文档通常用htm和html作为后缀名。Web浏览器的作用是读取HTML文档，并以网页的形式显示出他们。浏览器不会显示HTML标签，而是使用标签来解释页面的内容。</strong></p>
-<h3 id="HTML元素"><a href="#HTML元素" class="headerlink" title="HTML元素"></a>HTML元素</h3><p>（1）HTML元素指的是从开始标签(start tag)，到结束标签(end tag)的所有代码。</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;a href=&quot;index.html&quot;&gt;首页&lt;/a&gt;
-        &lt;br&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-&lt;!-- 上述HTML代码中，html元素中嵌套了body元素，body元素中又嵌套了a元素和br元素 --&gt;</code></pre>
-<p><img src="https://i.loli.net/2020/12/16/ahLjpODg9TUnw6I.png" alt="image-20201216201051807"></p>
-<p>（2）HTML元素语法</p>
-<ul>
-<li><p>HTML元素以开始标签(start tag)起始，以结束标签(end tag)终止</p>
-</li>
-<li><p>元素的内容是开始标签与结束标签之间的内容</p>
-</li>
-<li><p>某些HTML元素内容为空，空元素在开始标签中闭合，无结束标签</p>
-</li>
-<li><p>大多数HTML元素可拥有属性，属性总是以名称/值对的形式出现，提供了有关HTML元素的更多信息。</p>
-<p>属性总是在HTML元素的开始标签中规定；属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没问题。</p>
-</li>
-</ul>
-<p>（3）嵌套的HTML元素</p>
-<ul>
-<li>大多数HTML元素可以嵌套(可以包含其他HTML元素)</li>
-<li>HTML文档由嵌套的HTML元素构成</li>
-</ul>
-<p>（4）空的HTML元素</p>
-<ul>
-<li>没有内容的HTML元素被称为空元素。空元素是在开始标签中关闭的。</li>
-<li>&lt;br /&gt;就是没有关闭标签的空元素(&lt;br /&gt;标签定义换行)</li>
-</ul>
-<h3 id="常见的HTML标签"><a href="#常见的HTML标签" class="headerlink" title="常见的HTML标签"></a>常见的HTML标签</h3><p>行标签、块标签、行列块标签</p>
-<p>（1）基础标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&lt;!DOCTYPE&gt;</td>
-<td align="center">定义文档类型</td>
-</tr>
-<tr>
-<td align="center">&lt;html&gt;</td>
-<td align="center">定义HTML文档</td>
-</tr>
-<tr>
-<td align="center">&lt;body&gt;</td>
-<td align="center">定义文档的主体</td>
-</tr>
-<tr>
-<td align="center">&lt;head&gt;</td>
-<td align="center">定义关于文档的信息，默认换行</td>
-</tr>
-<tr>
-<td align="center">&lt;meta&gt;</td>
-<td align="center">定义关于HTML文档的元信息</td>
-</tr>
-<tr>
-<td align="center">&lt;title&gt;</td>
-<td align="center">定义文档的题目</td>
-</tr>
-<tr>
-<td align="center">&lt;script&gt;</td>
-<td align="center">定义客户端脚本，元素内容编写js代码</td>
-</tr>
-<tr>
-<td align="center">&lt;style&gt;</td>
-<td align="center">元素内容编写css代码</td>
-</tr>
-</tbody></table>
-<p>（2）多媒体标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>&lt;img&gt;</strong></td>
-<td align="center"><strong>定义图像</strong></td>
-</tr>
-<tr>
-<td align="center">&lt;audio&gt;</td>
-<td align="center">定义声音内容</td>
-</tr>
-<tr>
-<td align="center">&lt;video&gt;</td>
-<td align="center">定义视频</td>
-</tr>
-</tbody></table>
-<pre><code class="html">&lt;img src=&quot;&quot;  alt=&quot;&quot;&gt;test&lt;/img&gt;
-&lt;audio src=&quot;&quot; controls&gt;&lt;/audio&gt;
-&lt;video src=&quot;&quot; controls&gt;&lt;/video&gt;
-&lt;!-- src和href表示资源路径，如果无法显示图片，浏览器将显示代替文本，即alt的值。controls代表显示控件，可以让用户手动播放音频和视频--&gt;</code></pre>
-<p>（3）表单标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>&lt;form&gt;</strong></td>
-<td align="center"><strong>定义供用户输入的HTML表单</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;input&gt;</strong></td>
-<td align="center"><strong>定义输入控件(一个输入框)</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;textarea&gt;</strong></td>
-<td align="center">定义多行的文本输入控件(一个大的多行输入框)</td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;button&gt;</strong></td>
-<td align="center">定义按钮</td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;select&gt;</strong></td>
-<td align="center">定义选择列表(下拉列表)</td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;optgroup&gt;</strong></td>
-<td align="center">定义选择列表中的相关选项的组合</td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;option&gt;</strong></td>
-<td align="center">定义选择列表中的选项</td>
-</tr>
-<tr>
-<td align="center">&lt;fieldset&gt;</td>
-<td align="center">定义围绕表单中元素的边框</td>
-</tr>
-<tr>
-<td align="center">&lt;datalist&gt;</td>
-<td align="center">定义下拉列表</td>
-</tr>
-</tbody></table>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;/head&gt;
-&lt;form action=&quot;1.php&quot; method=&quot;GET&quot;&gt; 
-    &lt;h1&gt;个人信息填写&lt;/h1&gt;
-    &lt;!-- action表示将表单提交到哪里，method表示提交的方法(GET或POST)--&gt;
-    性别：
-    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;&gt;男
-    &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;&gt;女
-    &lt;!-- input定义一个输入框，根据type值的不同有不同的输入方式和内容。常用的type的值有：number(数字)text(文本)、date(日期)、email(邮件)、password(密码)、radio(单选框)、checkbox(复选框)。当参数名称name的值相同时，单选框只能选择一个，提交表单时提交value对应的值。--&gt;
-    &lt;br/&gt;
-    爱好：
-    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;运动
-    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;漫画
-    &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;&quot;&gt;游戏
-    &lt;br/&gt;
-    城市：
-    &lt;!-- 下拉框--&gt;
-    &lt;select name=&quot;&quot; id=&quot;&quot;&gt;
-        &lt;optgroup&gt;
-            &lt;option value=&quot;厦门&quot;&gt;厦门&lt;/option&gt;
-            &lt;option value=&quot;福州&quot;&gt;福州&lt;/option&gt;
-            &lt;option value=&quot;泉州&quot;&gt;泉州&lt;/option&gt;
-        &lt;/optgroup&gt;
-        &lt;br/&gt;
-        &lt;optgroup&gt;
-            &lt;option value=&quot;成都&quot;&gt;成都&lt;/option&gt;
-        &lt;/optgroup&gt;
-    &lt;/select&gt;
-    &lt;br/&gt;
-    个人描述：
-    &lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;500&quot; sytle=&quot;resize:none;&quot;&gt;&lt;/textarea&gt;
-    &lt;!-- cols表示列数，rows表示行数，浏览器显示时可随意拉伸该文本框,resize:none;表示禁止拉伸--&gt;
-    &lt;br/&gt;
-    &lt;input type=&quot;submit&quot; /&gt; &lt;!--一般用于提交表单，而不是botton标签，button一般放在form标签外面--&gt;
-    &lt;input type=&quot;reset&quot; /&gt; &lt;!--重置表单的所有数据--&gt;
-
-&lt;/form&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/21/3S2o5Fri9BMVU7f.png" alt="image-20210321093128668"></p>
-<p>（4）链接标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>&lt;a&gt;</strong></td>
-<td align="center"><strong>定义超链接</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;link&gt;</strong></td>
-<td align="center">定义文档与外部资源的关系</td>
-</tr>
-</tbody></table>
-<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;demo.css&quot; target=&quot;_blank&quot;/&gt;
-&lt;!-- 在编写HTML代码时，可用用link标签引入css文件。href表示css文件的存放位置，URL。若HTML文件和css文件在同一个目录下，href值如上.target=&quot;_blank&quot;表示打开一个新窗口，值为_self为打开当前窗口 --&gt;</code></pre>
-<p>（5）格式标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>&lt;h1&gt;to&lt;h6&gt;</strong></td>
-<td align="center"><strong>定义HTML标题</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;p&gt;</strong></td>
-<td align="center"><strong>定义段落,默认在前后存在换行</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;br&gt;</strong></td>
-<td align="center"><strong>定义换行</strong></td>
-</tr>
-<tr>
-<td align="center">&lt;hr&gt;</td>
-<td align="center">定义水平线</td>
-</tr>
-<tr>
-<td align="center">&lt;b&gt;</td>
-<td align="center">定义粗体文本</td>
-</tr>
-<tr>
-<td align="center">&lt;big&gt;</td>
-<td align="center">定义大号文本</td>
-</tr>
-<tr>
-<td align="center">&lt;em&gt;</td>
-<td align="center">定义强调文本</td>
-</tr>
-<tr>
-<td align="center">&lt;i&gt;</td>
-<td align="center">定义斜体文本</td>
-</tr>
-<tr>
-<td align="center">&lt;pre&gt;</td>
-<td align="center">定义预格式文本</td>
-</tr>
-<tr>
-<td align="center">&lt;small&gt;</td>
-<td align="center">定义小号文本</td>
-</tr>
-<tr>
-<td align="center">&lt;font&gt;</td>
-<td align="center">定义文本的字体大小和颜色</td>
-</tr>
-</tbody></table>
-<pre><code class="html">&lt;hr color=&quot;red&quot; width=&quot;500px&quot; align=&quot;left&quot;&gt;
-&lt;!-- 水平线宽度为500像素，向左居中--&gt;
-&lt;font color=&quot;red&quot; size=&quot;18px&quot;&gt;文本&lt;/font&gt;
-&lt;!-- px为像素单位--&gt;</code></pre>
-<p>（6）样式/节标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>&lt;style&gt;</strong></td>
-<td align="center"><strong>定义文档的样式信息</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;div&gt;</strong></td>
-<td align="center"><strong>定义文档中的分隔区块</strong></td>
-</tr>
-<tr>
-<td align="center">&lt;span&gt;</td>
-<td align="center">定义文档中的节</td>
-</tr>
-</tbody></table>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;div class=&quot;&quot; style=&quot;&quot;&gt;  &lt;!-- div作为一个块级元素，默认会占满一整行因此有换行的效果，但严格意义上说并不是换行，可以通过width，height，float等属性修改块的大小使之没有换行效果。独立成块，看成是一个容器，可在其中添加文字、图片、超链接等--&gt;
-
-        &lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>（7）表格标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&lt;table&gt;</td>
-<td align="center">定义表格</td>
-</tr>
-<tr>
-<td align="center">&lt;caption&gt;</td>
-<td align="center">定义表格标题</td>
-</tr>
-<tr>
-<td align="center">&lt;th&gt;</td>
-<td align="center">定义表格中的表头单元格</td>
-</tr>
-<tr>
-<td align="center">&lt;td&gt;</td>
-<td align="center">定义表格中的单元格（列）</td>
-</tr>
-<tr>
-<td align="center">&lt;tr&gt;</td>
-<td align="center">定义表格中的行</td>
-</tr>
-</tbody></table>
-<p>tr：表示表格中的一行，特点：存在N个tr，则会在表格中出现N行</p>
-<p>td：表示一行中的一个单元格，特点：存在N个td，则会在该行中出现N个单元格</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;table border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;50&quot; border-collapse:collapse&gt; &lt;!-- border表示设置边框的宽度，cellspacing表示外边距,为0则隐藏了外边距但还存在。cellpadding设置表格的内边距。
-
-border-collapse：属性，为表格设置合并边框模型。
-
-其属性值如下：
-
-separate：默认值。边框会被分开。
-
-collapse：将边框会合并为一个单线的边框--&gt;
-
-            &lt;!--创建一个5行5列的表格,存在5个tr，25个td--&gt;
-           &lt;caption&gt;Security&lt;/caption&gt; &lt;!--表格标题，在表格的上方居中显示--&gt;
-            &lt;tr&gt;
-               &lt;th&gt;test1&lt;/th&gt;      &lt;!-- th表示表头单元格,有加粗--&gt;
-               &lt;th&gt;test2&lt;/th&gt;
-               &lt;th&gt;test3&lt;/th&gt;
-               &lt;th&gt;test4&lt;/th&gt;
-               &lt;th&gt;test5&lt;/th&gt;
-           &lt;/tr&gt;
-            &lt;tr&gt;
-               &lt;td&gt;1&lt;/td&gt;
-               &lt;td&gt;1&lt;/td&gt;
-               &lt;td&gt;1&lt;/td&gt;
-               &lt;td&gt;1&lt;/td&gt;
-               &lt;td&gt;1&lt;/td&gt;
-           &lt;/tr&gt; 
-        &lt;/tabel&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>（8）框架标签</p>
-<table>
-<thead>
-<tr>
-<th align="center">标签</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&lt;frame&gt;</td>
-<td align="center">定义框架集的窗口或框架</td>
-</tr>
-<tr>
-<td align="center">&lt;frameset&gt;</td>
-<td align="center">定义框架集</td>
-</tr>
-<tr>
-<td align="center"><strong>&lt;iframe&gt;</strong></td>
-<td align="center"><strong>定义内联框架</strong></td>
-</tr>
-</tbody></table>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;style&gt;
-            iframe&#123;
-
-            &#125;
-        &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;iframe src=&quot;&quot; frameborder=&quot;0&quot; width=&quot;1000px&quot;  height=&quot;100%&quot;&gt;  
-            &lt;!--iframe 内联框架，块级元素，有宽度和高度,可以在当前网页内引入另一个网页的资源,可加载并显示其他网页的内容,frameborder=0表示关闭边框，为1显示边框。高度和宽度值设置为100%表示占满全屏 --&gt;
-
-        &lt;/iframe&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>参考链接:<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/index.asp">https://www.w3school.com.cn/tags/index.asp</a></p>
-<h3 id="HTML注释"><a href="#HTML注释" class="headerlink" title="HTML注释"></a>HTML注释</h3><p>（1）注释标签&lt;!– 与 –&gt; 用于在HTML插入注释</p>
-<pre><code class="html">&lt;!-- 在此处写注释 --&gt;</code></pre>
-<p>（2）注释：在开始标签中有一个惊叹号，但是结束标签中没有。</p>
-<p>（3）浏览器不会显示注释，但是能够帮助记录HTML文档。</p>
-<p>（4）可以利用注释在HTML中放置通知和提醒信息。</p>
-<h3 id="HTML实体编码"><a href="#HTML实体编码" class="headerlink" title="HTML实体编码"></a>HTML实体编码</h3><p>（1）HTML实体编码，也即HTML中的转义字符</p>
-<ul>
-<li>在 HTML 中不能使用小于号（&lt;）和大于号（&gt;），这是因为浏览器会误认为它们是标签。</li>
-<li>如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体（character entities）。</li>
-<li>字符实体类似：&entity_name;或者&#entity_number;</li>
-</ul>
-<p>（2）如需显示小于号，我们必须这样写：&amp;lt; 或 &amp;#60;</p>
-<p>（3）使用实体名而不是数字的好处是，名称易于记忆。不过坏处是，浏览器也许并不支持所有实体名称（对实体数字的支持却很好）。</p>
-<p>（4）常见的实体编码，参考链接：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/html/html_entities.asp">https://www.w3school.com.cn/html/html_entities.asp</a></p>
-<table>
-<thead>
-<tr>
-<th align="left">显示结果</th>
-<th align="left">描述</th>
-<th align="left">实体名称</th>
-<th align="left">实体编号</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"></td>
-<td align="left">空格</td>
-<td align="left">&amp;nbsp;</td>
-<td align="left">&amp;#160;</td>
-</tr>
-<tr>
-<td align="left">&lt;</td>
-<td align="left">小于号</td>
-<td align="left">&amp;lt;</td>
-<td align="left">&amp;#60;</td>
-</tr>
-<tr>
-<td align="left">&gt;</td>
-<td align="left">大于号</td>
-<td align="left">&amp;gt;</td>
-<td align="left">&amp;#62;</td>
-</tr>
-<tr>
-<td align="left">&amp;</td>
-<td align="left">和号</td>
-<td align="left">&amp;amp;</td>
-<td align="left">&amp;#38;</td>
-</tr>
-<tr>
-<td align="left">“</td>
-<td align="left">引号</td>
-<td align="left">&amp;quot;</td>
-<td align="left">&amp;#34;</td>
-</tr>
-<tr>
-<td align="left">‘</td>
-<td align="left">撇号</td>
-<td align="left">&amp;apos; (IE不支持)</td>
-<td align="left">&amp;#39;</td>
-</tr>
-<tr>
-<td align="left">©</td>
-<td align="left">版权（copyright）</td>
-<td align="left">&amp;copy;</td>
-<td align="left">&amp;#169;</td>
-</tr>
-</tbody></table>
-<p>（5）HTML属性–全局属性</p>
-<p>全局属性是可用于为任何HTML元素赋予意义和语境的属性。</p>
-<table>
-<thead>
-<tr>
-<th align="center">属性</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">class</td>
-<td align="center">规定元素的一个或多个类名(引用样式表中的类)</td>
-</tr>
-<tr>
-<td align="center">hidden</td>
-<td align="center">规定元素进行隐藏</td>
-</tr>
-<tr>
-<td align="center">id</td>
-<td align="center">规定元素的唯一id</td>
-</tr>
-<tr>
-<td align="center">style</td>
-<td align="center">规定元素的行内CSS样式</td>
-</tr>
-<tr>
-<td align="center">title</td>
-<td align="center">规定有关元素的额外信息</td>
-</tr>
-<tr>
-<td align="center">data-*</td>
-<td align="center">路由。用于存储页面或应用程序的私有定制数据</td>
-</tr>
-</tbody></table>
-<p>ps：id、class方便使用css和JavaScript控制对应的元素，id是唯一的，class是对应一个类</p>
-<h2 id="HTML事件属性"><a href="#HTML事件属性" class="headerlink" title="HTML事件属性"></a>HTML事件属性</h2><p>（1）事件型属性是可以使HTML事件触发浏览器中的行为，比方说当用户点击某个HTML元素时启动一段JavaScript。</p>
-<p>（2）事件型属性通常可以分为：全局事件属性，窗口事件属性，表单事件属性，键盘事件属性，鼠标事件属性，多媒体事件属性，其他事件属性。</p>
-<h3 id="Window事件属性—onerror事件"><a href="#Window事件属性—onerror事件" class="headerlink" title="Window事件属性—onerror事件"></a>Window事件属性—onerror事件</h3><p>（1）onerror：在错误发生时运行的脚本。</p>
-<p>（2）定义和用法：</p>
-<ul>
-<li>onerror事件会在文档或图像加载过程中发生错误时被触发。</li>
-<li>在装载文档或图像的过程中如果发生了错误，就会调用该事件句柄。</li>
-</ul>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;!-- onerror 事件会在文档或图像加载过程中发生错误时被触发。--&gt;
-        &lt;img src=&quot;image.gif&quot;
-             onerror=&quot;alert(&#39;The image could not be loaded.&#39;)&quot; /&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/EOgsuHUzaYPecBd.png" alt="image-20210315165838173"></p>
-<h3 id="Window事件属性—onload事件"><a href="#Window事件属性—onload事件" class="headerlink" title="Window事件属性—onload事件"></a>Window事件属性—onload事件</h3><p>（1）onload：页面结束加载之后触发。</p>
-<p>（2）定义和用法：</p>
-<ul>
-<li>onload属性在对象已加载时触发。</li>
-<li>onload常用在&lt;body&gt;中，一旦完全加载所有内容(包括图像、脚本文件、CSS文件等)，就执行一段脚本。</li>
-</ul>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;body onload=&quot;alert(&#39;该页面已加载！&#39;)&quot;&gt;
-        &lt;h1&gt;
-            Hello World!
-        &lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/86aqodCfvhipGBl.png" alt="image-20210315180956314"></p>
-<h3 id="Form事件属性—onchange事件"><a href="#Form事件属性—onchange事件" class="headerlink" title="Form事件属性—onchange事件"></a>Form事件属性—onchange事件</h3><p>（1）onchange：在元素值被改变时运行的脚本。</p>
-<p>（2）定义和用法：</p>
-<ul>
-<li>onchange事件会在域的内容改变时发生。</li>
-<li>onchange事件也可用于单选框与复选框改变后触发的事件</li>
-<li>onchange属性适用于：&lt;input&gt;、&lt;textarea&gt;以及&lt;select&gt;元素。</li>
-</ul>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;script&gt;
-            function myFunction()&#123;
-                var x=document.getElementById(&quot;fname&quot;);
-                x.value=x.value.toUpperCase();
-            &#125;
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        输入你的名字：&lt;input type=&quot;text&quot; id=&quot;fname&quot; onchange=&quot;myFunction()&quot;&gt;
-        &lt;!--当你离开输入框后，函数将被触发，将小写字母转变为大写字母--&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/nmSdzCarPgTRs1q.png" alt="image-20210315181941724"></p>
-<p><img src="https://i.loli.net/2021/03/15/2olfHGX8RTmL3wS.png" alt="image-20210315181959113"></p>
-<h3 id="Form事件属性—onfocus事件"><a href="#Form事件属性—onfocus事件" class="headerlink" title="Form事件属性—onfocus事件"></a>Form事件属性—onfocus事件</h3><p>（1）onfocus：当元素获得焦点时运行的脚本。</p>
-<p>（2）定义和用法：</p>
-<ul>
-<li>onfocus属性在元素获得焦点时触发</li>
-<li>onfocus常用于&lt;input&gt;、&lt;select&gt;以及&lt;a&gt;</li>
-</ul>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;script&gt;
-            function myFunction(x)&#123;
-                x.style.background=&quot;yellow&quot;;
-            &#125;
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        输入你的名字：&lt;input type=&quot;text&quot; onfocus=&quot;myFunction(this)&quot;&gt;
-        &lt;!--当输入框获取焦点时，修改背景色将被触发--&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/1G263yPbEOo8qfe.png" alt="image-20210315182624985"></p>
-<p><img src="https://i.loli.net/2021/03/15/vk34qrVUO8FSlwB.png" alt="image-20210315182637474"></p>
-<h3 id="Mouse事件属性—onclick事件"><a href="#Mouse事件属性—onclick事件" class="headerlink" title="Mouse事件属性—onclick事件"></a>Mouse事件属性—onclick事件</h3><p>onclick：元素上发生鼠标点击时触发。</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;script&gt;
-            function myFunction()&#123;
-                document.getElementById(&quot;demo&quot;).innerHTML=&quot;Hello World&quot;;
-            &#125;
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;button onclick=&quot;myFunction()&quot;&gt;
-            点我
-        &lt;/button&gt;
-        &lt;p id=&quot;demo&quot;&gt;
-        &lt;/p&gt;
-        &lt;!-- 点击将触发onclick事件 --&gt;
-        &lt;button onclick=&quot;window.location.href=&#39;http:\/\/127.0.0.1&#39;&quot;&gt;
-            填写个人信息
-        &lt;/button&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/OsY4WdJU2cRVurM.png" alt="image-20210315184435547"></p>
-<h3 id="Mouse事件属性—onmousemove事件"><a href="#Mouse事件属性—onmousemove事件" class="headerlink" title="Mouse事件属性—onmousemove事件"></a>Mouse事件属性—onmousemove事件</h3><p>onmouseover：当鼠标指针移动到元素时触发</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;input onmousemove=&quot;alert(&#39;The event has been triggered&#39;)&quot;&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/4iME3hV2CygcuX1.png" alt="image-20210315185221847"></p>
-<h3 id="Mouse事件属性—onmouseover事件"><a href="#Mouse事件属性—onmouseover事件" class="headerlink" title="Mouse事件属性—onmouseover事件"></a>Mouse事件属性—onmouseover事件</h3><pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;h1 onmouseover=&quot;alert(&#39;The event has been triggered&#39;)&quot;&gt;hanker&lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/wAdP5poI19yfmJF.png" alt="image-20210315185526053"></p>
-<h3 id="HTML列表"><a href="#HTML列表" class="headerlink" title="HTML列表"></a>HTML列表</h3><p>HTML支持有序、无序列表</p>
-<p>（1）定义无序列表：ul+li</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;ul&gt;
-            &lt;li&gt;咖啡&lt;/li&gt;
-            &lt;li&gt;茶&lt;/li&gt;
-            &lt;li&gt;牛奶&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/vtYNhQykP7JHfWM.png" alt="image-20210315190107145"></p>
-<p>（2）定义有序列表：ol+li</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;ol&gt;
-            &lt;li&gt;咖啡&lt;/li&gt;
-            &lt;li&gt;茶&lt;/li&gt;
-            &lt;li&gt;牛奶&lt;/li&gt;
-        &lt;/ol&gt;
-        &lt;ol start=&quot;50&quot;&gt;
-           &lt;li&gt;咖啡&lt;/li&gt;
-           &lt;li&gt;茶&lt;/li&gt;
-           &lt;li&gt;牛奶&lt;/li&gt; 
-        &lt;/ol&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/RFi12fZT4vWtKUb.png" alt="image-20210315190327677"></p>
-<h3 id="HTML表单"><a href="#HTML表单" class="headerlink" title="HTML表单"></a>HTML表单</h3><p>（1）HTML表单用于搜集不同类型的用户输入</p>
-<p>（2）&lt;form&gt;元素</p>
-<ul>
-<li>HTML表单用于收集用户输入</li>
-</ul>
-<p>（3）HTML表单包含表单元素。</p>
-<ul>
-<li>表单元素指的是不同类型的input元素、复选框、单选按钮、提交按钮等等。</li>
-</ul>
-<p>（4）&lt;input&gt;元素是最重要的表单元素</p>
-<p>（5）&lt;input&gt;元素有很多形态，根据不同的type属性。</p>
-<table>
-<thead>
-<tr>
-<th align="center">类型</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">text</td>
-<td align="center">定义常规文本输入</td>
-</tr>
-<tr>
-<td align="center">radio</td>
-<td align="center">定义单选按钮输入（选择多个选择之一）</td>
-</tr>
-<tr>
-<td align="center">submit</td>
-<td align="center">定义提交按钮（提交表单）</td>
-</tr>
-</tbody></table>
-<h4 id="文本输入"><a href="#文本输入" class="headerlink" title="文本输入"></a>文本输入</h4><p>&lt;input type=”text”&gt;定义用于文本输入的单行输入字段</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;form&gt;
-            First name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;firstname&quot;/&gt;
-            &lt;br&gt;
-            Last name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;/&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/bpMRWlGhvE3J9jU.png" alt="image-20210315191807882"></p>
-<h4 id="单选按钮"><a href="#单选按钮" class="headerlink" title="单选按钮"></a>单选按钮</h4><p>（1）&lt;input type=”radio”&gt;定义单选按钮</p>
-<p>（2）单选按钮允许用户在有限数量的选项中选择其中之一。</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;form&gt;
-            &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;/&gt;Male
-            &lt;br&gt;
-            &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;female&quot;/&gt;Female
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/c3WLbOfRqaQTGnv.png" alt="image-20210315192243280"></p>
-<h4 id="提交按钮"><a href="#提交按钮" class="headerlink" title="提交按钮"></a>提交按钮</h4><p>（1）&lt;input type=”submit”&gt;定义用于向表单处理程序提交表单的按钮</p>
-<p>（2）表单处理程序通常是包含用来处理输入数据的脚本的服务器页面</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;form action=&#39;form.php&#39;&gt;
-            First name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;firstname&quot;/&gt;
-            &lt;br&gt;
-            Last name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;/&gt;
-            &lt;br&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;submit&quot;/&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/uWx9OeFcNGq3bHM.png" alt="image-20210315192941921"></p>
-<p><img src="https://i.loli.net/2021/03/15/UnsfAECtjNOgGla.png" alt="image-20210315193009434"></p>
-<h4 id="各种框总结"><a href="#各种框总结" class="headerlink" title="各种框总结"></a>各种框总结</h4><ul>
-<li>文本框：text</li>
-<li>隐藏文本框：hidden</li>
-<li>密码框：password</li>
-<li>多选框：checkbox</li>
-<li>单选框：radio</li>
-<li>提交按钮：submit</li>
-<li>重置按钮：reset</li>
-<li>多选框：select、option</li>
-</ul>
-<h4 id="action属性"><a href="#action属性" class="headerlink" title="action属性"></a>action属性</h4><p>（1）action属性定义在提交表单时执行的动作</p>
-<p>（2）向服务器提交表单通常做法是使用提交按钮</p>
-<p>（3）通常，表单会被提交到web服务器上的网页</p>
-<pre><code class="html">&lt;form action=&quot;action_page.php&quot;&gt;</code></pre>
-<p>（4）如果省略action属性，则action会被设置为当前页面</p>
-<h4 id="method属性"><a href="#method属性" class="headerlink" title="method属性"></a>method属性</h4><p>（1）method属性规定在提交表单时所用的HTTP方法(GET或POST)</p>
-<pre><code class="html">&lt;form action=&quot;action_page.php&quot; method=&quot;GET&quot;&gt;
-&lt;form action=&quot;action_page.php&quot; method=&quot;POST&quot;&gt;</code></pre>
-<p>（2）如果表单提交是被动的（比如搜索引擎查询），并且没有敏感信息。表单数据在页面地址栏是可见的。这时使用GET.</p>
-<pre><code>action_page.php?firstname=Mickey&amp;lastname=Mouse</code></pre>
-<p>（3）如果表单正在更新数据，或者包含敏感信息(例如密码）。POST的安全性更佳，因为在页面地址栏中被提交的数据是不可见的。</p>
-<h4 id="校验函数"><a href="#校验函数" class="headerlink" title="校验函数"></a>校验函数</h4><p>onsubmit事件在表单提交时触发，当检验不通过时，就不会提交表单内容。</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;login&lt;/title&gt;
-    &lt;/head&gt;
-
-    &lt;body&gt;
-        &lt;h3&gt;
-            Login Please
-        &lt;/h3&gt;
-        &lt;script type=&quot;text/javascript&quot;&gt;
-            function check()&#123;
-                alert(&quot;check函数被触发了~&quot;)
-                return true   //此处改为false就不会提交，会返回false
-            &#125;
-        &lt;/script&gt;
-
-        &lt;form action=&quot;/login.php&quot; method=&quot;post&quot; onsubmit=&quot;return check()&quot;&gt;
-            姓名：&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;br&gt;
-            密码：&lt;input type=&quot;text&quot; password=&quot;password&quot;&gt;&lt;br&gt;
-            &lt;input value=&quot;提交&quot; type=&quot;submit&quot; name=&quot;submit&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/Y1lJreIVGRN7zKo.png" alt="image-20210315203458505"></p>
-<h3 id="HTML的form属性"><a href="#HTML的form属性" class="headerlink" title="HTML的form属性"></a>HTML的form属性</h3><p><img src="https://i.loli.net/2021/03/15/1jKqzZuAaE8GdsX.png" alt="image-20210315194714650"></p>
-<h3 id="常见的输入限制"><a href="#常见的输入限制" class="headerlink" title="常见的输入限制"></a>常见的输入限制</h3><p><img src="https://i.loli.net/2021/03/15/cX2CD8gmvsU5NM4.png" alt="image-20210315194834108"></p>
-<h4 id="value属性"><a href="#value属性" class="headerlink" title="value属性"></a>value属性</h4><p>value属性规定输入字段的初始值</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;form&gt;
-            First name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot;&gt;
-            &lt;br&gt;
-            Last name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/EQ3ZUHK25VmNazJ.png" alt="image-20210315200004163"></p>
-<h4 id="readonly属性"><a href="#readonly属性" class="headerlink" title="readonly属性"></a>readonly属性</h4><p>（1）readonly属性规定输入字段为只读（不能修改），可以提交元素</p>
-<p>（2）readonly属性不需要值。它等同于readonly=”readonly”</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;form&gt;
-            First name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot; readonly&gt;
-            &lt;br&gt;
-            Last name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/C5cdxHKPrQlEyks.png" alt="image-20210315200652188"></p>
-<h4 id="disabled属性"><a href="#disabled属性" class="headerlink" title="disabled属性"></a>disabled属性</h4><p>（1）disabled属性规定输入字段是禁用的。</p>
-<p>（2）被禁用的元素是不可用和不可点击的，且被禁用的元素不会被提交</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;form action=&quot;&quot;&gt;
-            First name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; value=&quot;dayang&quot; disabled&gt;
-            &lt;br&gt;
-            Last name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/8coQvE591CNPrse.png" alt="image-20210315201127969"></p>
-<h4 id="maxlength属性"><a href="#maxlength属性" class="headerlink" title="maxlength属性"></a>maxlength属性</h4><p>（1）maxlength属性规定输入字段允许的最大长度，如设置maxlength属性，则输入控件不会接受超过所允许数的字符。</p>
-<p>（2）该属性不会提供任何反馈，如果需要提醒用户，则必须编写JavaScript代码。</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;form&gt;
-            First name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;firstname&quot; maxlength=&quot;5&quot;&gt;
-            &lt;br&gt;
-            Last name:&lt;br&gt;
-            &lt;input type=&quot;text&quot; name=&quot;lastname&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/G3P7WS9TyxmajAC.png" alt="image-20210315202015566"></p>
-<h3 id="HTML-DOM"><a href="#HTML-DOM" class="headerlink" title="HTML DOM"></a>HTML DOM</h3><p>（1）HTML的文档对象模型</p>
-<p>（2）HTML的标准编程接口</p>
-<p>（3）HTML DOM定义了所有HTML元素的对象和属性，以及访问他们的方法。</p>
-<p>（4）换言之，HTML DOM 是关于如何获取、修改、添加或删除HTML元素的标准。</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;文档标题&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;a href=&quot;http://since1994.cn&quot;&gt;我的链接&lt;/a&gt;
-        &lt;h1&gt;
-            我的标题
-        &lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/15/6B3MxtUWLwaRqK5.png" alt="image-20210315204251708"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/15/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/HTML%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(六)-函数和代码复用02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/">深入Python语言(六)-函数和代码复用02</a>
-    </h1>
-  
-
-        
-        <a href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/" class="archive-article-date">
-  	<time datetime="2021-02-11T03:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="代码复用和模块化设计"><a href="#代码复用和模块化设计" class="headerlink" title="代码复用和模块化设计"></a>代码复用和模块化设计</h2><p><strong>要点：函数是程序的一种抽象，它通过封装实现代码复用，可以利用函数对程序进行模块化设计</strong></p>
-<p>（1）程序代码若是顺序但无组织的，不仅不利于阅读和理解，也很难进行升级和维护。因此，需要对代码进行抽象，形成易于理解的结构。当代编程语言从代码层面采用函数和对象两种抽象方式，分别对应<strong>面向过程和面向对象编程思想。</strong></p>
-<p>（2）函数封装的直接好处是代码复用，从而避免相同功能代码在调用出重复编写。代码复用产生了另一个好处，当更新函数功能时，所有被调用处的功能都被更新。</p>
-<p>（3）面向过程是一种以过程描述为主要方法的编程方式，该方法要求列出解决问题所需要的步骤，再用函数将这些步骤逐一实现，使用时依次建立并调用函数或编写语句即可。这是一种基本且自然的程序设计方法，函数通过将步骤或子功能封装实现代码复用并简化程序设计难度。</p>
-<p>（4）面向对象编程：对象是程序的一种高级抽象方式，它将程序代码组织为更高级的类。对象包括表征对象特征的属性和代表对象操作的方法。在程序设计中，若&lt;a&gt;代表对象，获取其属性&lt;b&gt;采用&lt;a&gt;.&lt;b&gt;，调用其方法&lt;c&gt;采用&lt;a&gt;.&lt;c&gt;()。对象的方法具有程序功能性，因此采用函数形式封装。对象可以凝聚更多代码，所以面向对象编程更适合代码规模较大，交互逻辑复杂的程序。</p>
-<p>（5）Python语言同时支持面向过程和面向对象两种编程方式。无论是面向过程还是面向对象编程，对程序合理划分功能模块并基于模块设计程序是一种常用方法，被称为“模块化设计”，即将一个程序分隔成短小的程序段，每一段程序完成一个小的功能。</p>
-<h2 id="函数的递归"><a href="#函数的递归" class="headerlink" title="函数的递归"></a>函数的递归</h2><h3 id="递归的定义"><a href="#递归的定义" class="headerlink" title="递归的定义"></a>递归的定义</h3><p>（1）函数定义中调用函数自身的方式称为递归。例如数学中的阶乘</p>
-<p><img src="https://i.loli.net/2021/02/11/AmfsY7pe3naKUHS.png" alt="image-20210211152129282"></p>
-<p>（2）递归的两个关键特征：</p>
-<ul>
-<li>存在一个或多个基例(例如0!)，基例不需要再次递归，它是确定的表达示或已知的值。</li>
-<li>所有递归链要以一个或多个基例结尾</li>
-</ul>
-<h3 id="递归的使用方法"><a href="#递归的使用方法" class="headerlink" title="递归的使用方法"></a>递归的使用方法</h3><p>（1）实例：阶乘的计算：根据用户输入的整数n，计算并输出n的阶乘值。</p>
-<pre><code class="python">def fact(n):
-    if n == 0:
-        return 1
-    else:
-        return n*fact(n-1)
-num = eval(input(&quot;请输入一个整数：&quot;))
-print(fact(abs(int(num))))</code></pre>
-<p>（2）fact()函数在其定义内部引用了自身，形成了递归过程(第5行)。无限制的递归将耗尽计算资源，因此需要设计基例使得递归逐层返回。fact()函数通过if语句给出了n为0时的基例，当n==0，fact()函数不再递归，返回数值1，若n!=0,则通过递归返回n与n-1阶乘的乘积。</p>
-<p>（3）由于负数和小数通过减一无法达到递归的基例(n==0)，代码第7行通过abs()和int()函数将用户输入转变成非负整数。</p>
-<p>（4）递归遵循函数第语义，每次调用都会引起新函数的开始，表示它有本地变量值的副本，包括函数的参数。每次调用时，函数参数的副本会临时存储，递归中各函数在运算自己的参数，互不影响。当基例结束运算并返回值时，各函数逐层结束运算，向调用者返回计算结果。</p>
-<p><strong>注意：使用递归一定要注意基例的构建，否则递归无法返回将会报错。</strong></p>
-<p>（5）实例：字符串反转：对于用户输入的字符串s，输出反转后的字符串。</p>
-<p>解决问题的基本思想：把一个字符串看成仅由首字符和剩余字符串两部分组成，若将剩余字符串和首字符交换，就完成了反转整个字符串。代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; def reverse(s):
-    return reverse(s[1:]) + s[0]    #s[0]是首字符，s[1:]是剩余字符串
-
-&gt;&gt;&gt; reverse(&quot;abc&quot;)
-Traceback (most recent call last):
-  File &quot;&lt;pyshell#3&gt;&quot;, line 1, in &lt;module&gt;
-    reverse(&quot;abc&quot;)
-  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
-    return reverse(s[1:]) + s[0]
-  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
-    return reverse(s[1:]) + s[0]
-  File &quot;&lt;pyshell#2&gt;&quot;, line 2, in reverse
-    return reverse(s[1:]) + s[0]
-  [Previous line repeated 991 more times]
-RecursionError: maximum recursion depth exceeded</code></pre>
-<p>（6）上述代码出错，该错误表明系统无法执行reverse()函数创建的递归，这是因为reverse()函数没有基例，递归层数超过了系统允许的最大递归深度。默认情况下，当递归调用到1000层，Python解释器将终止程序。递归深度是为了防止无限递归错误而设计的，当用户编写的正确递归程序需要超过1000层时，可以通过如下代码设定。</p>
-<pre><code class="python">&gt;&gt;&gt;import sys
-&gt;&gt;&gt;sys.setrecursionlimit(2000)    #2000是新的递归层数</code></pre>
-<p>（7）reverse()函数超过递归深度是因为没有设计基例。可以把基例设计为字符串的最短形式，即空字符串。代码如下：</p>
-<pre><code class="python">def reverse(s):
-    if s == &quot;&quot;:
-        return s
-    else:
-        return reverse(s[1:]) + s[0]
-str = input(&quot;请输入一个字符串：&quot;)
-print(reverse(str))</code></pre>
-<h2 id="实例：科赫曲线绘制"><a href="#实例：科赫曲线绘制" class="headerlink" title="实例：科赫曲线绘制"></a>实例：科赫曲线绘制</h2><p>（1）科赫曲线在众多经典数学曲线中非常著名，由于其形状类似雪花，也被称为雪花曲线。</p>
-<p>（2）正整数n代表科赫曲线的阶数，表示生成科赫曲线过程的操作次数。科赫曲线初始化阶数为0，表示一个长度为L的直线。对于直线L，将其等分为3段，中间一段用边长为L/3的等边三角形的两个边代替，得到1阶科赫曲线，它包含4条线段。进一步对每条线段重复同样的操作后得到2阶科赫曲线。继续重复同样的操作n次可以得到n阶科赫曲线。</p>
-<p><img src="https://i.loli.net/2021/02/11/2GwhWLdFHp6fSTv.png" alt="image-20210211210938960"></p>
-<p>（3）科赫曲线属于分形几何分支，其绘制过程体现了递归思想，绘制过程代码如下：</p>
-<pre><code class="python">import turtle
-def koch(size, n):
-    if n==0:
-        turtle.fd(size)
-    else:
-        for angle in [0, 60, -120, 60]:
-            turtle.left(angle)
-            koch(size/3, n-1)
-def main():
-    turtle.setup(800,400)
-    turtle.speed(0)          #控制绘制速度
-    turtle.penup()
-    turtle.goto(-300,-50)
-    turtle.pendown()
-    turtle.pensize(2)
-    koch(600,3)              #0阶科赫曲线长度，阶数
-    turtle.hideturtle()
-main()</code></pre>
-<p>（4）n阶科赫曲线的绘制相当于在画笔前进方向的0°、60°、-120°和60°分别绘制n-1阶曲线。在给定初始图形后，通过科赫曲线可以生成很多漂亮的图形。代码如下。</p>
-<pre><code class="python">import turtle
-def koch(size, n):
-    if n == 0:
-        turtle.fd(size)
-    else:
-        for angle in [0, 60, -120, 60]:
-            turtle.left(angle)
-            koch(size/3, n-1)
-def main():
-    turtle.setup(600,600)
-    turtle.speed(0)
-    turtle.penup()
-    turtle.goto(-200,100)
-    turtle.pendown()
-    turtle.pensize(2)
-    level=5
-    koch(400,level)
-    turtle.right(120)
-    koch(400,level)
-    turtle.hideturtle()
-main()</code></pre>
-<h2 id="Python内置函数"><a href="#Python内置函数" class="headerlink" title="Python内置函数"></a>Python内置函数</h2><p>（1）Python解释器提供了68个内置函数，这些函数不需要引用库直接使用。以下对部分函数进行说明</p>
-<p>（2）all()函数一般针对组合数据类型，如果其中每个元素都是True，则返回True，否则返回False。注意：整数0、空字符串””、空列表[]等都被当做False。</p>
-<p>（3）any()函数与all()函数相反，只要组合数据中任何一个是True，则返回True，全部元素都是False才返回False。</p>
-<p>（4）hash()函数对于能够计算哈希的类型返回哈希值。</p>
-<p>（5）id()函数对每一个数据返回唯一编号，数据不同编号不同，可以通过比较两个变量编号是否相同判断数据是否一致。Python将数据存储在内存中的地址作为其唯一编号。</p>
-<p>（6）reversed()函数返回输入组合数据类型的逆序形式。</p>
-<p>（7）sorted()函数对一个序列进行排序，默认从小到大排序。</p>
-<p>（8）type()函数返回每个数据对应的类型。</p>
-<p>实例如下：</p>
-<pre><code class="python">&gt;&gt;&gt; ls = [1,2,5,0]
-&gt;&gt;&gt; all(ls)
-False
-&gt;&gt;&gt; any(ls)
-True
-&gt;&gt;&gt; hash(&quot;中国，你好&quot;)
-8827663102129553702
-&gt;&gt;&gt; id(ls)
-2463935192072
-&gt;&gt;&gt; list(reversed(ls))
-[0, 5, 2, 1]
-&gt;&gt;&gt; sorted(ls)       #不改变ls的值
-[0, 1, 2, 5]
-&gt;&gt;&gt; ls
-[1, 2, 5, 0]
-&gt;&gt;&gt; sorted(ls, reverse=True)
-[5, 2, 1, 0]
-&gt;&gt;&gt; type(ls)
-&lt;class &#39;list&#39;&gt;
-&gt;&gt;&gt; type(reversed(ls))
-&lt;class &#39;list_reverseiterator&#39;&gt;</code></pre>
-<p>（9）Python使用手册<a target="_blank" rel="noopener" href="https://docs.python.org/3">https://docs.python.org/3</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/11/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AD)-%E5%87%BD%E6%95%B0%E5%92%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A802/">展开全文 >></a>
         </p>
       
 

