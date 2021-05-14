@@ -152,6 +152,442 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/运用Python语言(二)-程序设计方法论02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA02/">运用Python语言(二)-程序设计方法论02</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA02/" class="archive-article-date">
+  	<time datetime="2021-04-10T08:23:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="计算生态和模块编程"><a href="#计算生态和模块编程" class="headerlink" title="计算生态和模块编程"></a>计算生态和模块编程</h2><p>（1）开源运动产生了深植于个信息技术领域的大量可重用资源，直接且有力地支撑了信息技术超越其他技术领域的发展速度，形成了“计算生态”。</p>
+<p>（2）Python官方网站提供了第三方库索引功能（PyPI），网址：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi">https://pypi.python.org/pypi</a></p>
+<p>（3）上述网址列出了Python语言9万多个第三方库的基本信息，这些函数库覆盖信息领域技术所有技术方向。</p>
+<p>（4）Python语言的函数库并非都采用Python语言编写，<strong>很多采用C、C++等语言编写的专业库可以经过简单的接口封装供Python语言程序调用。</strong></p>
+<p>（5）Python语言的粘性功能使得它成为了各类编程语言之间的接口，<strong>Python语言也被称为“胶水语言”</strong></p>
+<p>（6）模块编程主张利用开源代码和第三方库作为程序的部分或全部模块，像搭积木一样编写程序。</p>
+<h2 id="Python第三方库的安装"><a href="#Python第三方库的安装" class="headerlink" title="Python第三方库的安装"></a>Python第三方库的安装</h2><p>（1）Python语言的标准库随Python安装包一起发布，用户可以随时使用，第三方库需要安装后才能使用。</p>
+<p>（2）Python第三方库有3种安装方式：pip工具安装、自定义安装和文件安装</p>
+<h3 id="pip工具安装"><a href="#pip工具安装" class="headerlink" title="pip工具安装"></a>pip工具安装</h3><p>（1）最常用且最高效的Python第三方库安装方式是采用pip工具安装。</p>
+<p>（2）<strong>pip是Python官方提供并维护的在线第三方安装工具。</strong>对于同时安装python2和python3的系统，建议采用<strong>pip3</strong>命令专门为Python3版本安装第三方库。</p>
+<p>（3）pip是Python内置命令，需要通过<strong>命令行执行</strong>，执行<strong>pip -h</strong>命令将列出pip常用的子命令。<strong>注意，不要在idle环境下运行pip程序。</strong></p>
+<p>（4）pip支持安装（install）、下载（download）、卸载（uninstall）、列表（list）、查看（show）、查找（search）等一系列安装和维护子命令。</p>
+<p>（5）安装一个库的命令格式如下：</p>
+<pre><code>pip3 install &lt;拟安装库名&gt;
+例如：
+pip3 install pygame //安装pygame库，pip工具默认从网络上下载pygame库安装文件并自动安装到系统中。</code></pre>
+<p>（6）使用 -U标签可以更新已安装库的版本，例如，用pip更新本身：</p>
+<pre><code>pip3 install -U pip3
+实际在Windows下运行的命令：
+python -m pip install --upgrade pip</code></pre>
+<p>（7）卸载一个库的命令格式如下：</p>
+<pre><code>pip3 uninstall &lt;拟卸载库名&gt;
+例如：
+pip3 uninstall pygame //卸载pygame库，卸载过程可能需要用户确认。</code></pre>
+<p>（8）<strong>可以通过list子命令列出当前系统中已安装的第三方库</strong>，例如：</p>
+<pre><code>pip3 list
+运行结果：
+PS D:\Python\program\第六章&gt; pip3 list
+Package                   Version
+------------------------- ---------
+altgraph                  0.17
+future                    0.18.2
+importlib-metadata        3.10.0
+jieba                     0.42.1
+pefile                    2019.4.18
+Pillow                    8.2.0
+pip                       21.0.1
+pyinstaller               4.2
+pyinstaller-hooks-contrib 2021.1
+pywin32-ctypes            0.2.0
+setuptools                40.6.2
+typing-extensions         3.7.4.3
+zipp                      3.4.1</code></pre>
+<p>（9）pip的show子命令列出某个已经安装库的详细信息，例如：</p>
+<pre><code>pip3 show &lt;拟查询库名&gt;
+例如：
+PS D:\Python\program\第六章&gt; pip3 show jieba
+Name: jieba
+Version: 0.42.1
+Summary: Chinese Words Segmentation Utilities
+Home-page: https://github.com/fxsjy/jieba
+Author: Sun, Junyi
+Author-email: ccnusjy@gmail.com
+License: MIT
+Location: d:\python\lib\site-packages
+Requires:
+Required-by:</code></pre>
+<p>（10）pip的download子命令可以下载第三方库的安装包，但并不安装，例如：</p>
+<pre><code>pip3 download &lt;拟下载库名&gt;</code></pre>
+<p>（11）pip的search子命令可以联网搜索库名或摘要中的关键字，例如：</p>
+<pre><code>pip3 search &lt;拟查询关键字&gt;</code></pre>
+<p>（12）pip可以安装超过90%以上的第三方库。在Windows下，还有一些第三方库无法用pip安装，此时，需要其他的安装方法。而在Linux和Mac OS X等操作系统中，pip工具几乎可以安装任何第三方库。</p>
+<h4 id="扩展：Windows下的pip换源"><a href="#扩展：Windows下的pip换源" class="headerlink" title="扩展：Windows下的pip换源"></a>扩展：Windows下的pip换源</h4><p>在C:\Users\86177路径下新建pip文件夹，在pip文件夹下新建文件pip.ini，在该文件中填入以下内容：</p>
+<pre><code>[global]
+index-url = http://mirrors.aliyun.com/pypi/simple/
+[install]
+trusted-host=mirrors.aliyun.com</code></pre>
+<h2 id="自定义安装"><a href="#自定义安装" class="headerlink" title="自定义安装"></a>自定义安装</h2><p>（1）自定义安装指按照第三方库提供的步骤和方式安装。<strong>第三方库都有主页用于维护库的代码和文档</strong>。以科学计算用的numpy为例，开发者的维护官方主页:<a target="_blank" rel="noopener" href="http://www.numpy.org/">http://www.numpy.org/</a></p>
+<p>（2）浏览网页后找到下载链接，进而根据提示步骤安装。<strong>自定义安装一般适合用于pip中尚无登记或安装失败的第三方库。</strong></p>
+<h2 id="文件安装"><a href="#文件安装" class="headerlink" title="文件安装"></a>文件安装</h2><p>（1）由于Python某些第三方库仅提供源代码，通过pip下载文件后无法在Windows系统编译安装，会导致第三方库安装失败。<strong>在Windows平台下所遇到的无法安装第三方库的问题大多属于这类</strong>。</p>
+<p>（2）为了解决无法安装的问题，美国加州大学尔湾分校提供了一个页面，帮助Python用户获得Windows可直接安装的第三方库文件。链地址：<a target="_blank" rel="noopener" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<p>（3）该地址列出了一批在pip安装中可能出现问题的第三方库。以scipy为例，首先在页面上找到scipy库对应的内容。</p>
+<p><img src="https://i.loli.net/2021/04/10/KFJ91dbGvkozIAH.png" alt="image-20210410185224213"></p>
+<p>（4）选择其中的.whl文件下载，例如下载scipy-1.5.4-cp39-cp39-win_amd64.whl下载到该文件到D:\pycodes目录。然后，采用pip命令安装改文件。</p>
+<pre><code>pip3 install D:\pycodes\scipy-1.5.4-cp39-cp39-win_amd64.whl</code></pre>
+<h4 id="扩展：whl格式"><a href="#扩展：whl格式" class="headerlink" title="扩展：whl格式"></a>扩展：whl格式</h4><p>（1）whl是Python库的一种打包格式，用于通过pip进行安装，相当于Python库的安装包文件。</p>
+<p>（2）whl文件本质上是一个压缩格式文件，可以通过该扩展名为zip查看其中的内容。</p>
+<h2 id="pip安装脚本"><a href="#pip安装脚本" class="headerlink" title="pip安装脚本"></a>pip安装脚本</h2><p>（1）部分第三方库介绍</p>
+<table>
+<thead>
+<tr>
+<th align="center">库名</th>
+<th align="center">用途</th>
+<th align="center">pip安装指令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">NumPy</td>
+<td align="center">矩阵运算</td>
+<td align="center">pip3 install numpy</td>
+</tr>
+<tr>
+<td align="center">Matplotlib</td>
+<td align="center">产品级2D图形绘制</td>
+<td align="center">pip3 install matplotlib</td>
+</tr>
+<tr>
+<td align="center">PIL</td>
+<td align="center">图像处理</td>
+<td align="center">pip3 install pillow</td>
+</tr>
+<tr>
+<td align="center">sklearn</td>
+<td align="center">机器学习和数据挖掘</td>
+<td align="center">pip3 install sklearn</td>
+</tr>
+<tr>
+<td align="center">Requests</td>
+<td align="center">HTTP协议访问</td>
+<td align="center">pip3 install requests</td>
+</tr>
+<tr>
+<td align="center">Jieba</td>
+<td align="center">中文分词</td>
+<td align="center">pip3 install jieba</td>
+</tr>
+<tr>
+<td align="center">Beautiful Soup或bs4</td>
+<td align="center">HTML和XML解析</td>
+<td align="center">pip3 install beautifulsoup4</td>
+</tr>
+<tr>
+<td align="center">Wheel</td>
+<td align="center">Python文件打包</td>
+<td align="center">pip3 install wheel</td>
+</tr>
+<tr>
+<td align="center">pyinstaller</td>
+<td align="center">打包Python源文件为可执行文件</td>
+<td align="center">pip3 install pyinstaller</td>
+</tr>
+<tr>
+<td align="center">Django</td>
+<td align="center">Python最流行的Web开发框架</td>
+<td align="center">pip3 install django</td>
+</tr>
+<tr>
+<td align="center">Flask</td>
+<td align="center">轻量级Web开发框架</td>
+<td align="center">pip3 install flask</td>
+</tr>
+<tr>
+<td align="center">WeRoBot</td>
+<td align="center">微信机器人开发框架</td>
+<td align="center">pip3 install werobot</td>
+</tr>
+<tr>
+<td align="center">Networkx</td>
+<td align="center">复杂网络和图结构的建模和分析</td>
+<td align="center">pip3 install networkx</td>
+</tr>
+<tr>
+<td align="center">SymPy</td>
+<td align="center">数学符号计算</td>
+<td align="center">pip3 install sympy</td>
+</tr>
+<tr>
+<td align="center">pandas</td>
+<td align="center">高效数据分析</td>
+<td align="center">pip3 install pandas</td>
+</tr>
+<tr>
+<td align="center">PyQt5</td>
+<td align="center">基于Qt的专业级GUI开发框架</td>
+<td align="center">pip3 install pyqt5</td>
+</tr>
+<tr>
+<td align="center">PyOpenGL</td>
+<td align="center">多平台OpenGL开发接口</td>
+<td align="center">pip3 install pyopengl</td>
+</tr>
+<tr>
+<td align="center">PyPDF2</td>
+<td align="center">PDF文件内容提取及处理</td>
+<td align="center">pip3 install pypdf2</td>
+</tr>
+<tr>
+<td align="center">docopt</td>
+<td align="center">Python命令行解析</td>
+<td align="center">pip3 install docopt</td>
+</tr>
+<tr>
+<td align="center">PyGame</td>
+<td align="center">简单小游戏开发框架</td>
+<td align="center">pip3 install pygame</td>
+</tr>
+</tbody></table>
+<p>（2）安装过程中，部分库会依赖其他函数库，pip会自动安装，部分库下载后需要一个安装过程，pip也会自动执行。</p>
+<p>（3）可以使用Python标准库os的system()函数调用控制台。以下代码给出了采用pip<strong>批量安装</strong>Python库的方法。</p>
+<pre><code class="python">import os
+libs = &#123;&quot;numpy&quot;,&quot;matplotlib&quot;,&quot;sklearn&quot;,&quot;requests&quot;,\
+        &quot;beautifulsoup4&quot;,&quot;wheel&quot;,&quot;networkx&quot;,&quot;sympy&quot;,\
+        &quot;django&quot;,&quot;flask&quot;,&quot;werobot&quot;,&quot;pyqt5&quot;,&quot;pandas&quot;,\
+        &quot;pyopengl&quot;,&quot;pypdf2&quot;,&quot;docopt&quot;,&quot;pygame&quot;&#125;
+try:
+    for lib in libs:
+        os.system(&quot;pip3 install &quot;+lib)
+    print(&quot;Successful&quot;)
+except:
+    print(&quot;Failed Somehow&quot;)</code></pre>
+<h2 id="You-Get"><a href="#You-Get" class="headerlink" title="You-Get"></a>You-Get</h2><p>（1）You-Get是一个基于Python3的视频下载工具，支持多数国内外主流视频站点的视频下载。（以下语句均在命令行执行）</p>
+<p>（2）用pip工具安装You-Get库</p>
+<pre><code>pip3 install you-get</code></pre>
+<p>（3）常规下载</p>
+<pre><code>you-get https://www.bilibili.com/video/BV17U4y1h7qF</code></pre>
+<p>（4）不下载，仅查看视频信息</p>
+<pre><code>you-get -i https://www.bilibili.com/video/BV17U4y1h7qF</code></pre>
+<p>（5）将视频下载到指定位置，例如，Windows下保存到D盘根目录</p>
+<pre><code>you-get -o D:/ https://www.bilibili.com/video/BV17U4y1h7qF</code></pre>
+<p>注意：</p>
+<ul>
+<li>各大视频网站需要登录观看的视频无法直接下载</li>
+<li>有些网站视频需要设置代理</li>
+</ul>
+<h2 id="Wordcloud"><a href="#Wordcloud" class="headerlink" title="Wordcloud"></a>Wordcloud</h2><pre><code class="python">import jieba
+import wordcloud
+excludes = &#123;&quot;将军&quot;,&quot;却说&quot;,&quot;荆州&quot;,&quot;二人&quot;,&quot;不可&quot;,&quot;不能&quot;,&quot;如此&quot;,&quot;次日&quot;,&quot;大喜&quot;&#125;
+txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
+words = jieba.lcut(txt)
+counts = &#123;&#125;
+for word in words:
+    if len(word) == 1 :
+        continue
+    elif word==&quot;诸葛亮&quot; or word== &quot;孔明曰&quot;:
+        rword = &quot;孔明&quot;
+    elif word==&quot;关公&quot; or word==&quot;云长&quot;:
+        rword = &quot;关羽&quot;
+    elif word == &quot;玄德&quot; or word == &quot;玄德曰&quot;:
+        rword = &quot;刘备&quot;
+    elif word ==&quot;孟德&quot; or word == &quot;丞相&quot;:
+        rword = &quot;曹操&quot;
+    else:
+        rword = word
+    counts[rword] = counts.get(rword,0) + 1
+for word in excludes:
+    del(counts[word])
+items = list(counts.items())
+items.sort(key = lambda x:x[1], reverse=True)
+ls = []
+for i in range(20):
+    word,count=items[i]
+    #print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
+    ls.append(items[i][0])
+txt1 = &#39; &#39;.join(ls)
+w=wordcloud.WordCloud(width=1000,height=500,background_color=&#39;white&#39;,\
+                      max_words=20,font_path=&#39;msyh.ttc&#39;)
+w.generate(txt1)
+w.to_file(&#39;2.jpg&#39;)</code></pre>
+<p><img src="https://i.loli.net/2021/04/10/IPpXBJv8ikF2ux9.png" alt="image-20210410232605044"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA02/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-deepin/deepin下安装MySQL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/09/deepin/deepin%E4%B8%8B%E5%AE%89%E8%A3%85MySQL/">deepin下安装MySQL</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/09/deepin/deepin%E4%B8%8B%E5%AE%89%E8%A3%85MySQL/" class="archive-article-date">
+  	<time datetime="2021-04-09T06:49:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h2><p>（1）MySQL官网：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></p>
+<p>（2）选择Linux通用版本，64位，点击下载压缩包</p>
+<p><img src="/home/fafusr/.config/Typora/typora-user-images/image-20210409154627533.png" alt="image-20210409154627533"></p>
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><pre><code>sudo tar -xvJf mysql-8.0.23-linux-glibc2.12-x86_64.tar.xz -C /usr/local</code></pre>
+<h2 id="创建软连接"><a href="#创建软连接" class="headerlink" title="创建软连接"></a>创建软连接</h2><p>1.进入 /usr/local 目录</p>
+<pre><code class="shell">cd /usr/local</code></pre>
+<p>2.为 mysql-8.0.23-linux-glibc2.12-x86_64 目录创建软链接（方便操作）</p>
+<pre><code class="shell">sudo ln -s mysql-8.0.23-linux-glibc2.12-x86_64 mysql</code></pre>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p>1.添加mysql用户组合mysql用户</p>
+<pre><code>sudo groupadd mysql
+sudo useradd -r -g mysql -s /bin/false mysql
+# -s /bin/false 参数指定mysql用户仅拥有所有权，而没有登陆权限</code></pre>
+<p>2.进入安装mysql软件的目录</p>
+<pre><code>cd /usr/local/mysql</code></pre>
+<p>3.在/usr/local/mysql下建立data文件夹用于存放数据库文件</p>
+<pre><code>sudo mkdir /usr/local/mysql/data</code></pre>
+<p>4.在mysql目录下修改当前目录拥有者为新建的mysql用户</p>
+<pre><code>sudo chown -R mysql:mysql ./</code></pre>
+<p>5.安装mysql</p>
+<pre><code>sudo ./bin/mysqld --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --initialize </code></pre>
+<p>正常安装后会有这样一段话</p>
+<pre><code>[Server] A temporary password is generated for root@localhost: sL:maY*3y6)d</code></pre>
+<p>记下随机产生的密码(root@localhost:后面跟的所有字符就是密码 sL:maY*3y6)d)</p>
+<h2 id="MySQL数据库配置"><a href="#MySQL数据库配置" class="headerlink" title="MySQL数据库配置"></a>MySQL数据库配置</h2><p>1.开启myslql服务</p>
+<pre><code>sudo ./support-files/mysql.server start</code></pre>
+<p>若显示：</p>
+<pre><code>Staring MySQL
+.OK</code></pre>
+<p>则基本完成</p>
+<p>2.将mysql进程放入系统进程中</p>
+<pre><code>sudo cp support-files/mysql.server /etc/init.d/mysqld</code></pre>
+<p>3.重新启动mysql服务（这一步骤执行时可能会出错，可以不做）</p>
+<pre><code>serverice mysqld restart</code></pre>
+<p>4.在/usr/bin下建立指向mysql的软连接后使用随机密码登陆mysql数据库</p>
+<pre><code>sudo ln -s /usr/local/mysql/bin/mysql /usr/bin
+
+mysql -u root -p</code></pre>
+<p>根据提示输入上面保存的随机密码</p>
+<p>5.进入mysql操作界面，为root用户设置新密码</p>
+<pre><code>alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;0515&#39;;</code></pre>
+<p>其中0515是设置的新密码，MySQL的安装和配置到此就结束了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/09/deepin/deepin%E4%B8%8B%E5%AE%89%E8%A3%85MySQL/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/运用Python语言(一)-程序设计方法论01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2858,1647 +3294,6 @@ True
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全进阶/PHP与SQL进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/">PHP与SQL进阶</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-17T08:28:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="PHP的基础语法"><a href="#PHP的基础语法" class="headerlink" title="PHP的基础语法"></a>PHP的基础语法</h2><p>（1）基本概念：</p>
-<ul>
-<li>PHP文件的默认文件扩展名是”.php”</li>
-<li>PHP脚本可放置于文档中的任何位置</li>
-<li>PHP脚本以**&lt;?php**开头，以**?&gt;**结尾</li>
-<li>PHP语句以分号结尾**;**</li>
-</ul>
-<p>（2）注释：PHP支持三种注释方法，包括单行注释和多行注释</p>
-<pre><code class="php">&lt;?php
-    //这是单行注释
-    #这也是单行注释
-    /*这是多行注释块
-        它横跨了
-        多行      */
-echo &quot;Hello World&quot;;
-?&gt;</code></pre>
-<p>（3）输出语法</p>
-<ul>
-<li>echo：能输出多个字符串</li>
-</ul>
-<pre><code class="php">&lt;?php
-echo &quot;123&quot;,&quot;456&quot;,&quot;789&quot;;
-?&gt;
-
-&lt;?php
-$name=&quot;kangkang&quot;;
-$shuiguo=array(&quot;苹果&quot;,&quot;香蕉&quot;,&quot;西瓜&quot;);
-echo &quot;I am &amp;name,I eat $shuiguo[1]&quot;;
-?&gt;</code></pre>
-<ul>
-<li>print：只能输出一个字符串</li>
-</ul>
-<h3 id="HTML和PHP的嵌套关系"><a href="#HTML和PHP的嵌套关系" class="headerlink" title="HTML和PHP的嵌套关系"></a>HTML和PHP的嵌套关系</h3><p>（1）要在PHP文件中写入PHP的语句（脚本），在整段代码的最前面写上&lt;?php，在整段代码的最后面写上?&gt;</p>
-<p>（2）PHP文件内可以写入HTML标签、PHP脚本</p>
-<p>（3）PHP文件中可以嵌套HTML标签、HTML标签又能嵌套PHP脚本、PHP脚本中可以嵌套HTML标签</p>
-<pre><code class="php">&lt;?php
-    echo &quot;test1&quot;;
-    echo &quot;&lt;br&gt;&quot;;
-    echo &quot;test2&quot;;
-?&gt;</code></pre>
-<h3 id="HTML和PHP的作用"><a href="#HTML和PHP的作用" class="headerlink" title="HTML和PHP的作用"></a>HTML和PHP的作用</h3><p>（1）HTML用于静态网页的制作。</p>
-<p>（2）PHP的作用:用于解决HTML的缺陷,可以和用户进行对应的交互以达到用户能够看到属于自己个性化的页面。</p>
-<ul>
-<li>前端页面:正常的用户可以去查看到的HTML页面。前端页面可以由PHP或HTML编写，一般用HTML。</li>
-<li>后端页面:页面不会显示任何内容，页面通常用于处理前端页面得到的数据。后端页面只能由服务端脚本引擎编写。</li>
-</ul>
-<h3 id="PHP的动态交互"><a href="#PHP的动态交互" class="headerlink" title="PHP的动态交互"></a>PHP的动态交互</h3><h4 id="浏览器提交请求"><a href="#浏览器提交请求" class="headerlink" title="浏览器提交请求"></a>浏览器提交请求</h4><p><strong>用户如何发送自己的需求（用户在浏览器中输入的内容如何提交给服务器）</strong></p>
-<p>（1）HTML form表单提交数据</p>
-<p>（2）JS  AJAX提交输入数据</p>
-<h4 id="服务器端接收请求"><a href="#服务器端接收请求" class="headerlink" title="服务器端接收请求"></a>服务器端接收请求</h4><pre><code>    $_SESSION 
-    $_COOKIE
-    $_FILES
-    $_GET
-    $_POST
-    $_REQUEST
-    $_SERVER
-    $GLOBALS</code></pre>
-<h4 id="网站用户状态保持"><a href="#网站用户状态保持" class="headerlink" title="网站用户状态保持"></a>网站用户状态保持</h4><p>（1）HTTP无状态协议，为了保持用户登录状态，HTTP引入了Cookie和Session机制。</p>
-<p>（2）cookie中，大部分用于保存客户端和服务器之间的状态（PHPSESSID–PHP Session ID–存放某串Session），但网站开发人员可以自行对cookie进行设置和使用。</p>
-<h4 id="Cookie和Session判断登录状态"><a href="#Cookie和Session判断登录状态" class="headerlink" title="Cookie和Session判断登录状态"></a>Cookie和Session判断登录状态</h4><p>（1）PHPSESSID中的值会和服务器中的session值进行判断</p>
-<p>（2）若有session值，则代表浏览器访问过这个页面</p>
-<p>（3）此时服务器会对session进行判断，如果session中写入的为“可以登录”,那么可登录成功，否则登录失败。</p>
-<h3 id="PHP变量"><a href="#PHP变量" class="headerlink" title="PHP变量"></a>PHP变量</h3><p>（1）PHP变量的命名规则：</p>
-<ul>
-<li>变量以$符号开头，其后是变量的名称</li>
-<li>变量名必须以字母或下划线开头</li>
-<li>变量名称不能以数字开头</li>
-<li>变量名称只能包含字母数字字符和下划线(A-z、0-9以及_)</li>
-<li>变量名称对大小写敏感</li>
-</ul>
-<pre><code class="php">&lt;?php
-$txt=&quot;Hello World!&quot;;
-$x=5;
-$y=10.5;
-echo $txt;
-echo &quot;&lt;br/&gt;&quot;;
-echo $x+$y;
-?&gt;</code></pre>
-<p>（2）超全局变量</p>
-<ul>
-<li>在PHP4.1.0中引入，是在全部作用域中始终可用的内置变量。</li>
-<li>PHP中的许多预定义变量都是“超全局的”，这意味着它们在一个脚本的全部作用域中都可用。</li>
-</ul>
-<pre><code class="php">    $_SESSION 获取保存的SESSION信息
-    $_COOKIE 获取保存的COOKIE信息
-    $_FILES 接收前端以任意形式传输的文件
-    $_GET 接收前端以GET形式传输的参数
-    $_POST 接收前端以POST形式传输的参数
-    $_REQUEST 接收前端以任意形式传输的参数
-    $_SERVER 保存关于报头、路径和脚本位置的信息。
-    $GLOBALS 保存PHP中所有的参数（包括超全局变量中的参数)</code></pre>
-<p>（3）$_GET &amp; $_POST：接收前端以GET或POST形式传输的参数</p>
-<ul>
-<li>get.php</li>
-</ul>
-<pre><code class="php">&lt;?php
-    echo &quot;Hello,your name is &quot;.$_GET[&#39;user&#39;];
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/LXybUOQsDMm3jRd.png" alt="image-20210317185828678"></p>
-<ul>
-<li>post.php</li>
-</ul>
-<pre><code class="php">&lt;?php
-    echo &quot;Hello,your name is &quot;.$_POST[&#39;user&#39;];
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/HN6eUCJisLYTmar.png" alt="image-20210317185705591"></p>
-<p>（4）$_SERVER：保存关于报头、路径和脚本位置的信息。</p>
-<pre><code class="php">&lt;?php
-    echo $_SERVER[&#39;PHP_SELF&#39;].&quot;&lt;br/&gt;&quot;;      //输出当前PHP文件名
-    echo $_SERVER[&#39;SERVER_NAME&#39;].&quot;&lt;br/&gt;&quot;;   //输出当前运行脚本所在的服务器的主机名
-    echo $_SERVER[&#39;HTTP_HOST&#39;].&quot;&lt;br/&gt;&quot;;     //输出当前服务器的主机名
-    echo $_SERVER[&#39;HTTP_REFERER&#39;].&quot;&lt;br/&gt;&quot;;  //返回来自当前请求的host头
-    echo $_SERVER[&#39;HTTP_USER_AGENT&#39;].&quot;&lt;br/&gt;&quot;;//返回当前请求页面的上一个页面URL
-    echo $_SERVER[&#39;HTTP_NAME&#39;].&quot;&lt;br/&gt;&quot;;      //返回当前请求客户端的User-Agent
-    echo $_SERVER[&#39;HTTP_STRING&#39;].&quot;&lt;br/&gt;&quot;;    //返回获取查询语句，一般是问号后面的字符串
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/SWNFo5Pe9uKhxtX.png" alt="image-20210317192027470"></p>
-<p><img src="https://i.loli.net/2021/03/17/NCdmWJTq4w8f6V5.png" alt="image-20210317192044223"></p>
-<p>（5）$GLOBALS</p>
-<ul>
-<li>应用全局作用域中可用的全部变量</li>
-<li>一个包含了全部变量的全局组合数组。变量的名字就是数组的键。</li>
-</ul>
-<pre><code class="php">&lt;?php
-    $_ =&quot;123456&quot;;
-    $a =&quot;&lt;br&gt;hello&quot;;
-    $b =&quot;&lt;br&gt;world&quot;;
-
-    echo $GLOBALS[&#39;_&#39;];
-    echo $GLOBALS[&#39;a&#39;];
-    echo $GLOBALS[&#39;b&#39;];
-    var_dump($GLOBALS) //查看$GLOBALS的类型和值
-    $GLOBALS[&#39;_GET&#39;] //获取超全局变量中_GET的变量,相当于$_GET
-    $GLOBALS[&#39;_GET&#39;][&#39;username&#39;] //获取前端以GET形式传输的username的值
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/J2txUnQHCuf36j7.png" alt="image-20210317192914226"></p>
-<p>扩展：CTF中如何绕过判断：</p>
-<pre><code class="php">//输入你想要的变量，$flag
-$want = $_GET[&#39;want&#39;];
-// $want=GLOBALS[&#39;flag&#39;]绕过if语句
-if($want==&#39;flag&#39;)&#123;
-    die(&quot;hacker!&quot;);
-&#125;
-else&#123;
-    echo $$want;
-    //GLOBALS[&#39;flag&#39;]
-&#125;
-//$want 利用正则表达式
-//want = flag</code></pre>
-<h3 id="PHP表单处理"><a href="#PHP表单处理" class="headerlink" title="PHP表单处理"></a>PHP表单处理</h3><p>PHP超全局变量$_GET和$_POST用于收集表单数据（form-data）</p>
-<ul>
-<li>form.html</li>
-</ul>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;/&gt;
-        &lt;title&gt;goktech&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-    &lt;form action=&quot;form.php&quot; method=&quot;POST&quot;&gt;
-        姓名：&lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;&lt;br/&gt;
-        电邮：&lt;input type=&quot;text&quot; name=&quot;email&quot;&gt;&lt;br/&gt;
-        &lt;input type=&quot;submit&quot;&gt;
-    &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<ul>
-<li>form.php</li>
-</ul>
-<pre><code class="php">&lt;meta charset=&quot;utf-8&quot;&gt;
-&lt;?php
-    $name=$_POST[&#39;name&#39;];
-    $email=$_POST[&#39;email&#39;];
-    echo &quot;Welcome &quot;,$name;
-    echo &quot;&lt;br&gt;&quot;;
-    echo &quot;Your email is &quot;,$email;
-//将用户名和电邮保存在数据库中
-    //1.构造SQL语句
-    //INSERT INTO user (username,email) VALUES (&quot;xxx&quot;,&quot;xxx&quot;) 将两个xxx看作是变量，第一个xxx前的内容看作一个字符串，两个xxx之间的内容为一个字符串，第二个xxx后的内容看作是一个字符串。
-    //PHP拼接符&quot;.&quot;
-    //$a定义变量a
-    $sql=&#39;INSERT INTO user (username,email) VALUES (&quot;&#39;.$name.&#39;&quot;,&quot;&#39;.$email.&#39;&#39;&quot;)&#39;;
-或者不用连接符：
-    $sql=&quot;INSERT INTO user (username,email) VALUES (&#39;$name&#39;,&#39;$email&#39;)&quot;;
-    //2.使用PHP去向数据库进行查询，查询的内容就位构造好的SQL语句
-    header(&quot;Content-Type:text/html;charset=UTF-8&quot;);     //解决中文乱码
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/4IPyNqHUoCFzpEK.png" alt="image-20210318095619457"></p>
-<p><img src="https://i.loli.net/2021/03/18/jYD3WQx45qdVewb.png" alt="image-20210318095636257"></p>
-<h3 id="PHP数据类型"><a href="#PHP数据类型" class="headerlink" title="PHP数据类型"></a>PHP数据类型</h3><p>（1）PHP数据类型分为：字符串、整数、浮点数、逻辑、数组、对象、NULL。</p>
-<p>（2）PHP字符串：</p>
-<ul>
-<li>字符串是字符序列，比如“Hello world!”。</li>
-<li>字符串可以是引号内的任何文本。可以使用单引号或双引号</li>
-</ul>
-<p>（3）PHP整数；可以用三种格式规定整数：十进制、十六进制(前缀是0x)或八进制(前缀是0)</p>
-<p>（4）var_dump()会返回变量的数据类型和值</p>
-<pre><code class="php">&lt;?php
-$x=666;
-$y=0x8c;   //十六进制数
-$z=047;    //八进制数
-
-var_dump($x);
-var_dump($y);
-var_dump($z);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/KeEHsqhbv43xl6y.png" alt="image-20210318100414764"></p>
-<p>扩展:ctf如何绕过判断：</p>
-<pre><code class="php">//$want = 0x01 ，利用十六进制绕过
-if($want === 1)&#123;
-    die(&quot;try!&quot;);
-&#125;
-else&#123;
-    if($want == 1)&#123;
-        echo $flag;时
-        //$want等于1
-    &#125;
-    else&#123;
-        die(&quot;hacker!&quot;);
-    &#125;
-&#125;</code></pre>
-<p>（5）PHP浮点数：浮点数是有小数点或指数形式的数字。float类型数据强制转换为int类型数据时会造成溢出。</p>
-<pre><code class="php">&lt;?php
-$x=11.123;
-$y=2.4e3;
-$z=8e-5;
-
-var_dump($x);
-var_dump($y);
-var_dump($z);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/1QAOSYM6mHVgoUC.png" alt="image-20210318103306580"></p>
-<p>（6）PHP数组：</p>
-<ul>
-<li>数组能够在单独的变量名中存储一个或多个值。</li>
-<li>在PHP中，array()函数用于创建数组</li>
-<li>在PHP中，有三种数组类型：</li>
-</ul>
-<pre><code>索引数组-带有数字索引的数组
-关联数组-带有指定键的数组
-多维数组-包含一个或多个数组的数组</code></pre>
-<ul>
-<li>获得数组的长度-count()函数：用于返回数组的长度（元素数）</li>
-</ul>
-<p>（7）PHP索引数组：带有数字索引的数组</p>
-<pre><code class="php">&lt;?php
-$shuiguo=array(&quot;苹果&quot;,&quot;香蕉&quot;,&quot;西瓜&quot;);
-echo $shuiguo[0],$shuiguo[1],$shuiguo[2];
-$len=count($shuiguo);
-echo &quot;&lt;br/&gt;&quot;;
-echo $len.&quot;&lt;br/&gt;&quot;;
-
-for ($i=0;$i&lt;$len;$i++)&#123;     //遍历索引数组
-    echo $shuiguo[$i];
-&#125;
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/CuixX4ZEo5sMD9B.png" alt="image-20210318132313725"></p>
-<p>（8）PHP关联数组：带有指定键的数组</p>
-<pre><code class="php">&lt;?php
-$shuiguo=array(&quot;苹果&quot;=&gt;&quot;3&quot;,&quot;香蕉&quot;=&gt;&quot;5&quot;,&quot;西瓜&quot;=&gt;&quot;9&quot;);
-foreach($shuiguo as $x=&gt;$y)&#123;     //用foreach遍历关联数组
-    echo $x.&quot;--&gt;&quot;.$y;
-    echo &quot;&lt;br/&gt;&quot;;
-&#125;
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/6Fz2cg7T3HkYZX5.png" alt="image-20210318132830706"></p>
-<h3 id="PHP函数"><a href="#PHP函数" class="headerlink" title="PHP函数"></a>PHP函数</h3><p>（1）PHP拥有超过1000个内建函数</p>
-<p>（2）PHP默认参数值。以下例子展示了如何使用默认参数。若调用自定义的没有参数的setHeight()函数，它的参数会取默认值50。</p>
-<pre><code class="php">&lt;?php
-function setHeight($minheight=50)&#123;
-    echo &quot;高度是：$minheight &lt;br/&gt;&quot;;
-&#125;
-setHeight(350);
-setHeight();
-setHeight(135);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/isdQgbrCOHAp2lL.png" alt="image-20210318133544243"></p>
-<pre><code class="php">&lt;?php
-function sum($x,$y)&#123;
-    $z=$x+$y;
-    return $z;      //return定义函数返回值
-&#125;
-echo &quot;5 + 7 =&quot;.sum(5,7).&quot;&lt;br/&gt;&quot;;
-echo &quot;6 + 6 =&quot;.sum(6,6).&quot;&lt;br/&gt;&quot;;
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/ihD1SGJaCnFcV5e.png" alt="image-20210318134041089"></p>
-<h3 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h3><p>（1）PHP是一门类型松散的语言——弱类型</p>
-<ul>
-<li>在定义PHP变量时不必告知变量的数据类型</li>
-<li>不同数据类型在比较时会发生强制类型转换，PHP根据它的值，自动把变量转换为正确的数据类型。</li>
-</ul>
-<p>（2）PHP的两种比较运算符”==”和”===”</p>
-<ul>
-<li>==等于符号，比较时，会先转换成相同的数据类型，然后比较值。</li>
-<li>===全等于符号，比较时，先比较数据类型是否相同，然后比较值</li>
-</ul>
-<pre><code class="php">&lt;?php
-$x=NULL;
-$y=0;
-$z=&quot;abc&quot;;
-
-var_dump($x == $y);   //NULL和整数0，true
-echo &quot;&lt;br/&gt;&quot;;         
-var_dump($x == $z);   //NULL和字符串，false
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($y == $z);   //整数0和字符串，true
-echo &quot;&lt;br/&gt;&quot;;
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($x === $y);  //NULL和整数0，false
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($x === $z);  //NULL和字符串，false
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($y === $z);  //整数0和字符串，false
-echo &quot;&lt;br/&gt;&quot;;
-
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/yGCsctegp4BKAj7.png" alt="image-20210318135601549"></p>
-<p>（3）0e字符串和0x字符串比较时：</p>
-<ul>
-<li>若字符串是0e类型，PHP会将其解析为科学计数法</li>
-<li>若字符串是0x类型，PHP会将其解析为十六进制</li>
-</ul>
-<pre><code class="php">&lt;?php
-$a=1.23e+3;
-$b=&quot;1.23e+3&quot;;
-$c=0x4c;
-$d=&quot;0x4c&quot;;
-
-echo $a.&quot;&lt;br/&gt;&quot;;
-echo $b.&quot;&lt;br/&gt;&quot;;
-echo $c.&quot;&lt;br/&gt;&quot;;
-echo $d.&quot;&lt;br/&gt;&quot;;
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($a == $b);
-echo &quot;&lt;br/&gt;&quot;;
-var_dump($c == $d);
-
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/sTgKS3Rov7jENAz.png" alt="image-20210318141329399"></p>
-<h2 id="SQL的进阶语法"><a href="#SQL的进阶语法" class="headerlink" title="SQL的进阶语法"></a>SQL的进阶语法</h2><h3 id="数据库系统"><a href="#数据库系统" class="headerlink" title="数据库系统"></a>数据库系统</h3><p>（1）数据库：长期存储在计算机内的、有组织的、可共享的数据集合。</p>
-<p>（2）DBMS(DataBase Management System)</p>
-<ul>
-<li>一种操纵和管理数据库的大型软件，用于建立、使用和维护数据库</li>
-<li>它对数据库进行统一的管理和控制，以保证数据库的安全性和完整性</li>
-<li>常见的DBMS包括access、SQLserver、mysql、oracle、DB2等</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/fv8WpUEh1g2FZje.png" alt="image-20210318142031864"></p>
-<h3 id="基础查询语句"><a href="#基础查询语句" class="headerlink" title="基础查询语句"></a>基础查询语句</h3><p>（1）select * from admin;</p>
-<ul>
-<li>select语句用于从表中选取数据，结果被存储在一个结果表中(称结果集)。以下例子说明admin表中有id，role，username，password，city，age这6列，共5行。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/XKT8ZW5nowuz2Cp.png" alt="image-20210318150151954"></p>
-<ul>
-<li>如需有条件地从表中选取数据，可将where子句添加到select语句中。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/VLYn6PwCyrMcDuh.png" alt="image-20210318150401661"></p>
-<p>（2）AND &amp; OR运算符</p>
-<ul>
-<li>AND和OR运算符用于根据多个条件筛选记录。AND优先级高于OR。</li>
-<li>若AND分隔的所有条件为true，则AND运算符显示记录</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/nDVuwvXOTZriCsQ.png" alt="image-20210318151451097"></p>
-<ul>
-<li>若有OR分隔的任何条件为真，则OR运算符显示记录</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/sTIqZpc6YixnH81.png" alt="image-20210318151556785"></p>
-<p>（3）order by排序：默认情况下按升序排序记录</p>
-<p><img src="https://i.loli.net/2021/03/18/kYPTKGzq6fjFAXm.png" alt="image-20210318152040641"></p>
-<ul>
-<li>执行select * from admin order by 6;（按照第6列进行排序，效果同上）</li>
-<li>若列数超出则会报错</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/tg4IJm9X1CvwRT8.png" alt="image-20210318152204167"></p>
-<p>（4）MySQL支持limit子句，用以取回有限数量的记录。</p>
-<p>（5）从第n行开始，显示后面m行：limit n,m （或者limit m offset n）。</p>
-<ul>
-<li>从第0行开始，显示后面1行</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/ZOFJn6rRpVqc2md.png" alt="image-20210318152654793"></p>
-<ul>
-<li>从第2行开始，显示后面3行</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/tQ9UWLkdE3FzsmI.png" alt="image-20210318152726593"></p>
-<p>（6）count(*)查询，返回记录的个数</p>
-<pre><code class="sql">SELECT count(*) FROM `test` WHERE City=&#39;Hangzhou&#39; AND Country=&#39;China&#39;;</code></pre>
-<h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p>UNION运算符用于组合两个或更多select语句的结果集。</p>
-<ul>
-<li>这些列必须具有相似的数据类型</li>
-<li>每个select语句中的列也必须以相同的顺序排列</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/52lJFVIcEN6La9y.png" alt="image-20210318153258170"></p>
-<ul>
-<li>union查询会按照select的顺序显示结果集</li>
-<li>当不知道另一张表aadmin时，可借助mysql的弱类型达到构造union语句。</li>
-</ul>
-<pre><code class="sql">select * from admin union select 1,2,3,4,5,6;</code></pre>
-<h3 id="SELECT子句"><a href="#SELECT子句" class="headerlink" title="SELECT子句"></a>SELECT子句</h3><p>（1）select查询的结果可作为另一个select查询的列的结果。</p>
-<p>（2）这种查询方式属于SQL子查询的一种。</p>
-<p><img src="https://i.loli.net/2021/03/18/7bKJSaygOLYXlIm.png" alt="image-20210318154404839"></p>
-<h3 id="基本建表和增删改语句"><a href="#基本建表和增删改语句" class="headerlink" title="基本建表和增删改语句"></a>基本建表和增删改语句</h3><p>（1)CREATE 用来建表，格式如下</p>
-<pre><code class="sql">create table 表名称 (列名称1 数据类型,列名称2 数据类型,列名称3 数据类型,...);</code></pre>
-<p>例如新建一张表test，插入3个列分别为id，username，password</p>
-<pre><code class="sql">create table test (id int,username varchar(255),password varchar(255));</code></pre>
-<p>（2）INSERT用来增加一条记录</p>
-<pre><code class="sql">insert into test (id,username,password) values(1,&#39;admin&#39;,&#39;admin123&#39;);</code></pre>
-<p>（3）UPDATE用来修改一条记录</p>
-<pre><code class="sql">update test set username=&#39;admin_A&#39;,password=&#39;admin321&#39; where username=&#39;admin&#39;;</code></pre>
-<p>（4）DELETE用来删除一条记录</p>
-<pre><code class="sql">delete from test where username=&#39;admin_A&#39;;</code></pre>
-<h3 id="MySQL数据库中设置属性为自增属性"><a href="#MySQL数据库中设置属性为自增属性" class="headerlink" title="MySQL数据库中设置属性为自增属性"></a>MySQL数据库中设置属性为自增属性</h3><pre><code class="sql">--+设置users表中的id属性为自增属性
-alter table users change id id int not null auto_increment primary key; 
---+设置users表中的自增属性从指定的1004开始自增，该命令可根据需要重复使用
-alter table users auto_increment = 1004;
-
---+MySQL中删除主键需要执行两步命令.
---+一、有auto_increment自增属性的，先删除自增；
---+二、删除主键约束 primary key，完成
-
---+删除id的auto_increment自增属性。
-alter table users change id id int;
---+然后删除id的primary key主键约束.
-alter table users drop primary key;</code></pre>
-<h3 id="数据库管理系统的内置数据库"><a href="#数据库管理系统的内置数据库" class="headerlink" title="数据库管理系统的内置数据库"></a>数据库管理系统的内置数据库</h3><p>（1）MySQL有一个默认的内置数据库，信息数据库information_schema</p>
-<p>（2）information_schema有三张关键的表：schemata、tables、columns</p>
-<p>（3）schemata表的schema_name列存放的是所有的数据库名</p>
-<pre><code class="sql">select schema_name from information_schema.schemata;
-或者使用
-show databases;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/F1XeAcMPWNJpgiv.png" alt="image-20210318160004813"></p>
-<p><img src="https://i.loli.net/2021/03/18/dQupgmRqYFH1jVK.png" alt="image-20210318160139745"></p>
-<p>（4）MySQL有一个默认的内置数据库，信息数据库information_schema。</p>
-<p>（5）information_schema有三张关键的表：schemata、tables、columns。</p>
-<p>（6）tables表的table_schema列存放的是所有的数据库名，table_name列存放的是数据库对应的所有表名。</p>
-<ul>
-<li>如要查询数据库mysql的所有表名。</li>
-</ul>
-<pre><code class="sql">select table_name from information_schema.tables where table_schema=&#39;mysql&#39;;
-或者也可以
-use mysql;   //进入或使用mysql数据库
-show tables; //查询数据库mysql的所有表名</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/1682TjYsrg4ZwLz.png" alt="image-20210318160929363"></p>
-<p>（7）columns表的column_name列存放的是所有的列名，table_schema列存放的是数据库对应的所有数据库名，table_name列存放的是数据库对应的所有数据库表名。</p>
-<ul>
-<li>如要查询数据库mysql的user表的所有列</li>
-</ul>
-<pre><code class="sql">select column_name from information_schema.columns where table_schema=&#39;mysql&#39; and table_name=&#39;user&#39;;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/TWgM79RIdoE8HQG.png" alt="image-20210318162436206"></p>
-<h3 id="数据库管理系统的内置函数"><a href="#数据库管理系统的内置函数" class="headerlink" title="数据库管理系统的内置函数"></a>数据库管理系统的内置函数</h3><p>（1）不同的DBMS有各自专属的内置函数，以下是mysql常见的一些内置函数：</p>
-<ul>
-<li>user()查看当前数据库账号的用户名。</li>
-</ul>
-<pre><code class="sql">select user();</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/URcaVqTSufPL3MB.png" alt="image-20210318162714816"></p>
-<ul>
-<li>version()查看当前数据库的版本。</li>
-</ul>
-<pre><code class="sql">select version();</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/KPrsadqNOCEYGvm.png" alt="image-20210318162832065"></p>
-<ul>
-<li>database()查看当前所在查询的数据库名。</li>
-</ul>
-<pre><code class="sql">use dvwa;        //进入数据库dvwa
-select database();</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/8neVsDGyQMBiCbo.png" alt="image-20210318163032842"></p>
-<ul>
-<li>@@datadir查看当前数据库所在物理路径</li>
-</ul>
-<pre><code class="sql">select @@datadir;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/dWr5xZLaBMt3gve.png" alt="image-20210318163155843"></p>
-<ul>
-<li>sleep(n)睡眠函数，运行n秒后返回结果。</li>
-</ul>
-<pre><code class="sql">select sleep(5);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/12GpoYXVtqlrhkU.png" alt="image-20210318163426515"></p>
-<ul>
-<li>length()返回结果长度。</li>
-</ul>
-<pre><code class="sql">select length(&quot;admin&quot;);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/pt8kxOaDSic4neG.png" alt="image-20210318163540873"></p>
-<ul>
-<li>substr(str,n,m)截取函数，从第n位开始截取m。</li>
-</ul>
-<pre><code class="sql">select substr(&quot;admin&quot;,2,3);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/azWsL38ognlNjA1.png" alt="image-20210318163706953"></p>
-<ul>
-<li>if(expr,r1,r2)判断函数，expr条件为真返回r1，为假返回r2。</li>
-</ul>
-<pre><code class="sql">select if((1&gt;2),111,222);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/KEAGFgyRhPWUjeZ.png" alt="image-20210318163855411"></p>
-<ul>
-<li>ord()返回一个字符的ASCII码</li>
-</ul>
-<pre><code class="sql">select ord(&#39;a&#39;);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/f9XRdjrSKckml8Z.png" alt="image-20210318180058349"></p>
-<ul>
-<li>hex()返回一个字符的16进制，相反是unhex()。</li>
-</ul>
-<pre><code class="sql">select hex(&#39;a&#39;);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/dXyhmpuAeQwUPcn.png" alt="image-20210318180229154"></p>
-<ul>
-<li>char()根据ASCII返回对应的字符</li>
-</ul>
-<pre><code class="sql">select char(97);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/hPxKMdlTXVtbIic.png" alt="image-20210318180334990"></p>
-<ul>
-<li>bin()返回一个数的2进制</li>
-</ul>
-<pre><code class="sql">select bin(7);</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/HFRDXcQs4Gnygkt.png" alt="image-20210318180438798"></p>
-<p>（2）concat()用于将多个字符串连接成一个字符串，多列成1列</p>
-<pre><code class="sql">select user_id,&#39;---&#39;,user from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png" alt="image-20210318181041151"></p>
-<pre><code class="sql">select concat(user_id,&#39;---&#39;,user) from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/uX68S9IN7AOx5ik.png" alt="image-20210318181128328"></p>
-<p>（3）group_concat()用于返回字符串的所有结果，该结果由分组的值连接而成。</p>
-<pre><code class="sql">select user_id,&#39;---&#39;,user from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/cTN87vnRX9W36Y5.png" alt="image-20210318181041151"></p>
-<pre><code class="sql">select group_concat(user_id,&#39;---&#39;,user)from users limit 0,1;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/FJlRm1ha4uKiNCv.png" alt="image-20210318181515127"></p>
-<h2 id="使用PHP管理SQL"><a href="#使用PHP管理SQL" class="headerlink" title="使用PHP管理SQL"></a>使用PHP管理SQL</h2><h3 id="PHP管理数据库"><a href="#PHP管理数据库" class="headerlink" title="PHP管理数据库"></a>PHP管理数据库</h3><p>（1）在不使用PHP的情况下，管理数据库的基本步骤：连接数据库-&gt;选择数据库-&gt;选择表-&gt;查询SQL语句</p>
-<p><img src="https://i.loli.net/2021/03/18/NrBHuAIcLE8hapj.png" alt="image-20210318184524764"></p>
-<p>（2）PHP连接数据库函数——mysqli_connect(servername,user,pass,database)</p>
-<ul>
-<li>servername：数据库地址</li>
-<li>user：数据库用户名</li>
-<li>pass：数据库密码</li>
-<li>database：数据库名</li>
-</ul>
-<pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-if(!$con)&#123;
-    die(&#39;连接失败：&#39;.mysqli_connect_error());
-&#125;
-else&#123;
-    echo &quot;连接成功&quot;;
-&#125;
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/Kikf8S9ap1l5Jbu.png" alt="image-20210318185742335"></p>
-<pre><code class="php">mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,&quot;test&quot;)//连接数据库</code></pre>
-<p><strong>扩展</strong>：可在相同路径下新建一个database.inc.php文件，用于存放需要传入的参数。然后通过<strong>include</strong>来调用。</p>
-<pre><code class="php">//database.inc.php文件
-&lt;?php
-    $dbserver = &quot;127.0.0.1&quot;;
-    $dbuser = &quot;root&quot;;
-    $dbpass = &quot;root&quot;;
-    $dbdatabase = &quot;test&quot;;
-    mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
-?&gt;</code></pre>
-<pre><code class="php">&lt;?php
-    include &quot;database.inc.php&quot;;
-?&gt;</code></pre>
-<p>（3）查询:PHP执行SQL语句函数——mysqli_query(conn,sql)</p>
-<ul>
-<li>conn：数据库连接函数的结果</li>
-<li>sql：SQL语句</li>
-</ul>
-<pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-if(!$con)&#123;
-    die(&#39;连接失败：&#39;.mysqli_connect_error());
-&#125;
-else&#123;
-    echo &quot;连接成功&lt;hr&gt;&quot;;
-&#125;
-
-$sql=&quot;select * from users limit 0,1&quot;;
-$result=mysqli_query($con,$sql);
-var_dump($result);
-
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/tJcBy8beNTHK3qw.png" alt="image-20210318190457387"></p>
-<p><strong>扩展</strong>：可在相同路径下新建一个database.inc.php文件，用于存放需要传入的参数。然后通过<strong>include</strong>来调用。</p>
-<pre><code class="php">//database.in.php文件
-&lt;?php
-    $dbserver = &quot;127.0.0.1&quot;;
-    $dbuser = &quot;root&quot;;
-    $dbpass = &quot;root&quot;;
-    $dbdatabase = &quot;test&quot;;
-    $con = mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
-?&gt;</code></pre>
-<pre><code class="php">&lt;?php
-    include &quot;database.inc.php&quot;;
-    $query = mysqli_query($con,$sql);
-?&gt;</code></pre>
-<p>（4）PHP获取执行结果函数——mysqli_fetch_array(query)</p>
-<ul>
-<li>query：执行SQL语句函数的结果</li>
-<li>mysqli_num_rows(query)：获取结果数组长度</li>
-</ul>
-<pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-$sql=&quot;select * from users limit 0,1&quot;;
-$result=mysqli_query($con,$sql);
-if(@mysqli_num_rows($result)&gt;0)&#123;       //加@符可避免报错
-    $row=mysqli_fetch_array($result);
-    echo $row[&#39;user_id&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;first_name&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;last_name&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;user&#39;].&quot;&lt;br/&gt;&quot;;
-    echo $row[&#39;password&#39;].&quot;&lt;br/&gt;&quot;;
-&#125;
-
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/Ft8EG4y12QASzfR.png" alt="image-20210318192511897"></p>
-<p><strong>扩展</strong>：根据用户输入用户名和密码判断是否正确，进行数据库操作</p>
-<ul>
-<li>login.html文件</li>
-</ul>
-<pre><code class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;form action=&quot;login.php&quot; method=&quot;get&quot;&gt;
-            City:
-            &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
-            &lt;br&gt;
-            Country:
-            &lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;
-            &lt;br&gt;
-            &lt;input type=&quot;submit&quot; value=&quot;查询&quot;&gt;
-        &lt;/form&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<ul>
-<li>login.php文件</li>
-</ul>
-<pre><code class="php">&lt;?php
-    $user = $_GET[&#39;username&#39;];
-    $pass = $_GET[&#39;password&#39;];
-    $sql = &quot;select * from test where City=&#39;&quot;.$user.&quot;&#39; and Country=&#39;&quot;.$pass.&quot;&#39;&quot;;
-    include &quot;database.inc.php&quot;;
-    $query = mysqli_query($con,$sql);
-    $result = mysqli_fetch_array($query);
-    var_dump($result)
-    echo &quot;&lt;br&gt;&quot;;
-    echo $result[&#39;CompanyName&#39;];
-?&gt;</code></pre>
-<ul>
-<li>database.inc.php文件</li>
-</ul>
-<pre><code class="php">&lt;?php
-    $dbserver = &quot;127.0.0.1&quot;;
-    $dbuser = &quot;root&quot;;
-    $dbpass = &quot;root&quot;;
-    $dbdatabase = &quot;test&quot;;
-    $con = mysqli_connect($dbserver,$dbuser,$dbpass,$dbdatabase);
-    function query($con,$sql)&#123;
-        mysqli_query($con,$sql);
-    &#125;
-?&gt;</code></pre>
-<h3 id="根据用户查询返回结果展示"><a href="#根据用户查询返回结果展示" class="headerlink" title="根据用户查询返回结果展示"></a>根据用户查询返回结果展示</h3><pre><code class="php">&lt;?php
-$con =mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;root&quot;,&quot;dvwa&quot;);
-if(!$con)&#123;
-    die(&#39;连接失败：&#39;.mysqli_connect_error());
-&#125;
-
-$id=$_GET[&#39;user_id&#39;];
-$sql =&quot;select * from `users` where user_id=$id&quot;;    //其中users不是用单引号括住，而是用` `
-
-$result=mysqli_query($con,$sql);
-
-if(mysqli_num_rows($result)&gt;0)&#123;
-    $row=mysqli_fetch_array($result);
-    echo &quot;您查询的用户名是： &quot;.$row[&#39;user&#39;].&quot;&lt;br/&gt;&quot;;
-    echo &quot;您查询的用户名密码是： &quot;.$row[&#39;password&#39;];
-&#125;
-
-mysqli_close($con);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-?&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/18/GEd5cH3gzv9h2Ne.png" alt="image-20210318195520342"></p>
-<h2 id="PHP的会话与权限管理"><a href="#PHP的会话与权限管理" class="headerlink" title="PHP的会话与权限管理"></a>PHP的会话与权限管理</h2><h3 id="Cookie和会话Session"><a href="#Cookie和会话Session" class="headerlink" title="Cookie和会话Session"></a>Cookie和会话Session</h3><p>（1）cookie用来管理服务器和客户之间的状态。</p>
-<ul>
-<li>cookie的工作机制是<strong>用户识别及状态管理</strong></li>
-<li>web网站为了管理用户的状态，会通过web浏览器，把一些数据临时写入用户的计算机内。当用户访问该web网站时，可通过通信方式取回之前发放的cookie。</li>
-</ul>
-<p>（2）session会在cookie中出现和传输，属于cookie的一部分</p>
-<ul>
-<li>当web服务器开启会话机制时，用户登录成功后，会将<strong>会话保存在服务器中</strong></li>
-<li>PHPSESSID–php session id–存放某串session</li>
-<li>session可在浏览器中用f12打开开发者工具–&gt;Application–&gt;Cookie查看</li>
-</ul>
-<h3 id="PHP-Cookie"><a href="#PHP-Cookie" class="headerlink" title="PHP Cookie"></a>PHP Cookie</h3><p>（1）下发cookie函数：Setcookie()</p>
-<ul>
-<li>服务端会通过http响应包的set-cookie为浏览器分配cookie字段。</li>
-</ul>
-<pre><code class="php">&lt;?php
-setcookie(&quot;user&quot;,&quot;reborn&quot;,time()+3600);
-header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-
-//创建名为“user”的cookie，并为它赋值“reborn”
-//规定此cookie在一小时后过期
-?&gt;</code></pre>
-<p>（2）取回cookie的值</p>
-<ul>
-<li>PHP的$_COOKIE变量用于取回cookie的值</li>
-</ul>
-<pre><code class="php">&lt;?php
-    echo $_COOKIE[&quot;user&quot;];    //取回cookie的值
-    print_r($_COOKIE);        //查看所有cookie的方法
-?&gt;</code></pre>
-<p>（3）删除cookie</p>
-<ul>
-<li>删除cookie时，应当使过期日期变更为过去的时间点</li>
-</ul>
-<pre><code class="php">&lt;?php
-    setcookie(&quot;user&quot;,&quot;&quot;,time()-3600);    //将过期数据设置为一小时前
-?&gt;</code></pre>
-<h3 id="PHP-Sessions"><a href="#PHP-Sessions" class="headerlink" title="PHP Sessions"></a>PHP Sessions</h3><p>PHP开启会话函数：session_start()</p>
-<ul>
-<li>session_start()函数必须位于&lt;html&gt;标签之前</li>
-</ul>
-<pre><code class="html">&lt;?php session_start(); ?&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        ......
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3 id="存储PHP-Session"><a href="#存储PHP-Session" class="headerlink" title="存储PHP Session"></a>存储PHP Session</h3><p>存储记录Session：$_SESSION</p>
-<pre><code class="php">&lt;?php
-    session_start();
-    $_SESSION[&#39;login_id&#39;]=1003;
-    $_SESSION[&#39;role&#39;]=&quot;student&quot;;
-?&gt;</code></pre>
-<h3 id="终结PHP-Session"><a href="#终结PHP-Session" class="headerlink" title="终结PHP Session"></a>终结PHP Session</h3><p>（1）若需要删除某些session数据，可以使用unset()或session_destroy()函数</p>
-<ul>
-<li>unset()函数用于释放指定的session变量</li>
-</ul>
-<pre><code class="php">&lt;?php
-    unset($_SESSION[&#39;views&#39;])；
-?&gt;</code></pre>
-<p>（2）可以通过session_destroy()函数彻底终结session</p>
-<ul>
-<li>session_destroy()将重置session，将失去所有已存储的session数据</li>
-</ul>
-<pre><code class="php">&lt;?php
-    session_destroy();
-?&gt;</code></pre>
-<h3 id="利用session进行权限管理"><a href="#利用session进行权限管理" class="headerlink" title="利用session进行权限管理"></a>利用session进行权限管理</h3><p>当用户需要访问登录后的页面或特定身份才能访问的页面或数据，则通过session变量来校验用户身份权限和状态，根据校验结果决定是否允许用户进行相关操作。</p>
-<ul>
-<li>用户登录成功时为用户分配session变量</li>
-<li>记录用户的登录状态和身份</li>
-</ul>
-<p><img src="https://i.loli.net/2021/03/18/8khDnLWJTZ5cmC7.png" alt="image-20210318203458759"></p>
-<h3 id="header-函数"><a href="#header-函数" class="headerlink" title="header()函数"></a>header()函数</h3><p>header()函数是PHP中进行页面跳转的一种方法。</p>
-<ul>
-<li>header()函数的主要功能是将HTTP协议标头(header)输出到浏览器。</li>
-</ul>
-<pre><code class="php">&lt;?php
-    header(&quot;Location:http://www.qq.com&quot;);   //重定向浏览器
-    exit();   //确保重定向后，后续代码不会被执行
-?&gt;</code></pre>
-<h3 id="die-函数"><a href="#die-函数" class="headerlink" title="die()函数"></a>die()函数</h3><p>die()函数执行后，将不再执行后面的所有php代码。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/17/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/PHP%E4%B8%8ESQL%E8%BF%9B%E9%98%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全进阶/JavaScript代码进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">JavaScript代码进阶</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-03-16T02:00:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="JavaScript简介"><a href="#JavaScript简介" class="headerlink" title="JavaScript简介"></a>JavaScript简介</h2><p>（1）JavaScript是web浏览器的语言，一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。</p>
-<p>（2）它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言。最早是在HTML网页上使用，用来给HTML网页增加动态功能。</p>
-<p>（3）JavaScript基本特点：</p>
-<ul>
-<li>脚本编写语言</li>
-<li>基于对象的语言</li>
-<li>简单性</li>
-<li>安全性</li>
-<li>动态性</li>
-<li>跨平台性</li>
-</ul>
-<h2 id="JavaScript的基本语法"><a href="#JavaScript的基本语法" class="headerlink" title="JavaScript的基本语法"></a>JavaScript的基本语法</h2><p>（1）JavaScript中的脚本必须位于&lt;script&gt;与&lt;/script&gt;标签之间。浏览器的控制台可以执行js代码。</p>
-<pre><code class="javascript">&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&gt;&lt;/script&gt;
-//外部引入js代码，src为资源路径</code></pre>
-<p>（2）脚本可被放置在HTML页面的&lt;body&gt;和&lt;head&gt;部分中。</p>
-<pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;script&gt;
-            document.write(&quot;&lt;h1&gt;this is a heading&lt;/h1&gt;&quot;);
-            document.write(&quot;&lt;p&gt;this is a paragraph&lt;/p&gt;&quot;);
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>（3）JavaScript的注释：</p>
-<ul>
-<li>单行注释：//</li>
-</ul>
-<pre><code class="javascript">&lt;script&gt;
-    //这表示单行注释，不会在页面中被显示
-    alert(&quot;my first javascript&quot;);
-&lt;/script&gt;</code></pre>
-<ul>
-<li>多行注释：/*在此写注释 */</li>
-</ul>
-<pre><code class="javascript">&lt;script&gt;
-    /*这表示多行注释，
-    不会在页面中被显示*/
-    alert(&quot;my first javascript&quot;);
-&lt;/script&gt;</code></pre>
-<h3 id="JavaScript变量"><a href="#JavaScript变量" class="headerlink" title="JavaScript变量"></a>JavaScript变量</h3><p>（1）变量是存储信息的容器；typeof(a)，打印a的类型</p>
-<pre><code class="javascript">var x=2;
-var y=3;
-var z=x+y;</code></pre>
-<p>（2）声明（创建）JavaScript变量</p>
-<ul>
-<li>方法一：创建变量，为变量赋值；</li>
-</ul>
-<pre><code class="javascript">var carname;
-carname=&quot;Volvo&quot;;</code></pre>
-<ul>
-<li>方法二：创建变量的同时并为变量赋值；</li>
-</ul>
-<pre><code class="javascript">var carname=&quot;Volvo&quot;;</code></pre>
-<p>（3）一条语句，多个变量：在一条语句中声明多个变量。语句使用var开头，使用逗号分隔变量；</p>
-<pre><code class="javascript">var name=&quot;Gates&quot;,age=56,job=&quot;CEO&quot;;</code></pre>
-<p>（4）横跨多行声明</p>
-<pre><code class="javascript">var name=&quot;Gates&quot;,
-    age=56,
-    job=&quot;CEO&quot;;</code></pre>
-<p>（5）无值变量：只声明了变量，但未为变量赋值，值=undefined</p>
-<pre><code class="javascript">var carname;</code></pre>
-<p>（6）重新声明变量：重新声明变量只要未重新赋值，变量原有的值不变，若重新赋值，则该变量的原有值被覆盖。</p>
-<pre><code class="javascript">var carname=&quot;Volvo&quot;; var carname;</code></pre>
-<h3 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h3><p>（1）局部变量：在JavaScript函数内部声明的变量（使用var）是局部变量，所以只能在函数内部访问它。（该变量的作用域是局部的）。可以在不同的函数中使用名称相同的局部变量，因为只有声明过该变量的函数才能识别出该变量。只要函数运行完毕，本地变量就会被删除。</p>
-<p>（2）全局变量：在函数外声明的变量是全局变量，网页上的所有脚本和函数都能访问它。全局变量会在页面关闭后被删除。</p>
-<p>（3）把值赋给尚未声明的变量，该变量将被自动作为全局变量声明。</p>
-<h3 id="JavaScript的基本数据类型"><a href="#JavaScript的基本数据类型" class="headerlink" title="JavaScript的基本数据类型"></a>JavaScript的基本数据类型</h3><p>（1）三种基本的数据类型：</p>
-<ul>
-<li>数值（整数和实数）</li>
-<li>字符串型（用’’或””括起来的字符或数值）</li>
-<li>布尔型（使用True或False表示）</li>
-</ul>
-<p>（2）常量：</p>
-<ul>
-<li>整型常量</li>
-<li>实型常量</li>
-<li>布尔值</li>
-<li>字符型常量</li>
-<li>空值</li>
-</ul>
-<p>（3）变量：由开发人员自行定义</p>
-<p>（4）JavaScript拥有动态类型，相同的变量可用作不同的类型</p>
-<pre><code class="javascript">var x; //x为undefined
-var x = 6; //x为数字
-var x = &quot;Bill&quot;; //x为字符串</code></pre>
-<p>（5）JavaScript字符串，可以使用单引号或双引号引用任意文本</p>
-<pre><code class="javascript">var carname=&quot;Bill Gates&quot;;
-var carname=&#39;Bill Gates&#39;;</code></pre>
-<p>（6）JavaScript字符串，允许在字符串中使用引号，只要不匹配字符中的引号即可</p>
-<pre><code class="javascript">var answer=&quot;He is called &#39;Bill&#39;&quot;;
-var answer=&#39;He is called &quot;Bill&quot;&#39;;
-var answer=&quot;&quot;\&#39;\&quot;Bill&quot;&#39;&quot;&quot;   //其中\表示转义符，结果为
-var answer=\\\&#39;        //结果为\&#39;
-
-var a=&#39;&quot;&#39;;
-var b=&quot;&#39;&quot;;
-var c=&quot;&lt;div&gt;&quot;;
-var d= a+b+c+b+a      //用加号作为连接符，结果为&quot;&#39;&lt;div&gt;&#39;&quot;
-
-var e=1+2          //结果e为3
-var f=1+&quot;2&quot;        //结果f为12
-var g=1+&quot;&quot;         //结果g为1，但typeof(g)为string</code></pre>
-<p>（7）JavaScript数字：JavaScript只有一种数字类型，数字可以带小数点，也可以不带</p>
-<pre><code class="javascript">var x1=34.00;
-var x2=34;</code></pre>
-<p>（8）极大或极小的数字可以通过科学（指数）计数法书写</p>
-<pre><code class="javascript">var x=123e5;  //12300000
-var y=123e-5; //0.00123</code></pre>
-<p>（9）JavaScript布尔，布尔（逻辑）只能有两个值：true或false</p>
-<pre><code class="javascript">var x=true
-var y=false</code></pre>
-<h3 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h3><p>（1）JavaScript函数语法。</p>
-<ul>
-<li>函数就是包裹在花括号中的代码块，前面使用了关键词function：</li>
-</ul>
-<pre><code class="JavaScript">function functionname()&#123;
-    这里是要执行的代码
-&#125;</code></pre>
-<ul>
-<li>调用带参数的函数，可以向其传递值，这些值被称为参数。</li>
-</ul>
-<pre><code class="javascript">myFunction(argument1,argument2)</code></pre>
-<ul>
-<li>当声明函数时，需要把参数作为变量来声明：</li>
-</ul>
-<pre><code class="JavaScript">function myFunction(var1,var2)&#123;
-    这里是要执行的代码
-&#125;</code></pre>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;p&gt;
-          请点击其中的一个按钮，来调用带参数的函数。  
-        &lt;/p&gt;
-        &lt;button onclick=&quot;myFunction(&#39;Harry Potter&#39;,&#39;Wizard&#39;)&quot;&gt;
-            点击这里
-        &lt;/button&gt;
-        &lt;button onclick=&quot;myFunction(&#39;Bob&#39;,&#39;Builder&#39;)&quot;&gt;
-            点击这里
-        &lt;/button&gt;
-
-        &lt;script&gt;
-            function myFunction(name,job)&#123;
-                alert(&quot;Welcome &quot;+name+&quot;,the &quot;+job);
-            &#125;
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>（2）使用函数将 值返回调用它的地方，通过使用return语句就可以实现，在使用return语句时，函数会停止执行，并返回指定的值。</p>
-<pre><code class="javascript">//带有返回值的函数语法
-function myFunction()&#123;
-var x=5;
-return x;
-&#125;</code></pre>
-<p>注意：整个JavaScript并不会停止执行，仅仅是函数。JavaScript将继续从调用函数的地方执行代码。</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;p&gt;
-            本例调用的函数会执行一个计算，然后返回结果：
-        &lt;/p&gt;
-        &lt;p id=&quot;demo&quot;&gt;
-        &lt;/p&gt;
-
-        &lt;script&gt;
-            function myFunction(a,b)&#123;
-                return a*b;
-            &#125;
-            document.getElementById(&quot;demo&quot;).innerHTML=myFunction(4,3);
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3 id="JavaScript运算符"><a href="#JavaScript运算符" class="headerlink" title="JavaScript运算符"></a>JavaScript运算符</h3><h4 id="算术运算符与赋值运算符"><a href="#算术运算符与赋值运算符" class="headerlink" title="算术运算符与赋值运算符"></a>算术运算符与赋值运算符</h4><p>算术运算符用于执行变量或值之间的算术运算，赋值运算符用于给JavaScript变量赋值</p>
-<table>
-<thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">+</td>
-<td align="center">加</td>
-</tr>
-<tr>
-<td align="center">-</td>
-<td align="center">减</td>
-</tr>
-<tr>
-<td align="center">*</td>
-<td align="center">乘</td>
-</tr>
-<tr>
-<td align="center">/</td>
-<td align="center">除</td>
-</tr>
-<tr>
-<td align="center">%</td>
-<td align="center">取余（保留整数）</td>
-</tr>
-<tr>
-<td align="center">++</td>
-<td align="center">累加（x=++5，x=6）</td>
-</tr>
-<tr>
-<td align="center">–</td>
-<td align="center">递减（x=–5，x=4）</td>
-</tr>
-<tr>
-<td align="center">=</td>
-<td align="center">赋值x=y</td>
-</tr>
-<tr>
-<td align="center">+=</td>
-<td align="center">x+=y等价于x=x+y</td>
-</tr>
-<tr>
-<td align="center">-=</td>
-<td align="center">x-=y等价于x=x-y</td>
-</tr>
-<tr>
-<td align="center">*=</td>
-<td align="center">x*=y等价于x=x*y</td>
-</tr>
-<tr>
-<td align="center">/=</td>
-<td align="center">x/=y等价于x=x/y</td>
-</tr>
-<tr>
-<td align="center">%=</td>
-<td align="center">x%=y等价于x=x%y</td>
-</tr>
-</tbody></table>
-<h4 id="比较和逻辑运算符"><a href="#比较和逻辑运算符" class="headerlink" title="比较和逻辑运算符"></a>比较和逻辑运算符</h4><p>（1）比较运算符在逻辑语句中使用，以测定变量或值是否相等</p>
-<table>
-<thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">描述</th>
-<th align="center">例子</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">==</td>
-<td align="center">等于</td>
-<td align="center">5==8为false</td>
-</tr>
-<tr>
-<td align="center">===</td>
-<td align="center">全等(值和类型都要相等)</td>
-<td align="center">5===5为true，5===”5”为false</td>
-</tr>
-<tr>
-<td align="center">!=</td>
-<td align="center">不等于</td>
-<td align="center">5!=8为true</td>
-</tr>
-<tr>
-<td align="center">&gt;</td>
-<td align="center">大于</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">&lt;</td>
-<td align="center">小于</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">&gt;=</td>
-<td align="center">大于等于</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">&lt;=</td>
-<td align="center">小于等于</td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<p>（2）逻辑运算符用于测定变量或值之间的逻辑</p>
-<table>
-<thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&amp;&amp;</td>
-<td align="center">and</td>
-</tr>
-<tr>
-<td align="center">||</td>
-<td align="center">or</td>
-</tr>
-<tr>
-<td align="center">!</td>
-<td align="center">not</td>
-</tr>
-</tbody></table>
-<h3 id="javascript条件语句"><a href="#javascript条件语句" class="headerlink" title="javascript条件语句"></a>javascript条件语句</h3><p>（1）if语句：只有当指定条件为true时，执行该条件下的代码</p>
-<p>（2）if…else语句：当条件为true时执行if下的代码，当条件为false时执行else下的代码</p>
-<p>（3）if…else if…else：使用该语句来选择多个代码块之一来执行</p>
-<p>（4）switch语句：使用该语句来选择多个代码块之一来执行</p>
-<h3 id="JavaScript循环语句"><a href="#JavaScript循环语句" class="headerlink" title="JavaScript循环语句"></a>JavaScript循环语句</h3><p>（1）for语句：</p>
-<pre><code>for(语句1;语句2;语句3)&#123;
-    被执行的代码块
-&#125;</code></pre>
-<ul>
-<li>语句1在循环开始前执行(可选)</li>
-<li>语句2定义循环的条件(可选)</li>
-<li>语句3在循环已被执行后执行(可选)</li>
-</ul>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;script&gt;
-            cars=[&quot;BMW&quot;,&quot;Volvo&quot;,&quot;Ford&quot;];
-            for(var i=0;i&lt;cars.length;i++)&#123;
-                document.write(car[i]+&quot;&lt;br&gt;&quot;);
-            &#125;
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>（2）while语句</p>
-<pre><code>while(条件)&#123;需要执行的代码&#125;
-例如：
-while(i&lt;5)&#123;
-x=x+&quot;The number is &quot;+i+&quot;&lt;br&gt;&quot;;
-i++;
-&#125;</code></pre>
-<p>（3）do…while语句</p>
-<pre><code>do&#123;
-需要执行的代码
-&#125;while(条件)</code></pre>
-<h3 id="break和continue语句"><a href="#break和continue语句" class="headerlink" title="break和continue语句"></a>break和continue语句</h3><p>（1）break语句：用于跳出当前循环，跳出循环后会继续执行该循环之后的代码。</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;p&gt;
-            点击按钮，测试带有break语句的循环
-        &lt;/p&gt;
-        &lt;button onclick=&quot;myFunction()&quot;&gt;
-            点击这里
-        &lt;/button&gt;
-        &lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
-        &lt;script&gt;
-            function myFunction()&#123;
-                var x=&quot;&quot;,i=0;
-                for(i=0;i&lt;10;i++)&#123;
-                    if(i==3)&#123;
-                        break;
-                    &#125;
-                    x=x + &quot;The number is &quot;+i+&quot;&lt;br&gt;&quot;;
-                &#125;
-                document.getElementById(&quot;demo&quot;).innerHTML=x;
-            &#125;
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>（2）continue语句：中断循环中的迭代，若出现了指定的条件，然后继续循环中的下一个迭代。</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;body&gt;
-        &lt;p&gt;
-            点击按钮执行循环，循环会跳过i=3的步骤
-        &lt;/p&gt;
-        &lt;button onclick=&quot;myFunction()&quot;&gt;
-            点击这里
-        &lt;/button&gt;
-        &lt;p id=&quot;demo&quot;&gt;&lt;/p&gt;
-        &lt;script&gt;
-            function myFunction()&#123;
-                var x=&quot;&quot;,i=0;
-                for(i=0;i&lt;10;i++)&#123;
-                    if(i==3)&#123;
-                        continue;
-                    &#125;
-                    x=x + &quot;The number is &quot;+i+&quot;&lt;br&gt;&quot;;
-                &#125;
-                document.getElementById(&quot;demo&quot;).innerHTML=x;
-            &#125;
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h2 id="JavaScript-DOM"><a href="#JavaScript-DOM" class="headerlink" title="JavaScript DOM"></a>JavaScript DOM</h2><p>（1）HTML DOM（文档对象模型）。对当前超文本进行操作的技术。当网页被加载时，浏览器会创建页面的文档对象模型，HTML DOM模型被构造为对象的树。</p>
-<p>（2）通过可编程的对象模型，JavaScript获得了足够的能力来创建动态的HTML。</p>
-<ul>
-<li>JavaScript能够改变页面中的所有HTML元素</li>
-<li>JavaScript能够改变页面中的所有HTML属性</li>
-<li>JavaScript能够改变页面中的所有CSS样式</li>
-<li>JavaScript能够对页面中的所有事件作出反应</li>
-</ul>
-<p>（3）通常要使用JavaScript操作HTML元素，就需要找到相应的元素，可通过如下的方法找到元素：</p>
-<ul>
-<li>通过id找到HTML元素</li>
-<li>通过标签名找到HTML元素</li>
-<li>通过类名找到HTML元素</li>
-</ul>
-<p>（4）DOM可以获取网站的cookie。在浏览器中使用快捷键F12进入控制台(console)，输入document.cookie就能获取当前网站的cookie。</p>
-<p><img src="https://i.loli.net/2021/03/16/acUeO5FTR7PVQX8.png" alt="image-20210316181503816"></p>
-<p>（5）DOM可以获取URL的数据，在控制台输入window.location就可获取到浏览器的URL数据</p>
-<p><img src="https://i.loli.net/2021/03/16/PhWa3QA9vnIHszN.png" alt="image-20210316181801514"></p>
-<h3 id="获取标签–基于id"><a href="#获取标签–基于id" class="headerlink" title="获取标签–基于id"></a>获取标签–基于id</h3><p>在使用JavaScript操作HTML元素，就需要找到相应的元素，可通过id获取元素</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meat charset=&quot;UTF-8&quot;&gt;&lt;/meat&gt;
-        &lt;title&gt;Goktech-javascript&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1 id=&quot;demo&quot;&gt;welcome to gok&lt;/h1&gt;
-        &lt;script&gt;
-            var a=document.getElementById(&quot;demo&quot;);
-            document.write(&quot;这是基于Id抓取到的内容：&quot;+a.innerHTML);   //document基于DOM技术，用到某一个方法要加上一个点.如getElementById函数，表示通过id找到一个标签。innerHTML可修改元素内容。window是基于BOM技术
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/16/UXLgYtdNaQ9b8AE.png" alt="image-20210316183426660"></p>
-<pre><code class="html">&lt;html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;script&gt;
-        function test()&#123;
-            document.getElementById(&quot;1&quot;).value=&quot;文本文档1&quot;; //找到id对应的标签后再用value方法修改改标签的值。
-            document.getElementById(&quot;2&quot;).value=&quot;文本文档2&quot;;
-            document.getElementById(&quot;3&quot;).href=&quot;http://www.goktech.cn&quot;;//找到id对应的标签后用href方法修改原a标签的值。
-        &#125;
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;1&quot; onclick=&quot;test()&quot;&gt;  //用onclick调用test函数
-    &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;2&quot; onclick=&quot;test()&quot;&gt;
-    &lt;a href=&quot;www.baidu.com&quot; id=&quot;3&quot; onclick=&quot;test()&quot;&gt;百度&lt;/a&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/23/PA4lhXvJHSTzKNu.png" alt="image-20210323212113175"></p>
-<p><img src="https://i.loli.net/2021/03/23/kMUy4m59fQAOZY8.png" alt="image-20210323212208821"></p>
-<p><img src="https://i.loli.net/2021/03/23/uTtJAC1yasGLEgf.png" alt="image-20210323212231314"></p>
-<h3 id="获取标签-–基于class"><a href="#获取标签-–基于class" class="headerlink" title="获取标签 –基于class"></a>获取标签 –基于class</h3><pre><code class="javascript">document.getElementsClassName(&quot;&quot;)[0]   //由于类并不唯一，所以可以在末尾加上[0]代表要取第一个标签</code></pre>
-<h3 id="获取标签–基于Tagname"><a href="#获取标签–基于Tagname" class="headerlink" title="获取标签–基于Tagname"></a>获取标签–基于Tagname</h3><p>通过TagName获取元素；</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;/meta&gt;
-        &lt;title&gt;Goktech-javascript&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;welcome to gok!&lt;/h1&gt;
-        &lt;h1&gt;Javascript DOM&lt;/h1&gt;
-        &lt;script&gt;
-            var b=document.getElementsByTagName(&quot;h1&quot;);
-            document.write(&quot;这是基于TagName抓取到的内容：&quot;+b[0].innerHTML);
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3 id="获取标签–基于Div"><a href="#获取标签–基于Div" class="headerlink" title="获取标签–基于Div"></a>获取标签–基于Div</h3><p>通过Div获取元素</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;/meta&gt;
-        &lt;title&gt;Goktech-javascript&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;div id=&quot;demo&quot;&gt;
-            &lt;h1&gt;welcome to gok!&lt;/h1&gt;
-            &lt;h1&gt;Javascript DOM&lt;/h1&gt;
-        &lt;/div&gt;
-
-        &lt;script&gt;
-            var a=document.getElementById(&quot;demo&quot;);
-            var b=document.getElementsByTagName(&quot;h1&quot;);
-            document.write(&quot;这是基于Div抓取到的内容：&quot;+b[0].innerHTML);
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h2 id="Javascript-BOM"><a href="#Javascript-BOM" class="headerlink" title="Javascript BOM"></a>Javascript BOM</h2><p>（1）BOM(Browser Object Model)，浏览器对象模型，对浏览器进行操作。它使JavaScript有能力与浏览器”对话“</p>
-<p>（2）所有浏览器都支持window对象。它表示浏览器窗口。</p>
-<ul>
-<li>所有JavaScript全局对象、函数以及变量均自动成为window对象的成员。</li>
-<li>全局变量是window对象的属性。</li>
-<li>全局函数是window对象的方法。</li>
-</ul>
-<p>（3）window.open()   ——-打开新窗口。window.close()  ——-关闭当前窗口。 window.location.href —-页面跳转。</p>
-<h3 id="BOM-window-open"><a href="#BOM-window-open" class="headerlink" title="BOM-window.open"></a>BOM-window.open</h3><p>window.open()实现的功能是打开一个新窗口，通过设置一个按钮，利用window.open()可以实现当点击按钮的时候，会打开一个新的页面(如例中的<a href="http://www.goktech.cn)，代码及现象如图：">http://www.goktech.cn)，代码及现象如图：</a></p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;script&gt;
-            function win_open()&#123;
-                window.open(&quot;http://www.goktech.cn&quot;)
-            &#125;
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;input type=&quot;button&quot; value=&quot;Open Window&quot; onclick=&quot;win_open()&quot;/&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/16/BwrX6UfFc4VMtxq.png" alt="image-20210316224229904"></p>
-<p><img src="https://i.loli.net/2021/03/16/suMivCgGxBAjZFD.png" alt="image-20210316224252251"></p>
-<h3 id="BOM-window-close"><a href="#BOM-window-close" class="headerlink" title="BOM-window.close"></a>BOM-window.close</h3><p>window.close()实现的功能是<strong>关闭当前窗口</strong>，在本例中预先设置执行代码后会弹出一个新窗口，当点击设置的按钮后，此新窗口会被关闭，代码及现象如图：</p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;script type=&quot;text/javascript&quot;&gt;
-            function Winclose()&#123;
-                myWindow.close()
-            &#125;        
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;input type=&quot;button&quot; value=&quot;Close myWindow&quot; onclick=&quot;Winclose()&quot;/&gt;
-        &lt;script type=&quot;text/javascript&quot;&gt;
-            myWindow=window.open(&#39;&#39;,&#39;&#39;,&#39;width=200,height=100&#39;)
-            myWindow.document.write(&quot;这是一个示例窗口&quot;)
-        &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/PfxMvwjTXaOmSqb.png" alt="image-20210317145808454"></p>
-<h3 id="Bom-window-location-href"><a href="#Bom-window-location-href" class="headerlink" title="Bom-window.location.href"></a>Bom-window.location.href</h3><p>（1）window.location可以查看当前网页的属性。</p>
-<p>（2）window.location.href()是修改当前网页的href属性，实现的功能是页面跳转，利用window.location.href()设置一个想要跳转的页面，当执行代码时就会跳转到相应的位置，代码及现象如下：</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Goktech.javascript&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;script&gt;
-        window.location.href=&#39;http://www.goktech.cn&#39;
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/AlFSoMRB8nvUTuZ.png" alt="image-20210317150437014"></p>
-<h3 id="BOM-消息框-alert"><a href="#BOM-消息框-alert" class="headerlink" title="BOM-消息框-alert"></a>BOM-消息框-alert</h3><p>alert(“文本”)：显示带有一段消息和一个确认按钮的警告框</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UFT-8&quot;&gt;
-        &lt;title&gt;Goktech.javascript&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;input type=&quot;submit&quot; value=&quot;点击此按钮(alert)&quot; onclick=&quot;alert(&#39;这是由alert形成的弹框&#39;)&quot;&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/4cmGoHKRihvekpQ.png" alt="image-20210317151009427"></p>
-<h3 id="BOM-消息框-confirm"><a href="#BOM-消息框-confirm" class="headerlink" title="BOM-消息框-confirm"></a>BOM-消息框-confirm</h3><p>confirm(“文本”)：显示带有一段消息以及确认按钮和取消按钮的对话框</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot;&gt;
-        &lt;title&gt;Goktech.javascript&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;input type=&quot;submit&quot; value=&quot;点击此按钮(confirm)&quot; onclick=&quot;confirm(&#39;这是由confirm形成的弹框&#39;)&quot;&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/w1kCMUD9ENZ4hma.png" alt="image-20210317151545748"></p>
-<h3 id="BOM-消息框-prompt"><a href="#BOM-消息框-prompt" class="headerlink" title="BOM-消息框-prompt"></a>BOM-消息框-prompt</h3><p>prompt(“文本”)：显示可提示用户输入的对话框</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;UTF-8&quot;&gt;
-        &lt;title&gt;Goktech-javascript&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;input type=&quot;submit&quot; value=&quot;点击此按钮(prompt)&quot; onclick=&quot;prompt(&#39;这是由prompt形成的弹框&#39;)&quot;&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><img src="https://i.loli.net/2021/03/17/3GV4TCYS8IwcXoz.png" alt="image-20210317152036718"></p>
-<p>扩展：jQuery是一个JavaScript库，极大简化了JavaScript。</p>
-<pre><code>&lt;script src=&quot;jquery-3.4.1.js&quot;&gt;&lt;/script&gt;
-function Jquery_Test()&#123;
-    $(&quot;p&quot;)    //定位到p标签
-    $(&quot;#p1&quot;).html(&quot;test&quot;)   //找到到id为p1的元素，给它添加元素
-    $(&quot;#input1&quot;).val(&quot;123&quot;)
-&#125;</code></pre>
-<h2 id="AJAX的基本语法及应用"><a href="#AJAX的基本语法及应用" class="headerlink" title="AJAX的基本语法及应用"></a>AJAX的基本语法及应用</h2><p>（1）AJAX=Asynchronous JavScript and XML（异步的JavaScript和XML）</p>
-<p>（2）AJAX是一种用于创建快速动态网页的技术。AJAX不是一种新的语言，而是一种新的标准方法；</p>
-<p>（3）传统的网页（不使用AJAX）如果需要更新内容，必须重载整个网页。AJAX技术通过在后台与服务器进行少量数据交换，AJAX可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
-<p>（4）使用AJAX的应用程序案例：新浪微博、Google地图、开心网等等。</p>
-<p>HTML – AJAX – 访问服务器的某个页面 – 数据库</p>
-<h3 id="AJAX请求方法"><a href="#AJAX请求方法" class="headerlink" title="AJAX请求方法"></a>AJAX请求方法</h3><p>如需将请求发送到服务器，使用XMLHttpRequest类的open()和send()方法；</p>
-<pre><code class="javascript">xmlhttp.open(&quot;GET&quot;,&quot;test1.txt&quot;,true);
-xmlhttp.send();</code></pre>
-<table>
-<thead>
-<tr>
-<th align="left">open(method,url,async)</th>
-<th align="left">规定请求的类型、URL以及是否异步处理请求。                                                                                         (1)method：请求的类型GET或POST                                                                                (2)url：文件在服务器上的位置                                                                                             (3)async：true（异步）或false（同步）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">send(string)</td>
-<td align="left">将请求发送到服务器。                                                                                                            *string：仅用于POST请求</td>
-</tr>
-</tbody></table>
-<h3 id="请求实现-get请求"><a href="#请求实现-get请求" class="headerlink" title="请求实现-get请求"></a>请求实现-get请求</h3><p>（1）一个简单的GET请求：</p>
-<pre><code>var xmlthhp = new XMLHttpRequest   //创建的xmlthhp是XMLHttpRequest类的对象
-
-xmlhttp.open(&quot;GET&quot;,&quot;demo_get.asp&quot;,true);
-xmlhttp.send();</code></pre>
-<p>（2）通过GET方法发送信息，请向URL添加信息：</p>
-<pre><code>xmlhttp.open(&quot;GET&quot;,&quot;demo_get2.asp?fname=Bill&amp;lname=Gates&quot;,true);
-xmlhttp.send();</code></pre>
-<p>（3）AJAX请求代码</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-    function loadXMLDoc()&#123;
-        var xmlhttp;
-        if (window.XMLHttpRequest)&#123;
-            xmlhttp=new XMLHttpRequest();
-        &#125;
-        else&#123;
-            xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
-        &#125;
-        xmlhttp.onreadystatechange=function()&#123;
-            if(xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)&#123;
-                document.getElementById(&quot;myDiv&quot;).innerHTML=xmlhttp.responseText;
-            &#125;
-        &#125;
-        xmlhttp.open(&quot;GET&quot;,&quot;/ajax/demo_get2.asp?fname=Bill&amp;name=Gates&quot;,true);
-        xmlhttp.send();
-    &#125;
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h2&gt;AJAX&lt;/h2&gt;
-    &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;请求数据&lt;/button&gt;
-    &lt;div id=&quot;myDiv&quot;&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<h3 id="请求实现-POST请求"><a href="#请求实现-POST请求" class="headerlink" title="请求实现-POST请求"></a>请求实现-POST请求</h3><p>（1）一个简单的POST请求：</p>
-<pre><code>xmlhttp.open(&quot;POST&quot;,&quot;demo_post.asp&quot;,true);
-xmlhttp.send();</code></pre>
-<p>（2）若需要像HTML表单那样POST数据，可以使用setRequestHeader()来添加HTTP头。然后在send()方法中规定想要发送的数据：</p>
-<pre><code>xmlhttp.open(&quot;POST&quot;,&quot;ajax_test.asp&quot;,true);
-xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
-xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);</code></pre>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>setRequestHeader(header,value)</td>
-<td>向请求添加HTTP头                                                                                                           (1)header：规定头的名称                                                                                          (2)value：规定头的值</td>
-</tr>
-</tbody></table>
-<p>（3）AJAX请求代码</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-    function loadXMLDoc()&#123;
-        var xmlhttp;
-        if (window.XMLHttpRequest)&#123;
-            xmlhttp=new XMLHttpRequest();
-        &#125;
-        else&#123;
-            xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
-        &#125;
-        xmlhttp.onreadystatechange=function()&#123;
-            if(xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)&#123;
-                document.getElementById(&quot;myDiv&quot;).innerHTML=xmlhttp.responseText;
-            &#125;
-        &#125;
-        xmlhttp.open(&quot;POST&quot;,&quot;ajax_test.asp&quot;,true);
-        xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
-        xmlhttp.send(&quot;fname=Bill&amp;lname=Gates&quot;);
-    &#125;
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h2&gt;AJAX&lt;/h2&gt;
-    &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;请求数据&lt;/button&gt;
-    &lt;div id=&quot;myDiv&quot;&gt;&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>扩展：</p>
-<h2 id="AJAX的GET请求"><a href="#AJAX的GET请求" class="headerlink" title="AJAX的GET请求"></a>AJAX的GET请求</h2><pre><code class="javascript">function ajax1()&#123;
-    //1.创建一个XMLHttpRequest对象
-    //打开浏览器
-    var xmlhttp = new XMLHttpRequest()
-    //2.使用open方法，表明请求的方式
-    //在浏览器上输入请求的URL
-        //1.GET/POST
-        //2.page
-        //3.true 异步
-    xmlhttp.open(&quot;GET&quot;,&quot;./AJAX_Back.html&quot;,true)
-    //3.使用send方法，发送请求的数据
-    //敲下回车，发送数据
-    xmlhttp.send()
-    //4.判断ajax是否从请求的页面中收到了数据
-    //当网页给响应时，将响应显示在页面上
-    xmlhttp.onload=function()&#123;
-        //xmlhttp.responeseText用于获取ajax接收到的响应
-        document.querySelectorAll(&quot;.container&quot;)[0].innerHTML=xmlhttp.responseText
-    &#125;
-&#125;</code></pre>
-<h2 id="AJAX的POST请求"><a href="#AJAX的POST请求" class="headerlink" title="AJAX的POST请求"></a>AJAX的POST请求</h2><p>post请求特征：</p>
-<ul>
-<li>post请求Header部分一定会存在一个字段Content-Type，用于判断post提交数据的类型</li>
-<li>如果post请求提交的是一串数据，则Content-Type: application/x-www-form-urlencoded</li>
-</ul>
-<pre><code class="javascript">function ajax1()&#123;
-    //1.创建一个XMLHttpRequest对象
-    //打开浏览器
-    var xmlhttp = new XMLHttpRequest()
-    //2.使用open方法，表明请求的方式
-    //在浏览器上输入请求的URL
-        //1.GET/POST
-        //2.page
-        //3.true
-    xmlhttp.open(&quot;POST&quot;,&quot;./AJAX_Back.html&quot;,true)
-    //3.使用setRequestHeader方法，设置请求头，表示需要提交数据
-    xmlhttp.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;)
-    //3.使用send方法，发送请求的数据.POSTData表示需要发送的数据
-    //敲下回车，发送数据
-    xmlhttp.send(&quot;POSTData&quot;)
-    //4.判断ajax是否从请求的页面中收到了数据
-    //当网页给响应时，将响应显示在页面上
-    xmlhttp.onload=function()&#123;
-        //xmlhttp.responeseText用于获取ajax接收到的响应
-        document.querySelectorAll(&quot;.container&quot;)[0].innerHTML=xmlhttp.responseText
-    &#125;
-&#125;</code></pre>
-<h2 id="AJAX请求数据库"><a href="#AJAX请求数据库" class="headerlink" title="AJAX请求数据库"></a>AJAX请求数据库</h2><p>浏览器触发AJAX请求–&gt;使用AJAX请求对后端HTML(PHP)页面进行请求–&gt;使用PHP语句向MySQL数据库进行请求–&gt;MySQL将数据响应给PHP页面–&gt;PHP页面将数据响应给前端AJAX请求的页面–&gt;AJAX将得到的请求显示在浏览器上。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/JavaScript%E4%BB%A3%E7%A0%81%E8%BF%9B%E9%98%B6/">展开全文 >></a>
         </p>
       
 

