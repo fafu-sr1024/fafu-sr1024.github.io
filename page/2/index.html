@@ -152,6 +152,1052 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python/运用Python语言(四)-科学计算和可视化02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/">运用Python语言(四)-科学计算和可视化02</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/" class="archive-article-date">
+  	<time datetime="2021-04-16T09:54:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="matplotlib库的使用"><a href="#matplotlib库的使用" class="headerlink" title="matplotlib库的使用"></a>matplotlib库的使用</h2><p><strong>matplotlib是提供数据绘图功能的第三方库，其pyplot子库主要用于实现各种数据展示图形的绘制</strong></p>
+<h3 id="matplotlib-pyplot库概述"><a href="#matplotlib-pyplot库概述" class="headerlink" title="matplotlib.pyplot库概述"></a>matplotlib.pyplot库概述</h3><p>（1）matplotlib.pyplot是matplotlib的子库，引用方式如下：</p>
+<pre><code class="python">&gt;&gt;&gt;import matplotlib.pyplot as plt #后续程序中，plt将代替matplotlib.pyplot</code></pre>
+<p>（2）为了正确显示中文字体，使用以下代码更改默认设置，其中’SimHei’表示黑体字。</p>
+<pre><code class="python">&gt;&gt;&gt; import matplotlib
+&gt;&gt;&gt; matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+&gt;&gt;&gt; matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]</code></pre>
+<p>（3）字体名称的中英文对照</p>
+<table>
+<thead>
+<tr>
+<th align="center">字体名称</th>
+<th align="center">字体英文表示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">宋体</td>
+<td align="center">SimSun</td>
+</tr>
+<tr>
+<td align="center">黑体</td>
+<td align="center">SimHei</td>
+</tr>
+<tr>
+<td align="center">楷体</td>
+<td align="center">KaiTi</td>
+</tr>
+<tr>
+<td align="center">微软雅黑</td>
+<td align="center">Microsoft YaHei</td>
+</tr>
+<tr>
+<td align="center">隶书</td>
+<td align="center">LiSu</td>
+</tr>
+<tr>
+<td align="center">仿宋</td>
+<td align="center">FangSong</td>
+</tr>
+<tr>
+<td align="center">幼圆</td>
+<td align="center">YouYuan</td>
+</tr>
+<tr>
+<td align="center">华文宋体</td>
+<td align="center">STSong</td>
+</tr>
+<tr>
+<td align="center">华文黑体</td>
+<td align="center">STHeiti</td>
+</tr>
+<tr>
+<td align="center">苹果丽中黑</td>
+<td align="center">Apple LiGothic Medium</td>
+</tr>
+</tbody></table>
+<p>（4）matplotlib库由一系列有组织有隶属关心的对象构成，对于基础绘图操作来说过于复杂。因此matplotlib提供了一套快捷命令式的绘图接口函数，<strong>即pyplot子模块</strong>。</p>
+<p>（5）pyplot将绘图所需要的对象构建过程封装在函数中，对用户提供了更加友好的接口。pyplot模块提供一批预定义的绘图函数，大多数函数可以从函数名辨别它的功能。</p>
+<h3 id="matplotlib-pyplot库解析"><a href="#matplotlib-pyplot库解析" class="headerlink" title="matplotlib.pyplot库解析"></a>matplotlib.pyplot库解析</h3><p>（1）以下内容使用plt代替matplotlib.pyplot。plt子库提供了一批操作和绘图函数，每个函数代表对图像进行的一个操作，比如创建绘图区域、添加标注或修改坐标轴等。这些函数采用了plt.&lt;b&gt;()形式调用，其中&lt;b&gt;是具体函数名称。</p>
+<p>（2）plt子库中包含了4个与绘图区域有关的函数，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.figure(figsize=None,facecolor=None)</td>
+<td align="center">创建一个全局绘图区域</td>
+</tr>
+<tr>
+<td align="center">plt.axes(rect,axisbg=’w’)</td>
+<td align="center">创建一个坐标系风格的子绘图区域，axisbg指背景色，默认为white</td>
+</tr>
+<tr>
+<td align="center">plt.subplot(nrows,ncols,plot_number)</td>
+<td align="center">在全局绘图区域中创建一个子绘图区域</td>
+</tr>
+<tr>
+<td align="center">plt.subplots_adjust()</td>
+<td align="center">调整子绘图区域的布局</td>
+</tr>
+</tbody></table>
+<p>（3）使用figure()函数创建一个全局绘图区域，并且使它成为当前的绘图对象，<strong>figsize参数可以指定绘图区域的宽度和高度，单位为英寸。</strong>鉴于figure()函数参数较多，这里采用指定参数名称的方式输入参数。</p>
+<pre><code class="python">plt.figure(figsize(8,4))</code></pre>
+<p>（4）绘制图像之前也不可调用figure()函数创建全局绘图区域，此时，plt子库会自动创建一个默认的绘图区域。显示绘图区域的代码如下：</p>
+<pre><code class="python">&gt;&gt;&gt;plt.figure(figsize(8,4))
+&gt;&gt;&gt;plt.show()</code></pre>
+<p>（5）<strong>subplot()**用于在全局绘图区域内创建子绘图区域，其参数表示将全局绘图区域分成</strong>nrows行和ncols列<strong>，并根据</strong>先行后列的计数方式**在plot_number位置生成一个坐标系。例如：</p>
+<pre><code class="python">&gt;&gt;&gt; plt.subplot(324)    #全局绘图区域被分割成3*2的表格，其中，在第4个位置绘制了一个坐标系。
+&gt;&gt;&gt; plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/eDwWkaCUdbRng2I.png" alt="image-20210417102315753"></p>
+<p>（6）axes()默认创建一个subplot(111)坐标系，参数rect=[left,bottom,width,height]中<strong>4个变量的范围都为[0,1]，</strong>表示坐标系与全局绘图区域的关系；axisbg指背景色，默认为white。</p>
+<pre><code class="python">&gt;&gt;&gt; plt.axes([0.1,0.1,0.7,0.3], axisbg=&#39;y&#39;)
+&gt;&gt;&gt; plt.show()</code></pre>
+<p>（7）plt子库提供了一组读取和显示相关的函数，用于在绘图区域中增加显示内容及读入数据，这些函数需要与其他函数搭配使用，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.legend()</td>
+<td align="center">在绘图区域中放置绘图标签（也称图注）</td>
+</tr>
+<tr>
+<td align="center">plt.show()</td>
+<td align="center">显示创建的绘图对象</td>
+</tr>
+<tr>
+<td align="center">plt.matshow()</td>
+<td align="center">在窗口显示数组矩阵</td>
+</tr>
+<tr>
+<td align="center">plt.imshow()</td>
+<td align="center">在axes上显示图像</td>
+</tr>
+<tr>
+<td align="center">plt.imsave()</td>
+<td align="center">保存数组为图像文件</td>
+</tr>
+<tr>
+<td align="center">plt.imread()</td>
+<td align="center">从文件图像中读取数组</td>
+</tr>
+</tbody></table>
+<p>（8）pyplot模块提供了17个用于绘制“基础图表”的常用函数，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>plt.plot(x,y,label,color,width)</strong></td>
+<td align="center">根据x，y数组绘制直、曲线</td>
+</tr>
+<tr>
+<td align="center">plt.boxplot(data,notch,position)</td>
+<td align="center">绘制一个箱型图</td>
+</tr>
+<tr>
+<td align="center">plt.bar(left,height,width,bottom)</td>
+<td align="center">绘制一个条形图</td>
+</tr>
+<tr>
+<td align="center">plt.barh(bottom,width,height,left)</td>
+<td align="center">绘制一个横向条形图</td>
+</tr>
+<tr>
+<td align="center">plt.polar(theta,r)</td>
+<td align="center">绘制极坐标图</td>
+</tr>
+<tr>
+<td align="center">plt.pie(data,explode)</td>
+<td align="center">绘制饼图</td>
+</tr>
+<tr>
+<td align="center">plt.psd(x,NFFT=256,pad_to,Fs)</td>
+<td align="center">绘制功率谱密度图</td>
+</tr>
+<tr>
+<td align="center">plt.specgram(x,NFFT=256,pad_to,F)</td>
+<td align="center">绘制谱图</td>
+</tr>
+<tr>
+<td align="center">plt.cohere(x,y,NFFT=256,Fs)</td>
+<td align="center">绘制X-Y的相关性函数</td>
+</tr>
+<tr>
+<td align="center">plt.scatter()</td>
+<td align="center">绘制散点图(x,y是长度相同的序列)</td>
+</tr>
+<tr>
+<td align="center">plt.step(x,y,where)</td>
+<td align="center">绘制步阶图</td>
+</tr>
+<tr>
+<td align="center">plt.hist(x,bins,normed)</td>
+<td align="center">绘制直方图</td>
+</tr>
+<tr>
+<td align="center">plt.contour(X,Y,Z,N)</td>
+<td align="center">绘制等值线</td>
+</tr>
+<tr>
+<td align="center">plt.vlines()</td>
+<td align="center">绘制垂直线</td>
+</tr>
+<tr>
+<td align="center">plt.stem(x,y,linefmt,markerfmt,basefmt)</td>
+<td align="center">绘制曲线每个点到水平轴线的垂线</td>
+</tr>
+<tr>
+<td align="center">plt.plot_data()</td>
+<td align="center">绘制数据日期</td>
+</tr>
+<tr>
+<td align="center">plt.plotfile()</td>
+<td align="center">绘制数据后写入文件</td>
+</tr>
+</tbody></table>
+<p>（9）plot()函数是用于绘制直线的最基础的函数，调用方式灵活，x和y可以是numpy计算出的数组，并用关键字参数指定各种属性。其中，labe表示设置标签并在图例中显示，color表示曲线的颜色，linewidth表示曲线的宽度。<strong>在字符串前后添加$符号，matplotlib会使用其内置的latex引擎绘制数学公式。</strong></p>
+<p>（10）实例：在坐标系中绘制基本的三角函数</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+x = np.linspace(0, 6, 100)
+y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
+plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,linewidth=3,linestyle=&quot;-&quot;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/MGgRwy7FZj2orLb.png" alt="image-20210417111653192"></p>
+<p>（11）plt库有两个坐标体系，<strong>图像坐标和数据坐标。</strong></p>
+<ul>
+<li>图像坐标将图像所在区域左下角视为原点，将x方向和y方向长度设定为1。整体绘图区域有一个图像坐标，每个axes()和subplot()函数产生的子图也有属于自己的图像坐标。**axes()函数参数rect指当前产生的子区域相对于整个绘图区域的图像坐标。</li>
+<li>数据坐标以当前绘图区域的坐标轴为参考，显示每个点的相对位置，这与坐标系里面标记数据点一致。</li>
+</ul>
+<p>（12）下表给出了与plt库的坐标轴设置相关的函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.axis(‘v’,’off’,’equal’,’scaled’,’tight’,’image’)</td>
+<td align="center">获取设置轴属性的快捷方法</td>
+</tr>
+<tr>
+<td align="center">plt.xlim(xmin,xmax)</td>
+<td align="center">设置当前x轴取值范围</td>
+</tr>
+<tr>
+<td align="center">plt.ylim(ymin,ymax)</td>
+<td align="center">设置当前y轴取值范围</td>
+</tr>
+<tr>
+<td align="center">plt.xscale()</td>
+<td align="center">设置x轴缩放</td>
+</tr>
+<tr>
+<td align="center">plt.yscale()</td>
+<td align="center">设置y轴缩放</td>
+</tr>
+<tr>
+<td align="center">plt.autoscale()</td>
+<td align="center">自动缩放轴视图的数据</td>
+</tr>
+<tr>
+<td align="center">plt.text(x,y,s,fontdic,withdash)</td>
+<td align="center">为axes图轴添加注释</td>
+</tr>
+<tr>
+<td align="center">plt.thetagrids(angles,labels,fmt,frac)</td>
+<td align="center">设置极坐标网络theta的位置</td>
+</tr>
+<tr>
+<td align="center">plt.grid(on/off)</td>
+<td align="center">打开或者关闭坐标网络</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; plt.plot([1,2,4],[1,2,3])
+&gt;&gt;&gt; plt.axis()   #获得当前坐标轴范围
+(0.85, 4.15, 0.9, 3.1)
+&gt;&gt;&gt; plt.axis([0,5,0,8]) #4个变量分别是[xmin,xmax,ymin,ymax]
+&gt;&gt;&gt; plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/ZP32HJmWCGBtkSQ.png" alt="image-20210417113325710"></p>
+<p>（13）下表给出了13个设置坐标系标签的相关函数</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">plt.figlegend(handles,label,loc)</td>
+<td align="center">为全局绘图区域放置图注</td>
+</tr>
+<tr>
+<td align="center">plt.legend()</td>
+<td align="center">为当前坐标图放置图注</td>
+</tr>
+<tr>
+<td align="center">plt.xlabel(s)</td>
+<td align="center">设置当前x轴的标签</td>
+</tr>
+<tr>
+<td align="center">plt.ylabel(s)</td>
+<td align="center">设置当前y轴的标签</td>
+</tr>
+<tr>
+<td align="center">plt.xticks(array,’a’,’b’,’c’)</td>
+<td align="center">设置当前x轴刻度位置的标签和值</td>
+</tr>
+<tr>
+<td align="center">plt.yticks(array,’a,’b’,’c’)</td>
+<td align="center">设置当前y轴刻度位置的标签和值</td>
+</tr>
+<tr>
+<td align="center">plt.clabel(cs,v)</td>
+<td align="center">为等值线图设置标签</td>
+</tr>
+<tr>
+<td align="center">plt.get_figlabels()</td>
+<td align="center">返回当前绘图区域的标签列表</td>
+</tr>
+<tr>
+<td align="center">plt.figtext(x,y,s,fontdic)</td>
+<td align="center">为全局绘图区域添加文字</td>
+</tr>
+<tr>
+<td align="center">plt.title()</td>
+<td align="center">设置标题</td>
+</tr>
+<tr>
+<td align="center">plt.suptitle()</td>
+<td align="center">为当前绘图区域添加中心标题</td>
+</tr>
+<tr>
+<td align="center">plt.text(x,y,fontdic,withdash)</td>
+<td align="center">为坐标图轴添加注释</td>
+</tr>
+<tr>
+<td align="center">plt.annotate(note,xy,xytext,xycoords,textcoords,arrowprops)</td>
+<td align="center">用箭头在指定数据点创建一个注释或一段文本</td>
+</tr>
+</tbody></table>
+<p>（14）绘制一个带标签的坐标系</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+plt.plot([1,2,4],[1,2,3])
+plt.title(&quot;坐标系标题&quot;)
+plt.xlabel(&#39;时间(s)&#39;)
+plt.ylabel(&#39;范围(m)&#39;)
+plt.xticks([1,2,3,4,5],[r&#39;$\pi/3$&#39;,r&#39;$2\pi/3$&#39;,r&#39;$\pi$&#39;,\
+                        r&#39;$4\pi/3$&#39;,r&#39;$5\pi/3$&#39;])
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/KRIyBVuktdjeqJY.png" alt="image-20210417125952062"></p>
+<p>（15）plt库提供了3个区域填充函数，对绘图区域填充颜色，如下表示所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">fill(x,y,c,color)</td>
+<td align="center">填充多边形</td>
+</tr>
+<tr>
+<td align="center">fill_between(x,y1,y2,where,color)</td>
+<td align="center">填充两条曲线围成的多边形</td>
+</tr>
+<tr>
+<td align="center">fill_betweenx(y,x1,x2,where,hold)</td>
+<td align="center">填充两条水平线之间的区域</td>
+</tr>
+</tbody></table>
+<p>（16）绘制一个带局部阴影的坐标系。</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+import numpy as np
+x = np.linspace(0,10,1000)
+y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
+plt.plot(x,y,&#39;k&#39;,color=&#39;r&#39;,label=&quot;$exp-decay$&quot;,linewidth=3)
+plt.axis([0,6,0,1.8])
+ix = (x&gt;0.8) &amp; (x&lt;3)
+plt.fill_between(x,y,0,where=ix,\
+                 facecolor=&#39;gray&#39;,alpha=0.25)
+plt.text(0.5*(0.8+3),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
+         horizontalalignment=&#39;center&#39;)
+plt.legend()
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/8znfgdYXk9KUowq.png" alt="image-20210417131059448"></p>
+<h2 id="实例：科学坐标图绘制"><a href="#实例：科学坐标图绘制" class="headerlink" title="实例：科学坐标图绘制"></a>实例：科学坐标图绘制</h2><p>（1）科学坐标图有4个要素：<strong>坐标轴、数据曲线、标题和图注</strong>。本实例以阻尼衰减曲线绘制来具体阐述科学坐标系的绘制方法。</p>
+<p>（2）本实例同时展示了在同一个区域用不同颜色和线条绘制两种曲线的方法，两条曲线分别为(x,y)和(x,z)。</p>
+<pre><code class="python">x = np.linspace(0.0, 6.0, 100)
+y = np.cos(2*np.pi*x) * np.exp(-x)+0.8
+z = 0.5 * np.cos(x ** 2)+0.8</code></pre>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+def Draw(pcolor, nt_point, nt_text, nt_size):   #Draw()函数用于绘制曲线
+    plt.plot(x,y,&#39;k&#39;,label=&quot;$exp_decay$&quot;,color=pcolor,\  #根据x、y数组绘制直、曲线
+             linewidth=3, linestyle=&#39;-&#39;)
+    plt.plot(x,z,&quot;b--&quot;,label=&quot;$cos(x^2)$&quot;, linewidth=1)
+    plt.xlabel(&#39;时间(s)&#39;)
+    plt.ylabel(&#39;幅度(mV)&#39;)
+    plt.title(&#39;阻尼衰减曲线绘制&#39;)
+    plt.annotate(&#39;$\cos(2 \pi t) \exp(-t)$&#39;,xy=nt_point,\   #用箭头在指定数据点创建一个注释或一段文本
+                 xytext=nt_text,fontsize=nt_size,arrowprops= \
+                 dict(arrowstyle=&#39;-&gt;&#39;, connectionstyle=&quot;arc3,rad=.1&quot;))
+def Shadow(a,b):                             #Shadow()函数用于设置阴影
+    ix = (x&gt;a) &amp; (x&lt;b)
+    plt.fill_between(x,y,0,where=ix,facecolor=&#39;gray&#39;,alpha=0.25)
+    plt.text(0.5*(a+b),0.2,r&quot;$\int_a^b f(x)\mathrm&#123;d&#125;x$&quot;,\
+             horizontalalignment=&#39;center&#39;)
+def XY_Axis(x_start, x_end, y_start, y_end): #XY_Axis()函数用于修改坐标轴
+    plt.xlim(x_start,x_end)   #设置当前x轴的取值范围
+    plt.ylim(y_start,y_end)
+    plt.xticks([np.pi/3,2 * np.pi/3, 1*np.pi, 4*np.pi/3,\     #设置当前x轴刻度位置的标签和值
+                5*np.pi/3],[&#39;$\pi/3$&#39;,&#39;$2\pi/3$&#39;,&#39;$\pi$&#39;,&#39;$4\pi/3$&#39;,&#39;$5\pi/3$&#39;])
+x = np.linspace(0.0, 6.0, 100)      #创建一个由0.0到6.0，等分成100个元素的数组
+y = np.cos(2 * np.pi * x) * np.exp(-x)+0.8
+z = 0.5 * np.cos(x ** 2)+0.8
+note_point,note_text,note_size=(1,np.cos(2*np.pi)*\
+                                np.exp(-1)+0.8),(1,1.4), 14
+fig = plt.figure(figsize=(8, 6),facecolor=&quot;white&quot;)   #创建一个全局绘图区域
+plt.subplot(111)                                     #在全局绘图区域中创建一个子绘图区域
+Draw(&quot;red&quot;,note_point,note_text,note_size)
+XY_Axis(0,5,0,1.8)
+Shadow(0.8,3)
+plt.legend()               #为当前坐标图放置图注
+plt.savefig(&#39;sample.JPG&#39;)  #将产生的坐标图保存为文件
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/yhvMBaQ2HW8e7PU.png" alt="image-20210417190906901"></p>
+<p>（3）其中第13行的annotate()函数配合箭头在曲线绘图界面添加动态注释，箭头的线条和尖端都有多种样式和参数，可以通过arrowprops和connetionstyle选择，具体可参考官方文档。</p>
+<h2 id="实例：多级雷达图绘制"><a href="#实例：多级雷达图绘制" class="headerlink" title="实例：多级雷达图绘制"></a>实例：多级雷达图绘制</h2><h3 id="单一数据雷达图"><a href="#单一数据雷达图" class="headerlink" title="单一数据雷达图"></a>单一数据雷达图</h3><p>（1）雷达图是通过多个离散属性比较对象的最直观工具。</p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;       #第3行到第5用于支持中文
+matplotlib.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+labels = np.array([&#39;综合&#39;,&#39;KDA&#39;,&#39;发育&#39;,&#39;推进&#39;,&#39;生存&#39;,&#39;输出&#39;]) #设置属性标签，包含6个属性
+nAttr = 6
+data = np.array([7, 5, 6, 9, 8, 7]) #预设一组玩家数据值
+angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
+data = np.concatenate((data, [data[0]]))    #对data进行封闭
+angles = np.concatenate((angles, [angles[0]]))   #对angles进行封闭
+labels=np.concatenate((labels,[labels[0]]))    #对labels进行封闭，若不对此进行封闭则会报错
+fig = plt.figure(facecolor=&quot;white&quot;)
+plt.subplot(111, polar=True)     #在全局绘图区域中创建一个子绘图区域
+plt.plot(angles,data,&#39;bo-&#39;,color = &#39;g&#39;,linewidth=2)
+plt.fill(angles,data,facecolor=&#39;g&#39;,alpha=0.25)
+plt.thetagrids(angles*180/np.pi,labels)
+plt.figtext(0.52, 0.95, &#39;DOTA能力值雷达图&#39;,ha=&#39;center&#39;)    #为全局绘图区域添加文字
+plt.grid(True)
+plt.savefig(&#39;dota_radar.JPG&#39;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/17/zpKIPkvLClZGeT8.png" alt="image-20210417215652944"></p>
+<p>（2）np.linspace()函数设定起点为0、末值为2π、返回一个两端点间数值平均分布的长为nAttr的数组angles，<strong>它表示从一个属性点到下一个属性点笔画需要旋转的角</strong>度，它取决于属性<strong>nAttr的大小，也是雷达图的多边形边数。</strong></p>
+<p>（3）np.concatenate()函数用于将数据和角度的数组首尾闭合起来，便于调用plot()函数绘制。</p>
+<p>（4）建立基本绘图对象后，使用subplot()函数建立极坐标系的子分区。<strong>polar参数指定了绘制类型为极坐标</strong>，这是subplot()除默认正方形坐标系外唯一支持的内置坐标图。</p>
+<p>（5）建立极坐标后，使用plot()函数依照data提供的数据画出不规则六边形，然后使用fill()函数填充半透明颜色。</p>
+<p>（6）thetagrids()函数为极坐标设置标签，这里把标签放在六角形的顶点上，需要将角度数据和文字一起作为参数传给thetagrids函数。</p>
+<h3 id="多数据雷达图"><a href="#多数据雷达图" class="headerlink" title="多数据雷达图"></a>多数据雷达图</h3><p><strong>霍兰德人格分析雷达图</strong></p>
+<pre><code class="python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams[&#39;font.family&#39;]=&#39;SimHei&#39;
+matplotlib.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]
+radar_labels = np.array([&#39;研究型(I)&#39;,&#39;艺术型(A)&#39;,&#39;社会型(S)&#39;,\
+                         &#39;企业型(E)&#39;,&#39;常规型(C)&#39;,&#39;现实型(R)&#39;])
+
+nAttr = 6
+data = np.array([[0.40, 0.32, 0.35, 0.30, 0.30, 0.88],
+                 [0.85, 0.35, 0.30, 0.40, 0.40, 0.30],
+                 [0.43, 0.89, 0.30, 0.28, 0.22, 0.30],
+                 [0.30, 0.25, 0.48, 0.85, 0.45, 0.40],
+                 [0.20, 0.38, 0.87, 0.45, 0.32, 0.28],
+                 [0.34, 0.31, 0.38, 0.40, 0.92, 0.28]]) #数据值
+data_labels=(&#39;工程师&#39;,&#39;实验员&#39;,&#39;艺术家&#39;,&#39;推销员&#39;,&#39;社会工作者&#39;,&#39;记事员&#39;)
+angles = np.linspace(0, 2*np.pi, nAttr, endpoint=False)
+data = np.concatenate((data,[data[0]]))
+angles = np.concatenate((angles,[angles[0]]))
+radar_labels = np.concatenate((radar_labels,[radar_labels[0]]))
+fig = plt.figure(facecolor=&quot;white&quot;)
+plt.subplot(111,polar=True)
+#plt.plot(angles,data,&#39;bo-&#39;, color=&#39;gray&#39;,linewidth=1,alpha=0.2)
+
+plt.plot(angles,data,&#39;o-&#39;,linewidth=1.5,alpha=0.2)
+plt.fill(angles,data,alpha=0.25)
+plt.thetagrids(angles*180/np.pi, radar_labels)
+plt.figtext(0.52,0.95,&#39;霍兰德人格分析&#39;, ha=&#39;center&#39;, size=20)
+legend=plt.legend(data_labels,loc=(0.94,0.80),labelspacing=0.1) #为当前坐标图放置图注
+plt.setp(legend.get_texts(),fontsize=&#39;small&#39;)
+plt.grid(True)
+plt.savefig(&#39;holland_radar.JPG&#39;)
+plt.show()</code></pre>
+<p><img src="https://i.loli.net/2021/04/18/apjLAPcXIixFnqy.png" alt="image-20210418141558700"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Python/运用Python语言(三)-科学计算和可视化01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/">运用Python语言(三)-科学计算和可视化01</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/" class="archive-article-date">
+  	<time datetime="2021-04-10T15:28:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h2><p><strong>科学计算需要采用矩阵运算库numpy和绘制库matplotlib。</strong></p>
+<p>（1）开展基本的科学计算需要两个步骤：组织数据和展示数据。</p>
+<ul>
+<li>组织数据是运算的基础，也是<strong>将客观世界数字化</strong>的必要手段。</li>
+<li>展示数据是<strong>体现运算结果</strong>的重要方式，也是展示结论的有力武器。</li>
+</ul>
+<p>（2）科学计算以<strong>矩阵</strong>而不是单一数值为基础，增加了计算密度，能够表达更为复杂的数据运算逻辑。</p>
+<p>（3）矩阵有维度概念，一维矩阵是线性的，类似于列表，二维矩阵是表格状的，这是常用的数据表示形式。</p>
+<h2 id="numpy库的使用"><a href="#numpy库的使用" class="headerlink" title="numpy库的使用"></a>numpy库的使用</h2><p><strong>numpy是用于处理含有同种元素的多维数组运算的第三方库</strong></p>
+<h3 id="numpy库概述"><a href="#numpy库概述" class="headerlink" title="numpy库概述"></a>numpy库概述</h3><p>（1）Python标准库中提供了一个array类型，用于保存数组类型数据，然而这个类型不支持多维数据，处理函数也不够丰富，不适合数值运算。因此，第三方库numpy得到了迅速发展，至今，<strong>numpy已经成为了科学计算事实上的标准库</strong>。</p>
+<p>（2）<strong>numpy库处理的最基础数据类型是由同种元素构成的多维数组</strong>。数组中所有元素的类型必须相同，数组中元素可以用整数索引，序号从0开始。</p>
+<p>（3）ndarray类型的维度叫做轴（axes），轴的个数叫做秩（rank）。一维数组的秩为1，二维数组的秩为2，二维数组相当于由两个一维数组构成。</p>
+<p>（4）由于numpy库中函数较多且命名容易与常用名混淆，建议采用如下方式引用numpy库：</p>
+<pre><code class="python">import numpy as np
+#as保留字与import一起使用能够改变后续代码中库的命名空间，有助于提高代码的可读性。简单地说，在程序的后续部分，np代替numpy</code></pre>
+<h3 id="numpy库解析"><a href="#numpy库解析" class="headerlink" title="numpy库解析"></a>numpy库解析</h3><p>（1）numpy库常用的创建数组（ndarray类型）函数有7个，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.array([x,y,z],dtype=int)</td>
+<td align="center">从Python列表和元组创造数组</td>
+</tr>
+<tr>
+<td align="center">np.arange(x,y,i)</td>
+<td align="center">创建一个由x到y，以i为步长的数组</td>
+</tr>
+<tr>
+<td align="center">np.linspace(x,y,n)</td>
+<td align="center">创建一个由x到y，等分成n个元素的数组</td>
+</tr>
+<tr>
+<td align="center">np.indices((m,n))</td>
+<td align="center">创建一个m行n列的矩阵</td>
+</tr>
+<tr>
+<td align="center">np.random.rand(m,n)</td>
+<td align="center">创建一个m行n列的随机数组</td>
+</tr>
+<tr>
+<td align="center">np.ones((m,n),dtype)</td>
+<td align="center">创建一个m行n列全1的数组，dtype是数据类型</td>
+</tr>
+<tr>
+<td align="center">np.empty((m,n),dtype)</td>
+<td align="center">创建一个m行n列全0的数组，dtype是数组类型</td>
+</tr>
+</tbody></table>
+<p>（2）创建一个简单的数组后，可以查看ndarray类的基本属性，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ndarray.ndim</td>
+<td align="center">数组轴的个数，也被称作秩</td>
+</tr>
+<tr>
+<td align="center">ndarray.shape</td>
+<td align="center">数组在每个维度上大小的的整数元组</td>
+</tr>
+<tr>
+<td align="center">ndarray.size</td>
+<td align="center">数组元素的总个数</td>
+</tr>
+<tr>
+<td align="center">ndarray.dtype</td>
+<td align="center">数组元素的数据类型，dtype类型可用于创建数组</td>
+</tr>
+<tr>
+<td align="center">ndarray.itemsize</td>
+<td align="center">数组中每个元素的字节大小</td>
+</tr>
+<tr>
+<td align="center">ndarray.data</td>
+<td align="center">包含实际数组元素的缓冲区地址</td>
+</tr>
+<tr>
+<td align="center">ndarray.flat</td>
+<td align="center">数组元素的迭代器</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; a = np.ones((4,5))
+&gt;&gt;&gt; print(a)
+[[1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1.]]
+&gt;&gt;&gt; a.ndim
+2
+&gt;&gt;&gt; a.shape
+(4, 5)
+&gt;&gt;&gt; a.dtype
+dtype(&#39;float64&#39;)</code></pre>
+<p>（3）数组在numpy中被当做对象，可以采用&lt;a&gt;.&lt;b&gt;()方式调用一些方法。下表给出了改变数组基础形态的操作方法，例如改变和调换数组维度等。其中，<strong>np.flatten()函数用于数组降维，相当于平铺数组中的数据，</strong>该功能在矩阵运算和图像处理中用处很大。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ndarray.reshape(n,m)</td>
+<td align="center">不改变数组ndarray，返回一个维度为(n,m)的数组</td>
+</tr>
+<tr>
+<td align="center">ndarray.resize(new_shape)</td>
+<td align="center">与reshape()作用相同，直接修改ndarray</td>
+</tr>
+<tr>
+<td align="center">ndarray.swqpaxes(ax1,ax2)</td>
+<td align="center">将数组n个维度中任意两个维度进行调换</td>
+</tr>
+<tr>
+<td align="center"><strong>ndarray.flatten()</strong></td>
+<td align="center">对数组进行降维，返回一个折叠后的一维数组</td>
+</tr>
+<tr>
+<td align="center">ndarray.ravel()</td>
+<td align="center">作用通np.flatten(),但是返回数组的一个视图</td>
+</tr>
+</tbody></table>
+<p>（4）下表给出了ndarray类的索引和切片方法。数组切片得到的是原始数组的视图，所有修改都会直接反映到源数组。如果需要得到ndarray切片的一份副本，需要进行复制操作，比如arange[5:8].copy()。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">x[i]</td>
+<td align="center">索引第i个元素</td>
+</tr>
+<tr>
+<td align="center">x[-i]</td>
+<td align="center">从后向前索引第i个元素</td>
+</tr>
+<tr>
+<td align="center">x[n:m]</td>
+<td align="center">默认步长为1，从前往后索引，不包含m</td>
+</tr>
+<tr>
+<td align="center">x[-m:-n]</td>
+<td align="center">默认步长为，从后往前索引，<strong>结束位置为n</strong>,(不是-n)</td>
+</tr>
+<tr>
+<td align="center">x[n：m：i]</td>
+<td align="center">指定i步长的由n到m的索引</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; a = np.random.rand(5,3)  #生成5*3的数组，用随机数填充
+&gt;&gt;&gt; a[2]  #获取第2行的数据
+array([0.31158762, 0.82371017, 0.73224191])
+&gt;&gt;&gt; a[1:3]
+array([[0.53039082, 0.14939241, 0.12996747],
+       [0.31158762, 0.82371017, 0.73224191]])
+&gt;&gt;&gt; a[-5:-2:2]
+array([[0.86506778, 0.97968013, 0.35782942],
+       [0.31158762, 0.82371017, 0.73224191]])
+&gt;&gt;&gt; print(a)
+[[0.86506778 0.97968013 0.35782942]
+ [0.53039082 0.14939241 0.12996747]
+ [0.31158762 0.82371017 0.73224191]
+ [0.12440417 0.96267856 0.6107584 ]
+ [0.3656373  0.35113364 0.08881953]]</code></pre>
+<p><strong>注意</strong>：上例中，</p>
+<ul>
+<li>从前往后索引，依次为a[0]、a[1]、a[2]、a[3]、a[4]</li>
+<li>从后往前索引，依次为a[-1]、a[-2]、a[-3]、a[-4]、a[-5]</li>
+</ul>
+<p>（5）除了ndarray类型方法外，numpy库提供了一批运算函数，如下表所示。这些函数中，输出参数y可选，如果没有指定，将创建并返回一个新的数组保存计算结果；如果指定参数，则将结果保存到参数中。</p>
+<ul>
+<li>例如，两个数组相加可以简单写为a+b，而np.add(a,b,a)则表示a+=b。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.add(x1,x2[,y])</td>
+<td align="center">y = x1 + x2</td>
+</tr>
+<tr>
+<td align="center">np.subtract(x1,x2[,y])</td>
+<td align="center">y = x1 - x2</td>
+</tr>
+<tr>
+<td align="center">np.multiply(x1,x2[,y])</td>
+<td align="center">y = x1 * x2</td>
+</tr>
+<tr>
+<td align="center">np.divide(x1,x2[,y])</td>
+<td align="center">y = x1 / x2</td>
+</tr>
+<tr>
+<td align="center">np floor_divide(x1,x2[,y])</td>
+<td align="center">y = x1 // x2,返回值取整</td>
+</tr>
+<tr>
+<td align="center">np.negative(x[,y])</td>
+<td align="center">y = -x</td>
+</tr>
+<tr>
+<td align="center">np.power(x1,x2[,y])</td>
+<td align="center">y = x1 ** x2</td>
+</tr>
+<tr>
+<td align="center">np.remainder(x1,x2[,y])</td>
+<td align="center">y = x1 % x2</td>
+</tr>
+</tbody></table>
+<p>（6）下表列出了numpy库的比较运算符，该表将返回一个布尔数组，它包含两个数组中对应元素值的比较结果。其中，where()函数是三元表达式x if condition else y的矢量版本。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.equal(x1,x2[,y])</td>
+<td align="center">y = x1 == x2</td>
+</tr>
+<tr>
+<td align="center">np.not_equal(x1,x2[,y])</td>
+<td align="center">y = x1 != x2</td>
+</tr>
+<tr>
+<td align="center">np.less(x1,x2[,y])</td>
+<td align="center">y = x1 &lt; x2</td>
+</tr>
+<tr>
+<td align="center">np.less_equal(x1,x2[,y])</td>
+<td align="center">y = x1 &lt;= x2</td>
+</tr>
+<tr>
+<td align="center">np.greater(x1,x2[,y])</td>
+<td align="center">y = x1 &gt; x2</td>
+</tr>
+<tr>
+<td align="center">np.greater_equal(x1,x2[,y])</td>
+<td align="center">y = x1 &gt;= x2</td>
+</tr>
+<tr>
+<td align="center">np.where(condition[x,y])</td>
+<td align="center">根据给出的条件判断输出x还是y</td>
+</tr>
+</tbody></table>
+<pre><code class="python">&gt;&gt;&gt;import numpy as np
+&gt;&gt;&gt; np.less([1,2],[2,2])
+array([ True, False])</code></pre>
+<p>（7）numpy的其他<strong>有趣而操作方便的函数</strong>，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">np.abs(x)</td>
+<td align="center">计算基于元素的整型、浮点或复数的绝对值</td>
+</tr>
+<tr>
+<td align="center">np.sqrt(x)</td>
+<td align="center">计算每个元素的平方根</td>
+</tr>
+<tr>
+<td align="center">np.squre(x)</td>
+<td align="center">计算每个元素的平方</td>
+</tr>
+<tr>
+<td align="center">np.sign(x)</td>
+<td align="center">计算每个元素的符号：1(+)、0、-1(-)</td>
+</tr>
+<tr>
+<td align="center">np.ceil(x)</td>
+<td align="center">计算大于或等于每个元素的最小值</td>
+</tr>
+<tr>
+<td align="center">np.floor(x)</td>
+<td align="center">计算小于或等于每个元素的最小值</td>
+</tr>
+<tr>
+<td align="center">np.rint(x[,out])</td>
+<td align="center">圆整，取每个元素为最近的整数，保留数据类型</td>
+</tr>
+<tr>
+<td align="center">np.exp(x[,out])</td>
+<td align="center">计算每个元素的指数值</td>
+</tr>
+<tr>
+<td align="center">np.log(x),np.log10(x),np.log2(x)</td>
+<td align="center">计算自然对数(e)，基于10、2的对数，log(1+x)</td>
+</tr>
+</tbody></table>
+<p>（8）numpy库还包括<strong>三角运算函数、傅里叶变换、随机和概率分布、基本数值统计、位运算、矩阵运算等非常丰富的功能</strong>。可在官网查询。</p>
+<h2 id="图像的手绘效果"><a href="#图像的手绘效果" class="headerlink" title="图像的手绘效果"></a>图像的手绘效果</h2><p><strong>这是一个使用numpy和PIL库提取图像特征形成手绘效果的实例</strong></p>
+<h3 id="图像的数组表示"><a href="#图像的数组表示" class="headerlink" title="图像的数组表示"></a>图像的数组表示</h3><p>（1）图像是有规则的二维数据，可以用numpy库将图像转换成数组对象。</p>
+<pre><code class="python">&gt;&gt;&gt; from PIL import Image
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; im = np.array(Image.open(&#39;01.jpg&#39;))#open()中为图片存放路径，该路径不得出现中文。可用相对路径
+&gt;&gt;&gt; print(im.shape,im.dtype)
+(1711, 2560, 3) uint8</code></pre>
+<p>（2）图像转换对应的ndarray类型是<strong>三维数据</strong>，如（881,1266,3），其中，前两维表示图像的<strong>长度和宽度</strong>，单位是<strong>像素</strong>，第三维表示每个像素点的<strong>RGB</strong>值，每个RGB值是一个单字节整数。</p>
+<p>（3）PIL库包括图像转换函数，能够改变图像单个像素的表示形式。<strong>使用convert()函数，这是’L’模式，表示将像素从RGB的3字节形式转变为单一数值形式，这个数值范围为0~255，表示灰度色彩变化。</strong>此时，图像从彩色变为带有灰度的黑白色。<strong>转换后，图像的adarray类型变为二维数据，</strong>每个像素点色彩只由一个整数表示。</p>
+<pre><code class="python">&gt;&gt;&gt; im = np.array(Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;))
+&gt;&gt;&gt; print(im.shape,im.dtype)
+(1711, 2560) uint8</code></pre>
+<p>（4）通过对图像的数组转换，可以利用numpy访问图像上的任意像素值。例如，获取位于坐标(20,300)像素的颜色值或获取图像中最大和最小的像素值。也可以采用切片方式获取指定行或列的元素值，甚至修改这些值。</p>
+<pre><code class="python">&gt;&gt;&gt; print(im[20,300])
+220
+&gt;&gt;&gt; print(int(im.min()),int(im.max()))
+0 255
+&gt;&gt;&gt; print(im[10,:])   #获取坐标x=10的所有像素点的值
+[246 246 246 ...  47  47  47]</code></pre>
+<p>（5）<strong>将图像读入ndarray数组对象后，可以通过任意数学操作来获取相应的图像变换。</strong>以灰度变换为例，分别对灰度变化后的图像进行<strong>反变换、区间变化和像素值平方处理。</strong></p>
+<ul>
+<li>注意：有些数学变换会改变图像的数据类型，如变成整数类型等，所以在<strong>重新生成PIL图像前要先将数据类型通过numpy.uint()变换成整数。</strong></li>
+</ul>
+<pre><code class="python">&gt;&gt;&gt; from PIL import Image
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; im0 = np.array(Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;))
+&gt;&gt;&gt; im1 = 255 - im0     #反变换
+&gt;&gt;&gt; im2 = (100/255)*im0 + 150    #区间变换
+&gt;&gt;&gt; im3 = 255*(im1/255)**2       #像素平方处理
+&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im1))
+&gt;&gt;&gt; pil_im.show()
+&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im2))
+&gt;&gt;&gt; pil_im.show()
+&gt;&gt;&gt; pil_im = Image.fromarray(np.uint(im3))
+&gt;&gt;&gt; pil_im.show()</code></pre>
+<ul>
+<li>原图像</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/16/wxBbIqke2Yg39z5.png" alt="image-20210416153015688"></p>
+<ul>
+<li>对im1执行结果</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/16/ylFrb7gNPiwvZXx.png" alt="image-20210416153206984"></p>
+<ul>
+<li>对im2执行结果</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/16/VOraQjwLHiRk1PU.png" alt="image-20210416153347977"></p>
+<ul>
+<li>对im3执行结果</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/16/yq2GjIDdptJ4X6Z.png" alt="image-20210416153503923"></p>
+<h3 id="扩展：灰度值"><a href="#扩展：灰度值" class="headerlink" title="扩展：灰度值"></a>扩展：灰度值</h3><p>（1）灰度值指黑白图像中点的颜色深度，范围从0到255，黑色为0，白色为255。因此，黑白图像也被称为灰度图像。</p>
+<p>（2）RGB彩色图片可以通过如下公式转换成灰度值：</p>
+<ul>
+<li>Gray=R<em>0.3+G\</em>0.59+B*0.11</li>
+</ul>
+<h3 id="图像的手绘效果-1"><a href="#图像的手绘效果-1" class="headerlink" title="图像的手绘效果"></a>图像的手绘效果</h3><p>（1）获得铅笔画风格图像常采用ImageFilter.CONTOUR滤镜，它能够将图像的轮廓信息提取出来，但却缺乏立体感。可由程序给出图像的手绘效果，让图像更具立体感。</p>
+<ul>
+<li>图像轮廓</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/16/8WoF4DqVz1YsagP.png" alt="image-20210416160955896"></p>
+<p>（2）为实现手绘风格，首先需要读取原图像的明暗变化，<strong>即灰度值。</strong></p>
+<p>（3）从直观视觉感受上定义，图像灰度值显著变化的地方就是梯度，它描述了图像灰度变化的强度。</p>
+<p>（4）通常可以使用梯度计算来提取图像轮廓，numpy中提供了直接获取灰度图像梯度的函数gradient()，传入图像数组表示即可返回代表x和y各自方向上梯度变化的二维元组。</p>
+<pre><code class="python">from PIL import Image
+import numpy as np
+vec_el = np.pi/2.2      #光源的俯视角度，弧度值
+vec_az = np.pi/4.       #光源的方位角度，弧度值
+depth = 10.             #0-100
+im = Image.open(&#39;01.jpg&#39;).convert(&#39;L&#39;)
+a = np.asarray(im).astype(&#39;float&#39;)   #astype实现变量类型转换
+grad = np.gradient(a)   #取图像灰度的梯度值
+grad_x, grad_y = grad   #分别取横纵图像梯度值
+grad_x = grad_x*depth/100.
+grad_y = grad_y*depth/100.
+dx = np.cos(vec_el)*np.cos(vec_az) #光源对x轴的影响
+dy = np.cos(vec_el)*np.sin(vec_az) #光源对y轴的影响
+dz = np.sin(vec_el)                #光源对z轴的影响
+A = np.sqrt(grad_x**2 + grad_y**2 + 1.)
+uni_x = grad_x/A
+uni_y = grad_y/A
+uni_z = 1./A
+a2 = 255*(dx*uni_x + dy*uni_y +dz*uni_z) #光源归一化
+a2 = a2.clip(0,255)
+im2 = Image.fromarray(a2.astype(&#39;uint8&#39;))#重构图像
+im2.save(&#39;fcityHandDraw.jpg&#39;)</code></pre>
+<ul>
+<li>手绘效果</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/16/faVxdl8psUnWJBe.png" alt="image-20210416160914116"></p>
+<p>（5）手绘图像的基本思想是利用像素之间的梯度值（而不是像素本身）重构每个像素值。为了体现光照效果，<strong>设计一个光源，</strong>建立光源对各点梯度值的影响函数，进而运算出新的像素值，从而体现边界点灰度变化，形成手绘效果。</p>
+<p>（6）为了更好的立体感，<strong>增加一个z方向梯度值</strong>，并给x和y方向梯度值赋权值depth。这种坐标空间变化相当于给物体加上一个虚拟光源，根据灰度值大小模拟各部分相对于人视角的远近程度，使画面显得有“深度”。</p>
+<p>（7）在利用梯度重构图像时，对应不同梯度取0~255之间不同的灰度值，<strong>depth</strong>的作用在于调节这个对应关系。</p>
+<ul>
+<li>depth较小时，背景区域接近白色，画面显示轮廓描绘；</li>
+<li>depth较大时，整体画面灰度值较深，近似于浮雕效果</li>
+</ul>
+<p>（8）将光源定义为3个参数：<strong>方位角vec_az、俯视角vec_el和深度权值depth</strong>。两个角度的设定和单位向量构成了基础的柱坐标系，体现物体相对于虚拟光源的位置。例如代码的第3行到第5行。</p>
+<p>（9）通过<strong>np.gradient()函数</strong>计算图像梯度值作为新色彩计算的基础。为了更直观地进行计算，可以把角度对应的柱坐标转换为xyz立体坐标系。dx、dy、dz是像素点在施加模拟光源后在x、y、z方向上明暗变化的加权向量，如代码第12到第14行。</p>
+<p>（10）A是梯度值，也是梯度大小。<strong>各个方向上总梯度除以幅值得到每个像素单元的梯度值</strong>。利用每个单元的梯度值和方向加权向量合成灰度值，<strong>clip函数用于预防溢出</strong>，并归一化到0~255区间。最后从数组中恢复图像并保存。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/运用Python语言(二)-程序设计方法论02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2297,1003 +3343,6 @@ main()</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/03/27/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B9%9D)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9601/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(八)-组合数据类型02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/25/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AB)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">深入Python语言(八)-组合数据类型02</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/25/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AB)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/" class="archive-article-date">
-  	<time datetime="2021-03-25T13:21:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="jieba库的使用"><a href="#jieba库的使用" class="headerlink" title="jieba库的使用"></a>jieba库的使用</h2><h3 id="jieba概述"><a href="#jieba概述" class="headerlink" title="jieba概述"></a>jieba概述</h3><p>（1）对于一段英文文本，若要提取其中的单词，只需使用<strong>字符串处理的split()方法</strong>即可。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;China is a great country&quot;.split()#split通过指定分隔符对字符串进行分片，默认以空格进行分片。
-[&#39;China&#39;, &#39;is&#39;, &#39;a&#39;, &#39;great&#39;, &#39;country&#39;]
-
-
-&gt;&gt;&gt;print str.split(&#39; &#39;, 1 ); # 以空格为分隔符，分隔成两个(num+1)子字符串</code></pre>
-<p>（2）对于一段中文文本，若要提取其中的单词则会缺少分隔符，因此需要引入jieba库。<strong>jieba（“结巴”）是Python中一个重要的第三方中文分词函数库，</strong>例如：</p>
-<pre><code class="python">&gt;&gt;&gt;import jieba
-&gt;&gt;&gt;jieba.lcut(&quot;中国是一个伟大的国家&quot;)
-[&#39;中国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]</code></pre>
-<p>（3）jieba是第三方库，不是Python安装包自带的，因此需要通过pip指令安装，pip安装命令如下：</p>
-<pre><code>:\&gt;pip install jieba #或者 pip3 install jieba</code></pre>
-<p>（4）jieba库的分词原理是利用一个中文词库，将待分词的内容与分词词库进行比对，通过图结构和动态规划方法找到最大概率的词组。除了分词，<strong>jieba还提供增加自定义中文单词的功能。</strong></p>
-<p>（5）jieba库支持3种分词模式：</p>
-<ul>
-<li>精确模式，将句子最精确地切开，适合文本分析。</li>
-<li>全模式，把句子中所有可以成词的词语都扫描出来，速度很快，但不能消除歧义。</li>
-<li>搜索引擎模式，在精确模式的基础上，对长词再次切分，提高召回率，适用于搜索引擎分词。 </li>
-</ul>
-<h3 id="jieba库解析"><a href="#jieba库解析" class="headerlink" title="jieba库解析"></a>jieba库解析</h3><p>（1）jieba库主要提供分词功能，可以辅助自定义分词词典。jieba库中包含的主要函数如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">jieba.cut(s)</td>
-<td align="center">精确模式，返回一可迭代的数据类型</td>
-</tr>
-<tr>
-<td align="center">jieba.cut(s,cut_all=True)</td>
-<td align="center">全模式，输出文本s中所有可能的单词</td>
-</tr>
-<tr>
-<td align="center">jieba.cut_for_search(s)</td>
-<td align="center">搜索引擎模式，适合搜索引擎建立索引的分词结果</td>
-</tr>
-<tr>
-<td align="center"><strong>jieba.lcut(s)</strong></td>
-<td align="center"><strong>精确模式，返回一个列表类型，建议使用</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>jieba.lcut(s,cut_all=True)</strong></td>
-<td align="center"><strong>全模式，返回一个列表类型，建议使用</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>jieba.lcut_for_search(s)</strong></td>
-<td align="center"><strong>搜素引擎模式，返回一个列表类型，建议使用</strong></td>
-</tr>
-<tr>
-<td align="center">jieba.add_word(w)</td>
-<td align="center">向分词词典中增加新词w</td>
-</tr>
-</tbody></table>
-<p>（2）针对上述分词函数，举例如下：</p>
-<pre><code class="python">&gt;&gt;&gt; jieba.lcut(&quot;中华人民共和国是一个伟大的国家&quot;)
-[&#39;中华人民共和国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]
-&gt;&gt;&gt; jieba.lcut(&quot;中华人民共和国是一个伟大的国家&quot;, cut_all=True)
-[&#39;中华&#39;, &#39;中华人民&#39;, &#39;中华人民共和国&#39;, &#39;华人&#39;, &#39;人民&#39;, &#39;人民共和国&#39;, &#39;共和&#39;, &#39;共和国&#39;, &#39;国是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]
-&gt;&gt;&gt; jieba.lcut_for_search(&quot;中华人民共和国是一个伟大的国家&quot;)
-[&#39;中华&#39;, &#39;华人&#39;, &#39;人民&#39;, &#39;共和&#39;, &#39;共和国&#39;, &#39;中华人民共和国&#39;, &#39;是&#39;, &#39;一个&#39;, &#39;伟大&#39;, &#39;的&#39;, &#39;国家&#39;]</code></pre>
-<p>（3）jieba.lcut()函数返回精确模式，<strong>输出的分词能够完整且不多余地组成原始文本；</strong>jieba.lcut(,True)函数返回全模式，<strong>输出原始文本中可能产生的所有问题，冗余性最大；</strong>jieba.lcut_for_search()函数返回搜索引擎模式，<strong>该模式首先执行精确模式，然后再对其中的长词进一步切分获得结果。</strong></p>
-<p>（4）默认情况下，上述表格中的6个分词函数可以较高概率识别自定义的新词，例如名字或缩写。而对于无法识别的分词，也可以通过jieba.add_word()函数向分词库添加，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; jieba.lcut(&quot;嵩天老师在努力教学Python语言&quot;)
-[&#39;嵩天&#39;, &#39;老师&#39;, &#39;在&#39;, &#39;努力&#39;, &#39;教学&#39;, &#39;Python&#39;, &#39;语言&#39;]
-&gt;&gt;&gt; jieba.lcut(&quot;习大大期盼有更好的教育&quot;)
-[&#39;习&#39;, &#39;大大&#39;, &#39;期盼&#39;, &#39;有&#39;, &#39;更好&#39;, &#39;的&#39;, &#39;教育&#39;]
-&gt;&gt;&gt; jieba.add_word(&quot;习大大&quot;)
-&gt;&gt;&gt; jieba.lcut(&quot;习大大期盼有更好的教育&quot;)
-[&#39;习大大&#39;, &#39;期盼&#39;, &#39;有&#39;, &#39;更好&#39;, &#39;的&#39;, &#39;教育&#39;]</code></pre>
-<p>拓展：<strong>第三方库</strong></p>
-<ul>
-<li>Python语言的第三方库指不在Python安装包中的函数库，也是非标准函数库，这类函数库一般由全球各领域专业人士结合专业特点和兴趣开发。</li>
-<li>Python语言构建了一个开放和自由的生态环境，随着Python语言的发展，一些稳定的第三方库不断被加入标准库。</li>
-</ul>
-<h2 id="文本词频统计"><a href="#文本词频统计" class="headerlink" title="文本词频统计"></a>文本词频统计</h2><p>词频统计只是累加问题，可用字典来解决。以词语为键，计数器为值，构成&lt;单词&gt;:&lt;出现次数&gt;的键值对即可。</p>
-<h3 id="Hamlet-《哈姆雷特》英文词频统计"><a href="#Hamlet-《哈姆雷特》英文词频统计" class="headerlink" title="Hamlet-《哈姆雷特》英文词频统计"></a>Hamlet-《哈姆雷特》英文词频统计</h3><p>（1）统计英文词频的第一步：<strong>分解并提取英文文章的单词。</strong>，同一个单词会存在大小写不同形式，但计数却不能区分大小写。假设Hamlet文本由变量txt表示，</p>
-<ul>
-<li><strong>可以通过txt.lower()函数将字母变成小写，</strong>排除原文大小写差异对词频统计的干扰。</li>
-<li>英文单词的分隔可以是空格、标点符号或者特殊符号。<strong>可以将各特殊字符和标点符号使用txt.replace()方法替换成空格，再提取单词。</strong></li>
-</ul>
-<p>（2）统计词频的第二步：对每个单词进行计数。假设将单词保存在变量word中，使用一个字典类型counts={}，统计单词出现的次数可采用如下代码：</p>
-<pre><code class="python">counts[word] = counts[word] + 1</code></pre>
-<ul>
-<li>当遇到一个新词时，单词没有出现在字典结构中，则需要再字典中新建键值对：</li>
-</ul>
-<pre><code class="python">counts[new_word] = 1</code></pre>
-<ul>
-<li>因此，无论词是否在字典中，加入字典counts中的处理逻辑可以统一表示如下：</li>
-</ul>
-<pre><code class="python">if word in counts:
-    counts[word] = counts[word] + 1
-else:
-    counts[word] = 1
-
-#或者，这个处理逻辑可以更简洁地表示如下代码：
-counts[word] = counts.get(word,0) + 1    
-#若word在counts中,则返回word对应的值，若word不再counts中，则默认返回0</code></pre>
-<p>（3）统计词频的第三步：对单词的统计值从高到低进行排序，输出前20个高频单词，并格式化打印输出。由于字典类型没有顺序，需要将其转换为有顺序的列表类型，再使用<strong>sort()方法和lambda函数配合实现根据单词出现的次数对元素进行排序。</strong>最后输出排序前10位的单词。</p>
-<pre><code class="python">items = list(counts.items())     #将字典转换为记录列表
-items.sort(key=lambda x:x[1], reverse=True)    #指定记录第2列排序 ，降序排序
-&#39;&#39;&#39;
-sort() 函数用于对原列表进行排序，如果指定参数，则使用比较函数指定的比较函数。
-list.sort( key=None, reverse=False)
-reverse = True 降序， reverse = False 升序（默认）。
-&#39;&#39;&#39;
-
-&#39;&#39;&#39;匿名函数
-&lt;函数名&gt; = lambda &lt;参数列表&gt;： &lt;表达式&gt;
-等价于：
-def &lt;函数名&gt;(&lt;参数列表&gt;)：
-   #return &lt;表达式&gt;
-&#39;&#39;&#39;</code></pre>
-<ul>
-<li>采用函数对获取和整理文本进行封装，以下是完整代码：</li>
-</ul>
-<pre><code class="python">def getText():
-    txt = open(&quot;hamlet.txt&quot;, &quot;r&quot;).read()
-    txt = txt.lower()
-    for ch in &#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#39;:
-        txt = txt.replace(ch, &quot; &quot;)  #将文本中的特殊字符替换为空格
-    return txt
-hamletTxt = getText()
-words = hamletTxt.split()           #默认以空格对文本分片
-counts = &#123;&#125;
-for word in words:
-    counts[word] = counts.get(word,0) + 1
-items = list(counts.items())
-#print(items)
-items.sort(key=lambda x:x[1], reverse=True)
-for i in range(10):
-    word, count = items[i]
-    print(&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count)) #0代表word,&lt;表示向左对齐；1代表count,&gt;表示向右对齐，默认采用空格填充。
-
-#运行结果如下：
-the        1138
-and         965
-to          754
-of          669
-you         550
-i           542
-a           542
-my          514
-hamlet      462
-in          436</code></pre>
-<ul>
-<li>观察输出结果可知，高频单词大多数是冠词、代词、连接词等语法型词汇，并不能代表文章含义。因此，需要采用<strong>集合类型构建一个排除词汇库excludes</strong>，在输出结果中排除这个词汇库中的内容，具备这样功能程序的完整代码如下：</li>
-</ul>
-<pre><code class="python">excludes = &#123;&quot;the&quot;,&quot;and&quot;,&quot;of&quot;,&quot;you&quot;,&quot;a&quot;,&quot;i&quot;,&quot;my&quot;,&quot;in&quot;&#125;
-def getText():
-    txt = open(&quot;hamlet.txt&quot;, &quot;r&quot;).read()
-    txt = txt.lower()
-    for ch in &#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#39;:
-        txt = txt.replace(ch, &quot; &quot;)
-    return txt
-hamletTxt = getText()
-words = hamletTxt.split()
-counts = &#123;&#125;
-for word in words:
-    counts[word] = counts.get(word,0) + 1
-for word in excludes:
-    del(counts[word])
-items = list(counts.items())
-items.sort(key=lambda x:x[1], reverse=True)
-#print(items)
-for i in range(10):
-    word, count = items[i]
-    print(&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
-
-#运行结果如下：
-&gt;&gt;&gt;
-to          754
-hamlet      462
-it          416
-that        391
-is          340
-not         314
-lord        309
-his         296
-this        295
-but         269
-#可通过继续增加excludes中的内容，以排除更多的词汇。</code></pre>
-<h3 id="《三国演义》人物出场统计"><a href="#《三国演义》人物出场统计" class="headerlink" title="《三国演义》人物出场统计"></a>《三国演义》人物出场统计</h3><p>（1）中文文章需要用到jieba库才能进行词频统计，代码如下：</p>
-<pre><code class="python">import jieba
-txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
-words = jieba.lcut(txt)
-counts = &#123;&#125;
-for word in words:
-    if len(word) == 1 :
-        continue
-    else:
-        counts[word] = counts.get(word,0) + 1
-items = list(counts.items())
-items.sort(key = lambda x:x[1], reverse=True)
-for i in range(15):
-    word,count=items[i]
-    print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
-
-#运行结果如下：
-&gt;&gt;&gt;
-曹操          939
-孔明          831
-将军          746
-却说          647
-玄德          570
-丞相          489
-关公          484
-二人          464
-不可          430
-荆州          413
-孔明曰         384
-玄德曰         383
-不能          381
-如此          375
-张飞          349</code></pre>
-<ul>
-<li>增加排除词库exclude</li>
-</ul>
-<pre><code class="python">import jieba
-excludes = &#123;&quot;将军&quot;,&quot;却说&quot;,&quot;荆州&quot;,&quot;二人&quot;,&quot;不可&quot;,&quot;不能&quot;,&quot;如此&quot;&#125;
-txt = open(&quot;三国演义.txt&quot;, &quot;r&quot;, encoding=&#39;utf-8&#39;).read()
-words = jieba.lcut(txt)
-counts = &#123;&#125;
-for word in words:
-    if len(word) == 1 :
-        continue
-    elif word==&quot;诸葛亮&quot; or word== &quot;孔明曰&quot;:
-        rword = &quot;孔明&quot;
-    elif word==&quot;关公&quot; or word==&quot;云长&quot;:
-        rword = &quot;关羽&quot;
-    elif word == &quot;玄德&quot; or word == &quot;玄德曰&quot;:
-        rword = &quot;刘备&quot;
-    elif word ==&quot;孟德&quot; or word == &quot;丞相&quot;:
-        rword = &quot;曹操&quot;
-    else:
-        rword = word
-    counts[rword] = counts.get(rword,0) + 1
-for word in excludes:
-    del(counts[word])
-items = list(counts.items())
-items.sort(key = lambda x:x[1], reverse=True)
-for i in range(5):
-    word,count=items[i]
-    print (&quot;&#123;0:&lt;10&#125;&#123;1:&gt;5&#125;&quot;.format(word,count))
-
-#运行结果
-&gt;&gt;&gt;
-曹操         1435
-孔明         1378
-刘备         1225
-关羽          753
-张飞          349</code></pre>
-<h2 id="Python之禅"><a href="#Python之禅" class="headerlink" title="Python之禅"></a>Python之禅</h2><p>（1）Python编译器以函数库的形式内置了一个有趣的文件，被称为“Python之禅”（The Zen of Python）。当调用如下一行语句后，会出现一段有趣的结果。</p>
-<pre><code class="python">import this
-
-#运行结果
-The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren&#39;t special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you&#39;re Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it&#39;s a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let&#39;s do more of those!</code></pre>
-<p>（2）在Python安装目录中找到Lib/this.py文件，该程序内容如下：</p>
-<pre><code class="python">s = &quot;&quot;&quot;Gur Mra bs Clguba, ol Gvz Crgref
-
-Ornhgvshy vf orggre guna htyl.
-Rkcyvpvg vf orggre guna vzcyvpvg.
-Fvzcyr vf orggre guna pbzcyrk.
-Pbzcyrk vf orggre guna pbzcyvpngrq.
-Syng vf orggre guna arfgrq.
-Fcnefr vf orggre guna qrafr.
-Ernqnovyvgl pbhagf.
-Fcrpvny pnfrf nera&#39;g fcrpvny rabhtu gb oernx gur ehyrf.
-Nygubhtu cenpgvpnyvgl orngf chevgl.
-Reebef fubhyq arire cnff fvyragyl.
-Hayrff rkcyvpvgyl fvyraprq.
-Va gur snpr bs nzovthvgl, ershfr gur grzcgngvba gb thrff.
-Gurer fubhyq or bar-- naq cersrenoyl bayl bar --boivbhf jnl gb qb vg.
-Nygubhtu gung jnl znl abg or boivbhf ng svefg hayrff lbh&#39;er Qhgpu.
-Abj vf orggre guna arire.
-Nygubhtu arire vf bsgra orggre guna *evtug* abj.
-Vs gur vzcyrzragngvba vf uneq gb rkcynva, vg&#39;f n onq vqrn.
-Vs gur vzcyrzragngvba vf rnfl gb rkcynva, vg znl or n tbbq vqrn.
-Anzrfcnprf ner bar ubaxvat terng vqrn -- yrg&#39;f qb zber bs gubfr!&quot;&quot;&quot;
-
-d = &#123;&#125;
-for c in (65, 97):
-    for i in range(26):
-        d[chr(i+c)] = chr((i+13) % 26 + c)
-
-print(&quot;&quot;.join([d.get(c, c) for c in s]))
-
-
-&#39;&#39;&#39;
-最后一行代码
-首先是一个循环for c in s，这个就是变量输入的字符串；
-然后d.get(c,c) for c in s，对于每一个c，从d里面获取对应的value；
-最后&quot;&quot;.join把上面的结果拼接成一个字符串。
-等价于如下：
-tmp = []
-for c in s:
-    tmp.append(d.get(c, c))
-print &quot;&quot;.join(tmp)
-&#39;&#39;&#39;</code></pre>
-<p>（3)该程序从第1行到第21行是一个字符串s，但该字符串并非明文。将s转换成明文的代码是从23行到28行。</p>
-<ul>
-<li>第23行定义了一个空字典。</li>
-<li>第26行对字典d填充了内容，这个填充<strong>将i+c对应的字符替换为(i+13)%26+c，即将编号循环增加了13。</strong></li>
-<li>chr(65)代表字符’A’，chr(97)代表字符’a’，因此，第23到第26行建立了字母a到z和字母A到Z的一个13位循环移动的对应表。</li>
-</ul>
-<p>密文： A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
-<p>原文： N O P Q R S T U V W X Y Z A B C D E F G H I J K L M</p>
-<p>密文： a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
-<p>原文： n o p q r s t u v w x y z a b c d e f g h i j k l m </p>
-<p>（4）该算法可看作是凯撒密码的一种扩展，相比凯撒密码，这个算法采用循环移动13个位置，直接好处是原文和密文之间的相互转换可以使用同一个程序。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/25/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%85%AB)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B02/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(七)-组合数据类型01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">深入Python语言(七)-组合数据类型01</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/" class="archive-article-date">
-  	<time datetime="2021-03-20T12:22:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="组合数据类型概述"><a href="#组合数据类型概述" class="headerlink" title="组合数据类型概述"></a>组合数据类型概述</h2><p>要点：<strong>组合数据类型为多个同类型或不同类型数据提供单一表示。组合数据类型分3类：序列类型、集合类型和映射类型。</strong></p>
-<p>（1）定义： 将多个数据有效组织起来并统一表示，这种能够表示多个数据的类型称为<strong>组合数据类型</strong>。不同于数字类型，例如整数、浮点数和复数类型，这些类型仅能表示一个数，这种表示单一数据的类型称为<strong>基本数据类型</strong>。</p>
-<p>（2）序列类型是一个元素向量，元素之间存在<strong>先后关系</strong>，通过需要访问，元素之间不排他。</p>
-<p>（3）集合类型是一个元素集合，元素之间<strong>无序</strong>，相同元素在集合中唯一存在。</p>
-<p>（4）映射类型是”键-值“数据项的集合，**每个元素是一个键值对，表示为(key,value)**。</p>
-<p><img src="https://i.loli.net/2021/03/20/hVPeXHUaN4W5Id8.png" alt="image-20210320204630710"></p>
-<h3 id="序列类型"><a href="#序列类型" class="headerlink" title="序列类型"></a>序列类型</h3><p>（1）序列类型是一维元素向量，元素之间存在先后关系，通过序号访问。当需要访问序列中某个特定值时，只需要通过下标标出即可。</p>
-<p>（2）由于元素之间存在顺序关系，所以<strong>序列中可以存在数值相同但位置不同的元素</strong>。序列类型支持成员关系操作符(in)、长度计算函数(len())、分片([])，元素本身也可以是序列类型。</p>
-<p>（3）Python中比较重要的序列类型：字符串(str)、元组(tuple)、列表(list)。</p>
-<ul>
-<li>字符串可以看成是单一字符的有序组合，属于序列类型。同时，由于字符串类型十分常用且单一字符串只表达一个含义，因此也被看作是基本数据类型。</li>
-<li>元组是包含0个或多个数据项的不可变序列类型，元组生成后是固定的，其中任何数据项不能被替换或删除。</li>
-<li>列表是一个可以修改数据项的数据类型，使用也最灵活。</li>
-</ul>
-<p>（4）<strong>只要是序列类型，都可以使用相同的索引体系，即正向递增序号和反向递减序号。</strong>(详见初始Python语言(二)))</p>
-<p>（5)序列类型有12个通用的操作符和函数</p>
-<table>
-<thead>
-<tr>
-<th align="center">操作符</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">x in s</td>
-<td align="center">若x是s的元素，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">x not in s</td>
-<td align="center">若x不是s的元素，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">s + t</td>
-<td align="center">连接s和t</td>
-</tr>
-<tr>
-<td align="center">s<em>n或n\</em>s</td>
-<td align="center">将序列s复制n次</td>
-</tr>
-<tr>
-<td align="center">s[i]</td>
-<td align="center">索引，返回序列的第i个元素</td>
-</tr>
-<tr>
-<td align="center">s[i:j]</td>
-<td align="center">分片，返回包含序列s第i到j个元素的子序列（不包含第j个元素）</td>
-</tr>
-<tr>
-<td align="center">s[i:j:k]</td>
-<td align="center">步骤分片，返回包含序列s第i到j个元素以k为步数的子序列</td>
-</tr>
-<tr>
-<td align="center">len(s)</td>
-<td align="center">序列s的元素个数（长度）</td>
-</tr>
-<tr>
-<td align="center">min(s)</td>
-<td align="center">序列s中的最小值</td>
-</tr>
-<tr>
-<td align="center">max(s)</td>
-<td align="center">序列s中的最大值</td>
-</tr>
-<tr>
-<td align="center">s.index(x[,i[,j]])</td>
-<td align="center">序列s中从i开始到j位置中第一次出现元素x的位置</td>
-</tr>
-<tr>
-<td align="center">s.count(x)</td>
-<td align="center">序列s中出现x的总次数</td>
-</tr>
-</tbody></table>
-<p>（6）元组类型（tuple）是序列中比较特殊的类型，因为<strong>它一旦创建就不能修改</strong>。元组类型在表达固定数据项、函数多返回值、多变量同步赋值、循环遍历等情况下十分有用。Python中元组采用逗号和圆括号（可选）来表示。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; creature = &quot;cat&quot;, &quot;dog&quot;, &quot;tiger&quot;, &quot;human&quot;
-&gt;&gt;&gt; creature
-(&#39;cat&#39;, &#39;dog&#39;, &#39;tiger&#39;, &#39;human&#39;)
-&gt;&gt;&gt; color = (&quot;red&quot;, 0x001100, &quot;blue&quot;, creature)
-&gt;&gt;&gt; color
-(&#39;red&#39;, 4352, &#39;blue&#39;, (&#39;cat&#39;, &#39;dog&#39;, &#39;tiger&#39;, &#39;human&#39;))
-&gt;&gt;&gt; color[2]
-&#39;blue&#39;
-&gt;&gt;&gt; color[-1][2]
-&#39;tiger&#39;</code></pre>
-<p>（7）生成元组只需要使用逗号将元素隔离开即可，例如上例中的元组creature，也可以增加圆括号，但圆括号在不混淆语义的情况下不是必须的。<strong>一个元组可以作为另一个元组的元素，可以采用多级索引获取信息，</strong>例如元组color中包含了creature。</p>
-<p>（8）元组除了用于表达固定数据项外，还常用于如下3种情况：函数多返回值、多变量同步赋值、循环遍历，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; def func(x):
-    return x, x**3     #函数多返回值
-
-&gt;&gt;&gt; a, b=&#39;dog&#39;, &#39;tiger&#39;    #多变量同步赋值
-&gt;&gt;&gt; a, b=(b, a)       #多变量同步赋值，括号可省略
-
-&gt;&gt;&gt; import math
-&gt;&gt;&gt; for x, y in ((1,0),(2,5),(3,8)):   #循环遍历
-    print(math.hypot(x,y))       #求多个坐标到原点的距离
-1.0
-5.385164807134504
-8.54400374531753</code></pre>
-<h3 id="集合类型"><a href="#集合类型" class="headerlink" title="集合类型"></a>集合类型</h3><p>（1）集合类型与数学中的集合概念一致，即包含0个或多个数据项的无序组合。<strong>集合中的元素不可重复，元素类型只能是固定数据类型，例如整数、浮点数、字符串、元组等。</strong>列表、字典和集合类型本身都是可变数据类型，不能作为集合的元素出现。</p>
-<p>（2）Python编译器中界定固定数据与否主要考察类型是否能够进行<strong>哈希运算</strong>。<strong>能够进行哈希运算的类型都可作为集合元素。</strong></p>
-<p>（4）哈希运算：哈希运算可以将任意长度的二进制值映射为较短的<strong>固定长度的二进制值</strong>，这个小的二进制值称为哈希值。Python提供了一个内置的哈希运算函数<strong>hash()**，它可以对大多数数据类型产生一个哈希值。哈希值与哈希前的内容无关，可以说，</strong>哈希是数据在另一个数据维度的体现。**例如：</p>
-<pre><code class="python">&gt;&gt;&gt; hash(&quot;PYTHON&quot;)
-4643938005541540506
-&gt;&gt;&gt; hash(&quot;IS&quot;)
--2450861983417858884
-&gt;&gt;&gt; hash(&quot;GOOD&quot;)
--1174573472557134882
-&gt;&gt;&gt; hash(&quot;PYTHON IS GOOD&quot;)
--1199702010419733010</code></pre>
-<p>（5）集合是无序组合，没有索引和位置的概念，不能分片，集合中元素可以动态增加或删除。集合用大括号{}表示，可以用赋值语句生成一个集合。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; S =&#123;425, &quot;BIT&quot;,(10,&quot;CS&quot;),424&#125;
-&gt;&gt;&gt; S
-&#123;424, 425, (10, &#39;CS&#39;), &#39;BIT&#39;&#125;
-&gt;&gt;&gt; T =&#123;425, &quot;BIT&quot;,(10,&quot;CS&quot;), 424, 425,&quot;BIT&quot;&#125;
-&gt;&gt;&gt; T
-&#123;424, 425, (10, &#39;CS&#39;), &#39;BIT&#39;&#125;</code></pre>
-<p>（6）由于集合元素是无序的，集合的打印效果与定义顺序可以不一致。由于<strong>集合元素独一无二，使用集合类型能够过滤掉重复元素。</strong></p>
-<p>（7）set(x)函数可以用于生成集合，输入的参数可以是任何组合数据类型，返回结果是一个无重复且排序任意的集合，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; W = set(&quot;apple&quot;)
-&gt;&gt;&gt; W
-&#123;&#39;l&#39;, &#39;p&#39;, &#39;e&#39;, &#39;a&#39;&#125;
-&gt;&gt;&gt; V = set((&quot;cat&quot;,&quot;dog&quot;,&quot;tiger&quot;,&quot;human&quot;))
-&gt;&gt;&gt; V
-&#123;&#39;tiger&#39;, &#39;cat&#39;, &#39;human&#39;, &#39;dog&#39;&#125;</code></pre>
-<p>（8）集合类型有10个操作符。</p>
-<table>
-<thead>
-<tr>
-<th align="center">操作符</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">S - T</td>
-<td align="center">返回一个新集合，包括在集合S但不在集合T中的元素</td>
-</tr>
-<tr>
-<td align="center">S -= T</td>
-<td align="center">更新集合S，包括在集合S但不在集合T中的元素</td>
-</tr>
-<tr>
-<td align="center">S &amp; T</td>
-<td align="center">返回一个新集合，包括同时在集合S和集合T中的元素</td>
-</tr>
-<tr>
-<td align="center">S &amp;= T</td>
-<td align="center">更新集合S，包括同时在集合S和集合T中的元素</td>
-</tr>
-<tr>
-<td align="center">S ^ T</td>
-<td align="center">返回一个新集合，包括集合S和集合T中的元素，但不包括同时在其中的元素</td>
-</tr>
-<tr>
-<td align="center">S ^= T</td>
-<td align="center">更新集合S，包括集合S和集合T中的元素，但不包括同时在其中的元素</td>
-</tr>
-<tr>
-<td align="center">S | T</td>
-<td align="center">返回一个新集合，包括集合S和集合T中的所有元素</td>
-</tr>
-<tr>
-<td align="center">S |= T</td>
-<td align="center">更新集合S，包括集合S和集合T中的所有元素</td>
-</tr>
-<tr>
-<td align="center">S &lt;= T</td>
-<td align="center">如果S与T相同或S是T的子集，返回True，否则返回False，可以用S&lt;T判断S是否是T的真子集</td>
-</tr>
-<tr>
-<td align="center">S &gt;= T</td>
-<td align="center">如果S与T相同或S是T的超集，返回True，否则返回False，可以用S&gt;T判断S是否是T的真超集</td>
-</tr>
-</tbody></table>
-<p>上述操作符表达了集合类型的4种基本操作：交集（&amp;）、并集（|）、差集（-）、补集（^）、操作逻辑与数学定义相同。</p>
-<p><img src="https://i.loli.net/2021/03/25/iAeX67WxPvm3K1u.png" alt="image-20210325150549210"></p>
-<p>（9）集合类型有10个操作函数或方法</p>
-<table>
-<thead>
-<tr>
-<th align="center">操作函数或方法</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">S.add(x)</td>
-<td align="center">如果数据项x不在集合S中，将x增加到s</td>
-</tr>
-<tr>
-<td align="center">S.clear()</td>
-<td align="center">移除S中的所有数据项</td>
-</tr>
-<tr>
-<td align="center">S.copy()</td>
-<td align="center">返回集合S的一个副本</td>
-</tr>
-<tr>
-<td align="center">S.pop()</td>
-<td align="center">随机返回集合S中的一个元素，如果S为空，产生KeyError异常</td>
-</tr>
-<tr>
-<td align="center">S.discard(x)</td>
-<td align="center">如果x在集合S中，移除该元素；如果x不在集合S中，不报错</td>
-</tr>
-<tr>
-<td align="center">S.remove(x)</td>
-<td align="center">如果x在集合S中，移除该元素；不在则产生KeyError异常</td>
-</tr>
-<tr>
-<td align="center">S.isdisjoint(T)</td>
-<td align="center">如果集合S与T没有相同元素，返回True</td>
-</tr>
-<tr>
-<td align="center">len(S)</td>
-<td align="center">返回集合S的元素的个数</td>
-</tr>
-<tr>
-<td align="center">x in S</td>
-<td align="center">如果x是S的元素，返回True，否则返回False</td>
-</tr>
-<tr>
-<td align="center">x not in S</td>
-<td align="center">如果x不是S的元素，返回True，否则返回False</td>
-</tr>
-</tbody></table>
-<p>（10）集合类型主要用于3个场景：<strong>成员关系测试、元素去重和删除数据项</strong>，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; &quot;BIT&quot; in &#123;&quot;PYTHON&quot;, &quot;BIT&quot;, 123, &quot;good&quot;&#125;      #成员关系测试
-True
-&gt;&gt;&gt; tup = &#123;&quot;PYTHON&quot;, &quot;BIT&quot;, 123, &quot;GOOD&quot;, 123&#125;     #元素去重
-&gt;&gt;&gt; set (tup)
-&#123;&#39;PYTHON&#39;, 123, &#39;GOOD&#39;, &#39;BIT&#39;&#125;
-&gt;&gt;&gt; newtup = tuple(set(tup)-&#123;&#39;PYTHON&#39;&#125;)          #去重同时删除数据项
-&gt;&gt;&gt; newtup
-(&#39;BIT&#39;, 123, &#39;GOOD&#39;)</code></pre>
-<h3 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h3><p>（1）映射类型是“键-值数据项的组合，每个元素是一个键值对，即元素是(key,value),元素之间是无序的。键值对(key,value)是一种二元关系，源于属性和值的映射关系。</p>
-<p>（2）键（key）表示一个属性，也可以理解为一个类别或项目，值（value）是属性的内容，键值对刻画了一个属性和它的值。键值对将映射关系结构化，用于存储和表达。在Python中，映射类型主要以字典(dict)体现。</p>
-<h2 id="列表类型和操作"><a href="#列表类型和操作" class="headerlink" title="列表类型和操作"></a>列表类型和操作</h2><p>要点：<strong>列表是包含0个或多个对象引用的有序序列，没有长度限制，可自由增删元素，使用灵活。</strong></p>
-<h3 id="列表类型的概念"><a href="#列表类型的概念" class="headerlink" title="列表类型的概念"></a>列表类型的概念</h3><p>（1）列表（list）属于序列类型，与元组不同，列表的长度和内容都是可变的。</p>
-<p>（2）由于列表属于序列类型，所以列表页支持成员关系操作符（in）、长度计算函数（len()）、分片（[]）。列表可以同时使用正向递增序号和反向递减序号，可以采用标准的比较操作符（&lt;、&lt;=、==、!=、&gt;=、&gt;）进行比较，<strong>列表的比较实际上是单个数据项的逐个比较。</strong></p>
-<p>（3）列表用中括号[]表示，也可以通过list()函数将元组或字符串转化成列表。直接使用list()函数会返回一个空列表。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; ls =[425, &quot;BIT&quot;, [10, &quot;CS&quot;], 425]
-&gt;&gt;&gt; ls
-[425, &#39;BIT&#39;, [10, &#39;CS&#39;], 425]
-&gt;&gt;&gt; ls[2][-1][0]
-&#39;C&#39;
-&gt;&gt;&gt; list((425, &quot;BTI&quot;, [10, &quot;CS&quot;], 425))
-[425, &#39;BTI&#39;, [10, &#39;CS&#39;], 425]
-&gt;&gt;&gt; list(&quot;中国是一个伟大的国家&quot;)
-[&#39;中&#39;, &#39;国&#39;, &#39;是&#39;, &#39;一&#39;, &#39;个&#39;, &#39;伟&#39;, &#39;大&#39;, &#39;的&#39;, &#39;国&#39;, &#39;家&#39;]
-&gt;&gt;&gt; list()
-[]</code></pre>
-<p>扩展：列表和数组。二者都是表示一组元素的方法，C语言采用数组，Python采用列表。二者区别：</p>
-<ul>
-<li>数组需要预先分配大小，列表则不需要</li>
-<li>数组要求元素类型一致，列表则不需要</li>
-</ul>
-<p>（4）列表要处理一组数据，因此，<strong>列表必须通过显示的数据赋值才能完成，简单将一个列表赋值给另一个列表不会生成新的列表对象。</strong>例如：</p>
-<pre><code class="python">&gt;&gt;&gt; ls = [425, &quot;BIT&quot;, 1024]     #用数据赋值产生列表ls
-&gt;&gt;&gt; lt =ls                  #lt是ls所对应数据的引用，lt并不包含真实数据
-&gt;&gt;&gt; ls[0]=0
-&gt;&gt;&gt; lt
-[0, &#39;BIT&#39;, 1024]</code></pre>
-<p>（5）如上例所示，ls由实际数据赋值产生，为列表对象。将ls赋值给列表lt仅能产生对列表ls的一个新的引用，此时lt和ls变量都是实际数据的表示或引用，真实数据只存储一份。因此，修改ls也同时修改了lt。</p>
-<h3 id="列表类型的操作"><a href="#列表类型的操作" class="headerlink" title="列表类型的操作"></a>列表类型的操作</h3><p>（1）列表是序列类型，因此，序列类型的12个通用操作符和函数都可应用于列表类型。但列表是可变的，以下列出了列表类型额外的14个常用函数或方法，主要处理列表的增删改等功能。</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数或方法</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">ls[i] = x</td>
-<td align="center">替换列表ls第i数据项为x</td>
-</tr>
-<tr>
-<td align="center">ls[i:j] = lt</td>
-<td align="center">用列表lt替换列表ls中第i到第j项数据项(不含第j向，下同)</td>
-</tr>
-<tr>
-<td align="center">ls[i:j:k] = lt</td>
-<td align="center">用列表lt替换列表ls中第i到第j项以k为步数的数据</td>
-</tr>
-<tr>
-<td align="center">del ls[i:j]</td>
-<td align="center">删除列表ls第i到第j项数据，等价于ls[i:j] = []</td>
-</tr>
-<tr>
-<td align="center">del ls[i:j:k]</td>
-<td align="center">删除列表ls第i到第j项k为步数的数据</td>
-</tr>
-<tr>
-<td align="center">ls+=lt或ls.extend(lt)</td>
-<td align="center">将列表lt元素增加到列表ls中</td>
-</tr>
-<tr>
-<td align="center">ls *= n</td>
-<td align="center">更新列表，其元素重复n次</td>
-</tr>
-<tr>
-<td align="center">ls.append(x)</td>
-<td align="center">在列表ls最后增加一个元素x</td>
-</tr>
-<tr>
-<td align="center">ls.clear()</td>
-<td align="center">删除ls中的所有元素</td>
-</tr>
-<tr>
-<td align="center">ls.copy()</td>
-<td align="center">生成一个新列表，复制ls中的所有元素</td>
-</tr>
-<tr>
-<td align="center">ls.inset(i,x)</td>
-<td align="center">在列表ls的第i位置增加元素x</td>
-</tr>
-<tr>
-<td align="center">ls.pop(i)</td>
-<td align="center">将列表ls中的第i项元素取出并删除该元素</td>
-</tr>
-<tr>
-<td align="center">ls.remove(x)</td>
-<td align="center">将列表中出现的第一个元素x删除</td>
-</tr>
-<tr>
-<td align="center">ls.reverse(x)</td>
-<td align="center">列表ls中的元素反转</td>
-</tr>
-</tbody></table>
-<pre><code class="python">&gt;&gt;&gt; vlist = list(range(5))
-&gt;&gt;&gt; vlist
-[0, 1, 2, 3, 4]
-&gt;&gt;&gt; len (vlist[2:])    #计算从第3个元素开始到结尾的子串长度
-3
-&gt;&gt;&gt; vlist[2:]
-[2, 3, 4]
-&gt;&gt;&gt; 2 in vlist        #判断2是否在列表vlist中
-True
-&gt;&gt;&gt; vlist[3]=&quot;python&quot;  #修改序号3的元素值和类型
-&gt;&gt;&gt; vlist
-[0, 1, 2, &#39;python&#39;, 4]
-&gt;&gt;&gt; vlist[1:3]=&#123;&quot;bit&quot;, &quot;computer&quot;&#125;  
-&gt;&gt;&gt; vlist
-[0, &#39;computer&#39;, &#39;bit&#39;, &#39;python&#39;, 4]</code></pre>
-<p>（2）当使用一个列表改变另一个列表的值时，Python不要求两个列表的长度一样，但遵循“多增少减”的原则。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; vlist
-[0, &#39;computer&#39;, &#39;bit&#39;, &#39;python&#39;, 4]
-&gt;&gt;&gt; vlist[1:3] = [&quot;new_bit&quot;,&quot;new_computer&quot;, 123]
-&gt;&gt;&gt; vlist
-[0, &#39;new_bit&#39;, &#39;new_computer&#39;, 123, &#39;python&#39;, 4]
-&gt;&gt;&gt; vlist[1:3]=[&quot;fewer&quot;]
-&gt;&gt;&gt; vlist
-[0, &#39;fewer&#39;, 123, &#39;python&#39;, 4]</code></pre>
-<p>（3）vlist[1:3]子序列包含了两个元素，对其赋值时却给了3个元素，最后vlist的结果会包含赋值列表中多余的元素。同样，当使用包含更少的元素赋值时，原列表元素会相应减少。<strong>可通过赋给更多或更少元素实现对列表元素的插入或删除</strong>。</p>
-<p>（4）与元组一样，列表可以通过for-in语句对其元素进行遍历，基本语法结构如下：</p>
-<pre><code class="python">for &lt;任意变量名&gt; in &lt;列表名&gt;:
-    &lt;语句块&gt;
-
-&gt;&gt;&gt; vlist
-[0, &#39;fewer&#39;, 123, &#39;python&#39;, 4]
-&gt;&gt;&gt; for e in vlist:
-    print(e, end=&quot; &quot;)
-0 fewer 123 python 4 
-&gt;&gt;&gt; </code></pre>
-<p>（5）列表是一个十分灵活的数据结构，它具有处理任意长度、混合类型数据的能力，并提供了丰富的基础操作符合方法。<strong>当程序需要使用组合数据类型管理批量数据时，应尽量使用列表类型。</strong></p>
-<h2 id="实例9：基本统计值计算"><a href="#实例9：基本统计值计算" class="headerlink" title="实例9：基本统计值计算"></a>实例9：基本统计值计算</h2><pre><code class="python">from math import sqrt
-def getNum():       #获取用户输入
-    nums = []
-    isNumStr = input(&quot;请输入数字(直接输入回车退出)：&quot;)
-    while isNumStr != &quot;&quot;:
-        nums.append(eval(isNumStr))
-        isNumStr = input(&quot;请输入数字(直接输入回车退出)：&quot;)
-    return nums
-def mean(numbers):     #计算平均值
-    s = 0.0
-    for num in numbers:
-        s = s +num
-    return s / len(numbers)
-def dev(numbers, mean):     #计算方差
-    sdev = 0.0
-    for num in numbers:
-        sdev =sdev + (num -mean)**2
-    b = sqrt(sdev / (len(numbers)-1))
-    return b
-def median(numbers):        #计算中位数
-    ls = sorted(numbers)#sorted返回重新排序的列表,返回新的列表,而不是在原列表上操作,原来的列表不变
-    size = len(numbers)
-    if size % 2 == 0:
-        med = (numbers[size//2-1] + numbers[size//2]) / 2
-    else:
-        med = numbers[size//2]
-    return med
-n = getNum() #主体函数
-m = mean(n)
-print(&quot;平均值：&#123;&#125;,方差：&#123;:.2&#125;,中位数：&#123;&#125;.&quot;.format(m,dev(n,m),median(n)))</code></pre>
-<p>运行结果如下：</p>
-<pre><code class="python">&gt;&gt;&gt;
-请输入数字(直接输入回车退出)：99
-请输入数字(直接输入回车退出)：98
-请输入数字(直接输入回车退出)：97
-请输入数字(直接输入回车退出)：96
-请输入数字(直接输入回车退出)：95
-请输入数字(直接输入回车退出)：
-平均值：97.0,方差：1.6,中位数：97.</code></pre>
-<p>列表在实现基本数据统计时发挥了很重要的作用，主要表现在以下3个方面：</p>
-<ul>
-<li>列表是一个动态长度的数据结构，可以根据需求增加或减少元素。</li>
-<li>列表的一系列方法或操作符为计算提供了简单的元素运算手段。</li>
-<li>列表提供了对每个元素的简单访问方式及所有元素的遍历方式。</li>
-</ul>
-<h2 id="字典类型和操作"><a href="#字典类型和操作" class="headerlink" title="字典类型和操作"></a>字典类型和操作</h2><h3 id="字典类型的概念"><a href="#字典类型的概念" class="headerlink" title="字典类型的概念"></a>字典类型的概念</h3><p>（1）访问列表的元素时，可以通过元素在列表的序号进行查找，即&lt;整数序号&gt;查找&lt;被索引内容&gt;</p>
-<p>（2）实际生活中，需要更为灵活的信息查找方式。例如学生信息，需要基于身份证号进行查找，而不是信息存储序号。</p>
-<p>（3）<strong>根据一个信息查找另一个信息的方式构成了“键值对”</strong>，它表示索引用的键和对应的值构成的成对关系，即通过特定的键（身份证号）来访问值（学生信息）。<strong>由于键不是序号，无法使用列表类型进行有效存储和索引。</strong></p>
-<p>（4）通过任意键信息查找一组数据中值信息的过程叫<strong>映射</strong>，Python中通过字典实现映射。字典可以通过大括号{}建立，模式如下：</p>
-<pre><code>&#123;&lt;键1&gt;:&lt;值1&gt;, &lt;键2&gt;:&lt;值2&gt;, ... , &lt;键n&gt;:&lt;值n&gt;&#125;</code></pre>
-<p>（5）在Python中，大括号{}可以表示集合，所以字典类型也具有和集合类似的性质，<strong>即键值对之间没有顺序且不能重复</strong>。也就是说，可以把<strong>字典看成元素是键值队的集合</strong>。例如下面的一个简单字典：</p>
-<pre><code class="python">&gt;&gt;&gt; Dcountry=&#123;&quot;中国&quot;:&quot;北京&quot;, &quot;美国&quot;:&quot;华盛顿&quot;, &quot;法国&quot;:&quot;巴黎&quot;&#125;
-&gt;&gt;&gt; print(Dcountry)
-&#123;&#39;中国&#39;: &#39;北京&#39;, &#39;美国&#39;: &#39;华盛顿&#39;, &#39;法国&#39;: &#39;巴黎&#39;&#125;</code></pre>
-<p>（6）字典中的各个元素没有顺序之分，<strong>若想保持一个集合中元素的顺序，需要使用列表，而不是字典。</strong>字典最主要的用法是查找与特定键相对应的值，这通过索引符号来实现。例如：</p>
-<pre><code class="python">&gt;&gt;&gt; Dcountry[&quot;中国&quot;]
-&#39;北京&#39;</code></pre>
-<p>（7）字典中键值队的访问模式如下，采用<strong>中括号</strong>格式：</p>
-<pre><code class="python">&lt;值&gt; = &lt;字典变量&gt;[&lt;键&gt;]</code></pre>
-<p>（8）字典中对某个键值的修改可以通过中括号的访问和赋值实现，例如；</p>
-<pre><code class="python">&gt;&gt;&gt; Dcountry[&quot;中国&quot;] = &#39;大北京&#39;
-&gt;&gt;&gt; print(Dcountry)
-&#123;&#39;中国&#39;: &#39;大北京&#39;, &#39;美国&#39;: &#39;华盛顿&#39;, &#39;法国&#39;: &#39;巴黎&#39;&#125;</code></pre>
-<p>（9）字典是存储可变数量键值对的数据结构，键和值可以是任意数据类型，包括程序自定义的类型。Python字典效率非常高，甚至可以存储几十万项内容。</p>
-<p>扩展：<strong>索引是按照一定顺序检索内容的体系。Python中，字符串、列表、元素等都采用数字索引，字典采用字符索引。</strong></p>
-<h3 id="字典类型的操作"><a href="#字典类型的操作" class="headerlink" title="字典类型的操作"></a>字典类型的操作</h3><p>（1）字典通过大括号创建，并指定初始的值；通过中括号可以增加新的元素，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; Dcountry=&#123;&quot;中国&quot;:&quot;北京&quot;, &quot;美国&quot;:&quot;华盛顿&quot;, &quot;法国&quot;:&quot;巴黎&quot;&#125;
-&gt;&gt;&gt; Dcountry[&quot;英国&quot;]=&quot;伦敦&quot;
-&gt;&gt;&gt; print(Dcountry)
-&#123;&#39;中国&#39;: &#39;大北京&#39;, &#39;美国&#39;: &#39;华盛顿&#39;, &#39;法国&#39;: &#39;巴黎&#39;, &#39;英国&#39;: &#39;伦敦&#39;&#125;</code></pre>
-<p>（2）直接使用大括号{}可以创建一个空的字典，并通过中括号[]向其增加元素，例如：</p>
-<pre><code class="python">&gt;&gt;&gt; Dp=&#123;&#125;
-&gt;&gt;&gt; Dp[&#39;2^10&#39;]=1024
-&gt;&gt;&gt; print(Dp)
-&#123;&#39;2^10&#39;: 1024&#125;</code></pre>
-<p>（3）注意：尽管集合类型也用大括号{}表示，<strong>但直接使用大括号{}生成的是一个字典，而不是集合。生成集合需要用set()函数。</strong></p>
-<p>（4）字典在Python中也已采用面向对象方式实现，所以也有一些对应的方法，采用&lt;a&gt;.&lt;b&gt;()格式。</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数和方法</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">&lt;d&gt;.keys()</td>
-<td align="center">返回所有的键信息</td>
-</tr>
-<tr>
-<td align="center">&lt;d&gt;.values()</td>
-<td align="center">返回所有的值信息</td>
-</tr>
-<tr>
-<td align="center">&lt;d&gt;.items()</td>
-<td align="center">返回所有的键值对</td>
-</tr>
-<tr>
-<td align="center">&lt;d&gt;.get(&lt;key&gt;,&lt;default&gt;)</td>
-<td align="center">键存在则返回相应值，否则返回默认值</td>
-</tr>
-<tr>
-<td align="center">&lt;d&gt;.pop(&lt;key&gt;,&lt;default&gt;)</td>
-<td align="center">键存在则返回相应值，同时删除键值对，否则返回默认值</td>
-</tr>
-<tr>
-<td align="center">&lt;d&gt;.popitem()</td>
-<td align="center">随机从字典中取出一个键值对，以元组(key,value)形式返回</td>
-</tr>
-<tr>
-<td align="center">&lt;d&gt;.clear()</td>
-<td align="center">删除所有的键值对</td>
-</tr>
-<tr>
-<td align="center">del&lt;d&gt;[&lt;key&gt;]</td>
-<td align="center">删除字典中某一个键值对</td>
-</tr>
-<tr>
-<td align="center">&lt;key&gt;in&lt;d&gt;</td>
-<td align="center">如果键在字典中则返回True，否则返回False</td>
-</tr>
-</tbody></table>
-<p>（5）若希望keys()、values()和items()方法返回列表类型，可以<strong>采用list()函数将返回值转换成列表</strong>。</p>
-<pre><code class="python">&gt;&gt;&gt; Dcountry.keys()
-dict_keys([&#39;中国&#39;, &#39;美国&#39;, &#39;法国&#39;, &#39;英国&#39;])
-&gt;&gt;&gt; list(Dcountry.values())
-[&#39;大北京&#39;, &#39;华盛顿&#39;, &#39;巴黎&#39;, &#39;伦敦&#39;]
-&gt;&gt;&gt; Dcountry.items()
-dict_items([(&#39;中国&#39;, &#39;大北京&#39;), (&#39;美国&#39;, &#39;华盛顿&#39;), (&#39;法国&#39;, &#39;巴黎&#39;), (&#39;英国&#39;, &#39;伦敦&#39;)])
-&gt;&gt;&gt; &#39;中国&#39; in Dcountry          #只对键进行判断
-True
-&gt;&gt;&gt; Dcountry.get(&#39;美国&#39;,&#39;悉尼&#39;)     #&#39;美国&#39;在字典中存在
-&#39;华盛顿&#39;
-&gt;&gt;&gt; Dcountry.get(&#39;澳大利亚&#39;, &#39;悉尼&#39;)   #&#39;澳大利亚&#39;在字典中不存在
-&#39;悉尼&#39;</code></pre>
-<p>（6）字典可以通过for-in语句对其元素进行遍历，基本语法结构如下：</p>
-<pre><code>for &lt;变量名&gt; in &lt;字典名&gt;:
-    &lt;语句块&gt;</code></pre>
-<p>（7）键相当于索引，因此，for循环返回的变量名是字典的索引值。若需要获得键对应的值，可以在语句块中get()方法获得。</p>
-<pre><code class="python">&gt;&gt;&gt; for key in Dcountry:
-    print(key)
-
-中国
-美国
-法国
-英国
-&gt;&gt;&gt; for key in Dcountry:
-    print(Dcountry.get(key,&#39;不存在&#39;))
-大北京
-华盛顿
-巴黎
-伦敦</code></pre>
-<p>（8）字典是实现键值对映射的数据结构，它采用固定数据类型的键数据作为索引，十分灵活，具有处理任意长度、混合类型键值对的能力。以下是字典的基本原则：</p>
-<ul>
-<li>字典是一个键值对的集合，该集合以键为索引，<strong>一个键信息只对应一个值信息。</strong></li>
-<li>字典中元素以键信息为索引访问。</li>
-<li>字典长度是可变的，可以通过对键信息赋值实现增加或修改键值对。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/20/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B8%83)-%E7%BB%84%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">展开全文 >></a>
         </p>
       
 
