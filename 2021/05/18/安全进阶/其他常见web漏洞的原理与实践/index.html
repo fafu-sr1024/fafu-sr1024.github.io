@@ -8,20 +8,34 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>其他常见web漏洞的原理与实践 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="扩展 CSRF–跨站请求伪造XSS可以配合CSRF漏洞，完成进一步的攻击。 XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。 XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对">
+  <meta name="description" content="CSRF漏洞原理与利用（1）跨站请求伪造。CSRF漏洞产生的原因主要是因为关键的敏感请求可被伪造发出，而服务端接收处理未进行二次校验。  敏感请求：增删改等操作请求，如添加账号，修改密码，删除文章等。 二次校验：验证请求是由用户正常发起的校验方式，如图片和短信验证码，随机token，修改密码需同时提交旧密码等都属于二次校验。  （2）XSS可以配合CSRF漏洞，完成进一步的攻击。  XSS—利用x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="其他常见web漏洞的原理与实践">
 <meta property="og:url" content="http://example.com/2021/05/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E5%85%B6%E4%BB%96%E5%B8%B8%E8%A7%81web%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="扩展 CSRF–跨站请求伪造XSS可以配合CSRF漏洞，完成进一步的攻击。 XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。 XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对">
+<meta property="og:description" content="CSRF漏洞原理与利用（1）跨站请求伪造。CSRF漏洞产生的原因主要是因为关键的敏感请求可被伪造发出，而服务端接收处理未进行二次校验。  敏感请求：增删改等操作请求，如添加账号，修改密码，删除文章等。 二次校验：验证请求是由用户正常发起的校验方式，如图片和短信验证码，随机token，修改密码需同时提交旧密码等都属于二次校验。  （2）XSS可以配合CSRF漏洞，完成进一步的攻击。  XSS—利用x">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/GmLU6N7ntXJbDFu.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/AzSxgmsBwe6OkNG.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/WqAZuXPsMLwVFm5.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/FPhzBHXifNMEyx3.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/Y5bTzs61nBRoCFJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/lX9LkytfOGCvJiA.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/SrYVZi7ucHFyh1M.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/wl4aHcXmptB2P5i.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/3VcPaDYhgBubOo9.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/6krOdizaGSMRIXH.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/4xp7s6OJ2fY5CHv.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/oWhAiaQUZc1eBsV.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/AVH8nwCeflqju1Q.png">
+<meta property="og:image" content="https://i.loli.net/2021/06/04/F5TE1ZKkr7tWbyR.png">
 <meta property="og:image" content="https://i.loli.net/2021/05/18/fgMdmTUVkb3lv2Z.png">
 <meta property="article:published_time" content="2021-05-18T11:17:09.000Z">
-<meta property="article:modified_time" content="2021-05-19T14:27:42.347Z">
+<meta property="article:modified_time" content="2021-06-04T12:19:52.644Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/05/18/fgMdmTUVkb3lv2Z.png">
+<meta name="twitter:image" content="https://i.loli.net/2021/06/04/GmLU6N7ntXJbDFu.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -177,35 +191,189 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><img src="https://i.loli.net/2021/05/18/fgMdmTUVkb3lv2Z.png" alt="image-20210518192126794"></p>
-<h3 id="CSRF–跨站请求伪造"><a href="#CSRF–跨站请求伪造" class="headerlink" title="CSRF–跨站请求伪造"></a>CSRF–跨站请求伪造</h3><p>XSS可以配合CSRF漏洞，完成进一步的攻击。</p>
-<p>XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。</p>
-<p>XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对方发送网址，只需要看到留言板（系统正常的功能），则恶意代码就会被触发（通过XSS漏洞而产生的，弥补了CSRF的缺点），然后利用CSRF伪造的脚本向网站发起请求，此时这个请求将会带上受害者本身的Cookie，不管XSS是否能获取到Cookie（Cookie是否设置了HTTPonly）此时的伪造脚本都会被执行。（利用CSRF弥补了XSS的缺点）</p>
-<p>CSRF—利用该漏洞，向对方发送恶意的链接，然后构造跨站请求伪造修改对方的密码，进一步控制对方用户—对方必须信任攻击者发送的网站，并且能够成功点击。</p>
-<p>防范：</p>
-<p>（1）referer：http请求包中存在该字段，表示的是从哪个网页访问到当前网页的。若referer的内容不是本网站，则推测可能遭遇了CSRF</p>
-<p>（2）二次校验：在关键的敏感网页加入验证码，需要输入正确的验证码才能进行操作。</p>
-<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p>针对与XML文档中的外部实体实施的注入，全名为XML外部实体注入。</p>
-<p>XML：可扩展标记语言</p>
-<p>HTML：超文本标记语言</p>
-<p>XML中的标签是可扩展的，即可以自定义标签。</p>
-<p>在当前的DTD文档中声明实体：&lt;!ENTITY 实体名称 “Bill Gates”&gt;</p>
+        <h2 id="CSRF漏洞原理与利用"><a href="#CSRF漏洞原理与利用" class="headerlink" title="CSRF漏洞原理与利用"></a>CSRF漏洞原理与利用</h2><p>（1）跨站请求伪造。CSRF漏洞产生的原因主要是因为<strong>关键的敏感请求可被伪造发出</strong>，而服务端接收处理<strong>未进行二次校验。</strong></p>
+<ul>
+<li><strong>敏感请求</strong>：增删改等操作请求，如添加账号，修改密码，删除文章等。</li>
+<li><strong>二次校验</strong>：验证请求是由用户正常发起的校验方式，如图片和短信验证码，随机token，修改密码需同时提交旧密码等都属于二次校验。</li>
+</ul>
+<p>（2）XSS可以配合CSRF漏洞，完成进一步的攻击。</p>
+<ul>
+<li>XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。</li>
+<li>XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对方发送网址，只需要看到留言板（系统正常的功能），则恶意代码就会被触发（通过XSS漏洞而产生的，弥补了CSRF的缺点），然后利用CSRF伪造的脚本向网站发起请求，此时这个请求将会带上受害者本身的Cookie，不管XSS是否能获取到Cookie（Cookie是否设置了HTTPonly）此时的伪造脚本都会被执行。（利用CSRF弥补了XSS的缺点）</li>
+<li>CSRF—利用该漏洞，向对方发送恶意的链接，然后构造跨站请求伪造修改对方的密码，进一步控制对方用户—对方必须信任攻击者发送的网站，并且能够成功点击。</li>
+</ul>
+<pre><code class="html">&lt;script&gt;function loadXMLDoc()
+&#123;
+var xmlhttp=new XMLHttpRequest();
+xmlhttp.open(&quot;POST&quot;,&quot;http://192.168.14.137:80/admin/adminadd.php?id=3&quot;,true);
+xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+xmlhttp.send(&quot;name=lwphp&amp;passwd=123456&amp;remark= test&amp;mid=1&amp;adminsubmit=%CC%E1%BD%BB&quot;);
+&#125;
+loadXMLDoc();
+&lt;/script&gt;</code></pre>
+<p>（3）防范：</p>
+<ul>
+<li>referer：http请求包中存在该字段，表示的是从哪个网页访问到当前网页的。若referer的内容不是本网站，则推测可能遭遇了CSRF</li>
+<li>二次校验：在关键的敏感网页加入验证码，需要输入正确的验证码才能进行操作。</li>
+</ul>
+<h2 id="XXE注入漏洞原理"><a href="#XXE注入漏洞原理" class="headerlink" title="XXE注入漏洞原理"></a>XXE注入漏洞原理</h2><p>（1）XXE（XML External Entity attack）<strong>外部实体注入攻击</strong>。针对与XML文档中的外部实体实施的注入。</p>
+<ul>
+<li>XXE是一种注入攻击。</li>
+<li>程序在解析XML时，<strong>解析了XML中的外部实体引用。</strong></li>
+<li>若解析时没有禁止外部实体的加载，攻击者可以利用外部实体读取任意文件，进行内网探测，执行远程代码和拒绝服务攻击。</li>
+</ul>
+<p>（2）XML 是一种类似HTML的标记性语言，用来存储标记数据、定义数据类型。和html不同的是，xml的根元素和子元素是允许用户自定义的。</p>
+<ul>
+<li><p>XML：可扩展标记语言。HTML：超文本标记语言</p>
+</li>
+<li><p>XML中的标签是可扩展的，即可以自定义标签。</p>
+</li>
+</ul>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt; &lt;!-- 文档声明：&lt;?xml version=&quot;1.0&quot;?&gt;  --&gt;
+&lt;note&gt;                              &lt;!-- 根元素：note --&gt;
+&lt;to&gt;
+&lt;from&gt;GeorgeJohn&lt;/to&gt;&lt;/from&gt;        &lt;!-- 子元素：to、from、heading、body --&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&#39;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;</code></pre>
+<p>（3）DTD（Document Type Definition）文档类型定义</p>
+<ul>
+<li>由于XML允许用户自定义标签，DTD则是用来规范和约束XML的书写。</li>
+<li>定义实体：定义实体就是为一段内容指定一个名称，使用时通过这个名称就可以引用其所代表的内容。</li>
+<li>在DTD文档中使用ENTITY关键字来声明一个实体，格式如下：</li>
+</ul>
+<pre><code>&lt;!ENTITY 实体名称 &quot;实体内容&quot;&gt;</code></pre>
+<ul>
+<li>如声明实体b，b的内容为文档规范： <a target="_blank" rel="noopener" href="http://xx.com/1.dtd">http://xx.com/1.dtd</a></li>
+</ul>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE author [&lt;!ENTITY b SYSTEM &quot;http://xx.com/1.dtd&quot;&gt;]&gt;
+&lt;c&gt;&amp;b;&lt;/c&gt;</code></pre>
+<ul>
+<li>由于外部实体不仅仅支持http协议，还支持其他协议如file</li>
+</ul>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE a [&lt;!ENTITY b SYSTEM &quot;file:///etc/passwd&quot;&gt;]&gt;
+&lt;c&gt;&amp;b;&lt;/c&gt;</code></pre>
+<p>（4）在当前的DTD文档中声明实体：&lt;!ENTITY 实体名称 “Bill Gates”&gt;</p>
 <p>从外部的DTD文档声明实体：&lt;!ENTITY 实体名称 SYSTEM “URI/URL”&gt;—此时引用了外部的DTD文档，和文件包含有点类似。若此时外部DTD文档的值是用户可控的，则可能会产生XXE注入（XML外部实体注入）</p>
 <p>输出实体：&amp;实体名称;</p>
-<h3 id="SSRF漏洞"><a href="#SSRF漏洞" class="headerlink" title="SSRF漏洞"></a>SSRF漏洞</h3><p>伪造服务端发起请求</p>
-<p>1.探测内网IP、端口信息</p>
-<p>2.探测内网的Web应用程序、语言环境</p>
-<p>3.利用SSRF攻击Web应用</p>
-<p>4.file协议读取文件</p>
-<p>探测内网需要结合Gopher协议</p>
-<h3 id="HTTP拆分攻击-CRLF注入"><a href="#HTTP拆分攻击-CRLF注入" class="headerlink" title="HTTP拆分攻击/CRLF注入"></a>HTTP拆分攻击/CRLF注入</h3><p>针对HTTP头部进行的注入（条件：前端输入的或用户可控的内容被放在HTTP头部中）</p>
+<h2 id="SSRF漏洞"><a href="#SSRF漏洞" class="headerlink" title="SSRF漏洞"></a>SSRF漏洞</h2><p>（1）SSRF（ Server-side Request Forgery ）服务端请求伪造。</p>
+<ul>
+<li>很多web应用都提供了<strong>从其他的服务器上获取数据的功能。</strong></li>
+<li>使用用户指定的URL，web应用可以<strong>获取图片，下载文件，读取文件内容等。</strong></li>
+<li>这个功能如果<strong>被恶意使用</strong>，可以利用存在缺陷的web应用作为代理，<strong>攻击远程和本地的服务器。</strong></li>
+</ul>
+<p>（2）如果应用程序对用户提供的URL和远端服务器返回的信息没有进行合适的验证和过滤，就可能存在这种服务端请求伪造的缺陷。Google,Facebook,Adobe,baidu,tencent等知名公司都被发现过这种漏洞。伪造服务端发起请求，攻击者利用ssrf可以实现的攻击主要有5种：</p>
+<ul>
+<li>.可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息;（.探测内网IP、端口信息）</li>
+<li>攻击运行在内网或本地的应用程序（比如溢出）;</li>
+<li>对内网web应用进行指纹识别，通过访问默认文件实现;（探测内网的Web应用程序、语言环境）</li>
+<li>攻击内外网的web应用，主要是使用get参数就可以实现的攻击（比如struts2，sqli等）;</li>
+<li>利用file协议读取本地文件等。</li>
+</ul>
+<p>（3）<strong>探测内网需要结合Gopher协议</strong></p>
+<h3 id="Weblogic-ssrf漏洞"><a href="#Weblogic-ssrf漏洞" class="headerlink" title="Weblogic ssrf漏洞"></a>Weblogic ssrf漏洞</h3><p>（1）Weblogic中存在一个SSRF漏洞，利用该漏洞可以发送任意HTTP请求，通过对不同的请求的返回信息，进行SSRF攻击。</p>
+<ul>
+<li>探测可以访问的地址：如 <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/GmLU6N7ntXJbDFu.png" alt="image-20210604185837859"></p>
+<ul>
+<li>探测无法访问的地址：如 <a target="_blank" rel="noopener" href="http://www.xxxxxxxxxxxx.com/">http://www.xxxxxxxxxxxx.com</a></li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/AzSxgmsBwe6OkNG.png" alt="image-20210604185916956"></p>
+<h2 id="HTTP拆分攻击-CRLF注入"><a href="#HTTP拆分攻击-CRLF注入" class="headerlink" title="HTTP拆分攻击/CRLF注入"></a>HTTP拆分攻击/CRLF注入</h2><p>（1）HTTP拆分（HTTP Splitting）攻击也称为CRLF注入（CRLF Injection），针对HTTP头部进行的注入（条件：前端输入的或用户可控的内容被放在HTTP头部中）</p>
+<ul>
+<li><strong>CR</strong>为回车符，ASCII为13，16进制写法为0x0d，URL编码为**%0d<strong>，也用符号</strong>\r**表示。</li>
+<li><strong>LF</strong>为换行符，ASCII为10，16进制写法为0x0a，URL编码为**%0a<strong>，也用符号</strong>\n**表示。</li>
+</ul>
+<p>（2）CRLF注入产生原理：HTTP头部如果存在<strong>用户可控的输入内容，</strong>程序没有进行过滤，就可以利用<strong>回车/换行<br>（%0d/%0a）符</strong>来<strong>创建新的头部字段</strong>，实现攻击目标。</p>
+<ul>
+<li>通过注入不同的字段可以达到不同的攻击效果，常与XSS、CSRF、会话固定等攻击手段结合使用。</li>
+<li>Set-Cookie：注入该字段可以控制用户的cookie值，可以进行会话固定等攻击。</li>
+<li>Location：注入该字段可控制页面跳转的位置，可以进行钓鱼攻击等</li>
+<li>X-XSS-Protection：注入该字段可以绕过浏览器的XSS防护功能</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/WqAZuXPsMLwVFm5.png" alt="image-20210604191025676"></p>
+<p>（3）http头部与HTTP正文之间是通过\x0d\0x0a\x0d\x0a来区分的，如果我们在头部插入一个\x0d\0x0a\x0d\x0a，后续的内容会被认为是HTTP的正文内容，因此可以在其后加入HTML和JavaScript来实现XSS攻击。</p>
 <p>%0d%0a表示换行，则下一行的内容会被当做HTTP头部执行</p>
 <p>如果出现了%0d%0a%0d%0a两次换行的情况，则表示后面的内容为HTTP正文。因此可以构造XSS注入。</p>
-<h3 id="会话固定攻击"><a href="#会话固定攻击" class="headerlink" title="会话固定攻击"></a>会话固定攻击</h3><p>登录前后的会话ID不变</p>
-<h3 id="路径穿越漏洞"><a href="#路径穿越漏洞" class="headerlink" title="路径穿越漏洞"></a>路径穿越漏洞</h3><h3 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h3><h3 id="服务器远程部署漏洞"><a href="#服务器远程部署漏洞" class="headerlink" title="服务器远程部署漏洞"></a>服务器远程部署漏洞</h3><p>远程部署漏洞：利用web中间件的功能，将源代码上传到服务器。若源代码为一句话木马，则可以进一步获取web服务器权限。类似于文件上传。</p>
-<p>漏洞影响范围：有图形化界面，可以直接配置网站页面的中间件（主要的有WebLogic\Jboss\Tomcat）</p>
-<p>根据不同的中间件有不同的管理方式（Tomcat），管理端–已知用户名和密码。</p>
-<h3 id="编辑器漏洞"><a href="#编辑器漏洞" class="headerlink" title="编辑器漏洞"></a>编辑器漏洞</h3><p>网站渗透思路：信息收集（是否存在源码泄露）、上扫描器、看对应的中间件漏洞、组件漏洞、CMS漏洞（whatweb）、手工挖掘（SQL注入、文件上传、命令执行）。</p>
+<h2 id="会话安全-会话固定攻击"><a href="#会话安全-会话固定攻击" class="headerlink" title="会话安全-会话固定攻击"></a>会话安全-会话固定攻击</h2><p>（1）固定会话：指的是用户在登陆前后，会话ID并不会发生改变。</p>
+<ul>
+<li>攻击者可以通过多种方式诱导攻击目标使用事先定义的会话ID来访问目标网站。</li>
+<li>由于会话ID是已知的，当用户登录后攻击者就可以使用相同的会话ID登录系统，直接获取登录后的权限。</li>
+</ul>
+<p>（2）攻击流程</p>
+<ul>
+<li>黑客访问网站获取sessionID；</li>
+<li>利用XSS漏洞或CRLF漏洞等方式构造攻击链接为用户预设sessionID；</li>
+<li>用户点击相关链接，获得了黑客预设的sessionID；</li>
+<li>用户登录系统；</li>
+<li>黑客通过预设的sessionID登录系统；</li>
+</ul>
+<h2 id="路径穿越与目录遍历漏洞"><a href="#路径穿越与目录遍历漏洞" class="headerlink" title="路径穿越与目录遍历漏洞"></a>路径穿越与目录遍历漏洞</h2><h3 id="路径穿越漏洞"><a href="#路径穿越漏洞" class="headerlink" title="路径穿越漏洞"></a>路径穿越漏洞</h3><p>（1）路径穿越漏洞：攻击者可以通过跳转字符“../”或者“..\”到达读取任意文件的目的。</p>
+<p>（2）路径穿越攻击通常发生在文件读取操作中，程序没有对跳转字符做过滤的情况下就导致网站源代码、网站配置文件、系统文件被读取，从而导致信息泄漏。</p>
+<p>（3）window下的常见敏感路径文件：</p>
+<pre><code>c:\boot.ini  //查看系统版本
+c:\windows\system32\inetsrv\metabase.xml  //IIS配置文件
+c:\windows\repair\sam  //存储windows系统初次安装的密码
+c:\Programe File\mysql\my.ini  //mysql配置文件
+c:\Programe File\mysql\data\mysql\use.MYD  //mysql root密码文件
+c:\windows\my.ini  //mysql 配置文件
+c:\windows\php.ini  //php配置文件</code></pre>
+<p>（4）linux下的常见敏感路径文件：</p>
+<pre><code>/etc/passwd         //用户信息
+/etc/apache2/apache2.conf    //apache2默认配置文件
+/usr/local/app/apache2/conf/httpd.conf    //apache2默认配置文件
+/etc/httpd/conf/httpd.conf       //apache2默认配置文件
+/usr/local/app/apache2/conf/extra/httpd-vhosts.conf    //虚拟主机设置
+/usr/local/app/php5/lib/php.ini    //php配置文件
+/etc/my.cnf    //Mysql配置文件</code></pre>
+<h3 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h3><p>（1）由于某些中间件配置错误，使得攻击者能够访问受限制的目录，并在Web服务器的根目录以外执行命令。</p>
+<ul>
+<li>利用这个漏洞，攻击者能够走出服务器的根目录，从而访问到文件系统的其他部分，譬如攻击者就能够看到一些受限制的文件，或者更危险的，攻击者能够执行一些造成整个系统崩溃的指令。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/FPhzBHXifNMEyx3.png" alt="image-20210604200243726"></p>
+<h2 id="服务器远程部署漏洞"><a href="#服务器远程部署漏洞" class="headerlink" title="服务器远程部署漏洞"></a>服务器远程部署漏洞</h2><p>（1）远程部署是Web服务器中间件的一种可以直接将源码上传到服务器的功能。</p>
+<ul>
+<li>如果远程部署配置不当，攻击者就可以上传Webshell直接入侵服务器。</li>
+<li>常见的中间件如Tomcat、Weblogic、Jboss、FTP都具有远程部署功能。</li>
+<li>常见的中间件及部署管理端口地址-默认口令表如下：</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/Y5bTzs61nBRoCFJ.png" alt="image-20210604200505406"></p>
+<p>（2）远程部署漏洞：利用web中间件的功能，将源代码上传到服务器。若源代码为一句话木马，则可以进一步获取web服务器权限。类似于文件上传。</p>
+<ul>
+<li>漏洞影响范围：有图形化界面，可以直接配置网站页面的中间件（主要的有WebLogic\Jboss\Tomcat）</li>
+<li>根据不同的中间件有不同的管理方式（Tomcat），管理端–已知用户名和密码。</li>
+</ul>
+<h3 id="Tomcat服务远程部署"><a href="#Tomcat服务远程部署" class="headerlink" title="Tomcat服务远程部署"></a>Tomcat服务远程部署</h3><p>（1）登陆Tomcat管理后台。打开<a href="http://192.168.14.140:8080进入Tomcat服务器管理后台帐号密码tomcat/tomcat。">http://192.168.14.140:8080进入Tomcat服务器管理后台帐号密码tomcat/tomcat。</a></p>
+<p><img src="https://i.loli.net/2021/06/04/lX9LkytfOGCvJiA.jpg" alt="img"></p>
+<p>（2）制作war包木马。使用Godzilla生成jsp木马，在sr.jsp所在文件夹下执行以下命令制作war包木马。</p>
+<p><img src="https://i.loli.net/2021/06/04/SrYVZi7ucHFyh1M.png" alt="image-20210604200928889"></p>
+<p><img src="https://i.loli.net/2021/06/04/wl4aHcXmptB2P5i.png" alt="image-20210604200941270"></p>
+<pre><code>jar cvf sr.war sr.jsp</code></pre>
+<p><img src="https://i.loli.net/2021/06/04/3VcPaDYhgBubOo9.png" alt="image-20210604201004608"></p>
+<p><img src="https://i.loli.net/2021/06/04/6krOdizaGSMRIXH.png" alt="image-20210604201013485"></p>
+<p>（3）上传部署war包。可以在应用列表中看见sr项目已成功部署。</p>
+<p><img src="https://i.loli.net/2021/06/04/4xp7s6OJ2fY5CHv.png" alt="image-20210604201031919"></p>
+<p><img src="https://i.loli.net/2021/06/04/oWhAiaQUZc1eBsV.png" alt="image-20210604201050973"></p>
+<p>（4）使用Godzilla连接sr.jsp木马。</p>
+<p><img src="https://i.loli.net/2021/06/04/AVH8nwCeflqju1Q.png" alt="image-20210604201143753"></p>
+<p><img src="https://i.loli.net/2021/06/04/F5TE1ZKkr7tWbyR.png" alt="image-20210604201201389"></p>
+<h2 id="常见编辑器漏洞"><a href="#常见编辑器漏洞" class="headerlink" title="常见编辑器漏洞"></a>常见编辑器漏洞</h2><p>（1）开源的编辑器经常被网站作为第三方组件而直接使用，而这些编辑器不同版本存在着不同的上传漏洞、解析漏洞、任意文件删除、目录遍历等漏洞。</p>
+<p>（2）常见的编辑器有：</p>
+<ul>
+<li>FCKeditor</li>
+<li>eWebEditor</li>
+<li>Cute Editor</li>
+<li>Webhtmleditor</li>
+<li>Kindeditor</li>
+<li>Freetextbox</li>
+<li>Msn sditor</li>
+</ul>
+<p>（3）更多资料请查阅：<a target="_blank" rel="noopener" href="http://navisec.it/%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%89%8B%E5%86%8C/">http://navisec.it/编辑器漏洞手册/ </a></p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><img src="https://i.loli.net/2021/05/18/fgMdmTUVkb3lv2Z.png" alt="image-20210518192126794"></p>
+<p>网站渗透思路：信息收集（是否存在源码泄露）、上扫描器、看对应的中间件漏洞、组件漏洞、CMS漏洞（whatweb）、手工挖掘（SQL注入、文件上传、命令执行）。</p>
 <p>vim –.文件名.swp swo swn</p>
 <p>index.php意外关闭时会在同目录下生成.index.php.swp</p>
 <p>/.get/</p>
@@ -315,6 +483,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2021/06/04/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          业务逻辑漏洞的原理与挖掘
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/05/16/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">文件上传漏洞的原理与实践进阶</div>
@@ -344,7 +521,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">1.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF%E2%80%93%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0"><span class="toc-number">1.1.</span> <span class="toc-text">CSRF–跨站请求伪造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XXE"><span class="toc-number">1.2.</span> <span class="toc-text">XXE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSRF%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.3.</span> <span class="toc-text">SSRF漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%E6%8B%86%E5%88%86%E6%94%BB%E5%87%BB-CRLF%E6%B3%A8%E5%85%A5"><span class="toc-number">1.4.</span> <span class="toc-text">HTTP拆分攻击&#x2F;CRLF注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB"><span class="toc-number">1.5.</span> <span class="toc-text">会话固定攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.6.</span> <span class="toc-text">路径穿越漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.7.</span> <span class="toc-text">目录遍历漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.8.</span> <span class="toc-text">服务器远程部署漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.9.</span> <span class="toc-text">编辑器漏洞</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSRF%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">CSRF漏洞原理与利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXE%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">XXE注入漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSRF%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text">SSRF漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Weblogic-ssrf%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.1.</span> <span class="toc-text">Weblogic ssrf漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E6%8B%86%E5%88%86%E6%94%BB%E5%87%BB-CRLF%E6%B3%A8%E5%85%A5"><span class="toc-number">4.</span> <span class="toc-text">HTTP拆分攻击&#x2F;CRLF注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%AE%89%E5%85%A8-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E6%94%BB%E5%87%BB"><span class="toc-number">5.</span> <span class="toc-text">会话安全-会话固定攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A%E4%B8%8E%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E"><span class="toc-number">6.</span> <span class="toc-text">路径穿越与目录遍历漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A%E6%BC%8F%E6%B4%9E"><span class="toc-number">6.1.</span> <span class="toc-text">路径穿越漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E"><span class="toc-number">6.2.</span> <span class="toc-text">目录遍历漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E6%BC%8F%E6%B4%9E"><span class="toc-number">7.</span> <span class="toc-text">服务器远程部署漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat%E6%9C%8D%E5%8A%A1%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2"><span class="toc-number">7.1.</span> <span class="toc-text">Tomcat服务远程部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E"><span class="toc-number">8.</span> <span class="toc-text">常见编辑器漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">9.</span> <span class="toc-text">扩展</span></a></li></ol>
                     </div>
                 </span>
             </div>

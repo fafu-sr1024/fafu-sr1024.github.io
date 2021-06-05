@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/03/17/w1kCMUD9ENZ4hma.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/17/3GV4TCYS8IwcXoz.png">
 <meta property="article:published_time" content="2021-03-16T02:00:50.000Z">
-<meta property="article:modified_time" content="2021-04-11T08:29:11.493Z">
+<meta property="article:modified_time" content="2021-05-25T16:15:38.182Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -281,7 +281,7 @@ var carname=&#39;Bill Gates&#39;;</code></pre>
 <p>（6）JavaScript字符串，允许在字符串中使用引号，只要不匹配字符中的引号即可</p>
 <pre><code class="javascript">var answer=&quot;He is called &#39;Bill&#39;&quot;;
 var answer=&#39;He is called &quot;Bill&quot;&#39;;
-var answer=&quot;&quot;\&#39;\&quot;Bill&quot;&#39;&quot;&quot;   //其中\表示转义符，结果为
+var answer=&quot;&quot;\&#39;\&quot;Bill&quot;&#39;&quot;&quot;   //其中\表示转义符，结果为&quot;&#39;&quot;Bill&quot;&#39;&quot;
 var answer=\\\&#39;        //结果为\&#39;
 
 var a=&#39;&quot;&#39;;
@@ -629,7 +629,7 @@ i++;
 <p><img src="https://i.loli.net/2021/03/23/PA4lhXvJHSTzKNu.png" alt="image-20210323212113175"></p>
 <p><img src="https://i.loli.net/2021/03/23/kMUy4m59fQAOZY8.png" alt="image-20210323212208821"></p>
 <p><img src="https://i.loli.net/2021/03/23/uTtJAC1yasGLEgf.png" alt="image-20210323212231314"></p>
-<h3 id="获取标签-–基于class"><a href="#获取标签-–基于class" class="headerlink" title="获取标签 –基于class"></a>获取标签 –基于class</h3><pre><code class="javascript">document.getElementsClassName(&quot;&quot;)[0]   //由于类并不唯一，所以可以在末尾加上[0]代表要取第一个标签</code></pre>
+<h3 id="获取标签-–基于class"><a href="#获取标签-–基于class" class="headerlink" title="获取标签 –基于class"></a>获取标签 –基于class</h3><pre><code class="javascript">document.getElementsByClassName(&quot;&quot;)[0]   //由于类并不唯一，所以可以在末尾加上[0]代表要取第一个标签</code></pre>
 <h3 id="获取标签–基于Tagname"><a href="#获取标签–基于Tagname" class="headerlink" title="获取标签–基于Tagname"></a>获取标签–基于Tagname</h3><p>通过TagName获取元素；</p>
 <pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;

