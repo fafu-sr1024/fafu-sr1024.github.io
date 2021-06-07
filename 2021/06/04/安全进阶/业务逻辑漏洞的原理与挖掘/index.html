@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/06/04/pfCOqRliLnTG6jF.png">
 <meta property="og:image" content="https://i.loli.net/2021/06/04/xAzd89TqhvBJ1Ge.png">
 <meta property="article:published_time" content="2021-06-04T12:22:41.000Z">
-<meta property="article:modified_time" content="2021-06-05T06:42:29.612Z">
+<meta property="article:modified_time" content="2021-06-06T10:36:26.607Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -260,7 +260,7 @@
 <td align="center">不安全的身份标识、不安全的角色标识、不安全的访问控制</td>
 </tr>
 </tbody></table>
-<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>（1）水平越权通常发生在对数据的增删改查等操作中，当一个请求中包含了请求对象标识，可以尝试将该对象标识该为其他请求对象的标识，如果能够成功访问， 可以认为存在水平越权漏洞，以下列举了常见可能发生水平越权漏洞的场景和测试方法。</p>
+<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>（1）水平越权通常发生在对数据的增删改查等操作中，当一个请求中包含了请求对象标识，可以尝试将该对象标识改为其他请求对象的标识，如果能够成功访问， 可以认为存在水平越权漏洞，以下列举了常见可能发生水平越权漏洞的场景和测试方法。</p>
 <p>（2）常见的测试方法</p>
 <ul>
 <li>使用两个账号分别登录后访问相同的功能模块，记录正确的请求对象标识，使用burp拦截其中一个用户的请求，将其中的请求对象标识替换为另一个用户的请求对象标识，如果能够成功访问，则认为存在水平越权漏洞。</li>

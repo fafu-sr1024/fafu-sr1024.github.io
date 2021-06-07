@@ -2679,7 +2679,9 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 <p>（2）INSERT用来增加一条记录</p>
 <pre><code class="sql">insert into test (id,username,password) values(1,&#39;admin&#39;,&#39;admin123&#39;);</code></pre>
 <p>（3）UPDATE用来修改一条记录</p>
-<pre><code class="sql">update test set username=&#39;admin_A&#39;,password=&#39;admin321&#39; where username=&#39;admin&#39;;</code></pre>
+<pre><code class="sql">update test 
+set username=&#39;admin_A&#39;,password=&#39;admin321&#39; 
+where username=&#39;admin&#39;;</code></pre>
 <p>（4）DELETE用来删除一条记录</p>
 <pre><code class="sql">delete from test where username=&#39;admin_A&#39;;</code></pre>
 <h3 id="MySQL数据库中设置属性为自增属性"><a href="#MySQL数据库中设置属性为自增属性" class="headerlink" title="MySQL数据库中设置属性为自增属性"></a>MySQL数据库中设置属性为自增属性</h3><pre><code class="sql">--+设置users表中的id属性为自增属性

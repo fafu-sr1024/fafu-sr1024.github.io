@@ -420,8 +420,7 @@
 <td>强制卸载(慎⽤)</td>
 </tr>
 </tbody></table>
-<pre><code>## 用户和用户组</code></pre>
-<table>
+<h2 id="用户和用户组"><a href="#用户和用户组" class="headerlink" title="用户和用户组"></a>用户和用户组</h2><table>
 <thead>
 <tr>
 <th>常⽤命令</th>
@@ -1424,7 +1423,7 @@
 <td align="center">不安全的身份标识、不安全的角色标识、不安全的访问控制</td>
 </tr>
 </tbody></table>
-<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>（1）水平越权通常发生在对数据的增删改查等操作中，当一个请求中包含了请求对象标识，可以尝试将该对象标识该为其他请求对象的标识，如果能够成功访问， 可以认为存在水平越权漏洞，以下列举了常见可能发生水平越权漏洞的场景和测试方法。</p>
+<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>（1）水平越权通常发生在对数据的增删改查等操作中，当一个请求中包含了请求对象标识，可以尝试将该对象标识改为其他请求对象的标识，如果能够成功访问， 可以认为存在水平越权漏洞，以下列举了常见可能发生水平越权漏洞的场景和测试方法。</p>
 <p>（2）常见的测试方法</p>
 <ul>
 <li>使用两个账号分别登录后访问相同的功能模块，记录正确的请求对象标识，使用burp拦截其中一个用户的请求，将其中的请求对象标识替换为另一个用户的请求对象标识，如果能够成功访问，则认为存在水平越权漏洞。</li>
@@ -1580,12 +1579,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="CSRF漏洞原理与利用"><a href="#CSRF漏洞原理与利用" class="headerlink" title="CSRF漏洞原理与利用"></a>CSRF漏洞原理与利用</h2><p>（1）跨站请求伪造。CSRF漏洞产生的原因主要是因为<strong>关键的敏感请求可被伪造发出</strong>，而服务端接收处理<strong>未进行二次校验。</strong></p>
+        <h2 id="CSRF漏洞原理与利用"><a href="#CSRF漏洞原理与利用" class="headerlink" title="CSRF漏洞原理与利用"></a>CSRF漏洞原理与利用</h2><p>（1）跨站请求伪造原理：一个跨站请求伪造攻击会迫使登录用户的浏览器将伪造的HTTP请求，包括该用户的会话cookie和其他认证信息，发送到一个存在漏洞的web应用程序。这就允许了攻击者迫使用户浏览器向存在漏洞的web应用程序发送请求，而这些请求会被应用程序认为是用户的合法请求。</p>
+<p>（2）跨站请求伪造。CSRF漏洞产生的原因主要是因为<strong>关键的敏感请求可被伪造发出</strong>，而服务端接收处理<strong>未进行二次校验。</strong></p>
 <ul>
 <li><strong>敏感请求</strong>：增删改等操作请求，如添加账号，修改密码，删除文章等。</li>
 <li><strong>二次校验</strong>：验证请求是由用户正常发起的校验方式，如图片和短信验证码，随机token，修改密码需同时提交旧密码等都属于二次校验。</li>
 </ul>
-<p>（2）XSS可以配合CSRF漏洞，完成进一步的攻击。</p>
+<p>（3）XSS可以配合CSRF漏洞，完成进一步的攻击。</p>
 <ul>
 <li>XSS—利用xss获取其他用户的Cookie，然后使用对方的Cookie去访问网页，则此时该网页的登录用户则为对方的账号，修改密码，控制用户。为Cookie设置HTTPonly可以防止XSS注入获取用户的Cookie。</li>
 <li>XSS+CSRF—利用这两个漏洞修改对方的密码，然后进一步控制对方的用户—组合攻击的优点： 黑客无需向对方发送网址，只需要看到留言板（系统正常的功能），则恶意代码就会被触发（通过XSS漏洞而产生的，弥补了CSRF的缺点），然后利用CSRF伪造的脚本向网站发起请求，此时这个请求将会带上受害者本身的Cookie，不管XSS是否能获取到Cookie（Cookie是否设置了HTTPonly）此时的伪造脚本都会被执行。（利用CSRF弥补了XSS的缺点）</li>
@@ -1600,7 +1600,7 @@ xmlhttp.send(&quot;name=lwphp&amp;passwd=123456&amp;remark= test&amp;mid=1&amp;a
 &#125;
 loadXMLDoc();
 &lt;/script&gt;</code></pre>
-<p>（3）防范：</p>
+<p>（4）防范：</p>
 <ul>
 <li>referer：http请求包中存在该字段，表示的是从哪个网页访问到当前网页的。若referer的内容不是本网站，则推测可能遭遇了CSRF</li>
 <li>二次校验：在关键的敏感网页加入验证码，需要输入正确的验证码才能进行操作。</li>
@@ -2390,7 +2390,7 @@ $test_unser = unserialize($test);
 <p>call_user_func_array</p>
 <p>ASP一句话木马</p>
 <p>wscript.exe文件</p>
-<h3 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h3><h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>（1）序列化：(serialize)将对象的信息以字符串的形式保存起来。不会对类中的方法进行序列化，只会对类中的属性进行序列化。</p>
+<h3 id="过狗一句话"><a href="#过狗一句话" class="headerlink" title="过狗一句话"></a>过狗一句话</h3><h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>（1）序列化：(serialize)将对象的信息以字符串的形式保存起来。不会对类中的方法进行序列化，只会对类中的属性进行序列化。（php序列化是字符串，java序列化是二进制序列）</p>
 <p>（2）反序列化：将字符串重新创建回对象。</p>
 <p>（3）当该对象需要进行反序列化操作且存在魔术方法时，反序列化会自动执行魔术方法。</p>
 <p>（4）魔术方法：在PHP序列化和反序列化中，会自动调用的某些函数。</p>
@@ -2594,7 +2594,7 @@ http(s)://user:password@example.com</code></pre>
 使用POST方法提交:&lt;?php php代码 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/05/15/1LRsSmOb5GkMAho.png" alt="image-20210515190257031"></p>
 <ul>
-<li>data://</li>
+<li>data:</li>
 </ul>
 <pre><code>?page=data:text/plain,&lt;?php php代码 ?&gt;</code></pre>
 <p><img src="https://i.loli.net/2021/05/15/sBYx9LjgWPMlcbi.png" alt="image-20210515190724316"></p>

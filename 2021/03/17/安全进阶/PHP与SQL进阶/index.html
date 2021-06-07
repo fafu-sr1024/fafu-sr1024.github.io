@@ -68,7 +68,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/03/18/GEd5cH3gzv9h2Ne.png">
 <meta property="og:image" content="https://i.loli.net/2021/03/18/8khDnLWJTZ5cmC7.png">
 <meta property="article:published_time" content="2021-03-17T08:28:15.000Z">
-<meta property="article:modified_time" content="2021-05-26T04:06:22.632Z">
+<meta property="article:modified_time" content="2021-06-06T02:43:09.857Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="安全进阶">
 <meta name="twitter:card" content="summary">
@@ -640,7 +640,9 @@ header(&quot;Content-Type:text/html;charset=utf-8&quot;);
 <p>（2）INSERT用来增加一条记录</p>
 <pre><code class="sql">insert into test (id,username,password) values(1,&#39;admin&#39;,&#39;admin123&#39;);</code></pre>
 <p>（3）UPDATE用来修改一条记录</p>
-<pre><code class="sql">update test set username=&#39;admin_A&#39;,password=&#39;admin321&#39; where username=&#39;admin&#39;;</code></pre>
+<pre><code class="sql">update test 
+set username=&#39;admin_A&#39;,password=&#39;admin321&#39; 
+where username=&#39;admin&#39;;</code></pre>
 <p>（4）DELETE用来删除一条记录</p>
 <pre><code class="sql">delete from test where username=&#39;admin_A&#39;;</code></pre>
 <h3 id="MySQL数据库中设置属性为自增属性"><a href="#MySQL数据库中设置属性为自增属性" class="headerlink" title="MySQL数据库中设置属性为自增属性"></a>MySQL数据库中设置属性为自增属性</h3><pre><code class="sql">--+设置users表中的id属性为自增属性
